@@ -150,7 +150,9 @@ Traps, all of them real:
 8. Poly often runs directly underneath the metal of a *different* net for hundreds of
    pixels. Metal over poly is a connection only where there is a contact.
    Where a poly line ends next to another feature, zoom to 4-6x before deciding whether
-   they touch. Most wrong readings so far were junctions judged at too low a zoom.
+   they touch; and when the decision matters, **measure it**: a colour profile across
+   the junction (`tools/larr_px.py`, read its docstring) settled junctions that one
+   agent had judged wrongly by eye three times. Most wrong readings so far were junctions judged at too low a zoom.
 9. If a region will not give a consistent circuit after two honest passes, stop, record
    exactly what is established (with coordinates) and what is not, and move on.
 
@@ -220,7 +222,9 @@ Most of the die is repeated cells. Trace a cell once.
   per-pixel median over the copies, which removes dirt, residue and metal grain. View
   it with `--comp NAME` on view.py / quad.py (coordinates stay those of the master).
   Start NAME with your block name (composites share one folder). Above 4x the median
-  is blurrier than a single clean shot; use it for dirt, not for fine junctions.
+  is blurrier than a single clean shot; use it for dirt, not for fine junctions. In a
+  composite the `acid` layer shows poly even under metal, because the fringes average
+  out.
 - `tools/cdp1_sr.py` (read its docstring) makes a sub-pixel-aligned median of the
   copies of a cell at 3-6x. The agent that wrote it says it is what made a register
   cell readable where the plain composite was too blurred.
