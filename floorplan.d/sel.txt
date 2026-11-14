@@ -2,3 +2,5 @@
 14330,14890:14890,16720  logic  write strobes R0-R11 | 12 x (inverter + NOR): sel_wN = rselN AND NOT strobe. Left half top to bottom R1 R2 R0 R4 R6 R7, right half R10 R5 R3 R8 R9 R11
 14070,14850:14330,16720  route  left bundle | rsel7 rsel6 rsel4 rsel0 rsel2 down to their gates; strobes of R1 R2 R0 R4 R6 back up and out to the west in poly
 14895,14850:15580,16550  route  middle bundle (16 tracks) | selects down to the gates, strobes of R10 R5 R3 R8 R9 R11 down; rsel12 rsel13 pass through; taps to the right-hand column
+15540,14850:15890,15895  logic  select buffers R16 R17 R15 R14 | two inverters each; the buffered selects go down tracks T11-T14 (?read enables)
+15540,15895:15890,16540  logic  write strobes R15, R14 | inverter + NOR with the strobe, as in the gate column; outputs down T10, T9

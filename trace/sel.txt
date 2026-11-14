@@ -276,3 +276,118 @@ M 15474,15098 y15218 x15561 w=20            # from the bar's contact (stub up to
 M 15635,14822 x15561 y16560 w=20
 C 15622,14822
 P 15608,14825 x15850 w=22
+
+# ---------------------------------------------------------------- right-hand gate column
+# x 15540-15890, y 14850-16550. Ground rail x 15663-15718 hanging from the VSS rail;
+# supply rail x 15795-15890 along the east edge. Every gate is a wide pull-down under
+# the ground rail (ground contact above, horizontal poly gate, output band below); the
+# output band runs east under a load gate to a supply contact at x ~15862 and west to
+# a buried contact from which the output leaves in poly.
+# THE LOADS ARE DRAWN SCHEMATICALLY (all shapes marked ?): their presence and which
+# output each belongs to is clear, their exact outlines were not traced.
+M 15690,14745 y16560 w=55          # ground rail
+M 15795,14850:15890,16560          # supply rail (extent above y 14850 not traced)
+N M 15840,15000 vcc
+
+# Two inverters in series = a buffer for one select line. Instanced four times.
+@cell sel_rbuf tag=16
+@s 30x34
+C 15683,14875                      # ground
+C 15683,15005                      # ground
+@s 26x26
+# --- first inverter (input: the select line, wired per instance)
+D 15662,14855:15712,14900          # ground contact land
+D 15612,14885:15745,14948          # pull-down: channel under the gate bar, output band below it
+P 15600,14910 x15757 w=22          # gate bar
+B 15604,14938:15634,14968          # output to poly
+D 15604,14938:15634,14968
+P 15606,14953 x15586 y15037 x15757 w=22    # output poly: west, down, then east as the second gate bar
+N D 15700,14936 sel_bn{}           # NOT rsel<N>
+?D 15745,14922:15880,14948         # output band on east to the supply contact
+?P 15808,14880:15843,14958         # load gate
+?C 15862,14935
+?B 15790,14920:15816,14950         # load gate tied to the output (real tie is a buried contact near 15760,14970)
+# --- second inverter
+D 15662,14985:15712,15030          # ground contact land
+D 15612,15012:15745,15078          # pull-down and output band
+B 15604,15070:15634,15098          # output to poly (leaves west per instance)
+D 15604,15070:15634,15098
+N D 15700,15066 sel_b{}            # rsel<N> buffered
+?D 15745,15052:15880,15078
+?P 15808,15010:15843,15090
+?C 15862,15065
+?B 15790,15050:15816,15080         # load gate tied to the output
+@end
+@inst sel_rbuf 0,260 tag=17
+@inst sel_rbuf 0,520 tag=15
+@inst sel_rbuf 0,780 tag=14
+
+# buffer inputs
+P 15552,14880 y14910 x15612 w=22            # rsel16: its poly comes down x 15552 (under T15) and turns east
+P 15640,15170 x15612 w=22                   # rsel17: on from the poly along y 15175
+C 15340,15428                               # rsel15 on T10 (which runs on down)
+P 15326,15430 x15612 w=22
+C 15299,15692                               # rsel14 on T9 (which runs on down)
+P 15285,15690 x15612 w=22
+M 15432,14770 y15000 x15301 y16266 w=20     # rsel14: x 15432 down, west along y 15000, T9 down to its second tap
+M 15472,14812 y15040 x15344 y15966 w=20     # rsel15: x 15474 down, west along y 15040, T10 down to its second tap
+# buffer outputs: poly west to a contact on a track, which starts there and runs down
+P 15620,15084 x15373 w=22
+C 15387,15086
+M 15388,15073 y16560 w=20                   # T11: sel_b16
+P 15620,15344 x15417 w=22
+C 15431,15349
+M 15431,15336 y16560 w=20                   # T12: sel_b17
+P 15620,15604 x15457 w=22
+C 15471,15606
+M 15474,15593 y16560 w=20                   # T13: sel_b15
+P 15620,15864 x15501 w=22
+C 15515,15866
+M 15517,15853 y16560 w=20                   # T14: sel_b14
+
+# Inverter + 2-input NOR with the strobe: the same logic as the gate column, for R15
+# and R14.
+@cell sel_rwr tag=15
+@s 30x34
+C 15683,15915                      # ground (inverter)
+C 15683,16040                      # ground (NOR, upper)
+C 15683,16210                      # ground (NOR, lower)
+@s 26x26
+# --- inverter (input: the select line, wired per instance)
+D 15662,15895:15712,15940
+D 15612,15930:15735,16000          # pull-down and output band
+P 15600,15956 x15747 w=22          # gate bar
+B 15604,15978:15634,16008          # output to poly
+D 15604,15978:15634,16008
+P 15606,15993 x15587 y16082 x15747 w=24    # output poly: west, down, east as NOR gate A
+N D 15700,15986 sel_n{}
+?D 15735,15972:15880,16000         # output band east to the supply contact
+?P 15800,15940:15835,16012         # load gate
+?C 15862,15986
+?B 15782,15970:15808,16002         # load gate tied to the output (real tie is a buried contact near 15780,15936)
+# --- NOR
+D 15645,16025:15735,16230          # pull-down strip: ground, gate A, output, gate B, ground
+P 15546,16172 x15747 w=24          # gate B: strobe, from a contact on T15
+C 15560,16172
+B 15600,16110:15630,16140          # output to poly (leaves west per instance)
+D 15600,16110:15650,16140
+N D 15700,16127 sel_w{}
+?D 15735,16100:15880,16148         # output band east to the supply contact
+?P 15770,16092:15805,16195         # load gate
+?C 15862,16124
+?B 15752,16098:15778,16150         # load gate tied to the output (real tie is a buried contact near 15780,16180)
+@end
+@inst sel_rwr 0,300 tag=14
+
+# inputs: second taps of rsel15 (T10) and rsel14 (T9)
+C 15340,15953
+P 15326,15956 x15612 w=22
+C 15299,16253
+P 15285,16256 x15612 w=22
+# outputs: poly west to a contact on the track the select came down, which goes on down
+P 15615,16127 x15330 w=20
+C 15344,16127
+M 15344,16114 y16560 w=20                   # T10: sel_w15
+P 15615,16427 x15287 w=20
+C 15301,16428
+M 15301,16415 y16560 w=20                   # T9: sel_w14
