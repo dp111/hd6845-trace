@@ -20,7 +20,7 @@ Slices are numbered by position; no bit order is established yet (see Not done).
 | top wiring | 2950-3040 | - | VSS band and feeds, the q outputs of row A leaving upward | traced (to y 2950) |
 | A | 3040-3330 | s0-s5 (6) | register cell `cdp1_reg` | traced |
 | below A | 3330-3420 | all | two horizontal poly lines y 3340-3360 and 3385-3405 running the full width, contacts at 10655,3345 and 10615,3385 | not traced |
-| B | 3440-3990 | s1-s5 (5) | larger cell, about 10 transistors, two VCC contacts (9012,3605 and 9010,3760), gate input pad at its foot (9113,3958) fed by row C's q | not traced |
+| B | 3440-3990 | s1-s5 (5) | comparator slice (believed): pull-down on a row-long NOR line plus about eight transistors; input pad at its foot (9113,3958) fed by row C's q | surveyed, see Logic |
 | channel B/C | 3990-4230 | all | five horizontal poly lines (y about 4003, 4047, 4090, 4133, 4177) crossed by thin vertical metal lines with contacts (9310,4130; 9617,4085; 9703,4085; 10093,4040; 10483,4000) | not traced |
 | C | 4232-4524 | s1-s5 (5) | `cdp1_reg` again (dy = 1194) | traced |
 | channel | 4530-5150 | all | about 15 horizontal metal lines, the rails crossing over/under | not traced |
@@ -89,6 +89,59 @@ the diffusion under m6 at 9104-9130.
   cell (9113+k*390, 4222) to a poly pad at the foot of row B (9113+k*390, 3958), i.e. it
   drives a gate in row B. Slice 5 differs: its metal goes left and up at x 10632.
 - `cdp1_c_wr`: the same kind of meander, y 4494-4516.
+
+### Row B (surveyed at 3-4x, NOT traced; coordinates for slice 2, add 390 per slice)
+
+Read from `cdp1_sr.py` composites of slices 2-4; slice 1 and slice 5 differ (findcell
+scores 0.74 and 0.82 against slice 2). What is established, and what is only believed:
+
+- **A diffusion line runs along the whole row** at y 3505-3540 (it passes under every VSS
+  rail; between x 9430 and 9560 it narrows to y 3510-3528, with a stub down x 9430-9448
+  to y 3610). In each slice one wide transistor pulls it to VSS: gate = a poly arm
+  y 3545-3568, x 9205-9420; VSS = the diffusion band y 3575-3606 below the arm, fed by
+  the rail contact at 9183,3608. In slice 1 only, at x 8990-9135 y 3505-3640, a depletion
+  load from the VCC contact at 9012,3605 (gate bar x 9070-9100, tie box at 9085,3520)
+  pulls the line up. So the line is a **5-input NOR, load in slice 1**: believed the
+  comparator's "all bits equal" output (high when no slice's gate is high). Where it
+  leaves the row (left end at x 8790, right end past slice 5) was not followed.
+- The pull-down's gate poly goes right, down the VCC-rail side (x 9397-9420), back left
+  along y 3612-3632 (over field), and down at x 9238-9262 to a buried contact at
+  9240-9262 x 3655-3680 (under the bit-line metal, which does **not** contact it: no pad,
+  no ring) onto the diffusion of the lower half. Call that node `g`.
+- Lower half (y 3650-3900), about eight transistors, believed to make
+  `g` = (row C bit) XOR (a second input):
+  - input 1: row C's `q`, poly up from the pad at 9503,3958, a vertical gate
+    x 9523-9545, y 3690-3830, between the diffusion on its left (x 9500-9520) and a
+    VSS strip under the next slice's rail (x 9550-9568);
+  - input 2: a vertical metal line x 9325-9347 with two poly contacts, 9337,3668 and
+    9337,3860. It comes up from channel B/C, where it is contacted to one horizontal
+    poly line (see below). From the upper pad a poly arm y 3662-3695 runs right to a
+    vertical gate x 9475-9498, y 3695-3772; from the lower pad a gate blob
+    x 9265-9318, y 3845-3885;
+  - VCC contact 9398,3757 on a diffusion 9350-9428 x 3732-3790; under the rail below it
+    a poly block 9350-9428 x 3790-3840 (load gate, part of the horizontal poly
+    y 3797-3823 that runs left to x 9190 as the gate of a pull-down between the
+    diffusion 9185-9232 x 3700-3795 and the VSS diffusion below it, contact 9185,3870);
+    a second load gate x 9430-9452, y 3795-3845 with its tie box 9450-9480 x 3820-3862;
+  - two horizontal gates y 3703-3728 and y 3738-3768 over a diffusion column x 9270-9322.
+  The exact series/parallel structure was not resolved; two honest passes at 4x left the
+  diffusion outlines between x 9260-9330 and around 9430-9460 unclear.
+
+### Channel B/C (surveyed)
+
+Five horizontal poly lines, y about 4003, 4047, 4090, 4133, 4177, in segments. The
+vertical metal line of each slice at x 8947+390k (row B's input 2) ends on a contact to
+a different one: slice 2 at 9337,4130; slice 3 at 9716,4088; slice 4 near 10106,4045;
+slice 5 near 10497,4003 (slice 1 not looked at). So five separate signals reach the five
+comparator slices from the side: believed the bits of a 5-bit counter that lives
+elsewhere. The lines are broken into segments and some segments are joined by short
+poly hooks (one at x 9240-9255, y 4085-4135 joins the y 4090 and y 4133 lines), so the
+routing must be traced, not assumed.
+
+The bit lines of row A do not all continue as the bit lines of row C: slice 2's
+(x 9247) jogs right at y 4035-4065 and goes on down at x 9287; slice 3's (x 9628)
+ends on a contact to the y 4090 poly line at 9628,4088. Row A's register therefore
+taps different bus bits from row C's in the same slice.
 
 ## Ports
 
