@@ -13,7 +13,10 @@ mask) at 3.3-5x on a median composite (`--comp cdp2_a`) is what made the junctio
 - Channel 1 above it (y 5720-6060): every wire that leaves row A upward is traced to
   the top of the region or to where it turns into a long horizontal line; all contacts
   tested. The long lines themselves are followed only between x 8480 and x 10850.
-- Everything else in the range is surveyed only (Inventory, Not done).
+- Row C (y 7500-7825, seven latch cells, slices s1..s7): the same cell (correlation
+  0.92-0.94, cellcheck 0-6 % bad blocks on the core), placed seven times, contacts
+  tested in all seven; tops of s3..s7 traced, tops of s1 and s2 only described. Shipped.
+- Rows B1, B2, D and channels 2, 3: surveyed only (Inventory, Not done).
 
 ## Conventions
 
@@ -43,7 +46,7 @@ mask) at 3.3-5x on a median composite (`--comp cdp2_a`) is what made the junctio
 | 6930-7200 | row B1: cell, 5 copies (findcell 0.88-0.90) | s3..s7 | not traced |
 | 7200-7480 | row B2: cell, 5 copies | s3..s7 | not traced |
 | 6900-7480, x 7900-8750 | irregular logic left of rows B | - | not traced |
-| 7530-7820 | row C: cell, 7 copies (dx -1172, -781, -390, 0, 390, 780, 1170) | s1..s7 | not traced |
+| 7500-7825 | **row C: seven static latch bits**, same cell as row A (dy 1476; dx -1171, -781, -391, 0, 390, 781, 1171) | s1..s7 | traced (tops of s1, s2 not) |
 | 7830-7960 | channel 3: horizontal poly lines; at the left (x 7700-7950) bundles turn down | - | not traced |
 | 7980-8450+ | row D: cell, 5 copies + a weaker sixth at dx -781 (0.73); may extend below 8450 | s3..s7 (+s2?) | not traced |
 
@@ -150,6 +153,41 @@ inverted outputs also go out sideways. s3's wiring differs from the regular stai
 of s4..s7, so s3 may be a separate bit rather than part of a 5-bit value. Which
 register it is is not established.
 
+### Row C: seven more latch bits (traced)
+
+`findcell` with the core of the row A cell finds seven copies at dy = 1476
+(scores 0.92-0.94), and `cellcheck` on the core (master y 6080-6345) gives 0-6 % bad
+blocks in both layers. The cell was therefore split: `cdp2_lat` is the core (everything
+below the grounded band), `cdp2_lat_top` what joins it in row A, `cdp2_lat_ctop` what
+joins it in row C. Nets of row C are named `cdp2_a_c_sK_a / _n2 / _q` (cell prefix + tag).
+
+Tested in all seven slices (contact test): track b's contact to the n2 land, the long
+contact of track c on the q drain, the band's contact to the VSS rail are there; track
+c's lower end over the strobe line has no contact.
+
+- Strobe `cdp2_c_ld`: poly line y 7790-7810, loops through the seven cells as in row A.
+  By colour it runs from about x 7650 to past x 10885. Ends not traced.
+- Top of the cell, s3..s7 (identical, cellcheck 0-6 %; from a 7-instance composite
+  `--comp cdp2_ctop`): the **output q leaves upward in poly** (x 9502-9520, no metal, no
+  contact) and crosses y 7425 into row B2. **Track b (n2)** has a contact at (9334,7517)
+  to a poly that runs right under the VCC rail (y 7506-7526) and then up at
+  x 9453-9474 across y 7425; the metal of track b itself also runs on up. The bus line
+  runs on up.
+- Top of the cell, **s1 and s2: different, not traced.** Seen at 1.6x: s2's output poly
+  (x 8721-8739) turns left at y 7463-7479 and runs left across s1 to x < 7960; s1's
+  output poly (x 8331-8349) turns left at y 7503-7522 and also runs to x < 7960. s1's
+  track b (x 8153-8175) runs on up past y 7390 with no contact at y 7517 (plain poly
+  under it: s1's own output line crossing); s2's track b has no metal at y 7517. Both
+  bus lines jog about 55 px to the right at y 7507-7526 (metal) and go on up at
+  x 8109-8131 (s1) and x 8517-8536 (s2). A metal line lies over s1's track-c column
+  (x 8330-8350) from above y 7390 down to the cell.
+- The bus lines of row C are named separately (`cdp2_c_sK_bus`): between row A and row
+  C the metal at the bus position is interrupted inside row B2 (no metal at x 9236-9258
+  for y 7190-7240 and 7317-7371), so whether it is the same wire is for row B2's trace.
+
+Believed: a 7-bit register (R4, R6 and R7 are 7 bits wide); two of its bits (s1, s2)
+are used to the left of the array, five (s3..s7) by the rows above (B1/B2).
+
 ## Ports
 
 | Name | Layer | Where it crosses | Direction | What |
@@ -165,6 +203,11 @@ register it is is not established.
 | `cdp2_a_s6_n2` | poly | line y 5956: x 8480 and x 10850 | out | |
 | `cdp2_a_s7_n2` | poly | line y 6000: x 8480 (ends at x 10518) | out | |
 | `cdp2_ch1_5826` | poly | line y 5826: x 8480 and x 10850; band at y 5730 to x 9086, then up across y 5700 at x 9080 (`?`) | unknown | not connected to row A |
+| `cdp2_c_sK_bus` (K=1..7) | metal | x 9246 + dx at y 7425 (s3..s7; s1, s2 end at the cell top, y 7551, in the trace) and y 7821 (down, not followed) | into the row | data for row C's latches |
+| `cdp2_a_c_sK_q` (K=3..7) | poly | x 9511 + dx, y 7425, going up | out, to row B2 | row C latch output |
+| `cdp2_a_c_sK_n2` (K=3..7) | metal and poly | metal x 9336 + dx and poly x 9463 + dx, both at y 7425 going up | out, to row B2 | inverted output |
+| `cdp2_a_c_s1_q`, `cdp2_a_c_s2_q` | poly | drawn only to the cell top (x 8340 / 8730, y 7554); beyond: see row C, s1 and s2 | out, to the left | not traced |
+| `cdp2_c_ld` | poly | y 7800; about x 7650 at the left, runs on right of x 10850 | into the row | load strobe of row C |
 | `cdp2_a_ld` | poly | y 6324; runs on right of x 10850; left end about x 8520 | into the row | load strobe of row A |
 | `vss` | metal | x 8794, 9184, 9574, 9964, 10354, 10744 (46 wide) at y 5960 and y 6350 | - | rails, run on both ways |
 | `vcc` | metal | x 9010 + 390k (50 wide) at y 5960; x 8998 + 390k (54 wide) at y 6350 | - | rails, run on both ways; narrower (x 9378-9402) in channel 2 |
@@ -203,8 +246,13 @@ register it is is not established.
 - **Channel 2 (y 6350-6900)**: 13 poly lines, their ends and contacts. `cdp2_lines.py`
   gives a first pass but breaks at every metal edge; check ends by eye. The far left
   (x 7600-8700) has contacts at about y 6690 (x 8120, 8300, 8700) and y 6800-6850.
-- Rows B1, B2 (y 6930-7480), row C (y 7530-7820), channel 3 (y 7830-7960), row D
-  (y 7980-8450): not started. Composite of row A: `--comp cdp2_a` (master frame
+- **Row C, tops of s1 and s2** (x 7990-8770, y 7390-7560): see row C. Two views at 3x
+  would do it.
+- **Ends of `cdp2_c_ld`** (y 7800): left about x 7650, right past x 10850.
+- Rows B1, B2 (y 6930-7480), channel 3 (y 7830-7960), row D (y 7980-8450): not
+  started. Rows B take q and n2 of row C's s3..s7 from below (ports) and the bus and
+  n2 lines of row A from above. They are not the latch cell (findcell finds no copy). Composite of row A: `--comp cdp2_a` (master frame
   9150,5940:9590,6350, five instances).
 - Logic left of the rows (x 7600-8750).
-- Rails are drawn only over row A (y 5960-6350).
+- Rails are drawn only over row A (y 5960-6350) and row C (y 7425-7830); x of the VSS
+  rails 8013, 8403, 8793, 9184, 9574, 9965, 10355, 10745, of the VCC rails 8229 ... 10571.

@@ -13,16 +13,14 @@
 
 @cell cdp2_lat tag=s4
 # --- metal that belongs to one cell
-M 9246,5985 y6345 w=16               # a: per-slice bus line, runs through the cell
-M 9336,5985 y6190 w=22               # b: track from above; ends on the n2 land
+M 9246,6075 y6345 w=16               # a: per-slice bus line, runs through the cell
+M 9336,6075 y6190 w=22               # b: track from above; ends on the n2 land
 M 9509,6084 y6338 w=20               # c: track on the q drain; ends over the strobe line, no contact
-M 9509,5985 y6070 w=20               # output metal, going up from the contact on the output poly
 M 9458,6117 y6241 w=30               # strap: load gate of inverter 1 up to the output land
 C 9244,6313 s=28x30                  # bus to the pass-transistor land
 C 9378,6276 s=30x30                  # VCC rail to the land the two loads hang from
 C 9446,6223 s=26x26                  # strap to poly (load gate = q)
 C 9460,6135 s=28x30                  # strap to the output land
-C 9508,6044 s=24x24                  # output poly to the output metal
 C 9508,6222 s=14x40                  # track c to the q drain (speckled strip in the clean shot)
 C 9183,6183 s=28x46                  # VSS rail to its land (oval)
 C 9337,6184 s=18x10                  # track b to the n2 land, at the very end of the track
@@ -75,11 +73,10 @@ B 9476,6203:9504,6240
 D 9478,6200:9560,6253                # q drain, T1 channel, on to the next cell's VSS land
 N D 9500,6240 cdp2_a_{}_q
 
-# --- output: land, buried contact, poly strip up to the contact of the output metal
+# --- output: land, buried contact, poly strip going up out of the cell
 D 9436,6110:9490,6160
 D 9482,6110:9528,6134
-P 9499,6029:9523,6058                # contact pad
-P 9502,6050:9520,6132                # strip down to the buried contact
+P 9502,6078:9520,6132                # strip up from the buried contact (continued outside the cell)
 B 9495,6106:9524,6133
 
 # --- hold device: the band along the cell top is tied to the VSS rail and widens, under
@@ -90,6 +87,21 @@ P 9348,6083:9431,6142                # block
 A 9348,6113:9431,6128 kind=hold
 P 9172,6082:9431,6103                # band along the cell top
 @end
+
+# Row A only: what joins the top of the cell. Bus line and track b run on up; the output
+# poly ends on a pad with a contact to the output metal, which also runs up.
+@cell cdp2_lat_top tag=s4
+M 9246,5700 y6080 w=16               # bus line, up to the top of the region (no contact in channel 1)
+M 9336,5985 y6080 w=22               # track b (n2); its upper end differs per slice, see channel 1
+P 9499,6029:9523,6058                # contact pad of the output poly
+P 9502,6050:9520,6082                # output poly strip
+C 9508,6044 s=24x24
+M 9509,5730 y6070 w=20               # output metal (q), up to its contact at y 5740
+@end
+@inst cdp2_lat_top -390,0 tag=s3
+@inst cdp2_lat_top 390,0 tag=s5
+@inst cdp2_lat_top 780,0 tag=s6
+@inst cdp2_lat_top 1170,0 tag=s7
 
 @inst cdp2_lat -390,0 tag=s3
 @inst cdp2_lat 390,0 tag=s5
@@ -136,11 +148,11 @@ D 10718,6223:10744,6252
 C 10743,6183 s=28x46
 
 # --- labels on the per-slice lines (master coordinates + slice offset)
-N M 8856,5990 cdp2_a_s3_bus
-N M 9246,5990 cdp2_a_s4_bus
-N M 9636,5990 cdp2_a_s5_bus
-N M 10026,5990 cdp2_a_s6_bus
-N M 10416,5990 cdp2_a_s7_bus
+N M 8856,6000 cdp2_a_s3_bus
+N M 9246,6000 cdp2_a_s4_bus
+N M 9636,6000 cdp2_a_s5_bus
+N M 10026,6000 cdp2_a_s6_bus
+N M 10416,6000 cdp2_a_s7_bus
 N P 9450,6324 cdp2_a_ld
 
 # =====================================================================================
@@ -199,14 +211,99 @@ P 8886,5730 x9086 w=16               # band from the pad to the right,
 ?P 9080,5700 y5747 w=18              #   turning up at x 9080 (seen at 1.4x only)
 
 # --- output metal (q) of each slice: up from the cell to a contact at y 5740
-M 9119,5730 y5990 w=20
-M 9509,5730 y5990 w=20
-M 9899,5730 y5990 w=20
-M 10289,5730 y5990 w=20
-M 10679,5730 y5990 w=20
 C 9118,5740 9508,5740 9897,5740 10287,5740 10677,5740 s=22x22
 ?P 9104,5728:9133,5752               # what the contact lands on and where it goes: not traced
 ?P 9494,5728:9523,5752
 ?P 9883,5728:9912,5752
 ?P 10273,5728:10302,5752
 ?P 10663,5728:10692,5752
+
+# =====================================================================================
+# Row C (y 7500-7825): seven more copies of the latch cell, slices s1..s7 (found by
+# correlation, offsets from findcell). Nets are named cdp2_a_c_sK_* (cell prefix + tag).
+# =====================================================================================
+@inst cdp2_lat -1171,1476 tag=c_s1
+@inst cdp2_lat -781,1476 tag=c_s2
+@inst cdp2_lat -391,1476 tag=c_s3
+@inst cdp2_lat 0,1476 tag=c_s4
+@inst cdp2_lat 390,1476 tag=c_s5
+@inst cdp2_lat 781,1476 tag=c_s6
+@inst cdp2_lat 1171,1476 tag=c_s7
+
+# Row C only: what joins the top of the cell. The output leaves upward in poly (no
+# contact); track b (n2) has a contact to a poly that goes right and then up, and the
+# metal itself also runs on up; the bus line runs on up.
+@cell cdp2_lat_ctop tag=c_s4
+M 9246,7425 y7556 w=16               # bus line
+M 9336,7425 y7556 w=22               # track b (n2)
+C 9334,7517 s=22x22
+P 9322,7504:9352,7530                # pad under the contact
+P 9340,7506:9474,7526                # n2 poly to the right, under the VCC rail,
+P 9453,7425:9474,7526                #   then up
+P 9502,7425:9520,7558                # output (q) poly, straight up from the cell
+@end
+@inst cdp2_lat_ctop -391,0 tag=c_s3
+@inst cdp2_lat_ctop 390,0 tag=c_s5
+@inst cdp2_lat_ctop 781,0 tag=c_s6
+@inst cdp2_lat_ctop 1171,0 tag=c_s7
+
+# --- supply rails of row C (the same rails as in row A, drawn here over the row only)
+M 8013,7425 y7830 w=46
+M 8403,7425 y7830 w=46
+M 8793,7425 y7830 w=46
+M 9184,7425 y7830 w=46
+M 9574,7425 y7830 w=46
+M 9965,7425 y7830 w=46
+M 10355,7425 y7830 w=46
+M 10745,7425 y7830 w=46
+N M 8013,7435 vss
+N M 8403,7435 vss
+N M 8793,7435 vss
+N M 9184,7435 vss
+N M 9574,7435 vss
+N M 9965,7435 vss
+N M 10355,7435 vss
+N M 10745,7435 vss
+M 8229,7425 y7641 w=50
+M 8619,7425 y7641 w=50
+M 9009,7425 y7641 w=50
+M 9400,7425 y7641 w=50
+M 9790,7425 y7641 w=50
+M 10181,7425 y7641 w=50
+M 10571,7425 y7641 w=50
+M 8218,7636 y7716 w=50
+M 8608,7636 y7716 w=50
+M 8998,7636 y7716 w=50
+M 9389,7636 y7716 w=50
+M 9779,7636 y7716 w=50
+M 10170,7636 y7716 w=50
+M 10560,7636 y7716 w=50
+M 8217,7711 y7830 w=54
+M 8607,7711 y7830 w=54
+M 8997,7711 y7830 w=54
+M 9388,7711 y7830 w=54
+M 9778,7711 y7830 w=54
+M 10169,7711 y7830 w=54
+M 10559,7711 y7830 w=54
+N M 8229,7435 vcc
+N M 8619,7435 vcc
+N M 9009,7435 vcc
+N M 9400,7435 vcc
+N M 9790,7435 vcc
+N M 10181,7435 vcc
+N M 10571,7435 vcc
+
+# --- eighth VSS rail (right of s7): land and contact for c_s7's pull-down
+D 10721,7626:10782,7702
+D 10719,7699:10745,7728
+C 10744,7659 s=28x46
+
+# --- labels of row C
+N M 8075,7600 cdp2_c_s1_bus
+N M 8465,7600 cdp2_c_s2_bus
+N M 8855,7600 cdp2_c_s3_bus
+N M 9246,7600 cdp2_c_s4_bus
+N M 9636,7600 cdp2_c_s5_bus
+N M 10027,7600 cdp2_c_s6_bus
+N M 10417,7600 cdp2_c_s7_bus
+N P 9450,7800 cdp2_c_ld

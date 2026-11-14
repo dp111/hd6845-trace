@@ -1,3 +1,6 @@
 8780,6020:10790,6345  array  5-bit register latch row | five static latch bits (pass transistor from a per-slice bus line, two inverters, weak hold device), all loaded together by one strobe line. True and inverted outputs go up to the row above; inverted outputs also leave sideways on poly lines. Which register: not yet established
 8480,5720:10850,6020  route  outputs of the latch row | five long poly lines carry the inverted latch outputs sideways; per-slice tracks take both polarities up to the row above
+7990,7500:10790,7825  array  7-bit register latch row | seven copies of the same static latch cell with their own strobe line. Outputs of five bits go up into the rows above, the two leftmost bits leave to the left. A 7-bit register (R4, R6 or R7): not yet established which
+?8780,6930:10790,7480  array  two rows of cells over the 7-bit register | five slices; take both polarities of five register bits from below. Not traced
 ?7600,6350:10850,6900  route  channel 2 | 13 horizontal poly lines under the per-slice metal lines and rails
+?8400,7980:10790,8450  array  row of cells below the 7-bit register | five or six slices, not traced
