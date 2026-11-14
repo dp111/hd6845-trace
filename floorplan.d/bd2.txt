@@ -1,0 +1,7 @@
+15895,15020:16280,15165  logic  Write strobe driver | inverter: sel_stb_r = NOT bd2_n1; output north and west to the register select gates
+15895,15220:16280,15365  logic  Address register load driver | inverter: areg_load = NOT E; output up the bundle to the address register
+15900,15500:16150,15670  logic  Write strobe gate | makes bd2_n1: pulled low by E AND bd2_r1_a (in series); load and a possible third input not resolved
+16100,14700:16460,15700  route  Strobe and E bundle | areg_load and sel_stb_r up, E (x 16169) from below, ground rail branch
+?15890,15670:16150,17100  logic  Bus control gate column | not traced: gates on E, R/W, RS, CS
+?16240,15400:16470,15900  logic  Gate group right of the bundle | not traced: two E-gated stacks under the ground rail
+?16480,14700:17000,17100  unknown  Right-hand column and routing | not looked at
