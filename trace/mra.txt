@@ -90,16 +90,16 @@ P 11875,10282:11908,10300                 # trunk foot into the buried contact
 P 11783,10254:11882,10276                 # G2
 D 11938,10268:11998,10321                 # pull-down channel strip under the chain poly
 D 11985,10303:12075,10322                 # to the VSS contact
-D 12045,10300:12100,10360
+D 12045,10300:12100,10356                 # VSS box; continues right as the bottom band (mra_col2)
 N D 11925,10285 mra_n2_{}
 
 # --- chain poly from the row below: band-3 and the vertical run down to H1 of row N+1
-P 11963,10245:12130,10262                 # band-3 (x(N+1) going right)
+P 11963,10245:12060,10262                 # band-3 (x(N+1) going right); jogs up at x 12052-12076, continued in mra_col2
 P 11963,10245:11986,10335                 # down through the INV2 channel; continued by mra_link or a per-row piece
 # --- band-2: arrives from the right, ends in a stub under the metal strip
-P 11950,10158:12130,10178
+P 11950,10158:12060,10178                 # jogs down at x 12052-12076, continued in mra_col2
 P 11950,10158:11985,10232
-N P 12120,10168 mra_b2_{}
+N P 12040,10168 mra_b2_{}
 @end
 
 # Row placements, r0 (top) .. r18 (bottom); offsets from findcell.py.
@@ -240,3 +240,120 @@ M 11917,17052 x12230 w=28
 # x 11580-11600 that runs up (outside this block, not drawn).
 P 11690,12448:11745,12470
 N P 11700,12459 mra_n1_r10
+
+# ---------------------------------------------------------------------------
+# Second column, x 12000-12470 (second run). Lines through all rows, drawn once:
+# x 12412-12462: VCC rail (drains of the two loads of every row; contacts in the cell).
+# x 12276-12294: "line A", a signal line that runs through every row with no contact in
+#   the rows (it jogs 10 px right at y 10200-10300 of each row; drawn straight).
+M 12437,7265 y16940 w=50
+N M 12437,9950 vcc
+M 12285,7265 y16940 w=18
+N M 12285,9950 mra_la
+
+@cell mra_col2 tag=r5
+@s 30x32
+
+# --- band-1 pad and the metal that takes g1 down to its source
+P 12110,10105:12152,10140                 # poly pad at the right end of band-1 (g1)
+C 12136,10122
+M 12136,10106 y10166 x12166 y10312 w=18   # g1 strip: pad -> down the row to the lower pad
+P 12152,10281:12192,10314                 # lower poly pad
+C 12171,10296
+P 12127,10285:12155,10308                 # same poly, tab to the left of the pad (over field as far as seen)
+P 12175,10188:12192,10290                 # riser from the pad
+P 12175,10188:12300,10205                 # ... turns right at y 10188-10205, under M1, to under line A
+P 12281,10188:12303,10300                 # ... and down under line A into the buried contact on node y
+B 12279,10281:12313,10312                 # buried contact: g1 poly to the inverter output diffusion
+
+# --- inverter g1 = NOT q: pull-down gate is the poly that hangs from the M1 pad; load 2
+D 12205,10283:12312,10336                 # VSS strip | channel under the q gate | output node y
+P 12227,10270:12251,10343                 # q gate (ends at y 10343, does not reach the line below)
+D 12300,10305:12412,10328                 # load strip: y | channel | VCC box
+P 12315,10276:12375,10338                 # load 2 gate block
+?B 12306,10301:12324,10332                # its tie to the output (position approximate; the corner at 12312-12327 x 10277-10297 is not resolved)
+D 12405,10282:12473,10332                 # VCC box under the rail
+C 12433,10305
+N D 12270,10320 mra_g1_{}
+
+# --- node q: metal M1 joins a diffusion box (top) to the poly pad of the q gate (bottom)
+M 12209,10047:12250,10088                 # top pad
+M 12238,10060 y10276 w=24
+D 12209,10045:12260,10092                 # diffusion box
+C 12226,10066
+P 12223,10230:12259,10277                 # poly pad; the q gate hangs from it
+C 12240,10254
+D 12236,10012:12262,10050                 # neck from the box up to a buried contact
+B 12234,10010:12266,10038
+P 12240,10015:12437,10034                 # q in poly to the right, under lines A, B, C and the VCC rail
+P 12410,9977:12437,10034                  # ... up
+P 12410,9977:12470,9997                   # ... and right along the top of the row (continues beyond x 12470)
+N P 12460,9987 mra_q_{}
+?P 12263,10056:12350,10091                # poly block between the q box and the VSS box of line C; lies under lines A and B.
+N P 12300,10075 mra_qblk_{}               #   Its own connection and what is under it are not resolved (ambiguity B1).
+
+# --- VSS brought across under M1, line A and line B in poly
+M 12168,10080:12198,10138                 # tongue of the VSS land down onto the pad
+P 12165,10105:12202,10140                 # poly pad
+C 12183,10122
+P 12183,10127 x12291 y10104 x12358 w=16   # link: right at y 10119-10135, up at x 12283-12299, right at y 10096-10112
+?B 12346,10094:12362,10114                # buried contact into the box (the poly ends at the box edge; contact not resolved)
+D 12350,10066:12408,10132                 # lower VSS box
+C 12376,10098
+M 12376,9964 y10116 w=28                  # "line C": lower box to upper box
+D 12355,9963:12402,10008                  # upper VSS box (nothing else seen on it)
+C 12374,9982
+
+# --- p3: the poly of the INV1 gate continues right to a pad; line B; pad; poly to the right
+P 12195,9972:12312,9994
+P 12308,9964:12345,9999                   # pad
+C 12325,9982
+M 12329,9966 y10152 x12340 y10256 w=18    # line B (jogs 11 px right at y 10152)
+P 12322,10226:12358,10254                 # pad
+C 12337,10240
+P 12350,10231:12470,10248                 # p3 arriving from the right (continues beyond x 12470)
+
+# --- n1 continues right along the top of the row
+P 12125,9924:12470,9945
+
+# --- the stack under and right of the VSS rail x 12055-12115
+P 12052,10160:12076,10196                 # band-2 jogs down
+P 12070,10175:12153,10196                 # band-2, gate across R; ends at x 12153
+P 12052,10233:12076,10262                 # band-3 (cin) jogs up
+P 12070,10233:12152,10256                 # band-3, gate across R; ends at x 12152
+D 12079,10153:12136,10279                 # R: top part | band-2 gate | middle | band-3 gate | bottom part
+D 12040,10205:12082,10226                 # neck: middle of R to the box on the left
+D 11995,10191:12045,10236                 # box
+C 12014,10213
+M 12017,10195 y10370 w=28                 # metal x 12003-12031 down to the pad of the row's bottom line
+P 12003,10337:12037,10372                 # pad
+C 12019,10353
+P 12003,10364:12470,10381                 # bottom line of the row (continues beyond x 12470); the same poly is
+N P 12460,10372 mra_m_{}                  #   the first agent's "H0" along the top of the next row
+N D 12100,10268 mra_rb_{}                 # bottom part of R: where it goes on is not resolved (ambiguity B3)
+
+# --- VSS diffusion ring around the g1 pad: bottom band, right strip, (top band)
+D 12100,10325:12220,10356                 # bottom band, joins the VSS box at (12068,10335)
+D 12205,10210:12222,10330                 # strip up the right side: source of the q pull-down
+?D 12205,10153:12222,10215                # the strip continues up under the g1 poly (a transistor gated by g1) ...
+?D 12079,10153:12222,10168                # ... and left along the top to R (corner at 12185-12222 x 10153-10190 not resolved)
+@end
+
+@inst mra_col2 0,-2646 tag=r0
+@inst mra_col2 0,-2169 tag=r1
+@inst mra_col2 0,-1692 tag=r2
+@inst mra_col2 0,-1215 tag=r3
+@inst mra_col2 0,-477 tag=r4
+@inst mra_col2 0,477 tag=r6
+@inst mra_col2 0,1040 tag=r7
+@inst mra_col2 1,1518 tag=r8
+@inst mra_col2 1,1995 tag=r9
+@inst mra_col2 1,2472 tag=r10
+@inst mra_col2 1,3123 tag=r11
+@inst mra_col2 1,3601 tag=r12
+@inst mra_col2 1,4077 tag=r13
+@inst mra_col2 1,4554 tag=r14
+@inst mra_col2 1,5097 tag=r15
+@inst mra_col2 1,5574 tag=r16
+@inst mra_col2 1,6051 tag=r17
+@inst mra_col2 2,6528 tag=r18
