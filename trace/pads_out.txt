@@ -1,0 +1,145 @@
+# Output driver cell: push-pull output transistors and the two-inverter pre-driver.
+# Master is MA3 (pin 7). The bond pad and the top of its neck are not in the cell,
+# because where the pad sits relative to the driver differs from pad to pad.
+#
+# Big transistors are drawn schematically: each contact row is one long contact
+# rectangle (the die has 20-30 individual contacts per row), and the diffusion is one
+# rectangle per row plus one under each gate.
+@block pads
+
+# supply metal near the master, outside the cell
+M 500,2400:605,4300                 # outer ring
+N M 550,3000 vss
+M 1591,2400:1895,4300               # inner band
+N M 1740,3000 vcc
+
+@cell outdrv tag=ma3
+
+# --- pad metal: neck down from the pad, finger bus, fingers
+M 848,3465:940,3602
+M 770,3600:941,3667                 # spreads left to the finger bus
+M 751,3620:803,4040                 # finger bus
+M 751,3680:1570,3717                # R2
+M 751,3834:1570,3872                # R4
+M 751,3992:1455,4034                # R6
+N M 777,3800 {}
+
+# --- supply band over the pre-driver, and the supply fingers
+M 1591,3100:1895,4150
+M 962,3600:1600,3650                # R1, joins the supply band
+M 828,3751:1600,3801                # R3
+M 828,3909:1582,3957                # R5
+M 550,4059:1575,4142                # R7 and the band back to the outer ring
+M 1500,3909:1582,4117               # joins R5 to R7
+
+# --- ground for the pre-driver: tunnels under the pad neck in diffusion
+M 550,3490:827,3567
+M 952,3490:1570,3572
+M 1487,3284:1570,3490
+D 752,3428:1027,3568
+C 790,3492:815,3552                 # two contacts
+C 968,3492:995,3552                 # two contacts
+
+# --- output transistors: diffusion rows
+D 962,3600:1885,3656                # R1  supply
+D 775,3676:1575,3723                # R2  pad
+D 832,3741:1885,3806                # R3  supply
+D 775,3826:1575,3884                # R4  pad
+D 832,3901:1575,3958                # R5  ground
+D 775,3978:1465,4035                # R6  pad
+D 775,4053:1560,4117                # R7  ground
+D 962,3655:1575,3677                # under G1
+D 832,3722:1575,3742                # under G2
+D 832,3805:1575,3827                # under G3
+D 832,3883:1575,3902                # under G4
+D 832,3957:1465,3979                # under G5
+D 775,4034:1465,4054                # under G6
+C 976,3611:1871,3635                # R1
+C 800,3686:1557,3709                # R2
+C 862,3762:1871,3786                # R3
+C 800,3841:1552,3865                # R4
+C 862,3921:1552,3945                # R5
+C 800,3999:1443,4023                # R6
+C 800,4078:1529,4102                # R7
+
+# --- output transistor gates
+P 938,3657:1990,3675                # G1  pull-up
+P 808,3724:1990,3740                # G2
+P 808,3807:1990,3825                # G3
+P 808,3732:828,3816                 # G2-G3 joined round the end of R3
+P 1955,3651:1989,3830               # poly bar under the pull-up gate strap
+P 808,3885:1950,3900                # G4  pull-down
+P 808,3959:1950,3977                # G5
+P 765,4036:1950,4052                # G6
+P 808,3892:828,3968                 # G4-G5 joined round the end of R5
+P 1914,3878:1949,4063               # poly bar under the pull-down gate strap
+C 1960,3668:1984,3804               # four contacts
+C 1920,3893:1944,4054               # five contacts
+M 1959,3649:1986,3830               # pull-up gate strap
+M 1915,3860:1950,4068               # pull-down gate strap
+
+# --- pre-driver, under the supply band
+D 1512,3220:1893,3422               # both pull-downs: drain / ground / drain
+D 1637,3125:1770,3222               # up through load U to the supply contacts
+D 1637,3420:1770,3526               # down through load L to the supply contacts
+D 1789,3180:1818,3222               # tab under the buried contact of load U
+D 1789,3420:1818,3463               # tab under the buried contact of load L
+C 1650,3128:1750,3152               # supply, three contacts
+C 1650,3489:1750,3513               # supply, three contacts
+C 1521,3290:1547,3349               # ground, two contacts
+P 1491,3263.5 x2085 w=25            # input from the core
+P 1487,3375.5 x1947 w=25            # second inverter's gate
+P 1618,3165:1893,3220               # load U gate
+P 1618,3434:1893,3476               # load L gate
+P 1890,3170:1950,3202               # load U gate out to its contact
+P 1890,3440:1950,3472               # load L gate out to its contact
+B 1787,3178:1820,3221
+B 1787,3426:1820,3465
+C 1931,3186 1931,3372 1931,3457 s=28x26
+M 1914,3170:1947,3388               # first inverter output up-down
+M 1947,3357:1989,3384               # ... across
+M 1960,3357:1989,3650               # ... down to the pull-up gate strap
+M 1915,3440:1947,3862               # second inverter output down to the pull-down strap
+N P 2070,3263 {}_drv_in
+N M 1975,3500 {}_pu
+N M 1931,3600 {}_pd
+N M 560,4100 vss
+N M 600,3530 vss
+N M 1740,3300 vcc
+@end
+
+# Instances, located with tools/findcell.py and checked with tools/cellcheck.py.
+# left column, same way up as the master
+@inst outdrv 0,-1605 tag=ma2
+@inst outdrv 0,1648 tag=ma4
+@inst outdrv 0,3731 tag=ma5
+@inst outdrv 1,5292 tag=ma6
+@inst outdrv 1,6854 tag=ma7
+@inst outdrv 1,8589 tag=ma8
+# left column below the blank pad site: flipped top to bottom
+@inst outdrv 2,10361 mx=1370 rot=180 o=1370,3630 tag=ma9
+@inst outdrv 2,11922 mx=1370 rot=180 o=1370,3630 tag=ma10
+# top row, left of VSS
+@inst outdrv 2059,-2187 mx=1370 rot=270 o=1370,3630 tag=ma1
+@inst outdrv 3598,-2187 mx=1370 rot=270 o=1370,3630 tag=ma0
+# bottom row
+@inst outdrv 2626,15997 rot=270 o=1370,3630 tag=ma13
+@inst outdrv 4579,15997 rot=270 o=1370,3630 tag=disptmg
+@inst outdrv 6726,15997 rot=270 o=1370,3630 tag=cudisp
+# top row, right of VSS
+@inst outdrv 9730,-2188 rot=90 o=1370,3630 tag=vsync
+@inst outdrv 11487,-2188 rot=90 o=1370,3630 tag=hsync
+@inst outdrv 13201,-2188 rot=90 o=1370,3630 tag=ra0
+@inst outdrv 14762,-2189 rot=90 o=1370,3630 tag=ra1
+@inst outdrv 16585,-2189 rot=90 o=1370,3630 tag=ra2
+# right column
+@inst outdrv 17056,-45 mx=1370 tag=ra3
+@inst outdrv 17056,1711 mx=1370 tag=ra4
+# lower-left corner. findcell locks onto the wrong finger for ma11 (the rows repeat
+# every 77 px); it is placed by hand and checked by overlay.
+@inst outdrv 2,13493 mx=1370 rot=180 o=1370,3630 tag=ma11
+@inst outdrv 3,15218 mx=1370 rot=180 o=1370,3630 tag=ma12
+
+# MA3's own pad (the other pads are added with the pad ring metal)
+M 768,2751:1287,3270                # bond pad
+M 770,3270:960,3467                 # neck

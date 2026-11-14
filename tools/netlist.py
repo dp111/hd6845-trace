@@ -18,6 +18,7 @@ from shapely.geometry import Point
 
 import tracelib
 
+GLOBAL_NETS = ('vss', 'vcc')   # joined by name; untraced gaps are reported, not fatal
 SLIVER_AREA = 60.0      # channels smaller than this are drawing artefacts
 MIN_OVERLAP = 0.25      # fraction of a contact that must lie on a layer to connect
 
@@ -190,6 +191,28 @@ class Netlist:
             for i, _ in d:
                 uf.union(('P', p[0][0]), ('D', i))
 
+        # supply nets are joined by name: find every labelled piece first
+        self.supply_pieces = {}
+        for gname in GLOBAL_NETS:
+            first = None
+            pieces = set()
+            for lb in tr.labels:
+                if lb.name != gname:
+                    continue
+                geoms, tree = trees[lb.layer]
+                pt = Point(lb.x, lb.y)
+                found = [i for i in (tree.query(pt) if tree is not None else [])
+                         if geoms[i].contains(pt)]
+                if not found:
+                    continue
+                key = (lb.layer, found[0])
+                pieces.add(uf.find(key))
+                if first is None:
+                    first = key
+                else:
+                    uf.union(first, key)
+            self.supply_pieces[gname] = len(pieces)
+
         # node ids
         roots = {}
         layers_of = defaultdict(set)
@@ -217,7 +240,7 @@ class Netlist:
             n = self.nodes[nid]
             if lb.name not in n.names:
                 n.names.append(lb.name)
-            if lb.name in seen and seen[lb.name] != nid:
+            if lb.name in seen and seen[lb.name] != nid and lb.name not in GLOBAL_NETS:
                 self.warn(f'name {lb.name} is on two unconnected nets '
                           f'(second at {lb.x:.0f},{lb.y:.0f})')
             seen.setdefault(lb.name, nid)
@@ -328,6 +351,9 @@ class Netlist:
         lines = []
         lines.append(f'{len(self.nodes)} nets, {len(self.transistors)} transistors, '
                      f'{len(self.errors)} errors, {len(self.warnings)} warnings')
+        for g, n in self.supply_pieces.items():
+            if n > 1:
+                lines.append(f'note   {g} is traced as {n} separate pieces, joined by name')
         for e in self.errors:
             lines.append('ERROR  ' + e)
         for w in self.warnings:

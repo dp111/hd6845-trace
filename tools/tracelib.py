@@ -35,11 +35,14 @@ File format (trace/*.txt), one item per line, '#' starts a comment:
     @cell NAME [tag=T]     start a cell. The items that follow, up to @end, are drawn
                            where they stand (the master) and can be repeated.
     @end
-    @inst NAME dx,dy [mx=X] [my=Y] [tag=T]
+    @inst NAME dx,dy [mx=X] [my=Y] [rot=DEG o=x,y] [tag=T]
                            a copy of the cell: mirrored about the vertical line x=X
-                           and/or the horizontal line y=Y, then moved by dx,dy.
-                           A label containing {} gets the tag substituted; other
-                           labels belong to the master only.
+                           and/or the horizontal line y=Y, then turned DEG degrees
+                           (clockwise as seen on the photo) about the point o, then
+                           moved by dx,dy.
+                           A label containing {} gets the tag substituted. Supply
+                           labels (vss, vcc) are copied as they are. Other labels
+                           belong to the master only.
 """
 import glob
 import os
@@ -115,11 +118,14 @@ def _points(tokens, src):
     return pts
 
 
-def xform(g, mx, my, dx, dy):
+def xform(g, mx, my, dx, dy, rot=0, o=(0, 0)):
     if mx is not None:
         g = affinity.scale(g, xfact=-1, yfact=1, origin=(mx, 0))
     if my is not None:
         g = affinity.scale(g, xfact=1, yfact=-1, origin=(0, my))
+    if rot:
+        # y grows downward on the photo, so a positive shapely angle looks clockwise
+        g = affinity.rotate(g, rot, origin=o)
     return affinity.translate(g, dx, dy)
 
 
@@ -164,10 +170,11 @@ def parse_file(path, items, labels, cells, insts):
             if head == '@inst':
                 kv = dict(t.split('=', 1) for t in tok[3:])
                 (dx, dy), = _points([tok[2]], src)
+                o = tuple(map(float, kv['o'].split(','))) if 'o' in kv else (0.0, 0.0)
                 insts.append((tok[1], dx, dy,
                               float(kv['mx']) if 'mx' in kv else None,
                               float(kv['my']) if 'my' in kv else None,
-                              kv.get('tag', ''), src))
+                              kv.get('tag', ''), src, float(kv.get('rot', 0)), o))
                 continue
             if head.startswith('@'):
                 raise TraceError(f'{src}: unknown directive {head}')
@@ -241,17 +248,17 @@ class Trace:
             files = sorted(glob.glob(os.path.join(TRACE_DIR, '**', '*.txt'), recursive=True))
         for p in files:
             parse_file(p, self.items, self.labels, self.cells, self.insts)
-        for name, dx, dy, mx, my, tag, src in self.insts:
+        for name, dx, dy, mx, my, tag, src, rot, o in self.insts:
             if name not in self.cells:
                 raise TraceError(f'{src}: no cell named {name}')
             _, _, citems, clabels = self.cells[name]
             for it in citems:
-                self.items.append(Item(it.layer, xform(it.geom, mx, my, dx, dy), it.uncertain,
+                self.items.append(Item(it.layer, xform(it.geom, mx, my, dx, dy, rot, o), it.uncertain,
                                        f'{src} <- {it.src}', it.block, dict(it.attrs)))
             for lb in clabels:
-                if '{}' not in lb.name:
+                if '{}' not in lb.name and lb.name not in ('vss', 'vcc'):
                     continue
-                p = xform(Point(lb.x, lb.y), mx, my, dx, dy)
+                p = xform(Point(lb.x, lb.y), mx, my, dx, dy, rot, o)
                 self.labels.append(Label(lb.layer, p.x, p.y, lb.name.replace('{}', tag),
                                          f'{src} <- {lb.src}'))
         self._tree = STRtree([it.geom for it in self.items]) if self.items else None
@@ -280,25 +287,29 @@ def overlay(im, x, y, w, h, scale, only=None, fill=True, trace=None):
     from PIL import Image, ImageDraw, ImageFont
     tr = trace or load()
     base = im.convert('RGBA')
-    lay = Image.new('RGBA', base.size, (0, 0, 0, 0))
-    d = ImageDraw.Draw(lay)
     order = {'D': 0, 'P': 1, 'M': 2, 'C': 3, 'B': 3}
     its = sorted(tr.query(x, y, x + w, y + h), key=lambda it: order[it.layer])
+    # one transparent sheet per layer, so a big shape never wipes out what is under it
+    sheets = {}
     for it in its:
         if only and it.layer not in only:
             continue
+        if it.layer not in sheets:
+            sheets[it.layer] = Image.new('RGBA', base.size, (0, 0, 0, 0))
+        d = ImageDraw.Draw(sheets[it.layer])
         col = COLOURS[it.layer]
         polys = [it.geom] if it.geom.geom_type == 'Polygon' else list(it.geom.geoms)
         for p in polys:
             xy = [((px - x) * scale, (py - y) * scale) for px, py in p.exterior.coords]
-            a = 45 if fill else 0
-            if it.layer in ('C', 'B'):
-                a = 90 if fill else 0
             outline = (255, 255, 0, 255) if it.uncertain else col + (255,)
-            d.polygon(xy, fill=col + (a,), outline=outline)
-            d.line(xy, fill=outline, width=2)
-            if it.uncertain:
-                d.line(xy, fill=(255, 255, 0, 255), width=3)
+            if fill:
+                a = 90 if it.layer in ('C', 'B') else 45
+                d.polygon(xy, fill=col + (a,))
+            d.line(xy, fill=outline, width=3 if it.uncertain else 2)
+    lay = Image.new('RGBA', base.size, (0, 0, 0, 0))
+    for k in ('D', 'P', 'M', 'C', 'B'):
+        if k in sheets:
+            lay = Image.alpha_composite(lay, sheets[k])
     out = Image.alpha_composite(base, lay).convert('RGB')
     d = ImageDraw.Draw(out)
     try:
