@@ -26,7 +26,10 @@ M 13849,18522 y18600 w=22          # output leaves downward (routing to be trace
 N P 13765,18160 t_g0_in
 N M 13849,18590 t_g0_out
 
-# ---- gate 1 (x 13975-14225): inverter with a two-finger pull-down
+# ---- clock-style buffer: a three-finger inverter (gate 2) driving a two-finger
+# inverter (gate 1). Used for CLK here and again 2798 px to the right for E.
+@cell clkbuf tag=clk
+# -- gate 1 (x 13975-14225): inverter with a two-finger pull-down
 C 14000,18231 s=34x30              # supply
 D 13976,18212:14030,18256
 D 13976,18254:14006,18371          # supply side of the load
@@ -46,11 +49,10 @@ M 14054,18283:14213,18323          # strap joining the two outer diffusions
 C 14073,18304 14192,18304 s=28x28
 C 14140,18410 s=30x40              # ground, middle diffusion
 C 14063,18535 s=26x26              # output
-M 14063,18522 y18600 w=22          # output leaves downward (routing to be traced)
 M 14152,18535 x14391 w=20          # input: output of gate 2
-N M 14063,18590 t_g1_out
+N P 14040,18480 {}_b
 
-# ---- gate 2 (x 14300-14620): inverter with a three-finger pull-down, input from the
+# -- gate 2 (x 14300-14620): inverter with a three-finger pull-down, input from the
 # CLK pad's protection cell, output along y 18535 to gate 1
 C 14329,18229 s=34x30              # supply
 D 14302,18212:14360,18256
@@ -74,9 +76,13 @@ M 14381,18283:14539,18323          # strap joining the output diffusions
 C 14391,18305 14517,18305 s=28x28
 C 14468,18400 s=30x36              # ground
 C 14590,18395 s=26x30              # ground
-M 14460,18522 y18600 w=22          # input from the CLK protection cell (routing to be traced)
-N M 14460,18590 clk
-N M 14300,18535 t_g2_out
+N P 14461,18490 {}
+N M 14300,18535 {}_n
+@end
+@inst clkbuf 2798,0 tag=e
+
+M 14063,18522 y18600 w=22          # buffered CLK leaves downward (routing to be traced)
+M 14460,18522 y18600 w=22          # CLK arrives from its protection cell (routing to be traced)
 
 # ---- three identical groups of four gates at a 628 px pitch, x 14600-16480.
 # Each group takes one input signal: an input inverter (a), two more inverters in a
@@ -167,3 +173,9 @@ N P 15174,18550 {}_d
 # R/W group: input arrives in metal from the R/W protection cell (routing to be traced)
 C 14675,18535 s=24x24
 M 14675,18535 x14612 y18600 w=22
+
+# E buffer wiring outside the cell
+M 17258,18522 y18600 w=22          # E arrives from its protection cell (routing to be traced)
+M 16861,18535 x16688 w=18          # buffered E, left along y 18535 ...
+C 16688,18535 s=26x26
+P 16682.5,18130 y18552 w=45        # ... then up towards the core in a wide poly line (top end not yet followed)
