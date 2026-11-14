@@ -2,10 +2,13 @@
 
 ## Status
 
-Traced and shipped: rows A and B (y 12200-12800, a 4-way pass-transistor selector per
-slice, 32 transistors) and the eight bus lines of channel 1 (y 11860-12190).
-Not traced: row R1 (y 11100-11800), row C (y 12800-13270), channel 2 (y 13280-13620),
-row D (y 13640-14050, six cells only), the supply rails, the wiring right of x 10600.
+Traced and shipped (extracts clean, 96 transistors): channel 1 bus lines, rows A and B
+(4-way pass-transistor selector per slice), row C (reset transistor on the selector
+node, then an 8-bit latch row with a buffered output back into the selector), supply
+rails for y 11790-13300.
+Not traced: row R1 (y 11100-11800), channel 2 (y 13280-13620), row D (y 13640-14050,
+six cells), the wiring right of x 10600. Found but not placed: row D and the lower half
+of R1 are built from a latch cell of the same family (see Not done).
 
 ## Conventions
 

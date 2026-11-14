@@ -48,12 +48,10 @@ C 8729,12653 s=26x30
 M 8509,11790 y12178 x8467 y12366 w=22      # a: from the row above, jogs left at y 12178
 M 8729,11790 y12366 w=20                   # b: from the row above
 M 8555,12338 y12810 w=18                   # n: joins both rows, continues down
-M 8467,12640 y12810 w=22                   # c: to the row below
 M 8729,12640 y12810 w=20                   # d: to the row below
 N M 8509,11800 cdp4_a_{}
 N M 8729,11800 cdp4_b_{}
 N M 8555,12500 cdp4_n_{}
-N M 8467,12800 cdp4_c_{}
 N M 8729,12800 cdp4_d_{}
 @end
 @inst cdp4_mux -782,0 tag=s0
@@ -94,3 +92,176 @@ N P 7610,12008 cdp4_bus_s4
 N P 7610,11964 cdp4_bus_s5
 N P 7610,11922 cdp4_bus_s6
 N P 7610,11877 cdp4_bus_s7
+
+# ======================================================================
+# Supply rails, two per slice (vertical, wide metal). Left of each slice VSS, middle VCC:
+# the latch loads hang from lands contacted by the middle rail, the pull-down sources
+# from lands contacted by the left rail. A ninth VSS rail stands right of s7.
+# Drawn for y 11790-13300 so far; they continue up and down.
+# ======================================================================
+M 7622,11790 y13300 w=46
+M 8013,11790 y13300 w=46
+M 8404,11790 y13300 w=46
+M 8795,11790 y13300 w=46
+M 9185,11790 y13300 w=46
+M 9574,11790 y13300 w=46
+M 9964,11790 y13300 w=46
+M 10355,11790 y13300 w=46
+N M 7622,11800 vss
+N M 8013,11800 vss
+N M 8404,11800 vss
+N M 8795,11800 vss
+N M 9185,11800 vss
+N M 9574,11800 vss
+N M 9964,11800 vss
+N M 10355,11800 vss
+M 7837,11790 y13300 w=44
+M 8228,11790 y13300 w=44
+M 8619,11790 y13300 w=44
+M 9010,11790 y13300 w=44
+M 9400,11790 y13300 w=44
+M 9789,11790 y13300 w=44
+M 10179,11790 y13300 w=44
+M 10570,11790 y13300 w=44
+N M 7837,11800 vcc
+N M 8228,11800 vcc
+N M 8619,11800 vcc
+N M 9010,11800 vcc
+N M 9400,11800 vcc
+N M 9789,11800 vcc
+N M 10179,11800 vcc
+N M 10570,11800 vcc
+
+# ======================================================================
+# Row C (y 12800-13300): reset transistor on n, then a latch per slice
+# ======================================================================
+P 7600,12874 x10705 w=22           # rst: gates the pull-down of n in every slice
+P 7600,12962 x10600 w=22           # ld: latch strobe, loops round each latch's input contact
+N P 7610,12874 cdp4_rst
+N P 7610,12962 cdp4_ld
+
+# --- top of row C: n's contact and its pull-down to the next slice's VSS rail; the
+# three per-slice metal tracks on their way down
+@cell cdp4_ctop tag=s2
+M 8556,12800 y13300 w=18                   # n: contact at 12830, then down through the latch (no contact)
+M 8729,12800 y13040 w=20                   # d: down to the latch's buffered output
+C 8556,12830 s=28x30
+D 8537,12807:8580,12852                    # contact land of n
+D 8575,12823:8745,12842                    # strip to the right, under the VCC rail
+D 8651,12823:8745,12930                    # block crossed by rst (width uncertain, see notes)
+D 8638,12908:8775,12930                    # on to the right: lands on the next slice's VSS contact
+D 8378,12897:8430,12940                    # VSS contact land (takes the previous slice's pull-down)
+C 8403,12917 s=28x30
+@end
+@inst cdp4_ctop -782,0 tag=s0
+@inst cdp4_ctop -391,0 tag=s1
+@inst cdp4_ctop 391,0 tag=s3
+@inst cdp4_ctop 781,0 tag=s4
+@inst cdp4_ctop 1170,0 tag=s5
+@inst cdp4_ctop 1560,0 tag=s6
+@inst cdp4_ctop 1951,0 tag=s7
+
+# --- the latch
+@cell cdp4_lat tag=lc_s2
+# input pass transistor: in -> a, gate = strobe (loop round the contact; its bottom is the gate)
+M 8465,12954 y13300 w=24                   # in: contact at the top, runs down into channel 2
+C 8466,12990 s=30x30
+D 8448,12977:8499,13064                    # contact land and strip down through the gate
+D 8448,12997:8516,13064                    #   widened on the right
+D 8450,13058:8477,13094                    #   tail under the buried contact
+P 8415,12955:8439,13039                    # strobe loop: down the left,
+P 8415,13017:8543,13039                    #   across the strip (the gate),
+P 8524,12955:8543,13039                    #   back up on the right
+B 8447,13062:8480,13097
+P 8448,13066:8478,13096                    # pad of node a over the tail
+P 8450,13066:8472,13248                    # node a: down under the in metal, gate of T_b
+P 8450,13227:8530,13248                    #   then right to the feedback land
+N P 8460,13120 cdp4_{}_a
+# inverter 2: a -> n2. T_b from the VSS land, load L2 down from the VCC land
+D 8380,13002:8409,13176                    # VSS land under the left rail
+D 8380,13117:8436,13176
+C 8403,13147 s=28x40
+D 8404,13156:8530,13212                    # T_b: source, channel, drain (n2) with the gate-tie pad
+D 8520,13186:8584,13212                    # n2 on to the foot of the load
+D 8556,13110:8586,13190                    # load strip down from the VCC land
+D 8552,13021:8602,13124                    # VCC land
+D 8600,13072:8634,13124
+C 8599,13095 s=30x30
+P 8547,13124:8592,13176                    # L2 gate block
+P 8528,13160:8552,13174                    # tab to the tie pad
+P 8498,13160:8540,13190                    # tie pad
+B 8494,13157:8542,13192
+N D 8560,13200 cdp4_{}_n2
+# n2 poly: from the L2 block down its right side, along under the strap, up as the
+# gate of both output pull-downs
+P 8591,13130:8615,13201
+P 8591,13181:8767,13201
+P 8744,12998:8767,13201
+# inverter 1: n2 -> q. Load L1 right of the VCC land; pull-down to the next slice's VSS land
+D 8630,13093:8700,13122                    # load strip
+P 8650,13085:8693,13170                    # L1 gate block; lower half is the strap's contact pad
+P 8646,13125:8693,13168
+P 8690,13093:8716,13123                    # tab over the output end
+B 8690,13091:8720,13125
+D 8693,13095:8722,13127                    # output end
+D 8699,13124:8775,13175                    # q drain below the output end; under the n2 gate to the next VSS land
+N D 8730,13150 cdp4_{}_q
+# buffer inverter: n2 -> qb (logically q), for the selector. Load LX from the top of the VCC land
+D 8600,13024:8660,13050                    # load strip
+P 8604,12990:8633,13064                    # LX gate block (overhangs the strip at the bottom)
+P 8604,12990:8686,13008                    # bar along the top to the tie
+P 8661,12990:8681,13042                    # neck down into the buried contact
+B 8657,13010:8686,13046
+D [ 8630,13024 8655,13024 8655,13012 8693,13012 8693,13004 8775,13004 8775,13089 8733,13089 8700,13056 8660,13050 8630,13050 ]   # output end, tie, land of the d contact and the wedge below it; on under the n2 gate to the next VSS land
+M 8695,13005:8740,13050                    # pad of the d track
+C 8712,13027 s=28x28
+# output of q: metal strap over the n2 poly to the output land, buried contact, poly down
+M 8680,13130 y13262 w=36
+C 8668,13152 s=26x26
+C 8679,13237 s=28x30
+D 8653,13213:8705,13258
+D 8700,13238:8742,13262
+B 8714,13234:8750,13264
+P 8724,13236:8747,13300
+# hold path (not understood, as in the right datapath's latch): a's poly ends on a
+# buried contact to a land under the n track; from there two stripes run under the
+# VCC rail to the edge of the output land
+B 8511,13226:8540,13258
+D 8514,13230:8564,13260
+?D 8560,13226:8646,13240                   # S1: stripe on node a, stops 7 px short of the output land as drawn
+P 8570,13247:8648,13261                    # S2: poly stripe, no connection seen
+N P 8600,13254 cdp4_{}_x2
+# poly band along the bottom, tied to the VSS rail
+P 8388,13264:8650,13288
+C 8401,13275 s=24x22
+@end
+@inst cdp4_lat -782,0 tag=lc_s0
+@inst cdp4_lat -391,0 tag=lc_s1
+@inst cdp4_lat 391,0 tag=lc_s3
+@inst cdp4_lat 781,0 tag=lc_s4
+@inst cdp4_lat 1170,0 tag=lc_s5
+@inst cdp4_lat 1560,0 tag=lc_s6
+@inst cdp4_lat 1951,0 tag=lc_s7
+
+# ninth VSS rail, right of s7: takes s7's pull-downs
+M 10746,11790 y13300 w=46
+N M 10746,11800 vss
+D 10722,13002:10751,13176
+C 10745,13147 s=28x40
+D 10720,12897:10772,12940
+C 10745,12917 s=28x30
+
+# --- the c input of the selector. Slices s2..s7: a metal track from the row B contact
+# down through row C (jogging right at y 12880-12945; no contact in the latch).
+# Slices s0, s1: the contact is strapped to the VSS rail on its left instead.
+@cell cdp4_ctrk tag=s2
+M [ 8456,12640 8478,12640 8478,12880 8521,12940 8521,13300 8500,13300 8500,12950 8456,12895 ]
+N M 8467,12800 cdp4_c_{}
+@end
+@inst cdp4_ctrk 391,0 tag=s3
+@inst cdp4_ctrk 781,0 tag=s4
+@inst cdp4_ctrk 1170,0 tag=s5
+@inst cdp4_ctrk 1560,0 tag=s6
+@inst cdp4_ctrk 1951,0 tag=s7
+M 7622,12654 x7696 w=22            # s0: c contact to the VSS rail
+M 8013,12654 x8087 w=22            # s1: c contact to the VSS rail
