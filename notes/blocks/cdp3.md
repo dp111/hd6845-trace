@@ -148,10 +148,19 @@ s2..s7 (same net as `cdp3_f` of the slice to the west) at x 9503+dx, y 8790.
 
 ## Ambiguities
 
-- Rail identity. Rail d is labelled `vss` in the trace on the strength of the row C cell
-  structure (wide diffusion with three contacts under it); rail a is believed VCC.
-  Neither was followed to a pad, and the row C cell is not traced yet. If rail d turns
-  out to be VCC the row E transistors of s0 and s1 pull N high instead of low.
+- Rail identity. Rail d is labelled `vss` in the trace. Evidence: (1) in the row C cell
+  it lies on a wide diffusion with three contacts and the load at the cell's top left
+  hangs from rail a; (2) rail d of s1..s7 (x 8403, 8793, 9184, 9574, 9964, 10355, 10745)
+  is at the x of the VSS rails that `cdp1` followed to the plane under the VSS pad (8403,
+  8796, 9187, 9577, 9967, 10357, 10738 at y 4530), and rail a at the top of row C
+  (x 9400+dx) at the x of cdp1's VCC rails (8620 ... 10570). The stretch between y 4530
+  and y 8450 belongs to cdp2 and was not looked at here, so continuity is assumed. If
+  rail d were VCC the row E transistors of s0 and s1 would pull N high instead of low.
+- Slice numbering against the neighbours (from their notes, not traced): `cdp4`'s slice
+  K has its rails at this block's slice K-1 (cdp4 s2 rails 8405 / 8619 = rail d of s1 and
+  rail a of s2 here), and the vertical metal its channel-1 bus lines end on (x 8555 in
+  its s2) is this block's line g (8561 in s1). So line g probably runs from channel B down
+  through rows C-H into cdp4's row R1 and is fed from the west there too.
 - The gate lines' east ends were seen at 0.85x only (row E's poly visible to about
   x 10690; row F's not visible east of s7's gate).
 - In the clean shot the row E and F transistors show khaki areas with a dark outline
@@ -256,3 +265,14 @@ H = R15 against MA0-7).
 - Row A and row H cells (variants of C), row I, the s0/s1 logic of rows A-C
   (x 7600-8560), the through lines (y 8819, 9493, 9537, 10708), rails over their full
   length, lines e, f, g.
+
+## Tools and method notes
+
+- `tools/cdp3_prof.py`: positions of metal lines (`--mode metal`) and of horizontal poly
+  lines (`--mode poly`, chip-2 stripped shot). The poly mode fails under metal ghosts and
+  the metal mode breaks lines at every edge underneath, so use it for coordinates, never
+  for continuity.
+- `composite.py` over the six row C instances gives a much cleaner picture than any single
+  instance; views above 4x add nothing.
+- In this part of the die the bright green bands of the clean shot are narrow strips of
+  open field between features (or between metal lines), not features.
