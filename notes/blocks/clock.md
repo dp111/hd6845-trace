@@ -73,10 +73,52 @@ What has been read so far (left half; mirror positions in brackets):
 - Full-height vertical poly strips at 11390-11416 and 11523-11547 run down past
   y 19890 towards the lines along the bottom of the block.
 
-## Big arrays (9570-10650 x 19200-19800): not yet examined
+## Big arrays (9570-10650 x 19200-19800): partly read, not traced
 
-Two large multi-finger arrays with a small one between them. A wide metal runs up
-into the core from each (x about 10690 and x about 9480).
+Supplies here:
+- VSS comes down from the core on the wide metal at x 10755-10815. It branches right
+  at y 19335-19375 into the driver logic's middle rail, carries on down, and turns
+  left at y 19765-19815 to run under both arrays as their bottom bus.
+- The wide metal at x 10652-10722 (from the core, ends at y 19410) is taken to be VCC:
+  the only thing under it is a small device whose gate is tied back to its other
+  side, i.e. a load.
+
+Right-hand array (10235-10725 x 19180-19790), columns left to right:
+
+| x | What |
+|---|---|
+| 10237-10278 | col 1, diffusion with contacts, joins the bottom bus (VSS) |
+| 10280-10300 | gate s1 |
+| 10300-10353 | col 2, joins a metal that leaves left at y 19235-19262 |
+| 10355-10378 | gate s2 |
+| 10380-10423 | col 3, joins the bottom bus (VSS) |
+| 10425-10447 | gate s3 |
+| 10449-10495 | col 4, joins the top bus (y 19183-19212) |
+| 10497-10520 | gate s4 |
+| 10522-10565 | col 5, joins the bottom bus (VSS) |
+| 10567-10590 | gate s5 |
+| 10592-10628 | col 6, joins the top bus; diffusion probably extends to x 10652 |
+| 10652-10680 | gate of the load, box at its top end 10645-10682 x 19237-19262 |
+| 10683-10725 | load's supply side, three contacts to the metal at x 10652-10722 |
+
+So there are two large inverters here. Gates s3-s5 (W about 3 x 480) pull the top bus
+low against the load. Gates s1-s2 pull col 2 low. s3-s5 have separate rounded top
+ends and are joined at the bottom by a poly bar (y 19752-19775) that runs right and
+then down in poly at x 10655-10690 to a poly bar along the bottom of the block
+(y 19905-19930), heading for the driver logic. s1 and s2 end at the top at y 19222
+next to a horizontal band (y 19215-19232, x 10240-10440) and the top bus has a pad
+with two contacts at 10285-10375 x 19180-19215; the likely reading is that the top
+bus drives s1 and s2 through that pad, making the two inverters a chain. Not
+confirmed. s1 and s2 also have long feet under the bottom bus (to y 19790).
+
+Left-hand array and the small devices between the arrays: not yet read.
+
+A metal at x 10840-10865 comes down from the core to a contact at 10852,19292,
+crosses under the VSS branch in poly to 10852,19422 and continues down. The bus
+line carrying `ck_src` (y 18455-18480) runs left to a contact at 10895,18467 and
+links to a vertical metal near x 10810 that heads down this way, so `ck_src` very
+probably comes from this part of the block: the gate row re-buffers something made
+here, and the driver logic's two halves take that signal and its complement back.
 
 ## Open questions
 
