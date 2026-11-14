@@ -180,7 +180,11 @@ N D 3400,11800 larr_n4_{}
 D 3298,11767:3418,11830
 D 3320,11825:3400,11850
 P 3358,11752:3385,11862             # Pv6; driven from below through a buried contact
-?P 3360,11855:3397,11897            # poly square in a heavy box: buried contact, diffusion side not resolved
+P 3360,11855:3397,11897             # poly square in a heavy box: buried contact
+B 3362,11858:3398,11897
+D 3362,11860:3422,11895             # under the contact and across to the strip
+D 3400,11872:3422,11935             # strip down the open space between rail E and Vm1 (diffusion by colour)
+?D 3400,11930:3422,11978            # ... on down into the band along the top of the next row (seen in the composite; not checked on the last row of each group)
 N P 3371,11800 larr_g6_{}
 
 # poly tap of rail E at the bottom of the row (the one at the top is in larr_top_n)

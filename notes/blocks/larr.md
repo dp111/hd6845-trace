@@ -62,7 +62,7 @@ marked believed.
   which is on rail E.
 - `larr_n4` = NOT `larr_g6`. Load L4 on rail C; pull-down gate Pv6 to R2, on rail E.
   `larr_g6` is the poly gate at 3358-3385 x 11752-11862: believed the stored counter
-  bit Q (a dynamic node; see Ambiguities for where it is driven from). N4's poly goes a
+  bit Q (see Ambiguities for the node it sits on). N4's poly goes a
   long way: Ph4, buried contact to the pass-gate strip, arm, P4, metal strap, along
   the bottom, up under rail A.
 - `larr_n2` = NOT `larr_n4` (so = Q). Load L2 on rail B; pull-down gate P4 to R2.
@@ -131,7 +131,7 @@ is traced.
 | H1 (on `larr_phe`), 11 rows | poly y top+31..51 | 2860,11511 in the master; rows s1-s6, s8, s9, s11-s13 | to the left column | believed a tap of rail E |
 | H3 (on `larr_phe`), same 11 rows | poly y top+38..60 | drawn to x 3780, goes on right | - | along the top of the row |
 | `larr_n3_sN` | diffusion strip y 11640-11660 | 3490,11650 (master) | out | NOT sum, to the clocked latches |
-| `larr_g6_sN` | poly 3360-3397 x 11855-11897 | buried contact, diffusion side not drawn | in | the stored bit |
+| `larr_g6_sN` | diffusion strip x 3400-3422 | 3411,11978 (master), into the band along the top of the next row | in | the stored bit |
 | `larr_n2_sN` | diffusion strip y 11925-11943 | 3292,11934 (master) | out | Q, to the right along the bottom of the row |
 | Pq1 (on `larr_phe`), every row | poly y 11900-11921 | ends at 3388,11910 (master) | - | gate strip at the bottom of the row |
 
@@ -167,11 +167,22 @@ is traced.
      dark outline from the poly inside it. Taken as all joined (the arm has no other
      end). If the arm were not joined, N4 would not reach the carry gate and the cell
      would make no sense.
-- **Where `larr_g6` is driven from.** Its poly ends in a heavy box (3360-3397 x
-  11858-11897, drawn `?P`), read as a buried contact onto a diffusion that runs down
-  under Pq1 and a second poly Pq2 (y 11928-11948, starts at 3290 where the N2 strip
-  ends, perhaps by a buried contact) to the wide diffusion band along the top of the
-  next row (y 11463-11497 there). Not resolved; none of it is drawn.
+- **The storage node `larr_g6`.** Traced: the gate poly ends in a buried contact
+  (3362-3398 x 11858-11897) onto a diffusion strip that runs down the open space
+  between rail E and Vm1 (3400-3422 x 11872-11975; diffusion by colour, class map
+  `larr_cls.py`) into the wide diffusion band along the top of the next row (y
+  11950-11975 here, 11463-11497 in the next row's frame; lower part drawn `?D`, not
+  checked on s6, s9, s13 which have no row below). So the stored bit of row n lives on
+  the band along the top of row n+1, which runs right to at least x 3750. Read but not
+  drawn: Vm1 (metal x 3428-3448) contacts a poly pad at 3425-3455 x 11895-11930
+  (contact 3440,11912) whose poly runs right along y 11900-11922 and crosses between
+  the VSS region 3490-3700 x 11862-11897 and that band: a clear device, bit to VSS when
+  Vm1 is high. Not resolved: a second poly Pq2 (y 11928-11948) runs from the end of the
+  N2 strip (3290) to a tab of the g6 strip at 3385-3403 x 11920-11937, parallel to
+  Pq1. If it is tied at both ends by buried contacts then g6 = N2 and the bit is a
+  static cross-coupled pair N2/N4 (and rail E would have to be VSS for it to hold);
+  if it only gates something, g6 is dynamic. This is the next thing to settle; it also
+  decides the rail E question.
 - **Carry channel under P2** (3263-3292 x 11560-11632, pull-down of net a): no
   outline is visible in the views; it is certain from the two edge lines across P2 at
   y 11557 and 11635 and the different colour of the poly between them.
@@ -196,7 +207,17 @@ is traced.
   (view.py ... --scale 3.9 --layers metal,acid1b --comp larr_row) are the way in.
 - **Gaps 1 and 2** (y 14333-14549, 15981-16154): two poly bands per gap along the
   whole width, plus thin lines; they carry the group carries to logic further right.
-- **Left column** x 2480-2860 and the route from it to the `maN_drv_in` lines.
+- **Left column** x 2480-2860 and the route from it to the `maN_drv_in` lines. One
+  observation to start from: `ma8_drv_in` (poly along y 11852 from the driver) ends at
+  about x 2255 on a pad with a metal contact (2237,11880); a short metal joins it to
+  a contact at 2197,11923 on a poly that runs right along y 11905-11928 into the
+  left-column cell at 2550-2720 x 11880-12010. So MA8's stage is the left-column cell
+  level with rows s1/s2, not with s8: the stages are placed near their pads and the
+  bits must reach them through the bundle of vertical metal lines at x 2150-2520
+  (eight lines counted at y 11600-12000). Bit numbers are therefore still unconfirmed.
+  A second poly along y 11823-11847 runs from a contact at 2283,11833 (on a bundle
+  line at x 2270-2290) to x 2850, where it turns down beside s1's L0 tap without
+  touching it.
 - **L0 of group 0**: find its pull-up and where it is read (look along x 2860-2905,
   y 11300-14140, and at the poly that crosses under it).
 - **Upper section** (9 rows) and the block at 4450-4780 x 8250-10500.
