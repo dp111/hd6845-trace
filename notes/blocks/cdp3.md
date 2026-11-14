@@ -10,11 +10,13 @@ lines, not reliable for continuity).
   rows E and F (two pass transistors per slice), their two gate lines, the eight
   per-slice tracks of channel G, the six per-slice tracks of channel D, and the vertical
   metal that joins them (lines b, c, h and the two lines into each row H cell).
-- NOT traced: the three rows of large cells (A, C, H), channel B, the row at the bottom
-  edge, the through lines at y 8819, 9493, 9537 and 10708, the rails (only two short
-  pieces are drawn), the per-slice vertical lines e, f, g.
-- Surveyed with coordinates but not traced: the row C cell (own section below) and the
-  wiring of channel B (own section below).
+- Traced the same way: channel B's six tracks onto line g and its six poly links from
+  line f to the next slice (wiring only; contacts checked at 2x in the clean shot, lines
+  by overlay at 0.8x).
+- NOT traced: the three rows of large cells (A, C, H), the row at the bottom edge, the
+  through lines at y 8819, 9493, 9537 and 10708, the rails (only two short pieces are
+  drawn), lines e, f, g outside channel B, the s0/s1 logic at x 7600-8560.
+- Surveyed with coordinates but not traced: the row C cell (own section below).
 
 ## Inventory
 
@@ -128,12 +130,21 @@ top edge cuts through the row A cells, the bottom edge through row I.
 | rail a | 9375-9420 | 9380-9425 | believed VCC |
 | rail d | 9548-9596 (contacts at 9568,8437 and 9568,8500) | 9550-9598 (contact at 9570,11200) | believed VSS |
 | e | 9625-9645 | 9630-9645 | not identified |
-| f | 9665-9690 | 9670-9690 | not identified; tied to the row A cell of the next slice in channel B |
-| g | 9715-9740 | 9715-9740 | not identified; fed from the west by a channel B track in s1..s6 |
+| f | 9665-9690 | 9670-9690 | `cdp3_f_sK` in s1..s6: tied to the row A cell of the next slice in channel B |
+| g | 9715-9740 | 9715-9740 | `cdp3_g_sK` in s1..s6: fed from the west by a channel B track |
 
-West edge, channel B (poly, x 7600; seen at 0.8x only): y 8819 (through line), and the
-six line g tracks at y 8907 (s6), 8950 (s5), 8991 (s4), 9036 (s3), 9078 (s2), 9124 (s1).
-East edge, channel B: the y 8819 line.
+West edge, channel B (poly, x 7600):
+
+| Name | y | What |
+|---|---|---|
+| cdp3_g_s6 .. cdp3_g_s1 | 8907, 8950, 8994, 9037, 9080, 9123 | per-cell vertical line g of the 6-bit rows (direction unknown) |
+| (not traced) | 8864, 9167 | lines into the s0/s1 logic |
+
+East edge, channel B: the y 8819 through line (not traced).
+
+Stubs inside the region (channel B, labels on the metal): `cdp3_f_sK` (K 1..6) at
+x 9684+dx, y 8790 and y 9200; line g at x 9731+dx, y 8790 and y 9200; the x 9500 line of
+s2..s7 (same net as `cdp3_f` of the slice to the west) at x 9503+dx, y 8790.
 
 ## Ambiguities
 
@@ -147,29 +158,32 @@ East edge, channel B: the y 8819 line.
   beside the body (x 9395-9432 and 9505-9537, below the pads). Read as open field: the
   chip-2 metal shot shows the body outline at x 9433-9500 only.
 
-## Channel B (y 8790-9200): surveyed, not traced
+## Channel B (y 8790-9200): tracks and links traced
 
-From one 1.6x view of s4 (both shots) and a 0.8x metal view of the full width. Contact
-positions are good to about 8 px; nothing here is in the trace file.
+From a 1.6x view of s4 (both shots), a 0.8x metal view of the full width, a 2x mosaic of
+all eighteen contacts in the clean shot, and the overlay.
 
-Horizontal poly (y centres from the chip-2 stripped shot at x 9530 / 9700):
-- y 8819: through line, full width, continues east past x 10870.
-- y 8907, 8950, 8991, 9036, 9078, 9124: six tracks from the west edge. Each ends at a
-  contact on line g of one slice: s6 (10508,8905), s5 (10116,8950), s4 (9724,8995),
-  s3 (9338,9036), s2 (8948,9078), s1 (8556,9124). East of its contact the track is gone.
+Traced:
+- Six poly tracks from the west edge, y 8907, 8950, 8994, 9037, 9080, 9123. Each ends at
+  a contact on line g of one slice (x 9729+dx): s6, s5, s4, s3, s2, s1 in that order. East
+  of its contact the track is gone. Nets `cdp3_g_s1`..`cdp3_g_s6`.
   Line g of slice k lies on the boundary with slice k+1 (x 9732 = the left edge of the
   next cell), so these six lines sit at the left edge of the six cells s2..s7 of rows A
-  and C: a 6-bit bus from the west onto a vertical line per cell. No such track was seen
-  for s7's line g (x 10903, outside the region) or s0's.
-- Short poly links, a metal contact at each end, joining line f of slice k to the
-  x 9500 line of slice k+1 (which comes down from the row A cell and ends there):
-  at y 8861: (8511)-(8727) s1-s2, (8897)-(9119) s2-s3, (9679)-(9901) s4-s5,
-  (10072)-(10287) s5-s6; at y 9146: (9287)-(9511) s3-s4, (10464)-(10679) s6-s7.
-  So each row A cell is tied to line f of the slice to its west; line f also has
-  contacts inside the row C cell.
-- One more link at y 9169 between contacts at about (7834,9169) and (8290,9169), and a
-  contact at (7834,8861) on the same vertical line: belongs to the s0/s1 logic, not
-  understood.
+  and C: a 6-bit bus from the west onto a vertical line per cell.
+- Six poly links, a metal contact at each end, joining line f of slice k (contact at
+  x 9681+dx) to the x 9500 line of slice k+1 (contact at x 9507+dx'), which comes down
+  from the row A cell and ends there. Links at y 8862 for s1-s2, s2-s3, s4-s5, s5-s6 and
+  at y 9144 for s3-s4, s6-s7. Nets `cdp3_f_s1`..`cdp3_f_s6`. So each row A cell (s2..s7)
+  is tied to line f of the slice to its west; line f also has contacts inside the row
+  C cell (not traced).
+- Lines f, g and the x 9500 lines are drawn across the channel only (y 8790-9200).
+
+Seen, not traced:
+- y 8819: through line, from about x 8420 east past x 10870.
+- No track was seen for s7's line g (x 10903, outside the region) or for s0's.
+- A poly line at y 9167 from the west edge to a contact at about (8290,9169), with a
+  contact at about (7834,9169) on the way, and a poly at y 8864 from the west edge to a
+  contact at about (7834,8861) on the same vertical metal: s0/s1 logic, not understood.
 - In the clean shot the channel also shows plain rectangles (9435-9490 x 8830-8880 and
   x 9000-9110 in s4). They are open field between the metal lines, not devices.
 
@@ -237,8 +251,8 @@ H = R15 against MA0-7).
 - Row C cell (9340-9730 x 9200-9500 in s4): see the section above for what is known. It
   needs 4-5x views junction by junction; start with the column question, then the right
   half. Budget about twenty views. A contact at about 9630,9525 sits just below the cell.
-- Channel B: trace the six tracks, the links and their contacts from the survey above
-  (each needs a 1.6x look; do it together with rows A and C, whose cells the lines end in).
+- Channel B: the y 8819 through line and the s0/s1 lines (y 8864, 9167; contacts near
+  x 7834 and 8290).
 - Row A and row H cells (variants of C), row I, the s0/s1 logic of rows A-C
   (x 7600-8560), the through lines (y 8819, 9493, 9537, 10708), rails over their full
   length, lines e, f, g.

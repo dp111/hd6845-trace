@@ -201,3 +201,69 @@ M 10593,10175 y10273 10637,10323 y10720     # row F left contact down into the r
 N P 7610,10361 cdp3_hw_s7
 N P 10840,10361 cdp3_n_s7
 N M 10637,10710 cdp3_hq_s7
+
+# =====================================================================================
+# Channel B (y 8790-9200): tracks onto line g, links from line f to the next slice
+# =====================================================================================
+# Contacts checked in the clean shot at 2x in every slice; the lines themselves by overlay at 0.8x.
+# Lines f, g and the x 9500 line are drawn only across the channel: they go on into the row A
+# cells above and (f, g) the row C cells below, which are not traced yet.
+
+# ---- six poly tracks from the west edge, each ending at a contact on line g of one slice
+P 7600,9123 x8572
+C 8558,9123 s=28x28
+M 8560,8790 y9200                    # line g of s1
+N P 7610,9123 cdp3_g_s1
+P 7600,9080 x8962
+C 8948,9080 s=28x28
+M 8950,8790 y9200                    # line g of s2
+N P 7610,9080 cdp3_g_s2
+P 7600,9037 x9353
+C 9339,9037 s=28x28
+M 9341,8790 y9200                    # line g of s3
+N P 7610,9037 cdp3_g_s3
+P 7600,8994 x9743
+C 9729,8994 s=28x28
+M 9731,8790 y9200                    # line g of s4
+N P 7610,8994 cdp3_g_s4
+P 7600,8950 x10133
+C 10119,8950 s=28x28
+M 10121,8790 y9200                    # line g of s5
+N P 7610,8950 cdp3_g_s5
+P 7600,8907 x10524
+C 10510,8907 s=28x28
+M 10512,8790 y9200                    # line g of s6
+N P 7610,8907 cdp3_g_s6
+
+# ---- poly links: line f of slice k to the x 9500 line of slice k+1 (which comes down from the
+# row A cell and ends at the link)
+P 8496,8862 x8740
+C 8510,8862 8726,8862 s=28x28
+M 8513,8790 y9200                    # line f of s1
+M 8722,8790 y8874                  # x 9500 line of s2
+N M 8513,8800 cdp3_f_s1
+P 8886,8862 x9131
+C 8900,8862 9117,8862 s=28x28
+M 8903,8790 y9200                    # line f of s2
+M 9113,8790 y8874                  # x 9500 line of s3
+N M 8903,8800 cdp3_f_s2
+P 9277,9144 x9521
+C 9291,9144 9507,9144 s=28x28
+M 9294,8790 y9200                    # line f of s3
+M 9503,8790 y9156                  # x 9500 line of s4
+N M 9294,8800 cdp3_f_s3
+P 9667,8862 x9911
+C 9681,8862 9897,8862 s=28x28
+M 9684,8790 y9200                    # line f of s4
+M 9893,8790 y8874                  # x 9500 line of s5
+N M 9684,8800 cdp3_f_s4
+P 10057,8862 x10302
+C 10071,8862 10288,8862 s=28x28
+M 10074,8790 y9200                    # line f of s5
+M 10284,8790 y8874                  # x 9500 line of s6
+N M 10074,8800 cdp3_f_s5
+P 10448,9144 x10692
+C 10462,9144 10678,9144 s=28x28
+M 10465,8790 y9200                    # line f of s6
+M 10674,8790 y9156                  # x 9500 line of s7
+N M 10465,8800 cdp3_f_s6

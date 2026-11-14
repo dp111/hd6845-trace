@@ -5,4 +5,4 @@
 8560,9200:10900,9500    ?array row C cells (6 bit) | large cell per slice, s2..s7; not traced. Believed a 6-bit register read onto bus N
 7780,10735:10900,11040  ?array row H cells (8 bit) | large cell per slice; not traced. Believed an 8-bit register read onto bus N
 8560,8450:10900,8790    ?array row A cells (6 bit) | variant of the row C cell; not traced
-7600,8790:10850,9200    route  channel B tracks and links | six poly lines from the west, one onto vertical line g at the left edge of each 6-bit cell; short poly links tie each row A cell to line f of the slice to its west. Surveyed, not traced
+7600,8790:10850,9200    route  channel B tracks and links | six poly lines from the west, one onto vertical line g at the left edge of each 6-bit cell; short poly links tie each row A cell to line f of the slice to its west. Traced
