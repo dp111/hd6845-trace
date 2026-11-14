@@ -1,0 +1,100 @@
+# bd2: bus control logic right of the register select gates.
+# Region x 15850-17000, y 14700-17100.
+# Left gate column: loads at x 15895-15945 beside the VCC rail x 15795-15890,
+# pull-downs under the ground rail x 16008-16055.
+@requires sel
+@requires areg
+@block bd2
+@w M=20 P=22
+@s 30x30
+
+# ---------------------------------------------------------------- supplies
+# VCC: the rail x 15795-15890 (areg above y 14700, sel from y 14850 down) and the band
+# y 14745-14805 that joins it to the inverter rail of areg (x 16142-16194).
+M 15795,14690:15890,14860
+M 15850,14745:16195,14805
+M 16142,14690:16194,14760
+N M 15870,14775 vcc
+# Ground: areg_rail_r (x 16401-16450 above y 14908) jogs left to x 16355-16405 and has a
+# branch, the band y 14908-14960, to the rail x 16008-16055 of the left gate column.
+# Called vss because every pull-down of the column has its source on it and every load
+# goes to the other rail.
+M 16401,14690:16450,14960
+M 16008,14908:16450,14960
+M 16008,14908:16055,15420
+M 16355,14908:16405,15330
+N M 16030,14935 vss
+@alias vss areg_rail_r
+
+# ---------------------------------------------------------------- sel_stb_r driver
+# G1, y 15030-15160: one inverter. Output = sel_stb_r, input = bd2_n1.
+# Output route: buried contact 16185-16218 x 15030-15058, poly up x 16256 under the
+# ground band, contact 16255,14868, metal west along y 14868, contact 15928,14868, poly
+# west along y 14825 into sel.
+P 15845,14825 x15934 y14860
+P 15913,14853:15945,14885              # pad
+C 15928,14868 16255,14868
+M 15928,14868 x16255
+P 16240,14853:16272,14885              # pad
+P 16256,14860 y15046 x16190
+B 16185,15030:16218,15058
+N M 16100,14868 sel_stb_r
+# VCC contacts and load
+D 15850,15022:15898,15140
+C 15862,15048 15862,15108 s=26x40
+D 15850,15075:15978,15145              # strip under the load block
+P 15903,15030:15942,15160              # load gate
+D 15916,15032:15950,15060              # under the load's tie
+B 15912,15028:15948,15062
+# output node: left of the gate's vertical leg, then the strip above the gate band
+D 15945,15040:15978,15145
+D 15945,15050:16216,15078
+D 16183,15032:16216,15078
+N D 16100,15064 sel_stb_r
+# pull-down: band y 15078-15100 with a leg down at x 15978-16000; source below / right
+P 15978,15078:16230,15100
+P 15978,15078:16000,15160
+P 16225,15070:16272,15102              # pad
+C 16255,15086
+D 15945,15078:16070,15145              # through under the leg
+D 16000,15050:16216,15118              # through under the band
+C 16032,15122 s=34x26
+N P 16100,15089 bd2_n1
+# bd2_n1: metal from the gate contact down and west to the trunk x 16168
+M 16255,15076 y15222 x16168 y15420
+
+# ---------------------------------------------------------------- areg_load driver
+# G2, y 15225-15360: one inverter. Output = areg_load, input = bd2_n2.
+# areg_load route: metal x 16299 down to contact 16296,14822, poly under the ground band,
+# contact 16296,15003, metal down to y 15258, west to contact 16255,15258, poly west to
+# the buried contact 16098-16132 x 15243-15277 on the output strip.
+M 16299,14690 y14832 w=16
+C 16296,14822 16296,15003
+P 16281,14808:16312,14838
+P 16297,14822 y15003 w=16
+P 16281,14988:16312,15018
+M 16297,14993 y15258 x16245 w=18
+C 16255,15258
+P 16238,15243:16272,15273
+P 16105,15257 x16255
+B 16098,15243:16132,15277
+N M 16297,15100 areg_load
+# VCC contact and load
+D 15850,15262:15895,15342
+C 15863,15300 s=26x60
+D 15850,15258:15955,15332              # strip under the load block
+P 15898,15232:15940,15335              # load gate
+P 15898,15228:15992,15250              # arm to the tie
+B 15963,15243:15995,15272
+D 15940,15252:16003,15288              # output node, under the tie
+D 16003,15262:16132,15290
+D 16096,15245:16132,15290
+# pull-down: band y 15290-15312, source below
+P 15978,15290:16195,15312
+P 16190,15283:16230,15318              # pad
+C 16210,15300
+D 16003,15262:16130,15332              # through under the band
+D 16003,15312:16068,15358
+C 16040,15338
+N P 16100,15301 bd2_n2
+M 16210,15290 y15420
