@@ -31,3 +31,21 @@ known. Matters for transistors that are depletion-mode without being wired as lo
 
 To settle: compare known loads against known pull-downs at 4-5x in both shots for any
 consistent outline or tint.
+
+## AMB-003  Data pad cell: layers under the VCC band  (open)
+
+Where: D0 master, 17900-18380 x 7150-7560 (and the same place in D1-D7).
+
+The pre-driver logic lies under the VCC band. Etch residue hides it in every single
+instance; the median composite shows all the edges but not which layer each belongs
+to. Two poly lines come in from the bus-interface side (P_x at y 7399-7422, P_y at
+y 7465-7492), there are two load blocks either side of three VCC contacts at
+y 7292, and a five-row multi-finger structure (rows G-K, x 18230-18660) to the right.
+Details and what is established: notes/blocks/pads.md.
+
+Candidate readings differ on whether the strips between rows G-J are one spiral gate
+fed from P_y, and on what the three-contact row K is for.
+
+To settle: trace the logic that drives P_x and P_y (M2). Knowing whether they are
+data and enable, and their polarity, should leave one consistent reading. A tri-state
+pair needs both output gates low when disabled, which is a strong constraint.

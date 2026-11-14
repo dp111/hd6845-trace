@@ -1,0 +1,127 @@
+# Row of buffers and gates above the bottom-right input pads, x 13700-17500,
+# y 18130-18560. Loads hang from the band along the top (VCC); pull-downs sit on the
+# rail at y 18381-18431 (VSS). Net names starting t_ are placeholders.
+@block inrow
+
+M 13690,18130:17420,18258          # band along the top; extent to the right not yet checked
+N M 14500,18180 vcc
+M 13707,18381:17480,18431          # rail; extent to the right not yet checked
+N M 14500,18406 vss
+
+# ---- gate 0 (x 13730-13925): inverter, input in poly from above, output leaves downward
+C 13886,18229 s=30x34              # supply
+D 13865,18210:13917,18256
+D 13891,18254:13922,18348          # supply side of the load
+D 13828,18278:13922,18348          # under the load gate, through to the output side
+P 13849,18262:13887,18382          # load gate, runs on down to its buried contact
+B 13834,18356:13878,18400
+?D 13733,18275:13849,18358         # pull-down diffusion, upper part (outline partly inferred)
+?D 13733,18356:13836,18497         # ... lower part
+D 13834,18356:13878,18400          # output under the buried contact
+C 13760,18405 s=30x40              # ground
+P 13765,18150 y18362 x13809 y18504 w=27     # input, L-shaped gate
+P 13838,18382:13863,18555          # output continues down in poly
+C 13850,18537 s=26x26
+M 13849,18522 y18600 w=22          # output leaves downward (routing to be traced)
+N P 13765,18160 t_g0_in
+N M 13849,18590 t_g0_out
+
+# ---- gate 1 (x 13975-14225): inverter with a two-finger pull-down
+C 14000,18231 s=34x30              # supply
+D 13976,18212:14030,18256
+D 13976,18254:14006,18371          # supply side of the load
+D 13976,18303:14056,18371          # under the load gate
+P 14010,18283:14050,18384          # load gate
+P 14027,18382:14052,18520          # ... runs on down to the output contact
+P 14038,18512:14086,18556
+B 14024,18394:14058,18427
+D 14030,18398:14056,18424          # output under the buried contact
+D 14054,18283:14223,18475          # two-finger pull-down
+P 14113.5,18262 y18490 w=23        # gate finger
+P 14160.5,18262 y18335 14186.5,18360 y18490 w=25   # gate finger (jogs right)
+P 14102,18477:14198,18504          # fingers joined
+P 14140,18500:14166,18552
+C 14152,18535 s=24x24              # gate input
+M 14054,18283:14213,18323          # strap joining the two outer diffusions
+C 14073,18304 14192,18304 s=28x28
+C 14140,18410 s=30x40              # ground, middle diffusion
+C 14063,18535 s=26x26              # output
+M 14063,18522 y18600 w=22          # output leaves downward (routing to be traced)
+M 14152,18535 x14391 w=20          # input: output of gate 2
+N M 14063,18590 t_g1_out
+
+# ---- gate 2 (x 14300-14620): inverter with a three-finger pull-down, input from the
+# CLK pad's protection cell, output along y 18535 to gate 1
+C 14329,18229 s=34x30              # supply
+D 14302,18212:14360,18256
+D 14302,18254:14333,18371          # supply side of the load
+D 14302,18303:14385,18371          # under the load gate
+P 14335,18283:14375,18384          # load gate
+P 14354,18382:14377,18480          # ... runs on down
+P 14354,18475:14406,18504
+P 14381,18500:14406,18550
+C 14391,18533 s=24x24              # output
+B 14352,18392:14395,18427
+D 14356,18396:14385,18424          # output under the buried contact
+D 14383,18283:14616,18475          # three-finger pull-down
+P 14438.5,18262 y18490 w=23        # finger 1
+P 14484.5,18262 y18332 14512,18368 y18438 14486,18460 y18490 w=24   # finger 2 (hourglass)
+P 14580,18262 y18332 14553,18368 y18438 14581,18460 y18490 w=24     # finger 3
+P 14427,18477:14593,18504          # fingers joined
+P 14448,18500:14474,18552
+C 14460,18533 s=24x24              # gate input
+M 14381,18283:14539,18323          # strap joining the output diffusions
+C 14391,18305 14517,18305 s=28x28
+C 14468,18400 s=30x36              # ground
+C 14590,18395 s=26x30              # ground
+M 14460,18522 y18600 w=22          # input from the CLK protection cell (routing to be traced)
+N M 14460,18590 clk
+N M 14300,18535 t_g2_out
+
+# ---- gate 3 (x 14600-14760): R/W input inverter
+C 14711,18229 s=34x30              # supply
+D 14690,18212:14745,18256
+D 14713,18254:14740,18330          # down through the load
+P 14692,18269:14760,18321          # load gate
+P 14664,18301:14694,18329          # ... tab to its buried contact
+D 14651,18326:14743,18350
+D 14664,18308:14694,18328
+B 14662,18299:14696,18331
+D 14690,18348:14719,18428          # output strip down to the pull-down
+D 14606,18381:14719,18426          # pull-down: ground | gate | output
+C 14630,18402 s=30x34              # ground
+P 14676.5,18555 y18363 w=25        # input gate, up from its contact
+P 14626,18352:14689,18375          # ... and on into an L that crosses no diffusion
+P 14626,18286:14650,18375
+C 14675,18535 s=24x24
+M 14675,18535 x14612 y18600 w=22   # input from the R/W protection cell (routing to be traced)
+N M 14612,18590 rw
+D 14717,18424:14735,18456          # output on down to a buried contact
+D 14705,18452:14736,18483
+B 14703,18450:14738,18485
+P 14709,18456:14736,18506          # output in poly to gate 4
+P 14709,18502:14842,18523
+N P 14780,18512 t_g3_out
+
+# ---- gate 4 (x 14770-14915): inverter. Cell, repeated to the right.
+@cell inv_s tag=g4
+C 14861,18229 s=34x30              # supply
+D 14842,18212:14895,18256
+D 14863,18254:14890,18402          # down through the load to the output
+P 14842,18262:14911,18368          # load gate
+P 14817,18346:14846,18375          # ... tab to its buried contact
+D 14823,18381:14892,18402          # output, under the rail
+D 14823,18362:14846,18383
+B 14815,18344:14848,18385
+P 14817,18404:14842,18506          # input gate
+D 14770,18423:14890,18462          # pull-down: ground | gate | output
+D 14850,18400:14890,18425
+C 14786,18442 s=30x34              # ground
+M 14762,18425:14812,18466          # tab on the rail
+D 14857,18460:14890,18494          # output under a buried contact
+B 14855,18460:14892,18498
+P 14861,18464:14888,18506          # output in poly to the next gate
+P 14861,18502:14992,18523
+N P 14930,18512 t_{}_out
+@end
+@inst inv_s 150,0 tag=g5

@@ -41,3 +41,59 @@ Not done yet (planned for later milestones)
 
 Next: M1, the pad ring. Start by following the metal plane from the VSS pad and the
 rail from the VCC pad to confirm which is which, then each pad's buffer or driver.
+
+## 2026-11-14 (later)  M1 in progress: pad ring
+
+Done
+- VSS/VCC confirmed. The top-middle pad sits in the peripheral plane (outer ring =
+  VSS). The bottom-middle pad feeds the band inside the pad ring (inner band = VCC).
+  With pin 1 fixed, the mix of plain inputs, outputs with drivers and bidirectional
+  pads round the die matches the pinout in only one orientation, so the pad table in
+  `notes/pads.md` is now firm.
+- Output driver cell traced once (MA3) and instanced at all 23 output pads
+  (`trace/pads_out.txt`); every instance extracts as two inverters plus a push-pull
+  pair, pad = NOT(core signal). Details in `notes/blocks/pads.md`.
+- Input side: five identical protection cells under the bottom-right pads, in pad
+  order CLK, R/W, E, then RS and CS (which of the last two is which is not yet
+  followed to the pads). Each is a wide long-channel clamp to the rail at y 18968.
+- Buffer row above them (`trace/inrow.txt`), traced from the left so far:
+  gate 0 inverter (input from the core in poly, output leaves left along y 18775),
+  gate 2 three-finger inverter fed by CLK, gate 1 two-finger inverter fed by gate 2
+  (so gate 1 output is buffered CLK, leaving left along y 19070 towards the block at
+  9550-12300 x 19050-19950), gate 3 R/W inverter, gates 4 and 5 inverters in a
+  chain, giving both polarities of R/W.
+
+New tools
+- `findcell.py`: finds copies of a rectangle anywhere on the die in all eight
+  orientations. It can lock onto the wrong finger of a periodic structure (MA11);
+  check every placement by overlay.
+- `cellcheck.py`: side-by-side picture of each instance against the master. The
+  bad-block percentage is only a rough guide; look at the pictures.
+- `composite.py` + `view.py --comp`: per-pixel median over all instances of a cell.
+  Removes etch residue, debris and metal grain. This is what made the logic under
+  the VCC band readable. Use it for every repeated cell.
+- `view.py --shift dx,dy`: look at another instance in the master's coordinates. Raw
+  metal of a clean instance shows where metal really is (grain = metal).
+
+Things learned about reading the die
+- Two logic-cell styles. Small gates: load is a tall poly block (about 70 x 105) over
+  a 27 px diffusion strip coming down from a VCC contact, W/L about 0.25; the block
+  is tied to the output by a buried-contact box at its lower corner; outputs often
+  leave through a second buried contact into a poly bar that becomes the next gate's
+  input. Big buffers: load block beside a VCC diffusion strip with the channel
+  running sideways under it (W/L about 1.8), and a two- or three-finger pull-down
+  with a metal strap joining the outer diffusions.
+- Under wide metal the acid shot is unreliable in any single instance (residue,
+  fringes). Dark lines seen through metal are edges of poly or diffusion beneath.
+- Keep rendered views under about 1400 px wide; wider ones are downscaled on read.
+
+Open
+- AMB-003: data pad cell, layers under the VCC band (parked until M2).
+- AMB-001 can now be re-read: the RES/LPSTB buffers use the same big-buffer cell as
+  gates 1 and 2 of the buffer row.
+- Pad squares and the two supply rings are not drawn yet (only MA3's pad).
+
+Next
+- Finish the buffer row to x 17500 and the wiring below it (bus lines at
+  y 18620-18750, four large rectangles at y 18575-18794, links to the protection
+  cells and pads). Then RES and LPSTB, then the block left of the CLK pad.

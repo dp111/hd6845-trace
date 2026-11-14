@@ -43,6 +43,14 @@ Read so far (D0 coordinates), all still to be confirmed by trace and extraction:
   above (U', y 7225-7266) and below (L', y 7316-7359). Two poly lines enter from the
   bus-interface side: P_x (y 7399-7422, turning up at x 18170) and P_y (y 7465-7492).
 
-Working hypothesis: U' loads S1 and L' loads S2; P_y pulls both low (output disable)
-through the left group, and P_x is the data input. Unresolved: whether the spiral
-gate joins P_y at 18252-18272,7455, and how row I's net reaches S2.
+Established since:
+- The metal over row K's three contacts is an extension of the VCC band (a strip at
+  y 7465-7495 joins them), so row K and row G are VCC rows and the gate at 7170 is a
+  fourth pull-up finger, consistent with it being on S1.
+- Rows C and I' both leave to the right on bars that reach the outer ring
+  (y 6882-6944 and y 7312-7388), so both are VSS and the frame gates are pull-downs.
+- Row J's wide bar (x 18272-18812, y 7400-7448) most likely joins row I' (VSS).
+
+Not resolved (AMB-003): which shapes under the VCC band are poly and which are
+diffusion, hence what P_x and P_y gate, and how the left group (rows G-K) is wired.
+Parked until the bus-interface logic that drives P_x and P_y is traced.
