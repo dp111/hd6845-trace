@@ -1,0 +1,2 @@
+15930,13725:16200,14575  logic  Address row inverters (x5) | make the complement row of each decode row pair from the true row; not a register
+15800,13290:16335,13500  route  Address lines to the row inverters | four metal lines from the register cells above the decode array plus one poly line, as nested poly L shapes

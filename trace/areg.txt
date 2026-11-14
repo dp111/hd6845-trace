@@ -1,0 +1,86 @@
+# Address lines into the register decode array, and the logic right of the array.
+# Region x 15800-16950, y 12900-14700.
+#
+# What used to be called "the address register cells" (x 15930-16200, five of them, one per
+# decode row pair) are plain inverters: the upper row of a pair arrives from outside the
+# cell (from the row of register cells above the decode array, through the poly/metal
+# lines traced below) and also gates the pull-down; the lower row is the inverter output.
+@block areg
+@requires decode
+
+# ---------------------------------------------------------------------------------
+# Row inverter. Master = pair 0 (rows y 13766 / 13851). One per row pair.
+#   upper row (decode ar<k>)   : input. Crosses the cell as the top band, ends in a tab
+#                                under the VCC rail; the bar hanging from it is the gate
+#                                of the pull-down.
+#   lower row (decode ar<k>_n) : output. Its poly is also the load gate (block at the right)
+#                                and is tied to the output node by the buried contact.
+# The pair's ground rail (diffusion, from the decode array) runs into the cell, is
+# contacted to the VSS rail and is the source of the pull-down.
+@cell areg_inv tag=0
+# ground rail extension - VSS contact - pull-down channel - output node - load channel - VCC contact
+D [ 15762,13782 x15972 y13761 x16036 y13790 x16128 y13785 x16200 y13832 x15762 ]
+C 15950,13805 s=30x34              # VSS rail to the ground rail
+C 16165,13805 s=30x34              # VCC rail to the top of the load
+# upper row: from the decode array, pad under the VSS rail, top band, tab; bar = pull-down gate
+P [ 15795,13753 x15942 y13741 x15956 y13731 x16182 y13773 x16160 y13751 x16018 y13843 x15993 y13752 x15962 y13777 x15795 ]
+# lower row: from the decode array, bottom band, arm up to the buried contact, load gate block
+P [ 15795,13838 x15968 y13860 x16040 y13805 x16066 y13845 x16087 y13768 x16130 y13865 x16062 y13882 x15945 y13864 x15795 ]
+B 16036,13801:16070,13846          # load gate (= lower row) tied to the output node
+@end
+
+@inst areg_inv 0,173 tag=1
+@inst areg_inv 0,347 tag=2
+@inst areg_inv 0,520 tag=3
+@inst areg_inv 1,693 tag=4
+
+# ---------------------------------------------------------------------------------
+# Supply rails over the inverters
+M 15950,13700 y14625 w=50          # VSS rail (comes down the diagonal from the top; upper part traced below)
+N M 15950,13900 vss
+M 16168,13600 y14700 w=52          # VCC rail
+N M 16168,13900 vcc
+
+# ---------------------------------------------------------------------------------
+# Feeds of the upper rows. Four arrive as metal lines from the left (from the row of
+# register cells above the decode array, rdp3's area), each ending in a contact to a poly
+# line; the fifth (pair 4) is a poly line from the register cell in this region.
+# The poly lines nest as L shapes around the top right of the inverter column.
+@s 24x24
+# pair 0: metal y 13480 -> poly right, then down under the VSS metal into the cell's left pad
+M 15800,13480 x15895 w=18
+N M 15806,13480 ar0
+C 15887,13480
+P 15872,13467:15902,13494
+P 15887,13481 x15975 y13742 w=18
+# pair 1: metal y 13433 -> poly right to x 16189, down, jog right at y 13565, down to cell 1's tab
+M 15800,13433 x15848 w=18
+N M 15806,13433 ar1
+C 15840,13433
+P 15826,13420:15856,13447
+P 15840,13434 x16189 y13574 w=17
+P 16180,13556:16219,13575
+P 16210,13560 y13946 w=18
+P 16175,13926:16219,13946
+# pair 2: metal y 13391 -> poly right to x 16231, down to a contact; metal x 16232 down to
+# y 14107; contact to a poly pad joined to cell 2's tab
+M 15800,13391 x15893 w=18
+N M 15806,13391 ar2
+C 15885,13392
+P 15871,13378:15901,13405
+P 15885,13392 x16231 y13530 w=17
+P 16217,13503:16247,13541
+C 16232,13522
+M 16232,13508 y14120 w=16
+C 16232,14107
+P 16215,14092:16250,14122
+P 16175,14098:16220,14120
+# pair 3: metal y 13350 -> poly right to x 16280, down to y 14286, left into cell 3's tab
+M 15800,13350 x15848 w=18
+N M 15806,13350 ar3
+C 15840,13350
+P 15826,13337:15856,13364
+P 15840,13350 x16280 y14286 x16172 w=18
+# pair 4: poly from the register cell at the top left (enters this piece at 16066,13280),
+# right along y 13309 to x 16320, down to y 14459, left into cell 4's tab
+P 16066,13280 y13309 x16320 y14459 x16172 w=18
