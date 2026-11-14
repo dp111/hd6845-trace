@@ -1,0 +1,59 @@
+#!/usr/bin/env python3
+"""Four-panel view of one region: metal, old stripped shot, clean stripped shot, and
+the clean shot with the trace over it.
+
+usage: quad.py x y w h [--scale S] [--grid N] [--out FILE] [--layers a,b,c,d] [--notrace]
+
+Default panels: metal | acid / acid1b | acid1b + trace outlines. Keep w*scale under
+about 650 so the result stays under 1400 px wide.
+"""
+import argparse
+import os
+import sys
+from PIL import Image, ImageDraw
+
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import view
+
+LABEL = {'metal': 'metal (chip 2)', 'acid': 'stripped (chip 2)', 'acid1b': 'clean (chip 1)',
+         'metal1': 'metal (chip 1)', 'acid1': 'stripped (chip 1)', 'edges': 'edges'}
+
+
+def quad(x, y, w, h, scale=1.7, grid=50, layers=('metal', 'acid', 'acid1b', 'acid1b'), trace=True):
+    ims = []
+    for i, l in enumerate(layers):
+        tr = trace and i == len(layers) - 1
+        im = view.panel(l, x, y, w, h, scale, grid, trace=tr, fill=False)
+        d = ImageDraw.Draw(im)
+        d.text((48, 16), LABEL.get(l, l) + (' + trace' if tr else ''), fill=(255, 255, 0),
+               font=view.font(14), stroke_width=3, stroke_fill=(0, 0, 0))
+        ims.append(im)
+    W, H = ims[0].size
+    cols = 2 if len(ims) > 1 else 1
+    rows = (len(ims) + 1) // 2
+    o = Image.new('RGB', (W * cols + 6 * (cols - 1), H * rows + 6 * (rows - 1)), (255, 0, 255))
+    for i, im in enumerate(ims):
+        o.paste(im, ((i % 2) * (W + 6), (i // 2) * (H + 6)))
+    return o
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument('x', type=int)
+    ap.add_argument('y', type=int)
+    ap.add_argument('w', type=int)
+    ap.add_argument('h', type=int)
+    ap.add_argument('--scale', type=float, default=1.7)
+    ap.add_argument('--grid', type=int, default=50)
+    ap.add_argument('--layers', default='metal,acid,acid1b,acid1b')
+    ap.add_argument('--notrace', action='store_true')
+    ap.add_argument('--out', default=os.path.join(view.CACHE, 'scratch', 'quad.png'))
+    a = ap.parse_args()
+    o = quad(a.x, a.y, a.w, a.h, a.scale, a.grid, a.layers.split(','), not a.notrace)
+    os.makedirs(os.path.dirname(a.out), exist_ok=True)
+    o.save(a.out)
+    print(a.out, o.size)
+
+
+if __name__ == '__main__':
+    main()

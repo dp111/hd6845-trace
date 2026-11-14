@@ -71,19 +71,34 @@ few pixels.
 | `acid1b` | hd6845acid2.jpg | metal stripped, clean: no fringes at all |
 
 `acid1b` is the important one. Under the wide rails, where `acid` shows only
-interference fringes, it shows gates, diffusion and contacts plainly. First reading
-of its colours, from the pilot cell and two formerly unreadable spots; to be checked
-on more known cells before it is relied on:
+interference fringes, it shows gates, diffusion and contacts plainly.
 
-| Appearance in `acid1b` | Reading |
-|---|---|
-| Salmon, sharp red outline | poly that was under metal (over diffusion or field) |
-| Dark red-brown, textured | poly over thin oxide that was not under metal (load gates, long gate strips) |
-| Olive strip with a dark outline, on pink | poly over field that was not under metal |
-| Plain tan with dark specks in rows | diffusion, the specks are where metal contacts were |
-| Pink | field oxide |
-| Bright green areas | not yet identified (seen inside the large structures of the clock driver logic and at buried contacts) |
+Colour legend for `acid1b`, calibrated on four known places: the pilot cell
+(14268-14648 x 14880-15260), the R/W gate group, the two plain diffusion rectangles
+at 14700-15002 x 18600-18820, and the MA3 pre-driver under the VCC band
+(1480-2000 x 3110-3550). What an area looks like depends on whether metal was above
+it, so the two cases are listed separately.
 
-So the salmon/brown difference is about what was above the poly, not about
-depletion implants; AMB-002 stays open. A per-pixel median of the three stripped
-shots (`acidmed`) is worse than `acid1b` alone and is not worth using.
+| Layer | Where metal was above | Where no metal was above |
+|---|---|---|
+| Poly | salmon with a sharp red outline. Unmistakable | over thin oxide (gates, loads): dark red-brown, textured. Over field: olive with a dark outline, easily taken for diffusion |
+| Diffusion | flat tan with a dark outline; rows of dark specks where contacts were | bright green in large areas, olive-green in small ones, dark outline |
+| Field | pink under narrow lines, olive-green under wide plates | olive-tan background |
+| Buried contact | small notch or box at a poly end, tan inside | small box with a heavy dark outline, light or dark inside |
+
+How to use the shots together
+- Under metal: read `acid1b`. Poly, diffusion and field are three different colours.
+- In the open: read poly from `acid` (orange everywhere), diffusion from `acid1b`
+  (green). `acid1b` alone cannot tell poly over field from diffusion there.
+- Metal and its contacts: `metal`, with `metal1` as a second opinion.
+- `tools/quad.py x y w h` renders metal, `acid`, `acid1b` and `acid1b` with the trace.
+
+The salmon/brown difference in poly follows the metal above it, not the implant:
+load gates and ordinary gates look the same when both are in the open. AMB-002
+stays open.
+
+Registration of `acid1b` against chip 2 measures within about 1 px wherever the
+measurement is confident (random logic, pads). In the regular arrays the measurement
+itself fails, so there the fit is interpolated; `metal1` measures within 1 px
+everywhere. A per-pixel median of the three stripped shots (`acidmed`) is worse than
+`acid1b` alone.
