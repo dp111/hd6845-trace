@@ -21,7 +21,7 @@ N M 15870,14775 vcc
 # goes to the other rail.
 M 16401,14690:16450,14960
 M 16008,14908:16450,14960
-M 16008,14908:16055,15420
+M 16008,14908:16058,17100
 M 16355,14908:16405,15330
 N M 16030,14935 vss
 @alias vss areg_rail_r
@@ -61,7 +61,20 @@ D 16000,15050:16216,15118              # through under the band
 C 16032,15122 s=34x26
 N P 16100,15089 bd2_n1
 # bd2_n1: metal from the gate contact down and west to the trunk x 16168
-M 16255,15076 y15222 x16168 y15420
+M 16255,15076 y15222 x16168 y15442
+# The metal x 16158-16178 ENDS at the contact 16167,15432 (both metal shots show bare
+# poly at y 15450-15468 and the track scan a gap 15443-15470). From the contact a poly
+# (strip 1) runs down under the lower trunk, diagonally across to under the metal
+# x 16200-16222, down to y 15612, and steps right into a block (16226-16248 x 15598-15662)
+# that the band y 15646-15668 leaves westwards to row 1 of the gate column.
+C 16167,15432
+P 16152,15418:16184,15448              # pad
+P 16168,15440 y15505 16210,15565 y15612 w=24
+?P 16205,15598:16232,15614             # strip 1 into the block: seen as one shape, edge under the metal's edge
+P 16226,15598:16248,15662              # block
+P 16140,15657 x16232                   # band west, under both trunks
+P 16108,15630:16148,15670              # its west end on the output strip of row 1
+B 16106,15628:16144,15670
 
 # ---------------------------------------------------------------- areg_load driver
 # G2, y 15225-15360: one inverter. Output = areg_load, input = bd2_n2.
@@ -97,4 +110,50 @@ D 16003,15262:16130,15332              # through under the band
 D 16003,15312:16068,15358
 C 16040,15338
 N P 16100,15301 bd2_n2
-M 16210,15290 y15420
+# bd2_n2 is e_b. From the gate pad 16210,15300:
+#  - metal x 16200-16222 down to its end at contact 16205,15690 (poly from there east: not traced)
+#  - poly under that metal (strip 2) down to y 15488, diagonal to 16240,15515, then east as
+#    the band y 15503-15527 into the gate group right of the bundle (gate G_b there, not traced)
+#  - a poly branch west along y 15358-15378 to the pad 16122,15388; contact; metal down to
+#    y 15480, east, and down as the trunk x 16158-16180: continuous to y 17702 (track scan,
+#    both metal shots), which is the e_b line of trunks.txt.
+M 16210,15290 y15700
+C 16205,15690
+P 16190,15675:16230,15710              # pad
+P 16210,15318 y15488 16240,15515 x16285 w=24
+P 16122,15368 x16210 w=20
+P 16106,15370:16140,15404              # pad
+C 16122,15388
+M 16122,15378 y15480 x16169 y17100
+N M 16169,16000 e_b
+@alias e_b bd2_n2
+
+# ---------------------------------------------------------------- row 1 (y 15500-15670)
+# Drives bd2_n1. Established: ground land with contact 16047,15522, two gate bands in
+# series below it, the output strip under the second band, its buried contact to the
+# band that goes east to the block / strip 1. NOT established: everything left of
+# x 16018 (see notes: the L-shaped poly bd2_r1_l and the diffusion around its end), so
+# no load is drawn and the gate may have a third input.
+D 16028,15505:16075,15545              # ground land
+C 16047,15522
+D 16018,15535:16100,15650              # column, through under both bands
+P 16005,15555:16105,15578              # upper band: gate bd2_r1_a
+P 16098,15545:16135,15580              # pad
+C 16114,15560
+M 16110,15550 y15792                   # bd2_r1_a: thin metal down to a pad at 16098-16140 x 15768-15797
+N M 16110,15700 bd2_r1_a
+P 16005,15603:16105,15625              # lower band: gate e_b
+P 16095,15600:16152,15620              # east to the tap on the trunk
+P 16150,15590:16185,15620              # pad
+C 16167,15605
+D 16095,15630:16142,15668              # output strip's east end under the buried contact
+N D 16060,15638 bd2_n1
+# The L-shaped poly west of the column: bar 15908-15992 x 15558-15587, neck down to the
+# pad 15925,15625, metal x 15912-15935 down to a contact at 15925,15825.
+P 15908,15558:15992,15587
+P 15908,15580:15937,15612
+P 15906,15606:15946,15646              # pad
+C 15925,15625
+# (the metal ends on a contact at 15925,15825; what is under it is not traced)
+M 15924,15615 y15835
+N M 15924,15700 bd2_r1_l
