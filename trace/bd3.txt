@@ -15,7 +15,7 @@ N M 14300,16930 vcc
 # ---------------------------------------------------------------- the strobe
 # sel_stb_l (metal x 14307) turns west below the R7 NOR's contact, then south to a
 # contact on poly. The poly runs south under the wide rail, then east along y 16996
-# (under the metal line bd3_x14543 for 300 px, no contact seen), under the supply
+# (under trunks' metal line X for 300 px, no contact seen), under the supply
 # rail, to a contact where T0 (sel_stb_r) arrives after turning west at y 16998.
 M 14317,16739 x14239 y16880 w=18
 C 14239,16865
@@ -25,11 +25,10 @@ C 14673,16997
 M 14912,16750 y16998 x14659 w=18   # T0 on down, west along y 16998 to the contact
 @alias sel_stb_r sel_stb_l
 
-# A metal line that is not one of the tracks: comes up from the south at x 14543
-# (followed by scan to y ~18093), turns west at y 16998 exactly over the strobe's poly,
-# runs west to x 13957 and turns north there.
-M 14090,16998 x14543 y17300 w=17
-N M 14400,16998 bd3_x14543
+# A metal line that is not one of the tracks lies exactly over this poly from x 14250
+# to 14553: line "X" of trace/trunks.txt (M 13770,18082 x14543 y16992 x13952 ...), the
+# input of inrow's gate 0. It comes up x 14543 from the south, turns west at y 16998 and
+# north at x 13957. No contact to the poly is visible; none is drawn. Not drawn here.
 
 # ---------------------------------------------------------------- R12 select buffer
 # The row at y 16740-16870: two inverters in series. Input rsel12: T8's upper part
@@ -78,9 +77,9 @@ N D 14430,16806 bd3_b12            # rsel12 buffered
 P 14378,16822 x14199 y17300 w=18
 
 # ---------------------------------------------------------------- sel_w7
-# Its poly (drawn in sel.txt down x 14135 to y 16760) turns west at y 16875 and leaves
-# the region's west edge.
-P 14135,16750 y16875 x14090 w=20
+# Its poly (drawn in sel.txt down x 14135 to y 16760) turns west at y 16864 and leaves
+# the region's west edge (3.6x view; goes on west past x 14040).
+P 14135,16750 y16864 x14090 w=22
 
 # ---------------------------------------------------------------- right-hand gate column, continued
 # Two more inverter + NOR pairs of the cell sel_rwr (trace/sel.txt), for R12 and R13.

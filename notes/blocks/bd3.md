@@ -20,7 +20,7 @@
 |---|---|---|
 | Gate column, last row | x 14290-14930, y 16740-16870 | two inverters in series (not the inverter + NOR of the rows above): right half first stage, left half second stage |
 | Ground rails of the gate column | x 14434 and 14789 | both end at y 16876 |
-| Supply rail of the gate column | x 14584-14634 | runs on south past y 17300; by scan (sel_tracks) it reaches the VCC band of the input row at y 18130 |
+| Supply rail of the gate column | x 14584-14634 | runs on south past y 17300; by scan (sel_tracks) it reaches the VCC band of the input row at y 18130, and a 2.5x view at (14609,18125) shows it merging into that band. So sel's `vcc` label on it is traced, not only inferred from the loads |
 | Wide rail | y 16907-16954, x 14060-14634 | joins the supply rail at its east end (seen at 1.1x and 1.65x, no dark line between); so `vcc`. Runs on west of x 14060 and turns north near x 13970-14030 |
 | Strobe link | poly, contact 14239,16865 - x 14242 south - y 16996 east - contact 14673,16997 | joins `sel_stb_l` to T0 (`sel_stb_r`) |
 | Horizontal bundle | y 16998-17258 (and on to 17432), x < 14912 | T0-T6 after turning west, pitch 43.3. Each crosses the supply rail in poly between two contacts (x 14672/14713 east, 14456/14499 west, alternating) |
@@ -162,10 +162,10 @@ turn west, at y 17302, 17346, 17388, 17432, and cross the supply rail the same w
 |---|---|---|---|---|
 | sel_stb_l = sel_stb_r | metal | 14307,16550 and 14912,16550 and 15561,16550 (top) | in (from sel) | strobe; one net |
 | rsel12, rsel13, sel_w*, sel_b* | metal | tracks at y 16550 (top) | in | see the track table |
-| sel_w7 | poly | 14100,16875 (west) | out | turns west at y 16875 (from x 14135) |
+| sel_w7 | poly | 14100,16864 (west) | out | turns west at y 16864 (from x 14135); goes on past x 14040 |
 | bd3_b12 | poly | 14199,17100 (bottom; drawn to 17300) | out | rsel12 buffered; seen to y 17320 |
 | sel_b13 | poly | 15512,17500 (drawn to there) | out | rsel13 buffered; poly going south, seen to y 17700 |
-| bd3_x14543 | metal | 14100,16998 (west) and 14543,17100 (bottom) | ? | a through line, not one of the tracks: see Ambiguities |
+| (trunks' X) | metal | 14100,16998 (west) and 14543,17100 (bottom) | through | not one of the tracks and not drawn in bd3.txt: see Ambiguities |
 | sel_w5 | metal | 14100,17041 (west) | out | |
 | sel_w3 | metal | 14100,17084 (west) | out | |
 | sel_w8 | metal | 14100,17128 (west) | out | below the region's bottom edge |
@@ -188,17 +188,19 @@ turn west, at y 17302, 17346, 17388, 17432, and cross the supply rail the same w
 
 ## Ambiguities
 
-- **`bd3_x14543` and the strobe.** A metal line comes up from the south at x 14543
-  (by scan from y ~18093, just above the input row's VCC band), turns west at y 16998
-  and runs to x 13957, where it turns north. For 300 px (x 14250-14553) it lies exactly
-  on top of the strobe's poly. No contact ring is visible anywhere along it in `metal`
-  or `metal1` (3.8x), and the trace has none, so the two are separate nets. Against:
-  the line occupies the place T0 would have in the bundle west of the supply rail, and
-  the poly under it looks darker in `acid1b` at x 14235-14390 than poly under metal
-  usually does (but so does poly under the supply rail, where there is certainly no
-  contact). For: rsel13's poly runs under sel_w12's metal and `bd3_n12`'s poly under
-  T0's metal in the same way, so poly under foreign metal is this layout's habit.
-  Settle by tracing the line's ends (south end near 14543,18093; north along x 13957).
+- **Trunks' line X and the strobe.** The metal line "X" of trace/trunks.txt (input of
+  inrow's gate 0, believed there to be a clock-like signal; `M 13770,18082 x14543
+  y16992 x13952 ...`) comes up x 14543 from the south, turns west at y 16998 and north
+  at x 13957. For 300 px (x 14250-14553) it lies exactly on top of the strobe's poly
+  link. No contact ring is visible anywhere along it in `metal` or `metal1` (3.8x), and
+  the trace has none, so the two are separate nets. Against: the line occupies the
+  place T0 would have in the bundle west of the supply rail, and the poly under it
+  looks darker in `acid1b` at x 14235-14390 than poly under metal usually does (but so
+  does poly under the supply rail, where there is certainly no contact). For: rsel13's
+  poly runs under sel_w12's metal and `bd3_n12`'s poly under T0's metal in the same way,
+  so poly under foreign metal is this layout's habit; and the strobe is now traced to a
+  plain inverter of `e_b`, which has no business on a clock line. If X ever turns out to
+  be E-like, look here again. (bd3.txt does not draw X; trunks.txt does.)
 - sel.txt draws `sel_stb_l`'s metal straight down to y 16760; it really turns west at
   y 16739. Harmless (the overshoot touches nothing).
 - Loads of `sel_rwr` (R12, R13 pairs) are sel's schematic `?` loads; at 1.3x the real
