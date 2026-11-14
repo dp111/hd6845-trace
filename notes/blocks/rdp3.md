@@ -117,6 +117,17 @@ difference block near the VCC contact (master 14770-14790 x 13045-13060); (3) th
 slices s0 and s7; (4) where each row's strobe poly ends; (5) where q goes (up into the
 sub-rows above, presumably comparators or counters).
 
+Seen on a trial overlay of RA slice s2 (`cache/scratch/rdp3/ra_top.png`, `ra_bot.png`):
+- Lower edge (y 12345-12470): strobe band with its loop, bus contact (14622,12412), VCC
+  land and contact all sit under the mirrored outlines. Good.
+- Upper edge (y 12115-12260): the output land with its strap contact, the buried contact
+  box (14872-14901 x 12202-12229) and the stripes S1/S2 of AMB-1 are there as in AR.
+  The grounded band (S3, here y 12175-12197) and its contact at (14562,12191) are there
+  too, but the band seems to end at x 14756, not 14809, and the metal above it differs
+  from AR: bright metal along y 12175-12200 over x 14600-14760 and no metal over
+  x 14760-14890, y 12140-12200. So the upper 40 px of the cell (and how the VCC rail
+  passes it) must be re-read in the array before the cell is placed there.
+
 Believed: RA, RB (and RC) are 8-bit registers written from the bus lines, each with the
 cells it is compared against in the two sub-rows above it.
 
