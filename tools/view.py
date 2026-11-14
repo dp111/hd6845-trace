@@ -10,6 +10,10 @@ usage: view.py x y w h [options]
   --trace        overlay the trace geometry (all files in trace/)
   --only LAYERS  with --trace: restrict to these trace layers, e.g. M,P,D,C
   --nofill       with --trace: outlines only
+  --comp NAME    show the median composite NAME (tools/composite.py) instead of the
+                 die itself; coordinates are still those of the master
+  --shift dx,dy  show the die at (x+dx, y+dy) but label the grid as x, y: looks at
+                 another instance of a cell in the master's coordinates
   --out FILE     output png (default: scratch/view.png under cache/)
 
 The acid panel uses cache/acid_aligned.npy, so both panels share coordinates.
@@ -23,6 +27,17 @@ from PIL import Image, ImageDraw, ImageFont
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CACHE = os.path.join(ROOT, 'cache')
 _arr = {}
+_comp = None      # (metal array, acid array, x0, y0) when --comp is in use
+_shift = (0, 0)   # --shift
+
+
+def use_comp(name):
+    global _comp
+    import json
+    d = os.path.join(CACHE, 'comp')
+    j = json.load(open(os.path.join(d, name + '.json')))
+    _comp = (np.load(os.path.join(d, name + '_metal.npy')),
+             np.load(os.path.join(d, name + '_acid.npy')), j['x0'], j['y0'])
 
 
 def arr(layer):
@@ -37,12 +52,17 @@ def raw(layer, x, y, w, h):
     if layer == 'blend':
         return ((raw('metal', x, y, w, h).astype(np.uint16) +
                  raw('acid', x, y, w, h)) // 2).astype(np.uint8)
-    a = arr(layer)
+    if _comp is not None:
+        a = _comp[0] if layer == 'metal' else _comp[1]
+        ox, oy = _comp[2], _comp[3]
+    else:
+        a = arr(layer)
+        ox, oy = -_shift[0], -_shift[1]
     H, W = a.shape[:2]
     out = np.zeros((h, w, 3), np.uint8)
-    x0, y0, x1, y1 = max(0, x), max(0, y), min(W, x + w), min(H, y + h)
+    x0, y0, x1, y1 = max(ox, x), max(oy, y), min(ox + W, x + w), min(oy + H, y + h)
     if x1 > x0 and y1 > y0:
-        out[y0 - y:y1 - y, x0 - x:x1 - x] = a[y0:y1, x0:x1]
+        out[y0 - y:y1 - y, x0 - x:x1 - x] = a[y0 - oy:y1 - oy, x0 - ox:x1 - ox]
     return out
 
 
@@ -123,9 +143,16 @@ def main():
     ap.add_argument('--trace', action='store_true')
     ap.add_argument('--only', default=None)
     ap.add_argument('--nofill', action='store_true')
+    ap.add_argument('--comp', default=None)
+    ap.add_argument('--shift', default=None)
     ap.add_argument('--out', default=os.path.join(CACHE, 'scratch', 'view.png'))
     a = ap.parse_args()
     os.makedirs(os.path.dirname(a.out), exist_ok=True)
+    if a.comp:
+        use_comp(a.comp)
+    if a.shift:
+        global _shift
+        _shift = tuple(int(v) for v in a.shift.split(','))
     im = render(a.x, a.y, a.w, a.h, a.scale, a.layers.split(','), a.stack, a.grid,
                 a.trace, a.only.split(',') if a.only else None, not a.nofill)
     im.save(a.out)
