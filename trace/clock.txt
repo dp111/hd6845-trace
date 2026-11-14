@@ -403,7 +403,7 @@ M 9848,19785:9870,19840            # ck_out also leaves downward (not yet follow
 # left edge, under the VSS branch in poly, and on up into the core
 M 9848,19785:9870,19865
 M 9848,19848:10870,19865
-M 10845,19435:10870,19865
+M 10845,19408:10870,19865
 C 10857,19422 s=26x26
 P 10846,19278:10872,19440
 C 10857,19292 s=26x26

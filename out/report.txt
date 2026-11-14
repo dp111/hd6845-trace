@@ -1,7 +1,6 @@
-144 nets, 321 transistors, 1 errors, 0 warnings
+143 nets, 321 transistors, 0 errors, 0 warnings
 note   vss is traced as 50 separate pieces, joined by name
 note   vcc is traced as 31 separate pieces, joined by name
-ERROR  contact at 10857,19422 (trace/clock.txt:407): no metal over it
 
 transistors
   t0    at   1204,  2211  W/L  743/18   -     gate ma2_pu       vcc <-> ma2
