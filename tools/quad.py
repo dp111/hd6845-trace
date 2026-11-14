@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
-"""Four-panel view of one region: metal, old stripped shot, clean stripped shot, and
-the clean shot with the trace over it.
+"""Several layers of one region side by side, the last with the trace outlined on it.
 
-usage: quad.py x y w h [--scale S] [--grid N] [--out FILE] [--layers a,b,c,d] [--notrace]
+usage: quad.py x y w h [--scale S] [--grid N] [--out FILE] [--layers a,b[,c,d]] [--notrace]
+               [--comp NAME] [--shift dx,dy]
 
-Default panels: metal | acid / acid1b | acid1b + trace outlines. Keep w*scale under
-about 650 so the result stays under 1400 px wide.
+Default panels: metal | acid1b + trace outlines. An image costs context in proportion
+to its area, so two panels are the default; ask for four (in a 2 x 2 block) with
+--layers metal,acid,acid1b,acid1b only when the extra shots are needed. Keep w*scale
+under about 640 so the result stays under 1400 px wide.
 """
 import argparse
 import os
@@ -19,7 +21,7 @@ LABEL = {'metal': 'metal (chip 2)', 'acid': 'stripped (chip 2)', 'acid1b': 'clea
          'metal1': 'metal (chip 1)', 'acid1': 'stripped (chip 1)', 'edges': 'edges'}
 
 
-def quad(x, y, w, h, scale=1.7, grid=50, layers=('metal', 'acid', 'acid1b', 'acid1b'), trace=True):
+def quad(x, y, w, h, scale=1.7, grid=50, layers=('metal', 'acid1b'), trace=True):
     ims = []
     for i, l in enumerate(layers):
         tr = trace and i == len(layers) - 1
@@ -45,7 +47,7 @@ def main():
     ap.add_argument('h', type=int)
     ap.add_argument('--scale', type=float, default=1.7)
     ap.add_argument('--grid', type=int, default=50)
-    ap.add_argument('--layers', default='metal,acid,acid1b,acid1b')
+    ap.add_argument('--layers', default='metal,acid1b')
     ap.add_argument('--notrace', action='store_true')
     ap.add_argument('--out', default='quad.png')
     ap.add_argument('--comp', default=None, help='use this median composite where it has the layer')

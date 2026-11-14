@@ -43,10 +43,13 @@ tools/t.sh BLOCK view.py X Y W H --scale S --layers acid1b [--grid N] [--trace -
 tools/t.sh BLOCK netlist.py
 ```
 
-- `quad.py` shows several layers of one region side by side (default: metal, acid,
-  acid1b, acid1b with your trace outlined). `view.py` shows one layer, or several
+- `quad.py` shows layers of one region side by side: by default `metal` and `acid1b`
+  with your trace outlined on the second. `--layers metal,acid,acid1b,acid1b` gives
+  four panels when you need the other shots. `view.py` shows one layer, or several
   with `--layers a,b --stack v`. `--layers edges` shows only outlines present in
   both chip-2 shots.
+- `mosaic.py X Y W H --offsets "0,0 dx,dy ..." --scale S --layer acid1b --out NAME.png`
+  shows the same rectangle at several offsets side by side, to compare repeats.
 - X Y is the top-left corner, W H the size, in die pixels. The tool prints the path of
   the PNG; open it with the Read tool.
 - **Keep every image under about 1400 px a side or it is downscaled when read and the
@@ -331,11 +334,24 @@ top), CLK, R/W, E, RS, CS bottom right, RES and LPSTB top. Table: `notes/pads.md
 
 ## 12. Pace and context
 
-- A view costs context; old images drop out of yours as new ones arrive. **Write
-  coordinates and conclusions into your notes file as soon as you have them.** Do not
-  rely on remembering an image.
-- Expect one to two views per unique transistor. Budget accordingly: decide which
-  junctions matter and look at those, rather than paging through the region.
+- **Images are your budget.** You have room for roughly 60 to 80 of them before your
+  context is full, and an image costs in proportion to its area: a 1300 x 650 view
+  costs half of a 1300 x 1300 one. The first agent on a block spent most of its
+  budget surveying and traced one eight-transistor cell. So: survey with a handful of
+  large-area, low-zoom views, decide what to trace, then spend on tracing. Read text
+  (trace files, netlist reports, notes) freely; it is cheap.
+- Old images drop out of your context as new ones arrive. **Write coordinates and
+  conclusions into your notes file as soon as you have them.** Do not rely on
+  remembering an image.
+- Expect one to two views per unique transistor. Decide which junctions matter and
+  look at those, rather than paging through the region.
+- **If `notes/blocks/BLOCK.md` already exists, you are continuing someone's work.** Read
+  it and the existing trace first. Trust what is marked traced and shipped (it
+  extracts); re-check what is marked uncertain when you need it; start from the "Not
+  done" list. Do not survey again.
+- What a brief says "is known" about a block's structure is the coordinator's belief
+  from a low-zoom look and may be wrong (one brief's "one unit per bit" was). Check
+  it with one view before building on it.
 - Ship often. If you run out of room, everything shipped so far is safe, and your notes
   tell the next agent where to resume.
 - Your final message should be short (under 300 words): what you traced, the main

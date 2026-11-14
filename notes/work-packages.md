@@ -19,15 +19,24 @@ agent has verified it), `partial` (reported, with work left: see its notes).
 | `cdp1` | 7600-10850 x 2950-5700 | central datapath, top rows | running |
 | `larr` | 2400-4780 x 6450-18550 | left vertical array (rows every 477 px), by the MA pads | running |
 | `mra` | 11700-13320 x 7200-17050 | mid-right vertical array (rows every 477 px) | running |
-| `dbus` | 17050-17700 x 5300-17000, and the D0-D7 pad cells | data bus interface column; then finish the data pad cell (AMB-003) | running |
+| `dbus` | 17050-17700 x 5300-17000, and the D0-D7 pad cells | data bus interface column; then finish the data pad cell (AMB-003) | partial: input buffers D0-D5 traced; gate groups, bus lines, pad cell left (continue as the same block) |
+
+| `cdp2` | 7600-10850 x 5700-8450 | central datapath | running |
+| `cdp3` | 7600-10850 x 8450-11200 | central datapath | running |
+| `cdp4` | 7600-10850 x 11200-14000 | central datapath, bottom rows | running |
+
+Measured on the first report: one agent run lasts about 20 minutes and about 60-80
+image views, and yields one or two traced cells plus survey notes. Blocks are
+therefore done by a chain of runs on the same prefix, each resuming from the block's
+notes. Order of priority for free slots: central datapath and the control logic
+around it, select/address logic, the two 14-bit arrays, right datapath, trunks, data
+bus and pads.
 
 ## Queue
 
 | Prefix | Region | What |
 |---|---|---|
-| `cdp2` | 7600-10850 x 5700-8450 | central datapath |
-| `cdp3` | 7600-10850 x 8450-11200 | central datapath |
-| `cdp4` | 7600-10850 x 11200-14000 | central datapath, bottom rows |
+| `dbus` (continue) | as above | gate groups under the buffer chains, internal bus lines, P_x driver, D6/D7 buffers, then the pad cell |
 | `rdp1` | 13350-16950 x 5450-8100 | right datapath, top rows |
 | `rdp2` | 13350-16950 x 8100-10700 | right datapath, middle rows |
 | `tl1`-`tl6` | 2100-6400 x 2500-6350, in six parts | top-left random logic |
