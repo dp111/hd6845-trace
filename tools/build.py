@@ -237,7 +237,19 @@ def build_floorplan(blocks, scale=1 / 8):
 
 def main():
     os.makedirs(OUT, exist_ok=True)
-    tr = tracelib.load()
+    # Blocks are traced by several agents at once: leave out any file that does not
+    # load on its own (work in progress) rather than fail the whole build.
+    import glob
+    good, bad = [], []
+    for f in sorted(glob.glob(os.path.join(ROOT, 'trace', '*.txt'))):
+        try:
+            tracelib.Trace(files=[f])
+            good.append(f)
+        except Exception as e:           # noqa: BLE001 - report and carry on
+            bad.append((os.path.basename(f), str(e).splitlines()[-1]))
+    for name, why in bad:
+        print(f'left out {name}: {why}')
+    tr = tracelib.Trace(files=good)
     nl = netlist_mod.Netlist(tr)
     with open(os.path.join(OUT, 'netlist.json'), 'w') as f:
         json.dump(nl.to_json(), f, indent=1)
