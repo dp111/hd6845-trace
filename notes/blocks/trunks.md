@@ -5,19 +5,23 @@ metal-shot pixels. "L" = left, "R" = right, "U" = up (smaller y), "D" = down.
 
 ## Status
 
-Work in progress (2026-11-15). Followed so far:
-- `ck_out`: all four routes out of the clock block, to their entry points (bottom row
-  of the logic below the decode array; bottom-centre logic from below; the bottom trunk
-  along y 18947 and up the left edge at x 2504, followed at 1x to y 18300 and at 0.5x
-  to about y 6000).
-- `ck_a`: up the right edge of the mid-right array (x 13025, one tap per row) to its
-  end at y 7270; second entry at the array's bottom row.
-- `ck_b`: into the bottom row of the mid-right array only.
-- The line the clock notes call `ck_src` is **not** `ck_a` (Ambiguities A1): it is the
-  output of the left-hand inverter of the input row, here called S.
-- `e_b`, `rw_d`, `rs_d`, `cs_d`: to their entry into the logic below the decode array
-  (right part), from below.
-Not yet: S to the left of the die, `ck_out` #1, `res_b`, `lpstb_b`, `clk`, `clk_b`.
+State at the end of the first session (2026-11-15). Everything below is in
+`trace/trunks.txt` unless it says "not drawn".
+
+| Signal | Followed to | Left open |
+|---|---|---|
+| `ck_out` | all four routes out of the clock block, to their entry points | top end of the left-edge trunk (x 2504; seen only at 0.5x above y 18300); `ck_out` #1 beyond x 10230; the taps |
+| `ck_a` | rail up the right edge of the mid-right array to its end; second entry at the array's bottom row | nothing outside the array |
+| `ck_b` | bottom row of the mid-right array (its only route) | nothing outside the array |
+| S (`t_g0_out`, the clock notes' `ck_src`) | gate g5; the long run along the bottom and up the left bus field to (6690,8366), still running | where it ends; its taps |
+| X (input of gate 0, so S = NOT X) | back to (13566,15880) in the channel right of the mid-right array | **its source** (most likely `ck_b`, not shown) |
+| `e_b` | entry below the decode logic at (16170,17690); seen running up to y 16400 | where it ends |
+| `rw_d`, `rs_d`, `cs_d` | entry below the decode logic; verticals to about y 16200 | upper ends of `rw_d`, `rs_d` |
+| `res_b`, `lpstb_b` | routing channel of the top-left logic, to y 3790 | further down |
+| `clk` | contact (7500,18772) on a cell row by the CUDISP pad | that row |
+| `clk_b` | not looked at (it enters the clock driver logic; whether it also leaves the clock block is not known) | all |
+
+The line the clock notes call `ck_src` is **not** `ck_a` (Ambiguities A1).
 
 ## How to use this file
 
@@ -35,8 +39,22 @@ Vertical segments, sorted by x:
 | x | y range | Layer | Net | Notes |
 |---|---|---|---|---|
 | 2495-2514 | about 6000-18952 | metal | `ck_out` | left-edge trunk, continues from the bottom trunk at the corner (2504,18952). Followed at 1.8x to y 18300 (tap contact at 2500,18385 to a poly going right), above that at 0.5x only; top end not found |
+| 5265-5290 | 2553-3790+ | metal | `res_b` | from contact (5277,2553); runs down a routing channel of the top-left logic, still running at y 3790 |
+| 5268-5290 | 2140-2553 | poly | `res_b` | under the wide bus y 2185-2505 |
+| 5310-5330 | 2553-3790+ | metal | `lpstb_b` | from contact (5343,2553) (its pad reaches left to x 5320); beside `res_b` |
+| 5335-5355 | 2093-2553 | poly | `lpstb_b` | under the wide bus |
 | 6135-6160 | 18850-18948 | poly | `ck_out` | tap from the bottom trunk, contact (6148,18948), up into the cell at 5950-6160 x 18790-18940 |
+| 6570-6595 | 1965-2095 | poly | `lpstb_b` | under the supply rail y 2004-2052 |
+| 6698-6722 | 1965-2095 | poly | `res_b` | under the supply rail |
+| 6750-6765 | 8366-8452 | metal | S | then left along y 8357-8375 |
+| 6789-6807 | 13331-17990 | metal | S | innermost (rightmost) line of the bundle up the left bus field below y 17090; poly link 16170-16515 under the supply buses; passes over the horizontal polys of the grid at y 13400-14800 without contact |
+| 6790-6808 | 17990-18428 | poly | S | from contact (6797,18428) up under nine bus lines to contact (6798,17990) |
+| 6853-6870 | 8990-13331 | metal | S | after the step right at y 13322-13340 (every line of the bundle steps right there, one after another, y 13290-13600); then diagonal to (7034,8815) |
+| 6922-6940 | 8452-8548 | metal | S | |
+| 7027-7047 | 8535-8797 | poly | S | between contacts (7034,8797) and (7034,8535) |
 | 9309-9347 | 18945-19253 | poly (wide) | `ck_out` | between contacts (9337,18945) and (9337,19253); passes under the VCC bus y 19095-19145 |
+| 9440-9480 | 18760-19335 | poly (wide) | `clk` | CLK pin node; from contact (9467,19335); passes under both `ck_out` lines and the VCC bus. Do not confuse with the `ck_out` wide poly 130 px to its left |
+| 9455-9475 | 19335-19902 | metal | `clk` | up from the line along the bottom of the clock block |
 | 10300-10320 | 17908-18473 | metal | `ck_out` | "ck_out #1": left arm of the ring; turns left at y 17908 |
 | 10330-10370 | 18555-18926 | poly (wide) | `ck_out` | contacts (10356,18926) and (10355,18555); under the VCC band and the S line (y 18590-18612) |
 | 10347-10365 | 18473-18555 | metal | `ck_out` | from the wide poly's top contact to the ring |
@@ -60,7 +78,8 @@ Vertical segments, sorted by x:
 | 13120-13145 | <15400-16412 | metal | not identified | starts at contact (13130,16412), whose poly goes left along y 16440-16462 under the `ck_a` rail into the mid-right array. **Not `ck_out`**, although it is in line with the `ck_out` vertical below it |
 | 13122-13143 | 16562-18337 | metal | `ck_out` | ends at contact (13131,16562) |
 | 13192-13212 | 18385-18775 | poly | S | see `S` below |
-| 13664-13684 | <16600-16822 | metal | X (input of gate 0) | ends at contact (13655,16822) |
+| 13555-13578 | <15880-16188 | metal | X | continues up the channel (not followed) |
+| 13660-13684 | 16190-16822 | metal | X | from contact (13655,16822) up to contact (13672,16190), which also taps a poly going right into the logic at x 13790 |
 | 13703-13727 | 15930-16711 | metal | `ck_out` | rail at the left edge of the logic below the decode array; contacts (13715,16711), (13716,16565), (13716,16490), (13716,15930) |
 | 13849 | 18537-18775 | metal | S | output of input-row gate 0 |
 | 14535-14552 | 16992-18082 | metal | X | beside the wide VCC vertical x 14585-14630 |
@@ -81,8 +100,15 @@ Horizontal segments, sorted by y:
 
 | y | x range | Layer | Net | Notes |
 |---|---|---|---|---|
+| 2085-2105 | 5343-6580 | metal | `lpstb_b` | |
+| 2130-2150 | 5277-6712 | metal | `res_b` | the lines at the same two y further left (x 3810-4605) are other signals |
 | 7265-7292 | <12960-13260 | poly | not identified | passes under the top end of the `ck_a` rail; contact (13260,7280) to a vertical metal x 13250-13270 going up |
+| 8357-8375 | <6690-6757 | metal | S | going left; not followed further |
+| 8443-8462 | 6757-6937 | metal | S | top one of three nested horizontals (the others: y 8490-8508, 8530-8548 left of x 6870) |
+| 8525-8548 | 6932-7034 | metal | S | from contact (7034,8535) |
+| 13322-13340 | 6798-6862 | metal | S | step in the bundle |
 | 16440-16462 | <12970-13132 | poly | not identified | from contact (13130,16412) left under the `ck_a` rail |
+| 16175-16200 | 13566-13690 | metal | X | contact (13672,16190) |
 | 16530-16574 | 13131-13715 | poly (wide) | `ck_out` | from contact (13131,16562) right under six vertical metals to contact (13715,16562) |
 | 16900-16915 | 13655-13952 | metal | X | from contact (13655,16908) |
 | 16943-16960 | 13025-13066 | metal | `ck_a` | jog |
@@ -101,6 +127,7 @@ Horizontal segments, sorted by y:
 | 18335-18350 (L3) | 11027-12807 | metal | `ck_out` | contacts at both ends only |
 | 18332-18348 | 12807-13132 | poly | `ck_out` | under the vertical metals |
 | 18375-18395 (L4) | 10857-12849 | metal | S | contacts at both ends only |
+| 18415-18437 | 6797-10268 | metal / poly | S | **the run to the left**: middle one of three bus lines (y 18383, 18426, 18470). In poly under vertical metals for x 9557-9777, 8382-8602 and 7420-7600 (a contact at each end) |
 | 18378-18393 | 12849-13212 | poly | S | then down at x 13200 |
 | 18420-18437 (L5) | 10810-12807 | metal | not identified | turns up at x 10803-10820; right end contact (12807,18427), poly to contact (13156,18427), metal on right |
 | 18458-18480 | 10358-10600 | poly | `ck_out` | from contact (10358,18470) on the ring to a device at 10600-10710 x 18390-18525 (poly ring round a diffusion; not traced) |
@@ -115,6 +142,8 @@ Horizontal segments, sorted by y:
 | 18742-18760 | 15930-... | metal | CS pin node (after protection) | arrives from the right; contact (15930,18750) to the CS group's input poly |
 | 18700-18722 | ...-13090 | metal | `ck_a` | line A of the clock block; end contact (13085,18709) |
 | 18745-18768 | ...-13010 | metal | `ck_b` | line B; end contact (13000,18756) |
+| 18745-18778 | 8600-9460 | poly (wide) | `clk` | under the VCC pad's bus |
+| 18763-18780 | 7500-8600 | metal | `clk` | to contact (7500,18772) |
 | 18765-18785 | 13200-13522 | poly | S | |
 | 18765-18785 | 13522-13852 | metal | S | from contact (13522,18774) to the drop from gate 0 |
 | 18895-18912 | 2548-3632 | metal | not identified | inner line at the bottom-left corner, between contacts (2548,18905) and (3632,18905); the poly from the latter passes under the `ck_out` trunk without contact |
@@ -281,9 +310,10 @@ nodes arriving from their protection cells, not outputs.
 ## S: output of input-row gate 0 (`t_g0_out`; the clock notes' `ck_src`)
 
 Source: the single inverter at the left end of the input row (gate 0, x 13730-13925).
-Its input X arrives from the logic below the decode array (see below); S = NOT X.
+S = NOT X. It is one of the most widely distributed lines on the die and behaves like
+a clock line, so its identity matters; see "What S is" below.
 
-Route of S:
+Route:
 1. Gate 0's output contact (13850,18537), metal down at x 13849 to y 18775, left along
    y 18765-18785 to a contact at (13522,18774).
 2. Poly left along y 18765-18785 to x 13200, up at x 13192-13212 (under the VCC
@@ -292,19 +322,74 @@ Route of S:
 3. Bus line L4 (metal, y 18375-18395) left to a contact at (10857,18383).
 4. Poly down from there (under L5) to a poly link between contacts (10810,18470) and
    (10900,18470).
-5. From (10900,18470): bus line L6 left piece right to x 11870: gate g5's input
-   (contact 11772,18467) and a capacitor rectangle (contact 11852,18468).
-6. From (10810,18470): the long run to the left of the die described in
-   `notes/blocks/clock.md` ("Route of `ck_a` to the left of the die"; that route
-   carries S, not `ck_a`). Not yet re-followed here.
+5. From (10900,18470): bus line L6 left piece right to x 11870: **gate g5 of the clock
+   block** (contact 11772,18467) and a capacitor rectangle (contact 11852,18468).
+6. From (10810,18470): metal down to contact (10808,18600); poly under the wide metal
+   x 10722-10772 to contact (10680,18600); metal left along y 18590-18612 (over the
+   `ck_out` wide poly, no contact) to x 10268; up to y 18426; then left along
+   y 18415-18437, the middle of three parallel bus lines, with three poly links
+   under vertical metals, to a contact at (6797,18428).
+7. Poly up under nine bus lines to a contact at (6798,17990); metal up at
+   x 6789-6807 as the innermost line of the bundle that climbs the left bus field;
+   poly link under the supply buses (contacts 6797,16515 and 6797,16170); on up
+   through the grid of horizontal polys (y 13400-14800; no contacts on S) to y 13331;
+   step right to x 6853-6870; up to y 8990; diagonal up-right to a contact at
+   (7034,8797).
+8. Poly up to a contact at (7034,8535); metal left along y 8525-8548, up at
+   x 6922-6940, left along y 8443-8462, up at x 6750-6765, left along y 8357-8375.
+   Followed to x 6690; **it goes on to the left** (towards the left-centre logic).
 
-Route of X (gate 0's input), followed backwards: poly from gate 0 up at x 13765-13795
-to a contact at (13782,18080); metal right along y 18075-18090 to x 14543; up at
-x 14535-14552 to y 16992; left along y 16985-17000 to x 13952; up to y 16907; left
-along y 16900-16915 to a contact at (13655,16908); poly up to a contact at
-(13655,16822); from there a vertical metal at x 13664-13684 going up (y < 16600) into
-the routing channel at the left edge of the logic below the decode array. Not
-followed further.
+No tap was seen on S between gate g5 and (7034,8797): the whole run delivers S to
+whatever lies beyond (6690,8366). Checked at 1x for the bottom run and the straight
+verticals, at 2-3x at every turn and link.
+
+X, gate 0's input, followed backwards: poly from the gate up to a contact at
+(13782,18080); metal right along y 18075-18090 to x 14543; up at x 14535-14552 to
+y 16992; left along y 16985-17000 to x 13952; up to y 16907; left to a contact at
+(13655,16908); poly up to a contact at (13655,16822); vertical metal x 13660-13684 up
+to a contact at (13672,16190) (which also feeds a poly going right into the logic at
+x 13790); left along y 16175-16200; up at x 13555-13578. Followed to y 15880 in the
+channel between the mid-right array and the logic below the decode array.
+
+### What S is (believed, not traced)
+
+Gate g5 of the clock block takes S and, according to the clock trace, puts its output
+on line B (`ck_b`); g6 inverts line B onto line A. That is only consistent if S is low
+whenever `ck_b` is high, i.e. X is `ck_b` or a copy of it and S is an inverter-made
+NOT `ck_b` (a full-swing phase much like `ck_a`). `ck_b`'s only route goes into the
+bottom row of the mid-right array, and X comes down the channel beside that array, so
+this is plausible; but the join between `ck_b` and X has not been seen. Until it is,
+treat S as an unknown clock-like control line.
+
+## res_b, lpstb_b
+
+Both leave the buffers by the top pads the same way (`trace/pads_in_top.txt` ends at
+y 1962):
+
+| Net | Contact, poly under the supply rail | Metal going left | Contact, poly under the wide bus | Vertical metal going down |
+|---|---|---|---|---|
+| `lpstb_b` | (6580,1965) to (6580,2095) | y 2085-2105 to (5343,2093) | to (5343,2553) | x 5310-5330 |
+| `res_b` | (6710,1965) to (6712,2095) | down to y 2130-2150, left to (5277,2140) | to (5277,2553) | x 5265-5290 |
+
+**Entry: top-left logic, from above, at y 2553.** The two verticals run down side by
+side in a routing channel (more verticals join on their right at x 5350-5490),
+crossing many horizontal polys; followed at 1x to y 3790 and still running. No taps
+identified.
+
+## clk and clk_b
+
+`clk` (the CLK pin node, after its protection resistor) does more than feed the clock
+block: the line along the bottom of that block (y 19892-19912) turns up at
+x 9455-9475, becomes a wide poly at contact (9467,19335), runs up under both `ck_out`
+lines and the VCC bus to y 18760, turns left under the VCC pad's bus to a contact at
+(8600,18770), and continues in metal along y 18763-18780 to a contact at (7500,18772).
+That contact sits on a wide poly belonging to a row of three large U-shaped poly gates
+at 6945-7540 x 18750-18940, just above the CUDISP pad. **Entry: that cell row** (it
+is in nobody's package yet; the bottom `ck_out` trunk passes right under it at
+y 18947 without touching it). Not traced.
+
+`clk_b`: not followed. Inside the clock block it comes down V5 into the driver logic;
+whether a branch leaves the block was not checked.
 
 ## Ambiguities
 
@@ -360,4 +445,21 @@ and A3 corrections applied: 0 errors, 0 warnings.
 
 ## Not done
 
-See Status; this section is rewritten as work proceeds.
+In rough order of value:
+
+1. **Source of X** (and so the meaning of S): follow the vertical metal x 13555-13578
+   up from y 15880.
+2. Where S goes after (6690,8366).
+3. `ck_out` left-edge trunk x 2504: verify above y 18300 at 1x, find its top end and
+   whether it turns along the top; list its taps into the left array.
+4. `ck_out` #1 along y 17900-17915 west of x 10230.
+5. `e_b` above y 16400 (does it reach the data bus column?); `rw_d`, `rs_d` above
+   y 15900.
+6. `res_b`, `lpstb_b` below y 3790.
+7. `clk_b`; the cell row at 6945-7540 x 18750-18940 that `clk` feeds.
+8. The unidentified lines met on the way, all listed in the position tables: bus lines
+   L1, L2 ("e"), L5; "c"; the vertical x 13120-13145 above y 16412; the three nested
+   lines round `e_b`.
+9. The small device on `ck_out` at 10600-10710 x 18390-18525.
+10. Taps are recorded only where they were seen in passing; none is drawn except the
+    one at (6148,18948).

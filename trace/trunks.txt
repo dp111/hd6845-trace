@@ -115,7 +115,33 @@ M 10809,18458 y18612 w=18
 C 10808,18600
 P 10822,18600 x10666 w=22
 C 10680,18600
-M 10693,18601 x10268 y18430 x10180 w=20      # followed to x 10180 only
+M 10693,18601 x10268 y18426 x9764 w=19       # middle one of three bus lines (y 18383, 18426, 18470)
+C 9777,18425
+P 9790,18425 x9544 w=20             # under the vertical metals x 9640-9760 (links seen at 1x)
+C 9557,18425
+M 9570,18426 x8590 w=19
+C 8602,18428
+P 8615,18428 x8369 w=20             # under the vertical metals x 8440-8560
+C 8382,18428
+M 8395,18428 x7588 w=19
+C 7600,18428
+P 7613,18428 x7407 w=20             # under the vertical metals x 7460-7520
+C 7420,18428
+M 7433,18428 x6784 w=19
+C 6797,18428
+P 6798,18441 y17977 w=20            # up under nine bus lines
+P 6808,17980:6870,18000             # stub to the right at the top contact
+C 6798,17990
+# up the left bus field: innermost (rightmost) line of the bundle at first
+M 6798,18003 y16502 w=18
+C 6797,16515
+P 6797,16528 y16157 w=20            # under the supply buses y 16230-16450
+C 6797,16170
+M 6798,16183 y13331 x6862 y8990 7034,8818 7034,8785 w=18   # steps right at y 13322-13340; diagonal at the top
+C 7034,8797
+P 7036,8810 y8522 w=20
+C 7034,8535
+M 7047,8536 x6930 y8452 x6757 y8366 x6690 w=18   # continues left (not followed)
 
 # X: input of gate 0, followed back towards its source. Poly up from the gate, metal
 # right along the bottom line of the bus group, up beside the wide VCC vertical, left
@@ -168,3 +194,43 @@ P 16625,18549 16625,18087 16385,17847 16385,17547 w=18
 C 16385,17560
 M 16385,17573 y16160 w=17           # top end at about y 16170 (seen at 1x)
 N M 16385,17000 cs_d
+
+# ====================================================================
+# lpstb_b and res_b (pads_in_top): each comes down its vertical metal to a contact,
+# passes under the supply rail y 2004-2052 in poly, runs left in metal (y 2095 and
+# y 2140), goes down in poly under the wide bus y 2185-2505, and continues as a vertical
+# metal down a routing channel of the top-left logic.
+C 6580,1965
+P 6582,1952 y2108 w=22
+C 6580,2095
+M 6593,2095 x5330 w=18
+C 5343,2093
+P 5345,2080 y2566 w=20
+C 5343,2553
+M 5356,2553 x5320 y3790 w=20        # followed at 1x to y 3790, continues down
+N M 5320,3000 lpstb_b
+
+C 6710,1965
+P 6710,1952 y2108 w=22
+C 6712,2095
+M 6712,2083 y2140 x5264 w=18
+C 5277,2140
+P 5279,2127 y2566 w=20
+C 5277,2553
+M 5277,2540 y3790 w=22              # followed at 1x to y 3790, continues down
+N M 5277,3000 res_b
+
+# ====================================================================
+# clk (the CLK pin node): the line along the bottom of the clock block turns up at
+# x 9465, changes to a wide poly at (9467,19335), goes up under the ck_out lines and
+# the VCC bus, turns left at y 18760 under the VCC pad's bus, and from a contact at
+# (8600,18770) runs left in metal to a contact at (7500,18772) on a wide poly that
+# belongs to the cell row at 6945-7540 x 18750-18940 (not traced).
+M 9435,19902 x9465 y19322 w=20
+C 9467,19335
+P 9460,19348 y18760 x8587 w=34      # 9440-9480, then y 18745-18778
+C 8600,18770
+M 8613,18772 x7487 w=18
+C 7500,18772
+P 7495,18760:7540,18800             # top of the wide poly that goes down into the cell row
+# (net name: clk_p / clk, from the clock trace)
