@@ -28,6 +28,8 @@ M 3105,11830:3150,11910
 M 3105,11905:3178,11955
 N M 2979,11520 vss
 N M 3155,11480 vcc
+M 3478,11462:3528,11955             # rail C = VCC
+N M 3503,11480 vcc
 
 # carry line: arrives from the row above as metal, leaves to the row below
 M 3063,11462:3085,11545             # from the row above
@@ -48,7 +50,9 @@ C 3182,11863
 C 3252,11885
 
 # metal from the node between the two pass gates, leaving right
-M 3218,11668:3340,11698
+M 3218,11668:3345,11698
+M 3313,11642:3350,11692             # box over the contact to poly Pv1
+C 3333,11660
 C 3232,11683
 
 # rail contacts
@@ -88,8 +92,7 @@ D 2875,11792:2912,11830
 # --- line along the top of the row (poly), enters from the left column
 P 2860,11511 x3020 w=20
 P 3008,11486:3032,11521
-P 3020,11496 x3340 w=20
-N P 2870,11511 larr_h1_{}
+P 3020,11496 x3312 w=20
 
 # --- P2: gate fed from the carry-in line
 P 3083,11515:3112,11545
@@ -107,7 +110,8 @@ P 3188,11600:3212,11722             # goes on down as a gate over the pass-gate 
 B 3215,11608:3250,11640
 
 # --- pass-gate strip y 11655-11705: stub | gate a | mid node | gate P2 | right part
-D 3163,11655:3340,11705
+D 3163,11655:3314,11705
+D 3292,11681:3347,11737             # R: on down to the buried contact of Ph4
 D 3163,11655:3186,11748             # strip under rail B down to the arm of N2 (joins it at 3180-3190,11728-11747)
 
 # --- load L2: node N2 leaves in diffusion round the P4 pad and off to the right
@@ -118,7 +122,7 @@ D 3220,11740:3272,11772             # tab under the buried contact
 D 3250,11777:3300,11822             # under gate P4 to the box on the right
 D 3215,11843:3272,11858
 D 3215,11843:3235,11943
-D 3215,11925:3340,11943
+D 3215,11925:3292,11943             # ends where poly Pq2 (y 11928-11948, not drawn) begins; junction not resolved
 P 3190,11775:3245,11840             # load gate block
 P 3220,11745:3248,11780
 B 3220,11745:3250,11775
@@ -127,5 +131,71 @@ N D 3260,11760 larr_n2_{}
 # --- P4: net a again (through the strap), gate between N2 and the box on the right
 P 3278,11740:3297,11890
 P 3240,11863:3280,11907             # pad under the strap contact
+
+# ---------------- column 3: x 3290-3475 -----------------------------------
+# Rail E: wide vertical metal of irregular outline.  It is the source of three
+# pull-downs here (contacts to T1 and R2) and also contacts two poly lines, so it is
+# drawn as a signal (larr_phe), not as VSS: see notes, Ambiguities.
+M 3300,11462:3350,11632
+M 3300,11575:3400,11632             # widens to the right over Pv1
+M 3385,11625:3423,11730             # passes right of the H2 contact box
+M 3320,11722:3418,11747
+M 3300,11740:3350,11870
+M 3310,11868:3350,11915
+M 3292,11900:3360,11955
+N M 3325,11480 larr_phe
+C 3322,11587                        # to T1
+C 3324,11790                        # to R2
+C 3337,11522                        # to the poly pad at the H1/H3 jog
+C 3330,11890                        # to the tab of poly Pq1
+
+# T1: diffusion on rail E; pull-down of net a (gate P2, the carry-in) on its left,
+# pull-down of N3 (gate Pv1 = mid) on its right
+D 3292,11553:3355,11640
+D 3258,11562:3296,11632             # under P2 to load L1's strip
+D 3350,11565:3390,11640             # under Pv1 to N3
+P 3358,11558:3382,11650             # Pv1
+P 3318,11642:3380,11677             # its pad under the H2 contact
+N M 3280,11683 larr_mid_{}
+
+# N3 with load L3 (VCC box on rail C at 3475-3532)
+D 3386,11565:3422,11605
+D 3386,11565:3405,11652
+D 3386,11640:3490,11660             # strip on to the clocked pass gates (column 4)
+D 3400,11603:3442,11642             # tab under the buried contact
+D 3415,11567:3480,11598             # load strip under the block
+D 3472,11552:3532,11600             # VCC box
+C 3500,11575
+P 3420,11558:3472,11606             # load gate block
+P 3410,11598:3442,11642
+B 3408,11603:3442,11642
+N D 3395,11585 larr_n3_{}
+
+# R ties to poly Ph4 by buried contact; Ph4 is the gate of load L4, so R = N4
+B 3318,11703:3347,11737
+P 3320,11707:3350,11735
+P 3345,11717:3445,11741             # Ph4
+P 3425,11717:3445,11780             # ... turns down into the buried contact of L4
+B 3412,11748:3445,11776
+P 3422,11778:3472,11832             # load gate block of L4
+D 3385,11750:3445,11774             # N4, top part under the buried contact
+D 3415,11790:3480,11825             # load strip under the block
+D 3472,11750:3532,11827             # VCC box
+C 3500,11775
+N D 3400,11800 larr_n4_{}
+
+# R2 (on rail E) | gate Pv6 | N4
+D 3298,11767:3418,11830
+D 3320,11825:3400,11850
+P 3358,11752:3385,11862             # Pv6; driven from below through a buried contact
+?P 3360,11855:3397,11897            # poly square in a heavy box: buried contact, diffusion side not resolved
+N P 3371,11800 larr_g6_{}
+
+# poly taps of rail E
+P 3318,11512:3352,11532             # pad at the jog of H1 into H3
+?P 3303,11486:3323,11532            # H1 turning down to the pad (junction not resolved)
+P 3345,11519 x3780 w=22             # H3, on to the right (not followed yet)
+P 3318,11880:3345,11902             # tab
+P 3290,11900:3388,11921             # Pq1
 
 @end
