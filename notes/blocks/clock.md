@@ -73,77 +73,51 @@ What has been read so far (left half; mirror positions in brackets):
 - Full-height vertical poly strips at 11390-11416 and 11523-11547 run down past
   y 19890 towards the lines along the bottom of the block.
 
-## Big arrays (9570-10650 x 19200-19800): partly read, not traced
+## Output stage: the two big arrays (9500-10730 x 19180-19815): traced schematically
 
-Supplies here:
-- VSS comes down from the core on the wide metal at x 10755-10815. It branches right
-  at y 19335-19375 into the driver logic's middle rail, carries on down, and turns
-  left at y 19765-19815 to run under both arrays as their bottom bus.
-- The wide metal at x 10652-10722 (from the core, ends at y 19410) is taken to be VCC:
-  the only thing under it is a small device whose gate is tied back to its other
-  side, i.e. a load.
+The two arrays are one circuit, a three-stage buffer ending in a push-pull pair:
 
-Right-hand array (10235-10725 x 19180-19790), columns left to right:
+```
+ck_p --> [inverter: s3,s4,s5, W 3x480] --> ck_t --> [inverter: s1,s2, W 2x480] --> ck_n2
+ck_n2 --> [F3, W 345] --> ck_ga   (pull-up gate of the output)
+ck_out:  pull-up  = group A, W 2x483 + 145, gate ck_ga, from VCC
+         pull-down = F1 + F2, W 2x345, gate ck_n2, to VSS
+```
 
-| x | What |
-|---|---|
-| 10237-10278 | col 1, diffusion with contacts, joins the bottom bus (VSS) |
-| 10280-10300 | gate s1 |
-| 10300-10353 | col 2, joins a metal that leaves left at y 19235-19262 |
-| 10355-10378 | gate s2 |
-| 10380-10423 | col 3, joins the bottom bus (VSS) |
-| 10425-10447 | gate s3 |
-| 10449-10495 | col 4, joins the top bus (y 19183-19212) |
-| 10497-10520 | gate s4 |
-| 10522-10565 | col 5, joins the bottom bus (VSS) |
-| 10567-10590 | gate s5 |
-| 10592-10628 | col 6, joins the top bus; diffusion probably extends to x 10652 |
-| 10652-10680 | gate of the load, box at its top end 10645-10682 x 19237-19262 |
-| 10683-10725 | load's supply side, three contacts to the metal at x 10652-10722 |
+So `ck_out` = NOT `ck_n2` = NOT `ck_p`, delayed by three stages. `ck_p` arrives on a
+poly bar along the bottom of the block (y 19905-19930) from the driver logic.
 
-So there are two large inverters here. Gates s3-s5 (W about 3 x 480) pull the top bus
-low against the load. Gates s1-s2 pull col 2 low. s3-s5 have separate rounded top
-ends and are joined at the bottom by a poly bar (y 19752-19775) that runs right and
-then down in poly at x 10655-10690 to a poly bar along the bottom of the block
-(y 19905-19930), heading for the driver logic. s1 and s2 end at the top at y 19222
-next to a horizontal band (y 19215-19232, x 10240-10440) and the top bus has a pad
-with two contacts at 10285-10375 x 19180-19215; the likely reading is that the top
-bus drives s1 and s2 through that pad, making the two inverters a chain. Not
-confirmed. s1 and s2 also have long feet under the bottom bus (to y 19790).
+Supplies: VSS comes down from the core on the wide metal at x 10755-10815, branches
+right at y 19335-19375 into the driver logic's middle rail, and turns left at
+y 19765-19815 as the bus under both arrays. VCC arrives twice: on the wide metal at
+x 10652-10722 from the core (it feeds only the load of `ck_t`), and on a wide metal
+from the left at y 19095-19145 that spreads along the top of the left array
+(y 19245-19300).
 
-Left-hand array (9500-10220 x 19190-19790), partly read:
+Loads: `ck_t` has a 154/27 load at x 10652-10680; `ck_n2` has a 174/34 load (group C,
+x 10130-10165). Both are about 5.5 squares wide, which is what first suggested that
+the wide metal over group C is VCC and not a signal.
 
-- The wide metal that enters at the top left (x 9575-9625 from y 19100, where it
-  comes in from the left at y 19095-19145) spreads along y 19245-19300 from x 9580
-  to 10120. Columns A1 (x 9600-9632) and A3 (9738-9770) and column C1 (10085-10115)
-  contact it. Reading this metal as a signal makes the device between C1 and C2
-  nonsensical, and reading it as VCC makes everything a pull-up, so it is taken to
-  be a second VCC feed. Not confirmed.
-- Group A, gate GA: a poly bar at 9640-9815 x 19195-19240 with two fingers down at
-  x 9640-9665 and 9712-9735 (to y 19750), joined at the bottom by a bar
-  (y 19742-19762) to a third, short, wide finger at 9555-9595 x 19580-19740.
-  Fingers 1 and 2 lie between A1/A3 and column A2 (9672-9705, contacts from
-  y 19320). The short finger lies between A1 and a column at 9510-9535 that joins
-  a bus along the bottom (y 19745-19790, x 9510-9880). If A2 is on that bus too,
-  group A is one big pull-up from VCC to that bus.
-- Group B (9800-10030): columns at 9805-9835, 9870-9905, 9940-9970, 9995-10030
-  with three gate fingers between them; a metal at y 19325-19360 (x 9800-10010)
-  crosses their tops. Not yet read.
-- Group C: gate 10130-10165 (y 19225-19420) between C1 and column C2
-  (10180-10210). C2's metal runs up to a top strap (y 19195-19228, x 9990-10215),
-  which joins the metal leaving the right-hand array's column 2 at y 19235-19262
-  and, at its left end, a two-contact pad at 9985-10030 x 19195-19235.
-- A small device below group C: poly block 10060-10090 x 19500-19660 beside a
-  three-contact column at 10110-10150.
+`ck_out` leaves the block two ways: up the left side on a metal at x 9515-9545 and
+away to the left at y 19240-19262, and downward at x 9848-9870 from the bus along
+the bottom. Neither has been followed.
 
-The two arrays are therefore one circuit, not two independent drivers.
+Established by close-up (6x): the gate bar of group A (9640-9830 x 19195-19240)
+continues down its right-hand side at x 9797-9830 to the contact at 9810,19337 on
+the `ck_ga` metal; the bar that joins F1-F3 (y 19357-19372) is a separate piece of
+poly just below that contact. This fixes the polarity of the output.
 
-A metal at x 10840-10865 comes down from the core to a contact at 10852,19292,
-crosses under the VSS branch in poly to 10852,19422 and continues down. The bus
-line carrying `ck_src` (y 18455-18480) runs left to a contact at 10895,18467 and
-links to a vertical metal near x 10810 that heads down this way, so `ck_src` very
-probably comes from this part of the block: the gate row re-buffers something made
-here, and the driver logic's two halves take that signal and its complement back.
+Inferred, flagged `?` in the trace:
+- s1 and s2 are driven by `ck_t` through the two-contact pad at 10285-10375 x
+  19180-19215. Seen: the pad and its contacts under the top bus, and the two gates
+  ending beside it. Not seen: the poly join itself.
+- F1, F2 and F3 share one gate bar, fed by the poly that comes down at x 9985-10010
+  from the `ck_n2` pad.
+- The two load gates are tied to their output sides (boxes seen at the top end of
+  each gate).
+
+Not yet traced here: the load of `ck_ga` (the small device at 10030-10160 x
+19430-19680 is the candidate), and whether `ck_ga` is bootstrapped.
 
 ## The gate row's input line (`ck_src`) is a global signal
 

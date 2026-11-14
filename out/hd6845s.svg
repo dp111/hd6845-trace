@@ -37,6 +37,14 @@
 <path d="M12625.0,18840.0 L12625.0,18968.0 L12570.0,18968.0 L12570.0,18840.0Z"><title>trace/clock.txt:214</title></path>
 <path d="M12800.0,18840.0 L12800.0,18968.0 L12745.0,18968.0 L12745.0,18840.0Z"><title>trace/clock.txt:234</title></path>
 <path d="M12495.0,19640.0 L12495.0,19960.0 L12435.0,19960.0 L12435.0,19640.0Z"><title>trace/clock.txt:262</title></path>
+<path d="M10628.0,19265.0 L10628.0,19745.0 L10237.0,19745.0 L10237.0,19265.0Z"><title>trace/clock.txt:301</title></path>
+<path d="M10725.0,19262.0 L10725.0,19410.0 L10626.0,19410.0 L10626.0,19262.0Z"><title>trace/clock.txt:330</title></path>
+<path d="M10662.0,19240.0 L10662.0,19266.0 L10626.0,19266.0 L10626.0,19240.0Z"><title>trace/clock.txt:333</title></path>
+<path d="M10210.0,19250.0 L10210.0,19420.0 L10085.0,19420.0 L10085.0,19250.0Z"><title>trace/clock.txt:337</title></path>
+<path d="M10210.0,19222.0 L10210.0,19254.0 L10158.0,19254.0 L10158.0,19222.0Z"><title>trace/clock.txt:340</title></path>
+<path d="M10048.0,19390.0 L10048.0,19735.0 L9805.0,19735.0 L9805.0,19390.0Z"><title>trace/clock.txt:349</title></path>
+<path d="M9775.0,19252.0 L9775.0,19735.0 L9598.0,19735.0 L9598.0,19252.0Z"><title>trace/clock.txt:369</title></path>
+<path d="M9600.0,19590.0 L9600.0,19735.0 L9505.0,19735.0 L9505.0,19590.0Z"><title>trace/clock.txt:370</title></path>
 <path d="M15112.0,18943.0 L15112.0,19135.0 L14695.0,19135.0 L14695.0,18943.0Z"><title>trace/inprot.txt:26</title></path>
 <path d="M13917.0,18210.0 L13917.0,18256.0 L13865.0,18256.0 L13865.0,18210.0Z"><title>trace/inrow.txt:13</title></path>
 <path d="M13922.0,18254.0 L13922.0,18348.0 L13891.0,18348.0 L13891.0,18254.0Z"><title>trace/inrow.txt:14</title></path>
@@ -715,6 +723,28 @@
 <path d="M12274.0,19562.0 L12274.0,19722.0 L12250.0,19722.0 L12250.0,19562.0Z"><title>trace/clock.txt:260</title></path>
 <path d="M12497.0,19698.0 L12497.0,19722.0 L12250.0,19722.0 L12250.0,19698.0Z"><title>trace/clock.txt:261</title></path>
 <path d="M11690.0,18955.0 L11690.0,19092.0 L11668.0,19092.0 L11668.0,18955.0Z"><title>trace/clock.txt:276</title></path>
+<path d="M10300.0,19222.0 L10300.0,19790.0 L10280.0,19790.0 L10280.0,19222.0Z"><title>trace/clock.txt:317</title></path>
+<path d="M10378.0,19222.0 L10378.0,19790.0 L10355.0,19790.0 L10355.0,19222.0Z"><title>trace/clock.txt:318</title></path>
+<path d="M10378.0,19180.0 L10378.0,19232.0 L10280.0,19232.0 L10280.0,19180.0Z" stroke="#ffff00" stroke-width="3"><title>trace/clock.txt:319</title></path>
+<path d="M10447.0,19225.0 L10447.0,19775.0 L10425.0,19775.0 L10425.0,19225.0Z"><title>trace/clock.txt:322</title></path>
+<path d="M10520.0,19225.0 L10520.0,19775.0 L10497.0,19775.0 L10497.0,19225.0Z"><title>trace/clock.txt:323</title></path>
+<path d="M10590.0,19225.0 L10590.0,19775.0 L10567.0,19775.0 L10567.0,19225.0Z"><title>trace/clock.txt:324</title></path>
+<path d="M10690.0,19752.0 L10690.0,19775.0 L10425.0,19775.0 L10425.0,19752.0Z"><title>trace/clock.txt:325</title></path>
+<path d="M10690.0,19775.0 L10690.0,19930.0 L10655.0,19930.0 L10655.0,19775.0Z"><title>trace/clock.txt:326</title></path>
+<path d="M11420.0,19905.0 L11420.0,19930.0 L10655.0,19930.0 L10655.0,19905.0Z" stroke="#ffff00" stroke-width="3"><title>trace/clock.txt:327</title></path>
+<path d="M10680.0,19245.0 L10680.0,19420.0 L10652.0,19420.0 L10652.0,19245.0Z"><title>trace/clock.txt:331</title></path>
+<path d="M10165.0,19215.0 L10165.0,19440.0 L10130.0,19440.0 L10130.0,19215.0Z"><title>trace/clock.txt:338</title></path>
+<path d="M10010.0,19190.0 L10010.0,19375.0 L9985.0,19375.0 L9985.0,19190.0Z"><title>trace/clock.txt:351</title></path>
+<path d="M10010.0,19355.0 L10010.0,19375.0 L9845.0,19375.0 L9845.0,19355.0Z" stroke="#ffff00" stroke-width="3"><title>trace/clock.txt:352</title></path>
+<path d="M9870.0,19355.0 L9870.0,19750.0 L9850.0,19750.0 L9850.0,19355.0Z"><title>trace/clock.txt:353</title></path>
+<path d="M9940.0,19355.0 L9940.0,19765.0 L9920.0,19765.0 L9920.0,19355.0Z"><title>trace/clock.txt:354</title></path>
+<path d="M10005.0,19355.0 L10005.0,19765.0 L9985.0,19765.0 L9985.0,19355.0Z"><title>trace/clock.txt:355</title></path>
+<path d="M9830.0,19195.0 L9830.0,19240.0 L9640.0,19240.0 L9640.0,19195.0Z"><title>trace/clock.txt:371</title></path>
+<path d="M9665.0,19240.0 L9665.0,19762.0 L9640.0,19762.0 L9640.0,19240.0Z"><title>trace/clock.txt:372</title></path>
+<path d="M9735.0,19240.0 L9735.0,19765.0 L9712.0,19765.0 L9712.0,19240.0Z"><title>trace/clock.txt:373</title></path>
+<path d="M9830.0,19240.0 L9830.0,19352.0 L9797.0,19352.0 L9797.0,19240.0Z"><title>trace/clock.txt:374</title></path>
+<path d="M9595.0,19580.0 L9595.0,19762.0 L9555.0,19762.0 L9555.0,19580.0Z"><title>trace/clock.txt:376</title></path>
+<path d="M9665.0,19742.0 L9665.0,19762.0 L9555.0,19762.0 L9555.0,19742.0Z"><title>trace/clock.txt:377</title></path>
 <path d="M15129.0,19029.0 L15129.0,19070.0 L14671.0,19070.0 L14671.0,19029.0Z"><title>trace/inprot.txt:27</title></path>
 <path d="M14695.0,19029.0 L14695.0,19219.0 L14667.0,19219.0 L14667.0,19029.0Z"><title>trace/inprot.txt:28</title></path>
 <path d="M15131.0,19200.0 L15131.0,19219.0 L14667.0,19219.0 L14667.0,19200.0Z"><title>trace/inprot.txt:29</title></path>
@@ -1300,6 +1330,37 @@
 <path d="M11430.0,18935.0 L11430.0,19134.0 L11408.0,19134.0 L11408.0,18935.0Z"><title>trace/clock.txt:274</title></path>
 <path d="M11900.0,19112.0 L11900.0,19134.0 L11408.0,19134.0 L11408.0,19112.0Z"><title>trace/clock.txt:275</title></path>
 <path d="M11900.0,19066.0 L11900.0,19089.0 L11668.0,19089.0 L11668.0,19066.0Z"><title>trace/clock.txt:278</title></path>
+<path d="M10815.0,18800.0 L10815.0,19815.0 L10755.0,19815.0 L10755.0,18800.0Z"><title>trace/clock.txt:290</title></path>
+<path d="M10815.0,19760.0 L10815.0,19815.0 L9940.0,19815.0 L9940.0,19760.0Z"><title>trace/clock.txt:291</title></path>
+<path d="M10722.0,18800.0 L10722.0,19410.0 L10652.0,19410.0 L10652.0,18800.0Z"><title>trace/clock.txt:293</title></path>
+<path d="M9625.0,19095.0 L9625.0,19145.0 L9380.0,19145.0 L9380.0,19095.0Z"><title>trace/clock.txt:295</title></path>
+<path d="M9625.0,19095.0 L9625.0,19300.0 L9575.0,19300.0 L9575.0,19095.0Z"><title>trace/clock.txt:296</title></path>
+<path d="M10120.0,19245.0 L10120.0,19300.0 L9580.0,19300.0 L9580.0,19245.0Z"><title>trace/clock.txt:297</title></path>
+<path d="M10278.0,19285.0 L10278.0,19800.0 L10237.0,19800.0 L10237.0,19285.0Z"><title>trace/clock.txt:302</title></path>
+<path d="M10353.0,19235.0 L10353.0,19715.0 L10300.0,19715.0 L10300.0,19235.0Z"><title>trace/clock.txt:304</title></path>
+<path d="M10353.0,19235.0 L10353.0,19262.0 L10215.0,19262.0 L10215.0,19235.0Z"><title>trace/clock.txt:306</title></path>
+<path d="M10423.0,19290.0 L10423.0,19800.0 L10380.0,19800.0 L10380.0,19290.0Z"><title>trace/clock.txt:307</title></path>
+<path d="M10495.0,19183.0 L10495.0,19715.0 L10449.0,19715.0 L10449.0,19183.0Z"><title>trace/clock.txt:309</title></path>
+<path d="M10565.0,19290.0 L10565.0,19800.0 L10522.0,19800.0 L10522.0,19290.0Z"><title>trace/clock.txt:311</title></path>
+<path d="M10628.0,19183.0 L10628.0,19715.0 L10592.0,19715.0 L10592.0,19183.0Z"><title>trace/clock.txt:313</title></path>
+<path d="M10630.0,19183.0 L10630.0,19212.0 L10290.0,19212.0 L10290.0,19183.0Z"><title>trace/clock.txt:315</title></path>
+<path d="M10120.0,19240.0 L10120.0,19440.0 L10075.0,19440.0 L10075.0,19240.0Z"><title>trace/clock.txt:341</title></path>
+<path d="M10215.0,19195.0 L10215.0,19400.0 L10180.0,19400.0 L10180.0,19195.0Z"><title>trace/clock.txt:343</title></path>
+<path d="M10215.0,19195.0 L10215.0,19228.0 L9990.0,19228.0 L9990.0,19195.0Z"><title>trace/clock.txt:345</title></path>
+<path d="M9840.0,19385.0 L9840.0,19725.0 L9805.0,19725.0 L9805.0,19385.0Z"><title>trace/clock.txt:356</title></path>
+<path d="M9980.0,19385.0 L9980.0,19410.0 L9805.0,19410.0 L9805.0,19385.0Z"><title>trace/clock.txt:358</title></path>
+<path d="M9980.0,19385.0 L9980.0,19800.0 L9940.0,19800.0 L9940.0,19385.0Z"><title>trace/clock.txt:359</title></path>
+<path d="M9905.0,19440.0 L9905.0,19790.0 L9880.0,19790.0 L9880.0,19440.0Z"><title>trace/clock.txt:361</title></path>
+<path d="M10050.0,19328.0 L10050.0,19725.0 L10015.0,19725.0 L10015.0,19328.0Z"><title>trace/clock.txt:363</title></path>
+<path d="M10050.0,19328.0 L10050.0,19355.0 L9795.0,19355.0 L9795.0,19328.0Z"><title>trace/clock.txt:365</title></path>
+<path d="M9635.0,19245.0 L9635.0,19725.0 L9598.0,19725.0 L9598.0,19245.0Z"><title>trace/clock.txt:378</title></path>
+<path d="M9773.0,19245.0 L9773.0,19725.0 L9738.0,19725.0 L9738.0,19245.0Z"><title>trace/clock.txt:380</title></path>
+<path d="M9707.0,19312.0 L9707.0,19790.0 L9670.0,19790.0 L9670.0,19312.0Z"><title>trace/clock.txt:382</title></path>
+<path d="M9545.0,19590.0 L9545.0,19790.0 L9505.0,19790.0 L9505.0,19590.0Z"><title>trace/clock.txt:384</title></path>
+<path d="M9905.0,19745.0 L9905.0,19790.0 L9505.0,19790.0 L9505.0,19745.0Z"><title>trace/clock.txt:386</title></path>
+<path d="M9545.0,19245.0 L9545.0,19600.0 L9515.0,19600.0 L9515.0,19245.0Z"><title>trace/clock.txt:388</title></path>
+<path d="M9545.0,19240.0 L9545.0,19262.0 L9380.0,19262.0 L9380.0,19240.0Z"><title>trace/clock.txt:389</title></path>
+<path d="M9870.0,19785.0 L9870.0,19840.0 L9848.0,19840.0 L9848.0,19785.0Z"><title>trace/clock.txt:390</title></path>
 <path d="M17650.0,18950.0 L17650.0,18998.0 L13720.0,18998.0 L13720.0,18950.0Z"><title>trace/inprot.txt:22</title></path>
 <path d="M15100.0,19074.0 L15100.0,19124.0 L14719.0,19124.0 L14719.0,19074.0Z"><title>trace/inprot.txt:36</title></path>
 <path d="M17420.0,18130.0 L17420.0,18258.0 L13690.0,18258.0 L13690.0,18130.0Z"><title>trace/inrow.txt:6</title></path>
@@ -1877,6 +1938,27 @@
 <path d="M12478.0,19935.0 L12478.0,19955.0 L12452.0,19955.0 L12452.0,19935.0Z" stroke="#ffff00" stroke-width="3"><title>trace/clock.txt:267</title></path>
 <path d="M11431.0,18935.0 L11431.0,18959.0 L11407.0,18959.0 L11407.0,18935.0Z"><title>trace/clock.txt:273</title></path>
 <path d="M11694.0,19067.0 L11694.0,19093.0 L11668.0,19093.0 L11668.0,19067.0Z"><title>trace/clock.txt:277</title></path>
+<path d="M10272.0,19290.0 L10272.0,19740.0 L10245.0,19740.0 L10245.0,19290.0Z"><title>trace/clock.txt:303</title></path>
+<path d="M10348.0,19290.0 L10348.0,19700.0 L10305.0,19700.0 L10305.0,19290.0Z"><title>trace/clock.txt:305</title></path>
+<path d="M10418.0,19300.0 L10418.0,19740.0 L10385.0,19740.0 L10385.0,19300.0Z"><title>trace/clock.txt:308</title></path>
+<path d="M10490.0,19290.0 L10490.0,19700.0 L10453.0,19700.0 L10453.0,19290.0Z"><title>trace/clock.txt:310</title></path>
+<path d="M10560.0,19300.0 L10560.0,19740.0 L10527.0,19740.0 L10527.0,19300.0Z"><title>trace/clock.txt:312</title></path>
+<path d="M10625.0,19290.0 L10625.0,19700.0 L10596.0,19700.0 L10596.0,19290.0Z"><title>trace/clock.txt:314</title></path>
+<path d="M10330.0,19190.0 L10330.0,19208.0 L10300.0,19208.0 L10300.0,19190.0Z" stroke="#ffff00" stroke-width="3"><title>trace/clock.txt:320</title></path>
+<path d="M10372.0,19190.0 L10372.0,19208.0 L10345.0,19208.0 L10345.0,19190.0Z" stroke="#ffff00" stroke-width="3"><title>trace/clock.txt:321</title></path>
+<path d="M10718.0,19300.0 L10718.0,19400.0 L10690.0,19400.0 L10690.0,19300.0Z"><title>trace/clock.txt:334</title></path>
+<path d="M10113.0,19258.0 L10113.0,19415.0 L10088.0,19415.0 L10088.0,19258.0Z"><title>trace/clock.txt:342</title></path>
+<path d="M10208.0,19265.0 L10208.0,19390.0 L10183.0,19390.0 L10183.0,19265.0Z"><title>trace/clock.txt:344</title></path>
+<path d="M10017.0,19200.0 L10017.0,19222.0 L9993.0,19222.0 L9993.0,19200.0Z"><title>trace/clock.txt:350</title></path>
+<path d="M9837.0,19410.0 L9837.0,19715.0 L9808.0,19715.0 L9808.0,19410.0Z"><title>trace/clock.txt:357</title></path>
+<path d="M9973.0,19402.0 L9973.0,19715.0 L9947.0,19715.0 L9947.0,19402.0Z"><title>trace/clock.txt:360</title></path>
+<path d="M9903.0,19452.0 L9903.0,19735.0 L9882.0,19735.0 L9882.0,19452.0Z"><title>trace/clock.txt:362</title></path>
+<path d="M10045.0,19395.0 L10045.0,19715.0 L10022.0,19715.0 L10022.0,19395.0Z"><title>trace/clock.txt:364</title></path>
+<path d="M9822.0,19324.0 L9822.0,19350.0 L9798.0,19350.0 L9798.0,19324.0Z"><title>trace/clock.txt:375</title></path>
+<path d="M9629.0,19310.0 L9629.0,19715.0 L9603.0,19715.0 L9603.0,19310.0Z"><title>trace/clock.txt:379</title></path>
+<path d="M9768.0,19310.0 L9768.0,19712.0 L9741.0,19712.0 L9741.0,19310.0Z"><title>trace/clock.txt:381</title></path>
+<path d="M9703.0,19322.0 L9703.0,19712.0 L9675.0,19712.0 L9675.0,19322.0Z"><title>trace/clock.txt:383</title></path>
+<path d="M9535.0,19602.0 L9535.0,19720.0 L9512.0,19720.0 L9512.0,19602.0Z"><title>trace/clock.txt:385</title></path>
 <path d="M15075.0,18956.0 L15075.0,18980.0 L14720.0,18980.0 L14720.0,18956.0Z"><title>trace/inprot.txt:34</title></path>
 <path d="M15080.0,19088.0 L15080.0,19112.0 L14740.0,19112.0 L14740.0,19088.0Z"><title>trace/inprot.txt:35</title></path>
 <path d="M13901.0,18212.0 L13901.0,18246.0 L13871.0,18246.0 L13871.0,18212.0Z"><title>trace/inrow.txt:12</title></path>
@@ -2379,6 +2461,8 @@
 <path d="M12620.0,18910.0 L12620.0,18922.0 L12576.0,18922.0 L12576.0,18910.0Z" stroke="#ffff00" stroke-width="3"><title>trace/clock.txt:218</title></path>
 <path d="M12795.0,18910.0 L12795.0,18922.0 L12751.0,18922.0 L12751.0,18910.0Z" stroke="#ffff00" stroke-width="3"><title>trace/clock.txt:237</title></path>
 <path d="M12490.0,19690.0 L12490.0,19702.0 L12440.0,19702.0 L12440.0,19690.0Z" stroke="#ffff00" stroke-width="3"><title>trace/clock.txt:263</title></path>
+<path d="M10662.0,19240.0 L10662.0,19262.0 L10636.0,19262.0 L10636.0,19240.0Z" stroke="#ffff00" stroke-width="3"><title>trace/clock.txt:332</title></path>
+<path d="M10186.0,19222.0 L10186.0,19250.0 L10158.0,19250.0 L10158.0,19222.0Z" stroke="#ffff00" stroke-width="3"><title>trace/clock.txt:339</title></path>
 <path d="M15113.0,19126.0 L15113.0,19142.0 L14694.0,19142.0 L14694.0,19126.0Z" stroke="#ffff00" stroke-width="3"><title>trace/inprot.txt:32</title></path>
 <path d="M13878.0,18356.0 L13878.0,18400.0 L13834.0,18400.0 L13834.0,18356.0Z"><title>trace/inrow.txt:17</title></path>
 <path d="M14058.0,18394.0 L14058.0,18427.0 L14024.0,18427.0 L14024.0,18394.0Z"><title>trace/inrow.txt:41</title></path>
@@ -2489,6 +2573,14 @@
 <circle cx="12114" cy="19500" r="3" fill="#fff" stroke="#000"/><text x="12120" y="19505" font-family="monospace" font-size="14" fill="#fff" stroke="#000" stroke-width="2.5" paint-order="stroke">vcc</text>
 <circle cx="12800" cy="19300" r="3" fill="#fff" stroke="#000"/><text x="12806" y="19305" font-family="monospace" font-size="14" fill="#fff" stroke="#000" stroke-width="2.5" paint-order="stroke">vcc</text>
 <circle cx="12500" cy="19960" r="3" fill="#fff" stroke="#000"/><text x="12506" y="19965" font-family="monospace" font-size="14" fill="#fff" stroke="#000" stroke-width="2.5" paint-order="stroke">vcc</text>
+<circle cx="10785" cy="19500" r="3" fill="#fff" stroke="#000"/><text x="10791" y="19505" font-family="monospace" font-size="14" fill="#fff" stroke="#000" stroke-width="2.5" paint-order="stroke">vss</text>
+<circle cx="10687" cy="19100" r="3" fill="#fff" stroke="#000"/><text x="10693" y="19105" font-family="monospace" font-size="14" fill="#fff" stroke="#000" stroke-width="2.5" paint-order="stroke">vcc</text>
+<circle cx="9800" cy="19272" r="3" fill="#fff" stroke="#000"/><text x="9806" y="19277" font-family="monospace" font-size="14" fill="#fff" stroke="#000" stroke-width="2.5" paint-order="stroke">vcc</text>
+<circle cx="10500" cy="19197" r="3" fill="#fff" stroke="#000"/><text x="10506" y="19202" font-family="monospace" font-size="14" fill="#fff" stroke="#000" stroke-width="2.5" paint-order="stroke">ck_t</text>
+<circle cx="10672" cy="19850" r="3" fill="#fff" stroke="#000"/><text x="10678" y="19855" font-family="monospace" font-size="14" fill="#fff" stroke="#000" stroke-width="2.5" paint-order="stroke">ck_p</text>
+<circle cx="10100" cy="19211" r="3" fill="#fff" stroke="#000"/><text x="10106" y="19216" font-family="monospace" font-size="14" fill="#fff" stroke="#000" stroke-width="2.5" paint-order="stroke">ck_n2</text>
+<circle cx="9900" cy="19341" r="3" fill="#fff" stroke="#000"/><text x="9906" y="19346" font-family="monospace" font-size="14" fill="#fff" stroke="#000" stroke-width="2.5" paint-order="stroke">ck_ga</text>
+<circle cx="9700" cy="19768" r="3" fill="#fff" stroke="#000"/><text x="9706" y="19773" font-family="monospace" font-size="14" fill="#fff" stroke="#000" stroke-width="2.5" paint-order="stroke">ck_out</text>
 <circle cx="15300" cy="18975" r="3" fill="#fff" stroke="#000"/><text x="15306" y="18980" font-family="monospace" font-size="14" fill="#fff" stroke="#000" stroke-width="2.5" paint-order="stroke">vss</text>
 <circle cx="14900" cy="19100" r="3" fill="#fff" stroke="#000"/><text x="14906" y="19105" font-family="monospace" font-size="14" fill="#fff" stroke="#000" stroke-width="2.5" paint-order="stroke">rw_p</text>
 <circle cx="14500" cy="18180" r="3" fill="#fff" stroke="#000"/><text x="14506" y="18185" font-family="monospace" font-size="14" fill="#fff" stroke="#000" stroke-width="2.5" paint-order="stroke">vcc</text>
@@ -2705,12 +2797,12 @@
 <text x="1120" y="2439" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t3<title>gate ma2_pd: vss - ma2</title></text>
 <text x="1204" y="2127" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t4<title>gate ma2_pu: vcc - ma2</title></text>
 <text x="1268" y="2061" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t5<title>gate ma2_pu: vcc - ma2</title></text>
-<text x="1204" y="3816" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t6<title>gate ma3_pu: vcc - ma3</title></text>
-<text x="1204" y="3892" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t7<title>gate ma3_pd: ma3 - vss</title></text>
-<text x="1148" y="3968" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t8<title>gate ma3_pd: vss - ma3</title></text>
-<text x="1120" y="4044" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t9<title>gate ma3_pd: vss - ma3</title></text>
-<text x="1204" y="3732" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t10<title>gate ma3_pu: vcc - ma3</title></text>
-<text x="1268" y="3666" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t11<title>gate ma3_pu: ma3 - vcc</title></text>
+<text x="1268" y="3666" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t6<title>gate ma3_pu: ma3 - vcc</title></text>
+<text x="1204" y="3732" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t7<title>gate ma3_pu: ma3 - vcc</title></text>
+<text x="1204" y="3816" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t8<title>gate ma3_pu: vcc - ma3</title></text>
+<text x="1204" y="3892" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t9<title>gate ma3_pd: ma3 - vss</title></text>
+<text x="1148" y="3968" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t10<title>gate ma3_pd: vss - ma3</title></text>
+<text x="1120" y="4044" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t11<title>gate ma3_pd: vss - ma3</title></text>
 <text x="1204" y="5464" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t12<title>gate ma4_pu: ma4 - vcc</title></text>
 <text x="1204" y="5540" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t13<title>gate ma4_pd: ma4 - vss</title></text>
 <text x="1148" y="5616" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t14<title>gate ma4_pd: ma4 - vss</title></text>
@@ -2727,31 +2819,31 @@
 <text x="1204" y="9024" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t25<title>gate ma6_pu: ma6 - vcc</title></text>
 <text x="1204" y="9108" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t26<title>gate ma6_pu: ma6 - vcc</title></text>
 <text x="1204" y="9184" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t27<title>gate ma6_pd: ma6 - vss</title></text>
-<text x="1150" y="9260" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t28<title>gate ma6_pd: ma6 - vss</title></text>
+<text x="1150" y="9260" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t28<title>gate ma6_pd: vss - ma6</title></text>
 <text x="1121" y="9336" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t29<title>gate ma6_pd: vss - ma6</title></text>
-<text x="1204" y="10670" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t30<title>gate ma7_pu: ma7 - vcc</title></text>
-<text x="1204" y="10746" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t31<title>gate ma7_pd: ma7 - vss</title></text>
-<text x="1150" y="10822" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t32<title>gate ma7_pd: vss - ma7</title></text>
-<text x="1121" y="10898" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t33<title>gate ma7_pd: vss - ma7</title></text>
-<text x="1204" y="10586" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t34<title>gate ma7_pu: vcc - ma7</title></text>
-<text x="1270" y="10520" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t35<title>gate ma7_pu: vcc - ma7</title></text>
-<text x="1270" y="12255" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t36<title>gate ma8_pu: ma8 - vcc</title></text>
-<text x="1204" y="12321" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t37<title>gate ma8_pu: ma8 - vcc</title></text>
-<text x="1204" y="12405" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t38<title>gate ma8_pu: ma8 - vcc</title></text>
-<text x="1204" y="12482" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t39<title>gate ma8_pd: ma8 - vss</title></text>
-<text x="1150" y="12557" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t40<title>gate ma8_pd: vss - ma8</title></text>
-<text x="1121" y="12633" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t41<title>gate ma8_pd: vss - ma8</title></text>
-<text x="1150" y="13653" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t42<title>gate ma9_pd: vss - ma9</title></text>
-<text x="1206" y="13728" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t43<title>gate ma9_pd: ma9 - vss</title></text>
-<text x="1206" y="13805" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t44<title>gate ma9_pu: ma9 - vcc</title></text>
-<text x="1206" y="13889" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t45<title>gate ma9_pu: ma9 - vcc</title></text>
-<text x="1270" y="13955" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t46<title>gate ma9_pu: vcc - ma9</title></text>
+<text x="1270" y="10520" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t30<title>gate ma7_pu: vcc - ma7</title></text>
+<text x="1204" y="10586" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t31<title>gate ma7_pu: ma7 - vcc</title></text>
+<text x="1204" y="10670" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t32<title>gate ma7_pu: ma7 - vcc</title></text>
+<text x="1204" y="10746" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t33<title>gate ma7_pd: ma7 - vss</title></text>
+<text x="1150" y="10822" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t34<title>gate ma7_pd: vss - ma7</title></text>
+<text x="1121" y="10898" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t35<title>gate ma7_pd: vss - ma7</title></text>
+<text x="1204" y="12405" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t36<title>gate ma8_pu: ma8 - vcc</title></text>
+<text x="1204" y="12482" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t37<title>gate ma8_pd: ma8 - vss</title></text>
+<text x="1150" y="12557" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t38<title>gate ma8_pd: vss - ma8</title></text>
+<text x="1121" y="12633" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t39<title>gate ma8_pd: vss - ma8</title></text>
+<text x="1204" y="12321" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t40<title>gate ma8_pu: vcc - ma8</title></text>
+<text x="1270" y="12255" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t41<title>gate ma8_pu: ma8 - vcc</title></text>
+<text x="1206" y="13728" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t42<title>gate ma9_pd: ma9 - vss</title></text>
+<text x="1206" y="13805" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t43<title>gate ma9_pu: ma9 - vcc</title></text>
+<text x="1206" y="13889" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t44<title>gate ma9_pu: ma9 - vcc</title></text>
+<text x="1270" y="13955" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t45<title>gate ma9_pu: vcc - ma9</title></text>
+<text x="1150" y="13653" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t46<title>gate ma9_pd: vss - ma9</title></text>
 <text x="1122" y="13577" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t47<title>gate ma9_pd: vss - ma9</title></text>
 <text x="1206" y="15290" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t48<title>gate ma10_pd: ma10 - vss</title></text>
 <text x="1206" y="15366" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t49<title>gate ma10_pu: ma10 - vcc</title></text>
 <text x="1206" y="15450" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t50<title>gate ma10_pu: ma10 - vcc</title></text>
-<text x="1270" y="15516" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t51<title>gate ma10_pu: ma10 - vcc</title></text>
-<text x="1150" y="15214" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t52<title>gate ma10_pd: vss - ma10</title></text>
+<text x="1270" y="15516" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t51<title>gate ma10_pu: vcc - ma10</title></text>
+<text x="1150" y="15214" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t52<title>gate ma10_pd: ma10 - vss</title></text>
 <text x="1122" y="15138" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t53<title>gate ma10_pd: vss - ma10</title></text>
 <text x="1206" y="16860" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t54<title>gate ma11_pd: ma11 - vss</title></text>
 <text x="1206" y="16937" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t55<title>gate ma11_pu: ma11 - vcc</title></text>
@@ -2771,41 +2863,41 @@
 <text x="3692" y="1276" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t69<title>gate ma1_pd: ma1 - vss</title></text>
 <text x="3767" y="1222" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t70<title>gate ma1_pd: ma1 - vss</title></text>
 <text x="3843" y="1193" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t71<title>gate ma1_pd: vss - ma1</title></text>
-<text x="1702" y="1770" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t72<title>gate ma2_pu: vss - ma2_pd</title></text>
-<text x="1702" y="1658" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t73<title>gate ma2_drv_in: ma2_pu - vss</title></text>
-<text x="1704" y="1588" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t74<title>gate ma2_pu: ma2_pu - vcc</title></text>
-<text x="1704" y="1850" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t75<title>gate ma2_pd: ma2_pd - vcc</title></text>
+<text x="1704" y="1850" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t72<title>gate ma2_pd: ma2_pd - vcc</title></text>
+<text x="1702" y="1770" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t73<title>gate ma2_pu: vss - ma2_pd</title></text>
+<text x="1702" y="1658" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t74<title>gate ma2_drv_in: ma2_pu - vss</title></text>
+<text x="1704" y="1588" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t75<title>gate ma2_pu: ma2_pu - vcc</title></text>
 <text x="2992" y="1776" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t76<title>gate ma1_pu: ma1_pu - vcc</title></text>
-<text x="3062" y="1776" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t77<title>gate ma1_drv_in: vss - ma1_pu</title></text>
-<text x="3174" y="1776" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t78<title>gate ma1_pu: ma1_pd - vss</title></text>
-<text x="3254" y="1776" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t79<title>gate ma1_pd: ma1_pd - vcc</title></text>
-<text x="1704" y="3455" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t80<title>gate ma3_pd: ma3_pd - vcc</title></text>
-<text x="1702" y="3376" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t81<title>gate ma3_pu: vss - ma3_pd</title></text>
-<text x="1702" y="3264" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t82<title>gate ma3_drv_in: ma3_pu - vss</title></text>
-<text x="1704" y="3192" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t83<title>gate ma3_pu: ma3_pu - vcc</title></text>
+<text x="3062" y="1776" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t77<title>gate ma1_drv_in: ma1_pu - vss</title></text>
+<text x="3174" y="1776" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t78<title>gate ma1_pu: vss - ma1_pd</title></text>
+<text x="3254" y="1776" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t79<title>gate ma1_pd: vcc - ma1_pd</title></text>
+<text x="1704" y="3192" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t80<title>gate ma3_pu: ma3_pu - vcc</title></text>
+<text x="1702" y="3264" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t81<title>gate ma3_drv_in: ma3_pu - vss</title></text>
+<text x="1702" y="3376" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t82<title>gate ma3_pu: vss - ma3_pd</title></text>
+<text x="1704" y="3455" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t83<title>gate ma3_pd: ma3_pd - vcc</title></text>
 <text x="1702" y="5024" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t84<title>gate ma4_pu: vss - ma4_pd</title></text>
 <text x="1702" y="4912" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t85<title>gate ma4_drv_in: ma4_pu - vss</title></text>
 <text x="1704" y="4840" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t86<title>gate ma4_pu: ma4_pu - vcc</title></text>
 <text x="1704" y="5103" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t87<title>gate ma4_pd: ma4_pd - vcc</title></text>
-<text x="1702" y="7106" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t88<title>gate ma5_pu: vss - ma5_pd</title></text>
-<text x="1702" y="6994" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t89<title>gate ma5_drv_in: ma5_pu - vss</title></text>
-<text x="1704" y="6924" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t90<title>gate ma5_pu: ma5_pu - vcc</title></text>
-<text x="1704" y="7186" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t91<title>gate ma5_pd: ma5_pd - vcc</title></text>
-<text x="1704" y="8668" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t92<title>gate ma6_pu: vss - ma6_pd</title></text>
-<text x="1704" y="8556" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t93<title>gate ma6_drv_in: ma6_pu - vss</title></text>
-<text x="1704" y="8484" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t94<title>gate ma6_pu: ma6_pu - vcc</title></text>
-<text x="1704" y="8747" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t95<title>gate ma6_pd: ma6_pd - vcc</title></text>
-<text x="1704" y="10309" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t96<title>gate ma7_pd: ma7_pd - vcc</title></text>
+<text x="1704" y="7186" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t88<title>gate ma5_pd: ma5_pd - vcc</title></text>
+<text x="1702" y="7106" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t89<title>gate ma5_pu: vss - ma5_pd</title></text>
+<text x="1702" y="6994" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t90<title>gate ma5_drv_in: ma5_pu - vss</title></text>
+<text x="1704" y="6924" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t91<title>gate ma5_pu: ma5_pu - vcc</title></text>
+<text x="1704" y="8747" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t92<title>gate ma6_pd: vcc - ma6_pd</title></text>
+<text x="1704" y="8668" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t93<title>gate ma6_pu: vss - ma6_pd</title></text>
+<text x="1704" y="8556" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t94<title>gate ma6_drv_in: ma6_pu - vss</title></text>
+<text x="1704" y="8484" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t95<title>gate ma6_pu: ma6_pu - vcc</title></text>
+<text x="1704" y="10309" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t96<title>gate ma7_pd: vcc - ma7_pd</title></text>
 <text x="1704" y="10230" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t97<title>gate ma7_pu: vss - ma7_pd</title></text>
 <text x="1704" y="10118" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t98<title>gate ma7_drv_in: ma7_pu - vss</title></text>
 <text x="1704" y="10046" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t99<title>gate ma7_pu: ma7_pu - vcc</title></text>
-<text x="1704" y="12044" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t100<title>gate ma8_pd: ma8_pd - vcc</title></text>
-<text x="1704" y="11964" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t101<title>gate ma8_pu: vss - ma8_pd</title></text>
-<text x="1704" y="11852" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t102<title>gate ma8_drv_in: ma8_pu - vss</title></text>
-<text x="1704" y="11782" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t103<title>gate ma8_pu: ma8_pu - vcc</title></text>
+<text x="1704" y="11964" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t100<title>gate ma8_pu: vss - ma8_pd</title></text>
+<text x="1704" y="11852" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t101<title>gate ma8_drv_in: ma8_pu - vss</title></text>
+<text x="1704" y="11782" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t102<title>gate ma8_pu: ma8_pu - vcc</title></text>
+<text x="1704" y="12044" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t103<title>gate ma8_pd: ma8_pd - vcc</title></text>
 <text x="1704" y="14358" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t104<title>gate ma9_drv_in: vss - ma9_pu</title></text>
 <text x="1704" y="14246" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t105<title>gate ma9_pu: ma9_pd - vss</title></text>
-<text x="1706" y="14166" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t106<title>gate ma9_pd: vcc - ma9_pd</title></text>
+<text x="1706" y="14166" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t106<title>gate ma9_pd: ma9_pd - vcc</title></text>
 <text x="1706" y="14428" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t107<title>gate ma9_pu: ma9_pu - vcc</title></text>
 <text x="1704" y="15918" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t108<title>gate ma10_drv_in: vss - ma10_pu</title></text>
 <text x="1704" y="15806" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t109<title>gate ma10_pu: ma10_pd - vss</title></text>
@@ -2819,194 +2911,207 @@
 <text x="1706" y="19214" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t117<title>gate ma12_drv_in: vss - ma12_pu</title></text>
 <text x="1706" y="19102" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t118<title>gate ma12_pu: ma12_pd - vss</title></text>
 <text x="1706" y="19023" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t119<title>gate ma12_pd: vcc - ma12_pd</title></text>
-<text x="5230" y="1276" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t120<title>gate ma0_pd: ma0 - vss</title></text>
-<text x="5154" y="1276" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t121<title>gate ma0_pu: vcc - ma0</title></text>
-<text x="5070" y="1276" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t122<title>gate ma0_pu: ma0 - vcc</title></text>
-<text x="5004" y="1342" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t123<title>gate ma0_pu: ma0 - vcc</title></text>
-<text x="5306" y="1222" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t124<title>gate ma0_pd: vss - ma0</title></text>
-<text x="5382" y="1193" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t125<title>gate ma0_pd: vss - ma0</title></text>
-<text x="4530" y="1776" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t126<title>gate ma0_pu: ma0_pu - vcc</title></text>
-<text x="4602" y="1776" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t127<title>gate ma0_drv_in: ma0_pu - vss</title></text>
-<text x="4714" y="1776" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t128<title>gate ma0_pu: vss - ma0_pd</title></text>
-<text x="4793" y="1776" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t129<title>gate ma0_pd: ma0_pd - vcc</title></text>
+<text x="5382" y="1193" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t120<title>gate ma0_pd: vss - ma0</title></text>
+<text x="5306" y="1222" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t121<title>gate ma0_pd: ma0 - vss</title></text>
+<text x="5230" y="1276" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t122<title>gate ma0_pd: ma0 - vss</title></text>
+<text x="5154" y="1276" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t123<title>gate ma0_pu: vcc - ma0</title></text>
+<text x="5070" y="1276" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t124<title>gate ma0_pu: ma0 - vcc</title></text>
+<text x="5004" y="1342" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t125<title>gate ma0_pu: ma0 - vcc</title></text>
+<text x="4602" y="1776" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t126<title>gate ma0_drv_in: vss - ma0_pu</title></text>
+<text x="4714" y="1776" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t127<title>gate ma0_pu: ma0_pd - vss</title></text>
+<text x="4793" y="1776" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t128<title>gate ma0_pd: ma0_pd - vcc</title></text>
+<text x="4530" y="1776" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t129<title>gate ma0_pu: ma0_pu - vcc</title></text>
 <text x="7043" y="1929" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t130<title>gate lpstb_b: lpstb_b - vcc</title></text>
 <text x="7126" y="1887" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t131<title>gate lpstb_n: vss - lpstb_b</title></text>
 <text x="7200" y="1846" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t132<title>gate lpstb_n: vss - lpstb_b</title></text>
-<text x="3558" y="19294" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t133<title>gate ma13_pu: ma13_pu - vcc</title></text>
-<text x="3630" y="19294" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t134<title>gate ma13_drv_in: ma13_pu - vss</title></text>
-<text x="3742" y="19294" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t135<title>gate ma13_pu: ma13_pd - vss</title></text>
-<text x="3821" y="19294" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t136<title>gate ma13_pd: vcc - ma13_pd</title></text>
-<text x="5512" y="19294" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t137<title>gate disptmg_pu: disptmg_pu - vcc</title></text>
-<text x="5582" y="19294" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t138<title>gate disptmg_drv_in: disptmg_pu - vss</title></text>
-<text x="5694" y="19294" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t139<title>gate disptmg_pu: vss - disptmg_pd</title></text>
-<text x="5774" y="19294" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t140<title>gate disptmg_pd: vcc - disptmg_pd</title></text>
-<text x="6051" y="19794" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t141<title>gate disptmg_pu: vcc - disptmg</title></text>
-<text x="6135" y="19794" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t142<title>gate disptmg_pu: vcc - disptmg</title></text>
-<text x="6212" y="19794" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t143<title>gate disptmg_pd: disptmg - vss</title></text>
-<text x="6287" y="19848" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t144<title>gate disptmg_pd: vss - disptmg</title></text>
-<text x="6363" y="19877" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t145<title>gate disptmg_pd: vss - disptmg</title></text>
-<text x="5985" y="19728" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t146<title>gate disptmg_pu: disptmg - vcc</title></text>
-<text x="4098" y="19794" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t147<title>gate ma13_pu: vcc - ma13</title></text>
-<text x="4182" y="19794" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t148<title>gate ma13_pu: vcc - ma13</title></text>
-<text x="4258" y="19794" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t149<title>gate ma13_pd: ma13 - vss</title></text>
-<text x="4334" y="19848" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t150<title>gate ma13_pd: vss - ma13</title></text>
-<text x="4410" y="19877" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t151<title>gate ma13_pd: vss - ma13</title></text>
-<text x="4032" y="19728" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t152<title>gate ma13_pu: ma13 - vcc</title></text>
-<text x="10762" y="1220" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t153<title>gate vsync_pd: vss - vsync</title></text>
-<text x="10838" y="1276" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t154<title>gate vsync_pd: vsync - vss</title></text>
-<text x="10914" y="1276" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t155<title>gate vsync_pu: vsync - vcc</title></text>
-<text x="10998" y="1276" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t156<title>gate vsync_pu: vcc - vsync</title></text>
-<text x="11064" y="1340" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t157<title>gate vsync_pu: vcc - vsync</title></text>
-<text x="10686" y="1192" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t158<title>gate vsync_pd: vss - vsync</title></text>
-<text x="11354" y="1774" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t159<title>gate vsync_pu: vsync_pd - vss</title></text>
-<text x="11466" y="1774" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t160<title>gate vsync_drv_in: vsync_pu - vss</title></text>
-<text x="11538" y="1776" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t161<title>gate vsync_pu: vsync_pu - vcc</title></text>
-<text x="11275" y="1776" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t162<title>gate vsync_pd: vsync_pd - vcc</title></text>
-<text x="7834" y="1980" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t163<title>gate res_n: res_n - vcc</title></text>
-<text x="7884" y="1835" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t164<title>gate res: vss - res_n</title></text>
-<text x="7336" y="1980" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t165<title>gate lpstb_n: lpstb_n - vcc</title></text>
-<text x="7386" y="1835" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t166<title>gate lpstb: vss - lpstb_n</title></text>
+<text x="7386" y="1835" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t133<title>gate lpstb: vss - lpstb_n</title></text>
+<text x="7336" y="1980" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t134<title>gate lpstb_n: lpstb_n - vcc</title></text>
+<text x="3630" y="19294" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t135<title>gate ma13_drv_in: vss - ma13_pu</title></text>
+<text x="3742" y="19294" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t136<title>gate ma13_pu: ma13_pd - vss</title></text>
+<text x="3821" y="19294" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t137<title>gate ma13_pd: ma13_pd - vcc</title></text>
+<text x="3558" y="19294" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t138<title>gate ma13_pu: ma13_pu - vcc</title></text>
+<text x="5512" y="19294" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t139<title>gate disptmg_pu: disptmg_pu - vcc</title></text>
+<text x="5582" y="19294" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t140<title>gate disptmg_drv_in: disptmg_pu - vss</title></text>
+<text x="5694" y="19294" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t141<title>gate disptmg_pu: vss - disptmg_pd</title></text>
+<text x="5774" y="19294" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t142<title>gate disptmg_pd: vcc - disptmg_pd</title></text>
+<text x="6051" y="19794" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t143<title>gate disptmg_pu: vcc - disptmg</title></text>
+<text x="6135" y="19794" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t144<title>gate disptmg_pu: vcc - disptmg</title></text>
+<text x="6212" y="19794" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t145<title>gate disptmg_pd: disptmg - vss</title></text>
+<text x="6287" y="19848" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t146<title>gate disptmg_pd: vss - disptmg</title></text>
+<text x="6363" y="19877" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t147<title>gate disptmg_pd: vss - disptmg</title></text>
+<text x="5985" y="19728" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t148<title>gate disptmg_pu: disptmg - vcc</title></text>
+<text x="4098" y="19794" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t149<title>gate ma13_pu: vcc - ma13</title></text>
+<text x="4182" y="19794" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t150<title>gate ma13_pu: vcc - ma13</title></text>
+<text x="4258" y="19794" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t151<title>gate ma13_pd: ma13 - vss</title></text>
+<text x="4334" y="19848" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t152<title>gate ma13_pd: vss - ma13</title></text>
+<text x="4410" y="19877" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t153<title>gate ma13_pd: vss - ma13</title></text>
+<text x="4032" y="19728" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t154<title>gate ma13_pu: ma13 - vcc</title></text>
+<text x="10686" y="1192" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t155<title>gate vsync_pd: vss - vsync</title></text>
+<text x="10762" y="1220" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t156<title>gate vsync_pd: vss - vsync</title></text>
+<text x="10838" y="1276" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t157<title>gate vsync_pd: vsync - vss</title></text>
+<text x="10914" y="1276" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t158<title>gate vsync_pu: vsync - vcc</title></text>
+<text x="10998" y="1276" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t159<title>gate vsync_pu: vcc - vsync</title></text>
+<text x="11064" y="1340" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t160<title>gate vsync_pu: vcc - vsync</title></text>
+<text x="11354" y="1774" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t161<title>gate vsync_pu: vss - vsync_pd</title></text>
+<text x="11466" y="1774" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t162<title>gate vsync_drv_in: vsync_pu - vss</title></text>
+<text x="11538" y="1776" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t163<title>gate vsync_pu: vsync_pu - vcc</title></text>
+<text x="11275" y="1776" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t164<title>gate vsync_pd: vcc - vsync_pd</title></text>
+<text x="7834" y="1980" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t165<title>gate res_n: res_n - vcc</title></text>
+<text x="7884" y="1835" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t166<title>gate res: vss - res_n</title></text>
 <text x="7541" y="1929" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t167<title>gate res_b: res_b - vcc</title></text>
-<text x="7624" y="1887" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t168<title>gate res_n: vss - res_b</title></text>
+<text x="7624" y="1887" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t168<title>gate res_n: res_b - vss</title></text>
 <text x="7698" y="1846" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t169<title>gate res_n: vss - res_b</title></text>
-<text x="11379" y="18825" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t170<title>gate ck_g1: ck_g2 - vss</title></text>
-<text x="11410" y="18697" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t171<title>gate ck_g2: vcc - ck_g2</title></text>
-<text x="11250" y="18825" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t172<title>gate ck_b: ck_g1 - vss</title></text>
-<text x="11256" y="18720" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t173<title>gate ck_g1: vcc - ck_g1</title></text>
-<text x="11517" y="18720" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t174<title>gate ck_g3: vcc - ck_g3</title></text>
-<text x="11511" y="18825" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t175<title>gate ck_a: ck_g3 - vss</title></text>
-<text x="7658" y="19294" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t176<title>gate cudisp_pu: cudisp_pu - vcc</title></text>
-<text x="7730" y="19294" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t177<title>gate cudisp_drv_in: cudisp_pu - vss</title></text>
-<text x="7842" y="19294" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t178<title>gate cudisp_pu: vss - cudisp_pd</title></text>
-<text x="7921" y="19294" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t179<title>gate cudisp_pd: vcc - cudisp_pd</title></text>
-<text x="8198" y="19794" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t180<title>gate cudisp_pu: vcc - cudisp</title></text>
-<text x="8282" y="19794" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t181<title>gate cudisp_pu: vcc - cudisp</title></text>
-<text x="8358" y="19794" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t182<title>gate cudisp_pd: cudisp - vss</title></text>
-<text x="8434" y="19848" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t183<title>gate cudisp_pd: vss - cudisp</title></text>
-<text x="8510" y="19877" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t184<title>gate cudisp_pd: vss - cudisp</title></text>
-<text x="8132" y="19728" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t185<title>gate cudisp_pu: cudisp - vcc</title></text>
-<text x="12443" y="1192" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t186<title>gate hsync_pd: vss - hsync</title></text>
-<text x="12519" y="1220" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t187<title>gate hsync_pd: vss - hsync</title></text>
-<text x="12594" y="1276" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t188<title>gate hsync_pd: hsync - vss</title></text>
-<text x="12671" y="1276" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t189<title>gate hsync_pu: hsync - vcc</title></text>
-<text x="12755" y="1276" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t190<title>gate hsync_pu: vcc - hsync</title></text>
-<text x="12821" y="1340" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t191<title>gate hsync_pu: vcc - hsync</title></text>
-<text x="14233" y="1220" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t192<title>gate ra0_pd: ra0 - vss</title></text>
-<text x="14308" y="1276" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t193<title>gate ra0_pd: ra0 - vss</title></text>
-<text x="14385" y="1276" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t194<title>gate ra0_pu: ra0 - vcc</title></text>
-<text x="14469" y="1276" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t195<title>gate ra0_pu: vcc - ra0</title></text>
-<text x="14535" y="1340" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t196<title>gate ra0_pu: vcc - ra0</title></text>
-<text x="14157" y="1192" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t197<title>gate ra0_pd: vss - ra0</title></text>
-<text x="13112" y="1774" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t198<title>gate hsync_pu: vss - hsync_pd</title></text>
-<text x="13224" y="1774" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t199<title>gate hsync_drv_in: hsync_pu - vss</title></text>
-<text x="13294" y="1776" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t200<title>gate hsync_pu: hsync_pu - vcc</title></text>
-<text x="13032" y="1776" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t201<title>gate hsync_pd: vcc - hsync_pd</title></text>
-<text x="13809" y="18436" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t202<title>gate t_g0_in: vss - t_g0_out</title></text>
-<text x="13868" y="18313" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t203<title>gate t_g0_out: t_g0_out - vcc</title></text>
-<text x="14030" y="18337" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t204<title>gate clk_b: vcc - clk_b</title></text>
-<text x="14114" y="18379" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t205<title>gate clk_n: clk_b - vss</title></text>
-<text x="14186" y="18420" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t206<title>gate clk_n: vss - clk_b</title></text>
-<text x="11985" y="18825" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t207<title>gate ck_b: ck_a - vss</title></text>
-<text x="11999" y="18685" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t208<title>gate ck_a: vcc - ck_a</title></text>
-<text x="11854" y="18824" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t209<title>gate ck_src: ck_b - vss</title></text>
-<text x="11860" y="18719" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t210<title>gate ck_b: vcc - ck_b</title></text>
-<text x="11640" y="18825" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t211<title>gate ck_g3: ck_g4 - vss</title></text>
-<text x="11671" y="18697" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t212<title>gate ck_g4: vcc - ck_g4</title></text>
-<text x="12420" y="18899" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t213<title>gate ck_g4: ck_g4 - vcc</title></text>
-<text x="12598" y="18899" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t214<title>gate clk_b: clk_b - vcc</title></text>
-<text x="12772" y="18899" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t215<title>gate clk_p: clk_p - vcc</title></text>
-<text x="14058" y="19050" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t216<title>gate clk_p: vss - clk_p</title></text>
-<text x="12442" y="19168" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t217<title>gate ck_b: ck_b - vcc</title></text>
-<text x="12442" y="19338" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t218<title>gate ck_b: ck_b - vcc</title></text>
-<text x="12465" y="19712" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t219<title>gate ck_g2: ck_g2 - vcc</title></text>
-<text x="14826" y="1774" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t220<title>gate ra0_pu: vss - ra0_pd</title></text>
-<text x="14938" y="1774" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t221<title>gate ra0_drv_in: ra0_pu - vss</title></text>
-<text x="15008" y="1776" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t222<title>gate ra0_pu: ra0_pu - vcc</title></text>
-<text x="14746" y="1776" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t223<title>gate ra0_pd: ra0_pd - vcc</title></text>
-<text x="14550" y="14988" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t224<title>gate a_out_L: vcc - a_out_L</title></text>
-<text x="14433" y="14957" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t225<title>gate in_a_L: vss - a_out_L</title></text>
-<text x="14420" y="15087" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t226<title>gate a_out_L: vss - b_out_L</title></text>
-<text x="14420" y="15172" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t227<title>gate in_c_L: b_out_L - vss</title></text>
-<text x="14529" y="15132" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t228<title>gate b_out_L: vcc - b_out_L</title></text>
-<text x="14982" y="18442" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t229<title>gate rw_b: rw_c - vss</title></text>
-<text x="15028" y="18315" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t230<title>gate rw_c: vcc - rw_c</title></text>
-<text x="14830" y="18442" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t231<title>gate rw_a: rw_b - vss</title></text>
-<text x="14876" y="18315" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t232<title>gate rw_b: vcc - rw_b</title></text>
-<text x="15132" y="18404" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t233<title>gate rw_c: rw_d - vss</title></text>
-<text x="15180" y="18295" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t234<title>gate rw_d: vcc - rw_d</title></text>
-<text x="15354" y="18295" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t235<title>gate rs_a: vcc - rs_a</title></text>
-<text x="15304" y="18404" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t236<title>gate rs: rs_a - vss</title></text>
-<text x="14355" y="18337" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t237<title>gate clk_n: vcc - clk_n</title></text>
-<text x="14438" y="18379" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t238<title>gate clk: vss - clk_n</title></text>
-<text x="14512" y="18402" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t239<title>gate clk: clk_n - vss</title></text>
-<text x="14553" y="18402" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t240<title>gate clk: clk_n - vss</title></text>
-<text x="14676" y="18404" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t241<title>gate rw: rw_a - vss</title></text>
-<text x="14726" y="18295" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t242<title>gate rw_a: vcc - rw_a</title></text>
-<text x="14904" y="19050" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t243<title>gate rw_p: vss - rw_p</title></text>
-<text x="15718" y="1191" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t244<title>gate ra1_pd: vss - ra1</title></text>
-<text x="15794" y="1220" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t245<title>gate ra1_pd: vss - ra1</title></text>
-<text x="15870" y="1274" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t246<title>gate ra1_pd: ra1 - vss</title></text>
-<text x="15946" y="1274" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t247<title>gate ra1_pu: ra1 - vcc</title></text>
-<text x="16030" y="1274" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t248<title>gate ra1_pu: vcc - ra1</title></text>
-<text x="16096" y="1340" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t249<title>gate ra1_pu: vcc - ra1</title></text>
-<text x="16386" y="1774" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t250<title>gate ra1_pu: vss - ra1_pd</title></text>
-<text x="16498" y="1774" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t251<title>gate ra1_drv_in: vss - ra1_pu</title></text>
-<text x="16570" y="1774" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t252<title>gate ra1_pu: ra1_pu - vcc</title></text>
-<text x="16307" y="1774" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t253<title>gate ra1_pd: ra1_pd - vcc</title></text>
-<text x="16238" y="18442" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t254<title>gate cs_b: cs_c - vss</title></text>
-<text x="16284" y="18315" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t255<title>gate cs_c: vcc - cs_c</title></text>
-<text x="16388" y="18404" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t256<title>gate cs_c: cs_d - vss</title></text>
-<text x="16436" y="18295" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t257<title>gate cs_d: vcc - cs_d</title></text>
-<text x="15760" y="18404" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t258<title>gate rs_c: rs_d - vss</title></text>
-<text x="15808" y="18295" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t259<title>gate rs_d: vcc - rs_d</title></text>
-<text x="15458" y="18442" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t260<title>gate rs_a: rs_b - vss</title></text>
-<text x="15504" y="18315" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t261<title>gate rs_b: vcc - rs_b</title></text>
-<text x="16086" y="18442" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t262<title>gate cs_a: cs_b - vss</title></text>
-<text x="16132" y="18315" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t263<title>gate cs_b: vcc - cs_b</title></text>
-<text x="15932" y="18404" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t264<title>gate cs: cs_a - vss</title></text>
-<text x="15982" y="18295" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t265<title>gate cs_a: vcc - cs_a</title></text>
-<text x="15610" y="18442" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t266<title>gate rs_b: rs_c - vss</title></text>
-<text x="15656" y="18315" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t267<title>gate rs_c: vcc - rs_c</title></text>
-<text x="15792" y="19050" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t268<title>gate e_p: vss - e_p</title></text>
-<text x="17541" y="1191" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t269<title>gate ra2_pd: vss - ra2</title></text>
-<text x="17617" y="1220" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t270<title>gate ra2_pd: ra2 - vss</title></text>
-<text x="17692" y="1274" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t271<title>gate ra2_pd: ra2 - vss</title></text>
-<text x="17769" y="1274" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t272<title>gate ra2_pu: ra2 - vcc</title></text>
-<text x="17853" y="1274" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t273<title>gate ra2_pu: ra2 - vcc</title></text>
-<text x="17919" y="1340" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t274<title>gate ra2_pu: ra2 - vcc</title></text>
-<text x="18392" y="1774" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t275<title>gate ra2_pu: ra2_pu - vcc</title></text>
-<text x="18322" y="1774" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t276<title>gate ra2_drv_in: vss - ra2_pu</title></text>
-<text x="18210" y="1774" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t277<title>gate ra2_pu: ra2_pd - vss</title></text>
-<text x="18130" y="1774" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t278<title>gate ra2_pd: ra2_pd - vcc</title></text>
-<text x="18094" y="3218" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t279<title>gate ra3_drv_in: ra3_pu - vss</title></text>
-<text x="18094" y="3330" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t280<title>gate ra3_pu: vss - ra3_pd</title></text>
-<text x="18092" y="3410" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t281<title>gate ra3_pd: ra3_pd - vcc</title></text>
-<text x="18092" y="3148" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t282<title>gate ra3_pu: ra3_pu - vcc</title></text>
-<text x="18528" y="3621" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t283<title>gate ra3_pu: vcc - ra3</title></text>
-<text x="18592" y="3687" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t284<title>gate ra3_pu: vcc - ra3</title></text>
-<text x="18592" y="3771" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t285<title>gate ra3_pu: ra3 - vcc</title></text>
-<text x="18592" y="3848" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t286<title>gate ra3_pd: ra3 - vss</title></text>
-<text x="18648" y="3923" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t287<title>gate ra3_pd: vss - ra3</title></text>
-<text x="18676" y="3999" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t288<title>gate ra3_pd: vss - ra3</title></text>
-<text x="18094" y="4974" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t289<title>gate ra4_drv_in: ra4_pu - vss</title></text>
-<text x="18094" y="5086" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t290<title>gate ra4_pu: vss - ra4_pd</title></text>
-<text x="18092" y="5166" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t291<title>gate ra4_pd: ra4_pd - vcc</title></text>
-<text x="18092" y="4904" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t292<title>gate ra4_pu: ra4_pu - vcc</title></text>
-<text x="18592" y="5527" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t293<title>gate ra4_pu: vcc - ra4</title></text>
-<text x="18592" y="5604" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t294<title>gate ra4_pd: ra4 - vss</title></text>
-<text x="18648" y="5679" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t295<title>gate ra4_pd: vss - ra4</title></text>
-<text x="18676" y="5755" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t296<title>gate ra4_pd: vss - ra4</title></text>
-<text x="18592" y="5443" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t297<title>gate ra4_pu: ra4 - vcc</title></text>
-<text x="18528" y="5377" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t298<title>gate ra4_pu: vcc - ra4</title></text>
-<text x="17153" y="18337" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t299<title>gate e_n: vcc - e_n</title></text>
-<text x="17236" y="18379" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t300<title>gate e: e_n - vss</title></text>
-<text x="17310" y="18402" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t301<title>gate e: e_n - vss</title></text>
-<text x="17351" y="18402" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t302<title>gate e: e_n - vss</title></text>
-<text x="16912" y="18379" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t303<title>gate e_n: e_b - vss</title></text>
-<text x="16984" y="18420" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t304<title>gate e_n: vss - e_b</title></text>
-<text x="16828" y="18337" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t305<title>gate e_b: vcc - e_b</title></text>
-<text x="16682" y="19048" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t306<title>gate rs_p: vss - rs_p</title></text>
-<text x="17356" y="19050" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t307<title>gate cs_p: vss - cs_p</title></text>
+<text x="11256" y="18720" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t170<title>gate ck_g1: vcc - ck_g1</title></text>
+<text x="11250" y="18825" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t171<title>gate ck_b: vss - ck_g1</title></text>
+<text x="11410" y="18697" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t172<title>gate ck_g2: vcc - ck_g2</title></text>
+<text x="11379" y="18825" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t173<title>gate ck_g1: ck_g2 - vss</title></text>
+<text x="7730" y="19294" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t174<title>gate cudisp_drv_in: vss - cudisp_pu</title></text>
+<text x="7842" y="19294" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t175<title>gate cudisp_pu: vss - cudisp_pd</title></text>
+<text x="7921" y="19294" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t176<title>gate cudisp_pd: vcc - cudisp_pd</title></text>
+<text x="7658" y="19294" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t177<title>gate cudisp_pu: cudisp_pu - vcc</title></text>
+<text x="10148" y="19335" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t178<title>gate ck_n2: ck_n2 - vcc</title></text>
+<text x="10666" y="19336" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t179<title>gate ck_t: ck_t - vcc</title></text>
+<text x="10578" y="19505" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t180<title>gate ck_p: ck_t - vss</title></text>
+<text x="10508" y="19505" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t181<title>gate ck_p: vss - ck_t</title></text>
+<text x="10436" y="19505" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t182<title>gate ck_p: ck_t - vss</title></text>
+<text x="10366" y="19505" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t183<title>gate ck_t: vss - ck_n2</title></text>
+<text x="10290" y="19505" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t184<title>gate ck_t: ck_n2 - vss</title></text>
+<text x="9652" y="19494" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t185<title>gate ck_ga: vcc - ck_out</title></text>
+<text x="9724" y="19494" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t186<title>gate ck_ga: ck_out - vcc</title></text>
+<text x="9575" y="19662" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t187<title>gate ck_ga: vcc - ck_out</title></text>
+<text x="9860" y="19562" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t188<title>gate ck_n2: ck_out - vss</title></text>
+<text x="9930" y="19562" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t189<title>gate ck_n2: ck_out - vss</title></text>
+<text x="9995" y="19562" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t190<title>gate ck_n2: ck_ga - vss</title></text>
+<text x="8198" y="19794" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t191<title>gate cudisp_pu: vcc - cudisp</title></text>
+<text x="8282" y="19794" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t192<title>gate cudisp_pu: vcc - cudisp</title></text>
+<text x="8358" y="19794" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t193<title>gate cudisp_pd: cudisp - vss</title></text>
+<text x="8434" y="19848" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t194<title>gate cudisp_pd: vss - cudisp</title></text>
+<text x="8510" y="19877" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t195<title>gate cudisp_pd: vss - cudisp</title></text>
+<text x="8132" y="19728" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t196<title>gate cudisp_pu: cudisp - vcc</title></text>
+<text x="12443" y="1192" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t197<title>gate hsync_pd: vss - hsync</title></text>
+<text x="12519" y="1220" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t198<title>gate hsync_pd: vss - hsync</title></text>
+<text x="12594" y="1276" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t199<title>gate hsync_pd: hsync - vss</title></text>
+<text x="12671" y="1276" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t200<title>gate hsync_pu: hsync - vcc</title></text>
+<text x="12755" y="1276" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t201<title>gate hsync_pu: vcc - hsync</title></text>
+<text x="12821" y="1340" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t202<title>gate hsync_pu: vcc - hsync</title></text>
+<text x="14233" y="1220" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t203<title>gate ra0_pd: ra0 - vss</title></text>
+<text x="14308" y="1276" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t204<title>gate ra0_pd: ra0 - vss</title></text>
+<text x="14385" y="1276" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t205<title>gate ra0_pu: vcc - ra0</title></text>
+<text x="14469" y="1276" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t206<title>gate ra0_pu: vcc - ra0</title></text>
+<text x="14535" y="1340" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t207<title>gate ra0_pu: vcc - ra0</title></text>
+<text x="14157" y="1192" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t208<title>gate ra0_pd: vss - ra0</title></text>
+<text x="13112" y="1774" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t209<title>gate hsync_pu: hsync_pd - vss</title></text>
+<text x="13224" y="1774" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t210<title>gate hsync_drv_in: vss - hsync_pu</title></text>
+<text x="13294" y="1776" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t211<title>gate hsync_pu: hsync_pu - vcc</title></text>
+<text x="13032" y="1776" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t212<title>gate hsync_pd: vcc - hsync_pd</title></text>
+<text x="13809" y="18436" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t213<title>gate t_g0_in: vss - t_g0_out</title></text>
+<text x="13868" y="18313" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t214<title>gate t_g0_out: t_g0_out - vcc</title></text>
+<text x="14114" y="18379" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t215<title>gate clk_n: clk_b - vss</title></text>
+<text x="14186" y="18420" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t216<title>gate clk_n: vss - clk_b</title></text>
+<text x="14030" y="18337" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t217<title>gate clk_b: vcc - clk_b</title></text>
+<text x="11999" y="18685" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t218<title>gate ck_a: vcc - ck_a</title></text>
+<text x="11985" y="18825" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t219<title>gate ck_b: ck_a - vss</title></text>
+<text x="11860" y="18719" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t220<title>gate ck_b: vcc - ck_b</title></text>
+<text x="11854" y="18824" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t221<title>gate ck_src: ck_b - vss</title></text>
+<text x="11511" y="18825" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t222<title>gate ck_a: ck_g3 - vss</title></text>
+<text x="11517" y="18720" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t223<title>gate ck_g3: vcc - ck_g3</title></text>
+<text x="11640" y="18825" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t224<title>gate ck_g3: ck_g4 - vss</title></text>
+<text x="11671" y="18697" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t225<title>gate ck_g4: vcc - ck_g4</title></text>
+<text x="12420" y="18899" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t226<title>gate ck_g4: ck_g4 - vcc</title></text>
+<text x="12598" y="18899" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t227<title>gate clk_b: clk_b - vcc</title></text>
+<text x="12772" y="18899" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t228<title>gate clk_p: clk_p - vcc</title></text>
+<text x="14058" y="19050" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t229<title>gate clk_p: vss - clk_p</title></text>
+<text x="12442" y="19168" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t230<title>gate ck_b: ck_b - vcc</title></text>
+<text x="12442" y="19338" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t231<title>gate ck_b: ck_b - vcc</title></text>
+<text x="12465" y="19712" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t232<title>gate ck_g2: ck_g2 - vcc</title></text>
+<text x="14746" y="1776" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t233<title>gate ra0_pd: ra0_pd - vcc</title></text>
+<text x="14826" y="1774" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t234<title>gate ra0_pu: vss - ra0_pd</title></text>
+<text x="14938" y="1774" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t235<title>gate ra0_drv_in: ra0_pu - vss</title></text>
+<text x="15008" y="1776" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t236<title>gate ra0_pu: ra0_pu - vcc</title></text>
+<text x="14433" y="14957" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t237<title>gate in_a_L: vss - a_out_L</title></text>
+<text x="14550" y="14988" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t238<title>gate a_out_L: a_out_L - vcc</title></text>
+<text x="14420" y="15087" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t239<title>gate a_out_L: vss - b_out_L</title></text>
+<text x="14420" y="15172" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t240<title>gate in_c_L: vss - b_out_L</title></text>
+<text x="14529" y="15132" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t241<title>gate b_out_L: vcc - b_out_L</title></text>
+<text x="14830" y="18442" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t242<title>gate rw_a: rw_b - vss</title></text>
+<text x="14876" y="18315" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t243<title>gate rw_b: vcc - rw_b</title></text>
+<text x="14982" y="18442" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t244<title>gate rw_b: rw_c - vss</title></text>
+<text x="15028" y="18315" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t245<title>gate rw_c: vcc - rw_c</title></text>
+<text x="14355" y="18337" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t246<title>gate clk_n: vcc - clk_n</title></text>
+<text x="14438" y="18379" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t247<title>gate clk: clk_n - vss</title></text>
+<text x="14512" y="18402" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t248<title>gate clk: clk_n - vss</title></text>
+<text x="14553" y="18402" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t249<title>gate clk: clk_n - vss</title></text>
+<text x="14676" y="18404" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t250<title>gate rw: rw_a - vss</title></text>
+<text x="14726" y="18295" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t251<title>gate rw_a: vcc - rw_a</title></text>
+<text x="15132" y="18404" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t252<title>gate rw_c: rw_d - vss</title></text>
+<text x="15180" y="18295" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t253<title>gate rw_d: vcc - rw_d</title></text>
+<text x="15304" y="18404" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t254<title>gate rs: rs_a - vss</title></text>
+<text x="15354" y="18295" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t255<title>gate rs_a: vcc - rs_a</title></text>
+<text x="14904" y="19050" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t256<title>gate rw_p: vss - rw_p</title></text>
+<text x="15718" y="1191" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t257<title>gate ra1_pd: vss - ra1</title></text>
+<text x="15794" y="1220" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t258<title>gate ra1_pd: vss - ra1</title></text>
+<text x="15870" y="1274" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t259<title>gate ra1_pd: ra1 - vss</title></text>
+<text x="15946" y="1274" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t260<title>gate ra1_pu: ra1 - vcc</title></text>
+<text x="16030" y="1274" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t261<title>gate ra1_pu: vcc - ra1</title></text>
+<text x="16096" y="1340" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t262<title>gate ra1_pu: vcc - ra1</title></text>
+<text x="16386" y="1774" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t263<title>gate ra1_pu: ra1_pd - vss</title></text>
+<text x="16498" y="1774" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t264<title>gate ra1_drv_in: vss - ra1_pu</title></text>
+<text x="16570" y="1774" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t265<title>gate ra1_pu: ra1_pu - vcc</title></text>
+<text x="16307" y="1774" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t266<title>gate ra1_pd: ra1_pd - vcc</title></text>
+<text x="15610" y="18442" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t267<title>gate rs_b: rs_c - vss</title></text>
+<text x="15656" y="18315" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t268<title>gate rs_c: vcc - rs_c</title></text>
+<text x="15932" y="18404" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t269<title>gate cs: cs_a - vss</title></text>
+<text x="15982" y="18295" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t270<title>gate cs_a: vcc - cs_a</title></text>
+<text x="16086" y="18442" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t271<title>gate cs_a: cs_b - vss</title></text>
+<text x="16132" y="18315" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t272<title>gate cs_b: vcc - cs_b</title></text>
+<text x="15458" y="18442" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t273<title>gate rs_a: rs_b - vss</title></text>
+<text x="15504" y="18315" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t274<title>gate rs_b: vcc - rs_b</title></text>
+<text x="16238" y="18442" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t275<title>gate cs_b: cs_c - vss</title></text>
+<text x="16284" y="18315" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t276<title>gate cs_c: vcc - cs_c</title></text>
+<text x="16388" y="18404" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t277<title>gate cs_c: cs_d - vss</title></text>
+<text x="16436" y="18295" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t278<title>gate cs_d: vcc - cs_d</title></text>
+<text x="15760" y="18404" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t279<title>gate rs_c: rs_d - vss</title></text>
+<text x="15808" y="18295" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t280<title>gate rs_d: vcc - rs_d</title></text>
+<text x="15792" y="19050" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t281<title>gate e_p: vss - e_p</title></text>
+<text x="17541" y="1191" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t282<title>gate ra2_pd: vss - ra2</title></text>
+<text x="17617" y="1220" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t283<title>gate ra2_pd: ra2 - vss</title></text>
+<text x="17692" y="1274" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t284<title>gate ra2_pd: ra2 - vss</title></text>
+<text x="17769" y="1274" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t285<title>gate ra2_pu: ra2 - vcc</title></text>
+<text x="17853" y="1274" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t286<title>gate ra2_pu: ra2 - vcc</title></text>
+<text x="17919" y="1340" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t287<title>gate ra2_pu: ra2 - vcc</title></text>
+<text x="18130" y="1774" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t288<title>gate ra2_pd: ra2_pd - vcc</title></text>
+<text x="18210" y="1774" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t289<title>gate ra2_pu: ra2_pd - vss</title></text>
+<text x="18322" y="1774" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t290<title>gate ra2_drv_in: vss - ra2_pu</title></text>
+<text x="18392" y="1774" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t291<title>gate ra2_pu: ra2_pu - vcc</title></text>
+<text x="18092" y="3410" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t292<title>gate ra3_pd: ra3_pd - vcc</title></text>
+<text x="18094" y="3330" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t293<title>gate ra3_pu: vss - ra3_pd</title></text>
+<text x="18094" y="3218" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t294<title>gate ra3_drv_in: ra3_pu - vss</title></text>
+<text x="18092" y="3148" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t295<title>gate ra3_pu: ra3_pu - vcc</title></text>
+<text x="18528" y="3621" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t296<title>gate ra3_pu: vcc - ra3</title></text>
+<text x="18592" y="3687" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t297<title>gate ra3_pu: vcc - ra3</title></text>
+<text x="18592" y="3771" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t298<title>gate ra3_pu: ra3 - vcc</title></text>
+<text x="18592" y="3848" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t299<title>gate ra3_pd: ra3 - vss</title></text>
+<text x="18648" y="3923" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t300<title>gate ra3_pd: vss - ra3</title></text>
+<text x="18676" y="3999" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t301<title>gate ra3_pd: vss - ra3</title></text>
+<text x="18094" y="4974" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t302<title>gate ra4_drv_in: ra4_pu - vss</title></text>
+<text x="18094" y="5086" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t303<title>gate ra4_pu: vss - ra4_pd</title></text>
+<text x="18092" y="5166" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t304<title>gate ra4_pd: ra4_pd - vcc</title></text>
+<text x="18092" y="4904" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t305<title>gate ra4_pu: ra4_pu - vcc</title></text>
+<text x="18592" y="5527" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t306<title>gate ra4_pu: vcc - ra4</title></text>
+<text x="18592" y="5604" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t307<title>gate ra4_pd: ra4 - vss</title></text>
+<text x="18648" y="5679" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t308<title>gate ra4_pd: vss - ra4</title></text>
+<text x="18676" y="5755" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t309<title>gate ra4_pd: vss - ra4</title></text>
+<text x="18592" y="5443" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t310<title>gate ra4_pu: ra4 - vcc</title></text>
+<text x="18528" y="5377" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t311<title>gate ra4_pu: vcc - ra4</title></text>
+<text x="16828" y="18337" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t312<title>gate e_b: vcc - e_b</title></text>
+<text x="16912" y="18379" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t313<title>gate e_n: e_b - vss</title></text>
+<text x="16984" y="18420" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t314<title>gate e_n: vss - e_b</title></text>
+<text x="17236" y="18379" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t315<title>gate e: e_n - vss</title></text>
+<text x="17310" y="18402" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t316<title>gate e: e_n - vss</title></text>
+<text x="17351" y="18402" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t317<title>gate e: e_n - vss</title></text>
+<text x="17153" y="18337" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t318<title>gate e_n: vcc - e_n</title></text>
+<text x="16682" y="19048" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t319<title>gate rs_p: vss - rs_p</title></text>
+<text x="17356" y="19050" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t320<title>gate cs_p: vss - cs_p</title></text>
 </g>
 <g inkscape:groupmode="layer" inkscape:label="floorplan" id="layer-floorplan" style="display:none">
 <rect x="8570" y="720" width="760" height="760" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="14"><title>1 VSS: pin 1, VSS</title></rect>

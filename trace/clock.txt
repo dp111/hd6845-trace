@@ -276,3 +276,115 @@ M 11408,19112:11900,19134
 P 11668,18955:11690,19092
 C 11681,19080 s=26x26
 M 11668,19066:11900,19089
+
+# ====================================================================
+# Output stage: the two big arrays, x 9500-10730, y 19180-19815.
+# Big devices are drawn schematically: one diffusion rectangle per group, one contact
+# rectangle per column. Joins marked ? are inferred, not seen (see notes/blocks/clock.md).
+#
+#   ck_p  --[s3,s4,s5 + load]-->  ck_t  --[s1,s2 + load GC]-->  ck_n2
+#   ck_n2 --[F3 + load]--> ck_ga ;  ck_out = pull-up(ck_ga) / pull-down(F1,F2: ck_n2)
+# ====================================================================
+
+# ---- supplies
+M 10755,18800:10815,19815          # VSS, down from the core (upper extent approximate)
+M 9940,19760:10815,19815           # VSS bus under the arrays
+N M 10785,19500 vss
+M 10652,18800:10722,19410          # VCC, down from the core (upper extent approximate)
+N M 10687,19100 vcc
+M 9380,19095:9625,19145            # VCC, second feed from the left
+M 9575,19095:9625,19300
+M 9580,19245:10120,19300           # ... spread along the top of the left array
+N M 9800,19272 vcc
+
+# ---- right array: inverter ck_p -> ck_t (s3-s5) and inverter ck_t -> ck_n2 (s1-s2)
+D 10237,19265:10628,19745
+M 10237,19285:10278,19800          # col 1, VSS
+C 10245,19290:10272,19740
+M 10300,19235:10353,19715          # col 2, ck_n2
+C 10305,19290:10348,19700
+M 10215,19235:10353,19262          # ... strap left to the left array
+M 10380,19290:10423,19800          # col 3, VSS
+C 10385,19300:10418,19740
+M 10449,19183:10495,19715          # col 4, ck_t
+C 10453,19290:10490,19700
+M 10522,19290:10565,19800          # col 5, VSS
+C 10527,19300:10560,19740
+M 10592,19183:10628,19715          # col 6, ck_t
+C 10596,19290:10625,19700
+M 10290,19183:10630,19212          # top bus, ck_t
+N M 10500,19197 ck_t
+P 10280,19222:10300,19790          # s1
+P 10355,19222:10378,19790          # s2
+?P 10280,19180:10378,19232         # pad joining s1 and s2 under the top bus
+?C 10300,19190:10330,19208         # ... contacted by the top bus (two contacts seen)
+?C 10345,19190:10372,19208
+P 10425,19225:10447,19775          # s3
+P 10497,19225:10520,19775          # s4
+P 10567,19225:10590,19775          # s5
+P 10425,19752:10690,19775          # s3-s5 joined along the bottom
+P 10655,19775:10690,19930          # ... and down to the bar along the bottom of the block
+?P 10655,19905:11420,19930         # bar towards the driver logic (not yet followed)
+N P 10672,19850 ck_p
+# load of ck_t
+D 10626,19262:10725,19410
+P 10652,19245:10680,19420
+?B 10636,19240:10662,19262         # gate tied to the ck_t side (box seen at the gate's top end)
+D 10626,19240:10662,19266
+C 10690,19300:10718,19400          # three contacts to VCC
+
+# ---- group C: load of ck_n2
+D 10085,19250:10210,19420
+P 10130,19215:10165,19440          # gate GC
+?B 10158,19222:10186,19250         # gate tied to the ck_n2 side (box seen at the gate's top end)
+D 10158,19222:10210,19254
+M 10075,19240:10120,19440          # col C1, VCC
+C 10088,19258:10113,19415
+M 10180,19195:10215,19400          # col C2, ck_n2
+C 10183,19265:10208,19390
+M 9990,19195:10215,19228           # strap along the top to the pad at its left end
+N M 10100,19211 ck_n2
+
+# ---- group B: pull-downs gated by ck_n2
+D 9805,19390:10048,19735
+C 9993,19200:10017,19222           # pad: ck_n2 down to poly
+P 9985,19190:10010,19375
+?P 9845,19355:10010,19375          # bar joining the three fingers
+P 9850,19355:9870,19750            # F1: ck_out to VSS
+P 9920,19355:9940,19765            # F2: ck_out to VSS
+P 9985,19355:10005,19765           # F3: ck_ga to VSS
+M 9805,19385:9840,19725            # col B1, VSS
+C 9808,19410:9837,19715
+M 9805,19385:9980,19410            # ... strap to col B3
+M 9940,19385:9980,19800            # col B3, VSS
+C 9947,19402:9973,19715
+M 9880,19440:9905,19790            # col B2, ck_out
+C 9882,19452:9903,19735
+M 10015,19328:10050,19725          # col B4, ck_ga
+C 10022,19395:10045,19715
+M 9795,19328:10050,19355           # ck_ga along the top of group B
+N M 9900,19341 ck_ga
+
+# ---- group A: pull-up of ck_out, gate ck_ga
+D 9598,19252:9775,19735
+D 9505,19590:9600,19735
+P 9640,19195:9830,19240            # gate bar
+P 9640,19240:9665,19762            # finger 1
+P 9712,19240:9735,19765            # finger 2
+P 9797,19240:9830,19352            # ... right end down to the ck_ga metal
+C 9810,19337 s=24x26
+P 9555,19580:9595,19762            # short third finger
+P 9555,19742:9665,19762
+M 9598,19245:9635,19725            # col A1, VCC
+C 9603,19310:9629,19715
+M 9738,19245:9773,19725            # col A3, VCC
+C 9741,19310:9768,19712
+M 9670,19312:9707,19790            # col A2, ck_out
+C 9675,19322:9703,19712
+M 9505,19590:9545,19790            # col at the left, ck_out
+C 9512,19602:9535,19720
+M 9505,19745:9905,19790            # ck_out bus along the bottom
+N M 9700,19768 ck_out
+M 9515,19245:9545,19600            # ck_out leaves up the left side ...
+M 9380,19240:9545,19262            # ... and away to the left (not yet followed)
+M 9848,19785:9870,19840            # ck_out also leaves downward (not yet followed)
