@@ -5,6 +5,8 @@ Extracts with 0 errors, 0 warnings.
 
 ## Status
 
+- Images used: about 40. Sharpened views (`tools/rdp3_sharp.py`) at 3-4x were the most
+  useful for this area; plain views above 4x added nothing.
 - **Traced and extracted**: the two strobe drivers (two big inverters at the top of the
   left gate column), their output routes to `sel` and `areg`, and their input wiring.
   - `areg_load = NOT e_b`. No other input, no latch, no clock.
@@ -115,6 +117,17 @@ Believed: `bd2_n1 = NOT(e_b AND bd2_r1_a [OR bd2_r1_l])`, hence
 Ambiguity 1. Either way the only clock-like input is E itself; no latch is on the path
 from `bd2_n1` to the select gates.
 
+Where the other inputs come from (seen in sharpened 3x views, not traced as gates):
+
+- `bd2_r1_a`: the thin metal x 16100-16120 from the gate pad 16114,15560 ends on a poly
+  pad with a heavy outline at 16098-16148 x 15765-15797, which sits at the east end of
+  row 2's output strip (y 15745-15790, below the band y 15723-15745, ground contact
+  16045,15700). By the layout style of this column (G1, G2, row 1: output strip, buried
+  contact at its east end, poly onwards) that pad is row 2's output. Believed:
+  `bd2_r1_a = NOT(row 2's gate)`; row 2's gate poly runs west to at least x 15905.
+- `bd2_r1_l`: see Ambiguity 1; believed to be row 3's output. Row 3's upper band
+  (y 15812-15832) is on `e_b` (tap 16166,15822).
+
 The extraction lists the two series transistors under "not part of a static gate"
 because no load is drawn.
 
@@ -198,11 +211,20 @@ The lists marked ? at the south, east and top edges come from `tools/sel_cut.py`
      somewhere not yet found. For: the outline above the bar and its straight left edge
      at x 15937. Against: the bar's end (x 15993) stops short of the pocket's right side,
      and no load is in sight.
+   - Seen later, in favour of (E): directly below the pocket there is a boxed structure
+     (15975-16010 x 15655-15715, heavy outline, inner box) and, west of it under the thin
+     metal `bd2_r1_l`, bars at y 15660-15675, 15680-15708 and 15712-15730 that reach the
+     VCC land 15850-15885 x 15685-15790 (contact row at x 15865). That is where a load of
+     row 1 would be if the L is a pull-down; it could equally be row 2's load. Not resolved
+     in sharpened 4x views.
    - Working assumption: none; the trace draws only the series pair and the output
-     route, and leaves `bd2_r1_l` as a separate net.
-   - To settle: find what `bd2_r1_l` meets at 15925,15825 (a gate output there means
-     (E), only gate inputs means (A)); look for the same cell elsewhere in the column
-     with a clearer left end.
+     route, and leaves `bd2_r1_l` as a separate net. My belief leans to (E):
+     `sel_stb_r = bd2_r1_l OR (e_b AND bd2_r1_a)`.
+   - To settle: trace 15890-16020 x 15640-15730 (the candidate load) and find what
+     `bd2_r1_l` meets at 15925,15825: that contact sits on a land (pitted in chip 2's
+     stripped shot, specks in the clean shot) with a boxed tie beside it
+     (15955-16000 x 15800-15845), which looks like the output land of row 3 next to its
+     load; if so `bd2_r1_l` is row 3's output and (E) holds.
 2. **Strip 1 into the block** (16205-16232 x 15598-15614, marked `?`): in the clean shot
    the salmon strip under the metal and the textured block beside it touch with no rim
    between them; in chip 2's stripped shot a dark line runs down the block's left side,
@@ -240,9 +262,13 @@ Everything below is seen, not traced.
   - y 15805-15880: band y 15812-15832 with a rounded west end at x 16015; band
     y 15857-15878; contact pad 15900-15945 x 15805-15850 (end of `bd2_r1_l`); a box
     15950-15995 x 15795-15845 beside it.
-  - Pad 16098-16140 x 15768-15797 at the lower end of `bd2_r1_a`, with a poly going
-    east from it at y 15760-15800.
-  - Taps of the lower trunk (`e_b`) at 16167,15735 and 16165,15818.
+  - Pad 16098-16148 x 15765-15797 at the lower end of `bd2_r1_a` (drawn; its contact is
+    marked `?`). A metal at x 16095-16118 is also seen below it (y 15800-15895), not
+    followed.
+  - Taps of the lower trunk (`e_b`), drawn as poly stubs: 16167,15735 east to band `G_d`
+    of the gate group; 16166,15822 west to row 3's upper band.
+  - Contact 16207,15778: poly east = band `G_e` of the gate group; metal `bd2_m210`
+    x 16200-16222 down to about y 16050 (drawn from the track scan, lower end not seen).
   - Further taps per trunks.md: `rw_d` at y 16030 (its top end), 16290, 16680; `rs_d` at
     16590 (top end); `cs_d` at 16170 (top end), 16430, 16815, 17170.
 - **Gate group right of the bundle** (x 16240-16470, y 15400-15900). Ground rail
@@ -258,8 +284,8 @@ Everything below is seen, not traced.
   band y 15635-15660, which comes from the east (x 16434+);
   node y 15660-15725 with a second poly box at its west end (16225-16318 x 15683-15715,
   reaching west towards the pad of contact 16205,15690 on the `e_b` metal);
-  band y 15725-15750, from the west (probably the tap 16167,15735 on `e_b`);
-  band y 15770-15795, from the west (from a contact at about 16207,15775);
+  band `G_d` y 15725-15750 = `e_b` (tap 16167,15735, traced to x 16262);
+  band `G_e` y 15770-15795 = `bd2_m210` (contact 16207,15778, traced to x 16262);
   ground contact 16330,15815.
   Loads and more gates on its east side (x 16370-16470): a load block at
   16405-16450 x 15468-15495, contacts at 16450,15540 and 16450,15738 joined by a thin metal

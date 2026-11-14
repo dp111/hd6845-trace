@@ -157,3 +157,25 @@ C 15925,15625
 # (the metal ends on a contact at 15925,15825; what is under it is not traced)
 M 15924,15615 y15835
 N M 15924,15700 bd2_r1_l
+
+# ---------------------------------------------------------------- bundle, y 15700-15900
+# Seen in sharpened 3x views (metal and clean shot); the gates these lines feed are not traced.
+# Taps on the e_b trunk: a contact on a poly pad each.
+C 16167,15735
+P 16152,15722:16185,15750              # pad
+P 16180,15737 x16262 w=18              # east: band G_d of the gate group right of the bundle
+C 16166,15822
+P 16152,15808:16185,15840              # pad
+P 16100,15822 x16160 w=20              # west: upper band of row 3 (y 15812-15832)
+# Contact 16207,15778: a metal x 16200-16222 starts here and runs down to about y 16050
+# (track scan); the pad's poly goes east as band G_e of the gate group.
+C 16207,15778
+P 16192,15762:16226,15795              # pad
+P 16220,15779 x16262 w=20
+M 16210,15768 y16045
+N M 16210,15900 bd2_m210
+# Lower end of bd2_r1_a: a poly pad with a heavy outline at the east end of row 2's output
+# strip (y 15745-15790). Believed to be that strip's buried contact, which would make
+# bd2_r1_a the output of row 2; the diffusion side is not traced.
+P 16098,15765:16148,15797
+?C 16114,15780
