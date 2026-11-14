@@ -5,11 +5,17 @@ metal-shot pixels. "L" = left, "R" = right, "U" = up (smaller y), "D" = down.
 
 ## Status
 
-Work in progress (2026-11-15). Followed so far: `ck_out`, `ck_a`, `ck_b` from the
-clock block to the three vertical metals at x 13022 / 13066 / 13132 and up to
-y 16600; `ck_b` and one branch of `ck_a` into the bottom row of the mid-right array.
-The line the clock notes call `ck_src` is **not** `ck_a` (see Ambiguities A1): it is
-the output of the left-hand inverter of the input row.
+Work in progress (2026-11-15). Followed so far:
+- `ck_out`: all four routes out of the clock block, to their entry points (bottom row
+  of the logic below the decode array; bottom-centre logic from below; the bottom trunk
+  along y 18947 and up the left edge at x 2504, followed at 1x to y 18300 and at 0.5x
+  to about y 6000).
+- `ck_a`: up the right edge of the mid-right array (x 13025, one tap per row) to its
+  end at y 7270; second entry at the array's bottom row.
+- `ck_b`: into the bottom row of the mid-right array only.
+- The line the clock notes call `ck_src` is **not** `ck_a` (Ambiguities A1): it is the
+  output of the left-hand inverter of the input row, here called S.
+Not yet: S to the left of the die, `e_b`, `rw/rs/cs`, `res_b`, `lpstb_b`, `clk`, `clk_b`.
 
 ## How to use this file
 
@@ -26,47 +32,85 @@ Vertical segments, sorted by x:
 
 | x | y range | Layer | Net | Notes |
 |---|---|---|---|---|
+| 2495-2514 | about 6000-18952 | metal | `ck_out` | left-edge trunk, continues from the bottom trunk at the corner (2504,18952). Followed at 1.8x to y 18300 (tap contact at 2500,18385 to a poly going right), above that at 0.5x only; top end not found |
+| 6135-6160 | 18850-18948 | poly | `ck_out` | tap from the bottom trunk, contact (6148,18948), up into the cell at 5950-6160 x 18790-18940 |
+| 9309-9347 | 18945-19253 | poly (wide) | `ck_out` | between contacts (9337,18945) and (9337,19253); passes under the VCC bus y 19095-19145 |
+| 10300-10320 | 17908-18473 | metal | `ck_out` | "ck_out #1": left arm of the ring; turns left at y 17908 |
+| 10330-10370 | 18555-18926 | poly (wide) | `ck_out` | contacts (10356,18926) and (10355,18555); under the VCC band and the S line (y 18590-18612) |
+| 10347-10365 | 18473-18555 | metal | `ck_out` | from the wide poly's top contact to the ring |
+| 10349-10368 | 17560-18390 | metal | not identified ("c") | comes down between the two `ck_out` verticals, turns right at y 18375-18395 to a contact at (10398,18428); has a branch at y 17633-17658 to a vertical x 10392-10410 going up. There is also a poly under it |
+| 10389-10408 | 17689-18342 | metal | `ck_out` | "ck_out #2": right arm of the ring |
+| 10392-10410 | <17560-17635 | metal | not identified ("c") | branch of "c"; do not confuse with `ck_out` #2 below it |
+| 10432-10452 | 18342-18473 | metal | `ck_out` | ring, right side |
+| 10430-10450 | 17733-18312 | metal | not identified ("e") | from contact (10440,17733) down to a contact at (10480,18297), then poly right under the wide metal x 10548-10598 to bus line L2 |
+| 10433-10450 | <16880-17689 | metal | `ck_out` | "ck_out #2" continues up the left side of the gate column x 10450-10750 (contacts on it at about y 17234 and 17168; at 0.5x it runs on to about y 14700 with a contact every 200-250 px) |
+| 10438-10497 | 18800-19005 | diffusion | (VCC strip of an island device) | gate = `ck_out` branch W |
 | 10848-10867 | 19015-19306 | metal | `ck_out` | joins the clock trace; corner contact at (10853,19015) |
 | 11000-11040 | 18322-19032 | poly (wide) | `ck_out` | passes under the VCC band and bus lines L4, L5, L6 without contact |
-| 12523 | 16900-16996 | metal | `ck_b` | entry into the mid-right array, bottom row |
+| 12513-12533 | 16900-16996 | metal | `ck_b` | entry into the mid-right array, bottom row |
 | 12603-12624 | 16800-16953 | metal | `ck_a` | from contact (12631,16954) up into the mid-right array, bottom row |
 | 12733-12757 | 16950-18471 | poly | `ck_a` | long poly from contact (12740,18471) up under the whole bus field (continuity between y 17050 and 18220 seen at 0.9x only) |
 | 13000-13035 | 18455-18772 | poly | `ck_b` | from the end of line B up through the VCC band |
 | 13012-13033 | 16995-18469 | metal | `ck_b` | ends at contact (13023,16995) |
-| 13013-13037 | 16600-16945 | metal | `ck_a` | continues up (being followed) |
+| 13013-13037 | 7270-16945 | metal | `ck_a` | rail up the right edge of the mid-right array; a contact to a poly going left at every row (y 16570, 16090, 15624, 15140, ... every 477). Top end at y 7270 lies over a poly band (y 7265-7292) without a visible contact. Straightness between the ends seen at 0.5x |
 | 13055-13077 | 16952-18471 | metal | `ck_a` | jogs left to x 13025 at y 16943-16960 |
 | 13085-13120 | 18455-18724 | poly | `ck_a` | from the end of line A up through the VCC band |
-| 13122-13143 | 16600-18337 | metal | `ck_out` | continues up (being followed) |
-| 13192-13212 | 18385-18775 | poly | S (`t_g0_out`) | see `S` below |
-| 13849 | 18537-18775 | metal | S (`t_g0_out`) | output of input-row gate 0 |
+| 13120-13145 | <15400-16412 | metal | not identified | starts at contact (13130,16412), whose poly goes left along y 16440-16462 under the `ck_a` rail into the mid-right array. **Not `ck_out`**, although it is in line with the `ck_out` vertical below it |
+| 13122-13143 | 16562-18337 | metal | `ck_out` | ends at contact (13131,16562) |
+| 13192-13212 | 18385-18775 | poly | S | see `S` below |
+| 13664-13684 | <16600-16822 | metal | X (input of gate 0) | ends at contact (13655,16822) |
+| 13703-13727 | 15930-16711 | metal | `ck_out` | rail at the left edge of the logic below the decode array; contacts (13715,16711), (13716,16565), (13716,16490), (13716,15930) |
+| 13849 | 18537-18775 | metal | S | output of input-row gate 0 |
+| 14535-14552 | 16992-18082 | metal | X | beside the wide VCC vertical x 14585-14630 |
 
 Horizontal segments, sorted by y:
 
 | y | x range | Layer | Net | Notes |
 |---|---|---|---|---|
+| 7265-7292 | <12960-13260 | poly | not identified | passes under the top end of the `ck_a` rail; contact (13260,7280) to a vertical metal x 13250-13270 going up |
+| 16440-16462 | <12970-13132 | poly | not identified | from contact (13130,16412) left under the `ck_a` rail |
+| 16530-16574 | 13131-13715 | poly (wide) | `ck_out` | from contact (13131,16562) right under six vertical metals to contact (13715,16562) |
+| 16900-16915 | 13655-13952 | metal | X | from contact (13655,16908) |
 | 16943-16960 | 13025-13066 | metal | `ck_a` | jog |
 | 16945-16965 | 12631-12745 | poly | `ck_a` | to contact (12631,16954) |
 | 16966-17001 | 12878-13040 | poly | `ck_b` | under the wide VCC vertical (x 12935-12980) |
+| 16985-17000 | 13952-14543 | metal | X | top line of the bus group above the input row; a poly runs under it for x 14235-14550 |
 | 16987-17004 | 12523-12892 | metal | `ck_b` | from contact (12892,16991) left |
+| 17677-17698 | 10398-10441 | metal | `ck_out` | jog of `ck_out` #2; a poly lies under it |
+| 17900-17915 | <10230-10311 | metal | `ck_out` | `ck_out` #1 going left (not yet followed) |
+| 18075-18090 | 13782-14543 | metal | X | bottom line of the bus group; contact (13782,18080) to gate 0's input poly |
 | 18243-18262 (L1) | ...-12807 | metal | not identified | ends at contact (12807,18253); poly on to contact (13216,18251), metal on right |
-| 18290-18305 (L2) | ...-12849 | metal | not identified | contact (12849,18296); poly on to contact (13176,18297), metal on right |
+| 18290-18305 (L2) | 10615-12849 | metal | not identified ("e") | left end: poly under the wide metal x 10548-10598 to contact (10480,18297) and the vertical x 10430-10450. Right end: contact (12849,18296), poly to contact (13176,18297), metal on right |
+| 18331-18352 | 10398-10442 | metal | `ck_out` | ring, top side |
 | 18335-18350 (L3) | 11027-12807 | metal | `ck_out` | contacts at both ends only |
 | 18332-18348 | 12807-13132 | poly | `ck_out` | under the vertical metals |
-| 18375-18395 (L4) | 10857-12849 | metal | S (`t_g0_out`) | contacts at both ends only |
+| 18375-18395 (L4) | 10857-12849 | metal | S | contacts at both ends only |
 | 18378-18393 | 12849-13212 | poly | S | then down at x 13200 |
 | 18420-18437 (L5) | 10810-12807 | metal | not identified | turns up at x 10803-10820; right end contact (12807,18427), poly to contact (13156,18427), metal on right |
+| 18458-18480 | 10358-10600 | poly | `ck_out` | from contact (10358,18470) on the ring to a device at 10600-10710 x 18390-18525 (poly ring round a diffusion; not traced) |
 | 18460-18480 (L6, left piece) | 10900-11870 | metal | S | contacts (10900,18470), (11772,18467) to gate g5's poly, (11852,18468) to a poly that goes up to a buried contact on a plain diffusion rectangle (11500-11720 x 18275-18400, added capacitance) |
 | 18460-18480 (L6, right piece) | 12095-12740 | metal | `ck_a` | from g6's output poly (x 12110) to contact (12740,18471) |
+| 18462-18485 | 10311-10442 | metal | `ck_out` | ring, bottom side; contact (10358,18470) |
+| 18590-18612 | 10255-10680 | metal | S | (route from clock.md; seen, not yet re-followed) |
 | 18700-18722 | ...-13090 | metal | `ck_a` | line A of the clock block; end contact (13085,18709) |
 | 18745-18768 | ...-13010 | metal | `ck_b` | line B; end contact (13000,18756) |
 | 18765-18785 | 13200-13522 | poly | S | |
 | 18765-18785 | 13522-13852 | metal | S | from contact (13522,18774) to the drop from gate 0 |
-| 18938-18957 | <10650-10858 | poly | `ck_out` | branch W, under the VSS and VCC verticals; not yet followed further left |
+| 18895-18912 | 2548-3632 | metal | not identified | inner line at the bottom-left corner, between contacts (2548,18905) and (3632,18905); the poly from the latter passes under the `ck_out` trunk without contact |
+| 18918-18940 | 9337-9890 | metal | `ck_out` | route N, from contact (9337,18945); steps down to y 18940-18962 at x 9890 |
+| 18920-18955 | 8567-9337 | poly (wide) | `ck_out` | route B, under the VCC pad's bus (x 8640-9290) |
+| 18938-18957 | 10440-10858 | poly | `ck_out` | branch W, under the VSS and VCC verticals to the island device at 10438-10499 |
+| 18940-18957 | 2504-4611, 5320-8567 | metal | `ck_out` | **bottom trunk**. Tap at (6148,18948) |
+| 18940-18962 | 9890-10363 | metal | `ck_out` | route N, to contact (10356,18926) |
 | 19005-19025 | 10853-11023 | metal | `ck_out` | between the corner contact and the wide poly's foot |
+| 19022-19045 | 4611-5320 | metal | `ck_out` | bottom trunk, the stretch that dips down |
+| 19240-19262 | 9337-9545 | metal | `ck_out` | from the clock block to contact (9337,19253) |
 
 ## ck_out
 
-Source: clock block output stage (NOT CLK).
+Source: clock block output stage (NOT CLK). Four routes leave the clock block.
+
+### Route E (east): to the logic below the decode array
 
 1. Vertical metal x 10848-10867 from the clock block (y 19306) up to a corner contact
    at (10853,19015).
@@ -80,13 +124,65 @@ Source: clock block output stage (NOT CLK).
    x 12733-12757 (`ck_a`).
 5. Poly along y 18332-18348 under the wide VCC vertical and the `ck_b`, `ck_a`
    verticals to a contact at (13132,18337).
-6. Vertical metal x 13122-13143 upwards: followed to y 16600, continues.
+6. Vertical metal x 13122-13143 up through the bus crossing field to a contact at
+   (13131,16562). **The metal ends there.** The vertical metal in line with it above
+   y 16412 is a different net.
+7. Wide poly right along y 16530-16574, under six vertical metals, to a contact at
+   (13715,16562).
+8. **Entry: logic below the decode array (left edge).** Vertical metal rail
+   x 13703-13727 from contact (13715,16711) up to contact (13716,15930). Taps to the
+   right at (13715,16711), (13716,16490) and (13716,15930) (poly or diffusion going
+   right into the gates at x 13750+).
 
-Branch W: at the corner contact (10853,19015) a poly leaves upwards (x 10838-10858),
-turns left at y 18938-18957 and passes under the VSS (x 10763-10817) and VCC
-(x 10677-10730) verticals. Followed to x 10650 only.
+### Branch W: an island device
 
-Branch at y 19240-19262 (from the clock block towards (9340,19240)): not yet followed.
+At the corner contact (10853,19015) a poly leaves upwards (x 10838-10858), turns left
+at y 18938-18957, passes under the VSS (x 10763-10817) and VCC (x 10677-10730)
+verticals and ends as the gate of an island device at 10438-10499 x 18925-18957 of the
+kind listed in AMB-006: diffusion strip down from under the VCC band, gate, stub with a
+contact at (10465,18987), isolated metal pad over stub and gate. A dead end.
+
+### Route N (north): into the bottom-centre logic
+
+1. From the clock block, metal left along y 19240-19262 to a contact at (9337,19253).
+2. Wide poly x 9309-9347 up under the VCC bus to a contact at (9337,18945).
+3. Metal right along y 18918-18940, stepping down at x 9890 to y 18940-18962, to a
+   contact at (10356,18926).
+4. Wide poly x 10330-10370 up through the VCC band and under the S line to a contact
+   at (10355,18555).
+5. Metal up at x 10347-10365 to a ring of metal: bottom y 18462-18485 (x 10311-10442),
+   right side x 10432-10452 up to y 18342, top y 18331-18352 back left to x 10398.
+   Two verticals leave it upwards, crossing the diagonal bus lines (which pass under
+   in poly):
+   - **`ck_out` #1**, x 10300-10320, up to y 17908, then left along y 17900-17915
+     (followed to x 10230; not yet further).
+   - **`ck_out` #2**, x 10389-10408, up to y 17689, right along y 17677-17698 to
+     x 10441, up at x 10433-10450. **Entry: bottom-centre logic, from below, at
+     (10441,17680).** It then runs up the left side of the gate column x 10450-10750
+     with taps (first two at about y 17234 and 17168; seen at 0.5x up to about
+     y 14700).
+6. A contact on the ring's bottom at (10358,18470) feeds a poly that runs right along
+   y 18458-18480 to a small device at 10600-10710 x 18390-18525 (a poly ring round a
+   diffusion; a second poly, from the unidentified vertical "c", also arrives there).
+   Not traced.
+
+Lines that look like part of this and are not: "c" (x 10349-10368, between the two
+`ck_out` verticals) and "e" (x 10430-10450 below y 18312, which continues the line of
+the ring's right side downwards from above). The gap between "e" and the ring's top
+(y 18312-18331) was checked at 4x in both metal shots.
+
+### Route B (bottom trunk and left edge)
+
+1. From the contact (9337,18945), wide poly left along y 18920-18955 under the VCC
+   pad's bus to a contact at (8567,18946).
+2. Metal left along y 18940-18957: x 8567 to 5320; down to y 19022-19045 for
+   x 5320-4611; back up to y 18940-18957; on to the bottom-left corner (2504,18952).
+   One tap seen: contact (6148,18948), poly up into the cell at 5950-6160 x
+   18790-18940. The polys that cross it at x 6950-7540 and at x 3632 have no contact.
+3. **Up the left edge: vertical metal x 2495-2514.** Followed at 1.8x to y 18300 (tap
+   at (2500,18385): contact to a poly going right) and at 0.5x up to about y 6000,
+   where it is still running; the top end has not been found. **Entry: left vertical
+   array, all along its left edge.**
 
 ## ck_b
 
@@ -103,8 +199,16 @@ Branch at y 19240-19262 (from the clock block towards (9340,19240)): not yet fol
 
 1. Line A (metal, y 18700-18722) ends at a contact at (13085,18709).
 2. Poly x 13085-13120 up through the VCC band to a contact at (13108,18471).
-3. Metal: left to x 13066, up at x 13055-13077 to y 16952, jog left along
-   y 16943-16960, up at x 13013-13037. Followed to y 16600, continues.
+3. Metal: left to x 13066, up at x 13055-13077 through the bus crossing field to
+   y 16952, jog left along y 16943-16960, then up at x 13013-13037.
+4. **Entry: mid-right array, right edge.** The vertical metal x 13013-13037 is a rail
+   that runs the full height of the array to y 7270. At every row (y 16570, 16090,
+   15624, 15140, ..., pitch 477) a contact on the rail feeds a poly that goes left
+   into the row (checked at 2.4x for y 16570; the others seen at 0.5-1x).
+5. The rail's top end (y 7270) lies over a poly band (y 7265-7292) that runs from
+   inside the array right to a contact at (13260,7280) and a vertical metal going up.
+   At 5x no contact ring shows between rail and band, so they are taken as not
+   joined (A2).
 
 Second route (from gate g6 of the clock block, whose output is on line A according
 to the clock trace): poly x 12098-12125 up to contact (12108,18467); bus line L6
@@ -174,6 +278,12 @@ line A; at 5x the two contacts (line B to g6's gate poly at 11985,18757; the lon
 contact from line A to g6's output at 11965-12030 x 18705-18720) do look real. If so,
 g5 pulls `ck_b` low whenever S is high, which only makes sense if X is a `ck_b`-like
 signal. X must be traced to its source to settle this.
+
+### A2. Top end of the `ck_a` rail
+
+At (13023,7278) the rail's tip covers a poly band exactly. No ring or pitted box shows
+in any shot at 5x, so no contact is drawn. If there is one, `ck_a` also reaches the
+vertical metal x 13250-13270 above y 7280.
 
 ## Not done
 

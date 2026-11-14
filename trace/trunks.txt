@@ -25,8 +25,44 @@ C 13132,18337
 M 13132,18352 y16600 w=22          # vertical trunk, x 13122-13143
 N M 12000,18342 ck_out
 # branch W: poly from the corner contact up and away to the left under the VSS and VCC
-# verticals (followed to x 10650 only)
-P 10851,19030 y18948 x10650 w=18
+# verticals, ending as the gate of an island device like those of AMB-006: a diffusion
+# strip that comes down from under the VCC band, the gate, a stub with one contact, and
+# an isolated metal pad over stub and gate.
+P 10851,19030 y18948 x10440 w=18
+P 10438,18925:10499,18957           # gate end of the poly
+?D 10438,18800:10497,19005          # strip from under the VCC band (its VCC contact was not looked for)
+C 10465,18987 s=26x30
+M 10436,18936:10500,19010           # isolated pad
+A 10436,18923:10500,18959 kind=clamp
+N D 10467,18850 vcc
+
+# ---- ck_out, the branch that leaves the clock block to the left at y 19240-19262.
+# Contact, wide poly up under the VCC bus, contact. From that upper contact:
+#   (N) metal right along y 18918-18940 / 18940-18962 to a second wide poly that goes up
+#       through the VCC band to a contact at (10355,18555), then a metal ring that
+#       sends two verticals up into the bottom-centre logic;
+#   (B) poly left under the VCC pad's bus, then the bottom trunk: metal along y 18947
+#       all the way to the bottom-left corner of the core and up the left edge.
+M 9390,19251 x9322 w=20
+C 9337,19253
+P 9328,19268 y18928 w=38            # wide poly, 9309-9347
+C 9337,18945
+# (N)
+M 9322,18929 x9890 y18951 x10360 y18914 w=20
+C 10356,18926
+P 10350,18940 y18540 w=40           # wide poly, 10330-10370, under the VCC band and the S line
+C 10355,18555
+M 10356,18568 y18473 w=18
+M 10311,17908 y18473 x10442 y18342 x10398 y17689 x10441 y16880 w=18   # ring; right-hand vertical goes on up (ck_out #2)
+M 10320,17908 x10230 w=16           # ck_out #1 turns left along y 17900-17915 (followed to x 10230 only)
+C 10358,18470 s=22x22
+P 10345,18470 x10600 w=24           # poly right, to a device at 10600-10710 x 18390-18525 (not traced)
+# (B)
+P 9350,18937 x8552 w=34
+C 8567,18946
+M 8582,18947 x5320 y19033 x4611 y18950 x2504 y18300 w=17   # bottom trunk, then up the left edge (followed at 1x to y 18300)
+C 6148,18948 s=24x24                # tap: poly up into the cell at 5950-6160 x 18790-18940
+P 6148,18962 y18850 w=24
 
 # ====================================================================
 # ck_b. Line B (clock trace) ends at a contact; poly up through the VCC band; vertical
