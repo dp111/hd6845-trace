@@ -250,6 +250,14 @@ Poly and diffusion, left half:
 Right half (x 9600-9740): dense, with a vertical poly strip at x 9612-9622 (y 9290-9500)
 beside the rail d diffusion and several horizontal diffusion fingers. Not decoded.
 
+Hints from `cdp1` (its register cell `cdp1_reg`, traced at y 3040-3330): that cell has a
+contact from the VSS rail to a grounded poly (gate of a depletion feedback transistor)
+and a bit line 62 px right of the VSS rail centre. Here the rail d bulge contact onto
+poly at 9592,9220 looks like the same motif, and line e (x 9639) is 65 px right of rail
+d's centre, so line e is probably the per-slice bit line (write data). The row C cell
+is not a copy of `cdp1_reg`, though: findcell with cdp1's master finds nothing in this
+region above 0.34.
+
 Working guess (not traced): a static register bit with a comparator bit against the
 per-slice west line and a read path to bus N, i.e. row C = a 6-bit readable register
 with an equality comparator (the cursor register R14 against MA8-13 would fit, and row
