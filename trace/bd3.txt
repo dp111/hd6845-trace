@@ -93,7 +93,13 @@ P 15590,16558 x15612 w=20          # rsel12's poly (from the contact at 15258,16
 M 15214,16550 y16877 w=20          # T7 (rsel13) ends at a contact
 C 15214,16864
 P 15200,16862 x15612 w=22          # rsel13: poly east to its inverter
-P 15216,16870 y17300 w=18          # rsel13: poly also south, under the metal of x 15214 (which is sel_w12 there)
+P 15216,16870 y17168 x15612 w=18   # rsel13: poly also south, under the metal of x 15214 (which is sel_w12 there),
+                                   # then east along y 17168 to its buffer
+# R13 select buffer: sel's two-inverter cell once more, below the R13 strobe pair
+M 15690,17100 y17380 w=55          # ground rail runs on
+M 15795,17100:15890,17380          # supply rail runs on
+@inst sel_rbuf 0,2258 tag=13
+P 15620,17340 x15512 y17500 w=20   # its output: poly west along y 17340, then south along x 15512
 # outputs: poly west to a contact on a track
 P 15615,16732 x15244 w=20
 C 15258,16734
@@ -176,5 +182,5 @@ C 15866,15108 s=20x36              # supply rail to diffusion
 # down. This is the line that trunks.txt calls e_b (its drawing stops at y 16400).
 C 16255,15085
 M 16255,15072 y15221 x16167 y15790 w=20
-?M 16167,15780 y16410 w=18         # by scan and a 1x view only: one line with tap contacts
+M 16167,15780 y16410 w=18          # one line with tap contacts (2x strip views), joins trunks' e_b at y 16400
 N M 16167,15500 e_b

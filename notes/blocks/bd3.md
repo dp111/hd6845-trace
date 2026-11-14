@@ -5,8 +5,9 @@
 - Traced and extracted (trace/bd3.txt, `@requires sel`, 0 errors, no open nets): the
   strobe's two lines and the link between them; the row at y 16740-16870 (a two-inverter
   buffer of rsel12); two more inverter + NOR pairs in the right-hand column (write
-  strobes of R12 and R13); all 16 tracks down to where they leave the region, including
-  the nested corners and supply-rail crossings of T0-T6.
+  strobes of R12 and R13) and a two-inverter buffer of rsel13 below them; all 16 tracks
+  down to where they leave the region, including the nested corners and supply-rail
+  crossings of T0-T6.
 - The strobe has no driver inside the region; it was followed east to its driver at
   x 15900-16270, y 15030-15160 (package bd2's area), which is traced too:
   **strobe = NOT e_b**, one big inverter. So sel_wN = rselN AND E.
@@ -23,7 +24,7 @@
 | Wide rail | y 16907-16954, x 14060-14634 | joins the supply rail at its east end (seen at 1.1x and 1.65x, no dark line between); so `vcc`. Runs on west of x 14060 and turns north near x 13970-14030 |
 | Strobe link | poly, contact 14239,16865 - x 14242 south - y 16996 east - contact 14673,16997 | joins `sel_stb_l` to T0 (`sel_stb_r`) |
 | Horizontal bundle | y 16998-17258 (and on to 17432), x < 14912 | T0-T6 after turning west, pitch 43.3. Each crosses the supply rail in poly between two contacts (x 14672/14713 east, 14456/14499 west, alternating) |
-| Right-hand gate column | x 15540-15890, y 16540-17130 | cell `sel_rwr` (from sel.txt) twice more: dy 600 (R12) and dy 900 (R13) |
+| Right-hand gate column | x 15540-15890, y 16540-17360 | cell `sel_rwr` (from sel.txt) twice more: dy 600 (R12) and dy 900 (R13); then `sel_rbuf` at dy 2258 (R13 buffer) |
 | Track shuffle | x 15214-15344, y 16860-17040 | T8, T9, T10 each step one track left where the track to their left has ended |
 
 ## Logic
@@ -69,11 +70,11 @@ Route, from the gates back to the driver:
   from under the supply rail of sel's right-hand column (x 15795-15890, contacts
   there); tied to the drain by a buried contact at (15945,15048).
 - Gate input: from the pad (16255,15085) metal runs down x 16255 to y 15221, west to
-  x 16167 and down. Checked at 2x from y 15190 to 15790 (one line, with tap contacts at
-  (16165,15430), (16165,15605), (16165,15735) and a branch west at y 15475), and by
-  scan (sel_tracks) from there to y 17700; trunks.txt has `e_b` on x 16170 up to
-  y 16400. So the input is `e_b` (E buffered, same sense as the pin), with the stretch
-  y 15790-16400 not looked at closely (drawn `?`).
+  x 16167 and down. Checked at 2x in the metal shot from y 15190 to 16430: one
+  unbroken line, with tap contacts at (16165,15430), (16165,15605), (16165,15735),
+  (16165,15822) and a branch west at y 15475 (none of the taps followed). trunks.txt
+  has `e_b` on x 16170 from the E buffer up to y 16400. So the input is `e_b` (E
+  buffered, same sense as the pin).
 
 Consequence (traced): every write strobe is sel_wN = rselN AND e_b. Nothing but E
 gates the strobe; CS, RS and R/W must act somewhere else (on the select lines through
@@ -107,16 +108,26 @@ the address rows, or on the data path). The strobe net has exactly these loads: 
 
 - rsel12: contact (15258,16560) on T8, poly east (in sel.txt).
 - rsel13: T7 ends at a contact at (15214,16864); poly east along y 16862 to the inverter.
-  **The same poly also runs south** from the pad along x 15216, directly under the metal
-  that occupies T7's line below y 16902 (which is sel_w12). Seen to y 17120, still going:
-  a second use of rsel13, not followed (believed: its buffer, like R12's).
+  The same poly also runs south from the pad along x 15216, directly under the metal
+  that occupies T7's line below y 16902 (which is sel_w12), to y 17168, and east along
+  y 17168 to the R13 buffer (below).
 - Strobe gates: contacts on T15 at (15560,16772) and (15560,17072); T15 ends there.
 - Outputs: poly west along y 16732 to a contact at (15258,16734) (T8's lower part starts
   there), and along y 17032 to a contact at (15344,17036) (a new line starts there on
   T10's x).
 
-So R12 and R13 have ordinary write strobes, and rsel12 (traced) and rsel13 (believed)
-each have a buffered copy as well.
+### R13 select buffer (right-hand column, y 17130-17360)
+
+    sel_bn13 = NOT rsel13       sel_b13 = NOT sel_bn13
+
+sel's two-inverter cell `sel_rbuf` once more (dy 2258 from its master; gate bars at
+y 17168 and 17295, overlay at 1.5x). Output: buried contact at (15620,17340), poly west
+along y 17340, then south along x 15512; seen to y 17700, still going.
+
+So R12 and R13 each have an ordinary write strobe and a buffered select, exactly like
+R14 and R15. (R12's buffer sits in the gate column and is called `bd3_b12`; R13's is in
+the right-hand column and is called `sel_b13`.) Believed: the buffered selects are read
+enables, so R12 and R13 are readable on this chip.
 
 ### Where each track goes
 
@@ -153,7 +164,7 @@ turn west, at y 17302, 17346, 17388, 17432, and cross the supply rail the same w
 | rsel12, rsel13, sel_w*, sel_b* | metal | tracks at y 16550 (top) | in | see the track table |
 | sel_w7 | poly | 14100,16875 (west) | out | turns west at y 16875 (from x 14135) |
 | bd3_b12 | poly | 14199,17100 (bottom; drawn to 17300) | out | rsel12 buffered; seen to y 17320 |
-| rsel13 | poly | 15216,17100 (bottom; drawn to 17300) | out | under the metal of sel_w12 |
+| sel_b13 | poly | 15512,17500 (drawn to there) | out | rsel13 buffered; poly going south, seen to y 17700 |
 | bd3_x14543 | metal | 14100,16998 (west) and 14543,17100 (bottom) | ? | a through line, not one of the tracks: see Ambiguities |
 | sel_w5 | metal | 14100,17041 (west) | out | |
 | sel_w3 | metal | 14100,17084 (west) | out | |
@@ -169,7 +180,7 @@ turn west, at y 17302, 17346, 17388, 17432, and cross the supply rail the same w
 | sel_b17 | metal | 15431,17100 (bottom) | out | |
 | sel_b15 | metal | 15474,17100 (bottom) | out | |
 | sel_b14 | metal | 15517,17100 (bottom) | out | |
-| e_b | metal | 16167,15790 (drawn `?` on to 16410) | in | input of the strobe's driver; joins trunks' `e_b` (x 16170, y 16400) |
+| e_b | metal | 16167,16410 | in | input of the strobe's driver; joins trunks' `e_b` (x 16170, y 16400) |
 | vss | metal | 16012-16065, 14990-15180 | - | rail the strobe driver's source sits on; only this piece drawn |
 | vcc | metal | 14584-14634, 17100 (bottom); 14060, 16907-16954 (west) | - | supply rail and the wide rail |
 | vss | metal | 15663-15718, 17100 (bottom) | - | ground rail of the right-hand column runs on |
@@ -200,7 +211,9 @@ turn west, at y 17302, 17346, 17388, 17432, and cross the supply rail the same w
 
 - Around the strobe's driver (bd2's area): the other taps of `e_b`, where the rail
   x 16012-16065 comes from, exact outline of the drain (drawn from 2x and 3x views).
-- Where `bd3_b12` (poly x 14199, south of y 17320) and rsel13's poly (x 15216, south of
-  y 17120) go.
+- Where `bd3_b12` (poly x 14199, south of y 17700) and `sel_b13` (poly x 15512, south
+  of y 17700) go.
+- The right-hand column goes on below the R13 buffer: next gate bar at y 17427, fed
+  from a contact at (15560,17430) on a metal line that comes up x 15560 from the south
+  (not T15, which ended at y 17072).
 - The tracks south of y 17100 and the west-going bundle beyond x 14100.
-- The right-hand column below y 17130.
