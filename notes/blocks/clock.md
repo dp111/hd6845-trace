@@ -111,7 +111,32 @@ with two contacts at 10285-10375 x 19180-19215; the likely reading is that the t
 bus drives s1 and s2 through that pad, making the two inverters a chain. Not
 confirmed. s1 and s2 also have long feet under the bottom bus (to y 19790).
 
-Left-hand array and the small devices between the arrays: not yet read.
+Left-hand array (9500-10220 x 19190-19790), partly read:
+
+- The wide metal that enters at the top left (x 9575-9625 from y 19100, where it
+  comes in from the left at y 19095-19145) spreads along y 19245-19300 from x 9580
+  to 10120. Columns A1 (x 9600-9632) and A3 (9738-9770) and column C1 (10085-10115)
+  contact it. Reading this metal as a signal makes the device between C1 and C2
+  nonsensical, and reading it as VCC makes everything a pull-up, so it is taken to
+  be a second VCC feed. Not confirmed.
+- Group A, gate GA: a poly bar at 9640-9815 x 19195-19240 with two fingers down at
+  x 9640-9665 and 9712-9735 (to y 19750), joined at the bottom by a bar
+  (y 19742-19762) to a third, short, wide finger at 9555-9595 x 19580-19740.
+  Fingers 1 and 2 lie between A1/A3 and column A2 (9672-9705, contacts from
+  y 19320). The short finger lies between A1 and a column at 9510-9535 that joins
+  a bus along the bottom (y 19745-19790, x 9510-9880). If A2 is on that bus too,
+  group A is one big pull-up from VCC to that bus.
+- Group B (9800-10030): columns at 9805-9835, 9870-9905, 9940-9970, 9995-10030
+  with three gate fingers between them; a metal at y 19325-19360 (x 9800-10010)
+  crosses their tops. Not yet read.
+- Group C: gate 10130-10165 (y 19225-19420) between C1 and column C2
+  (10180-10210). C2's metal runs up to a top strap (y 19195-19228, x 9990-10215),
+  which joins the metal leaving the right-hand array's column 2 at y 19235-19262
+  and, at its left end, a two-contact pad at 9985-10030 x 19195-19235.
+- A small device below group C: poly block 10060-10090 x 19500-19660 beside a
+  three-contact column at 10110-10150.
+
+The two arrays are therefore one circuit, not two independent drivers.
 
 A metal at x 10840-10865 comes down from the core to a contact at 10852,19292,
 crosses under the VSS branch in poly to 10852,19422 and continues down. The bus
