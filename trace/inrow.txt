@@ -78,7 +78,11 @@ M 14460,18522 y18600 w=22          # input from the CLK protection cell (routing
 N M 14460,18590 clk
 N M 14300,18535 t_g2_out
 
-# ---- gate 3 (x 14600-14760): R/W input inverter
+# ---- three identical groups of four gates at a 628 px pitch, x 14600-16480.
+# Each group takes one input signal: an input inverter (a), two more inverters in a
+# chain (b, c) and a fourth (d) fed by c. Master is the R/W group.
+@cell ingrp tag=rw
+# -- a: input inverter
 C 14711,18229 s=34x30              # supply
 D 14690,18212:14745,18256
 D 14713,18254:14740,18330          # down through the load
@@ -90,21 +94,17 @@ B 14662,18299:14696,18331
 D 14690,18348:14719,18428          # output strip down to the pull-down
 D 14606,18381:14719,18426          # pull-down: ground | gate | output
 C 14630,18402 s=30x34              # ground
-P 14676.5,18555 y18363 w=25        # input gate, up from its contact
-P 14626,18352:14689,18375          # ... and on into an L that crosses no diffusion
-P 14626,18286:14650,18375
-C 14675,18535 s=24x24
-M 14675,18535 x14612 y18600 w=22   # input from the R/W protection cell (routing to be traced)
-N M 14612,18590 rw
 D 14717,18424:14735,18456          # output on down to a buried contact
 D 14705,18452:14736,18483
 B 14703,18450:14738,18485
-P 14709,18456:14736,18506          # output in poly to gate 4
+P 14676.5,18540 y18363 w=25        # input gate, comes up from below
+P 14626,18352:14689,18375          # ... and on into an L that crosses no diffusion
+P 14626,18286:14650,18375
+P 14709,18456:14736,18506          # output in poly to b
 P 14709,18502:14842,18523
-N P 14780,18512 t_g3_out
-
-# ---- gate 4 (x 14770-14915): inverter. Cell, repeated to the right.
-@cell inv_s tag=g4
+N P 14676,18500 {}
+N P 14780,18512 {}_a
+# -- b: inverter
 C 14861,18229 s=34x30              # supply
 D 14842,18212:14895,18256
 D 14863,18254:14890,18402          # down through the load to the output
@@ -122,6 +122,48 @@ D 14857,18460:14890,18494          # output under a buried contact
 B 14855,18460:14892,18498
 P 14861,18464:14888,18506          # output in poly to the next gate
 P 14861,18502:14992,18523
-N P 14930,18512 t_{}_out
+N P 14930,18512 {}_b
+# -- c: inverter (b moved 152 px right)
+C 15013,18229 s=34x30              # supply
+D 14994,18212:15047,18256
+D 15015,18254:15042,18402          # down through the load to the output
+P 14994,18262:15063,18368          # load gate
+P 14969,18346:14998,18375          # ... tab to its buried contact
+D 14975,18381:15044,18402          # output, under the rail
+D 14975,18362:14998,18383
+B 14967,18344:15000,18385
+P 14969,18404:14994,18506          # input gate
+D 14922,18423:15042,18462          # pull-down: ground | gate | output
+D 15002,18400:15042,18425
+C 14938,18442 s=30x34              # ground
+M 14914,18425:14964,18466          # tab on the rail
+D 15009,18460:15042,18494          # output under a buried contact
+B 15007,18460:15044,18498
+P 15013,18464:15040,18506          # output in poly to the next gate
+P 15013,18502:15144,18523
+N P 15082,18512 {}_c
+# -- d: inverter with the short load of a (a's core moved 454 px right)
+C 15165,18229 s=34x30              # supply
+D 15144,18212:15199,18256
+D 15167,18254:15194,18330          # down through the load
+P 15146,18269:15214,18321          # load gate
+P 15118,18301:15148,18329          # ... tab to its buried contact
+D 15105,18326:15197,18350
+D 15118,18308:15148,18328
+B 15116,18299:15150,18331
+D 15144,18348:15173,18428          # output strip down to the pull-down
+D 15060,18381:15173,18426          # pull-down: ground | gate | output
+C 15084,18402 s=30x34              # ground
+D 15171,18424:15189,18456          # output on down to a buried contact
+D 15159,18452:15190,18483
+B 15157,18450:15192,18485
+P 15120,18358:15145,18506          # input gate, up from c's output bar
+P 15162,18456:15187,18560          # output leaves downward in poly
+N P 15174,18550 {}_d
 @end
-@inst inv_s 150,0 tag=g5
+@inst ingrp 628,0 tag=inb
+@inst ingrp 1256,0 tag=inc
+
+# R/W group: input arrives in metal from the R/W protection cell (routing to be traced)
+C 14675,18535 s=24x24
+M 14675,18535 x14612 y18600 w=22
