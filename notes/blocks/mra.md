@@ -112,7 +112,7 @@ boundary).
 | `mra_p3_rN` | P | 12200, 9982+dy | in | from the right-hand columns |
 | `mra_n1_rN` | P | 12130, 9934+dy | out | to the right-hand columns |
 | `mra_n1_r10` | P | 11700, 12459 | out | r10 only: the H2 stub is extended left to a contact at (11590,12460) on a vertical metal x 11580-11600 that runs up to about (11600,10500) and on, outside this block |
-| `mra_g1_rN` | P | 12130, 10122+dy | in | from the right-hand columns |
+| `mra_g1_rN` | P | 12130, 10122+dy | in | band-1 ends here in a poly pad (12110-12150 x 10105-10140) with a metal contact at (12127,10122); the metal (seen, not traced) runs down to a contact at (12170,10295) |
 | `mra_b2_rN` | P | 12130, 10168+dy | ? | band-2, ends in a stub under the strap at x 11950-11985 |
 | `mra_x_r(N+1)` on band-3 of row N | P | 12130, 10253+dy | out | the row's cin, continuing to the right-hand columns |
 | `mra_cin_r10` | P | 11700, 12911 | in | leaves the region to the left |
@@ -175,6 +175,17 @@ boundary).
   to a poly contact (12016,10352); contacts at (12135,10120), (12183,10120),
   (12170,10295), (12225,10052), (12238,10255), (12325,9977), (12372,9980), (12372,10095);
   rail contacts (12432,10170), (12432,10305), (12712,10240), (12712,10345), (12955,10157).
+- Seen in `c2_10075.png` but not traced: right of the g1 pad there is a second, separate
+  poly pad with a metal contact at (12176,10122); its poly runs right at y 10112-10133 to
+  x 12270-12290 and turns up. So g1 is NOT the poly that continues to the right; it
+  comes by metal from lower in the row. Whether the chain is a counter carry or a
+  comparator hangs on what is at (12170,10295).
+- The bus field: about ten vertical metal lines at x 13050-13330. At the top
+  (y 7330-7560) they end in a staircase of contacts ((13125,7350) (13125,7395)
+  (13170,7445) (13170,7515) (13210,7555) ...), i.e. the bundle turns left there. Rows send
+  horizontal lines under it to the right (for example from (12990,10395) diagonally to
+  (13330,10000); several at y 10900-10960, 11400, 11890). Which row taps which line was
+  not read.
 - The vertical signal lines in those columns and where they leave at y 7200 and y 17050.
 - The bus field x 13000-13320 and the connections of each row to it (this is what would
   give the bit order).
