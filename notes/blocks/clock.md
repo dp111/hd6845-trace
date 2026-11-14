@@ -50,41 +50,49 @@ Six island devices to VCC hang on these nets (AMB-006, taken to be clamps). A pl
 VCC diffusion block with nine contacts lies under the gate row's lines at
 12385-12790 x 18600-18850.
 
-## Driver logic (10900-12000 x 19140-19890): surveyed
+## Driver logic (10900-12000 x 19140-19890): being traced from the clean shot
 
-Rails: VCC along the top (y 19160-19212, with an eight-contact diffusion at
-11260-11600), VSS across the middle (y 19370-19452, entering from the left at
-y 19340-19385). VCC also comes down the right side on the metal at x 12088-12140.
+Read from `acid1b` with `metal1` for contacts (2026-11-15). The earlier survey of this
+block from the chip-2 shots was wrong in several places and is superseded.
 
-The two halves are roughly mirror images about x = 11437, but not near the centre.
+It is two big push-pull drivers, one per half, that drive lines A and B themselves:
+the left half's output diffusion is contacted by line A at (11030,19298), the right
+half's by line B at (11838,19250). So A and B each have two drivers, a small inverter
+in the gate row and a large push-pull here. The halves mirror each other about
+x = 11437 except for which line the output pad sits under.
 
-What has been read so far (left half; mirror positions in brackets):
-- Under the VSS rail there is a band of diffusion crossed by vertical poly gates,
-  with VSS contact pairs at x 11070, 11213, 11355 (y 19390 and 19430). Above the rail,
-  at y 19325-19365, three wide poly blocks: A 11020-11140, B 11160-11275,
-  C 11300-11410. Vertical poly legs hang from them and run down below the rail.
-- Below the rail the diffusion continues as a tall rectangle R1, 11050-11250 down to
-  y 19850 (mirror 11625-11825). Two legs run down it lengthwise: 11100-11125, which
-  carries on past the bottom edge, and 11155-11185, which stops just past it. With
-  W of 400 or more these are the big devices of the block, either wide transistors
-  or bootstrap capacitors.
-- A second outline, R2, overlaps R1: 11135-11388 with its bottom edge at y 19885
-  (mirror about 11550-11740). R1's own edges remain visible inside R2, so the two
-  are different layers. One is diffusion; the other may be the depletion implant.
-  If so this is the first place the implant outline has been seen (AMB-002).
-- A smaller tall diffusion at 10920-11030 down to y 19760 (mirror 11840-11950) holds
-  the lower end of the long vertical poly at x 10975-11003 (which starts near the
-  VCC rail at y 19200). The poly jogs, passes a small box at 10940-10995 x 19632-19665
-  and widens to 10950-10992 down to y 19775. Probably a bootstrap capacitor.
-- Leg 11250-11290 ends at y 19545 on a contact at 11275,19580 fed by the `ck_g2`
-  metal line. Its mirror, at 11592,19570, is fed by the `ck_g4` line (the `ck_g2`
-  line jogs round it). So the left half is driven from line B and the right half
-  from line A.
-- Line B's metal (y 19240-19265) runs the full width of the block. Line A's
-  (y 19292-19312) runs from the right as far as x 11055; a separate piece continues
-  from a contact at 11020,19292 to the left edge.
-- Full-height vertical poly strips at 11390-11416 and 11523-11547 run down past
-  y 19890 towards the lines along the bottom of the block.
+Left half, as read so far:
+- Pull-up: the long vertical poly at x 10980-11000 is its gate. Left of it
+  (x 10922-10978) is diffusion on VCC (contact at 10937,19188 under the top rail);
+  right of it (x 11003-11035, widening to a contact box 11008-11055 x 19275-19322) is
+  the output. Net of the gate: N1.
+- N1's load: a diffusion finger comes down from the VCC diffusion at x 11258-11318,
+  crossed by a poly gate at y 19218-19270 (W/L about 60/50). The gate's left end
+  turns up at x 11228-11250 to a poly bar under the top rail (y 19165-19191) that
+  runs left to the top of the long vertical poly, and turns down to a buried-contact
+  box at 11228-11258 x 19278-19312 on the finger below the gate. So the load's gate
+  is tied to its own output, and that output is N1.
+- Below the load, N1's diffusion narrows to a neck (x 11285-11300, y 19325-19365)
+  between the two poly blocks and widens again under the VSS rail at x 11277-11303.
+- Under the VSS rail (y 19370-19452), left to right: VSS contacts 11055-11085;
+  gate strip a (11100-11125); a node (11127-11160); gate strip b1 (11160-11185);
+  VSS contacts 11200-11235; gate strip b2 (11245-11275); N1 (11277-11303); gate
+  strip c1 (11305-11330); VSS contacts 11340-11380; gate strip c2 (11385-11405).
+  b1 and b2 are joined above the rail by poly block B (11163-11272 x 19329-19365),
+  c1 and c2 by block C (11305-11410). Strip a ends in a rounded top at y 19340.
+- So N1 = NOR(b, c), and the node between a and b1 is pulled down by a or b. A
+  narrow diffusion appears to run from that node up at x 11150-11165 and left along
+  y 19318-19332 to the output's contact box, which would make it the output.
+  To be confirmed.
+- The gate strips run on down below the rail for about 400 px over diffusion: these
+  are the very wide pull-downs (and, for the long vertical poly, the pull-up and a
+  capacitor to the output at its lower end).
+- A second load (x 11402 onward) mirrors the first, with its buried-contact box at
+  11366-11400 x 19275-19320.
+
+What the clean shot's colours mean is in `notes/layers.md`; the one surprise was that
+metal lines protect a margin around themselves, so a 25 px gap between two lines
+shows only as a thin dark bar, not as "open" colours.
 
 ## Output stage: the two big arrays (9500-10730 x 19180-19815): traced schematically
 

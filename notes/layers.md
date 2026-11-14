@@ -73,25 +73,35 @@ few pixels.
 `acid1b` is the important one. Under the wide rails, where `acid` shows only
 interference fringes, it shows gates, diffusion and contacts plainly.
 
-Colour legend for `acid1b`, calibrated on four known places: the pilot cell
-(14268-14648 x 14880-15260), the R/W gate group, the two plain diffusion rectangles
-at 14700-15002 x 18600-18820, and the MA3 pre-driver under the VCC band
-(1480-2000 x 3110-3550). What an area looks like depends on whether metal was above
-it, so the two cases are listed separately.
+Colour legend for `acid1b`. Calibrated on the pilot cell, the R/W gate group, the
+two plain diffusion rectangles at 14700-15002 x 18600-18820, the MA3 pre-driver
+under the VCC band, the wide E poly line at 16660-16705 x 18130-18552 and the
+clock driver logic. What an area looks like depends on whether metal was above it:
 
-| Layer | Where metal was above | Where no metal was above |
+| Layer | Protected (metal above, or within about 10 px of a metal edge) | In the open |
 |---|---|---|
-| Poly | salmon with a sharp red outline. Unmistakable | over thin oxide (gates, loads): dark red-brown, textured. Over field: olive with a dark outline, easily taken for diffusion |
-| Diffusion | flat tan with a dark outline; rows of dark specks where contacts were | bright green in large areas, olive-green in small ones, dark outline |
-| Field | pink under narrow lines, olive-green under wide plates | olive-tan background |
-| Buried contact | small notch or box at a poly end, tan inside | small box with a heavy dark outline, light or dark inside |
+| Poly | salmon with a sharp red outline | dark red-brown, textured, with a thin green rim. Same over field and over thin oxide |
+| Diffusion | flat tan with a dark outline; dark specks where metal contacts were | bright green |
+| Field | pink | khaki |
+| Buried contact | small box at a poly end with a heavy dark outline, tan inside | the same |
+
+Traps
+- Metal protects a margin of about 10 px beyond its edges. A 25-30 px gap between
+  two parallel metal lines therefore does not show open colours: over diffusion or
+  poly it is a thin dark bar across the feature, over field a narrow olive strip
+  with a dark outline. These bars and strips are not layout.
+- Tan (protected diffusion) and khaki (open field) are close. Check where the metal
+  is before calling a tan area diffusion.
+- A diffusion edge under metal is a dark line in `acid1b` and in the metal shots,
+  so a dark line across a metal line is not evidence of a gap in the metal.
 
 How to use the shots together
-- Under metal: read `acid1b`. Poly, diffusion and field are three different colours.
-- In the open: read poly from `acid` (orange everywhere), diffusion from `acid1b`
-  (green). `acid1b` alone cannot tell poly over field from diffusion there.
-- Metal and its contacts: `metal`, with `metal1` as a second opinion.
-- `tools/quad.py x y w h` renders metal, `acid`, `acid1b` and `acid1b` with the trace.
+- Geometry of poly and diffusion: `acid1b`, with the metal shot beside it to know
+  which colour table applies.
+- Poly in the open is also plain in `acid` (orange).
+- Metal and its contacts: `metal`, with `metal1` as a second opinion. Contacts to
+  diffusion also show as specks in `acid1b`.
+- `tools/quad.py x y w h [--layers a,b,c,d]` renders several shots side by side.
 
 The salmon/brown difference in poly follows the metal above it, not the implant:
 load gates and ordinary gates look the same when both are in the open. AMB-002
