@@ -38,6 +38,15 @@ File format (trace/*.txt), one item per line, '#' starts a comment:
     @block name            names the block for the items that follow (reporting only)
     @alias NAME OTHER      OTHER is another name for net NAME (two labels that turn
                            out to be one net once the wiring between them is traced)
+    @requires FILE         also load trace/FILE.txt (for cells defined there)
+
+trace/examples/ holds small verified traces kept as worked examples; they are not part
+of the chip's trace (the blocks that own those areas trace them again).
+
+Which files are loaded: all of trace/*.txt, unless the environment variable TRACE
+names some (comma separated, without .txt), in which case only those and whatever
+they @require. Anyone working on one block sets TRACE to that block so that another
+block's half-finished file cannot get in the way.
     @cell NAME [tag=T]     start a cell. The items that follow, up to @end, are drawn
                            where they stand (the master) and can be repeated.
     @end
@@ -139,7 +148,7 @@ def xform(g, mx, my, dx, dy, rot=0, o=(0, 0)):
 ALIASES = {}          # other name -> canonical name
 
 
-def parse_file(path, items, labels, cells, insts):
+def parse_file(path, items, labels, cells, insts, requires=None):
     widths = {}
     csize = (24.0, 24.0)
     block = ''
@@ -164,6 +173,10 @@ def parse_file(path, items, labels, cells, insts):
                 continue
             if head == '@alias':
                 ALIASES[tok[2]] = tok[1]
+                continue
+            if head == '@requires':
+                if requires is not None:
+                    requires.append(tok[1])
                 continue
             if head == '@block':
                 block = tok[1] if len(tok) > 1 else ''
@@ -258,9 +271,22 @@ class Trace:
         self.cells = {}
         self.insts = []
         if files is None:
-            files = sorted(glob.glob(os.path.join(TRACE_DIR, '**', '*.txt'), recursive=True))
-        for p in files:
-            parse_file(p, self.items, self.labels, self.cells, self.insts)
+            sel = os.environ.get('TRACE')
+            if sel:
+                files = [os.path.join(TRACE_DIR, n.strip() + ('' if n.strip().endswith('.txt') else '.txt'))
+                         for n in sel.split(',') if n.strip()]
+            else:
+                files = sorted(glob.glob(os.path.join(TRACE_DIR, '*.txt')))   # not trace/examples/
+        files = list(files)
+        self.files = []
+        while files:
+            p = files.pop(0)
+            if os.path.abspath(p) in self.files:
+                continue
+            self.files.append(os.path.abspath(p))
+            req = []
+            parse_file(p, self.items, self.labels, self.cells, self.insts, req)
+            files += [os.path.join(TRACE_DIR, n + ('' if n.endswith('.txt') else '.txt')) for n in req]
         for name, dx, dy, mx, my, tag, src, rot, o in self.insts:
             if name not in self.cells:
                 raise TraceError(f'{src}: no cell named {name}')

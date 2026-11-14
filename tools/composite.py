@@ -9,7 +9,7 @@ the instances, for both shots. Residue, debris and interference fringes sit in
 different places on each copy, so they drop out; the layout itself stays. Each patch
 is first nudged by up to a few pixels to line up with the master.
 
-Writes cache/comp/NAME_metal.npy, NAME_acid.npy and NAME.json (the rectangle).
+Writes cache/comp/NAME_<layer>.npy for metal, acid, acid1b and metal1, and NAME.json.
 View with:  view.py x y w h --comp NAME ...   (coordinates in the master's frame)
 
 With --cell the instances are the @inst lines of that trace cell plus the master.
@@ -63,7 +63,10 @@ def main():
             if dx or dy:
                 Ts.append(tmatrix(None, None, 0, (0, 0), dx, dy))
     os.makedirs(os.path.join(CACHE, 'comp'), exist_ok=True)
-    for layer, fname in (('metal', 'metal.npy'), ('acid', 'acid_aligned.npy')):
+    for layer, fname in (('metal', 'metal.npy'), ('acid', 'acid_aligned.npy'),
+                         ('acid1b', 'acid1b.npy'), ('metal1', 'metal1.npy')):
+        if not os.path.exists(os.path.join(CACHE, fname)):
+            continue
         arr = np.load(os.path.join(CACHE, fname), mmap_mode='r')
         ref = patch(arr, Ts[0], x0, y0, x1, y1)
         stack = [ref]

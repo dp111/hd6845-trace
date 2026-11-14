@@ -1,5 +1,6 @@
 # derived data, rebuilt by tools/prepare.py
 cache/
+cache
 
 .venv/
 __pycache__/

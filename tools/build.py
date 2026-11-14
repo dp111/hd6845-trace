@@ -8,7 +8,8 @@
   out/floorplan.jpg   the die at reduced scale with the functional blocks outlined
   out/floorplan.svg   the same outlines as a stand-alone SVG over the photo
 
-floorplan.txt (repo root) lists the blocks, one per line:
+floorplan.txt (repo root) and floorplan.d/*.txt list the blocks, one per line. The
+fragments in floorplan.d are written by whoever traces a block and are drawn on top:
   x0,y0:x1,y1  kind  name | description
 kind is one of: pad io array pla logic route test power unknown
 A leading '?' on the kind marks the identification as provisional.
@@ -38,10 +39,16 @@ KIND_COL = {
 
 
 def read_floorplan():
-    path = os.path.join(ROOT, 'floorplan.txt')
+    import glob
+    paths = [os.path.join(ROOT, 'floorplan.txt')] + sorted(glob.glob(os.path.join(ROOT, 'floorplan.d', '*.txt')))
     blocks = []
-    if not os.path.exists(path):
-        return blocks
+    for path in paths:
+        if os.path.exists(path):
+            _read_floorplan_file(path, blocks)
+    return blocks
+
+
+def _read_floorplan_file(path, blocks):
     for n, line in enumerate(open(path), 1):
         line = line.split('#', 1)[0].strip()
         if not line:
@@ -55,7 +62,7 @@ def read_floorplan():
         prov = kind.startswith('?')
         kind = kind.lstrip('?')
         if kind not in KIND_COL:
-            raise SystemExit(f'floorplan.txt:{n}: unknown kind {kind}')
+            raise SystemExit(f'{os.path.basename(path)}:{n}: unknown kind {kind}')
         blocks.append(dict(x0=min(x0, x1), y0=min(y0, y1), x1=max(x0, x1), y1=max(y0, y1),
                            kind=kind, prov=prov, name=' '.join(tok[2:]), desc=desc.strip()))
     return blocks

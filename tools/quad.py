@@ -15,7 +15,7 @@ from PIL import Image, ImageDraw
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import view
 
-LABEL = {'metal': 'metal (chip 2)', 'acid': 'stripped (chip 2)', 'acid1b': 'clean (chip 1)',
+LABEL = {'metal': 'metal (chip 2)', 'acid': 'stripped (chip 2)', 'acid1b': 'clean (chip 1)', 'edges': 'edges',
          'metal1': 'metal (chip 1)', 'acid1': 'stripped (chip 1)', 'edges': 'edges'}
 
 
@@ -47,8 +47,15 @@ def main():
     ap.add_argument('--grid', type=int, default=50)
     ap.add_argument('--layers', default='metal,acid,acid1b,acid1b')
     ap.add_argument('--notrace', action='store_true')
-    ap.add_argument('--out', default=os.path.join(view.CACHE, 'scratch', 'quad.png'))
+    ap.add_argument('--out', default='quad.png')
+    ap.add_argument('--comp', default=None, help='use this median composite where it has the layer')
+    ap.add_argument('--shift', default=None, help='dx,dy: look at another instance in the master frame')
     a = ap.parse_args()
+    a.out = view.scratch_path(a.out)
+    if a.comp:
+        view.use_comp(a.comp)
+    if a.shift:
+        view._shift = tuple(int(v) for v in a.shift.split(','))
     o = quad(a.x, a.y, a.w, a.h, a.scale, a.grid, a.layers.split(','), not a.notrace)
     os.makedirs(os.path.dirname(a.out), exist_ok=True)
     o.save(a.out)

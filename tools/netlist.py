@@ -384,7 +384,24 @@ class Netlist:
             lines.append('')
             lines.append('not part of a static gate')
             for t in passes:
-                lines.append(f'  t{t.id} gate {self.nm(t.gate)}: {self.nm(t.c1)} <-> {self.nm(t.c2)}')
+                lines.append(f'  t{t.id} at {t.x:.0f},{t.y:.0f} gate {self.nm(t.gate)}: '
+                             f'{self.nm(t.c1)} <-> {self.nm(t.c2)}')
+        # open ends: every net should be driven and used inside what is traced, or be named
+        gate_outs = {o for o, _, _ in gates}
+        opens = []
+        for n in self.nodes.values():
+            if n.names:
+                continue
+            if n.gates and not n.chans:
+                opens.append(f'  {n.name} at {n.x:.0f},{n.y:.0f}: gates {len(n.gates)} transistor(s) but nothing drives it')
+            elif n.id in gate_outs and not n.gates:
+                opens.append(f'  {n.name} at {n.x:.0f},{n.y:.0f}: a gate output that goes nowhere')
+            elif not n.gates and not n.chans and 'M' in n.layers and len(n.layers) == 1:
+                pass        # a bare piece of metal: wiring in progress
+        if opens:
+            lines.append('')
+            lines.append('unnamed open nets (find the missing connection, or name the net as a port)')
+            lines += opens
         return '\n'.join(lines)
 
     def to_json(self):
@@ -400,11 +417,5 @@ class Netlist:
 
 
 if __name__ == '__main__':
-    import json
-    import os
     nl = Netlist()
     print(nl.report())
-    out = os.path.join(tracelib.ROOT, 'out')
-    os.makedirs(out, exist_ok=True)
-    with open(os.path.join(out, 'netlist.json'), 'w') as f:
-        json.dump(nl.to_json(), f, indent=1)

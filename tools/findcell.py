@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Find the other places on the die that look like a given rectangle of it.
 
-usage: findcell.py x0 y0 x1 y1 [--min SCORE] [--region x0,y0:x1,y1] [--layer metal|acid]
+usage: findcell.py x0 y0 x1 y1 [--min SCORE] [--region x0,y0:x1,y1]
+                   [--layer metal|acid|acid1b|metal1]
                    [--orient LIST] [--cell NAME]
 
 The rectangle (metal-shot pixels) is the master. It is tried in all eight
@@ -23,6 +24,8 @@ import cv2
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CACHE = os.path.join(ROOT, 'cache')
 Q = 4   # coarse scale
+LAYER_FILES = {'metal': 'metal.npy', 'acid': 'acid_aligned.npy', 'acid1b': 'acid1b.npy',
+               'metal1': 'metal1.npy', 'acid1': 'acid1.npy'}
 
 
 def gray_small(layer):
@@ -30,7 +33,7 @@ def gray_small(layer):
     path = os.path.join(CACHE, f'{layer}_g{Q}.npy')
     if os.path.exists(path):
         return np.load(path)
-    name = {'metal': 'metal.npy', 'acid': 'acid_aligned.npy'}[layer]
+    name = LAYER_FILES[layer]
     a = np.load(os.path.join(CACHE, name), mmap_mode='r')
     H, W = a.shape[:2]
     hh, ww = H // Q * Q, W // Q * Q
@@ -44,7 +47,7 @@ def gray_small(layer):
 
 
 def full(layer):
-    name = {'metal': 'metal.npy', 'acid': 'acid_aligned.npy'}[layer]
+    name = LAYER_FILES[layer]
     return np.load(os.path.join(CACHE, name), mmap_mode='r')
 
 

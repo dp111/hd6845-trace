@@ -20,7 +20,8 @@ usage: view.py x y w h [options]
                  die itself; coordinates are still those of the master
   --shift dx,dy  show the die at (x+dx, y+dy) but label the grid as x, y: looks at
                  another instance of a cell in the master's coordinates
-  --out FILE     output png (default: scratch/view.png under cache/)
+  --out FILE     output png. A bare file name goes into the scratch directory, which
+                 is $HD_SCRATCH if set, else cache/scratch
 
 The acid panel uses cache/acid_aligned.npy, so both panels share coordinates.
 """
@@ -37,13 +38,27 @@ _comp = None      # (metal array, acid array, x0, y0) when --comp is in use
 _shift = (0, 0)   # --shift
 
 
+def scratch_path(name):
+    """Resolve an --out value: bare names go into the scratch directory."""
+    if os.path.dirname(name):
+        return name
+    d = os.environ.get('HD_SCRATCH') or os.path.join(CACHE, 'scratch')
+    if not os.path.isabs(d):
+        d = os.path.join(ROOT, d)
+    return os.path.join(d, name)
+
+
 def use_comp(name):
     global _comp
     import json
     d = os.path.join(CACHE, 'comp')
     j = json.load(open(os.path.join(d, name + '.json')))
-    _comp = (np.load(os.path.join(d, name + '_metal.npy')),
-             np.load(os.path.join(d, name + '_acid.npy')), j['x0'], j['y0'])
+    lay = {}
+    for l in ('metal', 'acid', 'acid1b', 'metal1'):
+        f = os.path.join(d, f'{name}_{l}.npy')
+        if os.path.exists(f):
+            lay[l] = np.load(f)
+    _comp = (lay, None, j['x0'], j['y0'])
 
 
 def arr(layer):
@@ -93,8 +108,8 @@ def raw(layer, x, y, w, h):
     if layer == 'blend':
         return ((raw('metal', x, y, w, h).astype(np.uint16) +
                  raw('acid', x, y, w, h)) // 2).astype(np.uint8)
-    if _comp is not None and layer in ('metal', 'acid'):
-        a = _comp[0] if layer == 'metal' else _comp[1]
+    if _comp is not None and layer in _comp[0]:
+        a = _comp[0][layer]
         ox, oy = _comp[2], _comp[3]
     else:
         a = arr(layer)
@@ -186,8 +201,9 @@ def main():
     ap.add_argument('--nofill', action='store_true')
     ap.add_argument('--comp', default=None)
     ap.add_argument('--shift', default=None)
-    ap.add_argument('--out', default=os.path.join(CACHE, 'scratch', 'view.png'))
+    ap.add_argument('--out', default='view.png')
     a = ap.parse_args()
+    a.out = scratch_path(a.out)
     os.makedirs(os.path.dirname(a.out), exist_ok=True)
     if a.comp:
         use_comp(a.comp)

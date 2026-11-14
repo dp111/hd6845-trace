@@ -104,7 +104,7 @@ def main():
         bs = np.array([it.geom.bounds for it in tr.cells[a.cell][2]])
         x0, y0 = int(bs[:, 0].min()) - 10, int(bs[:, 1].min()) - 10
         x1, y1 = int(bs[:, 2].max()) + 10, int(bs[:, 3].max()) + 10
-    name = {'metal': 'metal.npy', 'acid': 'acid_aligned.npy'}[a.layer]
+    name = {'metal': 'metal.npy', 'acid': 'acid_aligned.npy', 'acid1b': 'acid1b.npy', 'metal1': 'metal1.npy'}[a.layer]
     arr = np.load(os.path.join(CACHE, name), mmap_mode='r')
     master = patch(arr, np.eye(3), x0, y0, x1, y1)
     only = a.only.split(',') if a.only else None
@@ -126,7 +126,10 @@ def main():
         row = np.hstack([master, np.full((master.shape[0], 8, 3), 255, np.uint8), inst,
                          np.full((master.shape[0], 8, 3), 255, np.uint8), tint.astype(np.uint8)])
         row = cv2.resize(row, None, fx=a.scale, fy=a.scale, interpolation=cv2.INTER_AREA)
-        out = os.path.join(CACHE, 'scratch', f'cellcheck_{a.cell}_{tag or "x"}.png')
+        sd = os.environ.get('HD_SCRATCH') or os.path.join(CACHE, 'scratch')
+        sd = sd if os.path.isabs(sd) else os.path.join(ROOT, sd)
+        os.makedirs(sd, exist_ok=True)
+        out = os.path.join(sd, f'cellcheck_{a.cell}_{tag or "x"}.png')
         cv2.imwrite(out, cv2.cvtColor(row, cv2.COLOR_RGB2BGR))
         c = T @ np.array([(x0 + x1) / 2, (y0 + y1) / 2, 1])
         print(f'  {tag or "?":10s} centre {c[0]:6.0f},{c[1]:6.0f}  bad blocks {bad.sum():4d}/{valid.sum():4d} '

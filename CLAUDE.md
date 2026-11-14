@@ -47,3 +47,25 @@ first, then `notes/journal.md` (latest entry) and `notes/ambiguities.md` if they
 - `tools/netlist.py` prints the extraction report; `tools/build.py` regenerates `out/`.
 - Trace file format: docstring of `tools/tracelib.py`. Layer legend and what each
   feature looks like: `notes/layers.md`. Read that before tracing anything.
+
+## Parallel work (from 2026-11-15)
+
+The user asked for parallel agents and for the session to work unsupervised until the
+weekly usage limit is reached, committing and pushing each new traced piece and
+keeping the floor plan up to date.
+
+- Every agent works from `notes/tracing-guide.md`. Read it before tracing anything,
+  whoever you are.
+- One block = one agent = one file prefix. An agent owns `trace/PREFIX*.txt`,
+  `notes/blocks/PREFIX.md`, `floorplan.d/PREFIX.txt`, `tools/PREFIX_*.py` and
+  `cache/scratch/PREFIX/`, and nothing else.
+- Agents commit only through `tools/ship.sh "message" files...` and run tools through
+  `tools/t.sh PREFIX tool.py ...` (sets `TRACE=PREFIX` so other blocks' unfinished
+  files are not loaded).
+- The coordinating session alone edits `floorplan.txt`, `notes/work-packages.md` (the
+  queue and its status), `notes/journal.md`, `notes/ambiguities.md`, `PLAN.md`, this
+  file and the shared tools, and alone runs `tools/build.py`. When a package reports:
+  read its notes, spot-check an overlay, run the full extraction (no `TRACE`), trim the
+  coarse block in `floorplan.txt` that its `floorplan.d` fragment replaces, rebuild,
+  ship, mark it in `notes/work-packages.md`, and start the next package from the queue.
+- `trace/examples/` holds worked examples that are not part of the chip's trace.

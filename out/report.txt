@@ -1,6 +1,6 @@
-173 nets, 443 transistors, 0 errors, 0 warnings
-note   vss is traced as 51 separate pieces, joined by name
-note   vcc is traced as 32 separate pieces, joined by name
+168 nets, 438 transistors, 0 errors, 0 warnings
+note   vss is traced as 50 separate pieces, joined by name
+note   vcc is traced as 31 separate pieces, joined by name
 
 transistors
   t0    at   1268,  2061  W/L  613/18   -     gate ma2_pu       vcc <-> ma2
@@ -15,7 +15,7 @@ transistors
   t9    at   1204,  3892  W/L  743/15   -     gate ma3_pd       ma3 <-> vss
   t10   at   1148,  3968  W/L  633/18   -     gate ma3_pd       vss <-> ma3
   t11   at   1120,  4044  W/L  690/16   -     gate ma3_pd       vss <-> ma3
-  t12   at   1268,  5314  W/L  613/18   -     gate ma4_pu       ma4 <-> vcc
+  t12   at   1268,  5314  W/L  613/18   -     gate ma4_pu       vcc <-> ma4
   t13   at   1204,  5380  W/L  743/16   -     gate ma4_pu       ma4 <-> vcc
   t14   at   1204,  5464  W/L  743/18   -     gate ma4_pu       vcc <-> ma4
   t15   at   1204,  5540  W/L  743/15   -     gate ma4_pd       ma4 <-> vss
@@ -33,29 +33,29 @@ transistors
   t27   at   1204,  9184  W/L  743/15   -     gate ma6_pd       ma6 <-> vss
   t28   at   1150,  9260  W/L  633/18   -     gate ma6_pd       vss <-> ma6
   t29   at   1121,  9336  W/L  690/16   -     gate ma6_pd       vss <-> ma6
-  t30   at   1270, 10520  W/L  613/18   -     gate ma7_pu       vcc <-> ma7
-  t31   at   1204, 10586  W/L  743/16   -     gate ma7_pu       ma7 <-> vcc
-  t32   at   1204, 10670  W/L  743/18   -     gate ma7_pu       ma7 <-> vcc
-  t33   at   1204, 10746  W/L  743/15   -     gate ma7_pd       ma7 <-> vss
-  t34   at   1150, 10822  W/L  633/18   -     gate ma7_pd       vss <-> ma7
-  t35   at   1121, 10898  W/L  690/16   -     gate ma7_pd       vss <-> ma7
-  t36   at   1270, 12255  W/L  613/18   -     gate ma8_pu       vcc <-> ma8
+  t30   at   1204, 10670  W/L  743/18   -     gate ma7_pu       ma7 <-> vcc
+  t31   at   1204, 10746  W/L  743/15   -     gate ma7_pd       ma7 <-> vss
+  t32   at   1150, 10822  W/L  633/18   -     gate ma7_pd       vss <-> ma7
+  t33   at   1121, 10898  W/L  690/16   -     gate ma7_pd       vss <-> ma7
+  t34   at   1204, 10586  W/L  743/16   -     gate ma7_pu       vcc <-> ma7
+  t35   at   1270, 10520  W/L  613/18   -     gate ma7_pu       vcc <-> ma7
+  t36   at   1270, 12255  W/L  613/18   -     gate ma8_pu       ma8 <-> vcc
   t37   at   1204, 12321  W/L  743/16   -     gate ma8_pu       ma8 <-> vcc
   t38   at   1204, 12405  W/L  743/18   -     gate ma8_pu       ma8 <-> vcc
   t39   at   1204, 12482  W/L  743/15   -     gate ma8_pd       ma8 <-> vss
   t40   at   1150, 12557  W/L  633/18   -     gate ma8_pd       vss <-> ma8
   t41   at   1121, 12633  W/L  690/16   -     gate ma8_pd       vss <-> ma8
-  t42   at   1150, 13653  W/L  633/18   -     gate ma9_pd       ma9 <-> vss
-  t43   at   1206, 13728  W/L  743/15   -     gate ma9_pd       ma9 <-> vss
-  t44   at   1206, 13805  W/L  743/18   -     gate ma9_pu       ma9 <-> vcc
-  t45   at   1206, 13889  W/L  743/16   -     gate ma9_pu       ma9 <-> vcc
-  t46   at   1270, 13955  W/L  613/18   -     gate ma9_pu       vcc <-> ma9
+  t42   at   1206, 13728  W/L  743/15   -     gate ma9_pd       ma9 <-> vss
+  t43   at   1206, 13805  W/L  743/18   -     gate ma9_pu       ma9 <-> vcc
+  t44   at   1206, 13889  W/L  743/16   -     gate ma9_pu       ma9 <-> vcc
+  t45   at   1270, 13955  W/L  613/18   -     gate ma9_pu       vcc <-> ma9
+  t46   at   1150, 13653  W/L  633/18   -     gate ma9_pd       ma9 <-> vss
   t47   at   1122, 13577  W/L  690/16   -     gate ma9_pd       vss <-> ma9
-  t48   at   1206, 15290  W/L  743/15   -     gate ma10_pd      ma10 <-> vss
-  t49   at   1206, 15366  W/L  743/18   -     gate ma10_pu      ma10 <-> vcc
-  t50   at   1206, 15450  W/L  743/16   -     gate ma10_pu      ma10 <-> vcc
-  t51   at   1270, 15516  W/L  613/18   -     gate ma10_pu      ma10 <-> vcc
-  t52   at   1150, 15214  W/L  633/18   -     gate ma10_pd      ma10 <-> vss
+  t48   at   1150, 15214  W/L  633/18   -     gate ma10_pd      ma10 <-> vss
+  t49   at   1206, 15290  W/L  743/15   -     gate ma10_pd      ma10 <-> vss
+  t50   at   1206, 15366  W/L  743/18   -     gate ma10_pu      ma10 <-> vcc
+  t51   at   1206, 15450  W/L  743/16   -     gate ma10_pu      ma10 <-> vcc
+  t52   at   1270, 15516  W/L  613/18   -     gate ma10_pu      vcc <-> ma10
   t53   at   1122, 15138  W/L  690/16   -     gate ma10_pd      vss <-> ma10
   t54   at   1206, 16860  W/L  743/15   -     gate ma11_pd      ma11 <-> vss
   t55   at   1206, 16937  W/L  743/18   -     gate ma11_pu      ma11 <-> vcc
@@ -69,14 +69,14 @@ transistors
   t63   at   1272, 18812  W/L  613/18   -     gate ma12_pu      ma12 <-> vcc
   t64   at   1152, 18510  W/L  633/18   -     gate ma12_pd      vss <-> ma12
   t65   at   1123, 18434  W/L  690/16   -     gate ma12_pd      vss <-> ma12
-  t66   at   1702,  1770  W/L  381/25   -     gate ma2_pu       vss <-> ma2_pd
-  t67   at   1702,  1658  W/L  381/25   -     gate ma2_drv_in   ma2_pu <-> vss
-  t68   at   1704,  1588  W/L  134/55   load  gate ma2_pu       ma2_pu <-> vcc
-  t69   at   1704,  1850  W/L  133/42   load  gate ma2_pd       ma2_pd <-> vcc
-  t70   at   1702,  3376  W/L  381/25   -     gate ma3_pu       vss <-> ma3_pd
-  t71   at   1702,  3264  W/L  381/25   -     gate ma3_drv_in   ma3_pu <-> vss
-  t72   at   1704,  3192  W/L  134/55   load  gate ma3_pu       ma3_pu <-> vcc
-  t73   at   1704,  3455  W/L  133/42   load  gate ma3_pd       ma3_pd <-> vcc
+  t66   at   1704,  1850  W/L  133/42   load  gate ma2_pd       ma2_pd <-> vcc
+  t67   at   1702,  1770  W/L  381/25   -     gate ma2_pu       vss <-> ma2_pd
+  t68   at   1702,  1658  W/L  381/25   -     gate ma2_drv_in   ma2_pu <-> vss
+  t69   at   1704,  1588  W/L  134/55   load  gate ma2_pu       ma2_pu <-> vcc
+  t70   at   1704,  3455  W/L  133/42   load  gate ma3_pd       ma3_pd <-> vcc
+  t71   at   1702,  3376  W/L  381/25   -     gate ma3_pu       vss <-> ma3_pd
+  t72   at   1702,  3264  W/L  381/25   -     gate ma3_drv_in   ma3_pu <-> vss
+  t73   at   1704,  3192  W/L  134/55   load  gate ma3_pu       ma3_pu <-> vcc
   t74   at   1702,  5024  W/L  381/25   -     gate ma4_pu       vss <-> ma4_pd
   t75   at   1702,  4912  W/L  381/25   -     gate ma4_drv_in   ma4_pu <-> vss
   t76   at   1704,  4840  W/L  134/55   load  gate ma4_pu       ma4_pu <-> vcc
@@ -89,53 +89,53 @@ transistors
   t83   at   1704,  8556  W/L  381/25   -     gate ma6_drv_in   ma6_pu <-> vss
   t84   at   1704,  8668  W/L  381/25   -     gate ma6_pu       vss <-> ma6_pd
   t85   at   1704,  8747  W/L  133/42   load  gate ma6_pd       ma6_pd <-> vcc
-  t86   at   1704, 10230  W/L  381/25   -     gate ma7_pu       vss <-> ma7_pd
-  t87   at   1704, 10118  W/L  381/25   -     gate ma7_drv_in   ma7_pu <-> vss
-  t88   at   1704, 10046  W/L  134/55   load  gate ma7_pu       ma7_pu <-> vcc
-  t89   at   1704, 10309  W/L  133/42   load  gate ma7_pd       ma7_pd <-> vcc
-  t90   at   1704, 12044  W/L  133/42   load  gate ma8_pd       ma8_pd <-> vcc
-  t91   at   1704, 11964  W/L  381/25   -     gate ma8_pu       vss <-> ma8_pd
-  t92   at   1704, 11852  W/L  381/25   -     gate ma8_drv_in   ma8_pu <-> vss
-  t93   at   1704, 11782  W/L  134/55   load  gate ma8_pu       ma8_pu <-> vcc
-  t94   at   1706, 14428  W/L  134/55   load  gate ma9_pu       ma9_pu <-> vcc
-  t95   at   1704, 14358  W/L  381/25   -     gate ma9_drv_in   vss <-> ma9_pu
-  t96   at   1704, 14246  W/L  381/25   -     gate ma9_pu       ma9_pd <-> vss
-  t97   at   1706, 14166  W/L  133/42   load  gate ma9_pd       vcc <-> ma9_pd
-  t98   at   1706, 17560  W/L  134/55   load  gate ma11_pu      ma11_pu <-> vcc
-  t99   at   1704, 17490  W/L  381/25   -     gate ma11_drv_in  vss <-> ma11_pu
-  t100  at   1704, 17378  W/L  381/25   -     gate ma11_pu      ma11_pd <-> vss
-  t101  at   1706, 17298  W/L  133/42   load  gate ma11_pd      vcc <-> ma11_pd
-  t102  at   5154,  1276  W/L  743/18   -     gate ma0_pu       vcc <-> ma0
-  t103  at   5070,  1276  W/L  743/16   -     gate ma0_pu       ma0 <-> vcc
-  t104  at   5004,  1342  W/L  613/18   -     gate ma0_pu       ma0 <-> vcc
+  t86   at   1704, 10309  W/L  133/42   load  gate ma7_pd       ma7_pd <-> vcc
+  t87   at   1704, 10230  W/L  381/25   -     gate ma7_pu       vss <-> ma7_pd
+  t88   at   1704, 10118  W/L  381/25   -     gate ma7_drv_in   ma7_pu <-> vss
+  t89   at   1704, 10046  W/L  134/55   load  gate ma7_pu       ma7_pu <-> vcc
+  t90   at   1704, 11782  W/L  134/55   load  gate ma8_pu       ma8_pu <-> vcc
+  t91   at   1704, 11852  W/L  381/25   -     gate ma8_drv_in   ma8_pu <-> vss
+  t92   at   1704, 11964  W/L  381/25   -     gate ma8_pu       vss <-> ma8_pd
+  t93   at   1704, 12044  W/L  133/42   load  gate ma8_pd       ma8_pd <-> vcc
+  t94   at   1706, 17298  W/L  133/42   load  gate ma11_pd      vcc <-> ma11_pd
+  t95   at   1704, 17378  W/L  381/25   -     gate ma11_pu      ma11_pd <-> vss
+  t96   at   1704, 17490  W/L  381/25   -     gate ma11_drv_in  vss <-> ma11_pu
+  t97   at   1706, 17560  W/L  134/55   load  gate ma11_pu      ma11_pu <-> vcc
+  t98   at   3843,  1193  W/L  690/16   -     gate ma1_pd       vss <-> ma1
+  t99   at   3767,  1222  W/L  633/18   -     gate ma1_pd       ma1 <-> vss
+  t100  at   3692,  1276  W/L  743/15   -     gate ma1_pd       ma1 <-> vss
+  t101  at   3615,  1276  W/L  743/18   -     gate ma1_pu       vcc <-> ma1
+  t102  at   3531,  1276  W/L  743/16   -     gate ma1_pu       ma1 <-> vcc
+  t103  at   3465,  1342  W/L  613/18   -     gate ma1_pu       ma1 <-> vcc
+  t104  at   5154,  1276  W/L  743/18   -     gate ma0_pu       ma0 <-> vcc
   t105  at   5230,  1276  W/L  743/15   -     gate ma0_pd       ma0 <-> vss
   t106  at   5306,  1222  W/L  633/18   -     gate ma0_pd       ma0 <-> vss
   t107  at   5382,  1193  W/L  690/16   -     gate ma0_pd       vss <-> ma0
-  t108  at   3692,  1276  W/L  743/15   -     gate ma1_pd       ma1 <-> vss
-  t109  at   3615,  1276  W/L  743/18   -     gate ma1_pu       vcc <-> ma1
-  t110  at   3531,  1276  W/L  743/16   -     gate ma1_pu       ma1 <-> vcc
-  t111  at   3465,  1342  W/L  613/18   -     gate ma1_pu       ma1 <-> vcc
-  t112  at   3767,  1222  W/L  633/18   -     gate ma1_pd       ma1 <-> vss
-  t113  at   3843,  1193  W/L  690/16   -     gate ma1_pd       vss <-> ma1
-  t114  at   3062,  1776  W/L  381/25   -     gate ma1_drv_in   ma1_pu <-> vss
-  t115  at   3174,  1776  W/L  381/25   -     gate ma1_pu       ma1_pd <-> vss
-  t116  at   3254,  1776  W/L  133/42   load  gate ma1_pd       vcc <-> ma1_pd
-  t117  at   2992,  1776  W/L  134/55   load  gate ma1_pu       ma1_pu <-> vcc
-  t118  at   4602,  1776  W/L  381/25   -     gate ma0_drv_in   ma0_pu <-> vss
-  t119  at   4714,  1776  W/L  381/25   -     gate ma0_pu       ma0_pd <-> vss
-  t120  at   4793,  1776  W/L  133/42   load  gate ma0_pd       vcc <-> ma0_pd
-  t121  at   4530,  1776  W/L  134/55   load  gate ma0_pu       ma0_pu <-> vcc
-  t122  at   1706, 15990  W/L  134/55   load  gate ma10_pu      ma10_pu <-> vcc
-  t123  at   1704, 15918  W/L  381/25   -     gate ma10_drv_in  vss <-> ma10_pu
-  t124  at   1704, 15806  W/L  381/25   -     gate ma10_pu      ma10_pd <-> vss
-  t125  at   1706, 15727  W/L  133/42   load  gate ma10_pd      vcc <-> ma10_pd
-  t126  at   1706, 19023  W/L  133/42   load  gate ma12_pd      vcc <-> ma12_pd
+  t108  at   5070,  1276  W/L  743/16   -     gate ma0_pu       ma0 <-> vcc
+  t109  at   5004,  1342  W/L  613/18   -     gate ma0_pu       ma0 <-> vcc
+  t110  at   3062,  1776  W/L  381/25   -     gate ma1_drv_in   vss <-> ma1_pu
+  t111  at   3174,  1776  W/L  381/25   -     gate ma1_pu       ma1_pd <-> vss
+  t112  at   3254,  1776  W/L  133/42   load  gate ma1_pd       vcc <-> ma1_pd
+  t113  at   2992,  1776  W/L  134/55   load  gate ma1_pu       ma1_pu <-> vcc
+  t114  at   4602,  1776  W/L  381/25   -     gate ma0_drv_in   vss <-> ma0_pu
+  t115  at   4714,  1776  W/L  381/25   -     gate ma0_pu       vss <-> ma0_pd
+  t116  at   4793,  1776  W/L  133/42   load  gate ma0_pd       vcc <-> ma0_pd
+  t117  at   4530,  1776  W/L  134/55   load  gate ma0_pu       ma0_pu <-> vcc
+  t118  at   1706, 14428  W/L  134/55   load  gate ma9_pu       ma9_pu <-> vcc
+  t119  at   1704, 14358  W/L  381/25   -     gate ma9_drv_in   vss <-> ma9_pu
+  t120  at   1704, 14246  W/L  381/25   -     gate ma9_pu       ma9_pd <-> vss
+  t121  at   1706, 14166  W/L  133/42   load  gate ma9_pd       vcc <-> ma9_pd
+  t122  at   1704, 15918  W/L  381/25   -     gate ma10_drv_in  vss <-> ma10_pu
+  t123  at   1704, 15806  W/L  381/25   -     gate ma10_pu      ma10_pd <-> vss
+  t124  at   1706, 15727  W/L  133/42   load  gate ma10_pd      vcc <-> ma10_pd
+  t125  at   1706, 15990  W/L  134/55   load  gate ma10_pu      ma10_pu <-> vcc
+  t126  at   1706, 19214  W/L  381/25   -     gate ma12_drv_in  vss <-> ma12_pu
   t127  at   1706, 19102  W/L  381/25   -     gate ma12_pu      ma12_pd <-> vss
-  t128  at   1706, 19214  W/L  381/25   -     gate ma12_drv_in  vss <-> ma12_pu
+  t128  at   1706, 19023  W/L  133/42   load  gate ma12_pd      vcc <-> ma12_pd
   t129  at   1706, 19286  W/L  134/55   load  gate ma12_pu      ma12_pu <-> vcc
-  t130  at   3558, 19294  W/L  134/55   load  gate ma13_pu      ma13_pu <-> vcc
-  t131  at   3630, 19294  W/L  381/25   -     gate ma13_drv_in  vss <-> ma13_pu
-  t132  at   3742, 19294  W/L  381/25   -     gate ma13_pu      vss <-> ma13_pd
+  t130  at   3742, 19294  W/L  381/25   -     gate ma13_pu      vss <-> ma13_pd
+  t131  at   3630, 19294  W/L  381/25   -     gate ma13_drv_in  ma13_pu <-> vss
+  t132  at   3558, 19294  W/L  134/55   load  gate ma13_pu      ma13_pu <-> vcc
   t133  at   3821, 19294  W/L  133/42   load  gate ma13_pd      vcc <-> ma13_pd
   t134  at   4098, 19794  W/L  743/16   -     gate ma13_pu      vcc <-> ma13
   t135  at   4182, 19794  W/L  743/18   -     gate ma13_pu      vcc <-> ma13
@@ -149,31 +149,31 @@ transistors
   t143  at  10914,  1276  W/L  743/18   -     gate vsync_pu     vsync <-> vcc
   t144  at  10998,  1276  W/L  743/16   -     gate vsync_pu     vcc <-> vsync
   t145  at  11064,  1340  W/L  613/18   -     gate vsync_pu     vcc <-> vsync
-  t146  at   7834,  1980  W/L   36/36   load  gate res_n        res_n <-> vcc
-  t147  at   7884,  1835  W/L  197/24   -     gate res          vss <-> res_n
-  t148  at   7336,  1980  W/L   36/36   load  gate lpstb_n      lpstb_n <-> vcc
-  t149  at   7386,  1835  W/L  197/24   -     gate lpstb        vss <-> lpstb_n
+  t146  at   7336,  1980  W/L   36/36   load  gate lpstb_n      lpstb_n <-> vcc
+  t147  at   7386,  1835  W/L  197/24   -     gate lpstb        vss <-> lpstb_n
+  t148  at   7834,  1980  W/L   36/36   load  gate res_n        res_n <-> vcc
+  t149  at   7884,  1835  W/L  197/24   -     gate res          vss <-> res_n
   t150  at   7541,  1929  W/L   68/40   load  gate res_b        res_b <-> vcc
-  t151  at   7624,  1887  W/L  192/23   -     gate res_n        res_b <-> vss
+  t151  at   7624,  1887  W/L  192/23   -     gate res_n        vss <-> res_b
   t152  at   7698,  1846  W/L  203/25   -     gate res_n        vss <-> res_b
   t153  at   7200,  1846  W/L  203/25   -     gate lpstb_n      vss <-> lpstb_b
   t154  at   7126,  1887  W/L  192/23   -     gate lpstb_n      lpstb_b <-> vss
   t155  at   7043,  1929  W/L   68/40   load  gate lpstb_b      lpstb_b <-> vcc
-  t156  at   5582, 19294  W/L  381/25   -     gate disptmg_drv_in disptmg_pu <-> vss
-  t157  at   5694, 19294  W/L  381/25   -     gate disptmg_pu   vss <-> disptmg_pd
-  t158  at   5774, 19294  W/L  133/42   load  gate disptmg_pd   vcc <-> disptmg_pd
-  t159  at   5512, 19294  W/L  134/55   load  gate disptmg_pu   disptmg_pu <-> vcc
-  t160  at   7658, 19294  W/L  134/55   load  gate cudisp_pu    cudisp_pu <-> vcc
-  t161  at   7730, 19294  W/L  381/25   -     gate cudisp_drv_in cudisp_pu <-> vss
-  t162  at   7842, 19294  W/L  381/25   -     gate cudisp_pu    vss <-> cudisp_pd
-  t163  at   7921, 19294  W/L  133/42   load  gate cudisp_pd    vcc <-> cudisp_pd
+  t156  at   7658, 19294  W/L  134/55   load  gate cudisp_pu    cudisp_pu <-> vcc
+  t157  at   7730, 19294  W/L  381/25   -     gate cudisp_drv_in vss <-> cudisp_pu
+  t158  at   7842, 19294  W/L  381/25   -     gate cudisp_pu    cudisp_pd <-> vss
+  t159  at   7921, 19294  W/L  133/42   load  gate cudisp_pd    vcc <-> cudisp_pd
+  t160  at   5512, 19294  W/L  134/55   load  gate disptmg_pu   disptmg_pu <-> vcc
+  t161  at   5582, 19294  W/L  381/25   -     gate disptmg_drv_in vss <-> disptmg_pu
+  t162  at   5694, 19294  W/L  381/25   -     gate disptmg_pu   vss <-> disptmg_pd
+  t163  at   5774, 19294  W/L  133/42   load  gate disptmg_pd   vcc <-> disptmg_pd
   t164  at  10148, 19335  W/L  174/34   load  gate ck_n2        ck_n2 <-> vcc
   t165  at  10666, 19336  W/L  154/27   load  gate ck_t         ck_t <-> vcc
   t166  at  10578, 19505  W/L  480/23   -     gate clk          ck_t <-> vss
-  t167  at  10508, 19505  W/L  480/23   -     gate clk          vss <-> ck_t
-  t168  at  10436, 19505  W/L  480/22   -     gate clk          ck_t <-> vss
-  t169  at  10366, 19505  W/L  480/23   -     gate ck_t         ck_n2 <-> vss
-  t170  at  10290, 19505  W/L  480/20   -     gate ck_t         vss <-> ck_n2
+  t167  at  10508, 19505  W/L  480/23   -     gate clk          ck_t <-> vss
+  t168  at  10436, 19505  W/L  480/22   -     gate clk          vss <-> ck_t
+  t169  at  10366, 19505  W/L  480/23   -     gate ck_t         vss <-> ck_n2
+  t170  at  10290, 19505  W/L  480/20   -     gate ck_t         ck_n2 <-> vss
   t171  at  10992, 19374  W/L  577/27   -     gate ck_a_pu      vcc <-> ck_a
   t172  at  11121, 19609  W/L  482/24   -     gate clk_b        ck_a <-> vss
   t173  at  11176, 19609  W/L  482/31   -     gate ck_g2        ck_a <-> vss
@@ -188,264 +188,259 @@ transistors
   t182  at  11753, 19609  W/L  482/24   -     gate ck_clkn      ck_b <-> vss
   t183  at  11882, 19374  W/L  577/27   -     gate ck_b_pu      vcc <-> ck_b
   t184  at  11288, 19244  W/L   61/51   load  gate ck_a_pu      vcc <-> ck_a_pu
-  t185  at   9652, 19494  W/L  483/25   -     gate ck_ga        vcc <-> ck_out
-  t186  at   9724, 19494  W/L  483/23   -     gate ck_ga        vcc <-> ck_out
-  t187  at   9575, 19662  W/L  145/40   -     gate ck_ga        vcc <-> ck_out
+  t185  at   9575, 19662  W/L  145/40   -     gate ck_ga        vcc <-> ck_out
+  t186  at   9652, 19494  W/L  483/25   -     gate ck_ga        ck_out <-> vcc
+  t187  at   9724, 19494  W/L  483/23   -     gate ck_ga        vcc <-> ck_out
   t188  at   9860, 19562  W/L  345/20   -     gate ck_n2        ck_out <-> vss
-  t189  at   9930, 19562  W/L  345/20   -     gate ck_n2        ck_out <-> vss
+  t189  at   9930, 19562  W/L  345/20   -     gate ck_n2        vss <-> ck_out
   t190  at   9995, 19562  W/L  345/20   -     gate ck_n2        ck_ga <-> vss
-  t191  at   6051, 19794  W/L  743/16   -     gate disptmg_pu   vcc <-> disptmg
-  t192  at   6135, 19794  W/L  743/18   -     gate disptmg_pu   vcc <-> disptmg
-  t193  at   6212, 19794  W/L  743/15   -     gate disptmg_pd   disptmg <-> vss
-  t194  at   6287, 19848  W/L  633/18   -     gate disptmg_pd   vss <-> disptmg
-  t195  at   6363, 19877  W/L  690/16   -     gate disptmg_pd   vss <-> disptmg
-  t196  at   5985, 19728  W/L  613/18   -     gate disptmg_pu   disptmg <-> vcc
-  t197  at   8282, 19794  W/L  743/18   -     gate cudisp_pu    vcc <-> cudisp
-  t198  at   8358, 19794  W/L  743/15   -     gate cudisp_pd    cudisp <-> vss
-  t199  at   8434, 19848  W/L  633/18   -     gate cudisp_pd    vss <-> cudisp
-  t200  at   8510, 19877  W/L  690/16   -     gate cudisp_pd    vss <-> cudisp
-  t201  at   8198, 19794  W/L  743/16   -     gate cudisp_pu    vcc <-> cudisp
-  t202  at   8132, 19728  W/L  613/18   -     gate cudisp_pu    cudisp <-> vcc
+  t191  at   8198, 19794  W/L  743/16   -     gate cudisp_pu    vcc <-> cudisp
+  t192  at   8282, 19794  W/L  743/18   -     gate cudisp_pu    vcc <-> cudisp
+  t193  at   8358, 19794  W/L  743/15   -     gate cudisp_pd    cudisp <-> vss
+  t194  at   8434, 19848  W/L  633/18   -     gate cudisp_pd    vss <-> cudisp
+  t195  at   8510, 19877  W/L  690/16   -     gate cudisp_pd    vss <-> cudisp
+  t196  at   8132, 19728  W/L  613/18   -     gate cudisp_pu    cudisp <-> vcc
+  t197  at   6051, 19794  W/L  743/16   -     gate disptmg_pu   vcc <-> disptmg
+  t198  at   6135, 19794  W/L  743/18   -     gate disptmg_pu   vcc <-> disptmg
+  t199  at   6212, 19794  W/L  743/15   -     gate disptmg_pd   disptmg <-> vss
+  t200  at   6287, 19848  W/L  633/18   -     gate disptmg_pd   vss <-> disptmg
+  t201  at   6363, 19877  W/L  690/16   -     gate disptmg_pd   vss <-> disptmg
+  t202  at   5985, 19728  W/L  613/18   -     gate disptmg_pu   disptmg <-> vcc
   t203  at  12443,  1192  W/L  690/16   -     gate hsync_pd     vss <-> hsync
   t204  at  12519,  1220  W/L  633/18   -     gate hsync_pd     vss <-> hsync
   t205  at  12594,  1276  W/L  743/15   -     gate hsync_pd     hsync <-> vss
   t206  at  12671,  1276  W/L  743/18   -     gate hsync_pu     hsync <-> vcc
   t207  at  12755,  1276  W/L  743/16   -     gate hsync_pu     vcc <-> hsync
   t208  at  12821,  1340  W/L  613/18   -     gate hsync_pu     vcc <-> hsync
-  t209  at  11354,  1774  W/L  381/25   -     gate vsync_pu     vsync_pd <-> vss
+  t209  at  11538,  1776  W/L  134/55   load  gate vsync_pu     vsync_pu <-> vcc
   t210  at  11466,  1774  W/L  381/25   -     gate vsync_drv_in vsync_pu <-> vss
-  t211  at  11538,  1776  W/L  134/55   load  gate vsync_pu     vsync_pu <-> vcc
+  t211  at  11354,  1774  W/L  381/25   -     gate vsync_pu     vss <-> vsync_pd
   t212  at  11275,  1776  W/L  133/42   load  gate vsync_pd     vsync_pd <-> vcc
-  t213  at  11985, 18825  W/L   50/26   -     gate ck_b         ck_a <-> vss
-  t214  at  11999, 18685  W/L   68/26   load  gate ck_a         vcc <-> ck_a
-  t215  at  11854, 18824  W/L   50/24   -     gate ck_a         ck_b <-> vss
-  t216  at  11860, 18719  W/L   26/96   load  gate ck_b         vcc <-> ck_b
-  t217  at  11640, 18825  W/L   50/26   -     gate ck_g3        ck_g4 <-> vss
-  t218  at  11671, 18697  W/L   30/50   load  gate ck_g4        vcc <-> ck_g4
+  t213  at  11854, 18824  W/L   50/24   -     gate ck_a         ck_b <-> vss
+  t214  at  11860, 18719  W/L   26/96   load  gate ck_b         vcc <-> ck_b
+  t215  at  11985, 18825  W/L   50/26   -     gate ck_b         ck_a <-> vss
+  t216  at  11999, 18685  W/L   68/26   load  gate ck_a         vcc <-> ck_a
+  t217  at  11671, 18697  W/L   30/50   load  gate ck_g4        vcc <-> ck_g4
+  t218  at  11640, 18825  W/L   50/26   -     gate ck_g3        ck_g4 <-> vss
   t219  at  11511, 18825  W/L   50/24   -     gate ck_a         ck_g3 <-> vss
   t220  at  11517, 18720  W/L   26/96   load  gate ck_g3        vcc <-> ck_g3
   t221  at  11379, 18825  W/L   50/26   -     gate ck_g1        ck_g2 <-> vss
   t222  at  11410, 18697  W/L   30/50   load  gate ck_g2        vcc <-> ck_g2
-  t223  at  11256, 18720  W/L   26/96   load  gate ck_g1        vcc <-> ck_g1
-  t224  at  11250, 18825  W/L   50/24   -     gate ck_b         ck_g1 <-> vss
-  t225  at  12420, 18899  W/L   56/21   clamp gate ck_g4        ck_g4 <-> vcc
-  t226  at  12598, 18899  W/L   61/21   clamp gate clk_b        clk_b <-> vcc
-  t227  at  12772, 18899  W/L   61/21   clamp gate clk          clk <-> vcc
-  t228  at  12442, 19168  W/L   61/20   clamp gate ck_b         ck_b <-> vcc
-  t229  at  12442, 19338  W/L   61/20   clamp gate ck_b         ck_b <-> vcc
-  t230  at  12465, 19712  W/L   64/19   clamp gate ck_g2        ck_g2 <-> vcc
-  t231  at  14157,  1192  W/L  690/16   -     gate ra0_pd       vss <-> ra0
-  t232  at  14233,  1220  W/L  633/18   -     gate ra0_pd       vss <-> ra0
-  t233  at  14308,  1276  W/L  743/15   -     gate ra0_pd       ra0 <-> vss
-  t234  at  14385,  1276  W/L  743/18   -     gate ra0_pu       ra0 <-> vcc
-  t235  at  14469,  1276  W/L  743/16   -     gate ra0_pu       vcc <-> ra0
-  t236  at  14535,  1340  W/L  613/18   -     gate ra0_pu       vcc <-> ra0
-  t237  at  13294,  1776  W/L  134/55   load  gate hsync_pu     hsync_pu <-> vcc
-  t238  at  13224,  1774  W/L  381/25   -     gate hsync_drv_in vss <-> hsync_pu
-  t239  at  13112,  1774  W/L  381/25   -     gate hsync_pu     vss <-> hsync_pd
-  t240  at  13032,  1776  W/L  133/42   load  gate hsync_pd     hsync_pd <-> vcc
-  t241  at  14260, 13618  W/L   44/55   load  gate rsel7        vcc <-> rsel7
-  t242  at  14694, 13618  W/L   44/55   load  gate rsel1        vcc <-> rsel1
-  t243  at  14520, 13618  W/L   44/55   load  gate rsel0        vcc <-> rsel0
-  t244  at  14520, 13766  W/L   45/25   -     gate ar0          vss <-> rsel0
-  t245  at  14434, 13766  W/L   45/25   -     gate ar0          vss <-> rsel4
-  t246  at  14434, 13618  W/L   44/55   load  gate rsel4        vcc <-> rsel4
-  t247  at  14347, 13766  W/L   45/25   -     gate ar0          vss <-> rsel6
-  t248  at  14347, 13618  W/L   44/55   load  gate rsel6        vcc <-> rsel6
-  t249  at  14260, 13851  W/L   41/25   -     gate ar0_n        vss <-> rsel7
-  t250  at  14694, 13851  W/L   41/25   -     gate ar0_n        vss <-> rsel1
-  t251  at  14694, 13940  W/L   41/25   -     gate ar1          vss <-> rsel1
-  t252  at  14520, 13940  W/L   41/25   -     gate ar1          vss <-> rsel0
-  t253  at  14434, 13940  W/L   41/25   -     gate ar1          vss <-> rsel4
-  t254  at  14260, 14024  W/L   41/25   -     gate ar1_n        vss <-> rsel7
-  t255  at  14347, 14024  W/L   41/25   -     gate ar1_n        vss <-> rsel6
-  t256  at  14607, 14024  W/L   41/25   -     gate ar1_n        vss <-> rsel2
-  t257  at  14607, 14112  W/L   41/25   -     gate ar2          vss <-> rsel2
-  t258  at  14520, 14112  W/L   41/25   -     gate ar2          vss <-> rsel0
-  t259  at  14260, 14196  W/L   41/25   -     gate ar2_n        vss <-> rsel7
-  t260  at  14260, 14284  W/L   41/25   -     gate ar3          vss <-> rsel7
-  t261  at  14780, 14369  W/L   41/25   -     gate ar3_n        vss <-> rsel10
-  t262  at  14780, 14456  W/L   41/25   -     gate ar4          vss <-> rsel10
-  t263  at  14694, 14456  W/L   41/25   -     gate ar4          vss <-> rsel1
-  t264  at  14607, 14456  W/L   41/25   -     gate ar4          vss <-> rsel2
-  t265  at  14520, 14456  W/L   41/25   -     gate ar4          vss <-> rsel0
-  t266  at  14434, 14456  W/L   41/25   -     gate ar4          vss <-> rsel4
-  t267  at  14347, 14456  W/L   41/25   -     gate ar4          vss <-> rsel6
-  t268  at  14260, 14456  W/L   41/25   -     gate ar4          vss <-> rsel7
-  t269  at  15647, 14543  W/L   41/25   -     gate ar4_n        vss <-> rsel17
-  t270  at  15734, 14543  W/L   41/25   -     gate ar4_n        vss <-> rsel16
-  t271  at  15560, 14456  W/L   41/25   -     gate ar4          vss <-> rsel15
-  t272  at  15560, 14369  W/L   41/25   -     gate ar3_n        vss <-> rsel15
-  t273  at  15734, 14284  W/L   41/25   -     gate ar3          vss <-> rsel16
-  t274  at  15647, 14284  W/L   41/25   -     gate ar3          vss <-> rsel17
-  t275  at  14954, 14284  W/L   41/25   -     gate ar3          vss <-> rsel3
-  t276  at  14867, 14284  W/L   41/25   -     gate ar3          vss <-> rsel5
-  t277  at  14867, 14196  W/L   41/25   -     gate ar2_n        vss <-> rsel5
-  t278  at  15300, 14196  W/L   41/25   -     gate ar2_n        vss <-> rsel13
-  t279  at  15387, 14196  W/L   41/25   -     gate ar2_n        vss <-> rsel12
-  t280  at  15474, 14196  W/L   41/25   -     gate ar2_n        vss <-> rsel14
-  t281  at  15560, 14196  W/L   41/25   -     gate ar2_n        vss <-> rsel15
-  t282  at  15734, 14112  W/L   41/25   -     gate ar2          vss <-> rsel16
-  t283  at  15647, 14112  W/L   41/25   -     gate ar2          vss <-> rsel17
-  t284  at  15214, 14112  W/L   41/25   -     gate ar2          vss <-> rsel11
-  t285  at  15214, 14024  W/L   41/25   -     gate ar1_n        vss <-> rsel11
-  t286  at  15474, 14024  W/L   41/25   -     gate ar1_n        vss <-> rsel14
-  t287  at  15560, 14024  W/L   41/25   -     gate ar1_n        vss <-> rsel15
-  t288  at  15734, 13940  W/L   41/25   -     gate ar1          vss <-> rsel16
-  t289  at  15647, 13940  W/L   41/25   -     gate ar1          vss <-> rsel17
-  t290  at  15647, 13851  W/L   41/25   -     gate ar0_n        vss <-> rsel17
-  t291  at  15734, 13766  W/L   45/25   -     gate ar0          vss <-> rsel16
-  t292  at  15734, 13618  W/L   44/55   load  gate rsel16       vcc <-> rsel16
-  t293  at  15474, 13766  W/L   45/25   -     gate ar0          vss <-> rsel14
-  t294  at  15474, 13618  W/L   44/55   load  gate rsel14       vcc <-> rsel14
-  t295  at  15387, 13766  W/L   45/25   -     gate ar0          vss <-> rsel12
-  t296  at  15387, 13618  W/L   44/55   load  gate rsel12       vcc <-> rsel12
-  t297  at  15040, 13766  W/L   45/25   -     gate ar0          vss <-> rsel8
-  t298  at  15040, 13618  W/L   44/55   load  gate rsel8        rsel8 <-> vcc
-  t299  at  14780, 13766  W/L   45/25   -     gate ar0          vss <-> rsel10
-  t300  at  14780, 13618  W/L   44/55   load  gate rsel10       vcc <-> rsel10
-  t301  at  14607, 13766  W/L   45/25   -     gate ar0          vss <-> rsel2
-  t302  at  14607, 13618  W/L   44/55   load  gate rsel2        rsel2 <-> vcc
-  t303  at  15474, 14456  W/L   41/25   -     gate ar4          vss <-> rsel14
-  t304  at  15474, 14369  W/L   41/25   -     gate ar3_n        vss <-> rsel14
-  t305  at  15387, 14456  W/L   41/25   -     gate ar4          vss <-> rsel12
-  t306  at  15387, 14369  W/L   41/25   -     gate ar3_n        vss <-> rsel12
-  t307  at  15300, 14456  W/L   41/25   -     gate ar4          vss <-> rsel13
-  t308  at  15300, 14369  W/L   41/25   -     gate ar3_n        vss <-> rsel13
-  t309  at  15387, 13940  W/L   41/25   -     gate ar1          vss <-> rsel12
-  t310  at  15300, 13940  W/L   41/25   -     gate ar1          vss <-> rsel13
-  t311  at  15300, 13851  W/L   41/25   -     gate ar0_n        vss <-> rsel13
-  t312  at  15560, 13851  W/L   41/25   -     gate ar0_n        vss <-> rsel15
-  t313  at  14867, 13851  W/L   41/25   -     gate ar0_n        vss <-> rsel5
-  t314  at  14867, 13940  W/L   41/25   -     gate ar1          vss <-> rsel5
-  t315  at  14694, 14112  W/L   41/25   -     gate ar2          vss <-> rsel1
-  t316  at  14780, 14024  W/L   41/25   -     gate ar1_n        vss <-> rsel10
-  t317  at  14780, 14112  W/L   41/25   -     gate ar2          vss <-> rsel10
-  t318  at  14347, 14284  W/L   41/25   -     gate ar3          vss <-> rsel6
-  t319  at  14347, 14196  W/L   41/25   -     gate ar2_n        vss <-> rsel6
-  t320  at  14434, 14196  W/L   41/25   -     gate ar2_n        vss <-> rsel4
-  t321  at  14434, 14284  W/L   41/25   -     gate ar3          vss <-> rsel4
-  t322  at  14694, 14284  W/L   41/25   -     gate ar3          vss <-> rsel1
-  t323  at  14607, 14284  W/L   41/25   -     gate ar3          vss <-> rsel2
-  t324  at  14520, 14284  W/L   41/25   -     gate ar3          vss <-> rsel0
-  t325  at  14954, 14024  W/L   41/25   -     gate ar1_n        vss <-> rsel3
-  t326  at  14954, 14112  W/L   41/25   -     gate ar2          vss <-> rsel3
-  t327  at  15127, 14112  W/L   41/25   -     gate ar2          vss <-> rsel9
-  t328  at  15040, 14112  W/L   41/25   -     gate ar2          vss <-> rsel8
-  t329  at  15040, 13940  W/L   41/25   -     gate ar1          vss <-> rsel8
-  t330  at  14954, 13851  W/L   41/25   -     gate ar0_n        vss <-> rsel3
-  t331  at  15127, 13851  W/L   41/25   -     gate ar0_n        vss <-> rsel9
-  t332  at  15127, 13940  W/L   41/25   -     gate ar1          vss <-> rsel9
-  t333  at  15214, 13851  W/L   41/25   -     gate ar0_n        vss <-> rsel11
-  t334  at  14954, 14456  W/L   41/25   -     gate ar4          vss <-> rsel3
-  t335  at  14867, 14456  W/L   41/25   -     gate ar4          vss <-> rsel5
-  t336  at  15040, 14369  W/L   41/25   -     gate ar3_n        vss <-> rsel8
-  t337  at  15040, 14456  W/L   41/25   -     gate ar4          vss <-> rsel8
-  t338  at  15127, 14369  W/L   41/25   -     gate ar3_n        vss <-> rsel9
-  t339  at  15127, 14456  W/L   41/25   -     gate ar4          vss <-> rsel9
-  t340  at  15214, 14369  W/L   41/25   -     gate ar3_n        vss <-> rsel11
-  t341  at  15214, 14456  W/L   41/25   -     gate ar4          vss <-> rsel11
-  t342  at  14433, 14957  W/L   54/22   -     gate in_a_L       vss <-> a_out_L
-  t343  at  14550, 14988  W/L   27/52   load  gate a_out_L      a_out_L <-> vcc
-  t344  at  14420, 15087  W/L   80/20   -     gate a_out_L      vss <-> b_out_L
-  t345  at  14420, 15172  W/L   80/22   -     gate in_c_L       b_out_L <-> vss
-  t346  at  14529, 15132  W/L   35/42   load  gate b_out_L      b_out_L <-> vcc
-  t347  at  13809, 18436  W/L  266/27   -     gate t_g0_in      t_g0_out <-> vss
-  t348  at  13868, 18313  W/L   71/37   load  gate t_g0_out     t_g0_out <-> vcc
-  t349  at  14114, 18379  W/L  192/23   -     gate clk_n        clk_b <-> vss
-  t350  at  14186, 18420  W/L  203/25   -     gate clk_n        vss <-> clk_b
-  t351  at  14030, 18337  W/L   68/40   load  gate clk_b        vcc <-> clk_b
-  t352  at  14355, 18337  W/L   68/40   load  gate clk_n        vcc <-> clk_n
-  t353  at  14438, 18379  W/L  192/23   -     gate clk          clk_n <-> vss
-  t354  at  14512, 18402  W/L  213/24   -     gate clk          clk_n <-> vss
-  t355  at  14553, 18402  W/L  215/24   -     gate clk          clk_n <-> vss
-  t356  at  14676, 18404  W/L   45/25   -     gate rw           rw_a <-> vss
-  t357  at  14726, 18295  W/L   27/52   load  gate rw_a         vcc <-> rw_a
-  t358  at  14058, 19050  W/L  417/41   field gate clk          vss <-> clk
-  t359  at  15008,  1776  W/L  134/55   load  gate ra0_pu       ra0_pu <-> vcc
-  t360  at  14938,  1774  W/L  381/25   -     gate ra0_drv_in   vss <-> ra0_pu
-  t361  at  14826,  1774  W/L  381/25   -     gate ra0_pu       vss <-> ra0_pd
-  t362  at  14746,  1776  W/L  133/42   load  gate ra0_pd       ra0_pd <-> vcc
-  t363  at  15300, 13618  W/L   44/55   load  gate rsel13       vcc <-> rsel13
-  t364  at  14954, 13618  W/L   44/55   load  gate rsel3        vcc <-> rsel3
-  t365  at  15214, 13618  W/L   44/55   load  gate rsel11       vcc <-> rsel11
-  t366  at  14867, 13618  W/L   44/55   load  gate rsel5        vcc <-> rsel5
-  t367  at  15127, 13618  W/L   44/55   load  gate rsel9        vcc <-> rsel9
-  t368  at  15180, 18295  W/L   27/52   load  gate rw_d         vcc <-> rw_d
-  t369  at  15132, 18404  W/L   59/20   -     gate rw_c         rw_d <-> vss
-  t370  at  15354, 18295  W/L   27/52   load  gate rs_a         vcc <-> rs_a
-  t371  at  15304, 18404  W/L   45/25   -     gate rs           rs_a <-> vss
-  t372  at  15028, 18315  W/L   27/106  load  gate rw_c         vcc <-> rw_c
-  t373  at  14982, 18442  W/L   39/25   -     gate rw_b         rw_c <-> vss
-  t374  at  14876, 18315  W/L   27/106  load  gate rw_b         vcc <-> rw_b
-  t375  at  14830, 18442  W/L   39/25   -     gate rw_a         rw_b <-> vss
-  t376  at  14904, 19050  W/L  417/41   field gate rw_p         vss <-> rw_p
-  t377  at  15870,  1274  W/L  743/15   -     gate ra1_pd       ra1 <-> vss
-  t378  at  15946,  1274  W/L  743/18   -     gate ra1_pu       ra1 <-> vcc
-  t379  at  16030,  1274  W/L  743/16   -     gate ra1_pu       vcc <-> ra1
-  t380  at  16096,  1340  W/L  613/18   -     gate ra1_pu       vcc <-> ra1
-  t381  at  15794,  1220  W/L  633/18   -     gate ra1_pd       ra1 <-> vss
-  t382  at  15718,  1191  W/L  690/16   -     gate ra1_pd       vss <-> ra1
-  t383  at  16386,  1774  W/L  381/25   -     gate ra1_pu       vss <-> ra1_pd
-  t384  at  16498,  1774  W/L  381/25   -     gate ra1_drv_in   vss <-> ra1_pu
-  t385  at  16570,  1774  W/L  134/55   load  gate ra1_pu       ra1_pu <-> vcc
-  t386  at  16307,  1774  W/L  133/42   load  gate ra1_pd       ra1_pd <-> vcc
-  t387  at  15647, 13618  W/L   44/55   load  gate rsel17       vcc <-> rsel17
-  t388  at  15560, 13618  W/L   44/55   load  gate rsel15       vcc <-> rsel15
-  t389  at  15760, 18404  W/L   59/20   -     gate rs_c         rs_d <-> vss
-  t390  at  15808, 18295  W/L   27/52   load  gate rs_d         vcc <-> rs_d
-  t391  at  16086, 18442  W/L   39/25   -     gate cs_a         cs_b <-> vss
-  t392  at  16132, 18315  W/L   27/106  load  gate cs_b         vcc <-> cs_b
-  t393  at  15458, 18442  W/L   39/25   -     gate rs_a         rs_b <-> vss
-  t394  at  15504, 18315  W/L   27/106  load  gate rs_b         vcc <-> rs_b
-  t395  at  16238, 18442  W/L   39/25   -     gate cs_b         cs_c <-> vss
-  t396  at  16284, 18315  W/L   27/106  load  gate cs_c         vcc <-> cs_c
-  t397  at  15610, 18442  W/L   39/25   -     gate rs_b         rs_c <-> vss
-  t398  at  15656, 18315  W/L   27/106  load  gate rs_c         vcc <-> rs_c
-  t399  at  15932, 18404  W/L   45/25   -     gate cs           cs_a <-> vss
-  t400  at  15982, 18295  W/L   27/52   load  gate cs_a         vcc <-> cs_a
-  t401  at  15792, 19050  W/L  417/41   field gate e_p          vss <-> e_p
-  t402  at  17541,  1191  W/L  690/16   -     gate ra2_pd       vss <-> ra2
-  t403  at  17617,  1220  W/L  633/18   -     gate ra2_pd       ra2 <-> vss
-  t404  at  17692,  1274  W/L  743/15   -     gate ra2_pd       ra2 <-> vss
-  t405  at  17769,  1274  W/L  743/18   -     gate ra2_pu       ra2 <-> vcc
-  t406  at  17853,  1274  W/L  743/16   -     gate ra2_pu       ra2 <-> vcc
-  t407  at  17919,  1340  W/L  613/18   -     gate ra2_pu       ra2 <-> vcc
-  t408  at  18392,  1774  W/L  134/55   load  gate ra2_pu       ra2_pu <-> vcc
-  t409  at  18322,  1774  W/L  381/25   -     gate ra2_drv_in   vss <-> ra2_pu
-  t410  at  18210,  1774  W/L  381/25   -     gate ra2_pu       ra2_pd <-> vss
-  t411  at  18130,  1774  W/L  133/42   load  gate ra2_pd       ra2_pd <-> vcc
-  t412  at  18094,  3218  W/L  381/25   -     gate ra3_drv_in   ra3_pu <-> vss
-  t413  at  18094,  3330  W/L  381/25   -     gate ra3_pu       vss <-> ra3_pd
-  t414  at  18092,  3410  W/L  133/42   load  gate ra3_pd       ra3_pd <-> vcc
-  t415  at  18092,  3148  W/L  134/55   load  gate ra3_pu       ra3_pu <-> vcc
+  t223  at  11250, 18825  W/L   50/24   -     gate ck_b         ck_g1 <-> vss
+  t224  at  11256, 18720  W/L   26/96   load  gate ck_g1        vcc <-> ck_g1
+  t225  at  12598, 18899  W/L   61/21   clamp gate clk_b        clk_b <-> vcc
+  t226  at  12772, 18899  W/L   61/21   clamp gate clk          clk <-> vcc
+  t227  at  12420, 18899  W/L   56/21   clamp gate ck_g4        ck_g4 <-> vcc
+  t228  at  12465, 19712  W/L   64/19   clamp gate ck_g2        ck_g2 <-> vcc
+  t229  at  14308,  1276  W/L  743/15   -     gate ra0_pd       ra0 <-> vss
+  t230  at  14385,  1276  W/L  743/18   -     gate ra0_pu       ra0 <-> vcc
+  t231  at  14469,  1276  W/L  743/16   -     gate ra0_pu       vcc <-> ra0
+  t232  at  14535,  1340  W/L  613/18   -     gate ra0_pu       vcc <-> ra0
+  t233  at  14233,  1220  W/L  633/18   -     gate ra0_pd       ra0 <-> vss
+  t234  at  14157,  1192  W/L  690/16   -     gate ra0_pd       vss <-> ra0
+  t235  at  13032,  1776  W/L  133/42   load  gate hsync_pd     hsync_pd <-> vcc
+  t236  at  13112,  1774  W/L  381/25   -     gate hsync_pu     hsync_pd <-> vss
+  t237  at  13224,  1774  W/L  381/25   -     gate hsync_drv_in hsync_pu <-> vss
+  t238  at  13294,  1776  W/L  134/55   load  gate hsync_pu     hsync_pu <-> vcc
+  t239  at  14694, 13618  W/L   44/55   load  gate rsel1        vcc <-> rsel1
+  t240  at  14260, 13618  W/L   44/55   load  gate rsel7        vcc <-> rsel7
+  t241  at  14260, 13851  W/L   41/25   -     gate ar0_n        vss <-> rsel7
+  t242  at  14694, 13851  W/L   41/25   -     gate ar0_n        vss <-> rsel1
+  t243  at  14694, 13940  W/L   41/25   -     gate ar1          vss <-> rsel1
+  t244  at  14520, 13940  W/L   41/25   -     gate ar1          vss <-> rsel0
+  t245  at  14434, 13940  W/L   41/25   -     gate ar1          vss <-> rsel4
+  t246  at  14260, 14024  W/L   41/25   -     gate ar1_n        vss <-> rsel7
+  t247  at  14347, 14024  W/L   41/25   -     gate ar1_n        vss <-> rsel6
+  t248  at  14607, 14024  W/L   41/25   -     gate ar1_n        vss <-> rsel2
+  t249  at  14607, 14112  W/L   41/25   -     gate ar2          vss <-> rsel2
+  t250  at  14520, 14112  W/L   41/25   -     gate ar2          vss <-> rsel0
+  t251  at  14260, 14196  W/L   41/25   -     gate ar2_n        vss <-> rsel7
+  t252  at  14260, 14284  W/L   41/25   -     gate ar3          vss <-> rsel7
+  t253  at  14780, 14369  W/L   41/25   -     gate ar3_n        vss <-> rsel10
+  t254  at  14780, 14456  W/L   41/25   -     gate ar4          vss <-> rsel10
+  t255  at  14694, 14456  W/L   41/25   -     gate ar4          vss <-> rsel1
+  t256  at  14607, 14456  W/L   41/25   -     gate ar4          vss <-> rsel2
+  t257  at  14520, 14456  W/L   41/25   -     gate ar4          vss <-> rsel0
+  t258  at  14434, 14456  W/L   41/25   -     gate ar4          vss <-> rsel4
+  t259  at  14347, 14456  W/L   41/25   -     gate ar4          vss <-> rsel6
+  t260  at  14260, 14456  W/L   41/25   -     gate ar4          vss <-> rsel7
+  t261  at  15647, 14543  W/L   41/25   -     gate ar4_n        vss <-> rsel17
+  t262  at  15734, 14543  W/L   41/25   -     gate ar4_n        vss <-> rsel16
+  t263  at  15560, 14456  W/L   41/25   -     gate ar4          vss <-> rsel15
+  t264  at  15560, 14369  W/L   41/25   -     gate ar3_n        vss <-> rsel15
+  t265  at  15734, 14284  W/L   41/25   -     gate ar3          vss <-> rsel16
+  t266  at  15647, 14284  W/L   41/25   -     gate ar3          vss <-> rsel17
+  t267  at  14954, 14284  W/L   41/25   -     gate ar3          vss <-> rsel3
+  t268  at  14867, 14284  W/L   41/25   -     gate ar3          vss <-> rsel5
+  t269  at  14867, 14196  W/L   41/25   -     gate ar2_n        vss <-> rsel5
+  t270  at  15300, 14196  W/L   41/25   -     gate ar2_n        vss <-> rsel13
+  t271  at  15387, 14196  W/L   41/25   -     gate ar2_n        vss <-> rsel12
+  t272  at  15474, 14196  W/L   41/25   -     gate ar2_n        vss <-> rsel14
+  t273  at  15560, 14196  W/L   41/25   -     gate ar2_n        vss <-> rsel15
+  t274  at  15734, 14112  W/L   41/25   -     gate ar2          vss <-> rsel16
+  t275  at  15647, 14112  W/L   41/25   -     gate ar2          vss <-> rsel17
+  t276  at  15214, 14112  W/L   41/25   -     gate ar2          vss <-> rsel11
+  t277  at  15214, 14024  W/L   41/25   -     gate ar1_n        vss <-> rsel11
+  t278  at  15474, 14024  W/L   41/25   -     gate ar1_n        vss <-> rsel14
+  t279  at  15560, 14024  W/L   41/25   -     gate ar1_n        vss <-> rsel15
+  t280  at  15734, 13940  W/L   41/25   -     gate ar1          vss <-> rsel16
+  t281  at  15647, 13940  W/L   41/25   -     gate ar1          vss <-> rsel17
+  t282  at  15647, 13851  W/L   41/25   -     gate ar0_n        vss <-> rsel17
+  t283  at  15734, 13766  W/L   45/25   -     gate ar0          vss <-> rsel16
+  t284  at  15734, 13618  W/L   44/55   load  gate rsel16       vcc <-> rsel16
+  t285  at  15474, 13766  W/L   45/25   -     gate ar0          vss <-> rsel14
+  t286  at  15474, 13618  W/L   44/55   load  gate rsel14       vcc <-> rsel14
+  t287  at  15387, 13766  W/L   45/25   -     gate ar0          vss <-> rsel12
+  t288  at  15387, 13618  W/L   44/55   load  gate rsel12       vcc <-> rsel12
+  t289  at  15040, 13766  W/L   45/25   -     gate ar0          vss <-> rsel8
+  t290  at  15040, 13618  W/L   44/55   load  gate rsel8        vcc <-> rsel8
+  t291  at  14780, 13766  W/L   45/25   -     gate ar0          vss <-> rsel10
+  t292  at  14780, 13618  W/L   44/55   load  gate rsel10       rsel10 <-> vcc
+  t293  at  14607, 13766  W/L   45/25   -     gate ar0          vss <-> rsel2
+  t294  at  14607, 13618  W/L   44/55   load  gate rsel2        rsel2 <-> vcc
+  t295  at  14520, 13766  W/L   45/25   -     gate ar0          vss <-> rsel0
+  t296  at  14520, 13618  W/L   44/55   load  gate rsel0        rsel0 <-> vcc
+  t297  at  14434, 13766  W/L   45/25   -     gate ar0          vss <-> rsel4
+  t298  at  14434, 13618  W/L   44/55   load  gate rsel4        vcc <-> rsel4
+  t299  at  14347, 13766  W/L   45/25   -     gate ar0          vss <-> rsel6
+  t300  at  14347, 13618  W/L   44/55   load  gate rsel6        vcc <-> rsel6
+  t301  at  15474, 14456  W/L   41/25   -     gate ar4          vss <-> rsel14
+  t302  at  15474, 14369  W/L   41/25   -     gate ar3_n        vss <-> rsel14
+  t303  at  15387, 14456  W/L   41/25   -     gate ar4          vss <-> rsel12
+  t304  at  15387, 14369  W/L   41/25   -     gate ar3_n        vss <-> rsel12
+  t305  at  15300, 14456  W/L   41/25   -     gate ar4          vss <-> rsel13
+  t306  at  15300, 14369  W/L   41/25   -     gate ar3_n        vss <-> rsel13
+  t307  at  15387, 13940  W/L   41/25   -     gate ar1          vss <-> rsel12
+  t308  at  15300, 13940  W/L   41/25   -     gate ar1          vss <-> rsel13
+  t309  at  15300, 13851  W/L   41/25   -     gate ar0_n        vss <-> rsel13
+  t310  at  15560, 13851  W/L   41/25   -     gate ar0_n        vss <-> rsel15
+  t311  at  14867, 13851  W/L   41/25   -     gate ar0_n        vss <-> rsel5
+  t312  at  14867, 13940  W/L   41/25   -     gate ar1          vss <-> rsel5
+  t313  at  14694, 14112  W/L   41/25   -     gate ar2          vss <-> rsel1
+  t314  at  14780, 14024  W/L   41/25   -     gate ar1_n        vss <-> rsel10
+  t315  at  14780, 14112  W/L   41/25   -     gate ar2          vss <-> rsel10
+  t316  at  14347, 14284  W/L   41/25   -     gate ar3          vss <-> rsel6
+  t317  at  14347, 14196  W/L   41/25   -     gate ar2_n        vss <-> rsel6
+  t318  at  14434, 14196  W/L   41/25   -     gate ar2_n        vss <-> rsel4
+  t319  at  14434, 14284  W/L   41/25   -     gate ar3          vss <-> rsel4
+  t320  at  14694, 14284  W/L   41/25   -     gate ar3          vss <-> rsel1
+  t321  at  14607, 14284  W/L   41/25   -     gate ar3          vss <-> rsel2
+  t322  at  14520, 14284  W/L   41/25   -     gate ar3          vss <-> rsel0
+  t323  at  15040, 13940  W/L   41/25   -     gate ar1          vss <-> rsel8
+  t324  at  14954, 13851  W/L   41/25   -     gate ar0_n        vss <-> rsel3
+  t325  at  15127, 13851  W/L   41/25   -     gate ar0_n        vss <-> rsel9
+  t326  at  15127, 13940  W/L   41/25   -     gate ar1          vss <-> rsel9
+  t327  at  15214, 13851  W/L   41/25   -     gate ar0_n        vss <-> rsel11
+  t328  at  14954, 14024  W/L   41/25   -     gate ar1_n        vss <-> rsel3
+  t329  at  14954, 14112  W/L   41/25   -     gate ar2          vss <-> rsel3
+  t330  at  15040, 14112  W/L   41/25   -     gate ar2          vss <-> rsel8
+  t331  at  15127, 14112  W/L   41/25   -     gate ar2          vss <-> rsel9
+  t332  at  14867, 14456  W/L   41/25   -     gate ar4          vss <-> rsel5
+  t333  at  15040, 14369  W/L   41/25   -     gate ar3_n        vss <-> rsel8
+  t334  at  15040, 14456  W/L   41/25   -     gate ar4          vss <-> rsel8
+  t335  at  14954, 14456  W/L   41/25   -     gate ar4          vss <-> rsel3
+  t336  at  15127, 14369  W/L   41/25   -     gate ar3_n        vss <-> rsel9
+  t337  at  15127, 14456  W/L   41/25   -     gate ar4          vss <-> rsel9
+  t338  at  15214, 14369  W/L   41/25   -     gate ar3_n        vss <-> rsel11
+  t339  at  15214, 14456  W/L   41/25   -     gate ar4          vss <-> rsel11
+  t340  at  13809, 18436  W/L  266/27   -     gate t_g0_in      t_g0_out <-> vss
+  t341  at  13868, 18313  W/L   71/37   load  gate t_g0_out     t_g0_out <-> vcc
+  t342  at  14355, 18337  W/L   68/40   load  gate clk_n        vcc <-> clk_n
+  t343  at  14438, 18379  W/L  192/23   -     gate clk          clk_n <-> vss
+  t344  at  14512, 18402  W/L  213/24   -     gate clk          clk_n <-> vss
+  t345  at  14553, 18402  W/L  215/24   -     gate clk          clk_n <-> vss
+  t346  at  14676, 18404  W/L   45/25   -     gate rw           rw_a <-> vss
+  t347  at  14726, 18295  W/L   27/52   load  gate rw_a         vcc <-> rw_a
+  t348  at  14114, 18379  W/L  192/23   -     gate clk_n        vss <-> clk_b
+  t349  at  14186, 18420  W/L  203/25   -     gate clk_n        clk_b <-> vss
+  t350  at  14030, 18337  W/L   68/40   load  gate clk_b        vcc <-> clk_b
+  t351  at  14058, 19050  W/L  417/41   field gate clk          vss <-> clk
+  t352  at  12442, 19168  W/L   61/20   clamp gate ck_b         ck_b <-> vcc
+  t353  at  12442, 19338  W/L   61/20   clamp gate ck_b         ck_b <-> vcc
+  t354  at  15008,  1776  W/L  134/55   load  gate ra0_pu       ra0_pu <-> vcc
+  t355  at  14938,  1774  W/L  381/25   -     gate ra0_drv_in   vss <-> ra0_pu
+  t356  at  14826,  1774  W/L  381/25   -     gate ra0_pu       ra0_pd <-> vss
+  t357  at  14746,  1776  W/L  133/42   load  gate ra0_pd       ra0_pd <-> vcc
+  t358  at  15127, 13618  W/L   44/55   load  gate rsel9        rsel9 <-> vcc
+  t359  at  14954, 13618  W/L   44/55   load  gate rsel3        vcc <-> rsel3
+  t360  at  15300, 13618  W/L   44/55   load  gate rsel13       vcc <-> rsel13
+  t361  at  15214, 13618  W/L   44/55   load  gate rsel11       vcc <-> rsel11
+  t362  at  14867, 13618  W/L   44/55   load  gate rsel5        vcc <-> rsel5
+  t363  at  15132, 18404  W/L   59/20   -     gate rw_c         rw_d <-> vss
+  t364  at  15180, 18295  W/L   27/52   load  gate rw_d         vcc <-> rw_d
+  t365  at  15304, 18404  W/L   45/25   -     gate rs           rs_a <-> vss
+  t366  at  15354, 18295  W/L   27/52   load  gate rs_a         vcc <-> rs_a
+  t367  at  15028, 18315  W/L   27/106  load  gate rw_c         vcc <-> rw_c
+  t368  at  14982, 18442  W/L   39/25   -     gate rw_b         rw_c <-> vss
+  t369  at  14876, 18315  W/L   27/106  load  gate rw_b         vcc <-> rw_b
+  t370  at  14830, 18442  W/L   39/25   -     gate rw_a         rw_b <-> vss
+  t371  at  14904, 19050  W/L  417/41   field gate rw_p         vss <-> rw_p
+  t372  at  15718,  1191  W/L  690/16   -     gate ra1_pd       vss <-> ra1
+  t373  at  15794,  1220  W/L  633/18   -     gate ra1_pd       vss <-> ra1
+  t374  at  15870,  1274  W/L  743/15   -     gate ra1_pd       ra1 <-> vss
+  t375  at  15946,  1274  W/L  743/18   -     gate ra1_pu       ra1 <-> vcc
+  t376  at  16030,  1274  W/L  743/16   -     gate ra1_pu       vcc <-> ra1
+  t377  at  16096,  1340  W/L  613/18   -     gate ra1_pu       vcc <-> ra1
+  t378  at  15560, 13618  W/L   44/55   load  gate rsel15       vcc <-> rsel15
+  t379  at  15647, 13618  W/L   44/55   load  gate rsel17       vcc <-> rsel17
+  t380  at  15760, 18404  W/L   59/20   -     gate rs_c         rs_d <-> vss
+  t381  at  15808, 18295  W/L   27/52   load  gate rs_d         vcc <-> rs_d
+  t382  at  15610, 18442  W/L   39/25   -     gate rs_b         rs_c <-> vss
+  t383  at  15656, 18315  W/L   27/106  load  gate rs_c         vcc <-> rs_c
+  t384  at  16284, 18315  W/L   27/106  load  gate cs_c         vcc <-> cs_c
+  t385  at  16238, 18442  W/L   39/25   -     gate cs_b         cs_c <-> vss
+  t386  at  15932, 18404  W/L   45/25   -     gate cs           cs_a <-> vss
+  t387  at  15982, 18295  W/L   27/52   load  gate cs_a         vcc <-> cs_a
+  t388  at  15458, 18442  W/L   39/25   -     gate rs_a         rs_b <-> vss
+  t389  at  15504, 18315  W/L   27/106  load  gate rs_b         vcc <-> rs_b
+  t390  at  16086, 18442  W/L   39/25   -     gate cs_a         cs_b <-> vss
+  t391  at  16132, 18315  W/L   27/106  load  gate cs_b         vcc <-> cs_b
+  t392  at  15792, 19050  W/L  417/41   field gate e_p          vss <-> e_p
+  t393  at  17769,  1274  W/L  743/18   -     gate ra2_pu       ra2 <-> vcc
+  t394  at  17853,  1274  W/L  743/16   -     gate ra2_pu       ra2 <-> vcc
+  t395  at  17919,  1340  W/L  613/18   -     gate ra2_pu       ra2 <-> vcc
+  t396  at  17692,  1274  W/L  743/15   -     gate ra2_pd       ra2 <-> vss
+  t397  at  17617,  1220  W/L  633/18   -     gate ra2_pd       ra2 <-> vss
+  t398  at  17541,  1191  W/L  690/16   -     gate ra2_pd       vss <-> ra2
+  t399  at  16570,  1774  W/L  134/55   load  gate ra1_pu       ra1_pu <-> vcc
+  t400  at  16498,  1774  W/L  381/25   -     gate ra1_drv_in   vss <-> ra1_pu
+  t401  at  16386,  1774  W/L  381/25   -     gate ra1_pu       vss <-> ra1_pd
+  t402  at  16307,  1774  W/L  133/42   load  gate ra1_pd       ra1_pd <-> vcc
+  t403  at  18392,  1774  W/L  134/55   load  gate ra2_pu       ra2_pu <-> vcc
+  t404  at  18322,  1774  W/L  381/25   -     gate ra2_drv_in   ra2_pu <-> vss
+  t405  at  18210,  1774  W/L  381/25   -     gate ra2_pu       vss <-> ra2_pd
+  t406  at  18130,  1774  W/L  133/42   load  gate ra2_pd       ra2_pd <-> vcc
+  t407  at  18094,  3218  W/L  381/25   -     gate ra3_drv_in   ra3_pu <-> vss
+  t408  at  18094,  3330  W/L  381/25   -     gate ra3_pu       vss <-> ra3_pd
+  t409  at  18092,  3410  W/L  133/42   load  gate ra3_pd       ra3_pd <-> vcc
+  t410  at  18092,  3148  W/L  134/55   load  gate ra3_pu       ra3_pu <-> vcc
+  t411  at  18592,  3687  W/L  743/16   -     gate ra3_pu       vcc <-> ra3
+  t412  at  18592,  3771  W/L  743/18   -     gate ra3_pu       ra3 <-> vcc
+  t413  at  18592,  3848  W/L  743/15   -     gate ra3_pd       ra3 <-> vss
+  t414  at  18648,  3923  W/L  633/18   -     gate ra3_pd       vss <-> ra3
+  t415  at  18676,  3999  W/L  690/16   -     gate ra3_pd       vss <-> ra3
   t416  at  18528,  3621  W/L  613/18   -     gate ra3_pu       vcc <-> ra3
-  t417  at  18592,  3687  W/L  743/16   -     gate ra3_pu       vcc <-> ra3
-  t418  at  18592,  3771  W/L  743/18   -     gate ra3_pu       ra3 <-> vcc
-  t419  at  18592,  3848  W/L  743/15   -     gate ra3_pd       ra3 <-> vss
-  t420  at  18648,  3923  W/L  633/18   -     gate ra3_pd       vss <-> ra3
-  t421  at  18676,  3999  W/L  690/16   -     gate ra3_pd       vss <-> ra3
-  t422  at  18094,  4974  W/L  381/25   -     gate ra4_drv_in   ra4_pu <-> vss
-  t423  at  18094,  5086  W/L  381/25   -     gate ra4_pu       vss <-> ra4_pd
-  t424  at  18092,  5166  W/L  133/42   load  gate ra4_pd       ra4_pd <-> vcc
-  t425  at  18092,  4904  W/L  134/55   load  gate ra4_pu       ra4_pu <-> vcc
-  t426  at  18592,  5443  W/L  743/16   -     gate ra4_pu       ra4 <-> vcc
-  t427  at  18592,  5527  W/L  743/18   -     gate ra4_pu       vcc <-> ra4
-  t428  at  18592,  5604  W/L  743/15   -     gate ra4_pd       ra4 <-> vss
-  t429  at  18648,  5679  W/L  633/18   -     gate ra4_pd       vss <-> ra4
-  t430  at  18676,  5755  W/L  690/16   -     gate ra4_pd       vss <-> ra4
-  t431  at  18528,  5377  W/L  613/18   -     gate ra4_pu       vcc <-> ra4
-  t432  at  16828, 18337  W/L   68/40   load  gate e_b          vcc <-> e_b
-  t433  at  16912, 18379  W/L  192/23   -     gate e_n          e_b <-> vss
-  t434  at  16984, 18420  W/L  203/25   -     gate e_n          e_b <-> vss
-  t435  at  17236, 18379  W/L  192/23   -     gate e            vss <-> e_n
-  t436  at  17310, 18402  W/L  213/24   -     gate e            e_n <-> vss
-  t437  at  17351, 18402  W/L  215/24   -     gate e            e_n <-> vss
-  t438  at  17153, 18337  W/L   68/40   load  gate e_n          vcc <-> e_n
-  t439  at  16388, 18404  W/L   59/20   -     gate cs_c         cs_d <-> vss
-  t440  at  16436, 18295  W/L   27/52   load  gate cs_d         vcc <-> cs_d
-  t441  at  16682, 19048  W/L  417/41   field gate rs_p         vss <-> rs_p
-  t442  at  17356, 19050  W/L  417/41   field gate cs_p         vss <-> cs_p
+  t417  at  18092,  5166  W/L  133/42   load  gate ra4_pd       ra4_pd <-> vcc
+  t418  at  18094,  5086  W/L  381/25   -     gate ra4_pu       vss <-> ra4_pd
+  t419  at  18094,  4974  W/L  381/25   -     gate ra4_drv_in   ra4_pu <-> vss
+  t420  at  18092,  4904  W/L  134/55   load  gate ra4_pu       ra4_pu <-> vcc
+  t421  at  18592,  5527  W/L  743/18   -     gate ra4_pu       vcc <-> ra4
+  t422  at  18592,  5604  W/L  743/15   -     gate ra4_pd       ra4 <-> vss
+  t423  at  18648,  5679  W/L  633/18   -     gate ra4_pd       vss <-> ra4
+  t424  at  18676,  5755  W/L  690/16   -     gate ra4_pd       vss <-> ra4
+  t425  at  18592,  5443  W/L  743/16   -     gate ra4_pu       ra4 <-> vcc
+  t426  at  18528,  5377  W/L  613/18   -     gate ra4_pu       vcc <-> ra4
+  t427  at  16388, 18404  W/L   59/20   -     gate cs_c         cs_d <-> vss
+  t428  at  16436, 18295  W/L   27/52   load  gate cs_d         vcc <-> cs_d
+  t429  at  16828, 18337  W/L   68/40   load  gate e_b          vcc <-> e_b
+  t430  at  16912, 18379  W/L  192/23   -     gate e_n          e_b <-> vss
+  t431  at  16984, 18420  W/L  203/25   -     gate e_n          e_b <-> vss
+  t432  at  17236, 18379  W/L  192/23   -     gate e            vss <-> e_n
+  t433  at  17310, 18402  W/L  213/24   -     gate e            e_n <-> vss
+  t434  at  17351, 18402  W/L  215/24   -     gate e            e_n <-> vss
+  t435  at  17153, 18337  W/L   68/40   load  gate e_n          vcc <-> e_n
+  t436  at  16682, 19048  W/L  417/41   field gate rs_p         vss <-> rs_p
+  t437  at  17356, 19050  W/L  417/41   field gate cs_p         vss <-> cs_p
 
 gates
   ma2_pu       = NOT ma2_drv_in
@@ -494,29 +489,31 @@ gates
   hsync_pu     = NOT hsync_drv_in
   hsync_pd     = NOT hsync_pu
   ra0_pd       = NOT ra0_pu
-  rsel7        = NOR(ar0_n, ar1_n, ar2_n, ar3, ar4)
   rsel6        = NOR(ar0, ar1_n, ar2_n, ar3, ar4)
+  rsel7        = NOR(ar0_n, ar1_n, ar2_n, ar3, ar4)
   clk_n        = NOT clk
   t_g0_out     = NOT t_g0_in
   ra1_pu       = NOT ra1_drv_in
   ra1_pd       = NOT ra1_pu
   ra0_pu       = NOT ra0_drv_in
-  rsel1        = NOR(ar0_n, ar1, ar2, ar3, ar4)
-  rsel17       = NOR(ar0_n, ar1, ar2, ar3, ar4_n)
   rsel16       = NOR(ar0, ar1, ar2, ar3, ar4_n)
-  rsel5        = NOR(ar0_n, ar1, ar2_n, ar3, ar4)
-  rsel10       = NOR(ar0, ar1_n, ar2, ar3_n, ar4)
-  rsel0        = NOR(ar0, ar1, ar2, ar3, ar4)
+  rsel9        = NOR(ar0_n, ar1, ar2, ar3_n, ar4)
+  rsel17       = NOR(ar0_n, ar1, ar2, ar3, ar4_n)
   rsel4        = NOR(ar0, ar1, ar2_n, ar3, ar4)
   rsel2        = NOR(ar0, ar1_n, ar2, ar3, ar4)
+  rsel1        = NOR(ar0_n, ar1, ar2, ar3, ar4)
+  rsel0        = NOR(ar0, ar1, ar2, ar3, ar4)
+  rsel10       = NOR(ar0, ar1_n, ar2, ar3_n, ar4)
+  rsel5        = NOR(ar0_n, ar1, ar2_n, ar3, ar4)
   rsel15       = NOR(ar0_n, ar1_n, ar2_n, ar3_n, ar4)
-  rsel14       = NOR(ar0, ar1_n, ar2_n, ar3_n, ar4)
-  rsel12       = NOR(ar0, ar1, ar2_n, ar3_n, ar4)
-  rsel13       = NOR(ar0_n, ar1, ar2_n, ar3_n, ar4)
-  rsel11       = NOR(ar0_n, ar1_n, ar2, ar3_n, ar4)
-  rsel9        = NOR(ar0_n, ar1, ar2, ar3_n, ar4)
-  rsel8        = NOR(ar0, ar1, ar2, ar3_n, ar4)
   rsel3        = NOR(ar0_n, ar1_n, ar2, ar3, ar4)
+  rsel8        = NOR(ar0, ar1, ar2, ar3_n, ar4)
+  rsel11       = NOR(ar0_n, ar1_n, ar2, ar3_n, ar4)
+  rsel13       = NOR(ar0_n, ar1, ar2_n, ar3_n, ar4)
+  rsel12       = NOR(ar0, ar1, ar2_n, ar3_n, ar4)
+  rsel14       = NOR(ar0, ar1_n, ar2_n, ar3_n, ar4)
+  e_b          = NOT e_n
+  e_n          = NOT e
   rw_b         = NOT rw_a
   rw_c         = NOT rw_b
   ra2_pu       = NOT ra2_drv_in
@@ -525,8 +522,6 @@ gates
   ra3_pd       = NOT ra3_pu
   ra4_pu       = NOT ra4_drv_in
   ra4_pd       = NOT ra4_pu
-  e_n          = NOT e
-  e_b          = NOT e_n
   res_n        = NOT res
   lpstb_n      = NOT lpstb
   ck_a_pu      = NOR(ck_g2, clk_b)
@@ -534,163 +529,161 @@ gates
   ck_g1        = NOT ck_b
   ck_b_pu      = NOR(ck_clkn, ck_g4)
   ck_clkn      = NOT clk_b
-  b_out_L      = NOR(a_out_L, in_c_L)
-  a_out_L      = NOT in_a_L
-  rw_a         = NOT rw
   rw_d         = NOT rw_c
+  rw_a         = NOT rw
+  rs_a         = NOT rs
   rs_d         = NOT rs_c
   cs_d         = NOT cs_c
   cs_a         = NOT cs
-  rs_a         = NOT rs
-  rs_c         = NOT rs_b
-  rs_b         = NOT rs_a
   cs_c         = NOT cs_b
   cs_b         = NOT cs_a
+  rs_b         = NOT rs_a
+  rs_c         = NOT rs_b
 
 not part of a static gate
-  t0 gate ma2_pu: vcc <-> ma2
-  t1 gate ma2_pu: ma2 <-> vcc
-  t2 gate ma2_pu: vcc <-> ma2
-  t3 gate ma2_pd: ma2 <-> vss
-  t4 gate ma2_pd: vss <-> ma2
-  t5 gate ma2_pd: vss <-> ma2
-  t6 gate ma3_pu: ma3 <-> vcc
-  t7 gate ma3_pu: ma3 <-> vcc
-  t8 gate ma3_pu: vcc <-> ma3
-  t9 gate ma3_pd: ma3 <-> vss
-  t10 gate ma3_pd: vss <-> ma3
-  t11 gate ma3_pd: vss <-> ma3
-  t12 gate ma4_pu: ma4 <-> vcc
-  t13 gate ma4_pu: ma4 <-> vcc
-  t14 gate ma4_pu: vcc <-> ma4
-  t15 gate ma4_pd: ma4 <-> vss
-  t16 gate ma4_pd: ma4 <-> vss
-  t17 gate ma4_pd: vss <-> ma4
-  t18 gate ma5_pu: vcc <-> ma5
-  t19 gate ma5_pu: ma5 <-> vcc
-  t20 gate ma5_pu: vcc <-> ma5
-  t21 gate ma5_pd: ma5 <-> vss
-  t22 gate ma5_pd: ma5 <-> vss
-  t23 gate ma5_pd: vss <-> ma5
-  t24 gate ma6_pu: ma6 <-> vcc
-  t25 gate ma6_pu: ma6 <-> vcc
-  t26 gate ma6_pu: ma6 <-> vcc
-  t27 gate ma6_pd: ma6 <-> vss
-  t28 gate ma6_pd: vss <-> ma6
-  t29 gate ma6_pd: vss <-> ma6
-  t30 gate ma7_pu: vcc <-> ma7
-  t31 gate ma7_pu: ma7 <-> vcc
-  t32 gate ma7_pu: ma7 <-> vcc
-  t33 gate ma7_pd: ma7 <-> vss
-  t34 gate ma7_pd: vss <-> ma7
-  t35 gate ma7_pd: vss <-> ma7
-  t36 gate ma8_pu: vcc <-> ma8
-  t37 gate ma8_pu: ma8 <-> vcc
-  t38 gate ma8_pu: ma8 <-> vcc
-  t39 gate ma8_pd: ma8 <-> vss
-  t40 gate ma8_pd: vss <-> ma8
-  t41 gate ma8_pd: vss <-> ma8
-  t42 gate ma9_pd: ma9 <-> vss
-  t43 gate ma9_pd: ma9 <-> vss
-  t44 gate ma9_pu: ma9 <-> vcc
-  t45 gate ma9_pu: ma9 <-> vcc
-  t46 gate ma9_pu: vcc <-> ma9
-  t47 gate ma9_pd: vss <-> ma9
-  t48 gate ma10_pd: ma10 <-> vss
-  t49 gate ma10_pu: ma10 <-> vcc
-  t50 gate ma10_pu: ma10 <-> vcc
-  t51 gate ma10_pu: ma10 <-> vcc
-  t52 gate ma10_pd: ma10 <-> vss
-  t53 gate ma10_pd: vss <-> ma10
-  t54 gate ma11_pd: ma11 <-> vss
-  t55 gate ma11_pu: ma11 <-> vcc
-  t56 gate ma11_pu: ma11 <-> vcc
-  t57 gate ma11_pu: ma11 <-> vcc
-  t58 gate ma11_pd: vss <-> ma11
-  t59 gate ma11_pd: vss <-> ma11
-  t60 gate ma12_pd: ma12 <-> vss
-  t61 gate ma12_pu: ma12 <-> vcc
-  t62 gate ma12_pu: ma12 <-> vcc
-  t63 gate ma12_pu: ma12 <-> vcc
-  t64 gate ma12_pd: vss <-> ma12
-  t65 gate ma12_pd: vss <-> ma12
-  t102 gate ma0_pu: vcc <-> ma0
-  t103 gate ma0_pu: ma0 <-> vcc
-  t104 gate ma0_pu: ma0 <-> vcc
-  t105 gate ma0_pd: ma0 <-> vss
-  t106 gate ma0_pd: ma0 <-> vss
-  t107 gate ma0_pd: vss <-> ma0
-  t108 gate ma1_pd: ma1 <-> vss
-  t109 gate ma1_pu: vcc <-> ma1
-  t110 gate ma1_pu: ma1 <-> vcc
-  t111 gate ma1_pu: ma1 <-> vcc
-  t112 gate ma1_pd: ma1 <-> vss
-  t113 gate ma1_pd: vss <-> ma1
-  t134 gate ma13_pu: vcc <-> ma13
-  t135 gate ma13_pu: vcc <-> ma13
-  t136 gate ma13_pd: ma13 <-> vss
-  t137 gate ma13_pd: vss <-> ma13
-  t138 gate ma13_pd: vss <-> ma13
-  t139 gate ma13_pu: ma13 <-> vcc
-  t140 gate vsync_pd: vss <-> vsync
-  t141 gate vsync_pd: vss <-> vsync
-  t142 gate vsync_pd: vsync <-> vss
-  t143 gate vsync_pu: vsync <-> vcc
-  t144 gate vsync_pu: vcc <-> vsync
-  t145 gate vsync_pu: vcc <-> vsync
-  t171 gate ck_a_pu: vcc <-> ck_a
-  t183 gate ck_b_pu: vcc <-> ck_b
-  t185 gate ck_ga: vcc <-> ck_out
-  t186 gate ck_ga: vcc <-> ck_out
-  t187 gate ck_ga: vcc <-> ck_out
-  t188 gate ck_n2: ck_out <-> vss
-  t189 gate ck_n2: ck_out <-> vss
-  t190 gate ck_n2: ck_ga <-> vss
-  t191 gate disptmg_pu: vcc <-> disptmg
-  t192 gate disptmg_pu: vcc <-> disptmg
-  t193 gate disptmg_pd: disptmg <-> vss
-  t194 gate disptmg_pd: vss <-> disptmg
-  t195 gate disptmg_pd: vss <-> disptmg
-  t196 gate disptmg_pu: disptmg <-> vcc
-  t197 gate cudisp_pu: vcc <-> cudisp
-  t198 gate cudisp_pd: cudisp <-> vss
-  t199 gate cudisp_pd: vss <-> cudisp
-  t200 gate cudisp_pd: vss <-> cudisp
-  t201 gate cudisp_pu: vcc <-> cudisp
-  t202 gate cudisp_pu: cudisp <-> vcc
-  t203 gate hsync_pd: vss <-> hsync
-  t204 gate hsync_pd: vss <-> hsync
-  t205 gate hsync_pd: hsync <-> vss
-  t206 gate hsync_pu: hsync <-> vcc
-  t207 gate hsync_pu: vcc <-> hsync
-  t208 gate hsync_pu: vcc <-> hsync
-  t231 gate ra0_pd: vss <-> ra0
-  t232 gate ra0_pd: vss <-> ra0
-  t233 gate ra0_pd: ra0 <-> vss
-  t234 gate ra0_pu: ra0 <-> vcc
-  t235 gate ra0_pu: vcc <-> ra0
-  t236 gate ra0_pu: vcc <-> ra0
-  t377 gate ra1_pd: ra1 <-> vss
-  t378 gate ra1_pu: ra1 <-> vcc
-  t379 gate ra1_pu: vcc <-> ra1
-  t380 gate ra1_pu: vcc <-> ra1
-  t381 gate ra1_pd: ra1 <-> vss
-  t382 gate ra1_pd: vss <-> ra1
-  t402 gate ra2_pd: vss <-> ra2
-  t403 gate ra2_pd: ra2 <-> vss
-  t404 gate ra2_pd: ra2 <-> vss
-  t405 gate ra2_pu: ra2 <-> vcc
-  t406 gate ra2_pu: ra2 <-> vcc
-  t407 gate ra2_pu: ra2 <-> vcc
-  t416 gate ra3_pu: vcc <-> ra3
-  t417 gate ra3_pu: vcc <-> ra3
-  t418 gate ra3_pu: ra3 <-> vcc
-  t419 gate ra3_pd: ra3 <-> vss
-  t420 gate ra3_pd: vss <-> ra3
-  t421 gate ra3_pd: vss <-> ra3
-  t426 gate ra4_pu: ra4 <-> vcc
-  t427 gate ra4_pu: vcc <-> ra4
-  t428 gate ra4_pd: ra4 <-> vss
-  t429 gate ra4_pd: vss <-> ra4
-  t430 gate ra4_pd: vss <-> ra4
-  t431 gate ra4_pu: vcc <-> ra4
+  t0 at 1268,2061 gate ma2_pu: vcc <-> ma2
+  t1 at 1204,2127 gate ma2_pu: ma2 <-> vcc
+  t2 at 1204,2211 gate ma2_pu: vcc <-> ma2
+  t3 at 1204,2288 gate ma2_pd: ma2 <-> vss
+  t4 at 1148,2363 gate ma2_pd: vss <-> ma2
+  t5 at 1120,2439 gate ma2_pd: vss <-> ma2
+  t6 at 1268,3666 gate ma3_pu: ma3 <-> vcc
+  t7 at 1204,3732 gate ma3_pu: ma3 <-> vcc
+  t8 at 1204,3816 gate ma3_pu: vcc <-> ma3
+  t9 at 1204,3892 gate ma3_pd: ma3 <-> vss
+  t10 at 1148,3968 gate ma3_pd: vss <-> ma3
+  t11 at 1120,4044 gate ma3_pd: vss <-> ma3
+  t12 at 1268,5314 gate ma4_pu: vcc <-> ma4
+  t13 at 1204,5380 gate ma4_pu: ma4 <-> vcc
+  t14 at 1204,5464 gate ma4_pu: vcc <-> ma4
+  t15 at 1204,5540 gate ma4_pd: ma4 <-> vss
+  t16 at 1148,5616 gate ma4_pd: ma4 <-> vss
+  t17 at 1120,5692 gate ma4_pd: vss <-> ma4
+  t18 at 1268,7397 gate ma5_pu: vcc <-> ma5
+  t19 at 1204,7463 gate ma5_pu: ma5 <-> vcc
+  t20 at 1204,7547 gate ma5_pu: vcc <-> ma5
+  t21 at 1204,7624 gate ma5_pd: ma5 <-> vss
+  t22 at 1148,7699 gate ma5_pd: ma5 <-> vss
+  t23 at 1120,7775 gate ma5_pd: vss <-> ma5
+  t24 at 1270,8958 gate ma6_pu: ma6 <-> vcc
+  t25 at 1204,9024 gate ma6_pu: ma6 <-> vcc
+  t26 at 1204,9108 gate ma6_pu: ma6 <-> vcc
+  t27 at 1204,9184 gate ma6_pd: ma6 <-> vss
+  t28 at 1150,9260 gate ma6_pd: vss <-> ma6
+  t29 at 1121,9336 gate ma6_pd: vss <-> ma6
+  t30 at 1204,10670 gate ma7_pu: ma7 <-> vcc
+  t31 at 1204,10746 gate ma7_pd: ma7 <-> vss
+  t32 at 1150,10822 gate ma7_pd: vss <-> ma7
+  t33 at 1121,10898 gate ma7_pd: vss <-> ma7
+  t34 at 1204,10586 gate ma7_pu: vcc <-> ma7
+  t35 at 1270,10520 gate ma7_pu: vcc <-> ma7
+  t36 at 1270,12255 gate ma8_pu: ma8 <-> vcc
+  t37 at 1204,12321 gate ma8_pu: ma8 <-> vcc
+  t38 at 1204,12405 gate ma8_pu: ma8 <-> vcc
+  t39 at 1204,12482 gate ma8_pd: ma8 <-> vss
+  t40 at 1150,12557 gate ma8_pd: vss <-> ma8
+  t41 at 1121,12633 gate ma8_pd: vss <-> ma8
+  t42 at 1206,13728 gate ma9_pd: ma9 <-> vss
+  t43 at 1206,13805 gate ma9_pu: ma9 <-> vcc
+  t44 at 1206,13889 gate ma9_pu: ma9 <-> vcc
+  t45 at 1270,13955 gate ma9_pu: vcc <-> ma9
+  t46 at 1150,13653 gate ma9_pd: ma9 <-> vss
+  t47 at 1122,13577 gate ma9_pd: vss <-> ma9
+  t48 at 1150,15214 gate ma10_pd: ma10 <-> vss
+  t49 at 1206,15290 gate ma10_pd: ma10 <-> vss
+  t50 at 1206,15366 gate ma10_pu: ma10 <-> vcc
+  t51 at 1206,15450 gate ma10_pu: ma10 <-> vcc
+  t52 at 1270,15516 gate ma10_pu: vcc <-> ma10
+  t53 at 1122,15138 gate ma10_pd: vss <-> ma10
+  t54 at 1206,16860 gate ma11_pd: ma11 <-> vss
+  t55 at 1206,16937 gate ma11_pu: ma11 <-> vcc
+  t56 at 1206,17021 gate ma11_pu: ma11 <-> vcc
+  t57 at 1270,17087 gate ma11_pu: ma11 <-> vcc
+  t58 at 1150,16785 gate ma11_pd: vss <-> ma11
+  t59 at 1122,16709 gate ma11_pd: vss <-> ma11
+  t60 at 1206,18586 gate ma12_pd: ma12 <-> vss
+  t61 at 1206,18662 gate ma12_pu: ma12 <-> vcc
+  t62 at 1206,18746 gate ma12_pu: ma12 <-> vcc
+  t63 at 1272,18812 gate ma12_pu: ma12 <-> vcc
+  t64 at 1152,18510 gate ma12_pd: vss <-> ma12
+  t65 at 1123,18434 gate ma12_pd: vss <-> ma12
+  t98 at 3843,1193 gate ma1_pd: vss <-> ma1
+  t99 at 3767,1222 gate ma1_pd: ma1 <-> vss
+  t100 at 3692,1276 gate ma1_pd: ma1 <-> vss
+  t101 at 3615,1276 gate ma1_pu: vcc <-> ma1
+  t102 at 3531,1276 gate ma1_pu: ma1 <-> vcc
+  t103 at 3465,1342 gate ma1_pu: ma1 <-> vcc
+  t104 at 5154,1276 gate ma0_pu: ma0 <-> vcc
+  t105 at 5230,1276 gate ma0_pd: ma0 <-> vss
+  t106 at 5306,1222 gate ma0_pd: ma0 <-> vss
+  t107 at 5382,1193 gate ma0_pd: vss <-> ma0
+  t108 at 5070,1276 gate ma0_pu: ma0 <-> vcc
+  t109 at 5004,1342 gate ma0_pu: ma0 <-> vcc
+  t134 at 4098,19794 gate ma13_pu: vcc <-> ma13
+  t135 at 4182,19794 gate ma13_pu: vcc <-> ma13
+  t136 at 4258,19794 gate ma13_pd: ma13 <-> vss
+  t137 at 4334,19848 gate ma13_pd: vss <-> ma13
+  t138 at 4410,19877 gate ma13_pd: vss <-> ma13
+  t139 at 4032,19728 gate ma13_pu: ma13 <-> vcc
+  t140 at 10686,1192 gate vsync_pd: vss <-> vsync
+  t141 at 10762,1220 gate vsync_pd: vss <-> vsync
+  t142 at 10838,1276 gate vsync_pd: vsync <-> vss
+  t143 at 10914,1276 gate vsync_pu: vsync <-> vcc
+  t144 at 10998,1276 gate vsync_pu: vcc <-> vsync
+  t145 at 11064,1340 gate vsync_pu: vcc <-> vsync
+  t171 at 10992,19374 gate ck_a_pu: vcc <-> ck_a
+  t183 at 11882,19374 gate ck_b_pu: vcc <-> ck_b
+  t185 at 9575,19662 gate ck_ga: vcc <-> ck_out
+  t186 at 9652,19494 gate ck_ga: ck_out <-> vcc
+  t187 at 9724,19494 gate ck_ga: vcc <-> ck_out
+  t188 at 9860,19562 gate ck_n2: ck_out <-> vss
+  t189 at 9930,19562 gate ck_n2: vss <-> ck_out
+  t190 at 9995,19562 gate ck_n2: ck_ga <-> vss
+  t191 at 8198,19794 gate cudisp_pu: vcc <-> cudisp
+  t192 at 8282,19794 gate cudisp_pu: vcc <-> cudisp
+  t193 at 8358,19794 gate cudisp_pd: cudisp <-> vss
+  t194 at 8434,19848 gate cudisp_pd: vss <-> cudisp
+  t195 at 8510,19877 gate cudisp_pd: vss <-> cudisp
+  t196 at 8132,19728 gate cudisp_pu: cudisp <-> vcc
+  t197 at 6051,19794 gate disptmg_pu: vcc <-> disptmg
+  t198 at 6135,19794 gate disptmg_pu: vcc <-> disptmg
+  t199 at 6212,19794 gate disptmg_pd: disptmg <-> vss
+  t200 at 6287,19848 gate disptmg_pd: vss <-> disptmg
+  t201 at 6363,19877 gate disptmg_pd: vss <-> disptmg
+  t202 at 5985,19728 gate disptmg_pu: disptmg <-> vcc
+  t203 at 12443,1192 gate hsync_pd: vss <-> hsync
+  t204 at 12519,1220 gate hsync_pd: vss <-> hsync
+  t205 at 12594,1276 gate hsync_pd: hsync <-> vss
+  t206 at 12671,1276 gate hsync_pu: hsync <-> vcc
+  t207 at 12755,1276 gate hsync_pu: vcc <-> hsync
+  t208 at 12821,1340 gate hsync_pu: vcc <-> hsync
+  t229 at 14308,1276 gate ra0_pd: ra0 <-> vss
+  t230 at 14385,1276 gate ra0_pu: ra0 <-> vcc
+  t231 at 14469,1276 gate ra0_pu: vcc <-> ra0
+  t232 at 14535,1340 gate ra0_pu: vcc <-> ra0
+  t233 at 14233,1220 gate ra0_pd: ra0 <-> vss
+  t234 at 14157,1192 gate ra0_pd: vss <-> ra0
+  t372 at 15718,1191 gate ra1_pd: vss <-> ra1
+  t373 at 15794,1220 gate ra1_pd: vss <-> ra1
+  t374 at 15870,1274 gate ra1_pd: ra1 <-> vss
+  t375 at 15946,1274 gate ra1_pu: ra1 <-> vcc
+  t376 at 16030,1274 gate ra1_pu: vcc <-> ra1
+  t377 at 16096,1340 gate ra1_pu: vcc <-> ra1
+  t393 at 17769,1274 gate ra2_pu: ra2 <-> vcc
+  t394 at 17853,1274 gate ra2_pu: ra2 <-> vcc
+  t395 at 17919,1340 gate ra2_pu: ra2 <-> vcc
+  t396 at 17692,1274 gate ra2_pd: ra2 <-> vss
+  t397 at 17617,1220 gate ra2_pd: ra2 <-> vss
+  t398 at 17541,1191 gate ra2_pd: vss <-> ra2
+  t411 at 18592,3687 gate ra3_pu: vcc <-> ra3
+  t412 at 18592,3771 gate ra3_pu: ra3 <-> vcc
+  t413 at 18592,3848 gate ra3_pd: ra3 <-> vss
+  t414 at 18648,3923 gate ra3_pd: vss <-> ra3
+  t415 at 18676,3999 gate ra3_pd: vss <-> ra3
+  t416 at 18528,3621 gate ra3_pu: vcc <-> ra3
+  t421 at 18592,5527 gate ra4_pu: vcc <-> ra4
+  t422 at 18592,5604 gate ra4_pd: ra4 <-> vss
+  t423 at 18648,5679 gate ra4_pd: vss <-> ra4
+  t424 at 18676,5755 gate ra4_pd: vss <-> ra4
+  t425 at 18592,5443 gate ra4_pu: ra4 <-> vcc
+  t426 at 18528,5377 gate ra4_pu: vcc <-> ra4

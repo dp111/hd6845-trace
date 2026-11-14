@@ -7,6 +7,7 @@
 # comes straight down from the contact at 7880,1315 beside the RES pad. Each output is
 # the pin level, buffered (two inversions).
 @block pads_in_top
+@requires inrow
 
 M 6950,1834:8050,1886              # ground rail (extent approximate)
 N M 7600,1860 vss
