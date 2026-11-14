@@ -137,3 +137,16 @@ D 16960,8745:17040,8880            # capacitor rectangle
 P 17195,8825:17295,8847
 C 17205,8837 s=26x26
 M 17208,8825 y9100 w=20            # continues down (not yet traced)
+
+# ---- chain 1 (D1): pad input line. Poly all the way from the pad cell: left along
+# y 8405, down the channel beside the VCC rail, left again under both rails
+# (cross-under "line 1"), then a short metal jumper over cross-under "line 2".
+P 17592,8398:17835,8412            # from the D1 pad cell's contact at 17822,8400 (not drawn)
+P 17592,8398:17612,9566            # down the channel, in the open between VCC rail and P_x metal
+P 17285,9545:17612,9566            # line 1, under the VCC rail, the thin metal and the VSS rail
+C 17297,9553 s=26x26
+M 17297,9541 y9656 w=20            # jumper
+C 17293,9643 s=26x26
+P 17272,9630:17312,9660
+P 17272,9655:17300,9717            # down to G1's gate band
+N P 17700,8405 d1_in
