@@ -11,8 +11,11 @@
 - The strobe has no driver inside the region; it was followed east to its driver at
   x 15900-16270, y 15030-15160 (package bd2's area), which is traced too:
   **strobe = NOT e_b**, one big inverter. So sel_wN = rselN AND E.
-- Not traced: anything south of y 17100 except T3-T6's corners; the loads of the two new
-  right-hand pairs are the schematic (`?`) loads of sel's cell `sel_rwr`.
+- Not traced: anything south of y 17100 except T3-T6's corners and the R13 buffer. The
+  loads of the three new right-hand cells are the schematic (`?`) loads of sel's cells.
+- Every piece was checked by overlay (1.1x-1.65x for wiring, 3-6x at the junctions
+  that decide a net: the strobe link, the driver's output and input, the rsel12 bar
+  under the tracks).
 
 ## Inventory
 
@@ -42,8 +45,8 @@ Traced (extracted by netlist.py) unless marked believed.
 
 The trace declares `@alias sel_stb_r sel_stb_l`.
 
-Loads of the strobe in sel + bd3: the 16 NOR gates (R0-R15 except none missing: R0-R11
-in the gate column, R14, R15, R12, R13 in the right-hand column). Nothing else. T15
+Loads of the strobe in sel + bd3: the 16 NOR gates, one per register R0-R15 (R0-R11 in
+the gate column; R14, R15, R12, R13 in the right-hand column). Nothing else. T15
 (x 15561) ends at the R13 NOR's contact (15560,17072). T0 has no tap between y 16700
 and its end. No gate in this region drives the strobe: its only other end is the
 poly that arrives from the east along y 14825 at x 15850 (sel's port).
@@ -54,7 +57,7 @@ poly that arrives from the east along y 14825 at x 15850 (sel's port).
 
 Route, from the gates back to the driver:
 - sel's poly along y 14825 runs on east from x 15850, turns down at x 15932 to a
-  contact at (15932,14870) (seen at 1x and 1.4x only).
+  contact at (15932,14870) (4.2x overlay: no other branch).
 - Metal east along y 14872 (x 15952-16238 by scan) to a contact at (16257,14872).
 - Poly south along x 16259 under the wide rail y 14912-14959, to y 15040, then west to a
   buried contact at (16200,15046). At 4x (acid and acid1b) the poly turns west there;
