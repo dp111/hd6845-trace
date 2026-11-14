@@ -26,10 +26,11 @@ M 13849,18522 y18600 w=22          # output leaves downward (routing to be trace
 N P 13765,18160 t_g0_in
 N M 13849,18590 t_g0_out
 
-# ---- clock-style buffer: a three-finger inverter (gate 2) driving a two-finger
-# inverter (gate 1). Used for CLK here and again 2798 px to the right for E.
-@cell clkbuf tag=clk
-# -- gate 1 (x 13975-14225): inverter with a two-finger pull-down
+# ---- big buffers. buf3f is an inverter with a three-finger pull-down, buf2f one with
+# a two-finger pull-down. CLK and E each go through a buf3f then a buf2f (E's pair is
+# 2798 px to the right). buf2f is used again, flipped, in the RES and LPSTB buffers
+# by the top pads (trace/pads_in_top.txt).
+@cell buf2f tag=clk
 C 14000,18231 s=34x30              # supply
 D 13976,18212:14030,18256
 D 13976,18254:14006,18371          # supply side of the load
@@ -44,16 +45,12 @@ P 14113.5,18262 y18490 w=23        # gate finger
 P 14160.5,18262 y18335 14186.5,18360 y18490 w=25   # gate finger (jogs right)
 P 14102,18477:14198,18504          # fingers joined
 P 14140,18500:14166,18552
-C 14152,18535 s=24x24              # gate input
 M 14054,18283:14213,18323          # strap joining the two outer diffusions
 C 14073,18304 14192,18304 s=28x28
 C 14140,18410 s=30x40              # ground, middle diffusion
-C 14063,18535 s=26x26              # output
-M 14152,18535 x14391 w=20          # input: output of gate 2
 N P 14040,18480 {}_b
-
-# -- gate 2 (x 14300-14620): inverter with a three-finger pull-down, input from the
-# CLK pad's protection cell, output along y 18535 to gate 1
+@end
+@cell buf3f tag=clk
 C 14329,18229 s=34x30              # supply
 D 14302,18212:14360,18256
 D 14302,18254:14333,18371          # supply side of the load
@@ -77,10 +74,15 @@ C 14391,18305 14517,18305 s=28x28
 C 14468,18400 s=30x36              # ground
 C 14590,18395 s=26x30              # ground
 N P 14461,18490 {}
+M 14152,18535 x14391 w=20          # output, along y 18535 to the two-finger inverter
 N M 14300,18535 {}_n
 @end
-@inst clkbuf 2798,0 tag=e
+@inst buf2f 2798,0 tag=e
+@inst buf3f 2798,0 tag=e
 
+# input and output contacts of the two buf2f copies in this row
+C 14152,18535 16950,18535 s=24x24
+C 14063,18535 16861,18535 s=26x26
 M 14063,18522 y18600 w=22          # buffered CLK leaves downward (routing to be traced)
 M 14460,18522 y18600 w=22          # CLK arrives from its protection cell (routing to be traced)
 

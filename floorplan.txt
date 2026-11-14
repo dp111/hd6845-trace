@@ -48,8 +48,8 @@
 11320,720:12080,1480  pad  40 VSYNC | pin 40, VSYNC
 
 # --- I/O circuits other than the plain output drivers beside each pad
-6950,1640:8000,2060     ?io     RES/LPSTB input buffers | two identical two-stage buffers between the RES and LPSTB pads
-6380,840:6890,1300      ?io     input protection | comb structure between LPSTB and RES pads
+6950,1640:8000,2060     io      LPSTB and RES input buffers | left cell LPSTB, right cell RES; each a small inverter then a two-finger inverter, so the core sees the pin level
+6380,833:6918,1280      ?io     LPSTB and RES input protection | two mirrored comb cells; left serves LPSTB, right serves RES
 13690,18130:17480,18560 io      input buffers | CLK and E: three-finger inverter then two-finger inverter. R/W, RS, CS: chain of four inverters each, both polarities available. One more inverter at the left end
 13820,18940:17590,19225 io      input protection | five clamp cells in order CLK, R/W, E, RS, CS; each pad reaches its cell through a resistive strip
 9550,19050:12300,19950  ?io     clock driver | large transistors between VCC pad and CLK pad; buffered CLK from the input row heads this way

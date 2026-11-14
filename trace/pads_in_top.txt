@@ -1,0 +1,52 @@
+# RES and LPSTB input buffers between the two pads, x 6950-8000, y 1640-2060.
+# Two identical cells 498 px apart. Each is a small inverter fed from the pad side
+# followed by a two-finger inverter (cell buf2f from trace/inrow.txt, flipped top to
+# bottom). The rail at y 1834-1886 is ground and the one at y 2004-2052 is supply.
+# The left cell is LPSTB's: its input comes down from between the two comb-shaped
+# protection cells at 6380-6918 x 833-1280. The right cell is RES's: its input strip
+# comes straight down from the contact at 7880,1315 beside the RES pad. Each output is
+# the pin level, buffered (two inversions).
+@block pads_in_top
+
+M 6950,1834:8050,1886              # ground rail (extent approximate)
+N M 7600,1860 vss
+M 6300,2004:7945,2052              # supply rail (extent approximate)
+N M 7600,2028 vcc
+
+# two-finger inverters (placed with tools/findcell.py)
+@inst buf2f -6987,-16499 mx=14100 rot=180 o=14100,18382.5 tag=lpstb
+@inst buf2f -6489,-16499 mx=14100 rot=180 o=14100,18382.5 tag=res
+
+@cell topin tag=lpstb
+# -- first stage: small inverter, input from the pad side through the contact at 7381,1684
+C 7381,1684 s=26x26
+M 7381,1640 y1697 w=20             # from the pad side
+P 7385.5,1672 y1901.5 x7426 y1974 w=24   # input gate: down across the rail, then an L round a pocket
+D 7326,1781:7422,1830              # above the rail: output | gate | ground
+D 7346,1828:7455,1890              # under the rail: output | gate | ground
+D 7398,1888:7458,1962              # pocket below the rail, cut by the L
+C 7413,1860 s=28x30                # ground
+D 7322,1880:7372,1905              # output on down to the load
+D 7325,1900:7348,2046
+P 7301,1938:7374,1996              # load gate
+P 7370,1936:7398,1962              # ... tab to its buried contact
+D 7347,1936:7400,1962
+B 7346,1934:7399,1964
+C 7339,2029 s=40x30                # supply
+N D 7335,1920 {}_n
+N P 7385,1740 {}
+# -- link to the second stage: buried contact on the output, poly up, left along y 1705
+B 7325,1777:7358,1813
+P 7329,1710:7353,1810
+P 7140,1694:7353,1716
+@end
+@inst topin 498,0 tag=res
+
+# second-stage outputs. LPSTB's poly runs on up, under the wire at y 1730, to a contact
+# on the wire at y 1686; RES's contact is on the wire at y 1730. Both wires run left
+# and then down past x 6580 and x 6712 towards the core (not yet followed).
+P 7064,1670:7090,1716
+C 7076,1684 s=26x26
+M 7076,1686 x6581 y1962 w=16
+C 7574,1731 s=26x26
+M 7574,1731 x6710 y1962 w=16

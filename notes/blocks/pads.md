@@ -14,6 +14,33 @@
 - The bond pads themselves are not in the cell: each pad sits differently relative to
   its driver. Only MA3's pad is drawn so far.
 
+## Input pads
+
+Bottom right (trace/inprot.txt, trace/inrow.txt):
+
+| Pin | Path | Core-side nets |
+|---|---|---|
+| CLK | protection cell 1, then three-finger inverter, then two-finger inverter | `clk_n` = NOT clk, `clk_b` = clk buffered; `clk_b` leaves left along y 19070 |
+| R/W | protection cell 2, then four inverters in a chain | `rw_a` = NOT rw, `rw_b` = rw, `rw_c` = NOT rw, `rw_d` = rw |
+| E | protection cell 3, then three-finger and two-finger inverters | `e_n`, `e_b`; `e_b` goes up to the core in a wide poly line at x 16660-16705 |
+| RS | protection cell 4, then four inverters | `rs_a` .. `rs_d` |
+| CS | protection cell 5, then four inverters | `cs_a` .. `cs_d` |
+
+In each four-inverter group the b and c outputs also connect to a large plain
+diffusion rectangle (about 130 x 220 px), which looks like added capacitance.
+One further inverter at the left end of the row (input from the core in poly,
+output leaving left along y 18775) is not yet identified.
+
+Top (trace/pads_in_top.txt):
+
+| Pin | Path | Core-side net |
+|---|---|---|
+| LPSTB | left comb cell at 6380-6650 x 833-1280, then small inverter and two-finger inverter | `lpstb_b` = pin level, on the wire at y 1686 |
+| RES | strip from the contact at 7880,1315, right comb cell, then the same two stages | `res_b` = pin level, on the wire at y 1730 |
+
+Not yet drawn: the strips from the pads to the protection cells and from those to
+the buffers, the two top comb cells, and the wiring below the buffer row.
+
 ## Data pad (D0-D7): in progress
 
 Eight instances at dy = 0, 1735, 3470, 5054, 6637, 8242, 9847, 11452 from D0 (D0 at

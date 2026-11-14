@@ -81,10 +81,10 @@
 <text x="13084" y="872" font-family="sans-serif" font-size="142" fill="#ffffff" stroke="#000000" stroke-width="12" paint-order="stroke">39 HSYNC</text>
 <rect x="11320" y="720" width="760" height="760" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="14"><title>40 VSYNC: pin 40, VSYNC</title></rect>
 <text x="11344" y="872" font-family="sans-serif" font-size="142" fill="#ffffff" stroke="#000000" stroke-width="12" paint-order="stroke">40 VSYNC</text>
-<rect x="6950" y="1640" width="1050" height="420" fill="#ffc800" fill-opacity="0.12" stroke="#ffc800" stroke-width="14" stroke-dasharray="60 40"><title>RES/LPSTB input buffers: two identical two-stage buffers between the RES and LPSTB pads</title></rect>
-<text x="6974" y="1720" font-family="sans-serif" font-size="70" fill="#ffffff" stroke="#000000" stroke-width="6" paint-order="stroke">RES/LPSTB input buffers ?</text>
-<rect x="6380" y="840" width="510" height="460" fill="#ffc800" fill-opacity="0.12" stroke="#ffc800" stroke-width="14" stroke-dasharray="60 40"><title>input protection: comb structure between LPSTB and RES pads</title></rect>
-<text x="6404" y="920" font-family="sans-serif" font-size="70" fill="#ffffff" stroke="#000000" stroke-width="6" paint-order="stroke">input protection ?</text>
+<rect x="6950" y="1640" width="1050" height="420" fill="#ffc800" fill-opacity="0.12" stroke="#ffc800" stroke-width="14"><title>LPSTB and RES input buffers: left cell LPSTB, right cell RES; each a small inverter then a two-finger inverter, so the core sees the pin level</title></rect>
+<text x="6974" y="1720" font-family="sans-serif" font-size="70" fill="#ffffff" stroke="#000000" stroke-width="6" paint-order="stroke">LPSTB and RES input buffers</text>
+<rect x="6380" y="833" width="538" height="447" fill="#ffc800" fill-opacity="0.12" stroke="#ffc800" stroke-width="14" stroke-dasharray="60 40"><title>LPSTB and RES input protection: two mirrored comb cells; left serves LPSTB, right serves RES</title></rect>
+<text x="6404" y="913" font-family="sans-serif" font-size="70" fill="#ffffff" stroke="#000000" stroke-width="6" paint-order="stroke">LPSTB and RES input protection ?</text>
 <rect x="13690" y="18130" width="3790" height="430" fill="#ffc800" fill-opacity="0.12" stroke="#ffc800" stroke-width="14"><title>input buffers: CLK and E: three-finger inverter then two-finger inverter. R/W, RS, CS: chain of four inverters each, both polarities available. One more inverter at the left end</title></rect>
 <text x="13714" y="18310" font-family="sans-serif" font-size="170" fill="#ffffff" stroke="#000000" stroke-width="14" paint-order="stroke">input buffers</text>
 <rect x="13820" y="18940" width="3770" height="285" fill="#ffc800" fill-opacity="0.12" stroke="#ffc800" stroke-width="14"><title>input protection: five clamp cells in order CLK, R/W, E, RS, CS; each pad reaches its cell through a resistive strip</title></rect>

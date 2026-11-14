@@ -3,7 +3,7 @@
 Each entry: where, what is unclear, the candidate readings, the working assumption (if
 any) and what would settle it. Status is open, assumed or resolved.
 
-## AMB-001  Structure of the RES/LPSTB input buffers  (open)
+## AMB-001  Structure of the RES/LPSTB input buffers  (resolved)
 
 Where: 6950-8000 x 1640-2060, two identical cells.
 
@@ -19,8 +19,12 @@ has the box at 7040-7070 x 1837-1867 as a buried contact tying the output diffus
 the poly that leaves through the contact at 7076,1684; the other has it as a metal
 contact to the upper rail.
 
-To settle: trace both rails back to the VSS and VCC pads (M1), then re-read the cell
-knowing which is which. Not needed for anything else yet.
+Resolved: the large two-finger transistor with its load is the same cell as the
+second stage of the CLK and E buffers, flipped top to bottom (found by template
+matching, confirmed by overlay). That fixes the upper rail as ground and the lower
+as supply. The first stage is a small inverter whose gate wraps round a pocket of
+diffusion. Each cell is a non-inverting two-stage buffer. Traced in
+trace/pads_in_top.txt; left cell is LPSTB, right cell is RES.
 
 ## AMB-002  Depletion implant visibility  (open)
 
