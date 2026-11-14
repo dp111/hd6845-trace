@@ -24,7 +24,8 @@ agent has verified it), `partial` (reported, with work left: see its notes).
 | `cdp2` | 7600-10850 x 5700-8450 | central datapath | running |
 | `cdp3` | 7600-10850 x 8450-11200 | central datapath | partial (run 1): wiring rows E, F and channels B, D, G traced (two rows of cells gated onto an 8-line bus); cell rows A, C, H, I not traced; run 2 running |
 | `cdp4` | 7600-10850 x 11200-14000 | central datapath, bottom rows | running |
-| `bd3` | 14100-15900 x 16550-17100 and onward | where the strobe and select tracks from `sel` go; source of the write strobe | running |
+| `bd3` | 14100-15900 x 16550-17100 and onward | where the strobe and select tracks from `sel` go; source of the write strobe | done: strobe = NOT e_b (so each write strobe = select AND E); R12/R13 gated and buffered like R14/R15; all 16 tracks to the region's edge |
+| `bd1` | 13000-14100 x 14700-17100 | logic left of the select gates; the write strobes pass through it heading west | running |
 | `bd2` | 15850-17000 x 14700-17100 | gate that makes the address register load strobe (x 15880-16150, y 15230-15330), source of the write strobe entering `sel` at (15850,14825), rest of that logic | running |
 
 Measured on the first report: one agent run lasts about 20 minutes and about 60-80

@@ -143,7 +143,9 @@ Traps, all of them real:
 7. **Your eye is unreliable for repeated patterns.** In the decode array, impressions at
    2.7x of which crossings had transistors were wrong where a colour measurement was
    right. For arrays, measure (see `tools/pla_read.py`) and cross-check.
-8. Where a poly line ends next to another feature, zoom to 4-6x before deciding whether
+8. Poly often runs directly underneath the metal of a *different* net for hundreds of
+   pixels. Metal over poly is a connection only where there is a contact.
+   Where a poly line ends next to another feature, zoom to 4-6x before deciding whether
    they touch. Most wrong readings so far were junctions judged at too low a zoom.
 9. If a region will not give a consistent circuit after two honest passes, stop, record
    exactly what is established (with coordinates) and what is not, and move on.

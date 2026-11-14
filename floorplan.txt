@@ -79,7 +79,6 @@
 4800,15800:6500,18650   ?logic  bottom-left logic | random logic near DISPTMG/CUDISP pads
 13000,14700:14100,17100 ?logic  logic left of the select gates | random logic; five write strobes (R0 R1 R2 R4 R6) pass through it heading west
 15850,14700:17000,17100 ?logic  logic right of the select gates | random logic; the write strobe arrives from here
-14100,16550:15850,17100 ?logic  below the select gates | where the 16 strobe and select tracks go next
 16000,12900:17000,14700 ?logic  logic right of decode array | select-line drivers and bus control
 11600,2150:12080,2800   ?logic  small cell by die marking | isolated cell left of the HD46505S text
 
