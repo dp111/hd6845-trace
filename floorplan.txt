@@ -64,7 +64,6 @@
 13350,5450:16950,12550  ?array  right datapath (8-9 x 390 px) | horizontal bit-slices, 390.3 px pitch, nearest the data bus pads
 2400,6450:4780,18550    ?array  left vertical array (477 px rows) | rows repeat every 477 px beside the MA pads: memory address counter and related latches
 11700,7200:13320,17050  ?array  mid-right vertical array (477 px rows) | rows repeat every 477 px: 14-bit registers (start address, cursor, light pen) facing the left array across the routing field
-14380,14880:14850,16500 ?array  latch column (304 px rows) | inverter + NOR pairs mirrored about a supply rail; pilot trace is here
 14150,13030:15820,13260 ?array  row above decode array | 5 or so cells feeding the decode array
 
 # --- decode array
@@ -78,7 +77,9 @@
 11400,5250:13050,6450   ?logic  logic above mid-right array | small array, 4 or so columns
 7000,14600:11000,18550  ?logic  bottom-centre logic | random logic below the central datapath
 4800,15800:6500,18650   ?logic  bottom-left logic | random logic near DISPTMG/CUDISP pads
-13000,14700:17000,17100 ?logic  logic below decode array | random logic, includes the latch column
+13000,14700:14100,17100 ?logic  logic left of the select gates | random logic; five write strobes (R0 R1 R2 R4 R6) pass through it heading west
+15850,14700:17000,17100 ?logic  logic right of the select gates | random logic; the write strobe arrives from here
+14100,16550:15850,17100 ?logic  below the select gates | where the 16 strobe and select tracks go next
 16000,12900:17000,14700 ?logic  logic right of decode array | select-line drivers and bus control
 11600,2150:12080,2800   ?logic  small cell by die marking | isolated cell left of the HD46505S text
 

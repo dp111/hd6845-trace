@@ -45,11 +45,16 @@ tools/t.sh BLOCK netlist.py
 
 - `quad.py` shows layers of one region side by side: by default `metal` and `acid1b`
   with your trace outlined on the second. `--layers metal,acid,acid1b,acid1b` gives
-  four panels when you need the other shots. `view.py` shows one layer, or several
+  four panels when you need the other shots; `--traceall` outlines the trace on every
+  panel (useful to check metal). `view.py` shows one layer, or several
   with `--layers a,b --stack v`. `--layers edges` shows only outlines present in
   both chip-2 shots.
 - `mosaic.py X Y W H --offsets "0,0 dx,dy ..." --scale S --layer acid1b --out NAME.png`
   shows the same rectangle at several offsets side by side, to compare repeats.
+- For following bundles of parallel wires, `tools/sel_tracks.py` and `tools/sel_cut.py`
+  (written by the agent that traced the select logic; read their docstrings) report
+  where metal is present along a track or a cut. They missed one contact there, so
+  check what they say by overlay.
 - X Y is the top-left corner, W H the size, in die pixels. The tool prints the path of
   the PNG; open it with the Read tool.
 - **Keep every image under about 1400 px a side or it is downscaled when read and the

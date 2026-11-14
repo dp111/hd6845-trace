@@ -13,7 +13,7 @@ agent has verified it), `partial` (reported, with work left: see its notes).
 | Prefix | Region | What | Status |
 |---|---|---|---|
 | `areg` | 15800-16950 x 12900-14700 | address register cells that drive the decode rows, and the logic to their right | running |
-| `sel` | 14100-15850 x 14650-16550 | where the 18 register select lines go below the decode array (latch column, strobe gating) | running |
+| `sel` | 14100-15850 x 14650-16550 | where the 18 register select lines go below the decode array (latch column, strobe gating) | done: write strobe gates for R0-R11, R14, R15; R16/R17 buffered only; R12/R13 pass through |
 | `trunks` | whole die | routes of the global signals (clocks, E, R/W, RS, CS, RES, LPSTB) from where their traces end into the core | running |
 | `rdp3` | 13350-16950 x 10700-12900, and 13350-15800 x 12900-13480 | right datapath, lower rows, including the row of cells above the decode array | running |
 | `cdp1` | 7600-10850 x 2950-5700 | central datapath, top rows | running |
@@ -24,6 +24,7 @@ agent has verified it), `partial` (reported, with work left: see its notes).
 | `cdp2` | 7600-10850 x 5700-8450 | central datapath | running |
 | `cdp3` | 7600-10850 x 8450-11200 | central datapath | running |
 | `cdp4` | 7600-10850 x 11200-14000 | central datapath, bottom rows | running |
+| `bd3` | 14100-15900 x 16550-17100 and onward | where the strobe and select tracks from `sel` go; source of the write strobe | running |
 
 Measured on the first report: one agent run lasts about 20 minutes and about 60-80
 image views, and yields one or two traced cells plus survey notes. Blocks are
