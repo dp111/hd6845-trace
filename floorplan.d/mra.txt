@@ -1,0 +1,5 @@
+11730,7260:12200,16945  logic  carry/AND chain column of the mid-right array | per row: x(N) = x(N+1) AND NOT g1(N), rippling upward (bottom row first) in groups r0-r6, r7-r10, r11-r14, r15-r18; plus one inverter per row (n1 = NOT p3)
+11680,10880:11722,12580  route  group line A (rows r7-r10) | wired NOR of g1 of rows r7-r10, feeds the chain input of row r6
+11680,14955:11722,17090  route  group line B (rows r15-r18) | wired NOR of g1 of rows r15-r18 with its load at the bottom, feeds the chain input of row r14
+12200,7200:13000,17050  ?array  mid-right array, register/latch columns | not traced: 19 identical rows at 477 px; columns between the rails at x 12412, 12700, 12935
+13000,7200:13320,17050  ?route  vertical bus right of the mid-right array | about 8 vertical metal lines, probably the internal data bus; not traced
