@@ -81,6 +81,15 @@ gates the strobe; CS, RS and R/W must act somewhere else (on the select lines th
 the address rows, or on the data path). The strobe net has exactly these loads: the
 16 NORs.
 
+### The gate of sel_w7 (and sel_w11): row 5 of the gate column
+
+Already in sel.txt as the sixth pair of `sel_wr` instances (NOR at y 16600-16720).
+Looked at again here in passing (1.6x overlay for the left half, 1x for the right):
+the cell sits on the features, the strobe contacts are at (14305,16696) on `sel_stb_l`
+and (14918,16696) on T0, the outputs leave as sel has them. sel_w7 = NOR(sel_n7,
+strobe), nothing different from the rows above. Its output poly goes west along
+y 16651, down x 14135 and west again along y 16864 (4x), out of the region.
+
 ### R12 select buffer (row y 16740-16870)
 
     bd3_n12 = NOT rsel12        (right half; pull-down W/L 134/22, weak load 27/56)
@@ -201,6 +210,13 @@ turn west, at y 17302, 17346, 17388, 17432, and cross the supply rail the same w
   so poly under foreign metal is this layout's habit; and the strobe is now traced to a
   plain inverter of `e_b`, which has no business on a clock line. If X ever turns out to
   be E-like, look here again. (bd3.txt does not draw X; trunks.txt does.)
+- **notes/blocks/areg.md reads the strobe's driver differently** ("a poly going down
+  x 16247-16265 to a contact at (16255,15085)", i.e. the strobe wire would be `e_b`
+  itself). That was a low-zoom reading. At 4x in `acid` and `acid1b` and at 6x in `metal`
+  and `metal1` (view x 16215-16310, y 15015-15110) the poly coming down x 16259 turns
+  west at y 15030-15048 and ends on the buried contact at (16200,15046); a band of bare
+  field, y 15050-15068, unbroken in both chips, lies between it and the pad at
+  (16255,15085). So the strobe is the inverter's output (NOT `e_b`), not `e_b`.
 - sel.txt draws `sel_stb_l`'s metal straight down to y 16760; it really turns west at
   y 16739. Harmless (the overshoot touches nothing).
 - Loads of `sel_rwr` (R12, R13 pairs) are sel's schematic `?` loads; at 1.3x the real
