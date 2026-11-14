@@ -125,3 +125,38 @@ leakage figure. Working assumption: all six are enhancement devices used as clam
 to VCC + Vt, on the nets that drive the bootstrapped driver logic. Marked
 kind=clamp, which leaves them out of logic recovery. Revisit if the driver logic
 turns out not to bootstrap.
+
+## AMB-007  Clock driver logic  (open)
+
+Where: 10900-12000 x 19140-19890.
+
+Two roughly mirrored circuits (about x = 11437), with VCC along the top, VSS across
+the middle (y 19370-19452) and very large structures below. Inputs identified: line B
+and its re-buffered copy on the left half, line A and its copy on the right half,
+buffered CLK, and the CLK pin node along the bottom. Not identified: the outputs.
+
+What blocks the reading:
+- Most of the transistors lie under the VSS rail, where the acid shot shows only
+  interference fringes and the metal shot only grain. Two instances are too few
+  for a median composite.
+- Two overlapping outlines below the rail (R1 11050-11250, R2 11135-11388) are
+  different layers. One is diffusion; the other is neither orange like poly nor
+  contacted like diffusion, and may be an implant mask, in which case the poly
+  strips running down inside it are capacitor plates and not transistor gates.
+- The region marked "A" (11030-11140 x 19333-19372) is diffusion with a poly tab
+  entering from below, while its neighbours B and C are poly load gates with buried
+  contacts. So the three cells of each half are not alike.
+- Two short metal pieces at the left edge (y 19240-19262 and y 19283-19305) both end
+  at x 10910 beside a thin vertical line at x 10915-10925. Whether each contacts
+  that line (which would tie the second piece, and the diffusion of "A", to line B)
+  is not resolved.
+
+Why it is parked: the main clock does not go through this logic (see
+notes/blocks/clock.md), so nothing traced so far depends on it. Its outputs will be
+easier to identify from the core side, where they are used, and the source of its
+input `ck_src` should turn up when the bus fields are traced.
+
+To settle: follow the lines that leave it (candidates: the poly strips at
+x 11390-11416 and 11523-11547 running down to the bottom, anything leaving at the
+top between x 11000 and 11900) into the core; then re-read the cells under the
+rail knowing what they must produce.

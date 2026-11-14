@@ -123,3 +123,44 @@ Still to do for M1, in the order I would take them:
 3. The two comb protection cells by LPSTB and RES.
 4. Pad squares and the two supply rings as drawn metal.
 5. Data pad cell (AMB-003), after the bus-interface logic that drives it.
+
+## 2026-11-15  Clock block
+
+Result
+- The main internal clock is NOT CLK. The CLK pin node runs along the bottom of the
+  block and drives, through a single contact, a three-stage buffer built from the
+  two big arrays: inverter (3 fingers of W 480), inverter (2 fingers), then a
+  push-pull pair whose pull-up gate is the inverse of its pull-down gate. No gating,
+  no division. Output `ck_out` goes up into the core at x 10845-10870 and away to
+  the left at y 19240-19262.
+- A gate row of six inverters buffers a global signal `ck_src` into both polarities
+  (lines A and B). Those go right into the core, and down into a "driver logic" of
+  two mirrored circuits together with CLK. `ck_src` was followed 4000 px along the
+  bottom bus field to the foot of the left bus field; its source is not known.
+- The driver logic is not traced (AMB-007).
+
+Traced: 321 transistors in total, no rule errors. New in the tools: an `edges`
+layer in view.py (outlines present in both photos), an annotation layer for
+devices that are off in normal operation (`A ... kind=clamp|field`), and `@alias`.
+
+Corrections to earlier work
+- Input protection cells redrawn from 4x composites: the pad arrives in poly, a comb
+  of buried contacts ties it to the node, and the wide band above is a thick-oxide
+  clamp (AMB-005). The previous drawing had the pad strip as diffusion.
+- The six "island" devices in the clock wiring are taken to be clamps to VCC
+  (AMB-006).
+
+Method notes
+- Following one metal line across the die by eye is slow (about one view per
+  1300 px at full scale). Lines in the bus fields should be traced as bundles when
+  those fields are done, not one at a time.
+- Big multi-finger devices are quick: columns of contacts and gate strips read
+  directly at 0.9x, and a schematic rectangle per group is enough for the netlist.
+- The decisive questions were all junctions: which poly reaches which contact.
+  Each took one 5-6x view. Deciding early which junctions matter, and looking only
+  at those, would have saved many of the survey views.
+
+Next
+- M2: bus interface and register decode. `rw`, `rs`, `cs` and `e` are ready at the
+  input row; the decode array is at 14180-15780 x 13480-14680.
+- Carry AMB-007 and the source of `ck_src` as open items to pick up from the core.

@@ -52,7 +52,10 @@
 6380,833:6918,1280      ?io     LPSTB and RES input protection | two mirrored comb cells; left serves LPSTB, right serves RES
 13690,18130:17480,18560 io      input buffers | CLK and E: three-finger inverter then two-finger inverter. R/W, RS, CS: chain of four inverters each, both polarities available. One more inverter at the left end
 13820,18940:17590,19225 io      input protection | five clamp cells in order CLK, R/W, E, RS, CS; each pad reaches its cell through a resistive strip
-9550,19050:12300,19950  ?io     clock driver | large transistors between VCC pad and CLK pad; buffered CLK from the input row heads this way
+9500,19180:10730,19815   io      main clock buffer | CLK pin node drives a three-stage buffer (two big inverters, then a push-pull pair). Output is NOT CLK, the main internal clock
+11150,18600:12150,19000  logic   clock gate row | six inverters: buffers a global signal into both polarities (lines A and B), which go on into the core and down into the driver logic
+11950,18850:12900,19950  route   clock wiring | lines A, B, their re-buffered copies, buffered CLK and the CLK pin node on their way down; six small clamp devices to VCC
+10900,19140:12000,19890  ?logic  clock driver logic | two mirrored circuits with very wide devices and tall capacitor-like structures, fed by lines A/B and CLK. Surveyed, not traced; outputs not yet identified
 17050,5300:17700,17000  ?logic  data bus interface | column of logic beside the D0-D7 pads
 17720,5950:19150,19150  ?io     D0-D7 pad cells | eight identical cells, 1600-1735 px apart: tri-state driver with its pre-driver under the VCC band, input protection above. Located, not yet fully traced (AMB-003)
 

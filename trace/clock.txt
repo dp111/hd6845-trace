@@ -398,3 +398,13 @@ M 9848,19785:9870,19840            # ck_out also leaves downward (not yet follow
 ?P 14412,18845:14452,19065
 ?C 14440,18858 s=24x20
 ?M 14438,18600:14462,18872
+
+# ---- ck_out, downward branch: right along the bottom, up past the driver logic's
+# left edge, under the VSS branch in poly, and on up into the core
+M 9848,19785:9870,19865
+M 9848,19848:10870,19865
+M 10845,19435:10870,19865
+C 10857,19422 s=26x26
+P 10846,19278:10872,19440
+C 10857,19292 s=26x26
+M 10845,19100:10870,19306          # continues up into the core (not yet followed)

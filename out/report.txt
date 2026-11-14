@@ -1,6 +1,7 @@
-143 nets, 321 transistors, 0 errors, 0 warnings
+144 nets, 321 transistors, 1 errors, 0 warnings
 note   vss is traced as 50 separate pieces, joined by name
 note   vcc is traced as 31 separate pieces, joined by name
+ERROR  contact at 10857,19422 (trace/clock.txt:407): no metal over it
 
 transistors
   t0    at   1204,  2211  W/L  743/18   -     gate ma2_pu       vcc <-> ma2
@@ -348,8 +349,8 @@ gates
   ma11_pu      = NOT ma11_drv_in
   ma12_pd      = NOT ma12_pu
   ma12_pu      = NOT ma12_drv_in
-  ma0_pu       = NOT ma0_drv_in
   ma1_pu       = NOT ma1_drv_in
+  ma0_pu       = NOT ma0_drv_in
   ma0_pd       = NOT ma0_pu
   ma1_pd       = NOT ma1_pu
   disptmg_pu   = NOT disptmg_drv_in
@@ -357,13 +358,13 @@ gates
   ma13_pd      = NOT ma13_pu
   lpstb_b      = NOT lpstb_n
   res_b        = NOT res_n
+  vsync_pd     = NOT vsync_pu
   cudisp_pu    = NOT cudisp_drv_in
   cudisp_pd    = NOT cudisp_pu
   disptmg_pd   = NOT disptmg_pu
   ck_t         = NOT clk
   ck_n2        = NOT ck_t
   vsync_pu     = NOT vsync_drv_in
-  vsync_pd     = NOT vsync_pu
   hsync_pd     = NOT hsync_pu
   hsync_pu     = NOT hsync_drv_in
   ck_a         = NOT ck_b
@@ -387,21 +388,21 @@ gates
   ra4_pd       = NOT ra4_pu
   e_n          = NOT e
   e_b          = NOT e_n
-  res_n        = NOT res
   lpstb_n      = NOT lpstb
-  ck_g1        = NOT ck_b
+  res_n        = NOT res
   ck_g3        = NOT ck_a
+  ck_g1        = NOT ck_b
   a_out_L      = NOT in_a_L
   b_out_L      = NOR(a_out_L, in_c_L)
   rw_a         = NOT rw
-  rs_d         = NOT rs_c
-  cs_d         = NOT cs_c
-  cs_a         = NOT cs
   rs_a         = NOT rs
+  cs_d         = NOT cs_c
+  rs_d         = NOT rs_c
   rw_d         = NOT rw_c
+  cs_a         = NOT cs
   rs_b         = NOT rs_a
-  cs_b         = NOT cs_a
   rs_c         = NOT rs_b
+  cs_b         = NOT cs_a
   cs_c         = NOT cs_b
 
 not part of a static gate
