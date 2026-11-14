@@ -125,12 +125,16 @@ was above it. Full notes with coordinates of examples: `notes/layers.md`.
 Traps, all of them real:
 
 1. **The clean shot's colours drift across the die.** Open diffusion is green in the
-   bottom rows, pink in the decode array and mauve in the mid-right array. Calibrate locally: find an unmistakable
+   bottom rows, pink in the decode array and mauve in the mid-right array; at the top
+   of the central datapath diffusion is light tan with or without metal above it and
+   the olive pockets are open field. Calibrate locally: find an unmistakable
    structure near where you work (a VCC contact with its load, a row of contacts) and
    see what colour each layer has there.
 2. **Metal protected a margin of about 10 px beyond its edges.** A 25 px gap between two
    metal lines shows in `acid1b` only as a thin dark bar across whatever is underneath,
    or as a narrow olive strip with a dark outline. Those bars and strips are not layout.
+   Where such a gap crosses poly it can leave a dark ring that looks like a contact;
+   a real contact also shows as a ring in the metal shot.
 3. A dark line across a metal wire in the metal shots is the edge of something
    *underneath*, not a break in the metal. Likewise, bright green bands in `acid1b`
    inside the arrays are gaps of open field between metal lines, not features.
@@ -217,6 +221,9 @@ Most of the die is repeated cells. Trace a cell once.
   it with `--comp NAME` on view.py / quad.py (coordinates stay those of the master).
   Start NAME with your block name (composites share one folder). Above 4x the median
   is blurrier than a single clean shot; use it for dirt, not for fine junctions.
+- `tools/cdp1_sr.py` (read its docstring) makes a sub-pixel-aligned median of the
+  copies of a cell at 3-6x. The agent that wrote it says it is what made a register
+  cell readable where the plain composite was too blurred.
 - `--shift dx,dy` on view.py / quad.py shows another instance in the master's
   coordinates: use it to compare instances.
 - `tools/t.sh BLOCK cellcheck.py CELL [--bbox x0,y0:x1,y1] [--layer acid1b]` compares each

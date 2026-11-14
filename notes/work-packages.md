@@ -16,7 +16,7 @@ agent has verified it), `partial` (reported, with work left: see its notes).
 | `sel` | 14100-15850 x 14650-16550 | where the 18 register select lines go below the decode array (latch column, strobe gating) | done: write strobe gates for R0-R11, R14, R15; R16/R17 buffered only; R12/R13 pass through |
 | `trunks` | whole die | routes of the global signals (clocks, E, R/W, RS, CS, RES, LPSTB) from where their traces end into the core | partial (run 1): ck_out, ck_a, ck_b, e_b, rw_d, rs_d, cs_d, res_b, lpstb_b, clk to their first entries; left: source of X (input of input-row gate 0), end of S, clk_b, upper ends and taps |
 | `rdp3` | 13350-16950 x 10700-12900, and 13350-15800 x 12900-13480 | right datapath, lower rows, including the row of cells above the decode array | partial (run 1): address register latch row traced (5 bits); two 8-bit register rows found, not placed; run 2 running |
-| `cdp1` | 7600-10850 x 2950-5700 | central datapath, top rows | running |
+| `cdp1` | 7600-10850 x 2950-5700 | central datapath, top rows | partial (run 1): rows A and C are static register bits (6 and 5 cells), row B upper half is a 5-input equality NOR; row B per-bit logic, bit lines, channels, rows D, E left; run 2 running |
 | `larr` | 2400-4780 x 6450-18550 | left vertical array (rows every 477 px), by the MA pads | running |
 | `mra` | 11700-13320 x 7200-17050 | mid-right vertical array (rows every 477 px) | partial (run 1): chain column x 11730-12200 in all 19 rows; run 2 running on x 12200-13320 |
 | `dbus` | 17050-17700 x 5300-17000, and the D0-D7 pad cells | data bus interface column; then finish the data pad cell (AMB-003) | partial: input buffers D0-D5 traced; gate groups, bus lines, pad cell left (continue as the same block) |

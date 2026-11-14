@@ -36,6 +36,13 @@ known. Matters for transistors that are depletion-mode without being wired as lo
 To settle: compare known loads against known pull-downs at 4-5x in both shots for any
 consistent outline or tint.
 
+2026-11-15: this now matters in a concrete place. The static register cell of the
+central datapath (`cdp1_reg`, notes/blocks/cdp1.md) holds its value through a long
+transistor whose gate is grounded; the cell only works if that device is
+depletion-mode. So there are depletion devices that are not wired as loads, and
+topology alone will not find them all. Any transistor whose gate is tied to VSS or to
+its own source should be listed as a probable depletion device.
+
 ## AMB-003  Data pad cell  (open, narrowed)
 
 Where: D0 master, 17780-18760 x 7150-7560 (and the same place in D1-D7).
