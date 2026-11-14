@@ -145,6 +145,26 @@ links to a vertical metal near x 10810 that heads down this way, so `ck_src` ver
 probably comes from this part of the block: the gate row re-buffers something made
 here, and the driver logic's two halves take that signal and its complement back.
 
+## The gate row's input line (`ck_src`) is a global signal
+
+Followed from g5's gate: bus line y 18458-18480 leftwards to a contact at
+10897,18468; a short poly link joins it to a contact at 10808,18470 and, by a branch
+up at x 10850-10870, to a contact at 10855,18385 on the bus line at y 18375-18400
+(which runs right). From 10808,18470 a metal runs down to 10808,18600, crosses under
+the wide metal at x 10720-10770 in poly to 10685,18600, runs left in metal along
+y 18590-18612 to x 10255, up at x 10250-10290 to y 18425, and left along y 18410-18440.
+From there it is one of the lines of the bottom bus field: poly links under vertical
+metals at x 9740-9840 (contacts 9870,18420 and 9650,18420), at x 8440-8560 (contacts
+8600,18425 and 8380,18425) and at x 7470-7510 (contacts 7600,18425 and 7425,18425),
+ending at a contact at 6800,18420. A poly line runs up from there to a contact at
+6800,17990 at the foot of the innermost vertical line (x about 6790) of the bundle
+that climbs the left bus field.
+
+So `ck_src` is not made locally by anything traced so far. Either it is the block's
+own output coming back after distribution, or it is a signal from elsewhere that the
+clock block needs. Lines A and B, its two buffered polarities, are themselves sent
+on to the right-hand side of the core.
+
 ## Open questions
 
 - What `ck_src` is, and therefore what the block produces. Candidates: a clock
