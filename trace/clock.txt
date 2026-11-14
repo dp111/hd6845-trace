@@ -137,8 +137,8 @@ N M 11650,18467 ck_src
 #
 # Six small "island" devices hang on these nets. Each is a transistor from a VCC
 # diffusion to a short stub, with its gate on the net and a metal pad over stub and
-# gate. They are drawn as loads (gate tied to the stub); how the tie is made and
-# whether they are pull-ups or clamps is AMB-006.
+# gate. They are drawn with the gate tied to the stub and marked kind=clamp, i.e. off
+# in normal operation (AMB-006).
 # ====================================================================
 
 M 12088,19156:12140,19960          # VCC: joins the driver logic's top rail to the band along the bottom
@@ -171,6 +171,7 @@ P 12425,19134:12452,19201
 ?B 12417,19146:12431,19189
 C 12402,19167 s=26x30
 M 12380,19132:12456,19202
+A 12425,19136:12456,19199 kind=clamp
 C 12700,19185 s=24x24
 # island T2
 D 12382,19310:12705,19365
@@ -178,6 +179,7 @@ P 12425,19304:12452,19371
 ?B 12417,19316:12431,19359
 C 12402,19337 s=26x30
 M 12380,19302:12456,19372
+A 12425,19306:12456,19369 kind=clamp
 C 12700,19337 s=24x24
 ?M 12650,19150:12900,19420         # part of the VCC band the two strips reach (extent not traced)
 N M 12800,19300 vcc
@@ -191,13 +193,14 @@ M 11900,19283:12060,19306          # into the driver logic
 # ---- big VCC diffusion under the gate row's lines, with three island devices below it
 D 12385,18600:12790,18850
 C 12400,18603:12770,18627          # nine contacts to the VCC band
-# island B1, on net ck_n2 (V4)
+# island B1, on ck_g4 (V4)
 D 12395,18840:12445,18968
 P 12300,18888:12448,18916
 P 12300,18888:12323,19092
 ?B 12400,18910:12440,18922
 C 12420,18945 s=26x26
 M 12385,18885:12447,18975
+A 12390,18884:12450,18914 kind=clamp
 C 12309,19078 s=26x26
 M 12302,19066:12318,19545          # V4
 P 11992,19066:12323,19090
@@ -207,7 +210,6 @@ C 12310,19532 s=26x26
 P 11992,19521:12323,19545
 C 12005,19532 s=26x26
 M 11900,19521:12018,19544          # into the driver logic
-N M 12310,19300 ck_n2
 # island B2, on buffered CLK
 D 12570,18840:12625,18968
 P 12510,18888:12628,18916
@@ -216,6 +218,7 @@ P 12510,19042:12582,19068
 ?B 12576,18910:12620,18922
 C 12597,18945 s=26x26
 M 12563,18885:12627,18975
+A 12565,18884:12630,18914 kind=clamp
 C 12569,19057 s=26x26
 # buffered CLK from the input row (continues the stub in trace/inrow.txt)
 M 14052,18522:14075,18875
@@ -234,6 +237,7 @@ P 12845,18888:12870,19118
 ?B 12751,18910:12795,18922
 C 12772,18945 s=26x26
 M 12738,18885:12802,18975
+A 12740,18884:12805,18914 kind=clamp
 C 12857,19104 s=26x26
 M 12600,19093:13880,19115          # CLK pin node, from its protection cell
 M 12600,19093:12630,19912          # V6
@@ -243,7 +247,7 @@ P 12038,19888:12194,19912
 C 12050,19900 s=26x26
 M 11900,19888:12063,19912          # along the bottom of the driver logic (not yet followed)
 
-# ---- net ck_n1 (V3), with island BI near the bottom
+# ---- ck_g2 (V3), with island BI near the bottom
 C 12263,19120 s=26x26
 P 12034,19109:12282,19133
 C 12048,19121 s=26x26
@@ -253,13 +257,22 @@ C 12266,19573 s=26x26
 P 12034,19562:12280,19586
 C 12048,19573 s=26x26
 M 11900,19562:12061,19585          # into the driver logic
-N M 12266,19300 ck_n1
 P 12250,19562:12274,19722
 P 12250,19698:12497,19722
 D 12435,19640:12495,19960          # stub, channel, then down to the VCC band along the bottom
 ?B 12440,19690:12490,19702
 C 12462,19662 s=26x26
 M 12432,19636:12497,19726
+A 12430,19700:12500,19726 kind=clamp
 ?C 12465,19945 s=26x20             # strip to the VCC band (not seen, band covers it)
 ?M 12300,19932:12640,19990         # part of the VCC band along the bottom (extent not traced)
 N M 12500,19960 vcc
+
+# ---- gate 2 and gate 4 outputs to the wiring region (so V3 carries ck_g2 = line B
+# re-buffered, and V4 carries ck_g4 = line A re-buffered)
+C 11419,18947 s=24x24
+M 11408,18935:11430,19134
+M 11408,19112:11900,19134
+P 11668,18955:11690,19092
+C 11681,19080 s=26x26
+M 11668,19066:11900,19089

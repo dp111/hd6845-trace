@@ -7,7 +7,11 @@ File format (trace/*.txt), one item per line, '#' starts a comment:
   LAYER shape [key=value ...]
 
   LAYER   M metal, P poly, D diffusion, C contact (metal to poly or diffusion),
-          B buried contact (poly to diffusion)
+          B buried contact (poly to diffusion),
+          A annotation: not geometry. A transistor whose channel centre lies inside
+            an A rectangle takes its kind= attribute, e.g.  A 100,100:150,150 kind=clamp
+            Kinds used: clamp (gate tied to its own node, other side on a supply, off
+            in normal operation), field (thick-oxide device, off in normal operation).
   A leading '?' marks the item as uncertain, e.g.  ?P 7140,1700 y1755
 
   shapes
@@ -56,13 +60,14 @@ from shapely.strtree import STRtree
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 TRACE_DIR = os.path.join(ROOT, 'trace')
 
-LAYERS = ('D', 'P', 'M', 'C', 'B')
+LAYERS = ('D', 'P', 'M', 'C', 'B', 'A')
 COLOURS = {            # RGB for overlays and SVG
     'D': (0, 220, 60),
     'P': (255, 40, 40),
     'M': (60, 140, 255),
     'C': (255, 255, 255),
     'B': (255, 0, 255),
+    'A': (255, 160, 0),
 }
 
 
@@ -287,7 +292,7 @@ def overlay(im, x, y, w, h, scale, only=None, fill=True, trace=None):
     from PIL import Image, ImageDraw, ImageFont
     tr = trace or load()
     base = im.convert('RGBA')
-    order = {'D': 0, 'P': 1, 'M': 2, 'C': 3, 'B': 3}
+    order = {'D': 0, 'P': 1, 'M': 2, 'C': 3, 'B': 3, 'A': 4}
     its = sorted(tr.query(x, y, x + w, y + h), key=lambda it: order[it.layer])
     # one transparent sheet per layer, so a big shape never wipes out what is under it
     sheets = {}
@@ -304,10 +309,11 @@ def overlay(im, x, y, w, h, scale, only=None, fill=True, trace=None):
             outline = (255, 255, 0, 255) if it.uncertain else col + (255,)
             if fill:
                 a = 90 if it.layer in ('C', 'B') else 45
-                d.polygon(xy, fill=col + (a,))
+                if it.layer != 'A':
+                    d.polygon(xy, fill=col + (a,))
             d.line(xy, fill=outline, width=3 if it.uncertain else 2)
     lay = Image.new('RGBA', base.size, (0, 0, 0, 0))
-    for k in ('D', 'P', 'M', 'C', 'B'):
+    for k in ('D', 'P', 'M', 'C', 'B', 'A'):
         if k in sheets:
             lay = Image.alpha_composite(lay, sheets[k])
     out = Image.alpha_composite(base, lay).convert('RGB')

@@ -29,7 +29,7 @@ ROOT = tracelib.ROOT
 OUT = os.path.join(ROOT, 'out')
 W, H = 19838, 21025     # metal shot
 
-LAYER_NAMES = {'D': 'diffusion', 'P': 'poly', 'M': 'metal', 'C': 'contact', 'B': 'buried'}
+LAYER_NAMES = {'D': 'diffusion', 'P': 'poly', 'M': 'metal', 'C': 'contact', 'B': 'buried', 'A': 'annotation'}
 KIND_COL = {
     'pad': (255, 255, 255), 'io': (255, 200, 0), 'array': (0, 220, 255),
     'pla': (255, 0, 255), 'logic': (255, 80, 80), 'route': (150, 150, 150),

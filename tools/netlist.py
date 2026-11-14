@@ -273,6 +273,9 @@ class Netlist:
             t = Transistor(len(self.transistors), gate, self._node_of('D', i1),
                            self._node_of('D', i2), c.x, c.y, w, ch.area / w if w else 0,
                            geom=ch)
+            for an in L['A']:
+                if an.geom.contains(Point(c.x, c.y)) and 'kind' in an.attrs:
+                    t.kind = an.attrs['kind']
             self.transistors.append(t)
             self.nodes[gate].gates.append(t.id)
             self.nodes[t.c1].chans.append(t.id)
@@ -302,6 +305,9 @@ class Netlist:
             return gates, list(self.transistors)
         loads = {}
         for t in self.transistors:
+            if t.kind in ('clamp', 'field'):
+                used.add(t.id)          # off in normal operation: not part of any gate
+                continue
             for a, b in ((t.c1, t.c2), (t.c2, t.c1)):
                 if a == VCC and b != VSS and t.gate == b:
                     t.kind = 'load'
@@ -314,7 +320,7 @@ class Netlist:
             out = []
             for tid in self.nodes[node].chans:
                 t = self.transistors[tid]
-                if t.kind == 'load' or tid in seen_t:
+                if t.kind in ('load', 'clamp', 'field') or tid in seen_t:
                     continue
                 other = t.c2 if t.c1 == node else t.c1
                 if other == target:

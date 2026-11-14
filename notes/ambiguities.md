@@ -67,7 +67,7 @@ is drawn as part of the input net.
 To settle: nothing needed unless a diffusion turns up under it. Worth a second look
 if the input stage ever fails to simulate as a plain inverter.
 
-## AMB-005  Input protection cells: gate of the clamp, and the comb  (open)
+## AMB-005  Input protection cells: gate of the clamp, and the comb  (assumed)
 
 Where: master 14667-15131 x 18943-19219 (R/W); also CLK, E, RS, CS cells.
 
@@ -78,11 +78,18 @@ rail itself is taken to be VSS but has not been followed to the ring. Under the 
 band, below the node, there is a comb of ten small U-shaped features whose layer and
 purpose are not worked out.
 
-None of this affects logic: with any normal tie the clamp is off in operation. To
-settle: follow the rail to a supply, and look for the gate tie in the composite at
-14660-14710 x 19020-19080.
+None of this affects logic: with any normal tie the clamp is off in operation.
 
-## AMB-006  Island devices in the clock block wiring  (assumed)
+Update, from 4x composite views of the comb and the right-hand end: the pad's strip
+is poly and joins the frame at 15015-15035 x 19215-19262; the frame's right arm
+feeds a thin spine at y 19128-19140, and the ten U shapes hang from that spine over
+the lower edge of the node diffusion. Working assumption: the U shapes are buried
+contacts, so pad poly, frame, gate band and node are one net, and the band over
+y 19029-19070 is a thick-oxide clamp to the rail (gate on its own drain). This is
+the textbook arrangement and it gives the pad net a junction to the substrate, which
+a poly-only path would lack. Still to do: follow the rail to a supply.
+
+## AMB-006  Island devices in the clock block wiring  (assumed: clamps)
 
 Where: B1 12385-12447 x 18885-18975, B2 12563-12627 (same y), B3 12738-12802 (same y),
 T1 12380-12456 x 19132-19202, T2 12380-12456 x 19302-19372, BI 12432-12497 x 19636-19726.
@@ -110,5 +117,11 @@ Unclear:
 Effect on logic: none for `clk_p` and `clk_b` (both are driven anyway). For `ck_n1`,
 `ck_n2` and line B it decides whether the nets have a static pull-up.
 
-To settle: trace the driver logic and see what drives `ck_n1` and `ck_n2`. If they are
-push-pull or bootstrapped outputs, the islands are clamps or keepers.
+Update: `ck_n1` is the output of gate 2 and `ck_n2` the output of gate 4 in the gate
+row, so every island sits on a net that already has an inverter's depletion load,
+except B3, which sits on the CLK pin node (the pin, after its series resistor: see
+AMB-005). A pull-up is therefore needed nowhere and is ruled out on the pin by the
+leakage figure. Working assumption: all six are enhancement devices used as clamps
+to VCC + Vt, on the nets that drive the bootstrapped driver logic. Marked
+kind=clamp, which leaves them out of logic recovery. Revisit if the driver logic
+turns out not to bootstrap.

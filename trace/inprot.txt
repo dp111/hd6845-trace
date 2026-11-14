@@ -1,26 +1,38 @@
 # Input protection cells under the bottom-right input pads. Five identical cells, in
 # order CLK, R/W, E, RS, CS. Master is the R/W cell (x 14667-15131, y 18943-19219).
 #
-# Each is a wide long-channel transistor from the input node (middle row of contacts)
-# to the rail along the top (taken to be VSS: a clamp to ground). The pad reaches the
-# node through a narrow strip that acts as a series resistor. Below the node there is
-# a comb of ten small features under the VCC band whose purpose is not worked out;
-# it is not drawn. What the clamp's gate is tied to is not visible either (AMB-005),
-# so the gate is left as its own net, named <pin>_clampg.
+# Read from the median composite of the five (view.py --comp inprot):
+#   - The pad arrives in a narrow poly strip (a series resistor) that runs along below
+#     the cell (y 19248-19262), turns up at x 15015-15035 and joins a poly frame: bottom
+#     arm y 19200-19219, left arm x 14667-14695, right arm x 15112-15131.
+#   - The frame carries a thin spine (y 19128-19140) from which ten U-shaped windows
+#     hang, under the VCC band. These are taken to be buried contacts that tie the poly
+#     to the node diffusion above, so pad poly and node are one net (AMB-005).
+#   - The node diffusion has a row of eight metal contacts (y 19088-19112); its metal
+#     goes to the input buffer.
+#   - Above the node a wide poly band (y 19029-19070), part of the same frame, lies
+#     between the node and a diffusion rail with nine contacts (y 18956-18980). With
+#     its gate on its own drain this can only be a thick-oxide clamp to that rail,
+#     off in normal operation. The rail is taken to be VSS; not yet followed.
+#
+# The pad-side strips and the second strip under each cell (y 19228-19240, dead end at
+# x 15012) are not drawn.
 @block inprot
 
 M 13720,18950:17650,18998          # rail along the top of the cells (extent approximate)
 N M 15300,18975 vss
 
 @cell inprot tag=rw
-D 14695,18943:15112,19196          # clamp: rail side / gate / input node
-P 14671,19029:15129,19070          # clamp gate, 41 px long
-P 14667,19029:14695,19219          # ... continues as a ring round the node
-P 14667,19200:15131,19219
-P 15112,19129:15131,19219
-N P 14900,19050 {}_clampg
+D 14695,18943:15112,19135          # rail side / clamp channel / node
+P 14671,19029:15129,19070          # clamp gate band
+P 14667,19029:14695,19219          # frame, left arm
+P 14667,19200:15131,19219          # frame, bottom arm
+P 15112,19128:15131,19219          # frame, right arm
+P 14667,19128:15131,19140          # spine
+?B 14694,19126:15113,19142         # the comb: poly tied to the node (drawn as one strip)
+A 14690,19025:15115,19074 kind=field
 C 14720,18956:15075,18980          # nine contacts to the rail
-C 14740,19088:15080,19112          # eight contacts on the input node
+C 14740,19088:15080,19112          # eight contacts on the node
 M 14719,19074:15100,19124
 N M 14900,19100 {}_p
 @end
