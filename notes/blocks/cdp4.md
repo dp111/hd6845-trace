@@ -6,16 +6,15 @@ Trace: `trace/cdp4.txt`. Scratch: `cache/scratch/cdp4/`. Own tool: `tools/cdp4_t
 
 ## Status
 
-Traced and shipped (extracts clean: 96 transistors, no errors, no open nets):
+Traced and shipped (extracts clean: 138 transistors, no errors, no open nets):
 channel 1 bus lines, rows A and B (4-way pass-transistor selector per slice), row C
 (pull-down on the selector node, then an 8-bit latch row with a buffered output back
 into the selector), channel 2 (latch inputs from the left, selector output to the
-right), supply rails for y 11790-13650.
+right), row D (6-bit latch row under s1..s6 whose buffered outputs are the selector's
+c inputs of s2..s7), supply rails for y 11790-14062.
 
-Not traced: row R1 (y 11100-11800), row D (y 13650-14060, six cells), the wiring right
-of x 10600 and below y 13650. Row D and the lower half of R1 are built from the same
-latch core as row C (findcell placements under Not done) but with other metal, so they
-are **not** placed.
+Not traced: row R1 (y 11100-11800; its lower half is the same latch core upside down,
+placements under Not done), the wiring right of x 10600 and below y 14060.
 
 ## Conventions
 
@@ -48,7 +47,8 @@ are **not** placed.
 | 12800-12950 | row C top: contact of n, pull-down of n gated by `cdp4_rst` | 8 | traced |
 | 12950-13300 | row C latch (`cdp4_lat`), strobe `cdp4_ld` | 8 | traced |
 | 13310-13650 | channel 2: eight poly lines, each in two pieces (in from the left, n out to the right) | 8 | traced |
-| 13650-14060 | row D: the latch core again, six cells under s1..s6 (findcell dy 759, 0.80-0.82), different metal | 6 | found, not placed |
+| 13660-13695 | six poly links at y 13677: output of the row D cell under slice K to the foot of the c track of slice K+1 | 6 | traced |
+| 13700-14060 | row D: the same latch cell, six copies under s1..s6, strobe `cdp4_ld6` | 6 | traced |
 | 14060-14700 | fan-out wiring below row D into the random logic | - | not traced |
 
 ## Logic
@@ -133,13 +133,33 @@ separate pieces of poly**:
 Between the two pads, under the c track, the clean shot shows field (checked at 3.4x on
 s2 in four shots; the other slices only at 1x in metal).
 
+### Row D: 6-bit latch (traced)
+
+Six copies of `cdp4_lat` (`ldr_s1`..`ldr_s6`, findcell dy 759, dx -392, 0, 390, 780,
+1170, 1560), under slices s1..s6. Checked: cellcheck (median 0.90-0.93; the differing
+blocks are the missing c and n tracks), metal overlay of s1, s2, s3 and s6, clean-shot
+overlay of s6.
+
+- Strobe `cdp4_ld6`: poly line y 13721 from a contact at (7946,13720), left of the s1
+  cell, to the last cell (x 10330). A metal line goes down from the contact (x 7947,
+  seen to y 13840).
+- Data: in tracks `cdp4_in6_s1`..`s6` (x 8465 + dx) start just above each cell's in
+  contact and run down through the cell and **out of the bottom of the array**.
+- Output: the buffered output (d land) of the cell under slice K goes up in metal to a
+  poly contact at (8727 + dx, 13677); a poly link runs right from there to a contact
+  under the foot of the c track of slice **K+1** (8511 + offset, 13677). So
+  `cdp4_c_s2`..`s7` are the six bits of row D, one slice to the right of their cells.
+- The cell under s6 takes its VSS from a piece of rail at x 10355 that starts at
+  y 13694, below the link poly; the s7 rail was followed down only to row C.
+- No n track, no selector, no pull-down in this row.
+
 ### Believed, not traced
 
 A read-back multiplexer: two 8-bit and two 6-bit sources onto an 8-bit bus that leaves
 to the right (towards the data pads), with the bus pulled low by `cdp4_rst`. The widths
 fit the 6845's 14-bit registers split 6 + 8 (cursor R14/R15 and light pen R16/R17 are
-the readable ones), and the row C latch taking its data from the left fits a register
-that captures the memory address. sel1..sel4 would then be the read enables of four
+the readable ones). Rows C (8 bit, data from the left) and D (6 bit, data from below)
+would be one such pair, the two sources in row R1 the other. sel1..sel4 would then be the read enables of four
 registers. None of this is traced; the sources of sel1..sel4, rst, ld and the in lines
 lie left of x 7600.
 
@@ -159,9 +179,10 @@ lie left of x 7600.
 | `cdp4_a_s2`..`s7` | metal | x 8509 + offset, y 11790 (drawn end) | from row R1 | selector input a |
 | `cdp4_b_s0`..`s7` | metal | x 8729 + offset, y 11790 (drawn end) | from row R1 | selector input b |
 | (bus tap) | metal | x 8555 + offset, y 11790 (drawn end) | to/from row R1 | joins `cdp4_bus_sK` |
-| `cdp4_c_s2`..`s7` | metal | x 8510 + offset, y 13660 (drawn end) | from row D | selector input c |
-| `vss` | metal | x 7622, 8013, 8404, 8795, 9185, 9574, 9964, 10355 at y 11790 and y 13650; x 10746 at y 11790 | - | rails |
-| `vcc` | metal | x 7837, 8228, 8619, 9010, 9400, 9789, 10179, 10570 at y 11790 and y 13650 (7837: 13530) | - | rails |
+| `cdp4_in6_s1`..`s6` | metal | x 8073, 8465, 8855, 9245, 9635, 10025 at y 14059 (drawn end; continues down) | from outside (below) | data into the row D latch |
+| `cdp4_ld6` | metal | x 7947, y 13840 (drawn end; continues down) | from outside (below) | row D latch strobe |
+| `vss` | metal | x 7622, 8013, 8404, 8795, 9185, 9574, 9964, 10355, 10746 at y 11790; x 8013..10355 at y 14062; 7622 drawn to y 13650 | - | rails |
+| `vcc` | metal | x 7837, 8228, 8619, 9010, 9400, 9789, 10179, 10570 at y 11790; x 8228..10179 at y 14062; 7837 drawn to y 13530, 10570 to y 13650 | - | rails |
 
 Seen left of the region at 0.68x (`cache/scratch/cdp4/left_edge.png`), not traced: a
 bundle of about nine vertical metal lines at x 7330-7570. The poly lines from the array
@@ -199,19 +220,12 @@ run under it; contacts seen at about (7557,12170) and (7513,12128) (bus s0, s1),
    8657-8686 x 13010-13046 by a bar along the top (y 12990-13017) that lies under the VCC
    rail; seen in the clean shot at 5.9x, not in the metal shots.
 6. Channel 2 pads: only s2 was checked at high zoom for the gap between the two pads.
+7. Row D's poly and diffusion were not re-read shape by shape: the cell is placed on
+   the strength of findcell, cellcheck and overlays (every contact of the cell lands on
+   a contact in the photo). The ambiguities of the row C cell apply to it as well.
 
 ## Not done
 
-- **Row D** (y 13650-14060). `findcell` on the row C latch gives six copies:
-  `@inst cdp4_lat dx,759` with dx -392, 0, 390, 780, 1170, 1560 (under s1..s6);
-  cellcheck median 0.90-0.93, the poly/diffusion core looks the same, the metal does
-  not: no c and n tracks through the cell, and an L-shaped metal along the top
-  (y about 13718-13743, from x 8525 to beyond the cell's right edge, with a branch down
-  to the d contact at 8712,13786). It looks as if the c track of slice K+1 turns left
-  there and lands on the d contact of the cell under slice K (six tracks s2..s7, six
-  cells s1..s6), which would make c the buffered output of row D. Not verified. To do:
-  a row D variant of the cell (same poly/diffusion, own metal), its strobe line (expect
-  y about 13721), where its in tracks come from, rails below y 13650.
 - **Row R1 lower** (y about 11500-11800): `@inst cdp4_lat dx,-1466 mx=8610 rot=180
   o=8610,13132.5` for all eight offsets (dy -1467 for s7), score 0.82-0.83. Upside down
   the d contact falls at (8712,11772), where the b track starts, and the strobe at
@@ -220,4 +234,6 @@ run under it; contacts seen at about (7557,12170) and (7513,12128) (bus s0, s1),
   (x 8509) and the bus taps (x 8555) come from there.
 - Right of x 10600: the n lines' contacts beyond x 10850, thin vertical metals at
   x 10795-10905, the end of the s7 VCC rail.
-- Below y 13650: the s0 VCC rail's bend, row D, the fan-out at y 14060-14700.
+- Below y 14060: where the six in tracks of row D, `cdp4_ld6` and the rails go (fan-out
+  at y 14060-14700). The s0 VCC rail's bend below y 13540 and the wide metal at
+  x 7700-7990, y 13650-14060 left of row D. The s7 VSS rail between y 13300 and 13694.

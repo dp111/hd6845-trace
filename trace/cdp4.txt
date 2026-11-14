@@ -99,13 +99,15 @@ N P 7610,11877 cdp4_bus_s7
 # continue up and down.
 # ======================================================================
 M 7622,11790 y13650 w=46
-M 8013,11790 y13650 w=46
-M 8404,11790 y13650 w=46
-M 8795,11790 y13650 w=46
-M 9185,11790 y13650 w=46
-M 9574,11790 y13650 w=46
-M 9964,11790 y13650 w=46
-M 10355,11790 y13650 w=46
+M 8013,11790 y14062 w=46
+M 8404,11790 y14062 w=46
+M 8795,11790 y14062 w=46
+M 9185,11790 y14062 w=46
+M 9574,11790 y14062 w=46
+M 9964,11790 y14062 w=46
+M 10355,11790 y13300 w=46            # s7: seen down to row C; not followed through channel 2
+M 10355,13694 y14062 w=46            # s7, lower piece beside row D: starts below the link poly (y 13677)
+N M 10355,13800 vss
 N M 7622,11800 vss
 N M 8013,11800 vss
 N M 8404,11800 vss
@@ -115,12 +117,12 @@ N M 9574,11800 vss
 N M 9964,11800 vss
 N M 10355,11800 vss
 M 7837,11790 y13530 w=44            # s0: bends left below y 13540 (not traced)
-M 8228,11790 y13650 w=44
-M 8619,11790 y13650 w=44
-M 9010,11790 y13650 w=44
-M 9400,11790 y13650 w=44
-M 9789,11790 y13650 w=44
-M 10179,11790 y13650 w=44
+M 8228,11790 y14062 w=44
+M 8619,11790 y14062 w=44
+M 9010,11790 y14062 w=44
+M 9400,11790 y14062 w=44
+M 9789,11790 y14062 w=44
+M 10179,11790 y14062 w=44
 M 10570,11790 y13650 w=44
 N M 7837,11800 vcc
 N M 8228,11800 vcc
@@ -360,3 +362,59 @@ N M 8509,11800 cdp4_a_{}
 @inst cdp4_atrk 1951,0 tag=s7
 M 7622,12352 x7696 w=24            # s0: a contact to the VSS rail
 M 8013,12352 x8087 w=24            # s1: a contact to the VSS rail
+
+# ======================================================================
+# Row D (y 13650-14060): six more latches of the same cell under slices s1..s6
+# (findcell dy 759). Strobe cdp4_ld6. The buffered output of the cell under slice K
+# goes up in metal to a poly contact at (8727 + offset, 13677); a poly link runs from
+# there to the right, to a contact under the foot of the c track of slice K+1.
+# The in tracks leave the bottom of the array.
+# ======================================================================
+P 7930,13721 x10330 w=22           # strobe of row D: from a contact left of the s1 cell to the last cell
+C 7946,13720 s=26x24
+M 7947,13706 y13840 w=24           # metal down from the contact (seen to y 13840; continues)
+N M 7947,13830 cdp4_ld6
+@inst cdp4_lat -392,759 tag=ldr_s1
+M 8335,13664 y13800 w=24            # output of the cell under s1, up to the link
+C 8335,13677 s=26x24
+P 8313,13677 x8533 w=22            # poly link to the c track of s2
+C 8511,13677 s=26x24
+M 8511,13655 y13692 w=22
+N M 8073,14050 cdp4_in6_s1
+@inst cdp4_lat 0,759 tag=ldr_s2
+M 8727,13664 y13800 w=24            # output of the cell under s2, up to the link
+C 8727,13677 s=26x24
+P 8705,13677 x8924 w=22            # poly link to the c track of s3
+C 8902,13677 s=26x24
+M 8902,13655 y13692 w=22
+N M 8465,14050 cdp4_in6_s2
+@inst cdp4_lat 390,759 tag=ldr_s3
+M 9117,13664 y13800 w=24            # output of the cell under s3, up to the link
+C 9117,13677 s=26x24
+P 9095,13677 x9314 w=22            # poly link to the c track of s4
+C 9292,13677 s=26x24
+M 9292,13655 y13692 w=22
+N M 8855,14050 cdp4_in6_s3
+@inst cdp4_lat 780,759 tag=ldr_s4
+M 9507,13664 y13800 w=24            # output of the cell under s4, up to the link
+C 9507,13677 s=26x24
+P 9485,13677 x9703 w=22            # poly link to the c track of s5
+C 9681,13677 s=26x24
+M 9681,13655 y13692 w=22
+N M 9245,14050 cdp4_in6_s4
+@inst cdp4_lat 1170,759 tag=ldr_s5
+M 9897,13664 y13800 w=24            # output of the cell under s5, up to the link
+C 9897,13677 s=26x24
+P 9875,13677 x10093 w=22            # poly link to the c track of s6
+C 10071,13677 s=26x24
+M 10071,13655 y13692 w=22
+N M 9635,14050 cdp4_in6_s5
+@inst cdp4_lat 1560,759 tag=ldr_s6
+M 10287,13664 y13800 w=24            # output of the cell under s6, up to the link
+C 10287,13677 s=26x24
+P 10265,13677 x10484 w=22            # poly link to the c track of s7
+C 10462,13677 s=26x24
+M 10462,13655 y13692 w=22
+N M 10025,14050 cdp4_in6_s6
+D 10331,13761:10360,13935           # VSS land under the s7 rail for the last cell
+C 10354,13906 s=28x40

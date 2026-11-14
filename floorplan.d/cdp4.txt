@@ -4,4 +4,4 @@
 7650,12800:10780,12950  array  selector output pull-down | per slice a transistor from n to VSS gated by one line (rst) from the left
 7650,12950:10780,13300  array  8-bit latch (selector source d) | pass transistor loaded from the left by strobe ld, two inverters, and a buffer inverter that drives the selector; same cell family as the right datapath's register latch
 7600,13310:10850,13650  route  channel 2: latch data in, selector out | per slice one poly line in two pieces: from the left edge to the latch input, and from the selector node n to the right edge (towards the data bus)
-?7990,13650:10330,14060  array  6-bit latch (selector source c) | six cells of the same latch core under slices s1-s6; found by cell search, not traced
+7930,13660:10380,14060  array  6-bit latch (selector source c) | six latch cells under slices s1-s6, strobe from a contact at the left end, data tracks leave the bottom of the array; each buffered output is linked in poly to the c track of the next slice to the right
