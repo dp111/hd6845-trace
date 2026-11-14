@@ -86,7 +86,9 @@ M 14460,18522 y18600 w=22          # CLK arrives from its protection cell (routi
 
 # ---- three identical groups of four gates at a 628 px pitch, x 14600-16480.
 # Each group takes one input signal: an input inverter (a), two more inverters in a
-# chain (b, c) and a fourth (d) fed by c. Master is the R/W group.
+# chain (b, c) and a fourth (d) fed by c. Master is the R/W group; the second is RS and
+# the third CS (their inputs come from the fourth and fifth protection cells, which
+# the diffusion strips from the RS and CS pads enter).
 @cell ingrp tag=rw
 # -- a: input inverter
 C 14711,18229 s=34x30              # supply
@@ -167,8 +169,8 @@ P 15120,18358:15145,18506          # input gate, up from c's output bar
 P 15162,18456:15187,18560          # output leaves downward in poly
 N P 15174,18550 {}_d
 @end
-@inst ingrp 628,0 tag=inb
-@inst ingrp 1256,0 tag=inc
+@inst ingrp 628,0 tag=rs
+@inst ingrp 1256,0 tag=cs
 
 # R/W group: input arrives in metal from the R/W protection cell (routing to be traced)
 C 14675,18535 s=24x24

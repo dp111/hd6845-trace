@@ -49,3 +49,31 @@ fed from P_y, and on what the three-contact row K is for.
 To settle: trace the logic that drives P_x and P_y (M2). Knowing whether they are
 data and enable, and their polarity, should leave one consistent reading. A tri-state
 pair needs both output gates low when disabled, which is a strong constraint.
+
+## AMB-004  L-shaped poly on the input inverters  (assumed)
+
+Where: 14626-14689 x 18286-18375 on the R/W group, and the same place in the RS and
+CS groups (+628, +1256).
+
+The input gate poly of the first inverter of each group continues past its diffusion
+into an L that runs up beside the load and ends. It crosses no diffusion that I can
+see, so it does nothing electrically as traced. It abuts the gate with no gap, so it
+is drawn as part of the input net.
+
+To settle: nothing needed unless a diffusion turns up under it. Worth a second look
+if the input stage ever fails to simulate as a plain inverter.
+
+## AMB-005  Input protection cells: gate of the clamp, and the comb  (open)
+
+Where: master 14667-15131 x 18943-19219 (R/W); also CLK, E, RS, CS cells.
+
+The clamp is a 424/40 transistor from the input node to the rail at y 18950-18998.
+Its gate poly forms a ring round the node and no contact or buried contact to it is
+visible, so what it is tied to is unknown (ground is usual for such a clamp). The
+rail itself is taken to be VSS but has not been followed to the ring. Under the VCC
+band, below the node, there is a comb of ten small U-shaped features whose layer and
+purpose are not worked out.
+
+None of this affects logic: with any normal tie the clamp is off in operation. To
+settle: follow the rail to a supply, and look for the gate tie in the composite at
+14660-14710 x 19020-19080.

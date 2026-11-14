@@ -1,0 +1,30 @@
+# Input protection cells under the bottom-right input pads. Five identical cells, in
+# order CLK, R/W, E, RS, CS. Master is the R/W cell (x 14667-15131, y 18943-19219).
+#
+# Each is a wide long-channel transistor from the input node (middle row of contacts)
+# to the rail along the top (taken to be VSS: a clamp to ground). The pad reaches the
+# node through a narrow strip that acts as a series resistor. Below the node there is
+# a comb of ten small features under the VCC band whose purpose is not worked out;
+# it is not drawn. What the clamp's gate is tied to is not visible either (AMB-005),
+# so the gate is left as its own net, named <pin>_clampg.
+@block inprot
+
+M 13720,18950:17650,18998          # rail along the top of the cells (extent approximate)
+N M 15300,18975 vss
+
+@cell inprot tag=rw
+D 14695,18943:15112,19196          # clamp: rail side / gate / input node
+P 14671,19029:15129,19070          # clamp gate, 41 px long
+P 14667,19029:14695,19219          # ... continues as a ring round the node
+P 14667,19200:15131,19219
+P 15112,19129:15131,19219
+N P 14900,19050 {}_clampg
+C 14720,18956:15075,18980          # nine contacts to the rail
+C 14740,19088:15080,19112          # eight contacts on the input node
+M 14719,19074:15100,19124
+N M 14900,19100 {}_p
+@end
+@inst inprot -846,0 tag=clk
+@inst inprot 888,0 tag=e
+@inst inprot 1778,-1 tag=rs
+@inst inprot 2452,0 tag=cs
