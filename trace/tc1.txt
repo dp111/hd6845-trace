@@ -1,0 +1,178 @@
+# Top-centre logic, upper half (x 6400-8250, y 2500-4450).  Block tc1.
+# See notes/blocks/tc1.md. Local net names start with tc1_.
+#
+# The "island" (x 7330-7900, y 3050-4050) has three vertical rails:
+#   left  x 7420-7470  VSS (pull-down sources contact it)
+#   centre x 7597-7647 VCC (loads hang from it on both sides)
+#   right x 7770-7820  VSS
+# Gates left of the centre rail take their inputs from, and send their outputs to,
+# the routing channel on the left; gates right of it face the wiring on the right.
+# In this area a diffusion wire in the open is a strip about 22 px wide between two
+# dark edge lines (interior slightly redder than the field); large diffusions are green.
+@block tc1
+
+# ---- rails (extents beyond the island not yet followed)
+M 7622,3105 y4060 w=50             # centre rail
+N M 7622,3120 vcc
+M 7795,3000 y4000 w=48             # right rail
+N M 7795,3010 vss
+
+# =====================================================================================
+# Right half, top: R1 (inverter) and R2 (2-input NOR)
+# =====================================================================================
+
+# ---- R1: inverter. Input: poly band y 3193-3213 from the right. Output: up the metal
+#      line x 7914-7933.
+D 7600,3156:7652,3242              # VCC pad A (also feeds the load of the gate on the left)
+C 7618,3198 s=26x56
+D 7645,3164:7790,3186              # load strip and output wire to the right rail
+P 7655,3138:7715,3203              # load gate
+D 7720,3184:7739,3232              # bump down to the load's gate tie
+D 7688,3206:7739,3232
+P 7690,3198:7717,3230              # load gate stem
+B 7686,3204:7721,3234
+D 7787,3164:7830,3280              # under the right rail: drain, channel, source pad
+C 7799,3250 s=26x40                # source to VSS
+P 7766,3193:8025,3213              # input band, to contact (8009,3204) on metal V3
+D 7826,3164:7862,3186              # output wire right of the rail
+D 7855,3150:7884,3176              # ... under the buried contact
+P 7860,3150:7940,3170              # output poly to the metal contact
+B 7853,3146:7888,3178
+C 7924,3159 s=24x24
+M 7856,3071 x7924 y3170 w=19       # output metal: up, then left to contact (7862,3072)
+C 7862,3072 s=24x24
+P 7338,3065:7876,3079              # poly band west along the top of the island, under both VSS rails (field there); continues west
+N M 7924,3100 tc1_r1_out
+
+# ---- R2: 2-input NOR. Inputs: poly bands y 3281-3298 and y 3364-3384 from the right.
+#      Output node: the middle of the diffusion column right of the right rail; leaves by
+#      a buried contact, poly, contact (7924,3332), metal down to contact (7924,3464).
+D 7602,3324:7652,3372              # VCC pad B
+C 7620,3345 s=26x28
+D 7645,3324:7850,3346              # load strip; output wire under the right rail (no contact)
+P 7655,3307:7715,3397              # load gate
+D 7724,3344:7750,3398              # bump down to the gate tie
+P 7713,3354:7748,3378              # load gate stem
+P 7727,3370:7748,3396
+B 7722,3350:7752,3399
+D 7826,3256:7881,3410              # column right of the rail: VSS / gate / out / gate / VSS
+P 7818,3281:8025,3298              # input band a, to contact (8009,3286) on metal V3
+P 7818,3364:7984,3384              # input band b, to contact (7968,3375) on metal V2
+D 7783,3390:7832,3445              # VSS pad under the rail, below
+C 7801,3416 s=24x46
+P 7856,3322:7938,3345              # output poly from the buried contact to the metal contact
+B 7852,3312:7884,3350
+C 7924,3332 s=24x24
+M 7924,3322 y3474 w=20             # output metal
+C 7924,3464 s=24x24
+N M 7924,3400 tc1_r2_out
+
+# ---- wiring right of the island that belongs to R1/R2
+# V3: metal from above, contacts both the R1 input band and R2's band a; from the lower
+#     contact a poly runs down and then right into the datapath (y 3387-3402).
+M 8012,3016 y3297 w=21
+C 8010,3028 8009,3204 8009,3286 s=24x24
+P 7800,3020:8029,3038              # poly west from the top contact (continues; not yet followed). Ends 15 px short of the cdp1_a0_q hairpin at x 8047
+P 8004,3290:8025,3402
+P 8004,3387:8290,3402              # runs on right under the datapath's vertical metals (seen to x 8290)
+N M 8012,3100 tc1_a
+# V2: metal from above, ends on R2's band b; poly on down, right, down to contact
+#     (8009,3549) and the metal V3-lower going down.
+M 7850,2988 x7967 y3386 w=20       # from contact (7859,2984) along y 2978-2998, then down
+C 7859,2984 s=24x24
+P 7800,2977:7872,2994              # poly west from that contact (continues; not yet followed)
+C 7968,3375 s=24x24
+P 7959,3380:7977,3472
+P 7959,3452:8024,3472
+P 8004,3452:8024,3566
+C 8009,3549 s=24x24
+M 8012,3538 y3725 x8100 w=19       # down, then right; continues (not yet followed)
+N M 7967,3100 tc1_b
+
+# =====================================================================================
+# Right half, middle and bottom: R3 (NOR), R4 (inverter), R5 (AND-OR-invert)
+# =====================================================================================
+
+# ---- R3: 2-input NOR of R2's output (band c) and R4's output (band d, L-shaped poly).
+#      Output: buried contact right of the rail, poly band f, contact (7966,3506), metal
+#      right and up to contact (8054,3354), poly right into the datapath (y 3348-3362).
+D 7602,3479:7652,3540              # VCC pad D
+C 7620,3503 s=26x28
+D 7645,3488:7790,3526              # load strip (wide: strong load) and output to the rail
+P 7685,3470:7730,3544              # load gate
+D 7739,3524:7760,3578              # bump down to the gate tie
+D 7706,3552:7760,3578
+P 7708,3540:7737,3575              # load gate stem
+B 7704,3548:7741,3580
+D 7787,3440:7830,3600              # under the rail: VSS / c / out / d / VSS
+D 7826,3425:7854,3592              # ... the same column continues right of the rail
+C 7802,3582 s=24x26                # lower VSS pad
+P 7780,3452:7936,3471              # band c, from contact (7924,3464) = R2 output
+P 7780,3539:7918,3556              # band d
+P 7898,3539:7918,3647              # ... turns down to R4's output buried contact
+D 7850,3493:7884,3518              # output under the buried contact
+P 7860,3495:7985,3517              # band f
+B 7855,3489:7888,3521
+C 7966,3506 s=24x24
+M 7954,3510 x8054 y3343 w=19       # over the poly at x 8004-8024 without contact
+C 8054,3354 s=24x24
+P 8040,3342:8076,3368
+P 8060,3348:8290,3362              # runs on right under the datapath's vertical metals (seen to x 8290)
+N M 8054,3450 tc1_f
+
+# ---- R4: inverter. Input band e from contact (7922,3679) = R5 output. Output: under
+#      the rail, then right to a buried contact on the foot of R3's band d.
+D 7600,3633:7652,3715              # VCC pad
+C 7620,3665 s=26x50
+D 7645,3634:7717,3662              # load strip
+D 7710,3640:7790,3662              # output to the rail
+P 7653,3615:7713,3682              # load gate
+D 7719,3660:7738,3708              # bump down to the gate tie
+D 7687,3690:7738,3708
+P 7690,3678:7717,3706              # load gate stem
+B 7685,3686:7721,3711
+D 7787,3644:7830,3752              # under the rail: out / e / VSS pad (shared with R5)
+C 7802,3722 s=24x36
+P 7780,3667:7936,3689              # band e
+D 7826,3642:7866,3662              # output right of the rail
+D 7858,3625:7888,3652              # ... under the buried contact
+P 7862,3625:7918,3647              # foot of band d
+B 7856,3621:7892,3654
+N D 7750,3651 tc1_r4_out
+
+# ---- R5: AND-OR-invert, out = NOT(g.h + i.j). Wide ladder under and beside the rail:
+#      VSS / g / n1 / h / out / i / n2 / j / VSS. Strong load.
+D 7604,3824:7652,3876              # VCC pad E
+C 7622,3850 s=26x28
+D 7645,3838:7790,3878              # load strip into the output region
+P 7656,3832:7698,3884              # load gate
+P 7678,3772:7698,3836              # load gate stem, up to its buried contact
+D 7675,3769:7719,3800              # gate tie diffusion
+D 7705,3769:7719,3842              # ... narrow wire down to the output region
+B 7673,3767:7702,3802
+D 7702,3828:7790,3880              # output region left of the rail
+D 7740,3740:7873,3972              # ladder
+D 7771,3945:7832,4000              # lower VSS pad
+C 7800,3975 s=26x28
+P 7722,3753:8066,3773              # g, to contact (8052,3768)
+P 7722,3799:7984,3818              # h, to contact (7968,3808)
+P 7722,3885:8028,3901              # i, to contact (8010,3894)
+P 7722,3927:7936,3946              # j, to contact (7922,3939)
+C 7922,3939 s=24x24
+M 7922,3928 y4060 w=20             # continues down (not yet followed)
+P 7845,3843:7936,3866              # output poly
+B 7841,3839:7876,3870
+C 7922,3854 7922,3679 s=24x24
+M 7922,3668 y3866 w=20             # R5 output up to band e
+N M 7922,3760 tc1_r5_out
+N M 7922,4050 tc1_j
+# the four inputs of R5 arrive on metal verticals from below (not yet followed down)
+C 8052,3768 s=24x24
+M 8053,3758 y4060 w=20
+N M 8053,4050 tc1_g
+C 7968,3808 s=24x24
+M 7968,3798 y4060 w=21
+N M 7968,4050 tc1_h
+C 8010,3894 s=24x24
+M 8010,3884 y4060 w=20
+N M 8010,4050 tc1_i
