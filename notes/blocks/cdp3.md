@@ -167,12 +167,16 @@ Poly and diffusion, left half:
 - Band U: poly from the cell's left edge (stair, about y 9340-9370 at x 9325) up to
   y 9292-9302 over x 9390-9475, then y 9280-9297 east to the column.
 - Column: vertical poly x 9525-9545 over the whole cell height (y 9202-9502) between the
-  left half and the wide diffusion under rail d. A light strip (x 9515-9525) with a dark
-  line either side runs along its left edge for the whole height. Whether the regions
-  to its left (9459-9515 x 9234-9255; 9477-9515 x 9325-9380; 9477-9520 x 9452-9495) pass
-  under it to the rail d diffusion (three pull-downs) or stop short (a plain wire, or a
-  capacitor on the rail d diffusion) is NOT settled; a 5x view of 9500-9560 x 9220-9500
-  in `acid` and `metal1` should settle it.
+  left half and the wide diffusion under rail d. Band U joins it (same poly; band U ends
+  just east of it at x 9553), so column = band U = a signal from the slice to the west.
+  A 4.4x view in `acid` and `metal1` (x 9462-9572) shows dark bars across the column at
+  y 9264-9270, 9301-9305, 9387-9391, 9408-9413 and 9489-9496, lining up with the top and
+  bottom edges of the regions to its left, and field (greenish in `acid`, khaki in the
+  clean shot) in the stair-shaped gap y 9391-9408 between them. Read: the column is a
+  gate, and the diffusions 9477-9518 x 9305-9387 ("R1") and 9462-9518 x 9413-9495 (the
+  line c contact region) each pass under it to the rail d diffusion, i.e. two pull-downs
+  gated by band U, one of them on the line c node. The same may hold for the load output
+  9459-9515 x 9234-9264. Believed from one view; not yet overlaid or extracted.
 - Vertical poly strips at x 9391-9407 (y 9352-9400 and y 9442-9500) crossing strips that
   run east from the diffusion under rail a: probably two more loads or pull-ups, one of
   them into the line c node.
