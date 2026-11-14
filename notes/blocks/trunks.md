@@ -348,8 +348,10 @@ X, gate 0's input, followed backwards: poly from the gate up to a contact at
 y 16992; left along y 16985-17000 to x 13952; up to y 16907; left to a contact at
 (13655,16908); poly up to a contact at (13655,16822); vertical metal x 13660-13684 up
 to a contact at (13672,16190) (which also feeds a poly going right into the logic at
-x 13790); left along y 16175-16200; up at x 13555-13578. Followed to y 15880 in the
-channel between the mid-right array and the logic below the decode array.
+x 13790); left along y 16175-16200; up at x 13555-13578. Drawn to y 15880; seen at 1.7x to run
+on up to a contact at (13565,15275), where a poly leaves to the right along
+y 15255-15290, and probably further to a second contact at (13565,15190). That is in
+the channel between the mid-right array and the logic below the decode array.
 
 ### What S is (believed, not traced)
 
@@ -447,8 +449,8 @@ and A3 corrections applied: 0 errors, 0 warnings.
 
 In rough order of value:
 
-1. **Source of X** (and so the meaning of S): follow the vertical metal x 13555-13578
-   up from y 15880.
+1. **Source of X** (and so the meaning of S): resolve the two contacts on the vertical
+   metal x 13555-13578 at (13565,15275) and (13565,15190) and follow on from there.
 2. Where S goes after (6690,8366).
 3. `ck_out` left-edge trunk x 2504: verify above y 18300 at 1x, find its top end and
    whether it turns along the top; list its taps into the left array.
