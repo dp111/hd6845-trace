@@ -9,10 +9,6 @@
 # Master row is the second from the top, y 11470-11947.
 # ======================================================================
 
-# vertical lines through all rows (to be extended to full length)
-M 2880,11400:2900,12000              # L0
-N M 2890,11450 larr_l0
-
 @cell larr_bit tag=s1
 
 # ---------------- columns 1-2: x 2860-3340 --------------------------------
@@ -31,19 +27,15 @@ N M 3155,11480 vcc
 M 3478,11462:3528,11955             # rail C = VCC
 N M 3503,11480 vcc
 
-# carry line: arrives from the row above as metal, leaves to the row below
-M 3063,11462:3085,11545             # from the row above
-M 3063,11513:3110,11545             # foot over the contact to poly P2
-C 3095,11528
-M 3065,11633:3098,11670             # this row's carry out: over the drain contact
+# carry out (the carry-in arrives at the top of the row: cells larr_top_n / larr_top_g)
+M 3065,11633:3098,11670             # over the drain contact
 M 3060,11668:3090,11722             # over the contact to its load's gate
 M 3063,11690:3085,11955             # down to the row below
 C 3080,11650
 C 3073,11702
-N M 3074,11480 larr_cin_{}
 N M 3074,11800 larr_cout_{}
 
-# strap from the poly of net a to the pad of poly P4
+# strap from the run along the bottom to the pad of poly P4 (all net N4)
 M 3168,11848:3272,11880
 M 3232,11860:3275,11908
 C 3182,11863
@@ -58,26 +50,30 @@ C 3232,11683
 # rail contacts
 C 2980,11675                        # VSS to the source of the carry pull-down
 C 3022,11815                        # VSS to the source of the L0 pull-down
-C 2890,11810                        # L0 (vertical metal x 2880-2900, outside the cell) to its drain
 C 3152,11573                        # VCC to load L1
 C 3148,11793                        # VCC to load L2 and to the carry load
 
-# --- carry pull-down: one gate (net a) wrapped round the drain; source is VSS on the
-# top and left.  The poly jogs right round the VSS contact (the "hook" at y 11631-11652).
-D 2962,11553:3060,11757
-D 3060,11553:3112,11583             # top strip (source) runs on to the end of the gate
-D 3040,11633:3100,11684             # drain land under the carry-out contact
+# --- carry pull-downs: NOR of net a (the bar along the top) and N4 (the upright
+# gate on the left, which is the far end of the poly of load L4: arm, P4, strap, the
+# run along the bottom).  Source is VSS: top strip, left strip under rail A and the
+# pocket round the contact.  Between the left strip and the drain, x 2985-3001
+# y 11605-11650, is field (measured), so the bar is the only gate up there.  The
+# upright gate has an end cap over field above y 11652.
+D 2962,11553:3112,11583             # top strip (VSS)
+D 2962,11553:2984,11757             # left strip under rail A (VSS)
+D 3003,11553:3068,11630             # under the bar into the drain
+D 2962,11654:3060,11757             # pocket (VSS) | upright gate | drain
+D 3042,11634:3100,11684             # drain land under the carry-out contact
+D 3044,11600:3063,11640             # drain, between the upright gate's end cap and the band of net a
 D 3095,11645:3125,11682             # bridge from the drain to the load strip (open diffusion)
-P 2985,11583:3093,11605             # gate bar
+P 2985,11583:3093,11605             # gate bar (net a)
 P 3068,11603:3212,11632             # ... steps down and runs right under rail B to load L1
-P 2985,11583:3003,11652             # gate, left side
-P 2985,11631:3045,11652             # hook
-P 3010,11640:3040,11725             # gate, lower part
+N P 3040,11593 larr_a_{}
+P 3010,11635:3039,11725             # upright gate (N4)
 P 2978,11700:3040,11725             # jog back under rail A
 P 2978,11700:3003,11880             # down under rail A: gate of the L0 pull-down
 P 2978,11857:3200,11880             # along the bottom to the strap contact
 P 3168,11848:3200,11880
-N P 3040,11593 larr_a_{}
 
 # --- carry load: depletion, gate (poly P3) tied to the carry line by metal
 D 3122,11650:3142,11770             # strip under rail B, no contact of its own
@@ -87,17 +83,10 @@ P 3064,11688:3153,11730             # P3
 # --- L0 pull-down
 D 2962,11775:3050,11845
 D 2905,11800:2965,11822             # neck out to the L0 contact
-D 2875,11792:2912,11830
 
-# --- line along the top of the row (poly), enters from the left column
-P 2860,11511 x3020 w=20
-P 3008,11486:3032,11521
-P 3020,11496 x3312 w=20
 
-# --- P2: gate fed from the carry-in line
-P 3083,11515:3112,11545
-P 3083,11532 x3277 w=25
-P 3263,11520:3292,11727
+# --- P2: gate fed from the carry-in (its top end is in larr_top_n / larr_top_g)
+P 3263,11540:3292,11727
 
 # --- load L1 of net a: VCC box, strip under the block, short output strip, buried contact
 D 3130,11553:3187,11600
@@ -105,7 +94,7 @@ D 3180,11567:3250,11598
 D 3247,11557:3263,11636
 D 3215,11608:3263,11636             # tab under the buried contact
 P 3200,11550:3245,11610             # load gate block
-P 3188,11600:3248,11640             # stem; joins the band from the left
+P 3188,11600:3245,11640             # stem; joins the band from the left
 P 3188,11600:3212,11722             # goes on down as a gate over the pass-gate strip
 B 3215,11608:3250,11640
 
@@ -128,8 +117,12 @@ P 3220,11745:3248,11780
 B 3220,11745:3250,11775
 N D 3260,11760 larr_n2_{}
 
-# --- P4: net a again (through the strap), gate between N2 and the box on the right
-P 3278,11740:3297,11890
+# --- P4: gate between N2 and R2.  Its top turns right (the arm) and ends at the buried
+# contact of Ph4; its foot is the pad under the strap.  So P4, the strap and the gates
+# under rail A are all N4.
+P 3278,11737:3297,11890
+P 3278,11737:3342,11758             # arm
+P 3320,11730:3342,11758             # into the buried contact box
 P 3240,11863:3280,11907             # pad under the strap contact
 
 # ---------------- column 3: x 3290-3475 -----------------------------------
@@ -146,7 +139,6 @@ M 3292,11900:3360,11955
 N M 3325,11480 larr_phe
 C 3322,11587                        # to T1
 C 3324,11790                        # to R2
-C 3337,11522                        # to the poly pad at the H1/H3 jog
 C 3330,11890                        # to the tab of poly Pq1
 
 # T1: diffusion on rail E; pull-down of net a (gate P2, the carry-in) on its left,
@@ -191,11 +183,149 @@ P 3358,11752:3385,11862             # Pv6; driven from below through a buried co
 ?P 3360,11855:3397,11897            # poly square in a heavy box: buried contact, diffusion side not resolved
 N P 3371,11800 larr_g6_{}
 
-# poly taps of rail E
-P 3318,11512:3352,11532             # pad at the jog of H1 into H3
-?P 3303,11486:3323,11532            # H1 turning down to the pad (junction not resolved)
-P 3345,11519 x3780 w=22             # H3, on to the right (not followed yet)
+# poly tap of rail E at the bottom of the row (the one at the top is in larr_top_n)
 P 3318,11880:3345,11902             # tab
 P 3290,11900:3388,11921             # Pq1
 
 @end
+
+# ----------------------------------------------------------------------
+# Top edge of a normal row (a row with another row directly above it):
+# carry-in by metal from the row above, and the poly line from the left column that
+# is tied to rail E at a pad and goes on to the right as H3.
+@cell larr_top_n tag=s1
+M 3063,11462:3085,11545             # carry-in, from the row above
+M 3063,11513:3110,11545             # foot over the contact to poly P2
+C 3095,11528
+P 3083,11515:3112,11545
+P 3083,11532 x3277 w=25             # P2, along and ...
+P 3263,11520:3292,11550             # ... down into the row
+P 2860,11511 x3020 w=20             # H1: poly line from the left column
+P 3008,11486:3032,11521
+P 3020,11496 x3312 w=20
+?P 3303,11486:3323,11532            # H1 turning down to the pad (junction itself not resolved)
+P 3318,11512:3352,11532             # pad under the contact from rail E
+C 3337,11522
+P 3345,11519 x3780 w=22             # H3, on to the right (not followed further)
+@end
+
+# Top edge of the first row of the second and third group (s7, s10): no metal from
+# above; the poly line from the left turns down into the row as P2 and is the group's
+# carry-in.  No pad, no rail E contact, no H3 here.
+@cell larr_top_g tag=s7
+P 3030,14566 x3277 w=23
+P 3257,14555:3292,14630
+N P 3100,14566 larr_cin_{}
+@end
+@inst larr_top_g 0,1605 tag=s10
+P 2850,14566 x3035 w=23             # s7: the line arrives from the left column (port at x 2850)
+
+# Contact of a row's all-ones pull-down to the line L0 of its group
+@cell larr_l0tap tag=s1
+D 2875,11792:2912,11830
+C 2890,11810
+@end
+
+# ---- rows.  Offsets from findcell; tags s0..s13 top to bottom (s1 is the master).
+# Carry runs downward within each group, so s0 is the least significant bit of the
+# first group (see notes).
+@inst larr_bit 0,-478 tag=s0
+@inst larr_bit 0,477 tag=s2
+@inst larr_bit 0,954 tag=s3
+@inst larr_bit 0,1431 tag=s4
+@inst larr_bit 0,1909 tag=s5
+@inst larr_bit 0,2386 tag=s6
+@inst larr_bit 1,3079 tag=s7
+@inst larr_bit 1,3557 tag=s8
+@inst larr_bit 1,4034 tag=s9
+@inst larr_bit 1,4684 tag=s10
+@inst larr_bit 1,5161 tag=s11
+@inst larr_bit 1,5639 tag=s12
+@inst larr_bit 1,6116 tag=s13
+@inst larr_top_n 0,0 tag=s1
+@inst larr_top_n 0,477 tag=s2
+@inst larr_top_n 0,954 tag=s3
+@inst larr_top_n 0,1431 tag=s4
+@inst larr_top_n 0,1909 tag=s5
+@inst larr_top_n 0,2386 tag=s6
+@inst larr_top_n 1,3557 tag=s8
+@inst larr_top_n 1,4034 tag=s9
+@inst larr_top_n 1,5161 tag=s11
+@inst larr_top_n 1,5639 tag=s12
+@inst larr_top_n 1,6116 tag=s13
+@inst larr_l0tap 0,-478 tag=s0
+@inst larr_l0tap 0,477 tag=s2
+@inst larr_l0tap 0,954 tag=s3
+@inst larr_l0tap 0,1431 tag=s4
+@inst larr_l0tap 0,1909 tag=s5
+@inst larr_l0tap 1,3079 tag=s7
+@inst larr_l0tap 1,3557 tag=s8
+@inst larr_l0tap 1,4034 tag=s9
+
+# ---- first group (s0-s6)
+# top of s0: the carry-in of the whole counter.  P2's top is a poly pad with a contact
+# to a wide metal line that comes down from the upper section at x 3250-3295 and ends
+# here.  The poly line from the left column joins the same pad.
+M 3252,10940:3294,11043
+N M 3273,10950 larr_cin_s0
+C 3277,11020
+P 3258,11000:3295,11040
+P 3263,11035:3292,11070
+P 2897,11010 x3262 w=24             # ... comes along from x 2897, where it turns up
+P 2885,10945:2910,11022             # and leaves upward (not followed)
+# L0 of the first group: metal x 2880-2900 from s0's tap to s6's.  s6's tap is moved up
+# (contact at 2893,14114, neck down to the row's stub) to clear a poly band.
+M 2880,11318:2900,14130
+N M 2890,11400 larr_l0_g0
+D 2872,14098:2915,14138
+D 2888,14130:2910,14210
+D 2888,14186:2912,14208
+C 2893,14114
+# carry out of s6: the metal goes on down into the gap and ends on a contact at
+# 3094,14390.  What it lands on (one of the horizontal poly bands of the gap) is not
+# traced; the pad here only keeps the contact.
+M 3063,14330:3085,14405
+M 3060,14362:3110,14410
+C 3094,14390
+?P 3080,14375:3110,14405
+P 3105,14389 x3300 w=22             # the poly under the contact runs on to the right (seen to x 3300)
+@alias larr_cout_s6 larr_cout_g0
+
+# ---- second group (s7-s9)
+# L0 of the second group: starts at a contact at 2892,14523 whose diffusion leaves to
+# the left (left column, not traced), runs down past the taps of s7-s9 and through the
+# second gap, and ends on the poly line that is the carry-in of s10.
+D 2850,14508:2915,14540
+C 2892,14523
+M 2868,14498:2918,14546
+M 2881,14520:2903,16190
+M 2870,16150:2915,16195
+C 2893,16171
+P 2880,16171 x3035 w=23
+N M 2892,15000 larr_l0_g1
+@alias larr_l0_g1 larr_cin_s10
+# carry out of s9: as for s6, ends on a contact at 3094,16040
+M 3064,15980:3086,16055
+M 3061,16012:3111,16060
+C 3095,16040
+?P 3081,16025:3111,16055
+@alias larr_cout_s9 larr_cout_g1
+
+# ---- third group (s10-s13): no L0 line; the pull-downs' necks end blind
+N D 2932,16495 larr_l0nc_s10
+N D 2932,16972 larr_l0nc_s11
+N D 2932,17450 larr_l0nc_s12
+N D 2932,17927 larr_l0nc_s13
+
+# ---- rails through the lower section, drawn once at full length where they are
+# straight.  (Rail E dodges a contact box in every row, so only its pieces in the gaps
+# and at the ends are drawn here; inside the rows it is in the cell.)
+M 2955,10900:3003,18135             # rail A (VSS); goes on up into the upper section
+N M 2979,10920 vss
+M 3112,10900:3148,18525             # rail B (VCC), into the band at the bottom
+M 3478,10900:3528,18525             # rail C (VCC), into the band at the bottom
+M 2770,18520:4780,18550             # top edge of the wide band below the array (to y 18730)
+N M 3400,18535 vcc
+M 3305,14320:3350,14560             # rail E through the first gap
+M 3305,15970:3350,16165             # ... and the second
+M 3302,10985:3350,11000             # ... top end of the part drawn (it goes on up beside the wide line that feeds s0)

@@ -1,0 +1,9 @@
+# Left vertical array (larr). x0,y0:x1,y1  kind  name | description
+2860,10992:3480,18063  logic  MA counter incrementer (14 rows) | per row: carry = carry-in AND Q (NOR gate to the row below), sum = carry-in XOR Q by pass gates, all-ones line per group; inverters round the stored bit. Traced
+3480,10992:4250,18063  ?array  MA counter latches (14 rows) | clocked pass gates under four vertical strobe lines, loads on VCC rail C, pull-downs on rail D; believed counter latch and row-start latch. Not traced
+4250,10992:4720,18063  ?array  MA row cells, right column (14 rows) | one cell per counter row; not looked at
+2860,14333:4720,14549  ?route  carry gap 1 | carry out of bits 0-6 leaves here, carry into bit 7 arrives; horizontal poly bands
+2860,15981:4720,16154  ?route  carry gap 2 | carry out of bits 7-9; all-ones line of bits 7-9 becomes carry into bit 10
+2480,6700:2860,18500   ?logic  left column beside the arrays | irregular pitch, about 14 cells; believed MA output stages and group carry logic. Not traced
+2950,6543:4200,10924   ?array  upper rows (9 x 477 px) | nine identical rows of another type, extra 87 px after the fourth. Not traced
+4450,8250:4780,10500   ?logic  block right of the upper rows | not surveyed
