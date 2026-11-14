@@ -1,0 +1,148 @@
+# Central datapath, rows y 5700-8450 (cdp2): x 7600-10850.
+# Notes: notes/blocks/cdp2.md
+# Slices are numbered as in cdp4 (s0 = leftmost array slice; pitch 390.3). Master slice
+# for the cells here is s4 (VSS rail x 9186, VCC rail x 9400). Bit order not established.
+@block cdp2
+@w M=20 P=22
+@s 28x28
+
+# =====================================================================================
+# Row A (y 6020-6345): five latch cells, slices s3..s7 (x 8790-10745).
+# The cell is the latch of rdp3's row AR turned upside down (bus contact at the bottom).
+# =====================================================================================
+
+@cell cdp2_lat tag=s4
+# --- metal that belongs to one cell
+M 9246,5985 y6345 w=16               # a: per-slice bus line, runs through the cell
+M 9336,5985 y6187 w=22               # b: track from above; ends over the n2 land, no contact
+M 9509,6084 y6338 w=20               # c: track on the q drain; ends over the strobe line, no contact
+M 9509,5985 y6070 w=20               # output metal, going up from the contact on the output poly
+M 9458,6117 y6241 w=30               # strap: load gate of inverter 1 up to the output land
+C 9244,6313 s=28x30                  # bus to the pass-transistor land
+C 9378,6276 s=30x30                  # VCC rail to the land the two loads hang from
+C 9446,6223 s=26x26                  # strap to poly (load gate = q)
+C 9460,6135 s=28x30                  # strap to the output land
+C 9508,6044 s=24x24                  # output poly to the output metal
+C 9508,6222 s=14x40                  # track c to the q drain (speckled strip in the clean shot)
+C 9183,6183 s=28x46                  # VSS rail to its land (oval)
+C 9182,6096 s=22x20                  # VSS rail to the band of the hold device
+
+# --- pass transistor T1: bus -> node a, gate = row strobe (the strobe line loops round
+# the bus contact in every cell and runs on to the next one)
+D 9226,6290:9270,6341                # bus contact land
+D 9228,6212:9264,6296                # strip up through the gate to node a
+P 9196,6264:9219,6334                # strobe: up on the left of the contact,
+P 9196,6266:9320,6289                #   across the strip (the gate),
+P 9298,6266:9320,6334                #   down on the right,
+P 9298,6314:9590,6334                #   and on to the next cell
+
+# --- node a: buried contact to the gate of inverter 2, and on to the feedback land
+P 9224,6203:9266,6228                # pad over the end of the strip
+B 9226,6208:9264,6230
+P 9232,6119:9254,6228                # gate of T2, runs up under the bus line
+P 9232,6119:9320,6139                # then right to the buried contact at the feedback land
+D 9300,6110:9346,6138                # feedback land (under track b)
+B 9298,6112:9322,6140
+N D 9246,6240 cdp2_a_{}_a
+
+# --- inverter 2: a -> n2. Pull-down T2 from the VSS land, load from the VCC land
+D 9160,6150:9221,6226                # VSS land under the rail
+D 9158,6223:9184,6252                #   its lower corner, where the previous cell's T1 ends
+D 9217,6150:9273,6200                # T2: source at the land, drain strip right of the gate
+D 9266,6163:9326,6181                # drain band to the right, to n2
+D 9321,6163:9366,6196                # n2 land at the head of the load
+D 9334,6251:9412,6302                # VCC land
+D 9337,6190:9353,6262                # load strip down to the VCC land
+P 9322,6198:9370,6250                # load gate block
+P 9309,6199:9333,6213                # tab to the gate tie
+P 9279,6183:9321,6213                # gate tie pad
+D 9283,6175:9311,6209                # bump down from the drain band under the pad
+B 9281,6183:9313,6211
+N D 9344,6175 cdp2_a_{}_n2
+
+# --- n2 poly: the load gate block continues as a U round to the pull-down of inverter 1
+P 9366,6166:9398,6245                # up the right side of the block, under the VCC rail
+P 9372,6166:9545,6189                # along
+P 9523,6166:9545,6262                # down: gate of T1
+
+# --- inverter 1: n2 -> q. Load right of the VCC land, pull-down T1 to the next VSS land
+D 9406,6252:9494,6280                # load strip from the VCC land to the output end
+D 9482,6238:9494,6284                # narrow link from the output end up to the q drain
+P 9418,6203:9472,6292                # load gate block; upper half is the strap contact pad
+P 9465,6205:9502,6238                # tab from the pad onto the q drain (the gate tie)
+B 9476,6203:9504,6240
+D 9478,6200:9560,6253                # q drain, T1 channel, on to the next cell's VSS land
+N D 9500,6240 cdp2_a_{}_q
+
+# --- output: land, buried contact, poly strip up to the contact of the output metal
+D 9436,6110:9490,6160
+D 9482,6110:9528,6134
+P 9499,6029:9523,6058                # contact pad
+P 9502,6050:9520,6132                # strip down to the buried contact
+B 9495,6106:9524,6133
+
+# --- hold device: the band along the cell top is tied to the VSS rail and widens, under
+# the VCC rail, into a block over a diffusion strip that joins the feedback land (node a)
+# to the output land (q). Gate at VSS: only a depletion device makes sense (see notes).
+?D 9341,6113:9446,6128               # strip under the block, land to land
+P 9348,6083:9431,6142                # block
+A 9348,6113:9431,6128 kind=hold
+P 9172,6082:9431,6103                # band along the cell top
+@end
+
+@inst cdp2_lat -390,0 tag=s3
+@inst cdp2_lat 390,0 tag=s5
+@inst cdp2_lat 780,0 tag=s6
+@inst cdp2_lat 1170,0 tag=s7
+
+# --- supply rails of row A (per slice, vertical; they run on through the whole array)
+M 8794,5960 y6350 w=46
+M 9184,5960 y6350 w=46
+M 9574,5960 y6350 w=46
+M 9964,5960 y6350 w=46
+M 10354,5960 y6350 w=46
+M 10744,5960 y6350 w=46
+N M 8796,5970 vss
+N M 9186,5970 vss
+N M 9576,5970 vss
+N M 9966,5970 vss
+N M 10356,5970 vss
+N M 10746,5970 vss
+M 9010,5960 y6165 w=50
+M 9400,5960 y6165 w=50
+M 9790,5960 y6165 w=50
+M 10180,5960 y6165 w=50
+M 10570,5960 y6165 w=50
+M 8999,6160 y6240 w=50
+M 9389,6160 y6240 w=50
+M 9779,6160 y6240 w=50
+M 10169,6160 y6240 w=50
+M 10559,6160 y6240 w=50
+M 8998,6235 y6350 w=54
+M 9388,6235 y6350 w=54
+M 9778,6235 y6350 w=54
+M 10168,6235 y6350 w=54
+M 10558,6235 y6350 w=54
+N M 9010,5970 vcc
+N M 9400,5970 vcc
+N M 9790,5970 vcc
+N M 10180,5970 vcc
+N M 10570,5970 vcc
+
+# --- sixth VSS rail (right of s7): land and contact for s7's T1
+D 10720,6150:10781,6226
+D 10718,6223:10744,6252
+C 10743,6183 s=28x46
+
+# --- labels on the per-slice lines (master coordinates + slice offset)
+N M 8856,5990 cdp2_a_s3_bus
+N M 9246,5990 cdp2_a_s4_bus
+N M 9636,5990 cdp2_a_s5_bus
+N M 10026,5990 cdp2_a_s6_bus
+N M 10416,5990 cdp2_a_s7_bus
+N M 8946,5990 cdp2_a_s3_trkb
+N M 9336,5990 cdp2_a_s4_trkb
+N M 9726,5990 cdp2_a_s5_trkb
+N M 10116,5990 cdp2_a_s6_trkb
+N M 10506,5990 cdp2_a_s7_trkb
+N P 9450,6324 cdp2_a_ld
