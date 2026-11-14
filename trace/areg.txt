@@ -36,10 +36,21 @@ B 16036,13801:16070,13846          # load gate (= lower row) tied to the output 
 
 # ---------------------------------------------------------------------------------
 # Supply rails over the inverters
-M 15950,13700 y14625 w=50          # VSS rail (comes down the diagonal from the top; upper part traced below)
+# VSS rail: enters at the top (x 16122), passes the right edge of the register cell, comes
+# down two diagonals and runs over the left ends of the inverters (contacts to the five
+# ground rails). Ends at y 14625.
+M 16122,12900 y13335 16030,13450 y13595 15950,13700 y14625 w=50
 N M 15950,13900 vss
-M 16168,13600 y14700 w=52          # VCC rail
+# VCC rail of the inverters: enters top right on a diagonal, runs over their right ends
+M 16282,12900 16210,12970 y13395 16168,13475 y14700 w=52
 N M 16168,13900 vcc
+# VCC rail of the register cell (x 15950): down to y 13575, then left into the wide rail at
+# x 15795-15890, which also joins the decode array's VCC bus (y 13518-13632) and runs on down
+M 15950,12900 y13578 w=50
+M 15775,13520:15975,13578
+M 15795,13520:15890,14700
+M 15772,13520:15800,13632
+N M 15950,13300 vcc
 
 # ---------------------------------------------------------------------------------
 # Feeds of the upper rows. Four arrive as metal lines from the left (from the row of
@@ -84,3 +95,28 @@ P 15840,13350 x16280 y14286 x16172 w=18
 # pair 4: poly from the register cell at the top left (enters this piece at 16066,13280),
 # right along y 13309 to x 16320, down to y 14459, left into cell 4's tab
 P 16066,13280 y13309 x16320 y14459 x16172 w=18
+
+# ---------------------------------------------------------------------------------
+# Vertical bundle right of the inverters (besides the ar1..ar4 feeds above).
+# areg_load: the load strobe of the address register. Metal x 16299 from the bottom of the
+# region up to a contact at 16297,13022, then poly left along y 13024 into the register
+# cells (top band of the fifth cell; continues as one poly snake through all five).
+M 16299,13010 y14700 w=16
+N M 16299,14690 areg_load
+C 16297,13022
+P 16275,13006:16316,13037
+P 15862,13024 x16300 w=18          # top band of the fifth register cell, to the contact pad
+# areg_w6: metal x 16341 from the bottom of the region up to a contact at 16337,13264; poly
+# from there to the right (towards the right-hand column), drawn to x 16480
+M 16341,13255 y14700 w=15
+N M 16341,14690 areg_w6
+C 16337,13264
+P 16322,13250:16353,13278
+P 16337,13263 x16480 w=16
+# areg_w7: poly x 16364 from the bottom of the region up to y 13453, then right (towards the
+# right-hand column), drawn to x 16480
+P 16364,14700 y13453 x16480 w=20
+N P 16364,14690 areg_w7
+# wide metal rail x 16402-16451, full height of the region. Supply not identified.
+M 16426,12900 y14700 w=49
+N M 16426,13000 areg_rail_r
