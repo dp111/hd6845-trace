@@ -36,6 +36,8 @@ File format (trace/*.txt), one item per line, '#' starts a comment:
     @w M=24 P=20           default path widths
     @s 24x24               default contact size
     @block name            names the block for the items that follow (reporting only)
+    @alias NAME OTHER      OTHER is another name for net NAME (two labels that turn
+                           out to be one net once the wiring between them is traced)
     @cell NAME [tag=T]     start a cell. The items that follow, up to @end, are drawn
                            where they stand (the master) and can be repeated.
     @end
@@ -134,6 +136,9 @@ def xform(g, mx, my, dx, dy, rot=0, o=(0, 0)):
     return affinity.translate(g, dx, dy)
 
 
+ALIASES = {}          # other name -> canonical name
+
+
 def parse_file(path, items, labels, cells, insts):
     widths = {}
     csize = (24.0, 24.0)
@@ -156,6 +161,9 @@ def parse_file(path, items, labels, cells, insts):
             if head == '@s':
                 w, h = tok[1].split('x')
                 csize = (float(w), float(h))
+                continue
+            if head == '@alias':
+                ALIASES[tok[2]] = tok[1]
                 continue
             if head == '@block':
                 block = tok[1] if len(tok) > 1 else ''

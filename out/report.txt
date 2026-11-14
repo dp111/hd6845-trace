@@ -1,4 +1,4 @@
-145 nets, 321 transistors, 0 errors, 0 warnings
+143 nets, 321 transistors, 0 errors, 0 warnings
 note   vss is traced as 50 separate pieces, joined by name
 note   vcc is traced as 31 separate pieces, joined by name
 
@@ -183,9 +183,9 @@ transistors
   t177  at   7658, 19294  W/L  134/55   load  gate cudisp_pu    cudisp_pu <-> vcc
   t178  at  10148, 19335  W/L  174/34   load  gate ck_n2        ck_n2 <-> vcc
   t179  at  10666, 19336  W/L  154/27   load  gate ck_t         ck_t <-> vcc
-  t180  at  10578, 19505  W/L  480/23   -     gate ck_p         ck_t <-> vss
-  t181  at  10508, 19505  W/L  480/23   -     gate ck_p         vss <-> ck_t
-  t182  at  10436, 19505  W/L  480/22   -     gate ck_p         ck_t <-> vss
+  t180  at  10578, 19505  W/L  480/23   -     gate clk          ck_t <-> vss
+  t181  at  10508, 19505  W/L  480/23   -     gate clk          vss <-> ck_t
+  t182  at  10436, 19505  W/L  480/22   -     gate clk          ck_t <-> vss
   t183  at  10366, 19505  W/L  480/23   -     gate ck_t         vss <-> ck_n2
   t184  at  10290, 19505  W/L  480/20   -     gate ck_t         ck_n2 <-> vss
   t185  at   9652, 19494  W/L  483/25   -     gate ck_ga        vcc <-> ck_out
@@ -231,8 +231,8 @@ transistors
   t225  at  11671, 18697  W/L   30/50   load  gate ck_g4        vcc <-> ck_g4
   t226  at  12420, 18899  W/L   56/21   clamp gate ck_g4        ck_g4 <-> vcc
   t227  at  12598, 18899  W/L   61/21   clamp gate clk_b        clk_b <-> vcc
-  t228  at  12772, 18899  W/L   61/21   clamp gate clk_p        clk_p <-> vcc
-  t229  at  14058, 19050  W/L  417/41   field gate clk_p        vss <-> clk_p
+  t228  at  12772, 18899  W/L   61/21   clamp gate clk          clk <-> vcc
+  t229  at  14058, 19050  W/L  417/41   field gate clk          vss <-> clk
   t230  at  12442, 19168  W/L   61/20   clamp gate ck_b         ck_b <-> vcc
   t231  at  12442, 19338  W/L   61/20   clamp gate ck_b         ck_b <-> vcc
   t232  at  12465, 19712  W/L   64/19   clamp gate ck_g2        ck_g2 <-> vcc
@@ -358,13 +358,13 @@ gates
   lpstb_b      = NOT lpstb_n
   res_b        = NOT res_n
   cudisp_pu    = NOT cudisp_drv_in
-  disptmg_pd   = NOT disptmg_pu
   cudisp_pd    = NOT cudisp_pu
-  ck_t         = NOT ck_p
+  disptmg_pd   = NOT disptmg_pu
+  ck_t         = NOT clk
   ck_n2        = NOT ck_t
   vsync_pu     = NOT vsync_drv_in
-  hsync_pd     = NOT hsync_pu
   vsync_pd     = NOT vsync_pu
+  hsync_pd     = NOT hsync_pu
   hsync_pu     = NOT hsync_drv_in
   ck_a         = NOT ck_b
   ck_b         = NOT ck_src
@@ -394,15 +394,15 @@ gates
   a_out_L      = NOT in_a_L
   b_out_L      = NOR(a_out_L, in_c_L)
   rw_a         = NOT rw
-  rs_a         = NOT rs
-  rw_d         = NOT rw_c
-  cs_a         = NOT cs
   rs_d         = NOT rs_c
   cs_d         = NOT cs_c
-  cs_c         = NOT cs_b
-  cs_b         = NOT cs_a
+  cs_a         = NOT cs
+  rs_a         = NOT rs
+  rw_d         = NOT rw_c
   rs_b         = NOT rs_a
+  cs_b         = NOT cs_a
   rs_c         = NOT rs_b
+  cs_c         = NOT cs_b
 
 not part of a static gate
   t0 gate ma2_pu: vcc <-> ma2

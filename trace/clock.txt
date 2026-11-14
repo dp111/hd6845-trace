@@ -245,7 +245,7 @@ M 12170,19888:12630,19912
 C 12180,19900 s=26x26
 P 12038,19888:12194,19912
 C 12050,19900 s=26x26
-M 11900,19888:12063,19912          # along the bottom of the driver logic (not yet followed)
+M 9420,19892:12063,19912           # the CLK line, all along the bottom of the block; continues left (not yet followed)
 
 # ---- ck_g2 (V3), with island BI near the bottom
 C 12263,19120 s=26x26
@@ -282,7 +282,7 @@ M 11668,19066:11900,19089
 # Big devices are drawn schematically: one diffusion rectangle per group, one contact
 # rectangle per column. Joins marked ? are inferred, not seen (see notes/blocks/clock.md).
 #
-#   ck_p  --[s3,s4,s5 + load]-->  ck_t  --[s1,s2 + load GC]-->  ck_n2
+#   clk   --[s3,s4,s5 + load]-->  ck_t  --[s1,s2 + load GC]-->  ck_n2
 #   ck_n2 --[F3 + load]--> ck_ga ;  ck_out = pull-up(ck_ga) / pull-down(F1,F2: ck_n2)
 # ====================================================================
 
@@ -323,9 +323,9 @@ P 10425,19225:10447,19775          # s3
 P 10497,19225:10520,19775          # s4
 P 10567,19225:10590,19775          # s5
 P 10425,19752:10690,19775          # s3-s5 joined along the bottom
-P 10655,19775:10690,19930          # ... and down to the bar along the bottom of the block
-?P 10655,19905:11420,19930         # bar towards the driver logic (not yet followed)
-N P 10672,19850 ck_p
+P 10650,19775:10695,19935          # ... and down to a wide bar under the CLK line
+P 10650,19892:11000,19935
+C 10985,19901 s=24x20              # contact to the CLK line: the buffer's input is the CLK pin node
 # load of ck_t
 D 10626,19262:10725,19410
 P 10652,19245:10680,19420
@@ -388,3 +388,13 @@ N M 9700,19768 ck_out
 M 9515,19245:9545,19600            # ck_out leaves up the left side ...
 M 9380,19240:9545,19262            # ... and away to the left (not yet followed)
 M 9848,19785:9870,19840            # ck_out also leaves downward (not yet followed)
+
+# ---- CLK pin node to the CLK input buffer in the input row (trace/inrow.txt):
+# metal left from the protection cell's node, poly up under the rail, metal up.
+@alias clk clk_p
+?M 14200,19040:14452,19062
+?M 14200,19040:14225,19100
+?C 14440,19051 s=24x20
+?P 14412,18845:14452,19065
+?C 14440,18858 s=24x20
+?M 14438,18600:14462,18872

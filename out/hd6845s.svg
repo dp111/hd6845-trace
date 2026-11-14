@@ -730,8 +730,8 @@
 <path d="M10520.0,19225.0 L10520.0,19775.0 L10497.0,19775.0 L10497.0,19225.0Z"><title>trace/clock.txt:323</title></path>
 <path d="M10590.0,19225.0 L10590.0,19775.0 L10567.0,19775.0 L10567.0,19225.0Z"><title>trace/clock.txt:324</title></path>
 <path d="M10690.0,19752.0 L10690.0,19775.0 L10425.0,19775.0 L10425.0,19752.0Z"><title>trace/clock.txt:325</title></path>
-<path d="M10690.0,19775.0 L10690.0,19930.0 L10655.0,19930.0 L10655.0,19775.0Z"><title>trace/clock.txt:326</title></path>
-<path d="M11420.0,19905.0 L11420.0,19930.0 L10655.0,19930.0 L10655.0,19905.0Z" stroke="#ffff00" stroke-width="3"><title>trace/clock.txt:327</title></path>
+<path d="M10695.0,19775.0 L10695.0,19935.0 L10650.0,19935.0 L10650.0,19775.0Z"><title>trace/clock.txt:326</title></path>
+<path d="M11000.0,19892.0 L11000.0,19935.0 L10650.0,19935.0 L10650.0,19892.0Z"><title>trace/clock.txt:327</title></path>
 <path d="M10680.0,19245.0 L10680.0,19420.0 L10652.0,19420.0 L10652.0,19245.0Z"><title>trace/clock.txt:331</title></path>
 <path d="M10165.0,19215.0 L10165.0,19440.0 L10130.0,19440.0 L10130.0,19215.0Z"><title>trace/clock.txt:338</title></path>
 <path d="M10010.0,19190.0 L10010.0,19375.0 L9985.0,19375.0 L9985.0,19190.0Z"><title>trace/clock.txt:351</title></path>
@@ -745,6 +745,7 @@
 <path d="M9830.0,19240.0 L9830.0,19352.0 L9797.0,19352.0 L9797.0,19240.0Z"><title>trace/clock.txt:374</title></path>
 <path d="M9595.0,19580.0 L9595.0,19762.0 L9555.0,19762.0 L9555.0,19580.0Z"><title>trace/clock.txt:376</title></path>
 <path d="M9665.0,19742.0 L9665.0,19762.0 L9555.0,19762.0 L9555.0,19742.0Z"><title>trace/clock.txt:377</title></path>
+<path d="M14452.0,18845.0 L14452.0,19065.0 L14412.0,19065.0 L14412.0,18845.0Z" stroke="#ffff00" stroke-width="3"><title>trace/clock.txt:398</title></path>
 <path d="M15129.0,19029.0 L15129.0,19070.0 L14671.0,19070.0 L14671.0,19029.0Z"><title>trace/inprot.txt:27</title></path>
 <path d="M14695.0,19029.0 L14695.0,19219.0 L14667.0,19219.0 L14667.0,19029.0Z"><title>trace/inprot.txt:28</title></path>
 <path d="M15131.0,19200.0 L15131.0,19219.0 L14667.0,19219.0 L14667.0,19200.0Z"><title>trace/inprot.txt:29</title></path>
@@ -1321,7 +1322,7 @@
 <path d="M13880.0,19093.0 L13880.0,19115.0 L12600.0,19115.0 L12600.0,19093.0Z"><title>trace/clock.txt:242</title></path>
 <path d="M12630.0,19093.0 L12630.0,19912.0 L12600.0,19912.0 L12600.0,19093.0Z"><title>trace/clock.txt:243</title></path>
 <path d="M12630.0,19888.0 L12630.0,19912.0 L12170.0,19912.0 L12170.0,19888.0Z"><title>trace/clock.txt:244</title></path>
-<path d="M12063.0,19888.0 L12063.0,19912.0 L11900.0,19912.0 L11900.0,19888.0Z"><title>trace/clock.txt:248</title></path>
+<path d="M12063.0,19892.0 L12063.0,19912.0 L9420.0,19912.0 L9420.0,19892.0Z"><title>trace/clock.txt:248</title></path>
 <path d="M12061.0,19110.0 L12061.0,19133.0 L11900.0,19133.0 L11900.0,19110.0Z"><title>trace/clock.txt:254</title></path>
 <path d="M12277.0,19106.0 L12277.0,19587.0 L12255.0,19587.0 L12255.0,19106.0Z"><title>trace/clock.txt:255</title></path>
 <path d="M12061.0,19562.0 L12061.0,19585.0 L11900.0,19585.0 L11900.0,19562.0Z"><title>trace/clock.txt:259</title></path>
@@ -1361,6 +1362,9 @@
 <path d="M9545.0,19245.0 L9545.0,19600.0 L9515.0,19600.0 L9515.0,19245.0Z"><title>trace/clock.txt:388</title></path>
 <path d="M9545.0,19240.0 L9545.0,19262.0 L9380.0,19262.0 L9380.0,19240.0Z"><title>trace/clock.txt:389</title></path>
 <path d="M9870.0,19785.0 L9870.0,19840.0 L9848.0,19840.0 L9848.0,19785.0Z"><title>trace/clock.txt:390</title></path>
+<path d="M14452.0,19040.0 L14452.0,19062.0 L14200.0,19062.0 L14200.0,19040.0Z" stroke="#ffff00" stroke-width="3"><title>trace/clock.txt:395</title></path>
+<path d="M14225.0,19040.0 L14225.0,19100.0 L14200.0,19100.0 L14200.0,19040.0Z" stroke="#ffff00" stroke-width="3"><title>trace/clock.txt:396</title></path>
+<path d="M14462.0,18600.0 L14462.0,18872.0 L14438.0,18872.0 L14438.0,18600.0Z" stroke="#ffff00" stroke-width="3"><title>trace/clock.txt:400</title></path>
 <path d="M17650.0,18950.0 L17650.0,18998.0 L13720.0,18998.0 L13720.0,18950.0Z"><title>trace/inprot.txt:22</title></path>
 <path d="M15100.0,19074.0 L15100.0,19124.0 L14719.0,19124.0 L14719.0,19074.0Z"><title>trace/inprot.txt:36</title></path>
 <path d="M17420.0,18130.0 L17420.0,18258.0 L13690.0,18258.0 L13690.0,18130.0Z"><title>trace/inrow.txt:6</title></path>
@@ -1946,6 +1950,7 @@
 <path d="M10625.0,19290.0 L10625.0,19700.0 L10596.0,19700.0 L10596.0,19290.0Z"><title>trace/clock.txt:314</title></path>
 <path d="M10330.0,19190.0 L10330.0,19208.0 L10300.0,19208.0 L10300.0,19190.0Z" stroke="#ffff00" stroke-width="3"><title>trace/clock.txt:320</title></path>
 <path d="M10372.0,19190.0 L10372.0,19208.0 L10345.0,19208.0 L10345.0,19190.0Z" stroke="#ffff00" stroke-width="3"><title>trace/clock.txt:321</title></path>
+<path d="M10997.0,19891.0 L10997.0,19911.0 L10973.0,19911.0 L10973.0,19891.0Z"><title>trace/clock.txt:328</title></path>
 <path d="M10718.0,19300.0 L10718.0,19400.0 L10690.0,19400.0 L10690.0,19300.0Z"><title>trace/clock.txt:334</title></path>
 <path d="M10113.0,19258.0 L10113.0,19415.0 L10088.0,19415.0 L10088.0,19258.0Z"><title>trace/clock.txt:342</title></path>
 <path d="M10208.0,19265.0 L10208.0,19390.0 L10183.0,19390.0 L10183.0,19265.0Z"><title>trace/clock.txt:344</title></path>
@@ -1959,6 +1964,8 @@
 <path d="M9768.0,19310.0 L9768.0,19712.0 L9741.0,19712.0 L9741.0,19310.0Z"><title>trace/clock.txt:381</title></path>
 <path d="M9703.0,19322.0 L9703.0,19712.0 L9675.0,19712.0 L9675.0,19322.0Z"><title>trace/clock.txt:383</title></path>
 <path d="M9535.0,19602.0 L9535.0,19720.0 L9512.0,19720.0 L9512.0,19602.0Z"><title>trace/clock.txt:385</title></path>
+<path d="M14452.0,19041.0 L14452.0,19061.0 L14428.0,19061.0 L14428.0,19041.0Z" stroke="#ffff00" stroke-width="3"><title>trace/clock.txt:397</title></path>
+<path d="M14452.0,18848.0 L14452.0,18868.0 L14428.0,18868.0 L14428.0,18848.0Z" stroke="#ffff00" stroke-width="3"><title>trace/clock.txt:399</title></path>
 <path d="M15075.0,18956.0 L15075.0,18980.0 L14720.0,18980.0 L14720.0,18956.0Z"><title>trace/inprot.txt:34</title></path>
 <path d="M15080.0,19088.0 L15080.0,19112.0 L14740.0,19112.0 L14740.0,19088.0Z"><title>trace/inprot.txt:35</title></path>
 <path d="M13901.0,18212.0 L13901.0,18246.0 L13871.0,18246.0 L13871.0,18212.0Z"><title>trace/inrow.txt:12</title></path>
@@ -2577,7 +2584,6 @@
 <circle cx="10687" cy="19100" r="3" fill="#fff" stroke="#000"/><text x="10693" y="19105" font-family="monospace" font-size="14" fill="#fff" stroke="#000" stroke-width="2.5" paint-order="stroke">vcc</text>
 <circle cx="9800" cy="19272" r="3" fill="#fff" stroke="#000"/><text x="9806" y="19277" font-family="monospace" font-size="14" fill="#fff" stroke="#000" stroke-width="2.5" paint-order="stroke">vcc</text>
 <circle cx="10500" cy="19197" r="3" fill="#fff" stroke="#000"/><text x="10506" y="19202" font-family="monospace" font-size="14" fill="#fff" stroke="#000" stroke-width="2.5" paint-order="stroke">ck_t</text>
-<circle cx="10672" cy="19850" r="3" fill="#fff" stroke="#000"/><text x="10678" y="19855" font-family="monospace" font-size="14" fill="#fff" stroke="#000" stroke-width="2.5" paint-order="stroke">ck_p</text>
 <circle cx="10100" cy="19211" r="3" fill="#fff" stroke="#000"/><text x="10106" y="19216" font-family="monospace" font-size="14" fill="#fff" stroke="#000" stroke-width="2.5" paint-order="stroke">ck_n2</text>
 <circle cx="9900" cy="19341" r="3" fill="#fff" stroke="#000"/><text x="9906" y="19346" font-family="monospace" font-size="14" fill="#fff" stroke="#000" stroke-width="2.5" paint-order="stroke">ck_ga</text>
 <circle cx="9700" cy="19768" r="3" fill="#fff" stroke="#000"/><text x="9706" y="19773" font-family="monospace" font-size="14" fill="#fff" stroke="#000" stroke-width="2.5" paint-order="stroke">ck_out</text>
@@ -2971,9 +2977,9 @@
 <text x="7658" y="19294" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t177<title>gate cudisp_pu: cudisp_pu - vcc</title></text>
 <text x="10148" y="19335" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t178<title>gate ck_n2: ck_n2 - vcc</title></text>
 <text x="10666" y="19336" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t179<title>gate ck_t: ck_t - vcc</title></text>
-<text x="10578" y="19505" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t180<title>gate ck_p: ck_t - vss</title></text>
-<text x="10508" y="19505" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t181<title>gate ck_p: vss - ck_t</title></text>
-<text x="10436" y="19505" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t182<title>gate ck_p: ck_t - vss</title></text>
+<text x="10578" y="19505" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t180<title>gate clk: ck_t - vss</title></text>
+<text x="10508" y="19505" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t181<title>gate clk: vss - ck_t</title></text>
+<text x="10436" y="19505" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t182<title>gate clk: ck_t - vss</title></text>
 <text x="10366" y="19505" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t183<title>gate ck_t: vss - ck_n2</title></text>
 <text x="10290" y="19505" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t184<title>gate ck_t: ck_n2 - vss</title></text>
 <text x="9652" y="19494" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t185<title>gate ck_ga: vcc - ck_out</title></text>
@@ -3019,8 +3025,8 @@
 <text x="11671" y="18697" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t225<title>gate ck_g4: vcc - ck_g4</title></text>
 <text x="12420" y="18899" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t226<title>gate ck_g4: ck_g4 - vcc</title></text>
 <text x="12598" y="18899" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t227<title>gate clk_b: clk_b - vcc</title></text>
-<text x="12772" y="18899" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t228<title>gate clk_p: clk_p - vcc</title></text>
-<text x="14058" y="19050" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t229<title>gate clk_p: vss - clk_p</title></text>
+<text x="12772" y="18899" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t228<title>gate clk: clk - vcc</title></text>
+<text x="14058" y="19050" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t229<title>gate clk: vss - clk</title></text>
 <text x="12442" y="19168" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t230<title>gate ck_b: ck_b - vcc</title></text>
 <text x="12442" y="19338" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t231<title>gate ck_b: ck_b - vcc</title></text>
 <text x="12465" y="19712" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t232<title>gate ck_g2: ck_g2 - vcc</title></text>

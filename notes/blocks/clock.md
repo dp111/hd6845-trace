@@ -1,7 +1,20 @@
 # Clock block (9450-13100 x 18550-19950)
 
-Status: gate row and wiring region traced (trace/clock.txt). Driver logic and the two
-big arrays surveyed, not traced. Function of the block as a whole not yet established.
+Status: gate row, wiring region and output stage traced (trace/clock.txt). Driver
+logic surveyed, not traced.
+
+## Summary so far
+
+- The main internal clock is `ck_out` = NOT CLK. The CLK pin node runs along the
+  bottom of the block as a metal line (y 19892-19912) and, through one contact at
+  10985,19901, drives a three-stage buffer made of the two big arrays. Nothing but
+  the pin feeds that buffer: the clock is not gated or divided.
+- A second, unrelated-looking part of the block (gate row plus driver logic) takes
+  a global signal `ck_src`, makes both polarities of it (lines A and B) and combines
+  them with CLK in two mirrored, apparently bootstrapped, driver circuits. What
+  those produce is not yet known.
+- CLK therefore reaches the core by at least three routes: `ck_out` (heavy, inverted),
+  `clk_b` from the input row (light, same sense as the pin), and the pin node itself.
 
 ## Gate row (11150-12150 x 18600-19000): traced
 
@@ -84,8 +97,14 @@ ck_out:  pull-up  = group A, W 2x483 + 145, gate ck_ga, from VCC
          pull-down = F1 + F2, W 2x345, gate ck_n2, to VSS
 ```
 
-So `ck_out` = NOT `ck_n2` = NOT `ck_p`, delayed by three stages. `ck_p` arrives on a
-poly bar along the bottom of the block (y 19905-19930) from the driver logic.
+So `ck_out` = NOT `ck_n2` = NOT `ck_p`, delayed by three stages.
+
+`ck_p` is the CLK pin node itself. The gates s3-s5 are joined along the bottom and
+continue down in poly at x 10650-10695 to a wide poly bar (10650-11000 x
+19892-19935) lying under the metal line at y 19892-19912; a contact at 10985,19901
+joins the two (seen clearly at 2.9x). That metal line is the one that arrives from
+the CLK protection cell via the vertical metal at x 12600-12630, and it carries on
+to the left past x 9420 (not followed).
 
 Supplies: VSS comes down from the core on the wide metal at x 10755-10815, branches
 right at y 19335-19375 into the driver logic's middle rail, and turns left at
@@ -98,9 +117,12 @@ Loads: `ck_t` has a 154/27 load at x 10652-10680; `ck_n2` has a 174/34 load (gro
 x 10130-10165). Both are about 5.5 squares wide, which is what first suggested that
 the wide metal over group C is VCC and not a signal.
 
-`ck_out` leaves the block two ways: up the left side on a metal at x 9515-9545 and
-away to the left at y 19240-19262, and downward at x 9848-9870 from the bus along
-the bottom. Neither has been followed.
+`ck_out` leaves the block two ways. Up the left side on a metal at x 9515-9545 and
+away to the left at y 19240-19262 (not followed; it seems to reach a contact at
+9340,19240). And downward at x 9848-9870 from the bus along the bottom, right along
+y 19848-19865 to x 10850, up at x 10840-10870 to a contact at 10852,19422, under the
+VSS branch in poly to 10852,19292, and on up into the core in metal (seen at 0.85x;
+not yet in the trace).
 
 Established by close-up (6x): the gate bar of group A (9640-9830 x 19195-19240)
 continues down its right-hand side at x 9797-9830 to the contact at 9810,19337 on

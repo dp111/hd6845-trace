@@ -245,6 +245,11 @@ class Netlist:
                           f'(second at {lb.x:.0f},{lb.y:.0f})')
             seen.setdefault(lb.name, nid)
         for n in self.nodes.values():
+            canon = [nm for nm in n.names if nm not in tracelib.ALIASES]
+            if len(canon) == 1 and all(tracelib.ALIASES.get(nm) == canon[0]
+                                       for nm in n.names if nm != canon[0]):
+                n.names = canon + [nm for nm in n.names if nm != canon[0]]
+                continue
             if len(n.names) > 1:
                 self.err(f'net at {n.x:.0f},{n.y:.0f} carries several names: '
                          + ', '.join(n.names) + ' (short, or an alias)')
