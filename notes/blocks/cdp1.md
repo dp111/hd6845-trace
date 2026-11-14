@@ -142,6 +142,19 @@ scores 0.74 and 0.82 against slice 2). What is established, and what is only bel
   - two horizontal gates y 3703-3728 and y 3738-3768 over a diffusion column x 9270-9322.
   The exact series/parallel structure was not resolved; two honest passes at 4x left the
   diffusion outlines between x 9260-9330 and around 9430-9460 unclear.
+- A hypothesis to test, **not traced**: with A = row C's bit and B = input 2,
+  `n2 = NOR(A, B)` (pull-downs: the two vertical gates x 9475-9498 and x 9523-9545;
+  load: the poly block under the VCC rail, whose poly is the long horizontal line
+  y 3797-3823 and ends in the tie box at 9450-9480 x 3820-3862), and
+  `ne = NOT(n2 + A.B)` (pull-down gated by that horizontal line at x 9185-9232, a
+  series pair somewhere in the column x 9270-9322, load = the two horizontal gates
+  y 3703-3768 if they are fingers of a poly tied to `ne`). That makes `ne = A XOR B` in
+  eight transistors. Things that must be seen before believing it: what the diffusion
+  left of the gate at x 9475 (9450-9475 x 3703-3768) connects to; whether the two
+  horizontal gates are joined to the poly that passes the buried contact at 9240-9262;
+  where the row C bit's poly crosses the column.
+- Composites for this row: `tools/cdp1_sr.py X Y W H --offsets "0,0 390,0 780,0"` with
+  slice 2 as master (x 9150-9560).
 
 ### Channel B/C (surveyed)
 
