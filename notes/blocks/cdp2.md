@@ -287,7 +287,7 @@ Perhaps 12-16 transistors.
   `--comp cdp2_ctop` (top of row C, 9150,7420:9590,7610).
 - Row D was only seen at 0.4x: findcell gives five copies (s3..s7) and a weaker
   sixth at dx -781; check whether it is yet another row of the latch turned over
-  (findcell with `--orient` on the latch core found no upright copy there).
+  (findcell with the latch core, all eight orientations, y 6350-8600, found only row C).
 - Logic left of the rows (x 7600-8750).
 - Rails are drawn only over row A (y 5960-6350) and row C (y 7425-7830); x of the VSS
   rails 8013, 8403, 8793, 9184, 9574, 9965, 10355, 10745, of the VCC rails 8229 ... 10571.
