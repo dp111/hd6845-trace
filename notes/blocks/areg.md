@@ -14,7 +14,8 @@ Extracts with 0 errors, 0 warnings, no unnamed open nets.
   write path, its output inverter and its output line are in the trace; the first
   inverter's load and two internal links are described below but not drawn.
 - The load strobe (`areg_load`) is traced from the register cells to where it leaves the
-  region: metal at x 16299, y 14700, going down. What it is made of is outside this region.
+  region: metal at x 16299, y 14700, going down. Followed by eye below the region: it is
+  the output of a gate at about x 15880-16150, y 15230-15330 (bd2's area), see Logic.
 - Vertical bundle x 16200-16450: traced as labelled wires with ports.
 - Right-hand column of cells (x 16480-16800) and everything right of x 16460: not started.
 
@@ -153,6 +154,37 @@ What the cell is, as far as established:
   rests on one link that is believed, not traced, and on the polarity of the data line.**
   Nothing found contradicts decode.md.
 
+### Where the load strobe comes from (seen below the region, not traced: bd2's area)
+
+Followed `areg_load` past the boundary at 1-3x, without tracing:
+
+- Metal x 16291-16307 goes down from y 14700 to a contact at (16298,14822), ducks under a
+  horizontal metal band (y 14905-14960, a branch of `areg_rail_r`) in poly, and comes back
+  to metal at a contact at (16298,15000).
+- That metal runs down to y 15265, turns left and **ends** at a contact at (16255,15258).
+  Nothing continues down at x 16299 below y 15270.
+- From the contact a poly runs left along y 15245-15268 to a buried contact at about
+  16105-16130 x 15250-15275 on a diffusion strip (y 15258-15288) that runs on to the left
+  under a wide vertical rail (x 16005-16050) to beyond x 15985.
+- Directly below that strip a long poly band (y 15290-15312, x 15990-16195) with
+  diffusion on its far side (y 15315-15350, contacted to the wide rail at about
+  16035,15335): a pull-down on the strobe node. The band comes from a contact at
+  (16210,15300) whose metal goes down at x 16200-16220.
+- So **`areg_load` is the output node of a gate at about x 15880-16150, y 15230-15330**,
+  not a pin signal wired straight through. The rest of that gate (its load and other
+  pull-downs, to the left of x 15985) was not looked at.
+- Warning for whoever joins the ports: `notes/blocks/trunks.md` has `rw_d` on a metal at
+  x 16290-16308 from y 17558 up to "above 15900, not followed", and `rs_d` at
+  x 16333-16352. These are in line with `areg_load` (x 16299) and `areg_w6` (x 16341) but
+  **`areg_load` is not that metal continued**: its metal ends at (16255,15258). `areg_w6`
+  likewise leaves metal at a contact at (16337,14862) and continues as a poly that runs
+  down x 16340 to y 15255 and then diagonally down-right to about (16490,15390). Whether
+  either trunk line reaches these by another route is open.
+- Also seen: a third contact at (16252,14862) beside the two cross-unders takes a
+  horizontal metal from the left (y 14855-14875) into a poly going down x 16247-16265 to
+  a contact at (16255,15085); from there a metal goes down to y 15213, left to x 16170 and
+  down at x 16160-16180 (trunks has `e_b` on a metal at x 16160-16180 further down).
+
 ## Ports
 
 | Name | Layer | Crosses at | Direction | What |
@@ -209,8 +241,8 @@ metal shots over the full height.
   trace the cell on the median picture at 6x in three strips (x 15800-15925 is the hard
   one), then check the result on each of the five instances; the cell differs between
   instances only below y 13270 (output contact at y 13308 in cells 1-4, none in cell 5).
-- Where `areg_load` comes from below y 14700 (x 16299). This is the question that matters
-  most and it is outside the region.
+- The gate that drives `areg_load` (about x 15880-16150, y 15230-15330, outside the
+  region): trace it and its inputs. This is the question that matters most.
 - Right-hand column, x 16480-16800: four identical cells at about y 13060-13250,
   13270-13450, 13470-13640, 13660-13840 (pitch about 190, each with a contact near
   x 16540), then larger, different cells from y 13900 to 14700. Wide vertical metals at
