@@ -50,49 +50,80 @@ Six island devices to VCC hang on these nets (AMB-006, taken to be clamps). A pl
 VCC diffusion block with nine contacts lies under the gate row's lines at
 12385-12790 x 18600-18850.
 
-## Driver logic (10900-12000 x 19140-19890): being traced from the clean shot
+## Driver logic (10900-12000 x 19140-19890): read from the clean shot, being traced
 
-Read from `acid1b` with `metal1` for contacts (2026-11-15). The earlier survey of this
-block from the chip-2 shots was wrong in several places and is superseded.
+Read from `acid1b` with `metal1` for contacts and `acid` for open areas (2026-11-15).
+The earlier survey of this block from the chip-2 shots alone was wrong in several
+places and is superseded.
 
-It is two big push-pull drivers, one per half, that drive lines A and B themselves:
-the left half's output diffusion is contacted by line A at (11030,19298), the right
-half's by line B at (11838,19250). So A and B each have two drivers, a small inverter
-in the gate row and a large push-pull here. The halves mirror each other about
-x = 11437 except for which line the output pad sits under.
+**It is a two-phase non-overlapping clock generator.** Two cross-coupled NOR drivers
+produce lines A and B from CLK:
 
-Left half, as read so far:
-- Pull-up: the long vertical poly at x 10980-11000 is its gate. Left of it
-  (x 10922-10978) is diffusion on VCC (contact at 10937,19188 under the top rail);
-  right of it (x 11003-11035, widening to a contact box 11008-11055 x 19275-19322) is
-  the output. Net of the gate: N1.
-- N1's load: a diffusion finger comes down from the VCC diffusion at x 11258-11318,
-  crossed by a poly gate at y 19218-19270 (W/L about 60/50). The gate's left end
-  turns up at x 11228-11250 to a poly bar under the top rail (y 19165-19191) that
-  runs left to the top of the long vertical poly, and turns down to a buried-contact
-  box at 11228-11258 x 19278-19312 on the finger below the gate. So the load's gate
-  is tied to its own output, and that output is N1.
-- Below the load, N1's diffusion narrows to a neck (x 11285-11300, y 19325-19365)
-  between the two poly blocks and widens again under the VSS rail at x 11277-11303.
-- Under the VSS rail (y 19370-19452), left to right: VSS contacts 11055-11085;
-  gate strip a (11100-11125); a node (11127-11160); gate strip b1 (11160-11185);
-  VSS contacts 11200-11235; gate strip b2 (11245-11275); N1 (11277-11303); gate
-  strip c1 (11305-11330); VSS contacts 11340-11380; gate strip c2 (11385-11405).
-  b1 and b2 are joined above the rail by poly block B (11163-11272 x 19329-19365),
-  c1 and c2 by block C (11305-11410). Strip a ends in a rounded top at y 19340.
-- So N1 = NOR(b, c), and the node between a and b1 is pulled down by a or b. A
-  narrow diffusion appears to run from that node up at x 11150-11165 and left along
-  y 19318-19332 to the output's contact box, which would make it the output.
-  To be confirmed.
-- The gate strips run on down below the rail for about 400 px over diffusion: these
-  are the very wide pull-downs (and, for the long vertical poly, the pull-up and a
-  capacitor to the output at its lower end).
-- A second load (x 11402 onward) mirrors the first, with its buried-contact box at
-  11366-11400 x 19275-19320.
+```
+A = NOR(ck_g2, clk_b)        ck_g2 = B through two inverters (gate row g1, g2)
+B = NOR(ck_g4, N2)           ck_g4 = A through two inverters (gate row g3, g4)
+N2 = NOT clk_b               inverter in the middle of the block
+```
 
-What the clean shot's colours mean is in `notes/layers.md`; the one surprise was that
-metal lines protect a margin around themselves, so a 25 px gap between two lines
-shows only as a thin dark bar, not as "open" colours.
+So A can only be high while CLK is low and B while CLK is high, and each waits for
+the delayed copy of the other to fall. Lines A and B then go right along the gate
+row into the core, and A (as the line first called `ck_src`) is carried round the
+bottom and left bus fields.
+
+Left half (output A), with coordinates:
+- Output pad: line A's metal contacts the output diffusion at (11030,19298).
+  (Right half: line B contacts it at (11838,19250). Apart from that and the middle,
+  the halves mirror each other about x = 11437.)
+- Pull-up: long vertical poly, x 10980-11003 from y 19165, jogging at y 19545-19572
+  to x 10966-10992, gate between the outer diffusion (x 10922-10978, contact to the
+  top rail at 10937,19188) and the inner diffusion (x 11003-11033), which is the
+  output. Width about 430. Its gate net is N1.
+- N1 = NOR(b, c): load is the diffusion finger x 11258-11318 coming down from the
+  VCC diffusion, gate y 19218-19270 (W/L about 60/50), tied to its output by a
+  buried contact at 11228-11258 x 19278-19312; the same poly runs up the leg at
+  x 11228-11250 to the bar under the top rail (y 19165-19191) and left to the long
+  vertical poly. Below the load N1's diffusion necks down (x 11285-11300,
+  y 19325-19365) to a column at x 11283-11308 that ends at y 19548. Pull-downs:
+  b2 (x 11259-11282, to VSS column 11192-11251, W about 177) and c1
+  (x 11314-11340, to VSS column 11343-11378, which ends at y 19505, W about 135).
+- Output pull-downs: a (x 11109-11133) to VSS column 11058-11101, and b1
+  (x 11160-11191) to VSS column 11192-11251; the output is the narrow column
+  between them (x 11139-11159). All run down to y 19850: W about 480 each.
+- Gate nets: b1 and b2 are joined above the rail by poly block B
+  (11163-11272 x 19329-19365); b2 ends at a pad at 11259-11297 x 19551-19595 where
+  the `ck_g2` metal line (y 19562-19585) ends. c1 and c2 (x 11388-11412) are joined
+  by block C (11305-11410); c2 has a pad at 11382-11427 x 19470-19520 where the
+  `clk_b` metal line (y 19479-19502) ends, and runs on down to a poly bar under the
+  CLK metal line (11112-11412 x 19888-19906, no contact to that line) that also
+  joins strip a. So a = c = `clk_b` and b = `ck_g2`.
+
+Middle:
+- Load 2: finger x 11401-11455, gate y 19218-19270, tied to its output N2 by a
+  buried contact at 11366-11400 x 19275-19320. N2's column under the rail is
+  x 11412-11450, pulled down through c2 to VSS column 11343-11378. So N2 = NOT clk_b.
+- Load 2's gate poly continues right to x 11512, turns down at x 11490-11517
+  (y 19270-19325), runs diagonally to (11525-11547, 19365) and becomes strip S
+  (x 11523-11549), which runs the full height to a poly bar under the CLK line
+  (11525-11763 x 19888-19907) and up strip a' (x 11742-11763). So N2 drives the
+  right half's a' and c1'.
+
+Right half (output B): mirror of the left. b' = `ck_g4`, by a pad at
+11579-11619 x 19549-19588 where the `ck_g4` metal line turns down and ends. The
+`ck_g2` line jogs down round that pad (y 19607-19640 for x 11540-11658).
+
+Not settled (AMB-007):
+- A box, 10938-11003 x 19632-19668, on the pull-up's gate where the poly widens to
+  x 10950-10992 (and its mirror at 11870-11936). It looks like a buried contact
+  window, but one there would short gate, VCC side and output together. Left out
+  of the trace. Whether the pull-up is enhancement (output high = VCC - Vt, topped
+  up by the small inverters g5/g6 in the gate row) or depletion is also open.
+  Neither affects the logic above.
+- The path of the output diffusion from the pad to the column between a and b1 was
+  seen only at 3.3x (a narrow strip along y 19318-19332 and down x 11150-11165).
+
+Things that looked like structure and are not: "R2" and the lines flanking the long
+poly are rims that follow any poly edge in open areas; dark boxes at the ends of
+gates in `acid1b` are the gate overhang (check such spots in `acid`).
 
 ## Output stage: the two big arrays (9500-10730 x 19180-19815): traced schematically
 
