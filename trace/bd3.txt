@@ -1,0 +1,144 @@
+# Below the register-select gates: x 14100-15900, y 16550-17100.
+# Where the strobe and select tracks of trace/sel.txt go next.
+@block bd3
+@requires sel
+@w M=20 P=22
+@s 26x26
+
+# ---------------------------------------------------------------- rails
+M 14434,16750 y16876 w=52          # left ground rail of the gate column: ends here
+M 14789,16750 y16876 w=52          # right ground rail: ends here
+M 14609,16750 y17300 w=50          # supply rail of the gate column runs on south (x 14584-14634)
+M 14060,16907:14634,16954          # wide rail from the west, joins the supply rail
+N M 14300,16930 vcc
+
+# ---------------------------------------------------------------- the strobe
+# sel_stb_l (metal x 14307) turns west below the R7 NOR's contact, then south to a
+# contact on poly. The poly runs south under the wide rail, then east along y 16996
+# (under the metal line bd3_x14543 for 300 px, no contact seen), under the supply
+# rail, to a contact where T0 (sel_stb_r) arrives after turning west at y 16998.
+M 14317,16739 x14239 y16880 w=18
+C 14239,16865
+P 14225,16850:14253,16882
+P 14242,16870 y16996 x14687 w=18
+C 14673,16997
+M 14912,16750 y16998 x14659 w=18   # T0 on down, west along y 16998 to the contact
+@alias sel_stb_r sel_stb_l
+
+# A metal line that is not one of the tracks: comes up from the south at x 14543
+# (followed by scan to y ~18093), turns west at y 16998 exactly over the strobe's poly,
+# runs west to x 13957 and turns north there.
+M 14090,16998 x14543 y17300 w=17
+N M 14400,16998 bd3_x14543
+
+# ---------------------------------------------------------------- R12 select buffer
+# The row at y 16740-16870: two inverters in series. Input rsel12: T8's upper part
+# ends at a contact at 15258,16668; poly west, south along x 15196, west along y 16778
+# under tracks T7..T0 (no contacts) as the gate bar of the first inverter (right half).
+M 15258,16565 y16681 w=20
+C 15258,16668
+P 15272,16668 x15196 y16778 w=18
+P 15205,16778 x14742 w=22          # gate bar of the first inverter
+# first inverter (right half): pull-down under the right ground rail, weak load
+D 14756,16755:14890,16797          # ground above the bar (joins the R11 NOR's strip), output below
+D 14700,16797:14860,16816          # output band: west to the load, east to the buried contact
+B 14843,16803:14879,16836          # output to poly
+D 14845,16795:14877,16834
+D 14632,16796:14705,16823          # load channel strip, from the supply contact land
+P 14643,16778:14699,16841          # load gate block
+P 14676,16750:14699,16780          # ... stem up to its buried contact
+B 14672,16746:14708,16776          # load gate tied to the output
+D 14674,16748:14731,16774
+D 14709,16748:14731,16800          # arm from the output band up to the tie
+N D 14790,16806 bd3_n12            # NOT rsel12
+# its output: poly east, south along x 14912, west along y 16910 (under the top edge of
+# the wide rail on the far side of the supply rail) to a pad at 14305,16867; metal up
+# to the gate bar of the second inverter
+P 14870,16819 x14912 y16910 x14297 w=18
+P 14290,16850:14322,16919
+C 14305,16867
+M 14305,16768 y16880 w=18
+C 14306,16778
+P 14293,16763:14321,16793
+P 14315,16778 x14496 w=22          # gate bar of the second inverter
+# second inverter (left half): pull-down under the left ground rail, stronger load
+D 14353,16747:14488,16798          # ground above the bar (joins the R7 NOR's strip), output below
+D 14370,16795:14535,16817          # output band: west to the buried contact, east to the load
+B 14350,16803:14383,16843          # output to poly
+D 14352,16800:14381,16841
+B 14479,16805:14518,16838          # load gate tied to the output
+D 14481,16803:14516,16836
+P 14505,16832 x14580 w=18          # load gate poly from the tie ...
+P 14551,16750:14582,16841          # ... to the load gate block
+D 14529,16756:14632,16820          # load: output side, channel under the block, supply contact land
+C 14609,16790 s=28x44              # supply contact shared by both loads
+N D 14430,16806 bd3_b12            # rsel12 buffered
+# output: poly west along y 16822, then south along x 14199 (under the wide rail and
+# the horizontal lines; leaves the region)
+P 14378,16822 x14199 y17300 w=18
+
+# ---------------------------------------------------------------- sel_w7
+# Its poly (drawn in sel.txt down x 14135 to y 16760) turns west at y 16875 and leaves
+# the region's west edge.
+P 14135,16750 y16875 x14090 w=20
+
+# ---------------------------------------------------------------- right-hand gate column, continued
+# Two more inverter + NOR pairs of the cell sel_rwr (trace/sel.txt), for R12 and R13.
+M 15690,16550 y17110 w=55          # ground rail
+M 15795,16550:15890,17110          # supply rail
+@inst sel_rwr 0,600 tag=12
+@inst sel_rwr 0,900 tag=13
+M 15561,16550 y17085 w=20          # T15 (strobe) ends at the R13 NOR's contact
+P 15590,16558 x15612 w=20          # rsel12's poly (from the contact at 15258,16560) joins the gate bar
+M 15214,16550 y16877 w=20          # T7 (rsel13) ends at a contact
+C 15214,16864
+P 15200,16862 x15612 w=22          # rsel13: poly east to its inverter
+P 15216,16870 y17300 w=18          # rsel13: poly also south, under the metal of x 15214 (which is sel_w12 there)
+# outputs: poly west to a contact on a track
+P 15615,16732 x15244 w=20
+C 15258,16734
+P 15615,17032 x15330 w=20
+C 15344,17036
+
+# ---------------------------------------------------------------- tracks below y 16550
+# T1..T6: turn west (nested corners), cross the supply rail in poly between two
+# contacts, run on west past x 14100.
+M 14954,16550 y17041 x14700 w=18   # T1 sel_w5
+C 14713,17040
+P 14727,17040 x14485 w=18
+C 14499,17040
+M 14512,17041 x14090 w=18
+M 14998,16550 y17084 x14659 w=18   # T2 sel_w3
+C 14672,17084
+P 14686,17084 x14442 w=18
+C 14456,17084
+M 14469,17084 x14090 w=18
+M 15041,16550 y17128 x14700 w=18   # T3 sel_w8
+C 14713,17127
+P 14727,17127 x14485 w=18
+C 14499,17127
+M 14512,17128 x14090 w=18
+M 15085,16550 y17172 x14659 w=18   # T4 sel_w9
+C 14672,17171
+P 14686,17171 x14442 w=18
+C 14456,17171
+M 14469,17172 x14090 w=18
+M 15128,16750 y17215 x14700 w=18   # T5 sel_w11
+C 14713,17214
+P 14727,17214 x14485 w=18
+C 14499,17214
+M 14512,17215 x14090 w=18
+M 15171,16550 y17258 x14659 w=18   # T6 sel_w10
+C 14672,17257
+P 14686,17257 x14442 w=18
+C 14456,17257
+M 14469,17258 x14090 w=18
+# T8..T10 each step one track to the left where the track on their left has ended.
+M 15258,16721 y16910 x15214 y17300 w=20     # sel_w12: from its contact down T8, then on T7's line
+M 15301,16550 y16955 x15258 y17300 w=20     # T9 sel_w14, then on T8's line
+M 15344,16550 y16998 x15301 y17300 w=20     # T10 sel_w15, then on T9's line
+M 15344,17023 y17300 w=20                   # sel_w13: from its contact down T10's line
+M 15388,16550 y17300 w=20                   # T11 sel_b16
+M 15431,16550 y17300 w=20                   # T12 sel_b17
+M 15474,16550 y17300 w=20                   # T13 sel_b15
+M 15517,16550 y17300 w=20                   # T14 sel_b14
