@@ -5,9 +5,9 @@
 @block dbus
 
 # ---- rails (extent checked by overlay over the part traced so far)
-M 17355,8030:17400,9660            # VSS rail (continues both ways)
+M 17355,8030:17400,15120           # VSS rail (continues both ways)
 N M 17378,8200 vss
-M 17527,8287:17585,9660            # VCC rail (top end at 8287; continues down)
+M 17527,8287:17585,15120           # VCC rail (top end at 8287; continues down)
 N M 17556,8300 vcc
 
 # ---- input buffer chain: four inverters in series, the same arrangement as the R/W,
@@ -20,6 +20,7 @@ N M 17556,8300 vcc
 # G1 (inverter). Its gate poly continues past the diffusion into an L that ends beside
 # the load and crosses nothing (same habit as the input inverters of the bottom row).
 P 17290,8328:17435,8351            # gate band
+N P 17300,8340 d{}_in
 P 17413,8292:17435,8351            # L arm, up
 P 17413,8292:17503,8318            # L arm, right, dead end
 D 17350,8287:17410,8386            # VSS land, channel, output
@@ -95,6 +96,15 @@ D 17305,8811:17345,8853
 P 17290,8825:17345,8847            # G4 output, left
 N P 17300,8836 d{}_d
 @end
+
+# Copies for D1-D5 (offsets from findcell on the clean shot, each checked by overlay).
+# Tags follow position; chain 0 is tied to D0 by its traced input line, the others are
+# taken to follow the pad order. Their wiring left of x 17290 is not drawn yet.
+@inst dbus_in 1,1365 tag=1
+@inst dbus_in 1,2732 tag=2
+@inst dbus_in 2,4098 tag=3
+@inst dbus_in 2,5465 tag=4
+@inst dbus_in 2,6223 tag=5
 
 # ---- chain 0 (D0): wiring left of the cell
 C 17253,8338 s=26x26               # pad input: metal to G1's gate
