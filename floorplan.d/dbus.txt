@@ -1,0 +1,2 @@
+17255,8280:17590,8880  io  D0 input buffer | four inverters in series from the D0 pad (d0_a..d0_d), like the R/W, RS, CS buffers; only d0_d is used
+16960,8445:17040,8880  io  D0 buffer capacitors | plain diffusion rectangles on d0_b (not strapped) and d0_c

@@ -1,0 +1,129 @@
+# Data bus interface column, x 17050-17700, y 5300-17000, beside the D0-D7 pads.
+# Two rails run down the column: VSS at x 17355-17400 (pull-downs under it) and VCC at
+# x 17525-17585 (load contacts). Gates sit on a 152 px vertical pitch.
+# See notes/blocks/dbus.md.
+@block dbus
+
+# ---- rails (extent checked by overlay over the part traced so far)
+M 17355,8030:17400,9660            # VSS rail (continues both ways)
+N M 17378,8200 vss
+M 17527,8287:17585,9660            # VCC rail (top end at 8287; continues down)
+N M 17556,8300 vcc
+
+# ---- input buffer chain: four inverters in series, the same arrangement as the R/W,
+# RS and CS input buffers. pad -> G1 (d_a) -> G2 (d_b) -> G3 (d_c) -> G4 (d_d).
+# The b and c outputs go left to contacts beside plain diffusion rectangles (added
+# capacitance); only d_d, same sense as the pad, is used by logic.
+# Six copies (D0-D5). The cell holds the part common to all (x >= 17255); the wiring
+# to the left differs from copy to copy and is drawn per copy below.
+@cell dbus_in tag=0
+# G1 (inverter). Its gate poly continues past the diffusion into an L that ends beside
+# the load and crosses nothing (same habit as the input inverters of the bottom row).
+P 17290,8328:17435,8351            # gate band
+P 17413,8292:17435,8351            # L arm, up
+P 17413,8292:17503,8318            # L arm, right, dead end
+D 17350,8287:17410,8386            # VSS land, channel, output
+C 17385,8308 s=30x30               # VSS
+D 17305,8356:17462,8386            # output band
+D 17436,8324:17462,8404            # output, under the thin metal
+D 17436,8330:17490,8354            # bump to the load tie
+B 17460,8328:17492,8355            # load gate tied to output
+P 17463,8329:17490,8362            # load gate stem
+P 17465,8358:17520,8425            # load gate
+D 17450,8360:17530,8392            # load strip
+D 17522,8348:17585,8403            # VCC land
+C 17555,8375 s=30x34               # VCC
+B 17303,8356:17345,8398            # output to poly
+D 17305,8356:17345,8398
+P 17255,8366:17345,8392            # G1 output, left
+P 17262,8366:17288,8503            # ... and down to G2's gate
+N P 17275,8440 d{}_a
+
+# G2 (inverter)
+D 17322,8436:17378,8510            # VSS land and channel
+C 17340,8458 s=30x34               # VSS
+M 17322,8440:17360,8478            # rail widened over the contact
+P 17255,8483:17390,8503            # gate band
+D 17305,8506:17412,8550            # output band
+B 17303,8508:17345,8552            # output to poly
+P 17255,8520:17345,8545            # G2 output, left
+P 17262,8540:17288,8655            # ... and down to G3's gate
+D 17398,8482:17420,8550            # bump up to the load tie
+D 17398,8482:17447,8508
+B 17416,8478:17449,8510            # load gate tied to output
+P 17420,8480:17447,8512            # load gate stem
+P 17420,8508:17520,8568            # load gate
+D 17405,8522:17530,8548            # load strip
+D 17525,8497:17585,8555            # VCC land
+C 17553,8528 s=30x34               # VCC
+N P 17275,8532 d{}_b
+
+# G3 (inverter), same layout as G2
+D 17322,8588:17378,8662
+C 17340,8610 s=30x34
+M 17322,8592:17360,8630
+P 17255,8635:17390,8655            # gate band
+D 17305,8658:17412,8702
+B 17303,8660:17345,8704
+P 17255,8672:17345,8697            # G3 output, left
+P 17262,8672:17288,8803            # ... and down to join G4's gate line
+D 17398,8634:17420,8702
+D 17398,8634:17447,8660
+B 17416,8630:17449,8662
+P 17420,8632:17447,8664
+P 17420,8660:17520,8720            # load gate
+D 17405,8674:17530,8700
+D 17525,8649:17585,8707
+C 17553,8680 s=30x34
+
+# G4 (inverter), same layout as G1 without the L arm
+P 17255,8781:17425,8804            # gate band, fed by G3; the line also runs on left
+N P 17275,8792 d{}_c
+D 17350,8742:17410,8841
+C 17385,8763 s=30x30
+D 17305,8811:17462,8841            # output band
+D 17436,8779:17462,8859
+D 17436,8785:17490,8809
+B 17460,8783:17492,8810
+P 17463,8784:17490,8817
+P 17465,8813:17520,8870            # load gate
+D 17450,8815:17530,8847
+D 17522,8803:17585,8858
+C 17555,8830 s=30x34
+B 17303,8811:17345,8853
+D 17305,8811:17345,8853
+P 17290,8825:17345,8847            # G4 output, left
+N P 17300,8836 d{}_d
+@end
+
+# ---- chain 0 (D0): wiring left of the cell
+C 17253,8338 s=26x26               # pad input: metal to G1's gate
+P 17240,8328:17295,8351
+M 17253,8188 y8350 w=20
+M 17243,8188 x17325 w=22
+C 17313,8188 s=26x24
+P 17300,8179:17500,8198            # cross-under below the rail and the thin metal
+C 17487,8188 s=26x24
+M 17475,8188 x17557 w=22
+M 17557,8050 y8199 w=18            # continues up to the D0 pad cell (not yet drawn)
+N M 17557,8100 d0_in
+# d0_b: poly left to a contact. The contact has only a dot of metal on it; the strap
+# to the capacitor's contact is absent in both metal shots (compare d0_c below).
+P 17066,8520:17260,8545
+P 17066,8474:17092,8545
+C 17078,8490 s=26x26
+M 17063,8475:17093,8505
+D 16960,8445:17040,8580            # capacitor rectangle, contact present, not strapped
+C 16988,8468 s=30x30
+M 16972,8452:17004,8484
+N M 16988,8468 dbus_cap0b
+# d0_c: poly left to a contact, metal strap to the capacitor rectangle
+P 17066,8781:17260,8804
+C 17078,8795 s=26x26
+M 16978,8795 x17092 w=20
+C 16990,8787 s=30x30
+D 16960,8745:17040,8880            # capacitor rectangle
+# d0_d: poly left to a contact, then down in metal (line M_a) into the gate group below
+P 17195,8825:17295,8847
+C 17205,8837 s=26x26
+M 17208,8825 y9100 w=20            # continues down (not yet traced)
