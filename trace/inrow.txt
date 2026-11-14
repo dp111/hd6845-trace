@@ -183,3 +183,18 @@ M 17258,18522 y18600 w=22          # E arrives from its protection cell (routing
 M 16861,18535 x16688 w=18          # buffered E, left along y 18535 ...
 C 16688,18535 s=26x26
 P 16682.5,18130 y18552 w=45        # ... then up towards the core in a wide poly line (top end not yet followed)
+
+# R/W group: the b and c outputs are tapped below their bars and each runs in metal to
+# a large plain diffusion rectangle (added capacitance, presumably a delay).
+P 14875,18520:14901,18550          # tap on rw_b
+C 14888,18535 s=22x22
+M 14888,18535 y18577 x14978 w=16
+C 14978,18577 s=24x24
+D 14958,18557:15002,18602
+D 14872,18600:15002,18820          # rectangle on rw_b
+P 15072,18520:15098,18550          # tap on rw_c
+C 15085,18535 s=22x22
+M 15085,18535 y18640 x14805 y18577 w=16
+C 14805,18577 s=24x24
+D 14785,18557:14829,18602
+D 14700,18600:14830,18820          # rectangle on rw_c

@@ -97,3 +97,29 @@ Next
 - Finish the buffer row to x 17500 and the wiring below it (bus lines at
   y 18620-18750, four large rectangles at y 18575-18794, links to the protection
   cells and pads). Then RES and LPSTB, then the block left of the CLK pad.
+
+## 2026-11-14 (end of session)  M1 status
+
+Traced and extracting cleanly (290 transistors, no rule errors):
+- 23 output drivers (cell `outdrv`).
+- Bottom-right inputs: five protection cells (`inprot`), CLK and E two-stage buffers
+  (`buf3f` + `buf2f`), R/W, RS and CS four-inverter groups (`ingrp`), R/W taps and
+  their two diffusion rectangles, one unidentified inverter at the left end.
+- Top inputs: LPSTB and RES two-stage buffers (`topin` + flipped `buf2f`).
+
+Still to do for M1, in the order I would take them:
+1. The block left of the CLK pad (9550-12300 x 19050-19950) and the wiring between
+   it and the input row (12400-13700 x 18500-19600). `clk_b` arrives there on the
+   metal at y 19056 (ends at a contact at 12570,19055); the CLK node itself also runs
+   left on the metal at y 19103 and turns down at x 12615. A U-shaped poly joins the
+   contacts at 12570,19055 and 12852,19103, which cannot be a plain link between
+   those two metals, so there are transistors here that need 2.4x views. The block
+   has two large multi-finger arrays (9570-10650) and tall rectangles that look like
+   bootstrap capacitors (10920-11700 x 19350-19850). This is where the internal clock
+   phases are made.
+2. Wiring below the input row: strips from pads to protection cells and on to the
+   buffers, RS and CS taps and rectangles, and the lines that leave to the right at
+   y 18615-18750 (`rw_d`, RS node, `rs_d`, CS node).
+3. The two comb protection cells by LPSTB and RES.
+4. Pad squares and the two supply rings as drawn metal.
+5. Data pad cell (AMB-003), after the bus-interface logic that drives it.
