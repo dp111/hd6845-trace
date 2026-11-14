@@ -66,9 +66,22 @@ Caveats
 - Read from chip 1 only (the clean shot). Chip 2's metal shot shows the same pads
   where I looked (top-left corner), but the full matrix was not re-read there.
 
+## Row drivers (seen, not traced)
+
+The ten rows run on to the right in poly to a column of five identical cells at
+x 15960-16190, one per pair, at the same vertical pitch as the pairs (first cell
+y 13730-13880). Each cell sits between its pair's two rows, with the pair's ground
+rail running into it under a metal, and drives both rows. So each address bit has
+one cell that produces the true and the complement line: consistent with the rows
+coming straight from a 5-bit address register, though the cell itself (and which
+of its outputs is which) is still to be traced. Its middle part is an intricate
+shape in the open, probably a folded load, and needs 4x views. To the right of the
+cells a bundle of vertical lines (x 16200-16400) passes; further right is a column
+of larger cells (x 16480-16800).
+
 ## Next
 
-- Row drivers, right of the array (x > 15800): where the ten lines come from.
+- Trace one row-driver cell and instance it five times.
 - The row of cells above the array (14150-15820 x 13030-13260) and the structures at
   y 13260-13500 between it and the array.
 - Where each column goes below the array (contacts at y 14640, then the latch
