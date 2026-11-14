@@ -5,7 +5,7 @@ Measures the local offset between the two shots on a grid of patches (phase
 correlation of edge images), fits an affine map metal(x, y) -> acid(x', y'), reports
 the residuals, and writes
 
-  cache/align.json         the affine and its fit statistics
+  trace/align.json         the affine and its fit statistics (kept in git)
   cache/acid_aligned.npy   the acid shot resampled so that pixel (x, y) shows the
                            same place as pixel (x, y) of the metal shot
 
@@ -77,7 +77,7 @@ def main():
     # metal (x, y) -> acid (x', y')
     T = np.array([[1 + cx[0], cx[1], cx[2]],
                   [cy[0], 1 + cy[1], cy[2]]])
-    with open(os.path.join(CACHE, 'align.json'), 'w') as f:
+    with open(os.path.join(ROOT, 'trace', 'align.json'), 'w') as f:
         json.dump({'metal_to_acid': T.tolist(),
                    'patches_used': int(keep.sum()),
                    'residual_rms_px': float(np.sqrt((r[keep] ** 2).mean())),

@@ -1,0 +1,12 @@
+7 nets, 5 transistors, 0 errors, 0 warnings
+
+transistors
+  t0    at  14550, 14988  W/L   27/52   load  gate a_out_L      a_out_L <-> vcc
+  t1    at  14433, 14957  W/L   54/22   -     gate in_a_L       vss <-> a_out_L
+  t2    at  14420, 15172  W/L   80/22   -     gate in_c_L       b_out_L <-> vss
+  t3    at  14529, 15132  W/L   35/42   load  gate b_out_L      vcc <-> b_out_L
+  t4    at  14420, 15087  W/L   80/20   -     gate a_out_L      vss <-> b_out_L
+
+gates
+  a_out_L      = NOT in_a_L
+  b_out_L      = NOR(a_out_L, in_c_L)

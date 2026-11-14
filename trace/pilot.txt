@@ -3,13 +3,17 @@
 # Names here are local placeholders until the surrounding logic is traced.
 @block pilot
 
+# The supply rail and its labels stay outside the cell: they sit on the mirror axis.
+M 14609,14904 y15300 w=50          # supply rail (top end at 14904)
+N M 14609,14950 vcc
+N M 14434,14890 vss
+
+@cell pilot_half tag=L
+
 # --- metal
 M 14434,14880 y15300 w=52          # ground rail
-M 14609,14904 y15300 w=50          # supply rail (top end at 14904)
 M 14347,14825 y15240 w=16          # passes over, no contact in this region
 M 14305,15176 y15300 w=20
-N M 14434,14890 vss
-N M 14609,14950 vcc
 
 # --- contacts
 @s 30x34
@@ -29,8 +33,8 @@ P 14524,14956:14576,15019          # load gate
 P 14524,14930:14548,14958          # load gate stem to buried contact
 B 14520,14927:14550,14955          # load gate tied to output
 B 14348,14980:14380,15016          # output to P3
-N P 14328,14890 in_a
-N D 14480,14990 a_out
+N P 14328,14890 in_a_{}
+N D 14480,14990 a_out_{}
 
 # --- row B: 2-input NOR
 D 14405,15028:14460,15240          # pull-down strip under the ground rail
@@ -46,5 +50,12 @@ P 14285,14880 y15131 x14372 w=20          # row B output leaving up the left sid
 P 14508,15094:14550,15192          # load gate
 B 14498,15168:14534,15198          # load gate tied to output
 B 14346,15110:14378,15144          # output to P1
-N P 14300,15172 in_c
-N D 14480,15130 b_out
+N P 14300,15172 in_c_{}
+N D 14480,15130 b_out_{}
+@end
+
+# The right half (x 14611-14940) is a mirror image of this cell about x = 14611.5 as far
+# as the gates go: rail, contacts, diffusion, loads and buried contacts all land within
+# a few pixels. Its wiring differs (no counterpart of the metal at x 14347), so it is
+# not instanced here; it gets traced with the rest of this column in M2.
+#   @inst pilot_half 0,0 mx=14611.5 tag=R

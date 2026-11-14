@@ -32,12 +32,21 @@ File format (trace/*.txt), one item per line, '#' starts a comment:
     @w M=24 P=20           default path widths
     @s 24x24               default contact size
     @block name            names the block for the items that follow (reporting only)
+    @cell NAME [tag=T]     start a cell. The items that follow, up to @end, are drawn
+                           where they stand (the master) and can be repeated.
+    @end
+    @inst NAME dx,dy [mx=X] [my=Y] [tag=T]
+                           a copy of the cell: mirrored about the vertical line x=X
+                           and/or the horizontal line y=Y, then moved by dx,dy.
+                           A label containing {} gets the tag substituted; other
+                           labels belong to the master only.
 """
 import glob
 import os
 import re
 from dataclasses import dataclass, field
 
+from shapely import affinity
 from shapely.geometry import LineString, Point, Polygon, box
 from shapely.strtree import STRtree
 
@@ -106,10 +115,19 @@ def _points(tokens, src):
     return pts
 
 
-def parse_file(path, items, labels):
+def xform(g, mx, my, dx, dy):
+    if mx is not None:
+        g = affinity.scale(g, xfact=-1, yfact=1, origin=(mx, 0))
+    if my is not None:
+        g = affinity.scale(g, xfact=1, yfact=-1, origin=(0, my))
+    return affinity.translate(g, dx, dy)
+
+
+def parse_file(path, items, labels, cells, insts):
     widths = {}
     csize = (24.0, 24.0)
     block = ''
+    cell = None           # (name, tag, items, labels) while inside @cell
     rel = os.path.relpath(path, ROOT)
     with open(path) as f:
         for n, line in enumerate(f, 1):
@@ -131,6 +149,26 @@ def parse_file(path, items, labels):
             if head == '@block':
                 block = tok[1] if len(tok) > 1 else ''
                 continue
+            if head == '@cell':
+                if cell is not None:
+                    raise TraceError(f'{src}: @cell inside @cell')
+                kv = dict(t.split('=', 1) for t in tok[2:])
+                cell = (tok[1], kv.get('tag', ''), [], [])
+                if tok[1] in cells:
+                    raise TraceError(f'{src}: cell {tok[1]} defined twice')
+                cells[tok[1]] = cell
+                continue
+            if head == '@end':
+                cell = None
+                continue
+            if head == '@inst':
+                kv = dict(t.split('=', 1) for t in tok[3:])
+                (dx, dy), = _points([tok[2]], src)
+                insts.append((tok[1], dx, dy,
+                              float(kv['mx']) if 'mx' in kv else None,
+                              float(kv['my']) if 'my' in kv else None,
+                              kv.get('tag', ''), src))
+                continue
             if head.startswith('@'):
                 raise TraceError(f'{src}: unknown directive {head}')
             uncertain = head.startswith('?')
@@ -139,7 +177,11 @@ def parse_file(path, items, labels):
                 if len(tok) != 4 or tok[1] not in ('M', 'P', 'D'):
                     raise TraceError(f'{src}: label must be "N LAYER x,y name"')
                 (x, y), = _points([tok[2]], src)
-                labels.append(Label(tok[1], x, y, tok[3], src))
+                lb = Label(tok[1], x, y, tok[3], src)
+                if cell is not None:
+                    cell[3].append(lb)
+                    lb = Label(tok[1], x, y, tok[3].replace('{}', cell[1]), src)
+                labels.append(lb)
                 continue
             if layer not in LAYERS:
                 raise TraceError(f'{src}: unknown layer "{layer}"')
@@ -157,7 +199,10 @@ def parse_file(path, items, labels):
             def add(g):
                 if g.is_empty or not g.is_valid or g.area <= 0:
                     raise TraceError(f'{src}: degenerate or invalid shape')
-                items.append(Item(layer, g, uncertain, src, block, dict(attrs)))
+                it = Item(layer, g, uncertain, src, block, dict(attrs))
+                items.append(it)
+                if cell is not None:
+                    cell[2].append(it)
 
             m = _rect.match(geo[0])
             if m and len(geo) == 1:
@@ -190,10 +235,25 @@ class Trace:
     def __init__(self, files=None):
         self.items = []
         self.labels = []
+        self.cells = {}
+        self.insts = []
         if files is None:
             files = sorted(glob.glob(os.path.join(TRACE_DIR, '**', '*.txt'), recursive=True))
         for p in files:
-            parse_file(p, self.items, self.labels)
+            parse_file(p, self.items, self.labels, self.cells, self.insts)
+        for name, dx, dy, mx, my, tag, src in self.insts:
+            if name not in self.cells:
+                raise TraceError(f'{src}: no cell named {name}')
+            _, _, citems, clabels = self.cells[name]
+            for it in citems:
+                self.items.append(Item(it.layer, xform(it.geom, mx, my, dx, dy), it.uncertain,
+                                       f'{src} <- {it.src}', it.block, dict(it.attrs)))
+            for lb in clabels:
+                if '{}' not in lb.name:
+                    continue
+                p = xform(Point(lb.x, lb.y), mx, my, dx, dy)
+                self.labels.append(Label(lb.layer, p.x, p.y, lb.name.replace('{}', tag),
+                                         f'{src} <- {lb.src}'))
         self._tree = STRtree([it.geom for it in self.items]) if self.items else None
 
     def query(self, x0, y0, x1, y1):
@@ -231,11 +291,12 @@ def overlay(im, x, y, w, h, scale, only=None, fill=True, trace=None):
         polys = [it.geom] if it.geom.geom_type == 'Polygon' else list(it.geom.geoms)
         for p in polys:
             xy = [((px - x) * scale, (py - y) * scale) for px, py in p.exterior.coords]
-            a = 70 if fill else 0
+            a = 45 if fill else 0
             if it.layer in ('C', 'B'):
-                a = 150 if fill else 0
+                a = 90 if fill else 0
             outline = (255, 255, 0, 255) if it.uncertain else col + (255,)
             d.polygon(xy, fill=col + (a,), outline=outline)
+            d.line(xy, fill=outline, width=2)
             if it.uncertain:
                 d.line(xy, fill=(255, 255, 0, 255), width=3)
     out = Image.alpha_composite(base, lay).convert('RGB')

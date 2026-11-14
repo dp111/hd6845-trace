@@ -23,12 +23,21 @@ first, then `notes/journal.md` (latest entry) and `notes/ambiguities.md` if they
   machine, the interlace odd/even logic, and whatever makes some registers hold N and
   others N-1.
 
+- The user also wants a floor-plan overlay (`floorplan.txt` -> `out/floorplan.jpg`)
+  kept current: rename and tighten a block whenever tracing identifies it.
+
 ## Practical
 
-- `cache/` is derived data and is not in git. `python3 tools/prepare.py` rebuilds it.
+- Use `.venv/bin/python` (shapely, opencv, scikit-image, networkx are installed there).
+- `cache/` is derived data and is not in git. `tools/prepare.py` then `tools/align.py`
+  rebuild it. `cache/acid_aligned.npy` is the acid shot resampled into the metal frame,
+  so every tool takes metal-shot coordinates for both layers.
 - Keep large arrays on disk under `cache/`, not in `/tmp`: `/tmp` is RAM-backed here
-  and the machine has 12 GB.
-- The acid shot is offset from the metal shot by about (+10, +8) px; the exact affine
-  is in `PLAN.md` section 1.
-- `python3 tools/crop.py <acid|metal> x y w h out.png [scale] [--grid N]` cuts a crop
-  with an optional coordinate grid.
+  and the machine has 12 GB. Scratch renders go in `cache/scratch/`.
+- `tools/view.py x y w h --scale 2.5 --grid 50 [--layers metal,acid] [--stack v]
+  [--trace] [--nofill] --out FILE` renders a view. Keep each output under about
+  1400 px a side or it is downscaled when read. `--trace --nofill` is the clearest
+  way to check a trace against the photo.
+- `tools/netlist.py` prints the extraction report; `tools/build.py` regenerates `out/`.
+- Trace file format: docstring of `tools/tracelib.py`. Layer legend and what each
+  feature looks like: `notes/layers.md`. Read that before tracing anything.
