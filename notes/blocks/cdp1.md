@@ -164,8 +164,8 @@ taps different bus bits from row C's in the same slice.
 | Name | Layer | Where it crosses | Dir | What |
 |---|---|---|---|---|
 | `vss` | M | feeds at 9140-9197, 9900-9987, 10711-10765 x y 2950 (from the plane under the VSS pad); band continues left at 8340, y 2987-3037 | in | supply |
-| `vss` | M | rails x 8403, 8796, 9187, 9577, 9967, 10357, 10738 at y 4530 (drawn to there; they continue down) | - | |
-| `vcc` | M | rails x 8620, 9010, 9400, 9790, 10180, 10570 at y 4530 (drawn to there; they continue down; top end is in row A) | in | supply, from below |
+| `vss` | M | rails x 8796, 9187, 9577, 9967, 10357, 10738 at y 4530 (drawn to there; they continue down). Slice 0's rail (x 8403) is drawn only to y 3440: below that it widens to x 8375-8470 and continues at x 8420-8465 into the logic under row A | - | |
+| `vcc` | M | rails x 9010, 9400, 9790, 10180, 10570 at y 4530 (drawn to there; they continue down; top end is in row A). Slice 0's (x 8620) drawn to y 3530 only | in | supply, from below. VCC is identified by the loads hanging from it, not by following it to the pad |
 | `cdp1_a0_q` | P | 8340,3024 going left | out | row A bit, slice 0 |
 | `cdp1_a1_q` | P | 8340,2985 going left | out | row A bit, slice 1 |
 | `cdp1_a2_q` | M | 9507,2950 (turns left at y 2940 just above) | out | row A bit, slice 2 |
@@ -213,6 +213,13 @@ taps different bus bits from row C's in the same slice.
    was drawn so that this needs no exception. The first cell's write-line leg is wider
    (8395-8445) than the others.
 
+6. **NOR load in slice 1** (`?D 9040,3575:9140,3640`): the diffusion between the VCC
+   contact land and the gate bar is hidden by heavy outlines; drawn as inferred. The
+   bar, its buried contact on the line and the diffusion on its right are clear.
+7. Whether the diffusion strip under each VSS rail in row B (x 9160-9178, y 3700-3830
+   in slice 2) is diffusion or field decides whether the vertical gate of the previous
+   slice (x 9133-9155) is a transistor to VSS. Left for the lower-half trace.
+
 ## Not done
 
 - **Bit lines.** Each cell's bit line goes down from the contact at 8857+k*390, 3301
@@ -225,7 +232,7 @@ taps different bus bits from row C's in the same slice.
 - The two poly lines below row A (y 3340-3360, 3385-3405) and their contacts.
 - Channel B/C, the big channel y 4530-5150, rows D and E.
 - Where `cdp1_a_wr` and `cdp1_c_wr` come from (right of x 10786).
-- Thin vertical metal line at x 10795-10820.
+- Thin vertical metal line at x 10795-10820. Slice 5 also has two more thin vertical metal lines through row B at x 10612-10640 and 10660-10690 (the first is row C slice 5's q going up).
 - Everything left of x 8340.
 
 ## Method notes for whoever continues

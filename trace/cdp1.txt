@@ -102,7 +102,7 @@ N M 9116,3200 cdp1_{}_m6
 # ---------------------------------------------------------------------------------
 # Supply rails. One VSS rail (left of each cell) and one VCC rail (through each cell)
 # per slice, vertical. VSS comes down from the plane under the VSS pad in three feeds.
-M 8403,3030 y4530 w=50                 # VSS rail, slice 0
+M 8403,3030 y3440 w=50                 # VSS rail, slice 0: below y 3440 it widens and moves right into the logic under row A (not traced)
 M 8796,3030 y4530 w=52                 # VSS rail, slice 1
 M 9187,3030 y4530 w=52                 # VSS rail, slice 2
 M 9577,3030 y4530 w=52                 # VSS rail, slice 3
@@ -121,7 +121,7 @@ N M 9577,3400 vss
 N M 9967,3400 vss
 N M 10357,3400 vss
 N M 10738,3400 vss
-M 8620,3290 y4530 w=50                 # VCC rail, slice 0 (below the cell's own piece)
+M 8620,3290 y3530 w=50                 # VCC rail, slice 0: seen to continue down; not checked below y 3530
 M 9010,3290 y4530 w=50                 # VCC rail, slice 1
 M 9400,3290 y4530 w=50                 # VCC rail, slice 2
 M 9790,3290 y4530 w=50                 # VCC rail, slice 3
