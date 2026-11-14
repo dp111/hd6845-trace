@@ -98,14 +98,14 @@ N P 7610,11877 cdp4_bus_s7
 # Drawn for y 11790-13650 so far (the ninth VSS rail ends at y 13300); the others
 # continue up and down.
 # ======================================================================
-M 7622,11790 y13650 w=46
-M 8013,11790 y14062 w=46
-M 8404,11790 y14062 w=46
-M 8795,11790 y14062 w=46
-M 9185,11790 y14062 w=46
-M 9574,11790 y14062 w=46
-M 9964,11790 y14062 w=46
-M 10355,11790 y13300 w=46            # s7: seen down to row C; not followed through channel 2
+M 7622,11480 y13650 w=46
+M 8013,11480 y14062 w=46
+M 8404,11480 y14062 w=46
+M 8795,11480 y14062 w=46
+M 9185,11480 y14062 w=46
+M 9574,11480 y14062 w=46
+M 9964,11480 y14062 w=46
+M 10355,11480 y13300 w=46            # s7: seen down to row C; not followed through channel 2
 M 10355,13694 y14062 w=46            # s7, lower piece beside row D: starts below the link poly (y 13677)
 N M 10355,13800 vss
 N M 7622,11800 vss
@@ -116,14 +116,14 @@ N M 9185,11800 vss
 N M 9574,11800 vss
 N M 9964,11800 vss
 N M 10355,11800 vss
-M 7837,11790 y13530 w=44            # s0: bends left below y 13540 (not traced)
-M 8228,11790 y14062 w=44
-M 8619,11790 y14062 w=44
-M 9010,11790 y14062 w=44
-M 9400,11790 y14062 w=44
-M 9789,11790 y14062 w=44
-M 10179,11790 y14062 w=44
-M 10570,11790 y13650 w=44
+M 7837,11480 y13530 w=44            # s0: bends left below y 13540 (not traced)
+M 8228,11480 y14062 w=44
+M 8619,11480 y14062 w=44
+M 9010,11480 y14062 w=44
+M 9400,11480 y14062 w=44
+M 9789,11480 y14062 w=44
+M 10179,11480 y14062 w=44
+M 10570,11480 y13650 w=44
 N M 7837,11800 vcc
 N M 8228,11800 vcc
 N M 8619,11800 vcc
@@ -245,7 +245,7 @@ C 8401,13275 s=24x22
 @inst cdp4_lat 1951,0 tag=lc_s7
 
 # ninth VSS rail, right of s7: takes s7's pull-downs
-M 10746,11790 y13300 w=46
+M 10746,11480 y13300 w=46
 N M 10746,11800 vss
 D 10722,13002:10751,13176
 C 10745,13147 s=28x40
@@ -418,3 +418,30 @@ M 10462,13655 y13692 w=22
 N M 10025,14050 cdp4_in6_s6
 D 10331,13761:10360,13935           # VSS land under the s7 rail for the last cell
 C 10354,13906 s=28x40
+
+# ======================================================================
+# Row R1, lower half (y 11490-11850): eight more latches of the same cell, upside down
+# (findcell: dy -1466, mirrored top to bottom, score 0.82-0.83). Strobe cdp4_ld8b.
+# Its buffered output is the selector's b input: the d land's contact falls at
+# (8712 + dx, 11772), under the top end of the b track.
+# ======================================================================
+P 7600,11837 x10600 w=22           # strobe (poly line seen under all slices; ends not examined)
+N P 7610,11837 cdp4_ld8b
+@inst cdp4_lat -782,-1466 mx=8610 rot=180 o=8610,13132.5 tag=lr_s0
+N M 7683,11510 cdp4_in8b_s0
+@inst cdp4_lat -392,-1466 mx=8610 rot=180 o=8610,13132.5 tag=lr_s1
+N M 8073,11510 cdp4_in8b_s1
+@inst cdp4_lat 0,-1466 mx=8610 rot=180 o=8610,13132.5 tag=lr_s2
+N M 8465,11510 cdp4_in8b_s2
+@inst cdp4_lat 390,-1466 mx=8610 rot=180 o=8610,13132.5 tag=lr_s3
+N M 8855,11510 cdp4_in8b_s3
+@inst cdp4_lat 780,-1466 mx=8610 rot=180 o=8610,13132.5 tag=lr_s4
+N M 9245,11510 cdp4_in8b_s4
+@inst cdp4_lat 1170,-1466 mx=8610 rot=180 o=8610,13132.5 tag=lr_s5
+N M 9635,11510 cdp4_in8b_s5
+@inst cdp4_lat 1560,-1466 mx=8610 rot=180 o=8610,13132.5 tag=lr_s6
+N M 10025,11510 cdp4_in8b_s6
+@inst cdp4_lat 1951,-1467 mx=8610 rot=180 o=8610,13132.5 tag=lr_s7
+N M 10416,11510 cdp4_in8b_s7
+D 10722,11623:10751,11797           # VSS land under the ninth rail for the s7 cell of row R1
+C 10745,11652 s=28x40

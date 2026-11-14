@@ -1,4 +1,5 @@
 # cdp4: central datapath, bottom part. Format: x0,y0:x1,y1  kind  name | description
+7650,11490:10780,11855  array  8-bit latch (selector source b) | the register latch cell upside down: strobe line along its bottom edge, data tracks from the row above, buffered output down to the selector
 7600,11860:10560,12195  route  channel 1: per-slice lines to the left | eight poly lines from the left edge, one per slice, each tapped by a vertical metal that goes up into the row above
 7650,12200:10600,12800  array  4-way read selector (8 bit) | four pass transistors per slice put one of four sources on the output node n: a and c are 6 bits wide (slices s2-s7, the two left slices strapped to VSS), b and d 8 bits; select lines sel1-sel4 come from the left
 7650,12800:10780,12950  array  selector output pull-down | per slice a transistor from n to VSS gated by one line (rst) from the left

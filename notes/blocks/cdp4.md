@@ -6,15 +6,16 @@ Trace: `trace/cdp4.txt`. Scratch: `cache/scratch/cdp4/`. Own tool: `tools/cdp4_t
 
 ## Status
 
-Traced and shipped (extracts clean: 138 transistors, no errors, no open nets):
+Traced and shipped (extracts clean: 194 transistors, no errors, no open nets), top to
+bottom: the lower half of row R1 (8-bit latch row, upside down, selector source b),
 channel 1 bus lines, rows A and B (4-way pass-transistor selector per slice), row C
-(pull-down on the selector node, then an 8-bit latch row with a buffered output back
-into the selector), channel 2 (latch inputs from the left, selector output to the
-right), row D (6-bit latch row under s1..s6 whose buffered outputs are the selector's
-c inputs of s2..s7), supply rails for y 11790-14062.
+(pull-down on the selector node, then an 8-bit latch row, selector source d), channel 2
+(row C latch inputs from the left, selector output to the right), row D (6-bit latch
+row under s1..s6, selector source c of s2..s7), supply rails for y 11480-14062.
 
-Not traced: row R1 (y 11100-11800; its lower half is the same latch core upside down,
-placements under Not done), the wiring right of x 10600 and below y 14060.
+Not traced: the upper half of row R1 (y 11100-11490: source of the 6-bit a inputs, of
+the bus taps and of the in tracks of the R1 latch), the wiring right of x 10600 and
+below y 14060.
 
 ## Conventions
 
@@ -40,8 +41,7 @@ placements under Not done), the wiring right of x 10600 and below y 14060.
 | y | What | Slices | State |
 |---|---|---|---|
 | ~11100-11500 | row R1 upper: complex cell | 8 | not traced |
-| ~11500-11800 | row R1 lower: the row C latch core upside down (findcell 0.82) | 8 | found, not placed |
-| 11820-11845 | horizontal poly line y 11832 under all slices (where the upside-down latch's strobe would be) | - | not traced |
+| 11490-11850 | row R1 lower: the row C latch cell upside down, strobe `cdp4_ld8b` (poly line y 11837) | 8 | traced |
 | 11860-12190 | channel 1: eight poly bus lines from the left edge, one per slice | 8 | traced |
 | 12200-12800 | rows A and B: four pass transistors per slice onto node n | 8 | traced |
 | 12800-12950 | row C top: contact of n, pull-down of n gated by `cdp4_rst` | 8 | traced |
@@ -133,6 +133,22 @@ separate pieces of poly**:
 Between the two pads, under the c track, the clean shot shows field (checked at 3.4x on
 s2 in four shots; the other slices only at 1x in metal).
 
+### Row R1 lower: 8-bit latch, upside down (traced)
+
+Eight copies of `cdp4_lat` mirrored top to bottom (`lr_s0`..`lr_s7`: `dx,-1466 mx=8610
+rot=180 o=8610,13132.5`, s7 dy -1467). Checked: cellcheck median 0.92-0.93 with 1-5
+differing blocks of 132, metal overlay of s1, s2, s3, both layers of s7.
+
+- Strobe `cdp4_ld8b`: the poly line at y 11837 along the bottom edge of the row. Its
+  ends were not examined (drawn x 7600-10600).
+- Data: in tracks `cdp4_in8b_sK` (x 8465 + dx), contact at (8466 + dx, 11809), run **up**
+  through the cell and on into the upper half of R1.
+- Output: the d land's contact falls at (8712 + dx, 11772) under the top end of the b
+  track, so `cdp4_b_sK` is the buffered output of this latch.
+- The bus-tap track (x 8555) and, in s2..s7, the a track (x 8509) cross the cell with no
+  contact, where the n and c tracks cross the row C cell. Both come from the upper half.
+- s7's pull-downs end on a land under the ninth VSS rail (contact 10745,11652).
+
 ### Row D: 6-bit latch (traced)
 
 Six copies of `cdp4_lat` (`ldr_s1`..`ldr_s6`, findcell dy 759, dx -392, 0, 390, 780,
@@ -159,7 +175,7 @@ A read-back multiplexer: two 8-bit and two 6-bit sources onto an 8-bit bus that 
 to the right (towards the data pads), with the bus pulled low by `cdp4_rst`. The widths
 fit the 6845's 14-bit registers split 6 + 8 (cursor R14/R15 and light pen R16/R17 are
 the readable ones). Rows C (8 bit, data from the left) and D (6 bit, data from below)
-would be one such pair, the two sources in row R1 the other. sel1..sel4 would then be the read enables of four
+would be one such pair, the R1 latch (8 bit) and the 6-bit a source above it the other. sel1..sel4 would then be the read enables of four
 registers. None of this is traced; the sources of sel1..sel4, rst, ld and the in lines
 lie left of x 7600.
 
@@ -176,13 +192,14 @@ lie left of x 7600.
 | `cdp4_bus_s0`..`s7` | poly | x 7600, y 12180, 12137, 12093, 12052, 12008, 11964, 11922, 11877 | unknown | per-slice line between row R1 and the left |
 | `cdp4_in_s0`..`s7` | poly | x 7600, y 13333, 13376, 13420, 13463, 13505, 13548, 13590, 13633 | from outside | data into the row C latch |
 | `cdp4_n_s0`..`s7` | poly | x 10850, same y as `in` of the same slice | driven inside | selector output |
-| `cdp4_a_s2`..`s7` | metal | x 8509 + offset, y 11790 (drawn end) | from row R1 | selector input a |
-| `cdp4_b_s0`..`s7` | metal | x 8729 + offset, y 11790 (drawn end) | from row R1 | selector input b |
-| (bus tap) | metal | x 8555 + offset, y 11790 (drawn end) | to/from row R1 | joins `cdp4_bus_sK` |
+| `cdp4_a_s2`..`s7` | metal | x 8509 + offset, y 11790 (drawn end; the track continues up through the R1 latch) | from R1 upper | selector input a (6 bits) |
+| (bus tap) | metal | x 8555 + offset, y 11790 (drawn end; continues up through the R1 latch) | to/from R1 upper | joins `cdp4_bus_sK` |
+| `cdp4_in8b_s0`..`s7` | metal | x 8465 + offset, y 11499 (drawn end; continues up) | from R1 upper | data into the R1 latch |
+| `cdp4_ld8b` | poly | y 11837; believed to cross x 7600 (ends not examined) | from outside | R1 latch strobe |
 | `cdp4_in6_s1`..`s6` | metal | x 8073, 8465, 8855, 9245, 9635, 10025 at y 14059 (drawn end; continues down) | from outside (below) | data into the row D latch |
 | `cdp4_ld6` | metal | x 7947, y 13840 (drawn end; continues down) | from outside (below) | row D latch strobe |
-| `vss` | metal | x 7622, 8013, 8404, 8795, 9185, 9574, 9964, 10355, 10746 at y 11790; x 8013..10355 at y 14062; 7622 drawn to y 13650 | - | rails |
-| `vcc` | metal | x 7837, 8228, 8619, 9010, 9400, 9789, 10179, 10570 at y 11790; x 8228..10179 at y 14062; 7837 drawn to y 13530, 10570 to y 13650 | - | rails |
+| `vss` | metal | x 7622, 8013, 8404, 8795, 9185, 9574, 9964, 10355, 10746 at y 11480; x 8013..10355 at y 14062; 7622 drawn to y 13650 | - | rails |
+| `vcc` | metal | x 7837, 8228, 8619, 9010, 9400, 9789, 10179, 10570 at y 11480; x 8228..10179 at y 14062; 7837 drawn to y 13530, 10570 to y 13650 | - | rails |
 
 Seen left of the region at 0.68x (`cache/scratch/cdp4/left_edge.png`), not traced: a
 bundle of about nine vertical metal lines at x 7330-7570. The poly lines from the array
@@ -220,18 +237,19 @@ run under it; contacts seen at about (7557,12170) and (7513,12128) (bus s0, s1),
    8657-8686 x 13010-13046 by a bar along the top (y 12990-13017) that lies under the VCC
    rail; seen in the clean shot at 5.9x, not in the metal shots.
 6. Channel 2 pads: only s2 was checked at high zoom for the gap between the two pads.
-7. Row D's poly and diffusion were not re-read shape by shape: the cell is placed on
-   the strength of findcell, cellcheck and overlays (every contact of the cell lands on
-   a contact in the photo). The ambiguities of the row C cell apply to it as well.
+7. The poly and diffusion of row D and of the R1 latch were not re-read shape by shape:
+   the cells are placed on the strength of findcell, cellcheck and overlays (every
+   contact of the cell lands on a contact in the photo). The ambiguities of the row C
+   cell apply to them as well. In these two rows the n-track and c-track positions are
+   used differently (see Logic).
 
 ## Not done
 
-- **Row R1 lower** (y about 11500-11800): `@inst cdp4_lat dx,-1466 mx=8610 rot=180
-  o=8610,13132.5` for all eight offsets (dy -1467 for s7), score 0.82-0.83. Upside down
-  the d contact falls at (8712,11772), where the b track starts, and the strobe at
-  y 11837, where the unexplained poly line y 11832 runs. Not verified, not placed.
-- **Row R1 upper** (y 11100-11500): not looked at beyond the survey. The a tracks
-  (x 8509) and the bus taps (x 8555) come from there.
+- **Row R1 upper** (y 11100-11490): not looked at beyond the survey. The a tracks
+  (x 8509, s2..s7), the bus taps (x 8555) and the in tracks of the R1 latch (x 8465)
+  come from there. Expect a 6-bit source for a; what the bus taps and channel 1 carry
+  is unknown.
+- Ends of `cdp4_ld8b` (poly, y 11837).
 - Right of x 10600: the n lines' contacts beyond x 10850, thin vertical metals at
   x 10795-10905, the end of the s7 VCC rail.
 - Below y 14060: where the six in tracks of row D, `cdp4_ld6` and the rails go (fan-out
