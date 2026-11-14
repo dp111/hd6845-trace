@@ -234,3 +234,9 @@ N M 11983,7300 mra_mt_r0
 # VCC rail x 11917 is fed at the bottom from a horizontal metal bus (y 17038-17066) that
 # runs on to the right beyond x 12230 (not followed).
 M 11917,17052 x12230 w=28
+
+# Row r10 only: the n1 stub (H2) is extended left, under group line A, and leaves the
+# region at x 11700; it ends at a contact at (11590,12460) on a vertical metal line
+# x 11580-11600 that runs up (outside this block, not drawn).
+P 11690,12448:11745,12470
+N P 11700,12459 mra_n1_r10

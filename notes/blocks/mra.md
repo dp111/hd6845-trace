@@ -111,6 +111,7 @@ boundary).
 | vss (rail x 11828) | M | ends at y 7265 and y 16940 | - | how it is fed was not found (A4) |
 | `mra_p3_rN` | P | 12200, 9982+dy | in | from the right-hand columns |
 | `mra_n1_rN` | P | 12130, 9934+dy | out | to the right-hand columns |
+| `mra_n1_r10` | P | 11700, 12459 | out | r10 only: the H2 stub is extended left to a contact at (11590,12460) on a vertical metal x 11580-11600 that runs up to about (11600,10500) and on, outside this block |
 | `mra_g1_rN` | P | 12130, 10122+dy | in | from the right-hand columns |
 | `mra_b2_rN` | P | 12130, 10168+dy | ? | band-2, ends in a stub under the strap at x 11950-11985 |
 | `mra_x_r(N+1)` on band-3 of row N | P | 12130, 10253+dy | out | the row's cin, continuing to the right-hand columns |
@@ -118,6 +119,17 @@ boundary).
 | `mra_cin_r18` | P | 12215, 17016 | in | continues right |
 | `mra_cin_r3` | M/P | strap x 11967-11989, y 9035-9518 | ? | see A1 |
 | gap-1 bus (6 poly lines) | P | y 9220-9425 at x 11700 | ? | not traced, pass under the rails |
+
+## Row-to-row differences (measured with `cellcheck.py`, metal shot)
+
+- Chain cell (x 11725-12210): all 18 instances match the master; the only differences are
+  the tab extension (r7-r10, r15-r18) and the row above/below at group edges.
+- Left margin (x 11545-11750): nothing is attached to the rows except the group-line
+  contacts and, in r10 only, the extended n1 stub.
+- Right-hand columns (x 12200-13010, `--bbox 12200,9880:13010,10400`): identical in all
+  19 rows; bad blocks only along the top edge of r0, r4, r7, r11, r15 and the bottom edge
+  of r3, r6, r10, r14, r18 (the routing channels). So one cell will do for the rest of
+  the row, and no row has a special driver on band-3 inside the row body.
 
 ## Ambiguities
 
@@ -130,7 +142,9 @@ boundary).
   are obvious. Working assumption: none drawn; `mra_cin_r3` is left as an open port.
   Candidates: (a) a contact to r4's H1 blob that does not show (then cin(r3) = x(r4) and
   r0-r6 is one seven-row ripple group); (b) cin(r3) is driven through band-3 of r3 from
-  the right-hand columns. Tracing band-3 of r3 to the right settles (b).
+  the right-hand columns. (b) is unlikely: the right-hand columns of r3 are identical to
+  those of every other row. (a) is the reading to test first, e.g. on a better metal
+  shot of (11978,9450).
 - A2. The same metal strap exists in every row (from the band-2 stub of row N, y 10160,
   down to H2 of row N+1, y 9995+477), lying exactly over the chain poly, with no contact
   visible at either end. Drawn as isolated metal (`mra_md_rN`; `mra_mt_r0/r11/r15` where
@@ -141,6 +155,8 @@ boundary).
 - A3. Group line A (rows r7-r10) has pull-downs but no load anywhere along its metal or
   along the poly to r6. Its net continues on band-3 of r6 into the right-hand columns;
   look there for the load (and for a term that brings in the carry of the lower groups).
+  The right-hand columns of r6 are identical to the other rows', so if the load is there
+  every row has one on band-3 (then x has two loads in ordinary rows).
 - A4. The VSS rail at x 11828 ends at both ends of the array (y 7265, y 16940). It must be
   fed sideways (not found). Named vss because it is the source of all NOR pull-downs.
 - A5 (11893-11912, 10258-10305). The load gate of INV2 is tied to n2 at the buried contact
