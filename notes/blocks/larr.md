@@ -182,7 +182,14 @@ is traced.
   Pq1. If it is tied at both ends by buried contacts then g6 = N2 and the bit is a
   static cross-coupled pair N2/N4 (and rail E would have to be VSS for it to hold);
   if it only gates something, g6 is dynamic. This is the next thing to settle; it also
-  decides the rail E question.
+  decides the rail E question. Profile along y 11937 (`larr_px.py larr_row row 11937
+  3236 3428 4`): x 3236-3278 (the horizontal part of the N2 strip) and x 3384-3398
+  (the tab) have the same colour as each other in every layer, and it is neither the
+  open diffusion of the g6 strip beside it nor the open poly of Pq2 (chip-2 stripped
+  R/G 1.28, like poly on thin oxide; clean shot dull green). Between them Pq2 is plain
+  poly (3290-3376), meeting each end-to-end across one edge line. That looks like one
+  continuous link N2 - Pq2 - g6 with a buried contact at each end, i.e. the static
+  reading, but it is not proven and is not drawn.
 - **Carry channel under P2** (3263-3292 x 11560-11632, pull-down of net a): no
   outline is visible in the views; it is certain from the two edge lines across P2 at
   y 11557 and 11635 and the different colour of the poly between them.
