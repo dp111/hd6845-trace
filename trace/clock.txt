@@ -1,0 +1,130 @@
+# Clock block: between the VCC pad and the CLK pad, x 9450-13100, y 18550-19950.
+# Net names starting ck_ are local until the block is understood as a whole.
+@block clock
+
+# ====================================================================
+# Gate row, x 11150-12150, y 18600-19000. Loads hang from the VCC band along the top;
+# pull-downs lie under the VSS rail at y 18795-18848. Two metal lines cross the loads:
+# line A (y 18700-18722) and line B (y 18745-18768).
+# ====================================================================
+
+M 10760,18512:13050,18668          # VCC band (extent approximate)
+N M 11700,18600 vcc
+M 11160,18795:13380,18848          # VSS rail
+M 11160,18795:11200,18968          # ... turns down at its left end
+M 11030,18925:11200,18968          # ... and leaves left (not yet followed)
+N M 11700,18822 vss
+M 11063,18700:13090,18722          # line A
+M 11060,18700:11090,18852          # ... drop at its left end
+M 11105,18745:13010,18768          # line B
+M 11103,18745:11133,18897          # ... drop at its left end
+N M 11500,18711 ck_a
+N M 11500,18757 ck_b
+
+# ---- inverter with a tall load (W/L about 26/96). Master is gate 1.
+@cell ckg_t tag=g1
+C 11265,18645 s=34x30              # supply
+D 11240,18626:11294,18668
+D 11243,18666:11269,18772          # down through the load
+P 11224,18672:11292,18768          # load gate
+P 11290,18724:11345,18764          # ... tab to its buried contact
+B 11298,18722:11346,18766
+D 11243,18770:11344,18792          # output, spreading right below the load
+D 11300,18724:11344,18772          # ... and up under the buried contact
+D 11272,18790:11300,18802          # ... and down to the pull-down
+D 11190,18800:11300,18850          # pull-down under the rail: ground | gate | output
+C 11210,18825 s=30x34              # ground
+P 11238,18796:11262,18960          # input gate, comes up from below
+D 11274,18848:11300,18878          # output on down to a buried contact
+D 11274,18876:11311,18915
+B 11272,18875:11312,18916
+P 11278,18880:11305,18960          # output continues down in poly
+@end
+
+# ---- inverter with a short load (W/L about 30/50). Master is gate 2.
+@cell ckg_s tag=g2
+C 11402,18645 s=34x30              # supply
+D 11380,18626:11434,18668
+D 11395,18666:11425,18802          # down through the load to the pull-down
+P 11355,18672:11445,18722          # load gate
+P 11355,18720:11390,18760          # ... tab to its buried contact
+B 11351,18724:11393,18762
+D 11353,18728:11400,18762          # output under the buried contact
+D 11322,18800:11435,18850          # pull-down under the rail: ground | gate | output
+C 11340,18825 s=30x34              # ground
+P 11366,18796:11392,18960          # input gate, comes up from below
+D 11402,18848:11436,18880          # output on down to a buried contact
+D 11402,18878:11444,18915
+B 11399,18877:11446,18916
+P 11406,18882:11440,18960          # output continues down in poly
+@end
+
+# pair 2 = pair 1 moved 261 px right; gate 5 = gate 1 moved 604 px right
+@inst ckg_t 261,0 tag=g3
+@inst ckg_s 261,0 tag=g4
+@inst ckg_t 604,-1 tag=g5
+N P 11291,18940 ck_g1
+N P 11423,18940 ck_g2
+N P 11552,18940 ck_g3
+N P 11684,18940 ck_g4
+
+# ---- links inside the pairs: output of the first gate round to the input of the second
+P 11278,18952:11392,18980          # pair 1
+P 11278,18955:11305,18980
+P 11366,18955:11392,18980
+P 11539,18952:11653,18980          # pair 2
+P 11539,18955:11566,18980
+P 11627,18955:11653,18980
+
+# ---- gate 1 input: from line B. Contact at the foot of line B's drop, poly down, right, up.
+C 11116,18879 s=26x28
+P 11103,18864:11129,18975
+P 11103,18950:11262,18975
+P 11238,18955:11262,18975
+
+# ---- gate 3 input: from line A, the same way round the outside
+C 11072,18836 s=26x28
+P 11058,18820:11086,19022
+P 11058,18998:11523,19022
+P 11499,18955:11523,19022
+
+# ---- gate 6: inverter with a strong load (W/L about 68/26). Input is gate 5's output
+# (also on line B); output is on line A, and goes up to the core in poly at x 12110.
+C 11985,18643 s=40x30              # supply
+D 11960,18624:12030,18668
+D 11965,18666:12033,18738          # wide strip down through the load to the line A contact
+P 11958,18672:12060,18698          # load gate
+P 12036,18696:12060,18770          # ... runs down the right side
+P 12003,18742:12060,18770          # ... and back left to its buried contact
+B 12001,18738:12040,18770
+D 12003,18736:12033,18802          # output down to the pull-down
+C 11968,18703:12028,18720          # contact to line A
+D 11925,18800:12033,18850          # pull-down under the rail: ground | gate | output
+C 11948,18825 s=30x34              # ground
+P 11972,18750:11998,18960          # input gate
+C 11985,18760 s=22x20              # ... contacted by line B at its top end
+D 12003,18848:12033,18876          # output on down to a buried contact
+D 12010,18874:12050,18912
+B 12010,18872:12052,18913
+P 12017,18878:12047,18960          # output continues in poly: down, right,
+P 12017,18935:12125,18960
+P 12098,18455:12125,18960          # ... and up through the VCC band to a bus line
+C 12108,18467 s=24x24
+M 12095,18455:12400,18480          # bus line, leaves right (not yet followed)
+
+# ---- gate 5 output: round to gate 6's input, and tapped in metal to a plain
+# diffusion rectangle (added capacitance, as on the R/W buffers)
+P 11882,18935:11998,18960
+C 11940,18947 s=22x22
+M 11927,18935:11953,19028
+M 11778,19005:11953,19028
+C 11800,19017 s=24x24
+D 11783,19000:11818,19036
+D 11728,18975:11897,19150
+
+# ---- gate 5 input: poly from a bus line above the VCC band
+P 11760,18455:11786,18957
+P 11760,18931:11866,18957
+C 11772,18467 s=24x24
+M 11600,18455:11877,18480          # bus line, leaves left (not yet followed)
+N M 11650,18467 ck_src

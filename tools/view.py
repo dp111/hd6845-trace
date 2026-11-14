@@ -4,7 +4,10 @@
 usage: view.py x y w h [options]
   x y w h        region in metal-shot pixels (top-left corner and size)
   --scale S      output scale (default 1)
-  --layers L     comma list from: metal, acid, blend   (default metal,acid)
+  --layers L     comma list from: metal, acid, blend, edges   (default metal,acid)
+                 edges = dark outlines present in BOTH shots. Edges of poly and
+                 diffusion show in both; metal edges show only in the metal shot and
+                 interference fringes only in the acid shot, so both drop out.
   --stack v|h    stack the layer panels vertically or horizontally (default h)
   --grid N       draw a labelled coordinate grid every N pixels
   --trace        overlay the trace geometry (all files in trace/)
@@ -47,8 +50,37 @@ def arr(layer):
     return _arr[layer]
 
 
+def darklines(a, k=13):
+    """Dark-line response (black top-hat of brightness), float 0..1."""
+    import cv2
+    g = cv2.GaussianBlur(a.max(axis=2).astype(np.float32), (0, 0), 0.8)
+    se = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (k, k))
+    bh = cv2.morphologyEx(g, cv2.MORPH_BLACKHAT, se)
+    return np.clip((bh - 14) / 60.0, 0, 1)
+
+
 def raw(layer, x, y, w, h):
     """RGB uint8 array of the region, zero-padded outside the image."""
+    if layer == 'edges':
+        pad = 12
+        m = darklines(raw('metal', x - pad, y - pad, w + 2 * pad, h + 2 * pad))
+        a = darklines(raw('acid', x - pad, y - pad, w + 2 * pad, h + 2 * pad))
+        import cv2
+        # allow a pixel or two of misregistration between the shots
+        se = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (3, 3))
+        both = np.minimum(cv2.dilate(m, se), cv2.dilate(a, se))
+        both = both[pad:-pad, pad:-pad]
+        out = (255 * (1 - np.clip(both * 1.6, 0, 1))).astype(np.uint8)
+        # tint: orange where the acid shot looks like poly, to help tell layers apart
+        ac = raw('acid', x, y, w, h).astype(np.float32)
+        r, g, b = ac[..., 0], ac[..., 1], ac[..., 2]
+        poly = np.clip(((r - g) - 12) / 30.0, 0, 1) * np.clip((g - b - 20) / 30.0, 0, 1)
+        import cv2 as _c
+        poly = _c.GaussianBlur(poly, (0, 0), 3)
+        rgb = np.stack([out, out, out], axis=2).astype(np.float32)
+        tint = np.array([255, 170, 60], np.float32)
+        rgb = rgb * (1 - 0.45 * poly[..., None]) + (rgb / 255.0) * tint * 0.45 * poly[..., None]
+        return rgb.astype(np.uint8)
     if layer == 'blend':
         return ((raw('metal', x, y, w, h).astype(np.uint16) +
                  raw('acid', x, y, w, h)) // 2).astype(np.uint8)
