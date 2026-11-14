@@ -90,13 +90,15 @@ M 15152,14770 y14803 x15128 y16490 w=20     # track T5, ends at the R11 inverter
 C 15300,14650
 P 15300,14636 y14797 w=20
 C 15300,14783
-M 15300,14770 y14860 x15210 y14900 w=20
+M 15300,14770 y14860 x15214 y16560 w=20     # west along y 14860, then track T7 down through the whole region: no tap
 
 # rsel12 (col x 15387): poly down to a contact at y 14825
 C 15387,14650
 P 15387,14636 y14839 w=20
 C 15387,14825
-M 15387,14812 y14905 x15262 y14950 w=20
+M 15387,14812 y14905 x15258 y16574 w=20     # west along y 14905, then track T8 down through the whole region
+C 15258,16560                               # first tap of rsel12, on the region's bottom edge
+P 15244,16560 x15600 w=22                   # poly from it runs east (seen to x 15600, not followed: bd3)
 
 # rsel14 (col x 15474): poly jogs left to x 15436, down to a contact at y 14783
 C 15474,14650

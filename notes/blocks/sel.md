@@ -103,7 +103,7 @@ run on down from there.
 | Select | Used for |
 |---|---|
 | rsel0-rsel11 | one gate pair each: sel_wN = rselN AND NOT strobe. Nothing else |
-| rsel12, rsel13 | nothing here. T8 (x 15258) and T7 (x 15214) carry them through to y 16550 with no contact (track scan and overlay) |
+| rsel12, rsel13 | nothing here. T8 (x 15258) and T7 (x 15214) carry them through to y 16550 with no contact (track scan, and overlay on the metal shot). rsel12's first tap is exactly on the bottom edge: contact 15258,16560, poly east along y 16560 (seen to x 15600, not followed). rsel13 runs on south |
 | rsel14, rsel15 | each: a buffer (sel_bN) and a gate pair (sel_wN) |
 | rsel16, rsel17 | a buffer each (sel_b16, sel_b17), nothing else: no write strobe |
 
@@ -155,7 +155,7 @@ Local name, layer, where it crosses the boundary, direction.
 | sel_w11 | metal | 15128, 16550 (bottom; starts at y 16635) | out | T5. At y 16550 T5 is still unconnected: rsel11's line ended at 16490 |
 | sel_w10 | metal | 15171, 16550 (bottom) | out | T6 |
 | rsel13 | metal | 15214, 16550 (bottom) | out | T7, not used inside the region |
-| rsel12 | metal | 15258, 16550 (bottom) | out | T8, not used inside the region |
+| rsel12 | metal, poly | 15258, 16560 (bottom) | out | T8, not used inside the region; contact at 15258,16560 to a poly line going east along y 16560 |
 | sel_w14 | metal | 15301, 16550 (bottom) | out | T9: rsel14 AND NOT strobe |
 | sel_w15 | metal | 15344, 16550 (bottom) | out | T10: rsel15 AND NOT strobe |
 | sel_b16 | metal | 15388, 16550 (bottom) | out | T11: rsel16 buffered |
