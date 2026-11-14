@@ -125,7 +125,7 @@ was above it. Full notes with coordinates of examples: `notes/layers.md`.
 Traps, all of them real:
 
 1. **The clean shot's colours drift across the die.** Open diffusion is green in the
-   bottom rows and pink in the decode array. Calibrate locally: find an unmistakable
+   bottom rows, pink in the decode array and mauve in the mid-right array. Calibrate locally: find an unmistakable
    structure near where you work (a VCC contact with its load, a row of contacts) and
    see what colour each layer has there.
 2. **Metal protected a margin of about 10 px beyond its edges.** A 25 px gap between two
@@ -212,10 +212,14 @@ Most of the die is repeated cells. Trace a cell once.
 - `tools/t.sh BLOCK composite.py NAME x0,y0:x1,y1 --offsets "0,0 dx,dy ..."` builds the
   per-pixel median over the copies, which removes dirt, residue and metal grain. View
   it with `--comp NAME` on view.py / quad.py (coordinates stay those of the master).
+  Start NAME with your block name (composites share one folder). Above 4x the median
+  is blurrier than a single clean shot; use it for dirt, not for fine junctions.
 - `--shift dx,dy` on view.py / quad.py shows another instance in the master's
   coordinates: use it to compare instances.
-- `tools/t.sh BLOCK cellcheck.py CELL` compares each instance's photo with the master's
-  and tints differences. **Instances are not always identical**: the wiring around a
+- `tools/t.sh BLOCK cellcheck.py CELL [--bbox x0,y0:x1,y1] [--layer acid1b]` compares each
+  instance's photo with the master's and tints differences. With `--bbox` it compares
+  any rectangle, traced or not, at the instance positions: a cheap way to see whether
+  untraced neighbours of a cell also repeat. **Instances are not always identical**: the wiring around a
   repeated core often differs (one bit has an extra gate, the end slice differs). Look
   at every instance at least at low zoom before declaring it a copy.
 - Datapath slices repeat every 390.3 px horizontally; two other arrays repeat every

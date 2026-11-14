@@ -12,19 +12,20 @@ agent has verified it), `partial` (reported, with work left: see its notes).
 
 | Prefix | Region | What | Status |
 |---|---|---|---|
-| `areg` | 15800-16950 x 12900-14700 | address register cells that drive the decode rows, and the logic to their right | running |
+| `areg` | 15800-16950 x 12900-14700 | row inverters right of the decode array, fifth address register cell, bundle at x 16200-16400 | partial: inverters done; register cell partly; right-hand column x 16480-16800 not started |
 | `sel` | 14100-15850 x 14650-16550 | where the 18 register select lines go below the decode array (latch column, strobe gating) | done: write strobe gates for R0-R11, R14, R15; R16/R17 buffered only; R12/R13 pass through |
 | `trunks` | whole die | routes of the global signals (clocks, E, R/W, RS, CS, RES, LPSTB) from where their traces end into the core | running |
 | `rdp3` | 13350-16950 x 10700-12900, and 13350-15800 x 12900-13480 | right datapath, lower rows, including the row of cells above the decode array | running |
 | `cdp1` | 7600-10850 x 2950-5700 | central datapath, top rows | running |
 | `larr` | 2400-4780 x 6450-18550 | left vertical array (rows every 477 px), by the MA pads | running |
-| `mra` | 11700-13320 x 7200-17050 | mid-right vertical array (rows every 477 px) | running |
+| `mra` | 11700-13320 x 7200-17050 | mid-right vertical array (rows every 477 px) | partial (run 1): chain column x 11730-12200 in all 19 rows; run 2 running on x 12200-13320 |
 | `dbus` | 17050-17700 x 5300-17000, and the D0-D7 pad cells | data bus interface column; then finish the data pad cell (AMB-003) | partial: input buffers D0-D5 traced; gate groups, bus lines, pad cell left (continue as the same block) |
 
 | `cdp2` | 7600-10850 x 5700-8450 | central datapath | running |
 | `cdp3` | 7600-10850 x 8450-11200 | central datapath | running |
 | `cdp4` | 7600-10850 x 11200-14000 | central datapath, bottom rows | running |
 | `bd3` | 14100-15900 x 16550-17100 and onward | where the strobe and select tracks from `sel` go; source of the write strobe | running |
+| `bd2` | 15850-17000 x 14700-17100 | gate that makes the address register load strobe (x 15880-16150, y 15230-15330), source of the write strobe entering `sel` at (15850,14825), rest of that logic | running |
 
 Measured on the first report: one agent run lasts about 20 minutes and about 60-80
 image views, and yields one or two traced cells plus survey notes. Blocks are
@@ -38,6 +39,7 @@ bus and pads.
 | Prefix | Region | What |
 |---|---|---|
 | `dbus` (continue) | as above | gate groups under the buffer chains, internal bus lines, P_x driver, D6/D7 buffers, then the pad cell |
+| `areg` (continue) | as above | finish the fifth register cell (with `rdp3`'s four), the right-hand column x 16480-16800 |
 | `rdp1` | 13350-16950 x 5450-8100 | right datapath, top rows |
 | `rdp2` | 13350-16950 x 8100-10700 | right datapath, middle rows |
 | `tl1`-`tl6` | 2100-6400 x 2500-6350, in six parts | top-left random logic |

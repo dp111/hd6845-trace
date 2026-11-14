@@ -66,22 +66,24 @@ Caveats
 - Read from chip 1 only (the clean shot). Chip 2's metal shot shows the same pads
   where I looked (top-left corner), but the full matrix was not re-read there.
 
-## Row drivers (seen, not traced)
+## Row drivers (traced by the `areg` block)
 
-The ten rows run on to the right in poly to a column of five identical cells at
-x 15960-16190, one per pair, at the same vertical pitch as the pairs (first cell
-y 13730-13880). Each cell sits between its pair's two rows, with the pair's ground
-rail running into it under a metal, and drives both rows. So each address bit has
-one cell that produces the true and the complement line: consistent with the rows
-coming straight from a 5-bit address register, though the cell itself (and which
-of its outputs is which) is still to be traced. Its middle part is an intricate
-shape in the open, probably a folded load, and needs 4x views. To the right of the
-cells a bundle of vertical lines (x 16200-16400) passes; further right is a column
-of larger cells (x 16480-16800).
+The address register is the row of five cells **above** the array (x 14180-16150,
+y 13000-13290, one per 390 px), not the five cells to its right as first thought.
+Each register cell's output runs to the upper row of its pair with no gate in
+between; the five cells right of the array (x 15930-16200) are plain inverters that
+make the lower row from the upper one (`arK_n = NOT arK`). So the rows are driven
+straight from the address register, as the names assume.
+
+Whether the register's output is the true or the inverted data bit is supported but
+not proven by tracing (it rests on one link inside the register cell that is still
+uncertain, see `notes/blocks/areg.md`); the 0-17 argument above remains the main
+evidence for the polarity. The register's load strobe (`areg_load`) comes up a
+vertical line at x 16299 from a gate at about x 15880-16150, y 15230-15330.
 
 ## Next
 
-- Trace one row-driver cell and instance it five times.
+- Finish the register cell (four of the five are in the `rdp3` block's region).
 - The row of cells above the array (14150-15820 x 13030-13260) and the structures at
   y 13260-13500 between it and the array.
 - Where each column goes below the array (contacts at y 14640, then the latch
