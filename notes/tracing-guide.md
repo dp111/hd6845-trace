@@ -132,7 +132,8 @@ Traps, all of them real:
    metal lines shows in `acid1b` only as a thin dark bar across whatever is underneath,
    or as a narrow olive strip with a dark outline. Those bars and strips are not layout.
 3. A dark line across a metal wire in the metal shots is the edge of something
-   *underneath*, not a break in the metal.
+   *underneath*, not a break in the metal. Likewise, bright green bands in `acid1b`
+   inside the arrays are gaps of open field between metal lines, not features.
 4. Tan (diffusion under metal) and khaki (field in the open) are close. Check where the
    metal is before calling a tan area diffusion.
 5. Under wide metal, `acid` shows only fringes. Use `acid1b`, and `metal1` for outlines.
@@ -227,6 +228,12 @@ Most of the die is repeated cells. Trace a cell once.
 - Tag instances by position (`s0`, `s1`, ... left to right, or top to bottom) unless you
   have established which is bit 0 (for a counter, the carry direction shows it; say
   how you know).
+- Agents working on different parts of one array numbered their slices differently.
+  So that blocks can be joined, state at the top of your notes how your tags map to
+  the array's **columns**, which are defined by the wide VSS rail in each slice:
+  central datapath column cN has its VSS rail at x = 7605 + 390.3 N (N = 0..7); right
+  datapath column cN has its VSS rail at x = 14175 + 390 N. A row with fewer than
+  eight cells occupies only some columns: say which.
 - A programmed array (ROM/PLA) is read by measurement: see `tools/pla_read.py` and
   `notes/blocks/decode.md` for the method and its cross-checks.
 

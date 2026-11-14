@@ -22,7 +22,7 @@ agent has verified it), `partial` (reported, with work left: see its notes).
 | `dbus` | 17050-17700 x 5300-17000, and the D0-D7 pad cells | data bus interface column; then finish the data pad cell (AMB-003) | partial: input buffers D0-D5 traced; gate groups, bus lines, pad cell left (continue as the same block) |
 
 | `cdp2` | 7600-10850 x 5700-8450 | central datapath | running |
-| `cdp3` | 7600-10850 x 8450-11200 | central datapath | running |
+| `cdp3` | 7600-10850 x 8450-11200 | central datapath | partial (run 1): wiring rows E, F and channels B, D, G traced (two rows of cells gated onto an 8-line bus); cell rows A, C, H, I not traced; run 2 running |
 | `cdp4` | 7600-10850 x 11200-14000 | central datapath, bottom rows | running |
 | `bd3` | 14100-15900 x 16550-17100 and onward | where the strobe and select tracks from `sel` go; source of the write strobe | running |
 | `bd2` | 15850-17000 x 14700-17100 | gate that makes the address register load strobe (x 15880-16150, y 15230-15330), source of the write strobe entering `sel` at (15850,14825), rest of that logic | running |
