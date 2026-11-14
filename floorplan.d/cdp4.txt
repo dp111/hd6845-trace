@@ -1,3 +1,7 @@
 # cdp4: central datapath, bottom part. Format: x0,y0:x1,y1  kind  name | description
-7600,11860:10560,12195  route  channel 1: 8-bit bus | eight poly lines from the left edge, one per slice, each tapped by a vertical metal that goes up into the row above
-7650,12200:10600,12800  array  4-way selector (8 bit) | four pass transistors per slice put one of four per-slice sources (two from the row above, two from the row below) on a node that goes down into the next row; select lines sel1-sel4 come from the left
+7600,11860:10560,12195  route  channel 1: per-slice lines to the left | eight poly lines from the left edge, one per slice, each tapped by a vertical metal that goes up into the row above
+7650,12200:10600,12800  array  4-way read selector (8 bit) | four pass transistors per slice put one of four sources on the output node n: a and c are 6 bits wide (slices s2-s7, the two left slices strapped to VSS), b and d 8 bits; select lines sel1-sel4 come from the left
+7650,12800:10780,12950  array  selector output pull-down | per slice a transistor from n to VSS gated by one line (rst) from the left
+7650,12950:10780,13300  array  8-bit latch (selector source d) | pass transistor loaded from the left by strobe ld, two inverters, and a buffer inverter that drives the selector; same cell family as the right datapath's register latch
+7600,13310:10850,13650  route  channel 2: latch data in, selector out | per slice one poly line in two pieces: from the left edge to the latch input, and from the selector node n to the right edge (towards the data bus)
+?7990,13650:10330,14060  array  6-bit latch (selector source c) | six cells of the same latch core under slices s1-s6; found by cell search, not traced

@@ -45,11 +45,9 @@ D 8706,12630:8756,12680            # contact land of d
 P 8591,12530:8614,12750            # gate, branch of sel3 (free end at the bottom)
 C 8729,12653 s=26x30
 # --- metal
-M 8509,11790 y12178 x8467 y12366 w=22      # a: from the row above, jogs left at y 12178
 M 8729,11790 y12366 w=20                   # b: from the row above
 M 8555,12338 y12810 w=18                   # n: joins both rows, continues down
 M 8729,12640 y12810 w=20                   # d: to the row below
-N M 8509,11800 cdp4_a_{}
 N M 8729,11800 cdp4_b_{}
 N M 8555,12500 cdp4_n_{}
 N M 8729,12800 cdp4_d_{}
@@ -97,16 +95,17 @@ N P 7610,11877 cdp4_bus_s7
 # Supply rails, two per slice (vertical, wide metal). Left of each slice VSS, middle VCC:
 # the latch loads hang from lands contacted by the middle rail, the pull-down sources
 # from lands contacted by the left rail. A ninth VSS rail stands right of s7.
-# Drawn for y 11790-13300 so far; they continue up and down.
+# Drawn for y 11790-13650 so far (the ninth VSS rail ends at y 13300); the others
+# continue up and down.
 # ======================================================================
-M 7622,11790 y13300 w=46
-M 8013,11790 y13300 w=46
-M 8404,11790 y13300 w=46
-M 8795,11790 y13300 w=46
-M 9185,11790 y13300 w=46
-M 9574,11790 y13300 w=46
-M 9964,11790 y13300 w=46
-M 10355,11790 y13300 w=46
+M 7622,11790 y13650 w=46
+M 8013,11790 y13650 w=46
+M 8404,11790 y13650 w=46
+M 8795,11790 y13650 w=46
+M 9185,11790 y13650 w=46
+M 9574,11790 y13650 w=46
+M 9964,11790 y13650 w=46
+M 10355,11790 y13650 w=46
 N M 7622,11800 vss
 N M 8013,11800 vss
 N M 8404,11800 vss
@@ -115,14 +114,14 @@ N M 9185,11800 vss
 N M 9574,11800 vss
 N M 9964,11800 vss
 N M 10355,11800 vss
-M 7837,11790 y13300 w=44
-M 8228,11790 y13300 w=44
-M 8619,11790 y13300 w=44
-M 9010,11790 y13300 w=44
-M 9400,11790 y13300 w=44
-M 9789,11790 y13300 w=44
-M 10179,11790 y13300 w=44
-M 10570,11790 y13300 w=44
+M 7837,11790 y13530 w=44            # s0: bends left below y 13540 (not traced)
+M 8228,11790 y13650 w=44
+M 8619,11790 y13650 w=44
+M 9010,11790 y13650 w=44
+M 9400,11790 y13650 w=44
+M 9789,11790 y13650 w=44
+M 10179,11790 y13650 w=44
+M 10570,11790 y13650 w=44
 N M 7837,11800 vcc
 N M 8228,11800 vcc
 N M 8619,11800 vcc
@@ -222,7 +221,7 @@ C 8679,13237 s=28x30
 D 8653,13213:8705,13258
 D 8700,13238:8742,13262
 B 8714,13234:8750,13264
-P 8724,13236:8747,13300
+P 8724,13236:8747,13298                    # q poly: a stub, ends above channel 2
 # hold path (not understood, as in the right datapath's latch): a's poly ends on a
 # buried contact to a land under the n track; from there two stripes run under the
 # VCC rail to the edge of the output land
@@ -255,7 +254,7 @@ C 10745,12917 s=28x30
 # down through row C (jogging right at y 12880-12945; no contact in the latch).
 # Slices s0, s1: the contact is strapped to the VSS rail on its left instead.
 @cell cdp4_ctrk tag=s2
-M [ 8456,12640 8478,12640 8478,12880 8521,12940 8521,13300 8500,13300 8500,12950 8456,12895 ]
+M [ 8456,12640 8478,12640 8478,12880 8521,12940 8521,13660 8500,13660 8500,12950 8456,12895 ]
 N M 8467,12800 cdp4_c_{}
 @end
 @inst cdp4_ctrk 391,0 tag=s3
@@ -265,3 +264,99 @@ N M 8467,12800 cdp4_c_{}
 @inst cdp4_ctrk 1951,0 tag=s7
 M 7622,12654 x7696 w=22            # s0: c contact to the VSS rail
 M 8013,12654 x8087 w=22            # s1: c contact to the VSS rail
+
+# ======================================================================
+# Channel 2 (y 13310-13650): eight horizontal poly lines, one per slice, each in two
+# separate pieces at the same height. The left piece comes from the left edge and ends
+# on a contact under the latch's in track (x 8465 + offset): data into the row C latch.
+# The right piece starts on a contact under the n track (x 8556 + offset) and runs to
+# the right edge: the selector output leaving the array. Between the two contact pads
+# (under the c track) there is field.
+# ======================================================================
+P 7600,13333 x7693 w=22            # s0: in
+P 7662,13316:7707,13349
+C 7683,13333 s=26x24
+M 7683,13290 y13347 w=24
+N P 7610,13333 cdp4_in_s0
+P 7764,13333 x10850 w=22            # s0: n out to the right
+P 7750,13316:7798,13349
+C 7774,13333 s=26x24
+M 7774,13290 y13347 w=18
+P 7600,13376 x8084 w=22            # s1: in
+P 8053,13359:8098,13392
+C 8074,13376 s=26x24
+M 8074,13290 y13390 w=24
+N P 7610,13376 cdp4_in_s1
+P 8155,13376 x10850 w=22            # s1: n out to the right
+P 8141,13359:8189,13392
+C 8165,13376 s=26x24
+M 8165,13290 y13390 w=18
+P 7600,13420 x8475 w=22            # s2: in
+P 8444,13403:8489,13436
+C 8465,13420 s=26x24
+M 8465,13290 y13434 w=24
+N P 7610,13420 cdp4_in_s2
+P 8546,13420 x10850 w=22            # s2: n out to the right
+P 8532,13403:8580,13436
+C 8556,13420 s=26x24
+M 8556,13290 y13434 w=18
+P 7600,13463 x8866 w=22            # s3: in
+P 8835,13446:8880,13479
+C 8856,13463 s=26x24
+M 8856,13290 y13477 w=24
+N P 7610,13463 cdp4_in_s3
+P 8937,13463 x10850 w=22            # s3: n out to the right
+P 8923,13446:8971,13479
+C 8947,13463 s=26x24
+M 8947,13290 y13477 w=18
+P 7600,13505 x9256 w=22            # s4: in
+P 9225,13488:9270,13521
+C 9246,13505 s=26x24
+M 9246,13290 y13519 w=24
+N P 7610,13505 cdp4_in_s4
+P 9327,13505 x10850 w=22            # s4: n out to the right
+P 9313,13488:9361,13521
+C 9337,13505 s=26x24
+M 9337,13290 y13519 w=18
+P 7600,13548 x9645 w=22            # s5: in
+P 9614,13531:9659,13564
+C 9635,13548 s=26x24
+M 9635,13290 y13562 w=24
+N P 7610,13548 cdp4_in_s5
+P 9716,13548 x10850 w=22            # s5: n out to the right
+P 9702,13531:9750,13564
+C 9726,13548 s=26x24
+M 9726,13290 y13562 w=18
+P 7600,13590 x10035 w=22            # s6: in
+P 10004,13573:10049,13606
+C 10025,13590 s=26x24
+M 10025,13290 y13604 w=24
+N P 7610,13590 cdp4_in_s6
+P 10106,13590 x10850 w=22            # s6: n out to the right
+P 10092,13573:10140,13606
+C 10116,13590 s=26x24
+M 10116,13290 y13604 w=18
+P 7600,13633 x10426 w=22            # s7: in
+P 10395,13616:10440,13649
+C 10416,13633 s=26x24
+M 10416,13290 y13647 w=24
+N P 7610,13633 cdp4_in_s7
+P 10497,13633 x10850 w=22            # s7: n out to the right
+P 10483,13616:10531,13649
+C 10507,13633 s=26x24
+M 10507,13290 y13647 w=18
+
+# --- the a input of the selector. Slices s2..s7: a metal track from the row above
+# (x 8509 at y 11790), jogging left at y 12178 to the row A contact. Slices s0, s1:
+# no track; the contact is strapped to the VSS rail on its left (as for c).
+@cell cdp4_atrk tag=s2
+M 8509,11790 y12178 x8467 y12366 w=22
+N M 8509,11800 cdp4_a_{}
+@end
+@inst cdp4_atrk 391,0 tag=s3
+@inst cdp4_atrk 781,0 tag=s4
+@inst cdp4_atrk 1170,0 tag=s5
+@inst cdp4_atrk 1560,0 tag=s6
+@inst cdp4_atrk 1951,0 tag=s7
+M 7622,12352 x7696 w=24            # s0: a contact to the VSS rail
+M 8013,12352 x8087 w=24            # s1: a contact to the VSS rail

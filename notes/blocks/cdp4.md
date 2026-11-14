@@ -1,94 +1,223 @@
 # cdp4: central datapath, bottom part (x 7600-10850, y 11200-14000)
 
+Trace: `trace/cdp4.txt`. Scratch: `cache/scratch/cdp4/`. Own tool: `tools/cdp4_tri.py`
+(layers of one region in a single row). Median composite of the eight row C cells:
+`--comp cdp4_c` (master frame x 8360-8800, y 12790-13300).
+
 ## Status
 
-Traced and shipped (extracts clean, 96 transistors): channel 1 bus lines, rows A and B
-(4-way pass-transistor selector per slice), row C (reset transistor on the selector
-node, then an 8-bit latch row with a buffered output back into the selector), supply
-rails for y 11790-13300.
-Not traced: row R1 (y 11100-11800), channel 2 (y 13280-13620), row D (y 13640-14050,
-six cells), the wiring right of x 10600. Found but not placed: row D and the lower half
-of R1 are built from a latch cell of the same family (see Not done).
+Traced and shipped (extracts clean: 96 transistors, no errors, no open nets):
+channel 1 bus lines, rows A and B (4-way pass-transistor selector per slice), row C
+(pull-down on the selector node, then an 8-bit latch row with a buffered output back
+into the selector), channel 2 (latch inputs from the left, selector output to the
+right), supply rails for y 11790-13650.
+
+Not traced: row R1 (y 11100-11800), row D (y 13650-14060, six cells), the wiring right
+of x 10600 and below y 13650. Row D and the lower half of R1 are built from the same
+latch core as row C (findcell placements under Not done) but with other metal, so they
+are **not** placed.
 
 ## Conventions
 
 - Eight slices, pitch 390.3. Master slice for all cells is **s2** (third from the left).
   Offsets from findcell: s0 -782, s1 -391, s2 0, s3 391, s4 781, s5 1170, s6 1560, s7 1951.
-- Slices are tagged by position (s0 leftmost). Bit order not established.
-- Each slice has two wide vertical metal rails: x 8385-8425 and x 8597-8641 in s2
-  (which is VSS and which VCC: not yet established; they pass rows A/B without contacts).
-- In this part of the die the clean shot shows poly over field as salmon even in the
-  open, and poly over a channel (thin oxide) in the open as dark red-brown. The long
-  horizontal lines are poly (orange in `metal` and `acid`, metal lines cross over them).
+- Slices are tagged by position (s0 leftmost). **Bit order not established**, but two of
+  the selector's four sources are only six bits wide and occupy s2..s7 (in s0 and s1
+  those inputs are strapped to VSS), so s0 and s1 are the two high bits if the narrow
+  sources are zero-extended.
+- Rails, two per slice, vertical wide metal: **VSS** at x 8404 + offset (x 8381-8427 in
+  s2), **VCC** at x 8619 + offset (x 8597-8641). How known: all three depletion loads of
+  the row C latch hang from a land contacted by the x 8619 rail, the pull-down sources
+  sit on lands contacted by the x 8404 rail. A ninth VSS rail at x 10746 (right of s7)
+  takes s7's pull-downs; it ends at y 13300. The s0 VCC rail bends left below y 13540.
+- Reading the clean shot here: poly over field is salmon even in the open; poly over a
+  channel in the open is dark red-brown and textured; diffusion in the open is pink,
+  under metal tan; field in the open khaki, under metal pink. Open poly has a light rim
+  about 8 px wide that looks like field. Narrow features (under 20 px) show only their
+  outlines, so their layer cannot be told from colour.
 
 ## Inventory (rows, top to bottom)
 
 | y | What | Slices | State |
 |---|---|---|---|
-| ~11100-11800 | row R1: tall complex cell (maybe 30 transistors), two rails per slice | 8 | not traced |
-| 11820-11845 | one more horizontal poly line (y 11832), runs under all slices | - | not traced |
-| 11860-12190 | channel 1: eight horizontal poly bus lines, 43.3 px apart, entering from the left edge; line of slice k ends at a contact on a vertical metal (x 8555 in s2) that goes up into R1 | 8 | traced |
-| 12200-12470 | row A: two pass transistors onto node n | 8 | traced |
-| 12470-12545 | two select poly lines (sel2, sel3) | - | traced |
-| 12545-12800 | row B: two pass transistors onto node n (near mirror of row A) | 8 | traced |
-| 12800-13270 | row C: complex cell | 8 | not traced |
-| 13280-13620 | channel 2: about ten horizontal poly lines with stair-step contacts in pairs | 8 | not traced |
-| 13640-14050 | row D: complex cell, only six copies, x 8000-10330 | 6 | not traced |
-| 14050-14700 | fan-out wiring from row D down into the random logic (outside the region) | - | not traced |
+| ~11100-11500 | row R1 upper: complex cell | 8 | not traced |
+| ~11500-11800 | row R1 lower: the row C latch core upside down (findcell 0.82) | 8 | found, not placed |
+| 11820-11845 | horizontal poly line y 11832 under all slices (where the upside-down latch's strobe would be) | - | not traced |
+| 11860-12190 | channel 1: eight poly bus lines from the left edge, one per slice | 8 | traced |
+| 12200-12800 | rows A and B: four pass transistors per slice onto node n | 8 | traced |
+| 12800-12950 | row C top: contact of n, pull-down of n gated by `cdp4_rst` | 8 | traced |
+| 12950-13300 | row C latch (`cdp4_lat`), strobe `cdp4_ld` | 8 | traced |
+| 13310-13650 | channel 2: eight poly lines, each in two pieces (in from the left, n out to the right) | 8 | traced |
+| 13650-14060 | row D: the latch core again, six cells under s1..s6 (findcell dy 759, 0.80-0.82), different metal | 6 | found, not placed |
+| 14060-14700 | fan-out wiring below row D into the random logic | - | not traced |
 
 ## Logic
 
 ### Rows A and B: 4-way selector (traced)
 
-Per slice, four pass transistors (W about 195, L 23-28) share one node `cdp4_n_sK`
-(metal x 8548-8564 in s2, contacts at y 12352 and 12653, continues down into row C):
+Per slice four pass transistors (W about 195, L 23-28) share node `cdp4_n_sK` (metal
+x 8548-8564 in s2):
 
 ```
-n <-> a   when sel1     a: metal from row R1 (x 8509 at y 11800, jogs to x 8467 at y 12178)
-n <-> b   when sel2     b: metal from row R1 (x 8729)
-n <-> d   when sel3     d: metal going down into row C (x 8729)
-n <-> c   when sel4     c: metal going down into row C (x 8467)
+n <-> a   when sel1     a: s2..s7 a track from row R1 (x 8509 at y 11790, jogs to x 8467 at y 12178)
+n <-> b   when sel2     b: track from row R1 (x 8729), all eight slices
+n <-> d   when sel3     d: buffered output of the row C latch (x 8729), all eight slices
+n <-> c   when sel4     c: s2..s7 a track that runs down through row C and channel 2 into row D
 ```
 
-sel1..sel4 are horizontal poly lines (y 12223, 12481, 12530, 12786) that enter across
-the left edge (x 7600) and end at x 10590, just right of s7. The four gates are
-branches of these lines. The transistors gated by sel2 and sel3 lie under the wide rail
-at x 8597-8641; the rail has no contact there.
+- **In s0 and s1 the a and c contacts are strapped to the VSS rail** (metal tab from the
+  rail to the contact pad at 8465 + offset, y 12352 and y 12654; no track). So a and c
+  are 6-bit sources, b and d 8-bit.
+- sel1..sel4: horizontal poly lines y 12223, 12481, 12530, 12786, entering across the
+  left edge and ending at x 10590. The gates are branches of these lines. The sel2 and
+  sel3 transistors lie under the VCC rail, which has no contact there.
+- Every slice checked (mosaics in both layers, overlays, cellcheck).
 
-All eight slices are identical (mosaic in both layers).
+### Row C top: pull-down of n (traced)
 
-Believed, not traced: a selector that puts one of four per-slice sources (two in R1
-above, two in row C/D below) on n. Direction of each pass transistor is unknown until
-R1 and row C are traced.
+`cdp4_n_sK` has a contact at (8556,12830) to a diffusion strip that runs right, under
+the VCC rail, to a diffusion block crossed by the poly line `cdp4_rst` (y 12874); below
+the line the block continues right onto the VSS contact land of the **next** slice
+(8794,12917). So `n = 0` while rst is high. The width of that transistor is uncertain
+(Ambiguities 3).
+
+### Row C latch `cdp4_lat` (traced), 8 bits
+
+Same family as `rdp3_lat` of the right datapath (lower two thirds nearly identical),
+plus a buffer. Per slice, 7 transistors:
+
+```
+a   <- in      pass transistor 68/22, gate = cdp4_ld (the strobe poly loops round the in contact)
+n2  = NOT a    pull-down 56/22 (source on the VSS land), load L2 31/50
+q   = NOT n2   pull-down 51/23 to the next slice's VSS land, load L1 29/40
+d   = NOT n2   pull-down 85/23 to the next slice's VSS land, load LX 26/29   (buffer)
+```
+
+- `in` (`cdp4_in_sK`): metal track x 8453-8477, contact at (8466,12990), runs down
+  through the cell to channel 2.
+- `d` is a second inverter on n2, logically equal to q, with a strong load and a wide
+  pull-down. Its land carries the contact (8712,13027) of the d track, which goes up to
+  the sel3 transistor of row B. q itself is not used outside the cell: its metal strap
+  ((8668,13152) on the L1 gate pad to (8679,13237) on the output land) and the buried
+  contact to a poly strip are there as in `rdp3_lat`, but the strip is a stub ending at
+  y 13298.
+- n2's poly: L2's gate block, down its right side, along y 13181-13201 under the strap,
+  up the right edge of the cell (x 8744-8767, y 12998-13201) as the gate of both
+  pull-downs.
+- The n track (x 8547-8565) and the c track (x 8500-8521) cross the cell with no contact.
+- Hold path: not understood (Ambiguities 1). As traced the latch is dynamic.
+- Poly band along the bottom (y 13264-13288, x 8388-8650) tied to the VSS rail by the
+  contact (8401,13275); nothing seen crossing it.
+
+Instances: all eight identical in poly/diffusion and metal except the c track
+(cellcheck median 0.94-0.95; the only differing blocks in s0, s1 are the missing track).
 
 ### Channel 1 (traced)
 
-Eight poly lines `cdp4_bus_s0..s7`, one per slice, at y 12180 (s0), 12137, 12093,
-12052, 12008, 11964, 11922, 11877 (s7). Each comes from the left edge and ends on a
-metal contact at x 8555 + offset; the metal runs up into row R1 (not into rows A/B).
+Eight poly lines `cdp4_bus_s0..s7` at y 12180 (s0), 12137, 12093, 12052, 12008, 11964,
+11922, 11877 (s7). Each comes from the left edge and ends on a contact at x 8555 +
+offset under a metal track that goes up into row R1 (at the position where, in the
+upside-down latch, the n track would pass).
+
+### Channel 2 (traced)
+
+Line K at y 13333 (s0), 13376, 13420, 13463, 13505, 13548, 13590, 13633 (s7) is **two
+separate pieces of poly**:
+
+- left piece `cdp4_in_sK`: from the left edge to a contact pad under the in track
+  (8465 + offset): data into the row C latch;
+- right piece, part of `cdp4_n_sK`: from a contact pad under the n track (8556 + offset)
+  to the right edge: the selector output leaving the array. s7's piece ends on a
+  contact at about (10896,13634) to a vertical metal; the others run on beyond x 10930.
+
+Between the two pads, under the c track, the clean shot shows field (checked at 3.4x on
+s2 in four shots; the other slices only at 1x in metal).
+
+### Believed, not traced
+
+A read-back multiplexer: two 8-bit and two 6-bit sources onto an 8-bit bus that leaves
+to the right (towards the data pads), with the bus pulled low by `cdp4_rst`. The widths
+fit the 6845's 14-bit registers split 6 + 8 (cursor R14/R15 and light pen R16/R17 are
+the readable ones), and the row C latch taking its data from the left fits a register
+that captures the memory address. sel1..sel4 would then be the read enables of four
+registers. None of this is traced; the sources of sel1..sel4, rst, ld and the in lines
+lie left of x 7600.
 
 ## Ports
 
 | Name | Layer | Where it crosses | Direction | What |
 |---|---|---|---|---|
-| `cdp4_sel1` | poly | x 7600, y 12223 | from outside (left) | select: n <-> a |
-| `cdp4_sel2` | poly | x 7600, y 12481 | from outside (left) | select: n <-> b |
-| `cdp4_sel3` | poly | x 7600, y 12530 | from outside (left) | select: n <-> d |
-| `cdp4_sel4` | poly | x 7600, y 12786 | from outside (left) | select: n <-> c |
-| `cdp4_bus_s0`..`s7` | poly | x 7600, y 12180, 12137, 12093, 12052, 12008, 11964, 11922, 11877 | unknown | 8-bit bus between row R1 and whatever lies left of the array |
+| `cdp4_sel1` | poly | x 7600, y 12223 | from outside | select n <-> a |
+| `cdp4_sel2` | poly | x 7600, y 12481 | from outside | select n <-> b |
+| `cdp4_sel3` | poly | x 7600, y 12530 | from outside | select n <-> d (row C latch) |
+| `cdp4_sel4` | poly | x 7600, y 12786 | from outside | select n <-> c |
+| `cdp4_rst` | poly | x 7600, y 12874; right end x 10705 | from outside | pulls every n low |
+| `cdp4_ld` | poly | x 7600, y 12962; right end about x 10600 | from outside | row C latch strobe |
+| `cdp4_bus_s0`..`s7` | poly | x 7600, y 12180, 12137, 12093, 12052, 12008, 11964, 11922, 11877 | unknown | per-slice line between row R1 and the left |
+| `cdp4_in_s0`..`s7` | poly | x 7600, y 13333, 13376, 13420, 13463, 13505, 13548, 13590, 13633 | from outside | data into the row C latch |
+| `cdp4_n_s0`..`s7` | poly | x 10850, same y as `in` of the same slice | driven inside | selector output |
+| `cdp4_a_s2`..`s7` | metal | x 8509 + offset, y 11790 (drawn end) | from row R1 | selector input a |
+| `cdp4_b_s0`..`s7` | metal | x 8729 + offset, y 11790 (drawn end) | from row R1 | selector input b |
+| (bus tap) | metal | x 8555 + offset, y 11790 (drawn end) | to/from row R1 | joins `cdp4_bus_sK` |
+| `cdp4_c_s2`..`s7` | metal | x 8510 + offset, y 13660 (drawn end) | from row D | selector input c |
+| `vss` | metal | x 7622, 8013, 8404, 8795, 9185, 9574, 9964, 10355 at y 11790 and y 13650; x 10746 at y 11790 | - | rails |
+| `vcc` | metal | x 7837, 8228, 8619, 9010, 9400, 9789, 10179, 10570 at y 11790 and y 13650 (7837: 13530) | - | rails |
 
-Internal for now (will join when R1 / row C are traced): `cdp4_a_sK`, `cdp4_b_sK`
-(metal, drawn up to y 11790), `cdp4_c_sK`, `cdp4_d_sK`, `cdp4_n_sK` (metal, drawn down
-to y 12810).
+Seen left of the region at 0.68x (`cache/scratch/cdp4/left_edge.png`), not traced: a
+bundle of about nine vertical metal lines at x 7330-7570. The poly lines from the array
+run under it; contacts seen at about (7557,12170) and (7513,12128) (bus s0, s1),
+(7513,12740), (7470,12868) (on or near rst), (7557,12905), (7557,12975) (near ld).
 
 ## Ambiguities
 
-None yet in the traced part.
+1. **Hold path of the latch** (8510-8655 x 13220-13265; the same structure as AMB-1 of
+   `notes/blocks/rdp3.md`). Node a's poly ends on a buried contact (8511-8540 x
+   13226-13258) to a small land under the n track. From there two stripes run right,
+   under the VCC rail, to within a few pixels of the output land (q, left edge x 8653):
+   S1 y 13226-13240 and S2 y 13247-13261. On the 8-cell composite both look salmon
+   (poly-like) under the rail and both seem to start at the land. Readings: S1 a
+   diffusion link (then a = q and the latch is a static pair that the in pass transistor
+   overpowers, which would explain the separate buffer for d); or S2 the gate of a weak
+   device between the lands; or no link (dynamic). Drawn: S1 as `?D` on node a stopping
+   7 px short of the output land, S2 as unconnected poly `cdp4_<tag>_x2`. Would settle
+   it: a sharper photo of 8540-8660 x 13215-13265, or the same answer in rdp3.
+2. **Box in q's drain** (8702-8725 x 13141-13168): brown in the metal shots, dark and
+   textured in the clean shot, no metal over it. rdp3 saw the same outline under a
+   metal track and drew an uncertain contact. Not drawn here. If it were poly it would
+   be an island with no effect.
+3. **Width of the rst pull-down.** Diffusion above and below `cdp4_rst` is seen in the
+   gap between the VCC rail and the d track (x 8651-8718) and under the d track
+   (x 8727-8745); whether both parts cross the line was not settled. Drawn as one block
+   x 8651-8745 (W 94). Connectivity is the same either way.
+4. **Pull-down of d.** Drawn as the d land plus the wedge below it (down to the diagonal
+   edge ending at (8733,13089)) crossing the n2 gate, W 85. The top edge of the crossing
+   (y 13002) and the bottom edge (y 13089) are seen across the gate in three shots; a
+   field band about 20 px wide separates this diffusion from q's (L1 output end and the
+   drain below y 13124). An earlier reading took that band for a diffusion strap; the
+   stripped shots show it field-coloured.
+5. **LX gate tie.** The LX gate block (8604-8633) is joined to the buried contact at
+   8657-8686 x 13010-13046 by a bar along the top (y 12990-13017) that lies under the VCC
+   rail; seen in the clean shot at 5.9x, not in the metal shots.
+6. Channel 2 pads: only s2 was checked at high zoom for the gap between the two pads.
 
 ## Not done
 
-- Row R1 (y 11100-11800), row C, channel 2, row D: see Inventory.
-- Line at y 11832 (poly, under all slices).
-- Rails: identify VSS / VCC and draw at full length.
-- Right of x 10600 (y 11800-13600): a wide vertical rail at about x 10740 and several
-  thin vertical metal lines at x 10790-10880; not looked at.
+- **Row D** (y 13650-14060). `findcell` on the row C latch gives six copies:
+  `@inst cdp4_lat dx,759` with dx -392, 0, 390, 780, 1170, 1560 (under s1..s6);
+  cellcheck median 0.90-0.93, the poly/diffusion core looks the same, the metal does
+  not: no c and n tracks through the cell, and an L-shaped metal along the top
+  (y about 13718-13743, from x 8525 to beyond the cell's right edge, with a branch down
+  to the d contact at 8712,13786). It looks as if the c track of slice K+1 turns left
+  there and lands on the d contact of the cell under slice K (six tracks s2..s7, six
+  cells s1..s6), which would make c the buffered output of row D. Not verified. To do:
+  a row D variant of the cell (same poly/diffusion, own metal), its strobe line (expect
+  y about 13721), where its in tracks come from, rails below y 13650.
+- **Row R1 lower** (y about 11500-11800): `@inst cdp4_lat dx,-1466 mx=8610 rot=180
+  o=8610,13132.5` for all eight offsets (dy -1467 for s7), score 0.82-0.83. Upside down
+  the d contact falls at (8712,11772), where the b track starts, and the strobe at
+  y 11837, where the unexplained poly line y 11832 runs. Not verified, not placed.
+- **Row R1 upper** (y 11100-11500): not looked at beyond the survey. The a tracks
+  (x 8509) and the bus taps (x 8555) come from there.
+- Right of x 10600: the n lines' contacts beyond x 10850, thin vertical metals at
+  x 10795-10905, the end of the s7 VCC rail.
+- Below y 13650: the s0 VCC rail's bend, row D, the fan-out at y 14060-14700.
