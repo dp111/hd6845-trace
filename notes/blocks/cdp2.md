@@ -15,7 +15,7 @@ mask) at 3.3-5x on a median composite (`--comp cdp2_a`) is what made the junctio
   tested. The long lines themselves are followed only between x 8480 and x 10850.
 - Row C (y 7500-7825, seven latch cells, slices s1..s7): the same cell (correlation
   0.92-0.94, cellcheck 0-6 % bad blocks on the core), placed seven times, contacts
-  tested in all seven; tops of s3..s7 traced, tops of s1 and s2 only described. Shipped.
+  tested in all seven; tops of all seven traced. Shipped.
 - Rows B1, B2, D and channels 2, 3: surveyed only (Inventory, Not done).
 
 ## Conventions
@@ -46,7 +46,7 @@ mask) at 3.3-5x on a median composite (`--comp cdp2_a`) is what made the junctio
 | 6930-7200 | row B1: cell, 5 copies (findcell 0.88-0.90) | s3..s7 | not traced |
 | 7200-7480 | row B2: cell, 5 copies | s3..s7 | not traced |
 | 6900-7480, x 7900-8750 | irregular logic left of rows B | - | not traced |
-| 7500-7825 | **row C: seven static latch bits**, same cell as row A (dy 1476; dx -1171, -781, -391, 0, 390, 781, 1171) | s1..s7 | traced (tops of s1, s2 not) |
+| 7500-7825 | **row C: seven static latch bits**, same cell as row A (dy 1476; dx -1171, -781, -391, 0, 390, 781, 1171) | s1..s7 | traced |
 | 7830-7960 | channel 3: horizontal poly lines; at the left (x 7700-7950) bundles turn down | - | not traced |
 | 7980-8450+ | row D: cell, 5 copies + a weaker sixth at dx -781 (0.73); may extend below 8450 | s3..s7 (+s2?) | not traced |
 
@@ -173,20 +173,43 @@ c's lower end over the strobe line has no contact.
   to a poly that runs right under the VCC rail (y 7506-7526) and then up at
   x 9453-9474 across y 7425; the metal of track b itself also runs on up. The bus line
   runs on up.
-- Top of the cell, **s1 and s2: different, not traced.** Seen at 1.6x: s2's output poly
-  (x 8721-8739) turns left at y 7463-7479 and runs left across s1 to x < 7960; s1's
-  output poly (x 8331-8349) turns left at y 7503-7522 and also runs to x < 7960. s1's
-  track b (x 8153-8175) runs on up past y 7390 with no contact at y 7517 (plain poly
-  under it: s1's own output line crossing); s2's track b has no metal at y 7517. Both
-  bus lines jog about 55 px to the right at y 7507-7526 (metal) and go on up at
-  x 8109-8131 (s1) and x 8517-8536 (s2). A metal line lies over s1's track-c column
-  (x 8330-8350) from above y 7390 down to the cell.
+- Top of the cell, **s1 and s2 are different** (traced from two views at 2.9x, every
+  crossing tested, no contacts): the outputs leave **to the left** in poly. s2's output
+  poly (x 8720-8740) turns left at y 7463-7481 (line L1) and runs across s1; s1's
+  (x 8329-8349) turns left at y 7504-7522 (line L2). Both run on left of x 7990, where
+  they join the bundle that bends down at x 7700-7950 (not followed). In s1 the metal
+  on the track-c column also runs on up past y 7395 (q of s1 in metal), and so does
+  track b (n2 of s1). s2's track b ends at the cell top: its n2 is not used outside
+  the cell. Both bus lines jog right at y 7510-7528 (s1: x 8075 -> 8118, s2: x 8465 ->
+  8535) and run on up; s1's jog lies on top of L2 without a contact.
 - The bus lines of row C are named separately (`cdp2_c_sK_bus`): between row A and row
   C the metal at the bus position is interrupted inside row B2 (no metal at x 9236-9258
   for y 7190-7240 and 7317-7371), so whether it is the same wire is for row B2's trace.
 
-Believed: a 7-bit register (R4, R6 and R7 are 7 bits wide); two of its bits (s1, s2)
-are used to the left of the array, five (s3..s7) by the rows above (B1/B2).
+Believed: a 7-bit register of which two bits (s1, s2) are used to the left of the array
+and five (s3..s7) by the rows above (B1/B2). That 5 + 2 split fits **R10** (cursor
+start raster in bits 0-4, blink mode in bits 5-6) better than R4, R6 or R7; row A
+(5 bits, outputs to the row above it) would then be a 5-bit raster-type register (R9
+or R11) and rows B a 5-bit comparator. A guess from widths only.
+
+### Channel 2 (surveyed, tested)
+
+13 poly lines at y 6366 ... 6888. In slices s3..s7 the per-slice metal over them is: VSS
+rail, bus line (x 9243-9254), the line at x 9329-9340 (Ambiguities 3), VCC rail
+(x 9379-9421, with a dark line down its middle). Every crossing of the bus line, the
+x 9337 line and x 9415 with the 13 lines was put through the contact test in s3..s7:
+all plain poly, **no contact**. So in the sliced part channel 2 only passes through: its
+lines join things left of x 8780 or right of x 10790. (One contact-like reading in s2:
+(8556,6888).)
+
+### Rows B1/B2 (surveyed)
+
+One cell about 440 x 560 per slice (s3..s7), 5-instance composite `--comp cdp2_b`
+(master frame 9150,6890:9590,7500). Not the latch. Seen at 1.45x: VSS contacts at about
+(9175,7020), (9175,7040), (9180,7200), (9175,7340), (9180,7430); a VCC contact near
+(9390,7235); loads (textured blocks) near (9505,7110), (9500,7240), (9470,7400);
+contacts at (9455,7010), (9277,7095), (9287,7345), (9460,7275), (9505,7345), (9285,7430).
+Perhaps 12-16 transistors.
 
 ## Ports
 
@@ -203,10 +226,14 @@ are used to the left of the array, five (s3..s7) by the rows above (B1/B2).
 | `cdp2_a_s6_n2` | poly | line y 5956: x 8480 and x 10850 | out | |
 | `cdp2_a_s7_n2` | poly | line y 6000: x 8480 (ends at x 10518) | out | |
 | `cdp2_ch1_5826` | poly | line y 5826: x 8480 and x 10850; band at y 5730 to x 9086, then up across y 5700 at x 9080 (`?`) | unknown | not connected to row A |
-| `cdp2_c_sK_bus` (K=1..7) | metal | x 9246 + dx at y 7425 (s3..s7; s1, s2 end at the cell top, y 7551, in the trace) and y 7821 (down, not followed) | into the row | data for row C's latches |
+| `cdp2_c_sK_bus` (K=3..7) | metal | x 9246 + dx at y 7425 and (all seven) at y 7821 (down, not followed) | into the row | data for row C's latches |
 | `cdp2_a_c_sK_q` (K=3..7) | poly | x 9511 + dx, y 7425, going up | out, to row B2 | row C latch output |
 | `cdp2_a_c_sK_n2` (K=3..7) | metal and poly | metal x 9336 + dx and poly x 9463 + dx, both at y 7425 going up | out, to row B2 | inverted output |
-| `cdp2_a_c_s1_q`, `cdp2_a_c_s2_q` | poly | drawn only to the cell top (x 8340 / 8730, y 7554); beyond: see row C, s1 and s2 | out, to the left | not traced |
+| `cdp2_a_c_s2_q` | poly | line L1, x 7990, y 7472, going left | out | output of row C's s2 |
+| `cdp2_a_c_s1_q` | poly | line L2, x 7990, y 7513, going left | out | output of row C's s1 |
+| `cdp2_a_c_s1_q` | metal | x 8338, y 7395, going up | out | same net in metal |
+| `cdp2_a_c_s1_n2` | metal | x 8165, y 7395, going up | out | inverted output of s1 |
+| `cdp2_c_s1_bus`, `cdp2_c_s2_bus` | metal | x 8118 and x 8535 at y 7395, going up | in | bus lines of s1, s2 after their jog |
 | `cdp2_c_ld` | poly | y 7800; about x 7650 at the left, runs on right of x 10850 | into the row | load strobe of row C |
 | `cdp2_a_ld` | poly | y 6324; runs on right of x 10850; left end about x 8520 | into the row | load strobe of row A |
 | `vss` | metal | x 8794, 9184, 9574, 9964, 10354, 10744 (46 wide) at y 5960 and y 6350 | - | rails, run on both ways |
@@ -243,11 +270,10 @@ are used to the left of the array, five (s3..s7) by the rows above (B1/B2).
   x 10850 the lines belong to whoever has that area. The poly from the y 5740 pads
   upward (x 9080, 9463 and right of each pad) crosses into cdp1's rows.
 - **Ends of `cdp2_a_ld`**: right of x 10850 at y 6324; left end near x 8520, y 6324.
-- **Channel 2 (y 6350-6900)**: 13 poly lines, their ends and contacts. `cdp2_lines.py`
+- **Channel 2 (y 6350-6900)**: 13 poly lines, their ends and contacts (none in s3..s7). `cdp2_lines.py`
   gives a first pass but breaks at every metal edge; check ends by eye. The far left
   (x 7600-8700) has contacts at about y 6690 (x 8120, 8300, 8700) and y 6800-6850.
-- **Row C, tops of s1 and s2** (x 7990-8770, y 7390-7560): see row C. Two views at 3x
-  would do it.
+- **L1 and L2 left of x 7990** (y 7472, 7513): the two left-going outputs of row C.
 - **Ends of `cdp2_c_ld`** (y 7800): left about x 7650, right past x 10850.
 - Rows B1, B2 (y 6930-7480), channel 3 (y 7830-7960), row D (y 7980-8450): not
   started. Rows B take q and n2 of row C's s3..s7 from below (ports) and the bus and

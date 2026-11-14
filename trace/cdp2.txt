@@ -307,3 +307,19 @@ N M 9636,7600 cdp2_c_s5_bus
 N M 10027,7600 cdp2_c_s6_bus
 N M 10417,7600 cdp2_c_s7_bus
 N P 9450,7800 cdp2_c_ld
+
+# --- row C, tops of s1 and s2 (different from s3..s7): the outputs leave to the left on
+# two poly lines; no crossing on the way has a contact (tested).
+P 7990,7472 x8741 w=18               # L1: s2's output, running left across s1 (continues left of x 7990)
+P 8730,7463 y7558 w=20               #   up from s2's cell
+P 7990,7513 x8349 w=18               # L2: s1's output (continues left of x 7990)
+P 8339,7504 y7558 w=20               #   up from s1's cell
+M 8338,7395 y7565 w=20               # s1: metal on the track c column runs on up (q of s1)
+M 8165,7395 y7556 w=22               # s1: track b (n2) runs on up
+M 8075,7519 y7556 w=16               # s1 bus line: up from the cell,
+M 8067,7519 x8128 w=18               #   right,
+M 8118,7395 y7528 w=18               #   and on up
+M 8465,7519 y7556 w=16               # s2 bus line: the same jog
+M 8457,7519 x8544 w=18
+M 8535,7395 y7528 w=18
+# s2's track b ends at the cell top: its n2 is not used outside the cell.
