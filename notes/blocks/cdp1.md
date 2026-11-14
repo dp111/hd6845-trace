@@ -3,9 +3,10 @@
 ## Status
 
 Rows A and C (two rows of the same static register cell, 6 and 5 bits) are traced,
-instanced, checked instance by instance and extract cleanly. Row B (between them),
-rows D and E, the wiring channels and the per-slice bit lines are surveyed only
-(see Inventory and Not done). The area left of x 8340 was not touched: it is random
+instanced, checked instance by instance and extract cleanly. Row B's upper half (a
+5-input NOR along the row, its load and its output tap) is traced; its lower half
+(what drives each NOR input) is surveyed but not traced. Rows D and E, the wiring
+channels and the per-slice bit lines are surveyed only (see Inventory and Not done). The area left of x 8340 was not touched: it is random
 logic and overlaps the queued packages `tc1`/`tc2`.
 
 ## Inventory
@@ -90,7 +91,22 @@ the diffusion under m6 at 9104-9130.
   drives a gate in row B. Slice 5 differs: its metal goes left and up at x 10632.
 - `cdp1_c_wr`: the same kind of meander, y 4494-4516.
 
-### Row B (surveyed at 3-4x, NOT traced; coordinates for slice 2, add 390 per slice)
+### Row B upper half (traced): `cdp1_b_eq = NOR(cdp1_b1_ne .. cdp1_b5_ne)`
+
+- The output is a diffusion line along the row, closed at both ends (x 8778 and
+  x 10765). One pull-down per slice (W/L 164/23; slice 1: 124/23), one depletion load
+  in slice 1 (65/35, VCC contact 9012,3605, gate tied to the line by the buried contact
+  at 9070-9112 x 3505-3546).
+- It leaves through a buried contact in slice 1 (8928-8962 x 3476-3510) into a poly
+  line y 3424-3450 going left under slice 1's VSS rail to a pad at 8725,3437, and from
+  there in metal downward (x 8727), into the logic left of the array. Not followed.
+- `cdp1_bN_ne` (N = 1..5) are the gates of the pull-downs; each comes up from the lower
+  half of its slice through a buried contact at 9234-9266 x 3652-3682 (+390 per slice;
+  slice 1: 8844-8876). Named as open ports until the lower half is traced.
+- Believed function: `ne` = "this bit differs", so `eq` = "row C's 5-bit register equals
+  the 5-bit value arriving on the channel B/C poly lines". Traced: only the NOR.
+
+### Row B lower half (surveyed at 3-4x, NOT traced; coordinates for slice 2, add 390 per slice)
 
 Read from `cdp1_sr.py` composites of slices 2-4; slice 1 and slice 5 differ (findcell
 scores 0.74 and 0.82 against slice 2). What is established, and what is only believed:
@@ -161,6 +177,8 @@ taps different bus bits from row C's in the same slice.
 | `cdp1_aN_bl` | M | 8857+k*390, 3330 going down (k = -1..4 for a0..a5) | in/out | bit lines of row A; continue down through row B, not followed |
 | `cdp1_cN_bl` | M | 8857+k*390, 4524 going down (k = 0..4 for c1..c5) | in/out | bit lines of row C; continue down into the channel, not followed |
 | `cdp1_c5_q` | M | 10632,3990 going up | out | row C slice 5 output, not followed into row B |
+| `cdp1_b_eq` | M | 8727,3530 going down (drawn to there) | out | NOR of the five row B slices: believed "register C equals the incoming 5-bit value" |
+| `cdp1_bN_ne` | D | 9238-9262 x 3658-3700 (+390 per slice; slice 1 at 8848-8872) | in | top of the lower-half diffusion that drives each NOR input; internal to the block, open until the lower half is traced |
 
 ## Ambiguities
 
@@ -201,7 +219,9 @@ taps different bus bits from row C's in the same slice.
   (row A) / 4495 (row C). Row A's must pass row B and reach the poly lines of channel
   B/C or the big channel; row C's go straight into the big channel. Following them to
   the data bus gives the bit order and settles R8 / which 5-bit register row C is.
-- **Row B** (y 3440-3990, five cells): what row C's q is compared or combined with.
+- **Row B lower half** (y 3650-3990, five cells): the logic that makes each `ne`. Survey notes are under Logic. Slices 1 and 5 differ from 2-4 and must be looked at separately.
+- Where `cdp1_b_eq` goes (metal down from 8727,3530).
+- A third horizontal poly line below row A, y 3424-3450, is the NOR output only between x 8708 and 8958; whether another segment of it exists further right was not checked.
 - The two poly lines below row A (y 3340-3360, 3385-3405) and their contacts.
 - Channel B/C, the big channel y 4530-5150, rows D and E.
 - Where `cdp1_a_wr` and `cdp1_c_wr` come from (right of x 10786).

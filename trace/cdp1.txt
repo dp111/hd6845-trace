@@ -199,3 +199,74 @@ M 10672,4235 y4257 w=22
 # gate strip, elbow down, on to the next slice). Named where it passes under a VCC rail.
 N P 9010,3311 cdp1_a_wr
 N P 9010,4505 cdp1_c_wr
+
+# ---------------------------------------------------------------------------------
+# Row B, upper half: a diffusion line along the whole row (y 3505-3542), pulled to VSS
+# in every slice by one wide transistor and pulled up by a depletion load in slice 1:
+# a 5-input NOR. Each pull-down's gate ("ne") comes from the lower half of its slice,
+# which is not traced yet, through a buried contact under the bit-line metal.
+# Master of the pull-down: slice 2.
+@cell cdp1_nor tag=b2
+D 9230,3523:9432,3542                  # the line, middle part
+D 9228,3523:9392,3606                  # line | channel | VSS band
+D 9165,3575:9392,3606                  # VSS band
+D 9165,3580:9215,3642                  # VSS contact land under the rail
+C 9183,3608 s=26x40
+P 9205,3545:9420,3568                  # gate arm
+P 9397,3545:9420,3632                  # ... down the right side
+P 9238,3612:9420,3632                  # ... back left over field
+P 9238,3612:9262,3668                  # ... down to the lower half
+B 9234,3652:9266,3682                  # joined to the lower half's diffusion (node ne)
+D 9238,3658:9262,3700                  # top of that diffusion (rest not traced)
+N P 9300,3622 cdp1_{}_ne
+@end
+@inst cdp1_nor 390,0 tag=b3
+@inst cdp1_nor 780,0 tag=b4
+@inst cdp1_nor 1170,0 tag=b5
+# the line between the pull-downs: under each VSS rail, then a link with a dead-end stub
+# (where slice 1 has its load), then on to the next slice
+D 9150,3505:9240,3540
+D 9428,3510:9450,3610
+D 9428,3510:9560,3528
+D 9540,3505:9630,3540
+D 9818,3510:9840,3610
+D 9818,3510:9950,3528
+D 9930,3505:10020,3540
+D 10208,3510:10230,3610
+D 10208,3510:10340,3528
+D 10320,3505:10410,3540
+D 10598,3510:10620,3610
+D 10598,3510:10765,3530                # right end, closed, under the last VSS rail
+# slice 1: narrower pull-down (the load takes the room on its right)
+D 8778,3512:8850,3540                  # left end of the line, closed, under the VSS rail
+D 8840,3523:8975,3542                  # the line, middle part
+D 8838,3523:8962,3606                  # line | channel | VSS band
+D 8775,3575:8962,3606
+D 8775,3580:8825,3642
+C 8793,3608 s=26x40
+P 8790,3545:8998,3568                  # gate arm
+P 8975,3545:8998,3632
+P 8848,3612:8998,3632
+P 8848,3612:8872,3668
+B 8844,3652:8876,3682
+D 8848,3658:8872,3700
+N P 8910,3622 cdp1_b1_ne
+D 8962,3503:9165,3522                  # the line, right part
+D 8962,3503:8975,3542
+# slice 1: the load. VCC contact, gate bar tied to the line by the buried contact above it
+D 9000,3572:9048,3640
+C 9012,3605 s=28x34
+?D 9040,3575:9140,3640                 # under the bar to its right side (left part inferred)
+D 9116,3503:9140,3640                  # right side, up to the line
+P 9075,3508:9110,3648                  # gate bar
+B 9070,3505:9112,3546
+# output tap: buried contact on a tab of the line, poly up and left to a pad, metal down
+D 8932,3490:8975,3526
+P 8932,3437:8958,3506
+B 8928,3476:8962,3510
+P 8708,3424:8958,3450
+P 8708,3420:8746,3456
+C 8725,3437 s=24x26
+M 8727,3424 y3530 w=22                 # goes on down (not followed)
+N D 9100,3513 cdp1_b_eq
+N M 8727,3520 cdp1_b_eq
