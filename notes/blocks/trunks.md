@@ -15,7 +15,9 @@ Work in progress (2026-11-15). Followed so far:
 - `ck_b`: into the bottom row of the mid-right array only.
 - The line the clock notes call `ck_src` is **not** `ck_a` (Ambiguities A1): it is the
   output of the left-hand inverter of the input row, here called S.
-Not yet: S to the left of the die, `e_b`, `rw/rs/cs`, `res_b`, `lpstb_b`, `clk`, `clk_b`.
+- `e_b`, `rw_d`, `rs_d`, `cs_d`: to their entry into the logic below the decode array
+  (right part), from below.
+Not yet: S to the left of the die, `ck_out` #1, `res_b`, `lpstb_b`, `clk`, `clk_b`.
 
 ## How to use this file
 
@@ -62,6 +64,18 @@ Vertical segments, sorted by x:
 | 13703-13727 | 15930-16711 | metal | `ck_out` | rail at the left edge of the logic below the decode array; contacts (13715,16711), (13716,16565), (13716,16490), (13716,15930) |
 | 13849 | 18537-18775 | metal | S | output of input-row gate 0 |
 | 14535-14552 | 16992-18082 | metal | X | beside the wide VCC vertical x 14585-14630 |
+| 16160-16180 | <16400-17691 | metal | `e_b` | **entry: logic below the decode array, right part, from below.** Runs up beside the gate column x 15900-16250 with taps to the left (one at about y 17030); followed at 1x to y 16400, continues |
+| 16290-16308 | <15900-17558 | metal | `rw_d` | from contact (16298,17558); taps (contact, poly going left) seen at y 16680, 16290, 16030 |
+| 16290-16308 | 17558-17903 | poly | `rw_d` | then diagonal down-right to (16537,18142) |
+| 16333-16352 | <15900-17515 | metal | `rs_d` | from contact (16342,17515); taps seen at y 16590, 16335 |
+| 16333-16352 | 17515-17873 | poly | `rs_d` | then diagonal to (16584,18115) |
+| 16375-16395 | 16170-17560 | metal | `cs_d` | from contact (16385,17560); taps seen at y 17170, 16815, 16430 and the top end at 16170 |
+| 16375-16395 | 17560-17847 | poly | `cs_d` | then diagonal to (16625,18087) |
+| 16525-16550 | 18142-18634 | poly | `rw_d` | up through the input row's VCC band, from contact (16535,18620) |
+| 16572-16596 | 18115-18592 | poly | `rs_d` | from contact (16582,18578) |
+| 16610-16640 | 18087-18549 | poly | `cs_d` | from contact (16622,18535) |
+| 16660-16705 | 18105-18552 | poly (wide) | `e_b` | from the E buffer (inrow) to contact (16690,18120) |
+| 16807-16827 | 17691-18121 | metal | `e_b` | the third of four nested corners here (the others, at x 16765-16785, 16850-16870, 16893-16912, are not identified) |
 
 Horizontal segments, sorted by y:
 
@@ -77,8 +91,10 @@ Horizontal segments, sorted by y:
 | 16985-17000 | 13952-14543 | metal | X | top line of the bus group above the input row; a poly runs under it for x 14235-14550 |
 | 16987-17004 | 12523-12892 | metal | `ck_b` | from contact (12892,16991) left |
 | 17677-17698 | 10398-10441 | metal | `ck_out` | jog of `ck_out` #2; a poly lies under it |
+| 17683-17700 | 16170-16817 | metal | `e_b` | third of four nested horizontals (17595-17612, 17640-17658, **17683-17700**, 17725-17745); passes over the `rw_d`/`rs_d`/`cs_d` polys |
 | 17900-17915 | <10230-10311 | metal | `ck_out` | `ck_out` #1 going left (not yet followed) |
 | 18075-18090 | 13782-14543 | metal | X | bottom line of the bus group; contact (13782,18080) to gate 0's input poly |
+| 18112-18130 | 16690-16817 | metal | `e_b` | from the contact on the wide poly |
 | 18243-18262 (L1) | ...-12807 | metal | not identified | ends at contact (12807,18253); poly on to contact (13216,18251), metal on right |
 | 18290-18305 (L2) | 10615-12849 | metal | not identified ("e") | left end: poly under the wide metal x 10548-10598 to contact (10480,18297) and the vertical x 10430-10450. Right end: contact (12849,18296), poly to contact (13176,18297), metal on right |
 | 18331-18352 | 10398-10442 | metal | `ck_out` | ring, top side |
@@ -92,6 +108,11 @@ Horizontal segments, sorted by y:
 | 18460-18480 (L6, right piece) | 12095-12740 | metal | `ck_a` | from g6's output poly (x 12110) to contact (12740,18471) |
 | 18462-18485 | 10311-10442 | metal | `ck_out` | ring, bottom side; contact (10358,18470) |
 | 18590-18612 | 10255-10680 | metal | S | (route from clock.md; seen, not yet re-followed) |
+| 18525-18545 | 16428-16622 | metal | `cs_d` | contacts at both ends |
+| 18610-18628 | 15170-16535 | metal | `rw_d` | from contact (15170,18618) below the R/W group |
+| 18655-18672 | 15802-16582 | metal | `rs_d` | from contact (15802,18663); turns up at x 16572-16592 to contact (16582,18578) |
+| 18703-18722 | 15303-... | metal | RS pin node (after protection) | arrives from the right; contact (15303,18712) to the RS group's input poly. Not `rs_d` |
+| 18742-18760 | 15930-... | metal | CS pin node (after protection) | arrives from the right; contact (15930,18750) to the CS group's input poly |
 | 18700-18722 | ...-13090 | metal | `ck_a` | line A of the clock block; end contact (13085,18709) |
 | 18745-18768 | ...-13010 | metal | `ck_b` | line B; end contact (13000,18756) |
 | 18765-18785 | 13200-13522 | poly | S | |
@@ -217,6 +238,46 @@ up under bus lines L5..L1 (no contacts; checked at 2.25x) and on up to y 16950; 
 along y 16945-16965 to a contact at (12631,16954); metal up at x 12603-12624.
 **Entry: mid-right array, bottom row, metal going up from (12631,16954).**
 
+## e_b
+
+1. The wide poly from the E buffer (x 16660-16705, inrow trace) comes up through the
+   input row's VCC band to a contact at (16690,18120).
+2. Metal right along y 18112-18130 to x 16817, up at x 16807-16827 to y 17691, left
+   along y 17683-17700 to x 16170, up at x 16160-16180. On the way left it crosses
+   over the three polys of `rw_d`, `rs_d`, `cs_d` and seven other vertical polys.
+3. **Entry: logic below the decode array, right part (x 15900-16250), from below at
+   (16170,17690).** The vertical runs up beside that gate column with taps to the left;
+   followed at 1x to y 16400 and still running. Where it ends, and whether it goes on
+   to the data bus column, is not known.
+
+`e_n` (NOT E) was not seen leaving the input row.
+
+## rw_d, rs_d, cs_d
+
+Only the `_d` output of each four-inverter group leaves the input row (`_d` = pin
+level, four inversions). The `_a`, `_b`, `_c` nodes stay inside the row.
+
+| Net | Leaves the group at | Metal below the row | Poly up through the VCC band | Contact, then vertical metal |
+|---|---|---|---|---|
+| `rw_d` | contact (15170,18618) | y 18610-18628 to contact (16535,18620) | x 16525-16550 | (16298,17558), x 16290-16308 |
+| `rs_d` | contact (15802,18663) | y 18655-18672, up at x 16582 to contact (16582,18578) | x 16572-16596 | (16342,17515), x 16333-16352 |
+| `cs_d` | contact (16428,18535) | y 18525-18545 to contact (16622,18535) | x 16610-16640 | (16385,17560), x 16375-16395 |
+
+Above the band the three polys run diagonally up and to the left, parallel, under the
+nested metal lines, and straighten at y about 17850-17900. Their left-to-right order
+is the same at both ends (they are on one layer and cannot cross): `rw_d`, `rs_d`,
+`cs_d`.
+
+**Entry: logic below the decode array, right part, from below, at the three contacts.**
+The three vertical metals run up side by side (x 16298, 16342, 16385) with taps
+(a contact on the line, poly going left under the neighbours) into the logic at
+x < 16250: `cs_d` at y 17170, 16815, 16430 and its top end at about 16170; `rs_d` at
+16590, 16335; `rw_d` at 16680, 16290, 16030 (seen at 1x). `rw_d` and `rs_d` carry on
+above y 15900 into dense logic; not followed.
+
+The metal lines at y 18703-18722 and y 18742-18760 below the row are the RS and CS pin
+nodes arriving from their protection cells, not outputs.
+
 ## S: output of input-row gate 0 (`t_g0_out`; the clock notes' `ck_src`)
 
 Source: the single inverter at the left end of the input row (gate 0, x 13730-13925).
@@ -284,6 +345,18 @@ signal. X must be traced to its source to settle this.
 At (13023,7278) the rail's tip covers a poly band exactly. No ring or pitted box shows
 in any shot at 5x, so no contact is drawn. If there is one, `ck_a` also reaches the
 vertical metal x 13250-13270 above y 7280.
+
+### A3. Approximate supply shapes in other traces that touch these routes
+
+- `trace/clock.txt` draws the VCC band as `M 10760,18512:13050,18668`. Its left end is
+  really at x 10862 (for y 18518-18650); as drawn it covers the S line's contact at
+  (10808,18600) and shorts S to VCC in the extraction. Fix: start it at x 10862.
+- `trace/inrow.txt` draws the input row's VCC band with its top edge at y 18130; at
+  x 16650-16850 the edge is at about y 18160. The `e_b` metal at y 18112-18130 is
+  drawn 2 px narrow in `trunks.txt` to stay clear of it.
+
+`tools/trunks_check.py` runs the extraction against copies of the traces with the A1
+and A3 corrections applied: 0 errors, 0 warnings.
 
 ## Not done
 

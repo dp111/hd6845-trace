@@ -22,7 +22,11 @@ M 11012,18342 x12820 w=16           # bus line L3
 C 12807,18339
 P 12792,18340 x13146 w=18           # under VCC (12890-12985), ck_b (13022), ck_a (13066)
 C 13132,18337
-M 13132,18352 y16600 w=22          # vertical trunk, x 13122-13143
+M 13132,18352 y16550 w=22          # vertical trunk, x 13122-13143; ends at the next contact
+C 13131,16562
+P 13116,16552 x13730 w=42           # wide poly right, under six vertical metals
+C 13715,16562
+M 13715,16724 y15918 w=24           # rail at the left edge of the logic below the decode array
 N M 12000,18342 ck_out
 # branch W: poly from the corner contact up and away to the left under the VSS and VCC
 # verticals, ending as the gate of an island device like those of AMB-006: a diffusion
@@ -85,5 +89,82 @@ N M 13022,17500 ck_b
 C 13085,18709
 P 13102,18724 y18455 w=36
 C 13108,18471
-M 13120,18471 x13066 y16952 x13025 y16600 w=21
+M 13120,18471 x13066 y16952 x13025 y7270 w=21    # the rail up the right edge of the mid-right array (taps not drawn)
 N M 13066,17500 ck_a
+
+# ====================================================================
+@alias t_g0_out ck_src
+# S: output of input-row gate 0 (inrow's t_g0_out). Metal down and left, poly under the
+# diagonal supply metals, up at x 13200, left in poly under the vertical metals, then
+# bus line L4 to the left. At its left end a poly T joins it to bus line L6's left
+# piece (the clock trace's ck_src: gate g5's input) and to the contact at (10810,18470)
+# from which the run to the left of the die starts (clock.md; not yet re-followed).
+M 13849,18590 y18775 x13508 w=18
+C 13522,18774
+P 13536,18776 x13202 y18385 x12835 w=20
+C 12849,18384
+M 12862,18385 x10845 w=18           # bus line L4
+C 10857,18383
+P 10857,18370 y18470 w=18           # stem down, under L5
+P 10796,18470 x10914 w=24           # link
+C 10810,18470 10900,18470
+M 10888,18470 x11610 w=20           # bus line L6, left piece, to the clock trace's piece
+# start of the run to the left: metal down, poly under the wide metal x 10722-10772,
+# metal left along y 18590-18612, up at x 10255-10280, left along y 18420-18440
+M 10809,18458 y18612 w=18
+C 10808,18600
+P 10822,18600 x10666 w=22
+C 10680,18600
+M 10693,18601 x10268 y18430 x10180 w=20      # followed to x 10180 only
+
+# X: input of gate 0, followed back towards its source. Poly up from the gate, metal
+# right along the bottom line of the bus group, up beside the wide VCC vertical, left
+# along the top line, and by a short poly to the foot of a vertical metal that comes
+# down the routing channel at x 13674.
+P 13781,18165 y18066 w=26
+C 13782,18080
+M 13770,18082 x14543 y16992 x13952 y16907 x13642 w=17
+C 13655,16908
+P 13655,16921 y16809 w=22
+C 13655,16822
+M 13645,16822 x13674 y16600 w=20    # continues up (not followed)
+
+# ====================================================================
+# e_b: the wide poly from the E buffer ends at a contact above the VCC band; metal right,
+# up at x 16807-16827, left along y 17683-17700 (third of four nested lines), up at
+# x 16160-16180 beside the gate column x 15900-16250.
+P 16663,18105:16705,18140
+C 16690,18118 s=24x16
+M 16677,18118 x16817 y17691 x16170 y16400 w=16   # continues up (not followed). Really 18 wide, y 18112-18130;
+                                    # drawn narrow to clear inrow's VCC band, whose top edge is drawn 30 px too high here
+N M 16817,17900 e_b
+
+# rw_d, rs_d, cs_d: each leaves its inverter group downwards in poly, runs right in
+# metal below the input row, comes up through the VCC band in poly (x 16537, 16584,
+# 16625), runs diagonally up and left under the nested metal lines, and ends at a
+# contact from which a vertical metal goes up (x 16298, 16342, 16385).
+P 15174,18555 y18632 w=25
+C 15170,18618
+M 15157,18619 x16548 w=18
+C 16535,18620
+P 16537,18634 16537,18142 16298,17903 16298,17545 w=18
+C 16298,17558
+M 16298,17571 y16200 w=17           # continues up (not followed)
+N M 16298,17000 rw_d
+
+P 15802,18555 y18676 w=25
+C 15802,18663
+M 15789,18664 x16582 y18566 w=18
+C 16582,18578
+P 16584,18592 16584,18115 16342,17873 16342,17502 w=18
+C 16342,17515
+M 16342,17528 y16200 w=17
+N M 16342,17000 rs_d
+
+C 16428,18535
+M 16415,18535 x16635 w=20
+C 16622,18535
+P 16625,18549 16625,18087 16385,17847 16385,17547 w=18
+C 16385,17560
+M 16385,17573 y16160 w=17           # top end at about y 16170 (seen at 1x)
+N M 16385,17000 cs_d
