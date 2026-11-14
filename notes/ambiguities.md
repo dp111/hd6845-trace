@@ -90,6 +90,12 @@ y 19029-19070 is a thick-oxide clamp to the rail (gate on its own drain). This i
 the textbook arrangement and it gives the pad net a junction to the substrate, which
 a poly-only path would lack. Still to do: follow the rail to a supply.
 
+Checked against the clean shot of chip 1: the frame is a poly plate
+(14670-15130 x 19125-19215) with ten finger-shaped slots; ten fingers of the node
+diffusion reach down into the slots. The band above the node is poly with no metal
+over it. Nothing contradicts the working assumption; the trace still draws the comb
+as a single strip.
+
 ## AMB-006  Island devices in the clock block wiring  (assumed: clamps)
 
 Where: B1 12385-12447 x 18885-18975, B2 12563-12627 (same y), B3 12738-12802 (same y),
@@ -124,8 +130,15 @@ except B3, which sits on the CLK pin node (the pin, after its series resistor: s
 AMB-005). A pull-up is therefore needed nowhere and is ruled out on the pin by the
 leakage figure. Working assumption: all six are enhancement devices used as clamps
 to VCC + Vt, on the nets that drive the bootstrapped driver logic. Marked
-kind=clamp, which leaves them out of logic recovery. Revisit if the driver logic
-turns out not to bootstrap.
+kind=clamp, which leaves them out of logic recovery.
+
+Checked against the clean shot of chip 1: no buried contact at any of the six. Each
+is a plain gate over the strip, with the stub's metal contact showing as a speck and
+nothing visible on the gate. So if gate and stub are tied, it is by the metal pad
+contacting both, and a contact onto poly leaves no speck to see. The tie is still
+unproven. The nets involved are now known to be the clock phases, their delayed
+copies and CLK, where overshoot above VCC from the wide drivers is plausible, which
+suits a clamp.
 
 ## AMB-007  Clock driver logic  (mostly resolved)
 

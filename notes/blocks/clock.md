@@ -183,14 +183,15 @@ continues down its right-hand side at x 9797-9830 to the contact at 9810,19337 o
 the `ck_ga` metal; the bar that joins F1-F3 (y 19357-19372) is a separate piece of
 poly just below that contact. This fixes the polarity of the output.
 
-Inferred, flagged `?` in the trace:
-- s1 and s2 are driven by `ck_t` through the two-contact pad at 10285-10375 x
-  19180-19215. Seen: the pad and its contacts under the top bus, and the two gates
-  ending beside it. Not seen: the poly join itself.
-- F1, F2 and F3 share one gate bar, fed by the poly that comes down at x 9985-10010
-  from the `ck_n2` pad.
-- The two load gates are tied to their output sides (boxes seen at the top end of
-  each gate).
+Checked against the clean shot of chip 1 (2026-11-15):
+- s1 and s2 hang from one poly pad (10283-10372 x 19180-19218, an inverted U) that
+  carries two contacts to the `ck_t` bus. Confirmed.
+- F1, F2 and F3 hang from one poly band (9850-10010 x 19325-19372) that lies under
+  the `ck_ga` metal without contacting it and is fed by the poly coming down at
+  x 9975-10010 from the `ck_n2` pad. Confirmed.
+- Group A's gate bar runs down its right-hand side to a contact on the `ck_ga`
+  metal at (9810,19337). Confirmed.
+- Still inferred: the two load gates being tied to their output sides.
 
 Not yet traced here: the load of `ck_ga` (the small device at 10030-10160 x
 19430-19680 is the candidate), and whether `ck_ga` is bootstrapped.

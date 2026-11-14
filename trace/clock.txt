@@ -280,7 +280,8 @@ M 11668,19066:11900,19089
 # ====================================================================
 # Output stage: the two big arrays, x 9500-10730, y 19180-19815.
 # Big devices are drawn schematically: one diffusion rectangle per group, one contact
-# rectangle per column. Joins marked ? are inferred, not seen (see notes/blocks/clock.md).
+# rectangle per column. The joins first marked as inferred (s1/s2 pad, the band joining
+# F1-F3) were confirmed from the clean shot of chip 1; the two load-gate ties remain ?.
 #
 #   clk   --[s3,s4,s5 + load]-->  ck_t  --[s1,s2 + load GC]-->  ck_n2
 #   ck_n2 --[F3 + load]--> ck_ga ;  ck_out = pull-up(ck_ga) / pull-down(F1,F2: ck_n2)
@@ -316,9 +317,9 @@ M 10290,19183:10630,19212          # top bus, ck_t
 N M 10500,19197 ck_t
 P 10280,19222:10300,19790          # s1
 P 10355,19222:10378,19790          # s2
-?P 10280,19180:10378,19232         # pad joining s1 and s2 under the top bus
-?C 10300,19190:10330,19208         # ... contacted by the top bus (two contacts seen)
-?C 10345,19190:10372,19208
+P 10283,19180:10375,19224          # pad joining s1 and s2 under the top bus (join seen in the clean shot)
+C 10292,19186:10312,19204          # ... two contacts to the top bus
+C 10342,19186:10362,19204
 P 10425,19225:10447,19775          # s3
 P 10497,19225:10520,19775          # s4
 P 10567,19225:10590,19775          # s5
@@ -349,7 +350,7 @@ N M 10100,19211 ck_n2
 D 9805,19390:10048,19735
 C 9993,19200:10017,19222           # pad: ck_n2 down to poly
 P 9985,19190:10010,19375
-?P 9845,19355:10010,19375          # bar joining the three fingers
+P 9850,19325:10010,19372           # band joining the three fingers, under the ck_ga metal (seen in the clean shot)
 P 9850,19355:9870,19750            # F1: ck_out to VSS
 P 9920,19355:9940,19765            # F2: ck_out to VSS
 P 9985,19355:10005,19765           # F3: ck_ga to VSS
