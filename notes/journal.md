@@ -164,3 +164,46 @@ Next
 - M2: bus interface and register decode. `rw`, `rs`, `cs` and `e` are ready at the
   input row; the decode array is at 14180-15780 x 13480-14680.
 - Carry AMB-007 and the source of `ck_src` as open items to pick up from the core.
+
+## 2026-11-15 (later)  Second die, clock generator, register decode
+
+Three shots of a second die were added and registered into the reference frame
+(`tools/align.py`, layers `metal1`, `acid1`, `acid1b`). `acid1b` (hd6845acid2.jpg) is
+clean and changes what is readable; its colour legend is in `notes/layers.md`.
+
+Done, in the order agreed
+1. Legend for the clean shot, calibrated on six known places. Two lessons: metal
+   protects a margin beyond its edges (narrow gaps between lines leave only a thin
+   dark bar), and the colours shift across the die (open diffusion is green near
+   the edge, pink in the decode array), so the legend must be re-checked locally
+   against structure.
+2. Clock driver logic: it is a two-phase non-overlapping clock generator.
+   `ck_a` = NOR(delayed `ck_b`, CLK), `ck_b` = NOR(delayed `ck_a`, NOT CLK). Traced.
+   The earlier reading of this block from the chip-2 shots was wrong in several
+   places; the note in `notes/blocks/clock.md` replaces it.
+3. Data pad cell: re-read, much more established, still not traced. It has more
+   logic than two inverters. Parked again with the facts listed (AMB-003).
+4. Existing traces checked against the clean shot: gate groups, protection cell and
+   output pre-driver agree; the two inferred joins in the clock output stage are
+   confirmed.
+5. Register decode array read (`notes/blocks/decode.md`): 18 columns, each a 5-input
+   NOR, selecting R7 R6 R4 R0 R2 R1 R10 R5 R3 R8 R9 R11 R13 R12 R14 R15 R17 R16 from
+   left to right. Read by measuring colour at every crossing, with four independent
+   consistency checks.
+
+Trace: 443 transistors, no rule errors.
+
+Method notes
+- Regular arrays should be measured, not eyeballed: at 2.7x my impression of
+  which crossings had transistors was wrong in places where the colour measurement,
+  backed by the consistency checks, was right.
+- Phase correlation fails inside regular arrays, so `acid1b` registration there is
+  interpolated. Calibrate row and column positions from profiles before sampling
+  (`tools/pla_read.py` hard-codes the measured ones).
+- A cell that resists two passes should be left until its inputs are known. The
+  data pad cell cost about 25 views over two sessions without a consistent reading.
+
+Next
+- M2: row drivers of the decode array and the address register; the cells above the
+  array; where the 18 select lines go; then the bus interface that produces the two
+  lines into each data pad cell, and back to AMB-003.

@@ -68,7 +68,7 @@
 14150,13030:15820,13260 ?array  row above decode array | 5 or so cells feeding the decode array
 
 # --- decode array
-14180,13480:15780,14680 ?pla    register decode | NOR array, about 18 columns at 87 px pitch by 5 row pairs: address register to R0-R17 selects
+14140,13480:15800,14680 pla     register decode: 7 6 4 0 2 1 10 5 3 8 9 11 13 12 14 15 17 16 | NOR array, 5-bit address to 18 register selects. Columns left to right select R7 R6 R4 R0 R2 R1 R10 R5 R3 R8 R9 R11 R13 R12 R14 R15 R17 R16. Nothing decodes addresses 18-31
 
 # --- random logic
 2100,2500:6400,6350     ?logic  top-left logic | random logic

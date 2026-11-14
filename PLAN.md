@@ -11,14 +11,16 @@ Goal: recover the complete internal logic of the Hitachi HD6845S CRTC (die marki
 - a reference model that is checked against the netlist and reproduces the
   undocumented edge-case behaviour.
 
-Status: M0 done (see `notes/journal.md`). "Provisional" marks things seen during
-reconnaissance that still need proper tracing.
+Status (2026-11-15): M0 done. M1 done except the data pad cell (AMB-003) and some
+pad-ring wiring. M2 started: the register decode array is read. See
+`notes/journal.md`. "Provisional" marks things seen during reconnaissance that still
+need proper tracing.
 
 ## 1. What reconnaissance established
 
 | Item | Finding |
 |---|---|
-| Images | `hd6845metal2ndchip.jpg` 19838 x 21025 (metal intact), `hd6845acid2ndchip.jpg` 19857 x 21029 (metal stripped) |
+| Images | Chip 2: `hd6845metal2ndchip.jpg` 19838 x 21025 (metal intact, the reference frame), `hd6845acid2ndchip.jpg` (metal stripped). Chip 1, added later: `hd6845metal.jpg`, `hd6845acid.jpg`, `hd6845acid2.jpg`; the last is a clean stripped shot and is the best single source for poly and diffusion |
 | Registration | Already aligned. A feature at metal (x, y) is at acid (x + 12.70 - 0.000096x - 0.000167y, y + 7.80 + 0.000140x - 0.000107y), i.e. about (+10, +8) mid-die. Affine fit residual under 1 px RMS over 24 patches, so no stitching tears between the two |
 | Scale | Bit-slice pitch about 390 px, signal metal 20-25 px wide, contacts 30-40 px. Wiring is readable at 0.5x, transistors at 1x-2x |
 | Process | Silicon-gate NMOS, one metal layer |
