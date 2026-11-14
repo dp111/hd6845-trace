@@ -20,15 +20,27 @@ The block makes three clocks from the CLK pin:
 two inverters and `ck_g4` is `ck_a` delayed by two inverters (gate row g1-g4), so
 each phase waits for the other to have fallen. `ck_clkn` = NOT `clk_b` is made by an
 inverter in the middle of the driver logic; `clk_b` is CLK through the two-stage
-input buffer. Two small inverters in the gate row, g5 (`ck_b` = NOT `ck_a`) and g6
-(`ck_a` = NOT `ck_b`), sit on the same lines; their depletion loads can pull a phase
-fully to VCC, which a source-follower pull-up cannot.
+input buffer.
 
-Where they go: `ck_a` and `ck_b` run right along the gate row and turn up into the
-core at x 13090 and x 13010. `ck_a` also goes up at x 12110 to a bus line, round by
-a line at y 18345, and off along the bottom bus field to the foot of the left bus
-field (6800,17990); this is the line first labelled `ck_src`. `ck_out` goes up into
-the core at x 10845-10870 and away to the left at y 19240-19262.
+Two small inverters in the gate row also sit on the phase lines: g6 pulls line A
+(`ck_a`) down when `ck_b` is high, and g5 pulls line B (`ck_b`) down when a third
+signal, `ck_src`, is high. Their depletion loads can pull a phase fully to VCC,
+which a source-follower pull-up cannot.
+
+**Correction (2026-11-15, from the trunks block, checked at 6x).** An earlier version
+of this note said `ck_src` was `ck_a` itself, joined by a link at y 18345. That link
+does not exist: the line at y 18335-18358 is `ck_out` and neither contact is there.
+`ck_src` is the output of the lone inverter at the left end of the input buffer row
+(`t_g0_out`), whose input comes down from the core (followed back to about
+(13565,15275); its source is not yet found). So `ck_b` is also held low whenever that
+core signal is low, and the same inverted signal is distributed along the bottom
+bus field and up the left bus field. What it is remains open; see
+`notes/blocks/trunks.md`.
+
+Where the clocks go (`notes/blocks/trunks.md` has the routes): `ck_a` and `ck_b` run
+right along the gate row and turn up into the core at x 13090 and x 13010; `ck_a`
+runs up the right edge of the mid-right array with a tap per row. `ck_out` leaves the
+clock block four ways.
 
 ## Gate row (11150-12150 x 18600-19000): traced
 
@@ -43,8 +55,8 @@ y 18795-18848. Two metal lines cross the loads: line A (y 18700-18722) and line 
 | g1, g2 | line B | `ck_g1`, `ck_g2` | so `ck_g2` = line B re-buffered |
 | g3, g4 | line A | `ck_g3`, `ck_g4` | so `ck_g4` = line A re-buffered |
 
-`ck_src` turned out to be `ck_a` itself (see the summary), so g5 and g6 are a
-cross-coupled pair sitting on the two phase lines. Lines A and B also continue right
+`ck_src` is not `ck_a` (see the correction in the summary): g5's input is the output
+of input-row gate 0. Lines A and B also continue right
 along the row to x 13010 / 13090, where they turn up into the core (not followed).
 
 ## Wiring region (11950-12900 x 18850-19950): traced
@@ -196,7 +208,7 @@ Checked against the clean shot of chip 1 (2026-11-15):
 Not yet traced here: the load of `ck_ga` (the small device at 10030-10160 x
 19430-19680 is the candidate), and whether `ck_ga` is bootstrapped.
 
-## Route of `ck_a` to the left of the die
+## Route of `ck_src` to the left of the die
 
 From the bus piece at y 18458-18480 (which g5's gate also hangs on): left to a contact
 at 10897,18468; a short poly link to a contact at 10808,18470 and, by a branch up at

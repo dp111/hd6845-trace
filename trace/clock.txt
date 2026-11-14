@@ -8,7 +8,7 @@
 # line A (y 18700-18722) and line B (y 18745-18768).
 # ====================================================================
 
-M 10760,18512:13050,18668          # VCC band (extent approximate)
+M 10862,18512:13050,18668          # VCC band (extent approximate)
 N M 11700,18600 vcc
 M 11160,18795:13380,18848          # VSS rail
 M 11160,18795:11200,18968          # ... turns down at its left end
@@ -528,16 +528,13 @@ D 11523,19368:11821,19505          # under the rail: S | gate node | b2 | VSS | 
 D 11551,19505:11821,19548
 N P 11884,19400 ck_b_pu
 
+# ---- CORRECTION (trunks block, checked at 6x): the link once drawn here between line A
+# and the ck_src bus piece does not exist. The line at y 18335-18358 is ck_out, and
+# neither contact is there. ck_src is the output of input-row gate 0 (see
+# notes/blocks/trunks.md). Gate 6's output does go up at x 12110 to the bus line below,
+# which is ck_a. The old (wrong) description is left for the record:
 # ---- line A is also the line first labelled ck_src: gate 6's output goes up at
 # x 12110 to the bus line at y 18455-18480, right to x 12740, up in poly to a line at
 # y 18345, left to x 11850 and down in poly to the bus piece that feeds gate 5 and the
 # long run to the left bus field. Seen at 1.1x; drawn roughly.
-@alias ck_a ck_src
-?M 12095,18455:12755,18480
-?C 12741,18467 s=22x22
-?P 12727,18335:12755,18480
-?C 12741,18347 s=22x22
-?M 11835,18335:12755,18358
-?C 11852,18347 s=22x22
-?P 11840,18335:11866,18480
-?C 11852,18467 s=22x22
+M 12095,18455:12755,18480

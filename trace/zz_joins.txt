@@ -1,0 +1,12 @@
+# Joins between blocks: names that different blocks gave to what tracing shows is one
+# net. Maintained by the coordinating session. Each line says where the join is.
+@block joins
+
+# address register (rdp3) to the decode rows and their inverters (areg), x 15800-15890
+@alias ar0 rdp3_ar_s1_q
+@alias ar1 rdp3_ar_s2_q
+@alias ar2 rdp3_ar_s3_q
+@alias ar3 rdp3_ar_s4_q
+@alias ar4 rdp3_ar_s5_q
+# its load strobe: areg's metal at x 16299 to rdp3's row-wide poly at (16285,13022)
+@alias areg_load rdp3_ar_ld
