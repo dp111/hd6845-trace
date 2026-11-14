@@ -2630,98 +2630,100 @@
 <text x="17356" y="19050" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t279<title>gate cs_clampg: vss - cs_p</title></text>
 </g>
 <g inkscape:groupmode="layer" inkscape:label="floorplan" id="layer-floorplan" style="display:none">
-<rect x="8570" y="720" width="760" height="760" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="14" stroke-dasharray="60 40"><title>1 VSS: pin 1, VSS</title></rect>
-<text x="8594" y="900" font-family="sans-serif" font-size="170" fill="#ffffff" stroke="#000000" stroke-width="14" paint-order="stroke">1 VSS ?</text>
-<rect x="7070" y="770" width="760" height="760" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="14" stroke-dasharray="60 40"><title>2 RES: pin 2, RES</title></rect>
-<text x="7094" y="950" font-family="sans-serif" font-size="170" fill="#ffffff" stroke="#000000" stroke-width="14" paint-order="stroke">2 RES ?</text>
-<rect x="5470" y="770" width="760" height="760" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="14" stroke-dasharray="60 40"><title>3 LPSTB: pin 3, LPSTB</title></rect>
-<text x="5494" y="943" font-family="sans-serif" font-size="163" fill="#ffffff" stroke="#000000" stroke-width="14" paint-order="stroke">3 LPSTB ?</text>
-<rect x="3970" y="770" width="760" height="760" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="14" stroke-dasharray="60 40"><title>4 MA0: pin 4, MA0</title></rect>
-<text x="3994" y="950" font-family="sans-serif" font-size="170" fill="#ffffff" stroke="#000000" stroke-width="14" paint-order="stroke">4 MA0 ?</text>
-<rect x="2420" y="770" width="760" height="760" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="14" stroke-dasharray="60 40"><title>5 MA1: pin 5, MA1</title></rect>
-<text x="2444" y="950" font-family="sans-serif" font-size="170" fill="#ffffff" stroke="#000000" stroke-width="14" paint-order="stroke">5 MA1 ?</text>
-<rect x="620" y="1020" width="760" height="760" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="14" stroke-dasharray="60 40"><title>6 MA2: pin 6, MA2</title></rect>
-<text x="644" y="1200" font-family="sans-serif" font-size="170" fill="#ffffff" stroke="#000000" stroke-width="14" paint-order="stroke">6 MA2 ?</text>
-<rect x="670" y="2620" width="760" height="760" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="14" stroke-dasharray="60 40"><title>7 MA3: pin 7, MA3</title></rect>
-<text x="694" y="2800" font-family="sans-serif" font-size="170" fill="#ffffff" stroke="#000000" stroke-width="14" paint-order="stroke">7 MA3 ?</text>
-<rect x="670" y="4320" width="760" height="760" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="14" stroke-dasharray="60 40"><title>8 MA4: pin 8, MA4</title></rect>
-<text x="694" y="4500" font-family="sans-serif" font-size="170" fill="#ffffff" stroke="#000000" stroke-width="14" paint-order="stroke">8 MA4 ?</text>
-<rect x="670" y="6270" width="760" height="760" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="14" stroke-dasharray="60 40"><title>9 MA5: pin 9, MA5</title></rect>
-<text x="694" y="6450" font-family="sans-serif" font-size="170" fill="#ffffff" stroke="#000000" stroke-width="14" paint-order="stroke">9 MA5 ?</text>
-<rect x="670" y="7870" width="760" height="760" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="14" stroke-dasharray="60 40"><title>10 MA6: pin 10, MA6</title></rect>
-<text x="694" y="8050" font-family="sans-serif" font-size="170" fill="#ffffff" stroke="#000000" stroke-width="14" paint-order="stroke">10 MA6 ?</text>
-<rect x="670" y="9520" width="760" height="760" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="14" stroke-dasharray="60 40"><title>11 MA7: pin 11, MA7</title></rect>
-<text x="694" y="9700" font-family="sans-serif" font-size="170" fill="#ffffff" stroke="#000000" stroke-width="14" paint-order="stroke">11 MA7 ?</text>
-<rect x="670" y="11320" width="760" height="760" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="14" stroke-dasharray="60 40"><title>12 MA8: pin 12, MA8</title></rect>
-<text x="694" y="11500" font-family="sans-serif" font-size="170" fill="#ffffff" stroke="#000000" stroke-width="14" paint-order="stroke">12 MA8 ?</text>
-<rect x="670" y="14220" width="760" height="760" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="14" stroke-dasharray="60 40"><title>13 MA9: pin 13, MA9</title></rect>
-<text x="694" y="14400" font-family="sans-serif" font-size="170" fill="#ffffff" stroke="#000000" stroke-width="14" paint-order="stroke">13 MA9 ?</text>
-<rect x="670" y="15770" width="760" height="760" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="14" stroke-dasharray="60 40"><title>14 MA10: pin 14, MA10</title></rect>
-<text x="694" y="15943" font-family="sans-serif" font-size="163" fill="#ffffff" stroke="#000000" stroke-width="14" paint-order="stroke">14 MA10 ?</text>
-<rect x="670" y="17470" width="760" height="760" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="14" stroke-dasharray="60 40"><title>15 MA11: pin 15, MA11</title></rect>
-<text x="694" y="17643" font-family="sans-serif" font-size="163" fill="#ffffff" stroke="#000000" stroke-width="14" paint-order="stroke">15 MA11 ?</text>
-<rect x="620" y="19320" width="760" height="760" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="14" stroke-dasharray="60 40"><title>16 MA12: pin 16, MA12</title></rect>
-<text x="644" y="19493" font-family="sans-serif" font-size="163" fill="#ffffff" stroke="#000000" stroke-width="14" paint-order="stroke">16 MA12 ?</text>
-<rect x="2770" y="19520" width="760" height="760" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="14" stroke-dasharray="60 40"><title>17 MA13: pin 17, MA13</title></rect>
-<text x="2794" y="19693" font-family="sans-serif" font-size="163" fill="#ffffff" stroke="#000000" stroke-width="14" paint-order="stroke">17 MA13 ?</text>
-<rect x="4920" y="19520" width="760" height="760" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="14" stroke-dasharray="60 40"><title>18 DISPTMG: pin 18, DISPTMG</title></rect>
-<text x="4944" y="19644" font-family="sans-serif" font-size="114" fill="#ffffff" stroke="#000000" stroke-width="10" paint-order="stroke">18 DISPTMG ?</text>
-<rect x="7120" y="19520" width="760" height="760" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="14" stroke-dasharray="60 40"><title>19 CUDISP: pin 19, CUDISP</title></rect>
-<text x="7144" y="19657" font-family="sans-serif" font-size="127" fill="#ffffff" stroke="#000000" stroke-width="11" paint-order="stroke">19 CUDISP ?</text>
-<rect x="8620" y="19470" width="760" height="760" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="14" stroke-dasharray="60 40"><title>20 VCC: pin 20, VCC</title></rect>
-<text x="8644" y="19650" font-family="sans-serif" font-size="170" fill="#ffffff" stroke="#000000" stroke-width="14" paint-order="stroke">20 VCC ?</text>
-<rect x="13020" y="19570" width="760" height="760" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="14" stroke-dasharray="60 40"><title>21 CLK: pin 21, CLK</title></rect>
-<text x="13044" y="19750" font-family="sans-serif" font-size="170" fill="#ffffff" stroke="#000000" stroke-width="14" paint-order="stroke">21 CLK ?</text>
-<rect x="13970" y="19520" width="760" height="760" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="14" stroke-dasharray="60 40"><title>22 R/W: pin 22, R/W</title></rect>
-<text x="13994" y="19700" font-family="sans-serif" font-size="170" fill="#ffffff" stroke="#000000" stroke-width="14" paint-order="stroke">22 R/W ?</text>
-<rect x="16120" y="19520" width="760" height="760" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="14" stroke-dasharray="60 40"><title>23 E: pin 23, E</title></rect>
-<text x="16144" y="19700" font-family="sans-serif" font-size="170" fill="#ffffff" stroke="#000000" stroke-width="14" paint-order="stroke">23 E ?</text>
-<rect x="17070" y="19520" width="760" height="760" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="14" stroke-dasharray="60 40"><title>24 RS: pin 24, RS</title></rect>
-<text x="17094" y="19700" font-family="sans-serif" font-size="170" fill="#ffffff" stroke="#000000" stroke-width="14" paint-order="stroke">24 RS ?</text>
-<rect x="18120" y="19520" width="760" height="760" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="14" stroke-dasharray="60 40"><title>25 CS: pin 25, CS</title></rect>
-<text x="18144" y="19700" font-family="sans-serif" font-size="170" fill="#ffffff" stroke="#000000" stroke-width="14" paint-order="stroke">25 CS ?</text>
-<rect x="18420" y="17270" width="760" height="760" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="14" stroke-dasharray="60 40"><title>26 D7: pin 26, D7</title></rect>
-<text x="18444" y="17450" font-family="sans-serif" font-size="170" fill="#ffffff" stroke="#000000" stroke-width="14" paint-order="stroke">26 D7 ?</text>
-<rect x="18420" y="15720" width="760" height="760" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="14" stroke-dasharray="60 40"><title>27 D6: pin 27, D6</title></rect>
-<text x="18444" y="15900" font-family="sans-serif" font-size="170" fill="#ffffff" stroke="#000000" stroke-width="14" paint-order="stroke">27 D6 ?</text>
-<rect x="18420" y="14120" width="760" height="760" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="14" stroke-dasharray="60 40"><title>28 D5: pin 28, D5</title></rect>
-<text x="18444" y="14300" font-family="sans-serif" font-size="170" fill="#ffffff" stroke="#000000" stroke-width="14" paint-order="stroke">28 D5 ?</text>
-<rect x="18420" y="12520" width="760" height="760" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="14" stroke-dasharray="60 40"><title>29 D4: pin 29, D4</title></rect>
-<text x="18444" y="12700" font-family="sans-serif" font-size="170" fill="#ffffff" stroke="#000000" stroke-width="14" paint-order="stroke">29 D4 ?</text>
-<rect x="18420" y="10920" width="760" height="760" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="14" stroke-dasharray="60 40"><title>30 D3: pin 30, D3</title></rect>
-<text x="18444" y="11100" font-family="sans-serif" font-size="170" fill="#ffffff" stroke="#000000" stroke-width="14" paint-order="stroke">30 D3 ?</text>
-<rect x="18420" y="9320" width="760" height="760" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="14" stroke-dasharray="60 40"><title>31 D2: pin 31, D2</title></rect>
-<text x="18444" y="9500" font-family="sans-serif" font-size="170" fill="#ffffff" stroke="#000000" stroke-width="14" paint-order="stroke">31 D2 ?</text>
-<rect x="18420" y="7570" width="760" height="760" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="14" stroke-dasharray="60 40"><title>32 D1: pin 32, D1</title></rect>
-<text x="18444" y="7750" font-family="sans-serif" font-size="170" fill="#ffffff" stroke="#000000" stroke-width="14" paint-order="stroke">32 D1 ?</text>
-<rect x="18420" y="5820" width="760" height="760" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="14" stroke-dasharray="60 40"><title>33 D0: pin 33, D0</title></rect>
-<text x="18444" y="6000" font-family="sans-serif" font-size="170" fill="#ffffff" stroke="#000000" stroke-width="14" paint-order="stroke">33 D0 ?</text>
-<rect x="18420" y="4270" width="760" height="760" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="14" stroke-dasharray="60 40"><title>34 RA4: pin 34, RA4</title></rect>
-<text x="18444" y="4450" font-family="sans-serif" font-size="170" fill="#ffffff" stroke="#000000" stroke-width="14" paint-order="stroke">34 RA4 ?</text>
-<rect x="18420" y="2370" width="760" height="760" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="14" stroke-dasharray="60 40"><title>35 RA3: pin 35, RA3</title></rect>
-<text x="18444" y="2550" font-family="sans-serif" font-size="170" fill="#ffffff" stroke="#000000" stroke-width="14" paint-order="stroke">35 RA3 ?</text>
-<rect x="18520" y="670" width="760" height="760" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="14" stroke-dasharray="60 40"><title>36 RA2: pin 36, RA2</title></rect>
-<text x="18544" y="850" font-family="sans-serif" font-size="170" fill="#ffffff" stroke="#000000" stroke-width="14" paint-order="stroke">36 RA2 ?</text>
-<rect x="16570" y="720" width="760" height="760" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="14" stroke-dasharray="60 40"><title>37 RA1: pin 37, RA1</title></rect>
-<text x="16594" y="900" font-family="sans-serif" font-size="170" fill="#ffffff" stroke="#000000" stroke-width="14" paint-order="stroke">37 RA1 ?</text>
-<rect x="14770" y="720" width="760" height="760" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="14" stroke-dasharray="60 40"><title>38 RA0: pin 38, RA0</title></rect>
-<text x="14794" y="900" font-family="sans-serif" font-size="170" fill="#ffffff" stroke="#000000" stroke-width="14" paint-order="stroke">38 RA0 ?</text>
-<rect x="13060" y="720" width="760" height="760" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="14" stroke-dasharray="60 40"><title>39 HSYNC: pin 39, HSYNC</title></rect>
-<text x="13084" y="872" font-family="sans-serif" font-size="142" fill="#ffffff" stroke="#000000" stroke-width="12" paint-order="stroke">39 HSYNC ?</text>
-<rect x="11320" y="720" width="760" height="760" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="14" stroke-dasharray="60 40"><title>40 VSYNC: pin 40, VSYNC</title></rect>
-<text x="11344" y="872" font-family="sans-serif" font-size="142" fill="#ffffff" stroke="#000000" stroke-width="12" paint-order="stroke">40 VSYNC ?</text>
+<rect x="8570" y="720" width="760" height="760" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="14"><title>1 VSS: pin 1, VSS</title></rect>
+<text x="8594" y="900" font-family="sans-serif" font-size="170" fill="#ffffff" stroke="#000000" stroke-width="14" paint-order="stroke">1 VSS</text>
+<rect x="7070" y="770" width="760" height="760" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="14"><title>2 RES: pin 2, RES</title></rect>
+<text x="7094" y="950" font-family="sans-serif" font-size="170" fill="#ffffff" stroke="#000000" stroke-width="14" paint-order="stroke">2 RES</text>
+<rect x="5470" y="770" width="760" height="760" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="14"><title>3 LPSTB: pin 3, LPSTB</title></rect>
+<text x="5494" y="943" font-family="sans-serif" font-size="163" fill="#ffffff" stroke="#000000" stroke-width="14" paint-order="stroke">3 LPSTB</text>
+<rect x="3970" y="770" width="760" height="760" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="14"><title>4 MA0: pin 4, MA0</title></rect>
+<text x="3994" y="950" font-family="sans-serif" font-size="170" fill="#ffffff" stroke="#000000" stroke-width="14" paint-order="stroke">4 MA0</text>
+<rect x="2420" y="770" width="760" height="760" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="14"><title>5 MA1: pin 5, MA1</title></rect>
+<text x="2444" y="950" font-family="sans-serif" font-size="170" fill="#ffffff" stroke="#000000" stroke-width="14" paint-order="stroke">5 MA1</text>
+<rect x="620" y="1020" width="760" height="760" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="14"><title>6 MA2: pin 6, MA2</title></rect>
+<text x="644" y="1200" font-family="sans-serif" font-size="170" fill="#ffffff" stroke="#000000" stroke-width="14" paint-order="stroke">6 MA2</text>
+<rect x="670" y="2620" width="760" height="760" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="14"><title>7 MA3: pin 7, MA3</title></rect>
+<text x="694" y="2800" font-family="sans-serif" font-size="170" fill="#ffffff" stroke="#000000" stroke-width="14" paint-order="stroke">7 MA3</text>
+<rect x="670" y="4320" width="760" height="760" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="14"><title>8 MA4: pin 8, MA4</title></rect>
+<text x="694" y="4500" font-family="sans-serif" font-size="170" fill="#ffffff" stroke="#000000" stroke-width="14" paint-order="stroke">8 MA4</text>
+<rect x="670" y="6270" width="760" height="760" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="14"><title>9 MA5: pin 9, MA5</title></rect>
+<text x="694" y="6450" font-family="sans-serif" font-size="170" fill="#ffffff" stroke="#000000" stroke-width="14" paint-order="stroke">9 MA5</text>
+<rect x="670" y="7870" width="760" height="760" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="14"><title>10 MA6: pin 10, MA6</title></rect>
+<text x="694" y="8050" font-family="sans-serif" font-size="170" fill="#ffffff" stroke="#000000" stroke-width="14" paint-order="stroke">10 MA6</text>
+<rect x="670" y="9520" width="760" height="760" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="14"><title>11 MA7: pin 11, MA7</title></rect>
+<text x="694" y="9700" font-family="sans-serif" font-size="170" fill="#ffffff" stroke="#000000" stroke-width="14" paint-order="stroke">11 MA7</text>
+<rect x="670" y="11320" width="760" height="760" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="14"><title>12 MA8: pin 12, MA8</title></rect>
+<text x="694" y="11500" font-family="sans-serif" font-size="170" fill="#ffffff" stroke="#000000" stroke-width="14" paint-order="stroke">12 MA8</text>
+<rect x="670" y="14220" width="760" height="760" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="14"><title>13 MA9: pin 13, MA9</title></rect>
+<text x="694" y="14400" font-family="sans-serif" font-size="170" fill="#ffffff" stroke="#000000" stroke-width="14" paint-order="stroke">13 MA9</text>
+<rect x="670" y="15770" width="760" height="760" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="14"><title>14 MA10: pin 14, MA10</title></rect>
+<text x="694" y="15943" font-family="sans-serif" font-size="163" fill="#ffffff" stroke="#000000" stroke-width="14" paint-order="stroke">14 MA10</text>
+<rect x="670" y="17470" width="760" height="760" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="14"><title>15 MA11: pin 15, MA11</title></rect>
+<text x="694" y="17643" font-family="sans-serif" font-size="163" fill="#ffffff" stroke="#000000" stroke-width="14" paint-order="stroke">15 MA11</text>
+<rect x="620" y="19320" width="760" height="760" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="14"><title>16 MA12: pin 16, MA12</title></rect>
+<text x="644" y="19493" font-family="sans-serif" font-size="163" fill="#ffffff" stroke="#000000" stroke-width="14" paint-order="stroke">16 MA12</text>
+<rect x="2770" y="19520" width="760" height="760" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="14"><title>17 MA13: pin 17, MA13</title></rect>
+<text x="2794" y="19693" font-family="sans-serif" font-size="163" fill="#ffffff" stroke="#000000" stroke-width="14" paint-order="stroke">17 MA13</text>
+<rect x="4920" y="19520" width="760" height="760" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="14"><title>18 DISPTMG: pin 18, DISPTMG</title></rect>
+<text x="4944" y="19644" font-family="sans-serif" font-size="114" fill="#ffffff" stroke="#000000" stroke-width="10" paint-order="stroke">18 DISPTMG</text>
+<rect x="7120" y="19520" width="760" height="760" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="14"><title>19 CUDISP: pin 19, CUDISP</title></rect>
+<text x="7144" y="19657" font-family="sans-serif" font-size="127" fill="#ffffff" stroke="#000000" stroke-width="11" paint-order="stroke">19 CUDISP</text>
+<rect x="8620" y="19470" width="760" height="760" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="14"><title>20 VCC: pin 20, VCC</title></rect>
+<text x="8644" y="19650" font-family="sans-serif" font-size="170" fill="#ffffff" stroke="#000000" stroke-width="14" paint-order="stroke">20 VCC</text>
+<rect x="13020" y="19570" width="760" height="760" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="14"><title>21 CLK: pin 21, CLK</title></rect>
+<text x="13044" y="19750" font-family="sans-serif" font-size="170" fill="#ffffff" stroke="#000000" stroke-width="14" paint-order="stroke">21 CLK</text>
+<rect x="13970" y="19520" width="760" height="760" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="14"><title>22 R/W: pin 22, R/W</title></rect>
+<text x="13994" y="19700" font-family="sans-serif" font-size="170" fill="#ffffff" stroke="#000000" stroke-width="14" paint-order="stroke">22 R/W</text>
+<rect x="16120" y="19520" width="760" height="760" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="14"><title>23 E: pin 23, E</title></rect>
+<text x="16144" y="19700" font-family="sans-serif" font-size="170" fill="#ffffff" stroke="#000000" stroke-width="14" paint-order="stroke">23 E</text>
+<rect x="17070" y="19520" width="760" height="760" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="14"><title>24 RS: pin 24, RS</title></rect>
+<text x="17094" y="19700" font-family="sans-serif" font-size="170" fill="#ffffff" stroke="#000000" stroke-width="14" paint-order="stroke">24 RS</text>
+<rect x="18120" y="19520" width="760" height="760" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="14"><title>25 CS: pin 25, CS</title></rect>
+<text x="18144" y="19700" font-family="sans-serif" font-size="170" fill="#ffffff" stroke="#000000" stroke-width="14" paint-order="stroke">25 CS</text>
+<rect x="18420" y="17270" width="760" height="760" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="14"><title>26 D7: pin 26, D7</title></rect>
+<text x="18444" y="17450" font-family="sans-serif" font-size="170" fill="#ffffff" stroke="#000000" stroke-width="14" paint-order="stroke">26 D7</text>
+<rect x="18420" y="15720" width="760" height="760" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="14"><title>27 D6: pin 27, D6</title></rect>
+<text x="18444" y="15900" font-family="sans-serif" font-size="170" fill="#ffffff" stroke="#000000" stroke-width="14" paint-order="stroke">27 D6</text>
+<rect x="18420" y="14120" width="760" height="760" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="14"><title>28 D5: pin 28, D5</title></rect>
+<text x="18444" y="14300" font-family="sans-serif" font-size="170" fill="#ffffff" stroke="#000000" stroke-width="14" paint-order="stroke">28 D5</text>
+<rect x="18420" y="12520" width="760" height="760" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="14"><title>29 D4: pin 29, D4</title></rect>
+<text x="18444" y="12700" font-family="sans-serif" font-size="170" fill="#ffffff" stroke="#000000" stroke-width="14" paint-order="stroke">29 D4</text>
+<rect x="18420" y="10920" width="760" height="760" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="14"><title>30 D3: pin 30, D3</title></rect>
+<text x="18444" y="11100" font-family="sans-serif" font-size="170" fill="#ffffff" stroke="#000000" stroke-width="14" paint-order="stroke">30 D3</text>
+<rect x="18420" y="9320" width="760" height="760" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="14"><title>31 D2: pin 31, D2</title></rect>
+<text x="18444" y="9500" font-family="sans-serif" font-size="170" fill="#ffffff" stroke="#000000" stroke-width="14" paint-order="stroke">31 D2</text>
+<rect x="18420" y="7570" width="760" height="760" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="14"><title>32 D1: pin 32, D1</title></rect>
+<text x="18444" y="7750" font-family="sans-serif" font-size="170" fill="#ffffff" stroke="#000000" stroke-width="14" paint-order="stroke">32 D1</text>
+<rect x="18420" y="5820" width="760" height="760" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="14"><title>33 D0: pin 33, D0</title></rect>
+<text x="18444" y="6000" font-family="sans-serif" font-size="170" fill="#ffffff" stroke="#000000" stroke-width="14" paint-order="stroke">33 D0</text>
+<rect x="18420" y="4270" width="760" height="760" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="14"><title>34 RA4: pin 34, RA4</title></rect>
+<text x="18444" y="4450" font-family="sans-serif" font-size="170" fill="#ffffff" stroke="#000000" stroke-width="14" paint-order="stroke">34 RA4</text>
+<rect x="18420" y="2370" width="760" height="760" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="14"><title>35 RA3: pin 35, RA3</title></rect>
+<text x="18444" y="2550" font-family="sans-serif" font-size="170" fill="#ffffff" stroke="#000000" stroke-width="14" paint-order="stroke">35 RA3</text>
+<rect x="18520" y="670" width="760" height="760" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="14"><title>36 RA2: pin 36, RA2</title></rect>
+<text x="18544" y="850" font-family="sans-serif" font-size="170" fill="#ffffff" stroke="#000000" stroke-width="14" paint-order="stroke">36 RA2</text>
+<rect x="16570" y="720" width="760" height="760" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="14"><title>37 RA1: pin 37, RA1</title></rect>
+<text x="16594" y="900" font-family="sans-serif" font-size="170" fill="#ffffff" stroke="#000000" stroke-width="14" paint-order="stroke">37 RA1</text>
+<rect x="14770" y="720" width="760" height="760" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="14"><title>38 RA0: pin 38, RA0</title></rect>
+<text x="14794" y="900" font-family="sans-serif" font-size="170" fill="#ffffff" stroke="#000000" stroke-width="14" paint-order="stroke">38 RA0</text>
+<rect x="13060" y="720" width="760" height="760" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="14"><title>39 HSYNC: pin 39, HSYNC</title></rect>
+<text x="13084" y="872" font-family="sans-serif" font-size="142" fill="#ffffff" stroke="#000000" stroke-width="12" paint-order="stroke">39 HSYNC</text>
+<rect x="11320" y="720" width="760" height="760" fill="#ffffff" fill-opacity="0.12" stroke="#ffffff" stroke-width="14"><title>40 VSYNC: pin 40, VSYNC</title></rect>
+<text x="11344" y="872" font-family="sans-serif" font-size="142" fill="#ffffff" stroke="#000000" stroke-width="12" paint-order="stroke">40 VSYNC</text>
 <rect x="6950" y="1640" width="1050" height="420" fill="#ffc800" fill-opacity="0.12" stroke="#ffc800" stroke-width="14" stroke-dasharray="60 40"><title>RES/LPSTB input buffers: two identical two-stage buffers between the RES and LPSTB pads</title></rect>
 <text x="6974" y="1720" font-family="sans-serif" font-size="70" fill="#ffffff" stroke="#000000" stroke-width="6" paint-order="stroke">RES/LPSTB input buffers ?</text>
 <rect x="6380" y="840" width="510" height="460" fill="#ffc800" fill-opacity="0.12" stroke="#ffc800" stroke-width="14" stroke-dasharray="60 40"><title>input protection: comb structure between LPSTB and RES pads</title></rect>
 <text x="6404" y="920" font-family="sans-serif" font-size="70" fill="#ffffff" stroke="#000000" stroke-width="6" paint-order="stroke">input protection ?</text>
-<rect x="13650" y="18150" width="3900" height="470" fill="#ffc800" fill-opacity="0.12" stroke="#ffc800" stroke-width="14" stroke-dasharray="60 40"><title>input buffers: row of buffers for CLK, R/W, E, RS, CS</title></rect>
-<text x="13674" y="18330" font-family="sans-serif" font-size="170" fill="#ffffff" stroke="#000000" stroke-width="14" paint-order="stroke">input buffers ?</text>
-<rect x="13650" y="18930" width="3900" height="330" fill="#ffc800" fill-opacity="0.12" stroke="#ffc800" stroke-width="14" stroke-dasharray="60 40"><title>input protection: five identical structures above the bottom-right input pads</title></rect>
-<text x="13674" y="19110" font-family="sans-serif" font-size="170" fill="#ffffff" stroke="#000000" stroke-width="14" paint-order="stroke">input protection ?</text>
-<rect x="9550" y="19050" width="2750" height="900" fill="#ffc800" fill-opacity="0.12" stroke="#ffc800" stroke-width="14" stroke-dasharray="60 40"><title>clock driver: large transistors between VCC pad and CLK pad</title></rect>
+<rect x="13690" y="18130" width="3790" height="430" fill="#ffc800" fill-opacity="0.12" stroke="#ffc800" stroke-width="14"><title>input buffers: CLK and E: three-finger inverter then two-finger inverter. R/W, RS, CS: chain of four inverters each, both polarities available. One more inverter at the left end</title></rect>
+<text x="13714" y="18310" font-family="sans-serif" font-size="170" fill="#ffffff" stroke="#000000" stroke-width="14" paint-order="stroke">input buffers</text>
+<rect x="13820" y="18940" width="3770" height="285" fill="#ffc800" fill-opacity="0.12" stroke="#ffc800" stroke-width="14"><title>input protection: five clamp cells in order CLK, R/W, E, RS, CS; each pad reaches its cell through a resistive strip</title></rect>
+<text x="13844" y="19120" font-family="sans-serif" font-size="170" fill="#ffffff" stroke="#000000" stroke-width="14" paint-order="stroke">input protection</text>
+<rect x="9550" y="19050" width="2750" height="900" fill="#ffc800" fill-opacity="0.12" stroke="#ffc800" stroke-width="14" stroke-dasharray="60 40"><title>clock driver: large transistors between VCC pad and CLK pad; buffered CLK from the input row heads this way</title></rect>
 <text x="9574" y="19230" font-family="sans-serif" font-size="170" fill="#ffffff" stroke="#000000" stroke-width="14" paint-order="stroke">clock driver ?</text>
 <rect x="17050" y="5300" width="650" height="11700" fill="#ff5050" fill-opacity="0.12" stroke="#ff5050" stroke-width="14" stroke-dasharray="60 40"><title>data bus interface: column of logic beside the D0-D7 pads</title></rect>
 <text x="17074" y="5380" font-family="sans-serif" font-size="70" fill="#ffffff" stroke="#000000" stroke-width="6" paint-order="stroke">data bus interface ?</text>
+<rect x="17720" y="5950" width="1430" height="13200" fill="#ffc800" fill-opacity="0.12" stroke="#ffc800" stroke-width="14" stroke-dasharray="60 40"><title>D0-D7 pad cells: eight identical cells, 1600-1735 px apart: tri-state driver with its pre-driver under the VCC band, input protection above. Located, not yet fully traced (AMB-003)</title></rect>
+<text x="17744" y="6103" font-family="sans-serif" font-size="143" fill="#ffffff" stroke="#000000" stroke-width="12" paint-order="stroke">D0-D7 pad cells ?</text>
 <rect x="7600" y="2950" width="3250" height="11050" fill="#00dcff" fill-opacity="0.12" stroke="#00dcff" stroke-width="14" stroke-dasharray="60 40"><title>central datapath (8 x 390 px): horizontal bit-slices, 390.3 px pitch: counters, comparators and registers for the horizontal and vertical timing</title></rect>
 <text x="7624" y="3128" font-family="sans-serif" font-size="168" fill="#ffffff" stroke="#000000" stroke-width="14" paint-order="stroke">central datapath (8 x 390 px) ?</text>
 <rect x="13350" y="5450" width="3600" height="7100" fill="#00dcff" fill-opacity="0.12" stroke="#00dcff" stroke-width="14" stroke-dasharray="60 40"><title>right datapath (8-9 x 390 px): horizontal bit-slices, 390.3 px pitch, nearest the data bus pads</title></rect>

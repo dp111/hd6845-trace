@@ -2,59 +2,59 @@
 #   x0,y0:x1,y1  kind  name | description
 # kind: pad io array pla logic route test power unknown.  '?' = provisional.
 #
-# Status (M0): everything here comes from a visual survey at 0.2x plus the pinout.
-# Pad names follow from VSS/VCC and counting round the die; they become firm in M1.
-# Block functions are guesses from shape and position until the block is traced.
+# Status: pads are confirmed (M1). Blocks without a '?' have been traced. The rest
+# comes from a visual survey at 0.2x and is a guess from shape and position.
 
 # --- pads (centre +/- 380 px)
-8570,720:9330,1480  ?pad  1 VSS | pin 1, VSS
-7070,770:7830,1530  ?pad  2 RES | pin 2, RES
-5470,770:6230,1530  ?pad  3 LPSTB | pin 3, LPSTB
-3970,770:4730,1530  ?pad  4 MA0 | pin 4, MA0
-2420,770:3180,1530  ?pad  5 MA1 | pin 5, MA1
-620,1020:1380,1780  ?pad  6 MA2 | pin 6, MA2
-670,2620:1430,3380  ?pad  7 MA3 | pin 7, MA3
-670,4320:1430,5080  ?pad  8 MA4 | pin 8, MA4
-670,6270:1430,7030  ?pad  9 MA5 | pin 9, MA5
-670,7870:1430,8630  ?pad  10 MA6 | pin 10, MA6
-670,9520:1430,10280  ?pad  11 MA7 | pin 11, MA7
-670,11320:1430,12080  ?pad  12 MA8 | pin 12, MA8
-670,14220:1430,14980  ?pad  13 MA9 | pin 13, MA9
-670,15770:1430,16530  ?pad  14 MA10 | pin 14, MA10
-670,17470:1430,18230  ?pad  15 MA11 | pin 15, MA11
-620,19320:1380,20080  ?pad  16 MA12 | pin 16, MA12
-2770,19520:3530,20280  ?pad  17 MA13 | pin 17, MA13
-4920,19520:5680,20280  ?pad  18 DISPTMG | pin 18, DISPTMG
-7120,19520:7880,20280  ?pad  19 CUDISP | pin 19, CUDISP
-8620,19470:9380,20230  ?pad  20 VCC | pin 20, VCC
-13020,19570:13780,20330  ?pad  21 CLK | pin 21, CLK
-13970,19520:14730,20280  ?pad  22 R/W | pin 22, R/W
-16120,19520:16880,20280  ?pad  23 E | pin 23, E
-17070,19520:17830,20280  ?pad  24 RS | pin 24, RS
-18120,19520:18880,20280  ?pad  25 CS | pin 25, CS
-18420,17270:19180,18030  ?pad  26 D7 | pin 26, D7
-18420,15720:19180,16480  ?pad  27 D6 | pin 27, D6
-18420,14120:19180,14880  ?pad  28 D5 | pin 28, D5
-18420,12520:19180,13280  ?pad  29 D4 | pin 29, D4
-18420,10920:19180,11680  ?pad  30 D3 | pin 30, D3
-18420,9320:19180,10080  ?pad  31 D2 | pin 31, D2
-18420,7570:19180,8330  ?pad  32 D1 | pin 32, D1
-18420,5820:19180,6580  ?pad  33 D0 | pin 33, D0
-18420,4270:19180,5030  ?pad  34 RA4 | pin 34, RA4
-18420,2370:19180,3130  ?pad  35 RA3 | pin 35, RA3
-18520,670:19280,1430  ?pad  36 RA2 | pin 36, RA2
-16570,720:17330,1480  ?pad  37 RA1 | pin 37, RA1
-14770,720:15530,1480  ?pad  38 RA0 | pin 38, RA0
-13060,720:13820,1480  ?pad  39 HSYNC | pin 39, HSYNC
-11320,720:12080,1480  ?pad  40 VSYNC | pin 40, VSYNC
+8570,720:9330,1480  pad  1 VSS | pin 1, VSS
+7070,770:7830,1530  pad  2 RES | pin 2, RES
+5470,770:6230,1530  pad  3 LPSTB | pin 3, LPSTB
+3970,770:4730,1530  pad  4 MA0 | pin 4, MA0
+2420,770:3180,1530  pad  5 MA1 | pin 5, MA1
+620,1020:1380,1780  pad  6 MA2 | pin 6, MA2
+670,2620:1430,3380  pad  7 MA3 | pin 7, MA3
+670,4320:1430,5080  pad  8 MA4 | pin 8, MA4
+670,6270:1430,7030  pad  9 MA5 | pin 9, MA5
+670,7870:1430,8630  pad  10 MA6 | pin 10, MA6
+670,9520:1430,10280  pad  11 MA7 | pin 11, MA7
+670,11320:1430,12080  pad  12 MA8 | pin 12, MA8
+670,14220:1430,14980  pad  13 MA9 | pin 13, MA9
+670,15770:1430,16530  pad  14 MA10 | pin 14, MA10
+670,17470:1430,18230  pad  15 MA11 | pin 15, MA11
+620,19320:1380,20080  pad  16 MA12 | pin 16, MA12
+2770,19520:3530,20280  pad  17 MA13 | pin 17, MA13
+4920,19520:5680,20280  pad  18 DISPTMG | pin 18, DISPTMG
+7120,19520:7880,20280  pad  19 CUDISP | pin 19, CUDISP
+8620,19470:9380,20230  pad  20 VCC | pin 20, VCC
+13020,19570:13780,20330  pad  21 CLK | pin 21, CLK
+13970,19520:14730,20280  pad  22 R/W | pin 22, R/W
+16120,19520:16880,20280  pad  23 E | pin 23, E
+17070,19520:17830,20280  pad  24 RS | pin 24, RS
+18120,19520:18880,20280  pad  25 CS | pin 25, CS
+18420,17270:19180,18030  pad  26 D7 | pin 26, D7
+18420,15720:19180,16480  pad  27 D6 | pin 27, D6
+18420,14120:19180,14880  pad  28 D5 | pin 28, D5
+18420,12520:19180,13280  pad  29 D4 | pin 29, D4
+18420,10920:19180,11680  pad  30 D3 | pin 30, D3
+18420,9320:19180,10080  pad  31 D2 | pin 31, D2
+18420,7570:19180,8330  pad  32 D1 | pin 32, D1
+18420,5820:19180,6580  pad  33 D0 | pin 33, D0
+18420,4270:19180,5030  pad  34 RA4 | pin 34, RA4
+18420,2370:19180,3130  pad  35 RA3 | pin 35, RA3
+18520,670:19280,1430  pad  36 RA2 | pin 36, RA2
+16570,720:17330,1480  pad  37 RA1 | pin 37, RA1
+14770,720:15530,1480  pad  38 RA0 | pin 38, RA0
+13060,720:13820,1480  pad  39 HSYNC | pin 39, HSYNC
+11320,720:12080,1480  pad  40 VSYNC | pin 40, VSYNC
 
 # --- I/O circuits other than the plain output drivers beside each pad
 6950,1640:8000,2060     ?io     RES/LPSTB input buffers | two identical two-stage buffers between the RES and LPSTB pads
 6380,840:6890,1300      ?io     input protection | comb structure between LPSTB and RES pads
-13650,18150:17550,18620 ?io     input buffers | row of buffers for CLK, R/W, E, RS, CS
-13650,18930:17550,19260 ?io     input protection | five identical structures above the bottom-right input pads
-9550,19050:12300,19950  ?io     clock driver | large transistors between VCC pad and CLK pad
+13690,18130:17480,18560 io      input buffers | CLK and E: three-finger inverter then two-finger inverter. R/W, RS, CS: chain of four inverters each, both polarities available. One more inverter at the left end
+13820,18940:17590,19225 io      input protection | five clamp cells in order CLK, R/W, E, RS, CS; each pad reaches its cell through a resistive strip
+9550,19050:12300,19950  ?io     clock driver | large transistors between VCC pad and CLK pad; buffered CLK from the input row heads this way
 17050,5300:17700,17000  ?logic  data bus interface | column of logic beside the D0-D7 pads
+17720,5950:19150,19150  ?io     D0-D7 pad cells | eight identical cells, 1600-1735 px apart: tri-state driver with its pre-driver under the VCC band, input protection above. Located, not yet fully traced (AMB-003)
 
 # --- regular arrays
 7600,2950:10850,14000   ?array  central datapath (8 x 390 px) | horizontal bit-slices, 390.3 px pitch: counters, comparators and registers for the horizontal and vertical timing
