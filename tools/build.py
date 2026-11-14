@@ -2,7 +2,7 @@
 """Build everything in out/ from trace/.
 
   out/hd6845s.svg     the trace as an SVG in metal-shot coordinates, with Inkscape
-                      layers and both die photos linked as background layers
+                      layers and all five die photos linked as background layers
   out/netlist.json    extracted transistor netlist
   out/report.txt      rule-check report and recovered gates
   out/floorplan.jpg   the die at reduced scale with the functional blocks outlined
@@ -61,9 +61,25 @@ def read_floorplan():
     return blocks
 
 
-def acid_matrix():
-    """SVG matrix placing the raw acid shot in metal-shot coordinates."""
-    T = np.array(json.load(open(os.path.join(ROOT, 'trace', 'align.json')))['metal_to_acid'])
+PHOTOS = [   # (layer name, file, size, key in trace/align.json, visible)
+    ('photo-clean-chip1', 'hd6845acid2.jpg', (19860, 21053), 'acid1b', False),
+    ('photo-stripped-chip1', 'hd6845acid.jpg', (19872, 21056), 'acid1', False),
+    ('photo-metal-chip1', 'hd6845metal.jpg', (19885, 21057), 'metal1', False),
+    ('photo-stripped-chip2', 'hd6845acid2ndchip.jpg', (19857, 21029), 'acid', False),
+]
+
+
+def photo_matrix(key):
+    """SVG matrix placing a raw photo in reference (chip-2 metal) coordinates.
+
+    Uses the affine part of the registration only; tools/align.py also applies a
+    smooth correction of up to a pixel or two that an SVG transform cannot express.
+    """
+    rec = json.load(open(os.path.join(ROOT, 'trace', 'align.json')))
+    if key in rec and 'ref_to_src_affine' in rec[key]:
+        T = np.array(rec[key]['ref_to_src_affine'])
+    else:
+        T = np.array(rec.get('acid_old_affine', rec)['metal_to_acid'])
     A = np.linalg.inv(T[:, :2])
     t = -A @ T[:, 2]
     return 'matrix(%.8f %.8f %.8f %.8f %.4f %.4f)' % (A[0, 0], A[1, 0], A[0, 1], A[1, 1], t[0], t[1])
@@ -112,10 +128,11 @@ def build_svg(tr, nl, blocks):
             f'width="{W}" height="{H}" viewBox="0 0 {W} {H}">\n'
             f'<title>HD6845S trace (coordinates are pixels of hd6845metal2ndchip.jpg)</title>\n')
     out = [head]
-    out.append(svg_layer('photo-acid',
-                         f'<image xlink:href="../dieshots/hd6845acid2ndchip.jpg" x="0" y="0" '
-                         f'width="19857" height="21029" transform="{acid_matrix()}"/>\n', False))
-    out.append(svg_layer('photo-metal',
+    for name, fname, (pw, ph), key, vis in PHOTOS:
+        out.append(svg_layer(name,
+                             f'<image xlink:href="../dieshots/{fname}" x="0" y="0" '
+                             f'width="{pw}" height="{ph}" transform="{photo_matrix(key)}"/>\n', vis))
+    out.append(svg_layer('photo-metal-chip2',
                          f'<image xlink:href="../dieshots/hd6845metal2ndchip.jpg" x="0" y="0" '
                          f'width="{W}" height="{H}"/>\n'))
     for layer in ('D', 'P', 'M', 'C', 'B'):

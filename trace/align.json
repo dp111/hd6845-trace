@@ -72,5 +72,24 @@
   "patches_used": 237,
   "affine_residual_rms_px": 1.1831869801799997,
   "residual_after_correction_rms_px": 0.9811996500513098
+ },
+ "acid": {
+  "source": "hd6845acid2ndchip.jpg",
+  "matched_against": "metal",
+  "ref_to_src_affine": [
+   [
+    0.9999611769037541,
+    -0.0001807996830942326,
+    12.422014800745892
+   ],
+   [
+    0.00012069655143933449,
+    0.9998962327085142,
+    7.935735036436153
+   ]
+  ],
+  "patches_used": 418,
+  "affine_residual_rms_px": 0.8082634104199157,
+  "residual_after_correction_rms_px": 0.7030751906856488
  }
 }
