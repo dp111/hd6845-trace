@@ -120,3 +120,56 @@ N P 16364,14690 areg_w7
 # wide metal rail x 16402-16451, full height of the region. Supply not identified.
 M 16426,12900 y14700 w=49
 N M 16426,13000 areg_rail_r
+
+# ---------------------------------------------------------------------------------
+# Fifth address register cell (x 15745-16150, y 13000-13290): the rightmost of the row of
+# five above the decode array (the other four, every 390 px to the left, are rdp3's).
+# PARTIAL. Drawn: the write path (data line, pass transistor, storage node), the output
+# inverter with its load, the strap from its output to the line that feeds row pair 4.
+# Not drawn: the first inverter's load, what joins areg_s4_n to areg_g1, the static
+# feedback to the storage node, the contacts of straps M2 and M5. See notes/blocks/areg.md.
+@s 26x26
+# --- write path
+M 15797,12900 y13275 w=20          # data line: thin metal from above, ends at y 13275
+N M 15797,12910 areg_din4
+C 15797,13037                      # data line to the top of the diffusion strip
+D [ 15778,13013 x15822 y13043 x15848 y13104 x15778 ]   # strip: top - pass channel - bottom
+P 15772,13061:15856,13081          # pass gate: band of the strobe poly
+P 15852,13015:15872,13083          # strobe poly: strip joining the band to the top band
+N P 15862,13040 areg_load
+P 15803,13089:15850,13108          # storage node poly, on the buried contact
+B 15799,13085:15853,13111          # bottom of the strip to the storage node poly
+?P 15803,13105:15815,13132         # storage poly going down at the right edge of the data line
+?P 15781,13128:15812,13146         # ... widening under the data line
+P 15781,13140:15801,13228          # storage poly under the data line: gate of the first inverter
+N P 15791,13215 areg_s4
+# --- first inverter's pull-down (its load is not drawn)
+D 15745,13150:15822,13200
+N D 15752,13175 areg_c5_src        # runs on left to the next cell's VSS rail contact (15728,13165): not drawn
+N D 15812,13175 areg_s4_n
+# --- output inverter
+D 15885,13050:15962,13099          # VCC land
+C 15930,13069
+D 15955,13070:16045,13095          # strip under the load gate
+D 16027,13070:16045,13105          # ... turning down into the output node
+D [ 16026,13100 x16126 y13127 x16157 y13182 x16098 y13150 x16026 ]   # output node - pull-down channel - VSS land
+C 16118,13152 s=28x30              # VSS rail to the pull-down's source
+P 15966,13062:16022,13145          # load gate (upper part) and contact pad (lower part), one poly
+P 16018,13112:16052,13148          # ... extension onto the output node
+B 16023,13108:16056,13152          # load gate tied to the output node
+C 15995,13127                      # pad to the strap
+M 15988,13110:16028,13238          # strap M4: pad to the diffusion below
+C 16008,13215
+D 15989,13194:16040,13245          # diffusion under the strap's lower contact
+D 16035,13225:16076,13245          # ... extension to the right
+P 16055,13230:16075,13285          # output poly (to row pair 4), starts on that extension
+B 16050,13222:16080,13249          # ?? read as a buried contact (no contact mark in the clean shot)
+P 16071,13092:16090,13182          # pull-down gate
+P 15919,13160:16090,13182          # ... is the end of a horizontal poly band
+P 15919,13106:15944,13185          # ... which comes from a vertical piece under the VCC rail
+N P 15931,13130 areg_g1
+# --- straps whose contacts are not resolved
+M 15887,13015 y13275 w=20          # M2: from the top band to the bottom poly band
+N M 15887,13200 areg_m2
+M 16059,13015 y13272 w=18          # M5: from the top band to above the output poly
+N M 16059,13200 areg_m5
