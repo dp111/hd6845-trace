@@ -1,11 +1,6 @@
 # derived data, rebuilt by tools/prepare.py
 cache/
 
-# third-party inputs: left out of git until it is decided whether they belong here
-dieshots/
-datasheets/
-docs/
-
 .venv/
 __pycache__/
 *.pyc
