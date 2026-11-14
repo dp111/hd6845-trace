@@ -70,46 +70,52 @@ Read so far (D0 coordinates), all still to be confirmed by trace and extraction:
   above (U', y 7225-7266) and below (L', y 7316-7359). Two poly lines enter from the
   bus-interface side: P_x (y 7399-7422, turning up at x 18170) and P_y (y 7465-7492).
 
-Re-read from the clean shot of chip 1 (2026-11-15, in progress). Under the VCC band
-the clean shot shows poly as salmon, and chip 1's metal shot shows the outlines under
-the band much better than chip 2's. Not yet in the trace.
+Re-read from the clean shot of chip 1 with the eight-cell metal composite
+(2026-11-15). Much more is now established, but the cell has more logic than the
+"two lines in, two gates out" picture assumed, and it is still not traced. Parked
+again (AMB-003); the facts below are the starting point for finishing it.
 
-Rows right of the band (x 18222-18670), all diffusion with metal contacts:
+Established (D0 coordinates):
 
-| Row | y | x | Net |
-|---|---|---|---|
-| G | 7178-7228 | 18222-18670 | VCC (joined to K by the vertical metal at x 18228-18246) |
-| H | 7255-7300 | 18222-18600 | to be named |
-| I | 7325-7375 | 18222-18600 | to be named |
-| J | 7405-7450 | 18260-18465 | VSS (wide metal bar to the right) |
-| K | 7495-7545 | 18222-18360 | VCC, three contacts |
+1. Straps. S1 (metal, x 17857-17882) collects the pull-up gates; S2 (x 17797-17822)
+   the pull-down gates 6870 and 6947. Each also contacts a diffusion:
+   - S1 at (17862,7208), box 17845-17887 x 7180-7247, and again at its lower end at
+     (17855,7512), box 17840-17885 x 7495-7545.
+   - S2 at (17815,7335), box 17800-17845 x 7310-7360, which extends right to x 17895.
+   S1 crosses the line P_x at y 7365-7430 without a contact.
+2. Line P_x. Arrives from the bus-interface side as poly along y 7378-7398, widens to
+   a vertical piece at x 17855-17885 (y 7365-7430), runs right under the band along
+   y 7405-7430, steps up at x 18160-18200 and becomes strip 3 (y 7380-7400, between
+   rows I and J). At x 18635-18658 it turns up, runs to y 7228 and comes back left as
+   strip 1 (y 7228-7250, between rows G and H), ending at x 18183. On the way it is
+   tied to the right-hand end of row H by a buried contact (window 18597-18632 x
+   7250-7298). Row H's metal (eight contacts) ends at x 18592 and does not reach the
+   contact column.
+3. Line P_y. Arrives along y 7460-7500, crosses the lower S1 diffusion box as a gate
+   (y 7470-7492), runs right under the band and ends over row K with a buried contact
+   at 18355-18387 x 7455-7500. So there is a transistor, gate P_y, between the
+   S1-contacted diffusion below it and a diffusion above it (17840-17885 x
+   7440-7468), which has a small buried contact at 17835-17858 x 7440-7460 to poly.
+   Which poly is not resolved; if it is P_x this is a pass transistor from P_x onto
+   the pull-up gate net.
+4. Under the band. Poly bar U' (17920-18160 x 7227-7266) turns down at x 18140-18160
+   and becomes strip 2 (y 7302-7322, between rows H and I, ending at x 18595). Bar L'
+   is 17940-18112 x 7318-7355. A diffusion with three VCC contacts lies between the
+   bars (17958-18092 x 7266-7318).
+5. Two closed shapes with heavy outlines and green interiors, each crossing both
+   bars: 17917-17945 x 7218-7368 on the left, and on the right 18097-18116 x
+   7252-7368 joined to a box 18095-18200 x 7218-7258. In that box the end of U'
+   (x 18160) and the end of strip 1 (x 18183) face each other across a 20 px green
+   gap. The metal composite shows no gap in the VCC band here.
+6. Row I's metal (three contacts) runs right along y 7335-7375 and up a column at
+   x 18678-18722 whose three contacts land on the poly bar that feeds the frame gates
+   of the right-hand group.
+7. Rows: G VCC, J VSS, K VCC (three contacts). Row K with strip 4 over its top edge
+   reads as a depletion load on P_y.
 
-Poly strips between them (all salmon, so all under metal):
-- Strip 1, y 7228-7250, between G and H. Runs from x 18183 to x 18657, turns down
-  there (x 18637-18657) and joins strip 3.
-- Strip 2, y 7302-7322, between H and I. At the right it ends in a buried-contact
-  box at 18597-18631 x 7256-7325 on the end of row H. At the left it turns up at
-  x 18140-18160 to y 7258.
-- Strip 3, y 7380-7400, between I and J. It is the line P_x, which comes in from the
-  bus-interface side along y 7405-7430 and steps up at x 18180-18205.
-- Strip 4, y 7468-7490, is the line P_y. It runs over the top of row K's diffusion
-  and ends in a buried-contact box at 18355-18387 x 7455-7500. Read as P_y's own
-  depletion load: VCC contacts below the strip, a sliver above it tied to the strip.
-
-Under the band:
-- Two poly bars, U' (17915-18090 x 7228-7266) and L' (17940-18090 x 7318-7355), lie
-  above and below a diffusion with the three VCC contacts (17958-18092 x 7266-7318).
-- Two vertical strips with dark outlines and green interiors cross the ends of the
-  bars: 17939-17957 x 7218-7368 and 18097-18116 x 7252-7368. The right-hand one
-  starts in a box, 18093-18197 x 7218-7258, in which U' ends at x 18162 and strip 1
-  begins at x 18183, with green between. Taken to be buried-contact windows, so each
-  is a diffusion strap tied to the poly that crosses it.
-- If so, U' is the depletion load of the net that strip 1 and strip 3 belong to
-  (P_x), with its gate tied to that net in the box.
-
-Open: whether strip 2's upturned left end joins U' in the box; what the left
-strap and the two small boxes at 17905-17935 tie together; where the metal on rows H
-and I goes. Until these are read the cell's function is not known. The earlier
-hypothesis (P_y disables both gates through this group) is not supported: P_y
-does not gate anything here.
+Not established: what the two green shapes are (item 5). Read as buried-contact
+windows they tie U', L', strip 1 and strip 2 into one net, and then no assignment of
+the rows gives a working circuit; so that reading, or one of items 2-4, is wrong
+somewhere. Also open: where row H's metal goes at its left end, and what the frame
+group does if row I is not simply the pull-down gate net.
 

@@ -36,23 +36,24 @@ known. Matters for transistors that are depletion-mode without being wired as lo
 To settle: compare known loads against known pull-downs at 4-5x in both shots for any
 consistent outline or tint.
 
-## AMB-003  Data pad cell: layers under the VCC band  (open)
+## AMB-003  Data pad cell  (open, narrowed)
 
-Where: D0 master, 17900-18380 x 7150-7560 (and the same place in D1-D7).
+Where: D0 master, 17780-18760 x 7150-7560 (and the same place in D1-D7).
 
-The pre-driver logic lies under the VCC band. Etch residue hides it in every single
-instance; the median composite shows all the edges but not which layer each belongs
-to. Two poly lines come in from the bus-interface side (P_x at y 7399-7422, P_y at
-y 7465-7492), there are two load blocks either side of three VCC contacts at
-y 7292, and a five-row multi-finger structure (rows G-K, x 18230-18660) to the right.
-Details and what is established: notes/blocks/pads.md.
+The output fingers and their two gate nets are understood. The logic that makes
+those gate nets from the two lines that arrive from the bus interface is not. The
+clean shot of chip 1 settled which shapes under the VCC band are poly, and showed
+that the cell contains more than two inverters: at least one transistor gated by the
+second line sits in series with the pull-up gate net, the first line is tied to a
+diffusion row deep in the cell, and two large closed shapes under the band are of
+unknown kind. Everything established, with coordinates, is in
+notes/blocks/pads.md.
 
-Candidate readings differ on whether the strips between rows G-J are one spiral gate
-fed from P_y, and on what the three-contact row K is for.
-
-To settle: trace the logic that drives P_x and P_y (M2). Knowing whether they are
-data and enable, and their polarity, should leave one consistent reading. A tri-state
-pair needs both output gates low when disabled, which is a strong constraint.
+To settle: trace the bus-interface logic that drives the two lines (M2), so that
+their meaning and polarity are known; then finish the cell from 4x views of the
+clean shot, starting with the buried contact at 17835-17858 x 7440-7460 and the left
+end of row H's metal. A tri-state pair needs both output gates low when disabled,
+which is a strong check on any reading.
 
 ## AMB-004  L-shaped poly on the input inverters  (assumed)
 
