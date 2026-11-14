@@ -5,7 +5,7 @@ Extracts with 0 errors, 0 warnings.
 
 ## Status
 
-- Images used: about 40. Sharpened views (`tools/rdp3_sharp.py`) at 3-4x were the most
+- Images used: about 44. Sharpened views (`tools/rdp3_sharp.py`) at 3-4x were the most
   useful for this area; plain views above 4x added nothing.
 - **Traced and extracted**: the two strobe drivers (two big inverters at the top of the
   left gate column), their output routes to `sel` and `areg`, and their input wiring.
@@ -15,7 +15,8 @@ Extracts with 0 errors, 0 warnings.
   y 15500-15670). Established: its output strip is pulled to ground through two
   transistors in series, gates `bd2_r1_a` and `e_b`. Not established: its load and what
   the L-shaped poly at its left end does (Ambiguity 1). So the full equation of
-  `sel_stb_r` is still open: it is `e_b AND bd2_r1_a` possibly OR-ed with one more term.
+  `sel_stb_r` is still open: it is `e_b AND bd2_r1_a` possibly OR-ed with one more term,
+  and `bd2_r1_a` may be `NOT bd2_n1` fed back (a latch held by E): see Logic, row 1.
 - **Not traced**: the rest of the left gate column (y 15650-17100), the gate group right
   of the bundle (x 16240-16470, y 15400-15900), the whole right-hand column
   (x 16480-17000). Observations and coordinates for all three are under Not done.
@@ -114,22 +115,40 @@ Established (in the trace):
 Believed: `bd2_n1 = NOT(e_b AND bd2_r1_a [OR bd2_r1_l])`, hence
 `sel_stb_r = (e_b AND bd2_r1_a) [OR bd2_r1_l]` and
 `sel_wN = rselN AND NOT sel_stb_r`. Which of the two forms holds depends on
-Ambiguity 1. Either way the only clock-like input is E itself; no latch is on the path
-from `bd2_n1` to the select gates.
+Ambiguity 1. Either way the only clock-like input is E itself, and nothing sits between `bd2_n1` and
+the select gates but the inverter G1. Whether the gate itself is one half of a latch
+is the open question below.
 
-Where the other inputs come from (seen in sharpened 3x views, not traced as gates):
+Where the other inputs come from (seen in sharpened 3-5x views, **not traced as gates,
+not in the trace file**):
 
 - `bd2_r1_a`: the thin metal x 16100-16120 from the gate pad 16114,15560 ends on a poly
   pad with a heavy outline at 16098-16148 x 15765-15797, which sits at the east end of
-  row 2's output strip (y 15745-15790, below the band y 15723-15745, ground contact
-  16045,15700). By the layout style of this column (G1, G2, row 1: output strip, buried
-  contact at its east end, poly onwards) that pad is row 2's output. Believed:
-  `bd2_r1_a = NOT(row 2's gate)`; row 2's gate poly runs west to at least x 15905.
+  row 2's output strip (16035-16082 x 15745-15790). By the layout style of this column
+  (G1, G2, row 1: output strip, buried contact at its east end, poly onwards) that pad is
+  row 2's output. Whether the strip reaches the pad across x 16082-16100 was not seen.
+- Row 2 (15900-16150 x 15670-15800), as far as seen: ground land 16033-16082 x 15678-15722
+  (contacts on the rail at about 16045,15700), one gate band y 15725-15745 across the
+  column, output strip below it, running on west along y 15750-15787 to about x 15950.
+  So believed `bd2_r1_a = NOT(row 2's gate)`.
+- Row 2's gate poly is one band from x 15905 (under the thin metal `bd2_r1_l`) to its
+  rounded east end at x 16095 (y 15712-15735 west of x 15988, y 15720-15745 east of it).
+  No metal contact was recognised on it. Its only visible attachment is a boxed tab on
+  its top edge at 15985-16008 x 15658-15712 (two cells, heavy outline, in all shots),
+  which stands directly below the west end of row 1's output (the pocket / strip ending
+  at y 15638-15650).
+- **If that tab is a buried contact from row 1's output, rows 1 and 2 are cross-coupled:**
+  `bd2_r1_a = NOT bd2_n1` and `bd2_n1 = NOT(bd2_r1_l OR (e_b AND bd2_r1_a))`. That is a
+  latch held by E: while E is low `bd2_n1 = NOT bd2_r1_l`; while E is high `bd2_n1` can
+  fall (when `bd2_r1_l` rises) but cannot rise again until E falls. In terms of the
+  strobe: `sel_stb_r` (which blocks the write strobes while high) follows `bd2_r1_l`
+  while E is low and, once high during E high, stays high until E falls. This needs
+  reading (E) of Ambiguity 1; with reading (A) the loop would have no way to switch.
+  **This is a hypothesis from the layout, not a traced circuit.** The alternative for
+  the gate's source is a contact from `bd2_r1_l`'s metal where it crosses the band's west
+  end (15905-15945 x 15712-15730); none was recognised there.
 - `bd2_r1_l`: see Ambiguity 1; believed to be row 3's output. Row 3's upper band
   (y 15812-15832) is on `e_b` (tap 16166,15822).
-
-The extraction lists the two series transistors under "not part of a static gate"
-because no load is drawn.
 
 ## Bundle x 16100-16400: what is on each track
 
