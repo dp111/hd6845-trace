@@ -1,0 +1,7 @@
+# cdp3: central datapath, rows y 8450-11200
+7780,9820:10900,10330   array  pass-gate rows E, F onto bus N | two pass transistors per slice: gate_e joins bus N to the row C cells (rail d in the two left slices), gate_f joins it to the row H cells
+7600,9500:10850,9815    route  channel D tracks | six poly lines from the west, one to each row C cell
+7600,10300:10850,10720  route  channel G tracks | per slice: one poly line from the west into the row H cell, and the slice's bus N line leaving east
+8560,9200:10900,9500    ?array row C cells (6 bit) | large cell per slice, s2..s7; not traced. Believed a 6-bit register read onto bus N
+7780,10735:10900,11040  ?array row H cells (8 bit) | large cell per slice; not traced. Believed an 8-bit register read onto bus N
+8560,8450:10900,8790    ?array row A cells (6 bit) | variant of the row C cell; not traced

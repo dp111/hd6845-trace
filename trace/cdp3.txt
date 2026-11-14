@@ -1,0 +1,203 @@
+# Central datapath, rows y 8450-11200 (cdp3): x 7600-10850.
+# Eight bit slices s0..s7, left to right, 390.3 px apart; slice k is the master (s4) moved
+# by dx = -1561, -1171, -781, -390, 0, 390, 781, 1171. Tags are positions, not bit numbers.
+# See notes/blocks/cdp3.md for the inventory, the logic and the ports.
+@block cdp3
+@w M=18 P=18
+@s 30x34
+
+# =====================================================================================
+# Rows E and F (y 9820-10300): two pass transistors per slice onto the node N of the slice
+# =====================================================================================
+
+# ---- gate lines: horizontal poly from the west edge, one per row, ending at slice s7
+P 7600,10057 x10664 w=20             # gates of the row E transistors
+N P 7610,10057 cdp3_gate_e
+P 7600,10317 x10664 w=20             # gates of the row F transistors
+N P 7610,10317 cdp3_gate_f
+
+# ---- row E transistor as it is in s3..s7: gate vertical, joined to the gate line below it
+@cell cdp3_e tag=s4
+D 9435,9845:9499,10034              # body: source/drain either side of the gate
+D 9400,9859:9442,9909               # left pad
+D 9489,9859:9536,9909               # right pad
+P 9453,9828:9483,10060              # gate, down into the gate line
+C 9421,9884 9509,9884
+@end
+@inst cdp3_e -390,0 tag=s3
+@inst cdp3_e 390,0 tag=s5
+@inst cdp3_e 781,0 tag=s6
+@inst cdp3_e 1171,0 tag=s7
+
+# ---- s2: the same transistor, right pad and contact 41 px lower
+D 8654,9845:8718,10034
+D 8619,9859:8661,9909
+D 8708,9900:8755,9950
+P 8672,9828:8702,10060
+C 8640,9884 8731,9925
+
+# ---- s0 and s1: left pad a little lower, right pad lower still. The left contact is
+# strapped by a wide metal, over the gate, to the slice's wide rail (rail d).
+@cell cdp3_e01 tag=s0
+D 7874,9845:7938,10034
+D 7839,9877:7889,9940               # left pad
+D 7921,9947:7974,9992               # right pad
+P 7892,9828:7922,10060
+C 7858,9905 7949,9968
+M 7838,9882:8013,9932               # strap from the left contact to rail d
+@end
+@inst cdp3_e01 390,0 tag=s1
+M 8013,9690 y10110 w=46              # rail d of s0 (only the stretch beside row E is drawn so far)
+M 8403,9690 y10110 w=46              # rail d of s1
+N M 8013,9700 vss                    # identified from the row C cell structure, not followed to a pad
+N M 8403,9700 vss
+
+# ---- row F transistor, the same in all eight slices: gate joined to the gate line below it
+@cell cdp3_f tag=s4
+D 9436,10102:9500,10296
+D 9400,10163:9442,10213              # left pad
+D 9489,10163:9536,10213              # right pad
+P 9455,10088:9483,10320              # gate, down into the gate line
+C 9421,10187 9509,10187
+@end
+@inst cdp3_f -1561,0 tag=s0
+@inst cdp3_f -1171,0 tag=s1
+@inst cdp3_f -781,0 tag=s2
+@inst cdp3_f -390,0 tag=s3
+@inst cdp3_f 390,0 tag=s5
+@inst cdp3_f 781,0 tag=s6
+@inst cdp3_f 1171,0 tag=s7
+
+# ---- channel D tracks (y 9581-9797): one poly line per slice s2..s7 from the west edge to that
+# slice's tap contact; line b (metal) goes from the contact up into the row C cell.
+P 7600,9797 x8654
+C 8640,9797 s=28x28
+M 8642,9809 y9500               # line b of s2
+N P 7610,9797 cdp3_cw_s2
+P 7600,9754 x9045
+C 9031,9754 s=28x28
+M 9033,9766 y9500               # line b of s3
+N P 7610,9754 cdp3_cw_s3
+P 7600,9711 x9435
+C 9421,9711 s=28x28
+M 9423,9723 y9500               # line b of s4
+N P 7610,9711 cdp3_cw_s4
+P 7600,9668 x9825
+C 9811,9668 s=28x28
+M 9813,9680 y9500               # line b of s5
+N P 7610,9668 cdp3_cw_s5
+P 7600,9624 x10216
+C 10202,9624 s=28x28
+M 10204,9636 y9500               # line b of s6
+N P 7610,9624 cdp3_cw_s6
+P 7600,9581 x10606
+C 10592,9581 s=28x28
+M 10594,9593 y9500               # line b of s7
+N P 7610,9581 cdp3_cw_s7
+
+# ---- line c: from the row C cell down, with a diagonal jog, to the left contact of the row E
+# transistor (s2..s7; in s0 and s1 that contact goes to rail d instead)
+M 9076,9500 y9795 9031,9837 y9896
+N M 9076,9520 cdp3_cq_s3
+M 9466,9500 y9769 9421,9810 y9896
+N M 9466,9520 cdp3_cq_s4
+M 9856,9500 y9788 9811,9829 y9896
+N M 9856,9520 cdp3_cq_s5
+M 10247,9500 y9724 10202,9769 y9896
+N M 10247,9520 cdp3_cq_s6
+M 10637,9500 y9728 10592,9773 y9896
+N M 10637,9520 cdp3_cq_s7
+M 8686,9500 y9838 8642,9874 y9896      # s2: stays at x 8686 almost down to the contact
+N M 8686,9520 cdp3_cq_s2
+
+# ---- channel G tracks (y 10361-10664). Track of slice k: a west piece from the west edge to a
+# contact at x 9421+dx, and an east piece from a contact at x 9509+dx to the east edge. The two
+# pieces do not touch (checked in all eight slices).
+# s0
+P 7600,10664 x7874
+C 7860,10664 s=28x28
+M 7861,10652 y10720                 # west piece down into the row H cell
+P 7934,10664 x10850
+C 7948,10664 s=28x28
+M 7948,9956 y10676                  # line h: row E right contact, row F right contact, east piece
+M 7861,10175 y10520 7905,10568 y10720     # row F left contact down into the row H cell
+N P 7610,10664 cdp3_hw_s0
+N P 10840,10664 cdp3_n_s0
+N M 7905,10710 cdp3_hq_s0
+# s1
+P 7600,10621 x8264
+C 8250,10621 s=28x28
+M 8251,10609 y10720                 # west piece down into the row H cell
+P 8324,10621 x10850
+C 8338,10621 s=28x28
+M 8338,9956 y10633                  # line h: row E right contact, row F right contact, east piece
+M 8251,10175 y10533 8295,10583 y10720     # row F left contact down into the row H cell
+N P 7610,10621 cdp3_hw_s1
+N P 10840,10621 cdp3_n_s1
+N M 8295,10710 cdp3_hq_s1
+# s2
+P 7600,10577 x8654
+C 8640,10577 s=28x28
+M 8641,10565 y10720                 # west piece down into the row H cell
+P 8714,10577 x10850
+C 8728,10577 s=28x28
+M 8728,9913 y10589                  # line h: row E right contact, row F right contact, east piece
+M 8641,10175 y10489 8685,10539 y10720     # row F left contact down into the row H cell
+N P 7610,10577 cdp3_hw_s2
+N P 10840,10577 cdp3_n_s2
+N M 8685,10710 cdp3_hq_s2
+# s3
+P 7600,10535 x9045
+C 9031,10535 s=28x28
+M 9032,10523 y10720                 # west piece down into the row H cell
+P 9105,10535 x10850
+C 9119,10535 s=28x28
+M 9119,9872 y10547                  # line h: row E right contact, row F right contact, east piece
+M 9032,10175 y10447 9076,10497 y10720     # row F left contact down into the row H cell
+N P 7610,10535 cdp3_hw_s3
+N P 10840,10535 cdp3_n_s3
+N M 9076,10710 cdp3_hq_s3
+# s4
+P 7600,10490 x9435
+C 9421,10490 s=28x28
+M 9422,10478 y10720                 # west piece down into the row H cell
+P 9495,10490 x10850
+C 9509,10490 s=28x28
+M 9509,9872 y10502                  # line h: row E right contact, row F right contact, east piece
+M 9422,10175 y10394 9466,10447 y10720     # row F left contact down into the row H cell
+N P 7610,10490 cdp3_hw_s4
+N P 10840,10490 cdp3_n_s4
+N M 9466,10710 cdp3_hq_s4
+# s5
+P 7600,10447 x9825
+C 9811,10447 s=28x28
+M 9812,10435 y10720                 # west piece down into the row H cell
+P 9885,10447 x10850
+C 9899,10447 s=28x28
+M 9899,9872 y10459                  # line h: row E right contact, row F right contact, east piece
+M 9812,10175 y10359 9856,10409 y10720     # row F left contact down into the row H cell
+N P 7610,10447 cdp3_hw_s5
+N P 10840,10447 cdp3_n_s5
+N M 9856,10710 cdp3_hq_s5
+# s6
+P 7600,10404 x10216
+C 10202,10404 s=28x28
+M 10203,10392 y10720                 # west piece down into the row H cell
+P 10276,10404 x10850
+C 10290,10404 s=28x28
+M 10290,9872 y10416                  # line h: row E right contact, row F right contact, east piece
+M 10203,10175 y10316 10247,10366 y10720     # row F left contact down into the row H cell
+N P 7610,10404 cdp3_hw_s6
+N P 10840,10404 cdp3_n_s6
+N M 10247,10710 cdp3_hq_s6
+# s7
+P 7600,10361 x10606
+C 10592,10361 s=28x28
+M 10593,10349 y10720                 # west piece down into the row H cell
+P 10666,10361 x10850
+C 10680,10361 s=28x28
+M 10680,9872 y10373                  # line h: row E right contact, row F right contact, east piece
+M 10593,10175 y10273 10637,10323 y10720     # row F left contact down into the row H cell
+N P 7610,10361 cdp3_hw_s7
+N P 10840,10361 cdp3_n_s7
+N M 10637,10710 cdp3_hq_s7
