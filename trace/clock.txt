@@ -408,3 +408,135 @@ C 10857,19422 s=26x26
 P 10846,19278:10872,19440
 C 10857,19292 s=26x26
 M 10845,19100:10870,19306          # continues up into the core (not yet followed)
+
+# ====================================================================
+# Driver logic, x 10900-12000, y 19140-19890: the two-phase clock generator.
+# Read from the clean shot of chip 1 (acid1b) with metal1 for contacts.
+#   ck_a = NOR(ck_g2, clk_b)      left half     (ck_g2 = ck_b delayed)
+#   ck_b = NOR(ck_g4, ck_clkn)    right half    (ck_g4 = ck_a delayed)
+#   ck_clkn = NOT clk_b           middle
+# Each half: a NOR with a depletion load makes the gate of a wide pull-up
+# (ck_a_pu / ck_b_pu); the same two inputs drive wide pull-downs on the output.
+# Big devices are drawn as rectangles with measured edges. The right half is the
+# left half mirrored about x = 11437 (x -> 22874 - x), except for the output pad and
+# the middle.
+# ====================================================================
+
+# ---- rails and the lines crossing the block
+M 10755,19338:10960,19385          # VSS in from the vertical VSS metal
+M 10958,19370:11962,19452          # VSS rail across the middle
+N M 11500,19410 vss
+M 10910,19240:11900,19263          # line B, full width
+M 11058,19285:11900,19308          # line A
+M 11008,19278:11058,19320          # ... its pad over the left output
+M 10910,19285:11010,19308          # ... and on to the left edge
+M 11395,19479:11900,19502          # clk_b, ends on the c2 pad
+M 11580,19521:11900,19544          # ck_g4 ...
+M 11580,19521:11605,19588          # ... turns down to the pad on the right half's b2
+M 11640,19562:11900,19585          # ck_g2 ...
+M 11640,19562:11658,19632          # ... jogs down round that pad
+M 11530,19610:11658,19632
+M 11530,19565:11548,19632
+M 11262,19565:11548,19588          # ... and ends on the pad of the left half's b2
+D 11262,19163:11612,19218          # VCC diffusion under the top rail
+C 11275,19178:11590,19200          # ... eight contacts
+
+# ---- left half: output is line A
+D 10922,19163:10978,19760          # outer diffusion: VCC side of the pull-up
+C 10937,19188 s=24x24              # ... contact to the top rail
+D 10978,19203:11033,19760          # inner diffusion: the output side (and under the gate)
+P 10980,19165:11003,19560          # pull-up gate: long vertical poly
+P 10966,19545:11003,19572          # ... jog
+P 10966,19560:10992,19650
+P 10950,19648:10992,19775          # ... wide lower part (see AMB-007 for the box at y 19632-19668)
+P 10980,19165:11250,19191          # poly bar under the top rail
+P 11228,19165:11250,19312          # leg down to the load gate and its buried contact
+P 11228,19218:11328,19270          # load gate
+D 11258,19163:11318,19325          # load finger, from the VCC diffusion through the gate
+D 11236,19285:11262,19312          # tab under the buried contact
+B 11228,19278:11262,19312          # load gate tied to its output
+D 11285,19320:11300,19370          # neck down to the column under the rail
+P 11109,19340:11133,19906          # a: output pull-down
+P 11160,19330:11191,19868          # b1: output pull-down
+P 11259,19330:11282,19560          # b2: pull-down of the pull-up's gate
+P 11160,19329:11282,19365          # block joining b1 and b2
+P 11259,19551:11297,19595          # pad at the foot of b2
+C 11277,19573 s=22x22
+D 11053,19548:11250,19850          # lower part: VSS | a | output | b1 | VSS
+C 11062,19380:11088,19440          # VSS contacts (two)
+C 11203,19380:11232,19440          # VSS contacts (two)
+D 11040,19316:11158,19328          # output: narrow strip from the pad box ...
+D 11140,19316:11158,19372          # ... down to the column between a and b1
+D 11008,19275:11055,19322          # output pad box, on the inner diffusion
+C 11030,19298 s=26x26              # ... contacted by line A
+D 11053,19368:11452,19505          # under the rail: VSS | a | out | b1 | VSS | b2 | gate node | c1 | VSS | c2 | N2
+D 11053,19505:11312,19548
+P 11314,19330:11340,19522          # c1: pull-down of the pull-up's gate
+P 11388,19330:11412,19906          # c2: pull-down of N2; runs on down to the bar
+P 11314,19329:11412,19365          # block joining c1 and c2
+P 11382,19470:11427,19520          # pad on c2
+C 11405,19495 s=22x22              # ... where the clk_b line ends
+C 11350,19380:11374,19440          # VSS contacts (two)
+P 11109,19888:11412,19906          # bar joining a and c2, under the CLK metal line (no contact to it)
+N P 10990,19400 ck_a_pu
+
+# ---- middle: inverter N2 = NOT clk_b, and the poly that carries N2 to the right half
+D 11401,19163:11455,19325          # load 2 finger
+P 11366,19218:11512,19270          # load 2 gate, continuing right over field
+P 11366,19218:11398,19312          # leg down to its buried contact
+D 11372,19285:11403,19312
+B 11364,19278:11403,19312          # load 2 gate tied to its output
+D 11437,19320:11452,19370          # neck down to the N2 column under the rail
+P 11490,19265:11517,19330          # N2 poly turns down ...
+P [ 11490,19325 11517,19325 11549,19368 11523,19368 ]   # ... runs diagonally ...
+P 11523,19360:11549,19907          # ... and becomes strip S: c1 of the right half
+P 11523,19888:11765,19907          # bar under the CLK metal line, joining S to the right half's a
+N P 11535,19600 ck_clkn
+
+# ---- right half: output is line B (left half mirrored, then the differences)
+D 11896,19163:11952,19760          # outer diffusion: VCC side of the pull-up
+C 11937,19188 s=24x24              # ... contact to the top rail
+D 11841,19203:11896,19760          # inner diffusion: the output side (and under the gate)
+P 11871,19165:11894,19560          # pull-up gate: long vertical poly
+P 11871,19545:11908,19572          # ... jog
+P 11882,19560:11908,19650
+P 11882,19648:11924,19775          # ... wide lower part (see AMB-007 for the box at y 19632-19668)
+P 11624,19165:11894,19191          # poly bar under the top rail
+P 11624,19165:11646,19312          # leg down to the load gate and its buried contact
+P 11546,19218:11646,19270          # load gate
+D 11556,19163:11616,19325          # load finger, from the VCC diffusion through the gate
+D 11612,19285:11638,19312          # tab under the buried contact
+B 11612,19278:11646,19312          # load gate tied to its output
+D 11574,19320:11589,19370          # neck down to the column under the rail
+P 11741,19340:11765,19906          # a: output pull-down
+P 11683,19330:11714,19868          # b1: output pull-down
+P 11592,19330:11615,19560          # b2: pull-down of the pull-up's gate
+P 11592,19329:11714,19365          # block joining b1 and b2
+P 11577,19551:11615,19595          # pad at the foot of b2
+C 11597,19573 s=22x22
+D 11624,19548:11821,19850          # lower part: VSS | a | output | b1 | VSS
+C 11786,19380:11812,19440          # VSS contacts (two)
+C 11642,19380:11671,19440          # VSS contacts (two)
+D 11716,19316:11834,19328          # output: narrow strip from the pad box ...
+D 11716,19316:11734,19372          # ... down to the column between a and b1
+D 11819,19224:11866,19322          # output pad box, on the inner diffusion (line A passes over it without contact)
+C 11832,19251 s=26x30              # ... contacted by line B (two contacts)
+D 11475,19368:11523,19430          # VSS column left of S
+C 11482,19388:11506,19406
+D 11523,19368:11821,19505          # under the rail: S | gate node | b2 | VSS | b1 | out | a | VSS
+D 11551,19505:11821,19548
+N P 11884,19400 ck_b_pu
+
+# ---- line A is also the line first labelled ck_src: gate 6's output goes up at
+# x 12110 to the bus line at y 18455-18480, right to x 12740, up in poly to a line at
+# y 18345, left to x 11850 and down in poly to the bus piece that feeds gate 5 and the
+# long run to the left bus field. Seen at 1.1x; drawn roughly.
+@alias ck_a ck_src
+?M 12095,18455:12755,18480
+?C 12741,18467 s=22x22
+?P 12727,18335:12755,18480
+?C 12741,18347 s=22x22
+?M 11835,18335:12755,18358
+?C 11852,18347 s=22x22
+?P 11840,18335:11866,18480
+?C 11852,18467 s=22x22

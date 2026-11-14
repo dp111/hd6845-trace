@@ -3,18 +3,32 @@
 Status: gate row, wiring region and output stage traced (trace/clock.txt). Driver
 logic surveyed, not traced.
 
-## Summary so far
+## Summary
 
-- The main internal clock is `ck_out` = NOT CLK. The CLK pin node runs along the
-  bottom of the block as a metal line (y 19892-19912) and, through one contact at
-  10985,19901, drives a three-stage buffer made of the two big arrays. Nothing but
-  the pin feeds that buffer: the clock is not gated or divided.
-- A second, unrelated-looking part of the block (gate row plus driver logic) takes
-  a global signal `ck_src`, makes both polarities of it (lines A and B) and combines
-  them with CLK in two mirrored, apparently bootstrapped, driver circuits. What
-  those produce is not yet known.
-- CLK therefore reaches the core by at least three routes: `ck_out` (heavy, inverted),
-  `clk_b` from the input row (light, same sense as the pin), and the pin node itself.
+Status: traced except for a few flagged joins (trace/clock.txt). 335 transistors in
+the whole trace, no rule errors.
+
+The block makes three clocks from the CLK pin:
+
+| Net | What it is | Made by |
+|---|---|---|
+| `ck_out` | NOT CLK, heavily buffered | three-stage buffer in the two big arrays, fed straight from the pin node |
+| `ck_a` | high only while CLK is low | left half of the driver logic: NOR(`ck_g2`, `clk_b`) |
+| `ck_b` | high only while CLK is high | right half: NOR(`ck_g4`, `ck_clkn`) |
+
+`ck_a` and `ck_b` are a two-phase non-overlapping pair: `ck_g2` is `ck_b` delayed by
+two inverters and `ck_g4` is `ck_a` delayed by two inverters (gate row g1-g4), so
+each phase waits for the other to have fallen. `ck_clkn` = NOT `clk_b` is made by an
+inverter in the middle of the driver logic; `clk_b` is CLK through the two-stage
+input buffer. Two small inverters in the gate row, g5 (`ck_b` = NOT `ck_a`) and g6
+(`ck_a` = NOT `ck_b`), sit on the same lines; their depletion loads can pull a phase
+fully to VCC, which a source-follower pull-up cannot.
+
+Where they go: `ck_a` and `ck_b` run right along the gate row and turn up into the
+core at x 13090 and x 13010. `ck_a` also goes up at x 12110 to a bus line, round by
+a line at y 18345, and off along the bottom bus field to the foot of the left bus
+field (6800,17990); this is the line first labelled `ck_src`. `ck_out` goes up into
+the core at x 10845-10870 and away to the left at y 19240-19262.
 
 ## Gate row (11150-12150 x 18600-19000): traced
 
@@ -29,8 +43,9 @@ y 18795-18848. Two metal lines cross the loads: line A (y 18700-18722) and line 
 | g1, g2 | line B | `ck_g1`, `ck_g2` | so `ck_g2` = line B re-buffered |
 | g3, g4 | line A | `ck_g3`, `ck_g4` | so `ck_g4` = line A re-buffered |
 
-So `ck_b` = NOT `ck_src`, `ck_a` = `ck_src`. Lines A and B also continue right along
-the row to x 13010 / 13090, where they turn up into the core (not followed).
+`ck_src` turned out to be `ck_a` itself (see the summary), so g5 and g6 are a
+cross-coupled pair sitting on the two phase lines. Lines A and B also continue right
+along the row to x 13010 / 13090, where they turn up into the core (not followed).
 
 ## Wiring region (11950-12900 x 18850-19950): traced
 
@@ -180,29 +195,15 @@ Inferred, flagged `?` in the trace:
 Not yet traced here: the load of `ck_ga` (the small device at 10030-10160 x
 19430-19680 is the candidate), and whether `ck_ga` is bootstrapped.
 
-## The gate row's input line (`ck_src`) is a global signal
+## Route of `ck_a` to the left of the die
 
-Followed from g5's gate: bus line y 18458-18480 leftwards to a contact at
-10897,18468; a short poly link joins it to a contact at 10808,18470 and, by a branch
-up at x 10850-10870, to a contact at 10855,18385 on the bus line at y 18375-18400
-(which runs right). From 10808,18470 a metal runs down to 10808,18600, crosses under
-the wide metal at x 10720-10770 in poly to 10685,18600, runs left in metal along
-y 18590-18612 to x 10255, up at x 10250-10290 to y 18425, and left along y 18410-18440.
-From there it is one of the lines of the bottom bus field: poly links under vertical
-metals at x 9740-9840 (contacts 9870,18420 and 9650,18420), at x 8440-8560 (contacts
-8600,18425 and 8380,18425) and at x 7470-7510 (contacts 7600,18425 and 7425,18425),
-ending at a contact at 6800,18420. A poly line runs up from there to a contact at
-6800,17990 at the foot of the innermost vertical line (x about 6790) of the bundle
-that climbs the left bus field.
-
-So `ck_src` is not made locally by anything traced so far. Either it is the block's
-own output coming back after distribution, or it is a signal from elsewhere that the
-clock block needs. Lines A and B, its two buffered polarities, are themselves sent
-on to the right-hand side of the core.
-
-## Open questions
-
-- What `ck_src` is, and therefore what the block produces. Candidates: a clock
-  phase fed back from the arrays, or a separate timing signal. CLK enters the driver
-  logic directly as well (`clk_b`, `clk_p`).
-- Whether the block bootstraps (see AMB-006).
+From the bus piece at y 18458-18480 (which g5's gate also hangs on): left to a contact
+at 10897,18468; a short poly link to a contact at 10808,18470 and, by a branch up at
+x 10850-10870, to a contact at 10855,18385 on the bus line at y 18375-18400. From
+10808,18470 a metal runs down to 10808,18600, crosses under the wide metal at
+x 10720-10770 in poly to 10685,18600, runs left along y 18590-18612 to x 10255, up at
+x 10250-10290 to y 18425, and left along y 18410-18440 as one of the lines of the
+bottom bus field: poly links under vertical metals at x 9740-9840, 8440-8560 and
+7470-7510, ending at a contact at 6800,18420. A poly line runs up from there to a
+contact at 6800,17990 at the foot of the innermost vertical line (x about 6790) of
+the bundle that climbs the left bus field. Seen at 1x; not in the trace.
