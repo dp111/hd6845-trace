@@ -252,11 +252,15 @@ Perhaps 12-16 transistors.
    land, gate tied to n2) is the only one that gives n2 a load. A thin bright line
    (x 9335-9343, y 6191-6246) shows in both metal shots over the strip; it is too narrow
    (8 px) for metal and is read as the strip itself.
-3. **Below the end of track b**: metal at x 9326-9348 is certain down to y 6190 and
-   again at y 6348 and below (the line at x 9333-9340 in channel 2). Between, over the
-   n2 load and the left part of the VCC land, the metal shots disagree (chip 2 bright,
-   chip 1 not). Drawn: nothing below y 6190. If the metal is continuous the line in
-   channel 2 is n2 as well. Needs a look at y 6250-6400 on both metal shots.
+3. **Metal below the end of track b** (x 9326-9348, from y 6252 down): a separate piece
+   from track b (between y 6190 and 6252 neither metal shot of chip 1 shows metal, and
+   the n2 load lies there). Over the left part of the VCC land (y 6258-6294) the clean
+   shot is speckled like a contact under it in all five slices (mean 170,150,100,
+   s.d. 17-30, against flat tan s.d. 2 at x 9360 between the two metals), and both
+   metal shots show metal. Read: a second metal contacted to the VCC land, i.e. **the
+   line at x 9329-9340 that runs down through channel 2 in s4..s7 is a VCC branch**
+   (in s3 it stops at y 6340). Drawn `?M`/`?C` inside the cell only. Whoever traces
+   row B1 should check where that line lands.
 5. **End of line e in s3** (8900,6115): see channel 1. A metal line that ends is
    expected to end on a contact; none is seen, as with track c over the strobe line.
 4. Small dark boxes in the open beside the strobe gate (9270-9297 x 6244-6260 and
@@ -275,10 +279,15 @@ Perhaps 12-16 transistors.
   (x 7600-8700) has contacts at about y 6690 (x 8120, 8300, 8700) and y 6800-6850.
 - **L1 and L2 left of x 7990** (y 7472, 7513): the two left-going outputs of row C.
 - **Ends of `cdp2_c_ld`** (y 7800): left about x 7650, right past x 10850.
-- Rows B1, B2 (y 6930-7480), channel 3 (y 7830-7960), row D (y 7980-8450): not
-  started. Rows B take q and n2 of row C's s3..s7 from below (ports) and the bus and
-  n2 lines of row A from above. They are not the latch cell (findcell finds no copy). Composite of row A: `--comp cdp2_a` (master frame
-  9150,5940:9590,6350, five instances).
+- **Rows B1, B2** (y 6930-7480, s3..s7), channel 3 (y 7830-7960), row D (y 7980-8450):
+  not started. Rows B get q and n2 of row C's s3..s7 from below (ports) and, from
+  above, only the bus lines of row A and the VCC branch (Ambiguities 3). They are
+  not the latch cell (findcell finds no copy). Composites: `--comp cdp2_b` (rows B,
+  master frame 9150,6890:9590,7500), `--comp cdp2_a` (row A, 9150,5940:9590,6350),
+  `--comp cdp2_ctop` (top of row C, 9150,7420:9590,7610).
+- Row D was only seen at 0.4x: findcell gives five copies (s3..s7) and a weaker
+  sixth at dx -781; check whether it is yet another row of the latch turned over
+  (findcell with `--orient` on the latch core found no upright copy there).
 - Logic left of the rows (x 7600-8750).
 - Rails are drawn only over row A (y 5960-6350) and row C (y 7425-7830); x of the VSS
   rails 8013, 8403, 8793, 9184, 9574, 9965, 10355, 10745, of the VCC rails 8229 ... 10571.

@@ -25,6 +25,8 @@ C 9508,6222 s=14x40                  # track c to the q drain (speckled strip in
 C 9183,6183 s=28x46                  # VSS rail to its land (oval)
 C 9337,6184 s=18x10                  # track b to the n2 land, at the very end of the track
 C 9182,6096 s=22x20                  # VSS rail to the band of the hold device
+?M 9337,6254 y6345 w=20              # second metal on the VCC land, below the end of track b (not joined to it);
+?C 9338,6276 s=14x36                 #   speckled like a contact in all slices. Runs on down in s4..s7 (notes)
 
 # --- pass transistor T1: bus -> node a, gate = row strobe (the strobe line loops round
 # the bus contact in every cell and runs on to the next one)
