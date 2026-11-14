@@ -1,2 +1,7 @@
-14140,13005:16160,13285  array  ?Address register (5 bit latch) | five transparent latch bits loaded from the per-slice lines above when rdp3_ar_ld is high; outputs q_s0..q_s4 leave to the right
-14450,13285:15900,13500  route  AR outputs | the five latch outputs running right to the area beside the decode array
+14140,13005:16160,13285  array  ?Address register (5 bit latch) | five transparent latch bits loaded from bus lines s1..s5 when rdp3_ar_ld is high; outputs leave to the right
+14450,13285:15900,13500  route  Address register outputs | the five latch outputs running right to the area beside the decode array
+13815,12167:16940,12437  array  ?Register row RA (8 bit latch) | same latch cell as the address register, upside down; written from the per-slice bus lines; not yet placed in the trace
+13815,11321:16940,11591  array  ?Register row RB (8 bit latch) | same latch cell, upside down; not yet placed in the trace
+13780,11780:16900,12167  unknown  ?Cells fed by register RA | two sub-rows, 8 slices, not traced (comparator / counter expected)
+13780,10950:16900,11320  unknown  ?Cells fed by register RB | two sub-rows, 8 slices, not traced
+13700,12437:16950,13000  route  Bus and track routing | bus lines s0, s5, s6, s7 leave to the lower right; the second per-slice lines leave to the lower left

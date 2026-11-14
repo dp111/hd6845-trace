@@ -9,13 +9,12 @@
 # array. Master is the second cell from the left (x 14597-14987).
 # =====================================================================================
 
-@cell rdp3_ar tag=s1
+@cell rdp3_lat tag=ar_s2
 # --- metal that belongs to one cell
-M 14625,12990 y13277 w=28            # per-slice bus line, comes from above, ends at the cell bottom
-N M 14625,13000 rdp3_ar_bus_{}
-M 14712,13014 y13277 w=20            # full-height track, no contact found on it (see notes)
-N M 14712,13020 rdp3_ar_trk_{}
-M 14886,13012 y13277 w=22            # full-height track, sits on the n1 drain
+# three vertical tracks cross the cell; only their part inside the cell is drawn here
+M 14625,13012 y13277 w=28            # per-slice bus line (labelled outside the cell)
+M 14712,13014 y13277 w=20            # track with no contact found on it in this cell (see notes)
+M 14886,13012 y13277 w=22            # track that sits on the q drain
 M 14832,13112 y13245 w=38            # strap: load gate of inverter 1 down to the output land
 C 14622,13035 s=30x30                # bus to the pass-transistor diffusion
 C 14757,13070 s=30x30                # VCC rail to the land the two loads hang from
@@ -30,7 +29,6 @@ P 14572,13015:14597,13088            # strobe line: down the left of the contact
 P 14572,13060:14697,13088            #   across the strip (the gate),
 P 14667,13015:14697,13088            #   back up on the right,
 P 14667,13015:14975,13043            #   and on to the next cell
-N P 14850,13029 rdp3_ar_ld
 
 # --- node a: buried contact to the gate of inverter 2, and on to the feedback land
 P 14602,13122:14642,13150            # pad over the end of the strip
@@ -39,7 +37,7 @@ P 14610,13122:14632,13232            # gate of T_b, runs down under the bus line
 P 14610,13210:14698,13232            # then right to the buried contact at the feedback land
 D 14680,13214:14724,13244            # feedback land (under the 14712 track)
 B 14678,13210:14700,13240
-N D 14623,13105 rdp3_ar_a_{}
+N D 14623,13105 rdp3_{}_a
 
 # --- inverter 2: a -> n2. Pull-down T_b from the VSS land, load L2 from the VCC land
 D 14536,13126:14600,13202            # VSS land under the left rail (oval contact)
@@ -55,7 +53,7 @@ P 14688,13138:14712,13152            # tab to the gate tie
 P 14658,13138:14700,13168            # gate tie pad
 D 14662,13142:14690,13176            # bump up from the drain band under the pad
 B 14660,13140:14692,13168
-N D 14720,13175 rdp3_ar_n2_{}
+N D 14720,13175 rdp3_{}_n2
 
 # --- n2 poly: load gate block continues as a U round to the pull-down of inverter 1
 P 14751,13108:14775,13187            # down the right side of the block (top corner chamfered)
@@ -68,49 +66,64 @@ P 14797,13058:14848,13150            # load gate block; lower half is the strap 
 P 14840,13058:14872,13098            # tab over the output end
 B 14846,13066:14874,13100
 D 14855,13098:14935,13150            # n1 drain, T_a channel, on to the next cell's VSS land
-N D 14880,13140 rdp3_ar_q_{}
+N D 14880,13140 rdp3_{}_q
 
 # --- output: land, buried contact, poly strip down to the contact of the line to the right
 D 14820,13197:14868,13243
 D 14860,13218:14900,13243
-P 14874,13220:14899,13292            # (continued outside the cell: the end slice differs)
+P 14874,13220:14899,13252            # (continued outside the cell)
 B 14872,13218:14901,13245
 
 # --- not understood: a narrow diffusion-coloured stripe and a poly stripe side by side
 # between the feedback land and the output land, under the VCC rail. See notes, AMB-1.
 ?D 14722,13208:14809,13220
 P 14730,13226:14809,13245
-N P 14770,13235 rdp3_ar_s2_{}
+N P 14770,13235 rdp3_{}_x2
 
 # --- poly band along the cell bottom, tied to the VSS rail
 P 14550,13251:14809,13272
 C 14562,13256 s=24x22
 @end
 
-@inst rdp3_ar -390,0 tag=s0
-@inst rdp3_ar 390,0 tag=s2
-@inst rdp3_ar 780,0 tag=s3
-@inst rdp3_ar 1170,0 tag=s4
+# Row AR. Slices are numbered as in the array above (s0 = leftmost array slice, x 13780):
+# the five AR cells stand under array slices s1..s5.
+@inst rdp3_lat -390,0 tag=ar_s1
+@inst rdp3_lat 390,0 tag=ar_s3
+@inst rdp3_lat 780,0 tag=ar_s4
+@inst rdp3_lat 1170,0 tag=ar_s5
+N P 14850,13029 rdp3_ar_ld
+# AR only: the two spare tracks end at the cell edges
+N M 14322,13020 rdp3_ar_s1_trk
+N M 14712,13020 rdp3_ar_s2_trk
+N M 15102,13020 rdp3_ar_s3_trk
+N M 15492,13020 rdp3_ar_s4_trk
+N M 15882,13020 rdp3_ar_s5_trk
+# AR only: output poly strips below the cells
+P 14484,13245:14509,13292
+P 14874,13245:14899,13292
+P 15264,13245:15289,13292
+P 15654,13245:15679,13292
+P 16044,13245:16069,13292
 
-# --- supply rails of row AR (per slice, vertical). Upper ends provisional: they come down
-# from the array above. VCC rails run on down into the decode array's VCC bus.
-M 14175,12900 y13277 w=60
-M 14565,12900 y13277 w=60
-M 14955,12900 y13277 w=60
-M 15345,12900 y13277 w=60
-M 15735,12900 y13277 w=60
-M 16125,12900 y13277 w=60
+# --- supply rails (per slice, vertical), drawn from the bottom edge of band B1 (y 12437)
+# down through the routing zone and row AR; they continue upward through the array. VCC rails run on down into the decode array's VCC bus.
+M 14175,12437 y13277 w=60
+M 14565,12437 y13277 w=60
+M 14955,12437 y13277 w=60
+M 15345,12437 y13277 w=60
+M 15735,12437 y13277 w=60
+M 16125,12437 y13277 w=60
 N M 14565,12950 vss
 N M 14175,12950 vss
 N M 14955,12950 vss
 N M 15345,12950 vss
 N M 15735,12950 vss
 N M 16125,12950 vss
-M 14382,12900 y13520 w=56
-M 14772,12900 y13520 w=56
-M 15162,12900 y13520 w=56
-M 15552,12900 y13520 w=56
-M 15942,12900 y13520 w=56
+M 14382,12437 y13520 w=56
+M 14772,12437 y13520 w=56
+M 15162,12437 y13520 w=56
+M 15552,12437 y13520 w=56
+M 15942,12437 y13520 w=56
 N M 14382,12950 vcc
 N M 14772,12950 vcc
 N M 15162,12950 vcc
@@ -183,3 +196,20 @@ P 15824,13352 x15860 w=24            # poly continues to the right
 # q4 (s4): no contact; the poly strip turns right and runs on under the sixth rail
 P 16044,13285:16069,13318
 P 16044,13296:16170,13318
+
+# =====================================================================================
+# Per-slice bus lines between the register row of band B1 (bus contact at y 12402-12412)
+# and row AR. Straight thin metal, checked on strip views (cache/scratch/rdp3/bus_strips.png).
+# Upper ends stop at the bottom edge of the B1 register row (not yet placed, see notes).
+# The s5 line has a contact at (15797,12738) to a horizontal poly line (routing zone, notes).
+# =====================================================================================
+M 14235,12437 y13014 w=24
+M 14625,12437 y13014 w=24
+M 15015,12437 y13014 w=24
+M 15405,12437 y13014 w=24
+M 15795,12437 y13014 w=24
+N M 14235,12600 rdp3_bus_s1
+N M 14625,12600 rdp3_bus_s2
+N M 15015,12600 rdp3_bus_s3
+N M 15405,12600 rdp3_bus_s4
+N M 15795,12600 rdp3_bus_s5
