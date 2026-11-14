@@ -1,0 +1,53 @@
+# Long-distance wiring of the global signals (clocks first). Each route is drawn exactly
+# as far as it has been followed on the photos. Notes: notes/blocks/trunks.md.
+# Net names come from the traces this file joins on to (clock, inrow, pads_in_top).
+@block trunks
+@requires clock
+@requires inrow
+@requires pads_in_top
+@w M=18 P=22
+@s 26x26
+
+# ====================================================================
+# ck_out (NOT CLK). Joins the clock trace's vertical metal at x 10845-10870.
+# Up to a corner contact at (10853,19015), right in metal to the foot of a wide poly
+# line, up in poly through the VCC band and under three bus lines to a contact on bus
+# line L3 (y 18335-18350), right along L3, under the vertical supply/clock metals in
+# poly, and up the vertical metal at x 13122-13143.
+M 10857,19310 y19015 x11030 w=20
+C 10853,19015 11023,19015
+P 11020,19032 y18322 w=40           # wide poly, 11000-11040
+C 11027,18340
+M 11012,18342 x12820 w=16           # bus line L3
+C 12807,18339
+P 12792,18340 x13146 w=18           # under VCC (12890-12985), ck_b (13022), ck_a (13066)
+C 13132,18337
+M 13132,18352 y16600 w=22          # vertical trunk, x 13122-13143
+N M 12000,18342 ck_out
+# branch W: poly from the corner contact up and away to the left under the VSS and VCC
+# verticals (followed to x 10650 only)
+P 10851,19030 y18948 x10650 w=18
+
+# ====================================================================
+# ck_b. Line B (clock trace) ends at a contact; poly up through the VCC band; vertical
+# metal x 13012-13033 up to a contact at (13023,16995); poly left under the wide VCC
+# vertical; metal left along y 16987-17004 and up into the bottom row of the mid-right
+# array at x 12523.
+C 13000,18756
+P 13017,18772 y18455 w=36
+C 13022,18469
+M 13022,18482 y16982 w=21
+C 13023,16995
+P 13040,16984 x12878 w=34
+C 12892,16991
+M 12905,16996 x12523 y16900 w=18    # entry into the mid-right array (bottom row)
+N M 13022,17500 ck_b
+
+# ====================================================================
+# ck_a. Line A ends at a contact; poly up through the VCC band; metal left then up at
+# x 13055-13077; jogs left at y 16943-16960 and carries on up at x 13013-13037.
+C 13085,18709
+P 13102,18724 y18455 w=36
+C 13108,18471
+M 13120,18471 x13066 y16952 x13025 y16600 w=21
+N M 13066,17500 ck_a
