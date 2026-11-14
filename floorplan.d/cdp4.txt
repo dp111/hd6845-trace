@@ -1,0 +1,3 @@
+# cdp4: central datapath, bottom part. Format: x0,y0:x1,y1  kind  name | description
+7600,11860:10560,12195  route  channel 1: 8-bit bus | eight poly lines from the left edge, one per slice, each tapped by a vertical metal that goes up into the row above
+7650,12200:10600,12800  array  4-way selector (8 bit) | four pass transistors per slice put one of four per-slice sources (two from the row above, two from the row below) on a node that goes down into the next row; select lines sel1-sel4 come from the left

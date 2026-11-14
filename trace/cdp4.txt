@@ -1,0 +1,96 @@
+# Central datapath, bottom part: x 7600-10850, y 11200-14000.
+# Eight bit slices, 390.3 px apart. Master slice for every cell here is s2 (the third
+# from the left: rails at x 8405 and x 8619). Slice offsets from findcell:
+#   s0 -782   s1 -391   s2 0   s3 391   s4 781   s5 1170   s6 1560   s7 1951
+# Slices are tagged by position; bit order is not established.
+@block cdp4
+
+# ======================================================================
+# Rows A and B (y 12200-12800): four pass transistors per slice onto one node n
+# ======================================================================
+# Four horizontal poly select lines, entering from the left edge of the region
+# and ending just right of the last slice.
+P 7600,12223 x10588 w=23           # sel1: gates T1 of row A (branch down at each slice)
+P 7600,12481 x10592 w=23           # sel2: gates T2 of row A
+P 7600,12530 x10592 w=23           # sel3: gates T2 of row B
+P 7600,12786 x10586 w=23           # sel4: gates T1 of row B
+N P 7610,12223 cdp4_sel1
+N P 7610,12481 cdp4_sel2
+N P 7610,12530 cdp4_sel3
+N P 7610,12786 cdp4_sel4
+
+@cell cdp4_mux tag=s2
+# --- row A, T1: a -> n, gate = sel1
+D 8483,12248:8548,12441            # channel strip, gate down the middle
+D 8449,12330:8490,12380            # contact land of a
+D 8541,12330:8576,12380            # contact land of n (merges with T2's left side)
+P 8501,12224:8529,12450            # gate, branch of sel1
+C 8465,12352 8555,12352 s=26x30
+# --- row A, T2: b -> n, gate = sel2 (under the wide rail, no contact to it)
+D 8569,12270:8638,12462
+D 8632,12346:8712,12363            # narrow strap to the contact land of b
+D 8706,12332:8756,12379            # contact land of b
+P 8591,12257:8614,12482            # gate, branch of sel2 (free end at the top)
+C 8729,12352 s=26x30
+# --- row B, T1: c -> n, gate = sel4
+D 8483,12569:8548,12766
+D 8449,12630:8490,12680            # contact land of c
+D 8541,12630:8576,12680            # contact land of n
+P 8501,12555:8529,12788            # gate, branch of sel4 (free end at the top)
+C 8465,12653 8555,12653 s=26x30
+# --- row B, T2: d -> n, gate = sel3
+D 8569,12551:8638,12745
+D 8632,12646:8712,12662            # narrow strap to the contact land of d
+D 8706,12630:8756,12680            # contact land of d
+P 8591,12530:8614,12750            # gate, branch of sel3 (free end at the bottom)
+C 8729,12653 s=26x30
+# --- metal
+M 8509,11790 y12178 x8467 y12366 w=22      # a: from the row above, jogs left at y 12178
+M 8729,11790 y12366 w=20                   # b: from the row above
+M 8555,12338 y12810 w=18                   # n: joins both rows, continues down
+M 8467,12640 y12810 w=22                   # c: to the row below
+M 8729,12640 y12810 w=20                   # d: to the row below
+N M 8509,11800 cdp4_a_{}
+N M 8729,11800 cdp4_b_{}
+N M 8555,12500 cdp4_n_{}
+N M 8467,12800 cdp4_c_{}
+N M 8729,12800 cdp4_d_{}
+@end
+@inst cdp4_mux -782,0 tag=s0
+@inst cdp4_mux -391,0 tag=s1
+@inst cdp4_mux 391,0 tag=s3
+@inst cdp4_mux 781,0 tag=s4
+@inst cdp4_mux 1170,0 tag=s5
+@inst cdp4_mux 1560,0 tag=s6
+@inst cdp4_mux 1951,0 tag=s7
+
+# ======================================================================
+# Channel 1 (y 11800-12200): eight horizontal poly bus lines from the left edge,
+# one per slice, each ending at a contact to a vertical metal line (x 8555 + offset)
+# that comes down from the row above.
+# ======================================================================
+P 7600,12180 x7786 w=20
+P 7600,12137 x8177 w=20
+P 7600,12093 x8568 w=20
+P 7600,12052 x8959 w=20
+P 7600,12008 x9349 w=20
+P 7600,11964 x9738 w=20
+P 7600,11922 x10128 w=20
+P 7600,11877 x10519 w=20
+C 7773,12180 8164,12137 8555,12093 8946,12052 9336,12008 9725,11964 10115,11922 10506,11877 s=26x26
+M 7773,11790 y12194 w=20
+M 8164,11790 y12151 w=20
+M 8555,11790 y12107 w=20
+M 8946,11790 y12066 w=20
+M 9336,11790 y12022 w=20
+M 9725,11790 y11978 w=20
+M 10115,11790 y11936 w=20
+M 10506,11790 y11891 w=20
+N P 7610,12180 cdp4_bus_s0
+N P 7610,12137 cdp4_bus_s1
+N P 7610,12093 cdp4_bus_s2
+N P 7610,12052 cdp4_bus_s3
+N P 7610,12008 cdp4_bus_s4
+N P 7610,11964 cdp4_bus_s5
+N P 7610,11922 cdp4_bus_s6
+N P 7610,11877 cdp4_bus_s7
