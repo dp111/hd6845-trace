@@ -1,0 +1,7 @@
+# cdp1: central datapath, top rows. x0,y0:x1,y1  kind  name | description
+8340,2950:10790,3040   power  VSS feeds and band | three feeds from the VSS plane and the band joining the slice rails; row A's outputs leave upward here
+8340,3040:10790,3330   ?array R8 register (6 bit) | six static register bits (write pass transistor, two inverters, grounded-gate feedback). Each output leaves upward on its own wire. R8 is a guess from the width and the fan-out
+8750,3440:10790,3990   ?array row B (5 cells) | not traced; takes the outputs of the register below
+8750,4232:10790,4524   array  5-bit register | five static register bits, same cell as the row above; outputs go up to row B. Which register is not known yet
+8340,4530:10790,5150   ?route channel | horizontal metal lines, probably the internal data bus and row strobes; not traced
+8750,5150:10790,5700   ?array rows D and E (5 cells) | not traced

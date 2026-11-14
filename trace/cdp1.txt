@@ -1,0 +1,201 @@
+# Central datapath, top rows (x 7600-10850, y 2950-5700).  Block cdp1.
+# Rows (see notes/blocks/cdp1.md):
+#   A  y 3040-3330  six register cells (cdp1_reg), slices a0..a5
+#   B  y 3480-3900  five cells (not traced here yet)
+#   C  y 4232-4522  five register cells (cdp1_reg again), slices c1..c5
+# Slices are numbered by position, left to right; a1..a5 stand over c1..c5.
+@block cdp1
+
+# ---------------------------------------------------------------------------------
+# cdp1_reg: one static register bit. Master = row A, second slice (x 8745-9225).
+#   x   storage node: gate of the first inverter, written from the bit line through
+#       the pass transistor whose gate is the row's write line
+#   q1  = NOT x  (first inverter, weak depletion load)
+#   q   = NOT q1 (second inverter); fed back to x through a long transistor whose
+#         gate is tied to VSS (must be a depletion device: a feedback resistor)
+#   q leaves the cell upward in poly (pt).
+# The vertical rails (VSS left, VCC right of centre) are drawn outside the cell.
+@cell cdp1_reg tag=a1
+
+# --- metal
+M 8857,3060 y3330 w=20                 # bit line (continues downward outside the cell)
+M 8840,3284:8875,3320                  # ... its contact pad
+M 8945,3060 y3168 w=22                 # m3: upper part. No contact found (see notes)
+M 8948,3160 y3292 w=10                 # m3: thin neck
+M 8936,3288:8960,3321                  # m3: lower end, over the write line, no contact found
+M 9116,3060 y3322 w=22                 # m6: no contact found inside the cell
+M [ 9050,3103 x9084 y3178 x9074 y3226 x9038 y3188 x9050 ]   # m5: q diffusion to load gate
+M [ 8985,3065 x9035 y3150 x9037 y3176 x9026 y3238 x9038 y3292 x9035 y3330 x8985 y3292 x8968 y3238 x8976 y3152 x8985 ]  # VCC rail, necked round m5
+
+# --- contacts
+C 8792,3082 s=30x30                    # VSS rail to the grounded poly
+C 8791,3163 s=28x44                    # VSS rail to diffusion
+C 8857,3301 s=28x30                    # bit line
+C 8987,3264 s=26x30                    # VCC
+C 9064,3119 s=28x28                    # m5 to q diffusion
+C 9054,3206 s=26x26                    # m5 to the second load's gate
+
+# --- first inverter: pull-down under the bit line metal, VSS on its left
+D 8768,3133:8882,3188                  # VSS | channel | q1
+D 8868,3150:8894,3188                  # q1 widens below the gate poly's arm
+D 8872,3152:8985,3170                  # q1 band to the load
+D 8890,3165:8930,3202                  # ... tab under the load's gate tie
+D 8958,3150:8985,3246                  # load strip, up from VCC
+D 8940,3240:9022,3290                  # VCC diffusion
+P [ 8839,3103 x8914 y3127 x8866 y3228 x8839 ]   # x: gate, arm to the feedback diffusion, tail to the bit-line pass transistor
+B 8898,3097:8928,3130                  # x arm joined to the feedback diffusion
+P [ 8933,3176 x8992 y3150 x9016 y3200 8992,3234 x8933 ]   # q1: load gate (block under the VCC rail, diagonal corner)
+P 8900,3178:8935,3202                  # ... its tie
+B 8896,3174:8932,3204
+P 8990,3150:9157,3176                  # q1 runs right to the second inverter
+P 9130,3150:9153,3246                  # ... gate of its pull-down
+
+# --- bit-line pass transistor (gate: the row's write line)
+D 8840,3206:8868,3282                  # x island, down through the channel
+B 8836,3202:8872,3230                  # x poly tail joined to it
+D 8838,3276:8882,3327                  # bit line diffusion
+P 8805,3250:8930,3278                  # write line: gate strip
+P 8805,3250:8833,3322                  # ... leg up from the previous slice
+P 8905,3250:8930,3322                  # ... elbow down
+P 8905,3300:9225,3322                  # ... on to the next slice
+
+# --- feedback transistor: grounded gate over a long diffusion from q back to x
+D 8905,3099:9132,3124                  # x | channel | q | arm under pt
+D 9046,3099:9092,3144                  # q contact land
+P 8776,3066:9040,3092                  # grounded poly
+P 8776,3066:8815,3098
+P 8958,3066:9040,3128                  # ... widened over the diffusion: the gate
+?B 9096,3096:9134,3126                 # pt joined to the arm (inferred: see notes)
+P 9100,3040:9126,3112                  # pt: q leaves upward
+
+# --- second inverter
+D 9104,3183:9165,3242                  # q | channel | VSS (the next slice's)
+D 9135,3180:9195,3240                  # ... which reaches down-left from the next rail's diffusion
+D 9104,3183:9130,3264
+D 9015,3234:9115,3264                  # load strip from VCC
+P 9028,3185:9098,3285                  # load gate block
+P 9078,3192:9110,3222                  # ... its tie
+B 9082,3190:9112,3224
+
+N P 8852,3110 cdp1_{}_x
+N D 8920,3160 cdp1_{}_q1
+N D 9064,3135 cdp1_{}_q
+N M 8857,3070 cdp1_{}_bl
+N M 8945,3070 cdp1_{}_m3
+N M 9116,3200 cdp1_{}_m6
+@end
+
+# ---------------------------------------------------------------------------------
+# Row A: six register bits. Offsets from findcell on the metal shot, checked by overlay.
+@inst cdp1_reg -391,0 tag=a0
+@inst cdp1_reg 390,0 tag=a2
+@inst cdp1_reg 780,0 tag=a3
+@inst cdp1_reg 1170,0 tag=a4
+@inst cdp1_reg 1560,0 tag=a5
+# Row C: five more of the same cell, under slices a1..a5.
+@inst cdp1_reg 0,1194 tag=c1
+@inst cdp1_reg 390,1194 tag=c2
+@inst cdp1_reg 780,1194 tag=c3
+@inst cdp1_reg 1170,1194 tag=c4
+@inst cdp1_reg 1560,1193 tag=c5
+
+# ---------------------------------------------------------------------------------
+# Supply rails. One VSS rail (left of each cell) and one VCC rail (through each cell)
+# per slice, vertical. VSS comes down from the plane under the VSS pad in three feeds.
+M 8403,3030 y4530 w=50                 # VSS rail, slice 0
+M 8796,3030 y4530 w=52                 # VSS rail, slice 1
+M 9187,3030 y4530 w=52                 # VSS rail, slice 2
+M 9577,3030 y4530 w=52                 # VSS rail, slice 3
+M 9967,3030 y4530 w=52                 # VSS rail, slice 4
+M 10357,3030 y4530 w=52                # VSS rail, slice 5
+M 10738,2950 y4530 w=54                # VSS rail right of slice 5 (third feed)
+M 8340,2987:9145,3037                  # VSS band over slices 0 and 1 (runs on to the left)
+M 9140,2950:9197,3045                  # first feed from the VSS plane
+M 9548,2987:9905,3037                  # VSS band over slice 3
+M 9900,2950:9987,3042                  # second feed
+M 10300,2987:10720,3037                # VSS band over slice 5
+N M 8796,3400 vss
+N M 8403,3400 vss
+N M 9187,3400 vss
+N M 9577,3400 vss
+N M 9967,3400 vss
+N M 10357,3400 vss
+N M 10738,3400 vss
+M 8620,3290 y4530 w=50                 # VCC rail, slice 0 (below the cell's own piece)
+M 9010,3290 y4530 w=50                 # VCC rail, slice 1
+M 9400,3290 y4530 w=50                 # VCC rail, slice 2
+M 9790,3290 y4530 w=50                 # VCC rail, slice 3
+M 10180,3290 y4530 w=50                # VCC rail, slice 4
+M 10570,3290 y4530 w=50                # VCC rail, slice 5
+N M 8620,3400 vcc
+N M 9010,3400 vcc
+N M 9400,3400 vcc
+N M 9790,3400 vcc
+N M 10180,3400 vcc
+N M 10570,3400 vcc
+# VSS diffusion for the last pull-down of row A, on the rail right of slice 5
+D 10712,3152:10765,3205
+D 10690,3180:10745,3240
+C 10737,3175 s=28x36
+# VSS diffusion for the last pull-down of row C
+D 10712,4345:10765,4398
+D 10690,4373:10745,4433
+C 10737,4368 s=28x36
+
+# ---------------------------------------------------------------------------------
+# Row A: where each q leaves (poly "pt" going up out of the cell).
+P 8722,3046 y3024 x8340 w=22           # a0: left along y 3024, under the VSS band
+N P 8345,3024 cdp1_a0_q
+P 9113,3046 y2985 x8340 w=22           # a1: left along y 2985
+N P 8345,2985 cdp1_a1_q
+P 9492,3008:9522,3046                  # a2: pad
+C 9506,3026 s=24x26
+M 9507,3044 y2950 w=20                 # ... metal up, turns left at y 2940 (outside the block)
+N M 9507,2955 cdp1_a2_q
+P [ 9880,3046 y3020 x9862 y2950 x9882 y3000 x9906 y3046 ]   # a3: jogs left, up to a pad at 9865,2940
+N P 9872,2955 cdp1_a3_q
+P 10262,3008:10296,3046                # a4: pad
+C 10275,3026 s=24x26
+M 10275,3044 y2950 w=22                # ... metal straight up
+N M 10275,2955 cdp1_a4_q
+P [ 10660,3046 y3020 x10655 y2950 x10675 y3000 x10686 y3046 ]   # a5: up to a pad at 10655,2940
+N P 10665,2955 cdp1_a5_q
+
+# Row C: each q goes up in metal to a poly pad at the foot of row B (slices 1-4).
+# The cell's m6 hangs from the same pad.
+P 9100,4205:9132,4247                  # c1 pad on pt
+C 9113,4222 s=24x26
+M 9115,3945 y4258 w=22
+C 9113,3958 s=24x26
+P 9102,3940:9132,3976                  # row B's pad (the poly above belongs to row B)
+P 9490,4205:9522,4247                  # c2
+C 9503,4222 s=24x26
+M 9505,3945 y4258 w=22
+C 9503,3958 s=24x26
+P 9492,3940:9522,3976
+P 9880,4205:9912,4247                  # c3
+C 9893,4222 s=24x26
+M 9895,3945 y4258 w=22
+C 9893,3958 s=24x26
+P 9882,3940:9912,3976
+P 10270,4205:10302,4247                # c4
+C 10283,4222 s=24x26
+M 10285,3945 y4258 w=22
+C 10283,3958 s=24x26
+P 10272,3940:10302,3976
+# c5 differs: from the pad the metal goes left and then up at x 10632 (traced to y 3990)
+P 10660,4204:10692,4246
+C 10672,4221 s=24x26
+M 10622,4205:10690,4240
+M 10632,3990 y4257 w=20
+M 10672,4235 y4257 w=22
+@alias cdp1_c1_q cdp1_c1_m6
+@alias cdp1_c2_q cdp1_c2_m6
+@alias cdp1_c3_q cdp1_c3_m6
+@alias cdp1_c4_q cdp1_c4_m6
+@alias cdp1_c5_q cdp1_c5_m6
+
+# The write line of each row: one poly line that meanders through the cells (leg up,
+# gate strip, elbow down, on to the next slice). Named where it passes under a VCC rail.
+N P 9010,3311 cdp1_a_wr
+N P 9010,4505 cdp1_c_wr
