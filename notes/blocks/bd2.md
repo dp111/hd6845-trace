@@ -249,7 +249,12 @@ The lists marked ? at the south, east and top edges come from `tools/sel_cut.py`
    between them; in chip 2's stripped shot a dark line runs down the block's left side,
    but that is also where the metal's edge was. Taken as joined: otherwise strip 1 (and
    with it G1's input) would have no driver and the block and band would lead nowhere.
-3. **Loads of G1 and G2**: the VCC lands under the rail are shared with the loads of
+3. **East end of row 1's output strip** (16095-16148 x 15628-15670, `?` in the trace): a
+   hook-shaped poly end with a heavy outline and an inner bar, at the west end of the band
+   that leads to the block and strip 1. Taken as the strip's buried contact because G1 and
+   G2 end their output strips the same way at the same x (16098-16132, 16185-16218). The
+   diffusion under it was not seen separately from the poly.
+3a. **Loads of G1 and G2**: the VCC lands under the rail are shared with the loads of
    `sel`'s right-hand column on the other side of the rail (`sel.txt` draws those
    schematically, with one contact per load at y 15065, 15195, 15325; the photos show
    contacts at 15048 and 15108, 15195, 15300). The strips from the lands to my load

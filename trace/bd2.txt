@@ -74,7 +74,7 @@ P 16168,15440 y15505 16210,15565 y15612 w=24
 P 16226,15598:16248,15662              # block
 P 16140,15657 x16232                   # band west, under both trunks
 P 16108,15630:16148,15670              # its west end on the output strip of row 1
-B 16106,15628:16144,15670
+?B 16106,15628:16144,15670             # heavy-outlined hook; taken as the strip's buried contact (style of G1, G2)
 
 # ---------------------------------------------------------------- areg_load driver
 # G2, y 15225-15360: one inverter. Output = areg_load, input = bd2_n2.
@@ -146,7 +146,7 @@ P 16005,15603:16105,15625              # lower band: gate e_b
 P 16095,15600:16152,15620              # east to the tap on the trunk
 P 16150,15590:16185,15620              # pad
 C 16167,15605
-D 16095,15630:16142,15668              # output strip's east end under the buried contact
+?D 16095,15630:16142,15668             # output strip's east end under the buried contact (not seen separately)
 N D 16060,15638 bd2_n1
 # The L-shaped poly west of the column: bar 15908-15992 x 15558-15587, neck down to the
 # pad 15925,15625, metal x 15912-15935 down to a contact at 15925,15825.
