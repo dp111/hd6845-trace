@@ -14,7 +14,7 @@
 @cell cdp2_lat tag=s4
 # --- metal that belongs to one cell
 M 9246,5985 y6345 w=16               # a: per-slice bus line, runs through the cell
-M 9336,5985 y6187 w=22               # b: track from above; ends over the n2 land, no contact
+M 9336,5985 y6190 w=22               # b: track from above; ends on the n2 land
 M 9509,6084 y6338 w=20               # c: track on the q drain; ends over the strobe line, no contact
 M 9509,5985 y6070 w=20               # output metal, going up from the contact on the output poly
 M 9458,6117 y6241 w=30               # strap: load gate of inverter 1 up to the output land
@@ -25,6 +25,7 @@ C 9460,6135 s=28x30                  # strap to the output land
 C 9508,6044 s=24x24                  # output poly to the output metal
 C 9508,6222 s=14x40                  # track c to the q drain (speckled strip in the clean shot)
 C 9183,6183 s=28x46                  # VSS rail to its land (oval)
+C 9337,6184 s=18x10                  # track b to the n2 land, at the very end of the track
 C 9182,6096 s=22x20                  # VSS rail to the band of the hold device
 
 # --- pass transistor T1: bus -> node a, gate = row strobe (the strobe line loops round
@@ -140,9 +141,72 @@ N M 9246,5990 cdp2_a_s4_bus
 N M 9636,5990 cdp2_a_s5_bus
 N M 10026,5990 cdp2_a_s6_bus
 N M 10416,5990 cdp2_a_s7_bus
-N M 8946,5990 cdp2_a_s3_trkb
-N M 9336,5990 cdp2_a_s4_trkb
-N M 9726,5990 cdp2_a_s5_trkb
-N M 10116,5990 cdp2_a_s6_trkb
-N M 10506,5990 cdp2_a_s7_trkb
 N P 9450,6324 cdp2_a_ld
+
+# =====================================================================================
+# Channel 1 (y 5720-6060): how row A's outputs leave. Every crossing of a track with a
+# line was tested for a contact (colour and speckle in the clean shot, notes); the ones
+# listed are the only ones.
+# =====================================================================================
+# --- long poly lines, pitch 43.3. They run on to the right past x 10850. Left of
+# x 8480 they continue (jogging up and left around the s2 VSS rail): not traced.
+P 8480,5826 x10850 w=20
+P 8480,5870 x10850 w=20
+P 8480,5913 x10850 w=20
+P 8480,5956 x10850 w=20
+P 8480,6000 x10518 w=20              # ends just right of s7's track b
+P 8320,6042 x8962 w=20               # short line: s3's track b to a contact at x 8335
+N P 8490,5826 cdp2_ch1_5826
+
+# --- track b (n2) of each slice: up from the cell, one contact to "its" line
+M 9336,5858 y5990 w=22               # s4: starts at its contact to line 5870
+C 9332,5869 s=22x22
+M 9726,5730 y5990 w=22               # s5: contact to line 5913, runs on up to a contact at y 5740
+C 9725,5916 s=22x22
+C 9725,5740 s=22x22
+M 10116,5730 y5990 w=22              # s6: line 5956
+C 10113,5958 s=22x22
+C 10113,5740 s=22x22
+M 10506,5730 y5990 w=22              # s7: line 6000
+C 10502,6000 s=22x22
+C 10502,5740 s=22x22
+?P 9711,5728:9740,5752               # pads under the top contacts; the poly goes on right and up
+?P 10099,5728:10128,5752             #   (seen at 1x only), into the row above
+?P 10488,5728:10517,5752
+# s3 is different: its track b has no contact to line 5826. It meets line 6042 and, at
+# its top end, a poly jumper to the track that comes down in s4's column.
+M 8946,5772 y5990 w=22
+C 8943,6044 s=22x22                  # to line 6042
+C 8943,5782 s=22x22                  # to the jumper
+P 8930,5783 x9346 w=18               # jumper
+C 9332,5782 s=22x22
+M 9334,5700 y5794 w=20               # s4's upper piece: from above, ends at the jumper contact
+# s4's line 5870 also goes up: a short metal link at x 9463, then poly
+M 9463,5772 y5880 w=20
+C 9463,5869 s=20x20
+C 9463,5782 s=20x20
+P 9463,5700 y5794 w=18               # poly going up out of the region
+# line 6042 (s3's n2) ends at the left on a contact to a metal line going down
+C 8335,6042 s=22x22
+M 8335,6032 y6066 w=20               # continues down into the logic left of row A: not traced
+
+# --- extra metal line e in s3 (x 8892-8908): contacts to a poly pad at y 5739 and to
+# line 5826; its lower part is a stub that ends at y 6115 over field, no contact.
+M 8900,5730 y6115 w=16
+C 8900,5825 s=20x20
+C 8900,5739 s=20x20
+P 8886,5730 x9086 w=16               # band from the pad to the right,
+?P 9080,5700 y5747 w=18              #   turning up at x 9080 (seen at 1.4x only)
+
+# --- output metal (q) of each slice: up from the cell to a contact at y 5740
+M 9119,5730 y5990 w=20
+M 9509,5730 y5990 w=20
+M 9899,5730 y5990 w=20
+M 10289,5730 y5990 w=20
+M 10679,5730 y5990 w=20
+C 9118,5740 9508,5740 9897,5740 10287,5740 10677,5740 s=22x22
+?P 9104,5728:9133,5752               # what the contact lands on and where it goes: not traced
+?P 9494,5728:9523,5752
+?P 9883,5728:9912,5752
+?P 10273,5728:10302,5752
+?P 10663,5728:10692,5752
