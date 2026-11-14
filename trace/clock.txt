@@ -128,3 +128,138 @@ P 11760,18931:11866,18957
 C 11772,18467 s=24x24
 M 11600,18455:11877,18480          # bus line, leaves left (not yet followed)
 N M 11650,18467 ck_src
+
+# ====================================================================
+# Wiring between the gate row, the input row and the driver logic,
+# x 11950-12900, y 18850-19950. Vertical metals V1-V6 carry seven nets down; each
+# crosses the VCC metal at x 12088-12140 on a poly bar and enters the driver logic in
+# metal at x ~12000.
+#
+# Six small "island" devices hang on these nets. Each is a transistor from a VCC
+# diffusion to a short stub, with its gate on the net and a metal pad over stub and
+# gate. They are drawn as loads (gate tied to the stub); how the tie is made and
+# whether they are pull-ups or clamps is AMB-006.
+# ====================================================================
+
+M 12088,19156:12140,19960          # VCC: joins the driver logic's top rail to the band along the bottom
+M 10905,19160:12140,19212          # driver logic top rail
+N M 12114,19500 vcc
+
+# ---- lines A and B come down: poly under the VSS rail, then metal
+C 12170,18756 s=24x20              # line B to poly
+P 12150,18742:12197,18895
+C 12176,18880 s=26x24
+M 12165,18866:12190,19266          # V1: line B
+C 12235,18711 s=24x18              # line A to poly
+P 12209,18695:12259,18945
+C 12223,18928 s=26x24
+M 12208,18914:12232,19308          # V2: line A
+
+# ---- line B: bar to the driver logic, and on to islands T1 and T2
+C 12181,19252 s=26x26
+P 11992,19238:12195,19266
+C 12005,19254 s=26x26
+M 11900,19243:12018,19266          # into the driver logic
+P 12190,19243:12452,19264
+P 12428,19198:12452,19264
+?P 12278,19258:12298,19412         # branch down between V3 and V4 (join at its top end not resolved)
+P 12278,19393:12452,19412
+P 12428,19365:12452,19412
+# island T1
+D 12382,19140:12705,19195
+P 12425,19134:12452,19201
+?B 12417,19146:12431,19189
+C 12402,19167 s=26x30
+M 12380,19132:12456,19202
+C 12700,19185 s=24x24
+# island T2
+D 12382,19310:12705,19365
+P 12425,19304:12452,19371
+?B 12417,19316:12431,19359
+C 12402,19337 s=26x30
+M 12380,19302:12456,19372
+C 12700,19337 s=24x24
+?M 12650,19150:12900,19420         # part of the VCC band the two strips reach (extent not traced)
+N M 12800,19300 vcc
+
+# ---- line A: bar to the driver logic
+C 12220,19294 s=26x26
+P 12036,19282:12236,19325
+C 12048,19294 s=26x26
+M 11900,19283:12060,19306          # into the driver logic
+
+# ---- big VCC diffusion under the gate row's lines, with three island devices below it
+D 12385,18600:12790,18850
+C 12400,18603:12770,18627          # nine contacts to the VCC band
+# island B1, on net ck_n2 (V4)
+D 12395,18840:12445,18968
+P 12300,18888:12448,18916
+P 12300,18888:12323,19092
+?B 12400,18910:12440,18922
+C 12420,18945 s=26x26
+M 12385,18885:12447,18975
+C 12309,19078 s=26x26
+M 12302,19066:12318,19545          # V4
+P 11992,19066:12323,19090
+C 12005,19077 s=26x26
+M 11900,19066:12018,19089          # into the driver logic
+C 12310,19532 s=26x26
+P 11992,19521:12323,19545
+C 12005,19532 s=26x26
+M 11900,19521:12018,19544          # into the driver logic
+N M 12310,19300 ck_n2
+# island B2, on buffered CLK
+D 12570,18840:12625,18968
+P 12510,18888:12628,18916
+P 12510,18888:12535,19068
+P 12510,19042:12582,19068
+?B 12576,18910:12620,18922
+C 12597,18945 s=26x26
+M 12563,18885:12627,18975
+C 12569,19057 s=26x26
+# buffered CLK from the input row (continues the stub in trace/inrow.txt)
+M 14052,18522:14075,18875
+M 13663,18852:14075,18875
+M 13663,18852:13688,19065
+M 12556,19040:13688,19065
+M 12557,19045:12583,19502          # V5
+C 12569,19489 s=26x26
+P 12034,19478:12582,19502
+C 12047,19490 s=26x26
+M 11900,19479:12060,19502          # into the driver logic
+# island B3, on the CLK pin node
+D 12745,18840:12800,18968
+P 12742,18888:12870,18916
+P 12845,18888:12870,19118
+?B 12751,18910:12795,18922
+C 12772,18945 s=26x26
+M 12738,18885:12802,18975
+C 12857,19104 s=26x26
+M 12600,19093:13880,19115          # CLK pin node, from its protection cell
+M 12600,19093:12630,19912          # V6
+M 12170,19888:12630,19912
+C 12180,19900 s=26x26
+P 12038,19888:12194,19912
+C 12050,19900 s=26x26
+M 11900,19888:12063,19912          # along the bottom of the driver logic (not yet followed)
+
+# ---- net ck_n1 (V3), with island BI near the bottom
+C 12263,19120 s=26x26
+P 12034,19109:12282,19133
+C 12048,19121 s=26x26
+M 11900,19110:12061,19133          # into the driver logic
+M 12255,19106:12277,19587          # V3
+C 12266,19573 s=26x26
+P 12034,19562:12280,19586
+C 12048,19573 s=26x26
+M 11900,19562:12061,19585          # into the driver logic
+N M 12266,19300 ck_n1
+P 12250,19562:12274,19722
+P 12250,19698:12497,19722
+D 12435,19640:12495,19960          # stub, channel, then down to the VCC band along the bottom
+?B 12440,19690:12490,19702
+C 12462,19662 s=26x26
+M 12432,19636:12497,19726
+?C 12465,19945 s=26x20             # strip to the VCC band (not seen, band covers it)
+?M 12300,19932:12640,19990         # part of the VCC band along the bottom (extent not traced)
+N M 12500,19960 vcc
