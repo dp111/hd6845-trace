@@ -1,0 +1,185 @@
+# Right datapath, lower rows (rdp3): x 13350-16950, y 10700-12900 and x 13350-15800, y 12900-13480
+# Notes: notes/blocks/rdp3.md
+@block rdp3
+@w M=22 P=22
+@s 28x28
+
+# =====================================================================================
+# Row AR: five latch cells at y 13010-13280, x 14190-16140 (pitch 390), above the decode
+# array. Master is the second cell from the left (x 14597-14987).
+# =====================================================================================
+
+@cell rdp3_ar tag=s1
+# --- metal that belongs to one cell
+M 14625,12990 y13277 w=28            # per-slice bus line, comes from above, ends at the cell bottom
+N M 14625,13000 rdp3_ar_bus_{}
+M 14712,13014 y13277 w=20            # full-height track, no contact found on it (see notes)
+N M 14712,13020 rdp3_ar_trk_{}
+M 14886,13012 y13277 w=22            # full-height track, sits on the n1 drain
+M 14832,13112 y13245 w=38            # strap: load gate of inverter 1 down to the output land
+C 14622,13035 s=30x30                # bus to the pass-transistor diffusion
+C 14757,13070 s=30x30                # VCC rail to the land the two loads hang from
+C 14825,13128 s=26x26                # strap to poly (load gate = n1)
+C 14835,13217 s=28x30                # strap to the output land
+?C 14886,13130 s=14x34               # track to n1 drain: seen as an outline only
+
+# --- pass transistor T1: bus -> node a, gate = row strobe
+D 14602,13010:14648,13056            # bus contact land
+D 14606,13050:14640,13140            # strip down through the gate to node a
+P 14572,13015:14597,13088            # strobe line: down the left of the contact,
+P 14572,13060:14697,13088            #   across the strip (the gate),
+P 14667,13015:14697,13088            #   back up on the right,
+P 14667,13015:14975,13043            #   and on to the next cell
+N P 14850,13029 rdp3_ar_ld
+
+# --- node a: buried contact to the gate of inverter 2, and on to the feedback land
+P 14602,13122:14642,13150            # pad over the end of the strip
+B 14604,13120:14642,13142
+P 14610,13122:14632,13232            # gate of T_b, runs down under the bus line
+P 14610,13210:14698,13232            # then right to the buried contact at the feedback land
+D 14680,13214:14724,13244            # feedback land (under the 14712 track)
+B 14678,13210:14700,13240
+N D 14623,13105 rdp3_ar_a_{}
+
+# --- inverter 2: a -> n2. Pull-down T_b from the VSS land, load L2 from the VCC land
+D 14536,13126:14600,13202            # VSS land under the left rail (oval contact)
+D 14535,13100:14562,13128            #   its upper corner, where the previous cell's T_a ends
+D 14596,13152:14652,13203            # T_b: source at the land, drain strip right of the gate
+C 14555,13163 s=30x58
+D 14645,13172:14704,13189            # drain band to the right, to n2
+D 14700,13156:14744,13190            # n2 land at the foot of the load
+D 14713,13050:14790,13098            # VCC land
+D 14717,13090:14747,13160            # load strip down to n2
+P 14707,13100:14752,13152            # load gate block
+P 14688,13138:14712,13152            # tab to the gate tie
+P 14658,13138:14700,13168            # gate tie pad
+D 14662,13142:14690,13176            # bump up from the drain band under the pad
+B 14660,13140:14692,13168
+N D 14720,13175 rdp3_ar_n2_{}
+
+# --- n2 poly: load gate block continues as a U round to the pull-down of inverter 1
+P 14751,13108:14775,13187            # down the right side of the block (top corner chamfered)
+P 14751,13162:14922,13187            # along
+P 14900,13085:14922,13187            # up: gate of T_a
+
+# --- inverter 1: n2 -> n1. Load L1 right of the VCC land, pull-down T_a to the next VSS land
+D 14785,13072:14872,13100            # load strip from the VCC land to the output end
+P 14797,13058:14848,13150            # load gate block; lower half is the strap contact pad
+P 14840,13058:14872,13098            # tab over the output end
+B 14846,13066:14874,13100
+D 14855,13098:14935,13150            # n1 drain, T_a channel, on to the next cell's VSS land
+N D 14880,13140 rdp3_ar_q_{}
+
+# --- output: land, buried contact, poly strip down to the contact of the line to the right
+D 14820,13197:14868,13243
+D 14860,13218:14900,13243
+P 14874,13220:14899,13292            # (continued outside the cell: the end slice differs)
+B 14872,13218:14901,13245
+
+# --- not understood: a narrow diffusion-coloured stripe and a poly stripe side by side
+# between the feedback land and the output land, under the VCC rail. See notes, AMB-1.
+?D 14722,13208:14809,13220
+P 14730,13226:14809,13245
+N P 14770,13235 rdp3_ar_s2_{}
+
+# --- poly band along the cell bottom, tied to the VSS rail
+P 14550,13251:14809,13272
+C 14562,13256 s=24x22
+@end
+
+@inst rdp3_ar -390,0 tag=s0
+@inst rdp3_ar 390,0 tag=s2
+@inst rdp3_ar 780,0 tag=s3
+@inst rdp3_ar 1170,0 tag=s4
+
+# --- supply rails of row AR (per slice, vertical). Upper ends provisional: they come down
+# from the array above. VCC rails run on down into the decode array's VCC bus.
+M 14175,12900 y13277 w=60
+M 14565,12900 y13277 w=60
+M 14955,12900 y13277 w=60
+M 15345,12900 y13277 w=60
+M 15735,12900 y13277 w=60
+M 16125,12900 y13277 w=60
+N M 14565,12950 vss
+N M 14175,12950 vss
+N M 14955,12950 vss
+N M 15345,12950 vss
+N M 15735,12950 vss
+N M 16125,12950 vss
+M 14382,12900 y13520 w=56
+M 14772,12900 y13520 w=56
+M 15162,12900 y13520 w=56
+M 15552,12900 y13520 w=56
+M 15942,12900 y13520 w=56
+N M 14382,12950 vcc
+N M 14772,12950 vcc
+N M 15162,12950 vcc
+N M 15552,12950 vcc
+N M 15942,12950 vcc
+
+# --- sixth VSS rail (right of s4): land and contact for s4's T_a. This rail runs on down.
+D 16096,13100:16140,13202
+C 16115,13163 s=30x58
+M 16125,13270 y13320 w=60            # continues downward, bending left (areg region)
+
+# --- strobe line rdp3_ar_ld: left end, and right end to its contact (metal goes down from there)
+P 14155,13015:14190,13043
+P 16140,13015:16300,13043
+?C 16285,13024 s=26x26
+?M 16285,13010 y13080 w=22
+N M 16285,13070 rdp3_ar_ld
+
+# --- outputs q0..q3: contact below each cell, metal down and to the right, a poly
+# cross-under beneath every VCC rail on the way. Drawn as far as the last contact before
+# the lines continue in poly (x 15839 / 15884), which is inside the areg region.
+P 14868,13290:14905,13324
+P 14478,13290:14515,13324
+P 15258,13290:15295,13324
+P 15648,13290:15685,13324
+P 14484,13285:14509,13300
+P 15264,13285:15289,13300
+P 15654,13285:15679,13300
+C 14496,13308 14886,13308 15276,13308 15666,13308 s=24x24
+# q0 (s0), y 13481
+M 14493,13294 y13481 x14725
+C 14713,13482 s=22x22
+P 14698,13481 x14861 w=24
+C 14846,13482 s=22x22
+M 14834,13481 x15117
+C 15105,13482 s=22x22
+P 15090,13481 x15250 w=24
+C 15235,13482 s=22x22
+M 15223,13481 x15503
+C 15491,13481 s=22x22
+P 15476,13481 x15639 w=24
+C 15624,13481 s=22x22
+M 15612,13481 x15896
+C 15884,13482 s=22x22
+P 15869,13481 x15905 w=24            # poly continues to the right (areg region)
+# q1 (s1), y 13437
+M 14886,13294 y13437 x15073
+C 15061,13437 s=22x22
+P 15046,13437 x15295 w=24
+C 15280,13437 s=22x22
+M 15268,13437 x15462
+C 15450,13437 s=22x22
+P 15435,13437 x15684 w=24
+C 15669,13437 s=22x22
+M 15657,13437 x15851
+C 15839,13437 s=22x22
+P 15824,13437 x15860 w=24            # poly continues to the right
+# q2 (s2), y 13392
+M 15276,13294 y13392 x15503
+C 15491,13392 s=22x22
+P 15476,13392 x15639 w=24
+C 15624,13392 s=22x22
+M 15612,13392 x15896
+C 15884,13392 s=22x22
+P 15869,13392 x15905 w=24            # poly continues to the right
+# q3 (s3), y 13352
+M 15666,13294 y13352 x15851
+C 15839,13352 s=22x22
+P 15824,13352 x15860 w=24            # poly continues to the right
+# q4 (s4): no contact; the poly strip turns right and runs on under the sixth rail
+P 16044,13285:16069,13318
+P 16044,13296:16170,13318

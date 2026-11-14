@@ -1,0 +1,2 @@
+14140,13005:16160,13285  array  ?Address register (5 bit latch) | five transparent latch bits loaded from the per-slice lines above when rdp3_ar_ld is high; outputs q_s0..q_s4 leave to the right
+14450,13285:15900,13500  route  AR outputs | the five latch outputs running right to the area beside the decode array
