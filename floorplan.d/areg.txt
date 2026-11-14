@@ -1,2 +1,5 @@
 15930,13725:16200,14575  logic  Address row inverters (x5) | make the complement row of each decode row pair from the true row; not a register
 15800,13290:16335,13500  route  Address lines to the row inverters | four metal lines from the register cells above the decode array plus one poly line, as nested poly L shapes
+15745,13000:16150,13290  array  Address register bit (fifth of five) | latch written from a data line through a pass transistor gated by the load strobe; drives decode row pair 4. Partly traced
+16200,13500:16460,14700  route  Address feeds and load strobe bundle | ar1..ar4 feeds, the address register load strobe (metal x 16299, from below), two more lines to the right-hand column
+?16480,13050:16800,14700  unknown  Column of cells right of the bundle | four identical cells then larger ones; not traced
