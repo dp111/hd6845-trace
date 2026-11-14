@@ -1,0 +1,131 @@
+# Left vertical array, beside the MA pads.  Region x 2400-4780, y 6450-18550.
+# See notes/blocks/larr.md.  Everything here was read from the median composite of
+# eleven rows (tools/composite.py larr_row ...) and checked against single rows.
+@block larr
+@s 28x30
+
+# ======================================================================
+# Lower section: 14 identical rows (tops y 10992 ... 17586).
+# Master row is the second from the top, y 11470-11947.
+# ======================================================================
+
+# vertical lines through all rows (to be extended to full length)
+M 2880,11400:2900,12000              # L0
+N M 2890,11450 larr_l0
+
+@cell larr_bit tag=s1
+
+# ---------------- columns 1-2: x 2860-3340 --------------------------------
+# supply rails as they run through the row (the rows overlap by a few px)
+M 2955,11462:3003,11955             # rail A = VSS
+M 2955,11770:3050,11847             # ... widened over the contact of the L0 pull-down
+M 3105,11462:3178,11500             # rail B = VCC
+M 3130,11495:3178,11650
+M 3105,11600:3178,11648
+M 3128,11640:3178,11770             # notch on the left side, y 11650-11760
+M 3105,11760:3178,11835
+M 3105,11830:3150,11910
+M 3105,11905:3178,11955
+N M 2979,11520 vss
+N M 3155,11480 vcc
+
+# carry line: arrives from the row above as metal, leaves to the row below
+M 3063,11462:3085,11545             # from the row above
+M 3063,11513:3110,11545             # foot over the contact to poly P2
+C 3095,11528
+M 3065,11633:3098,11670             # this row's carry out: over the drain contact
+M 3060,11668:3090,11722             # over the contact to its load's gate
+M 3063,11690:3085,11955             # down to the row below
+C 3080,11650
+C 3073,11702
+N M 3074,11480 larr_cin_{}
+N M 3074,11800 larr_cout_{}
+
+# strap from the poly of net a to the pad of poly P4
+M 3168,11848:3272,11880
+M 3232,11860:3275,11908
+C 3182,11863
+C 3252,11885
+
+# metal from the node between the two pass gates, leaving right
+M 3218,11668:3340,11698
+C 3232,11683
+
+# rail contacts
+C 2980,11675                        # VSS to the source of the carry pull-down
+C 3022,11815                        # VSS to the source of the L0 pull-down
+C 2890,11810                        # L0 (vertical metal x 2880-2900, outside the cell) to its drain
+C 3152,11573                        # VCC to load L1
+C 3148,11793                        # VCC to load L2 and to the carry load
+
+# --- carry pull-down: one gate (net a) wrapped round the drain; source is VSS on the
+# top and left.  The poly jogs right round the VSS contact (the "hook" at y 11631-11652).
+D 2962,11553:3060,11757
+D 3060,11553:3112,11583             # top strip (source) runs on to the end of the gate
+D 3040,11633:3100,11684             # drain land under the carry-out contact
+D 3095,11645:3125,11682             # bridge from the drain to the load strip (open diffusion)
+P 2985,11583:3093,11605             # gate bar
+P 3068,11603:3212,11632             # ... steps down and runs right under rail B to load L1
+P 2985,11583:3003,11652             # gate, left side
+P 2985,11631:3045,11652             # hook
+P 3010,11640:3040,11725             # gate, lower part
+P 2978,11700:3040,11725             # jog back under rail A
+P 2978,11700:3003,11880             # down under rail A: gate of the L0 pull-down
+P 2978,11857:3200,11880             # along the bottom to the strap contact
+P 3168,11848:3200,11880
+N P 3040,11593 larr_a_{}
+
+# --- carry load: depletion, gate (poly P3) tied to the carry line by metal
+D 3122,11650:3142,11770             # strip under rail B, no contact of its own
+D 3105,11765:3187,11825             # VCC contact box
+P 3064,11688:3153,11730             # P3
+
+# --- L0 pull-down
+D 2962,11775:3050,11845
+D 2905,11800:2965,11822             # neck out to the L0 contact
+D 2875,11792:2912,11830
+
+# --- line along the top of the row (poly), enters from the left column
+P 2860,11511 x3020 w=20
+P 3008,11486:3032,11521
+P 3020,11496 x3340 w=20
+N P 2870,11511 larr_h1_{}
+
+# --- P2: gate fed from the carry-in line
+P 3083,11515:3112,11545
+P 3083,11532 x3277 w=25
+P 3263,11520:3292,11727
+
+# --- load L1 of net a: VCC box, strip under the block, short output strip, buried contact
+D 3130,11553:3187,11600
+D 3180,11567:3250,11598
+D 3247,11557:3263,11636
+D 3215,11608:3263,11636             # tab under the buried contact
+P 3200,11550:3245,11610             # load gate block
+P 3188,11600:3248,11640             # stem; joins the band from the left
+P 3188,11600:3212,11722             # goes on down as a gate over the pass-gate strip
+B 3215,11608:3250,11640
+
+# --- pass-gate strip y 11655-11705: stub | gate a | mid node | gate P2 | right part
+D 3163,11655:3340,11705
+D 3163,11655:3186,11748             # strip under rail B down to the arm of N2 (joins it at 3180-3190,11728-11747)
+
+# --- load L2: node N2 leaves in diffusion round the P4 pad and off to the right
+D 3180,11795:3255,11825             # strip from the VCC box under the block
+D 3250,11728:3272,11850
+D 3180,11728:3272,11745             # arm over the buried contact
+D 3220,11740:3272,11772             # tab under the buried contact
+D 3250,11777:3300,11822             # under gate P4 to the box on the right
+D 3215,11843:3272,11858
+D 3215,11843:3235,11943
+D 3215,11925:3340,11943
+P 3190,11775:3245,11840             # load gate block
+P 3220,11745:3248,11780
+B 3220,11745:3250,11775
+N D 3260,11760 larr_n2_{}
+
+# --- P4: net a again (through the strap), gate between N2 and the box on the right
+P 3278,11740:3297,11890
+P 3240,11863:3280,11907             # pad under the strap contact
+
+@end
