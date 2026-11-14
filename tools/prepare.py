@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Build the derived data in cache/ from the inputs.
 
-- cache/metal.npy, cache/acid.npy : the die shots as raw uint8 RGB arrays, for
-  memory-mapped cropping (about 1.25 GB each)
+- cache/metal.npy, cache/acid.npy : the two shots of chip 2 as raw uint8 RGB arrays,
+  for memory-mapped cropping (about 1.25 GB each). tools/align.py then resamples the
+  stripped shot and the three shots of chip 1 into the reference frame.
 - cache/ds/p-NN.png               : datasheet pages at 110 dpi (the PDF is a scan)
 - cache/accc.txt                  : text of the CPC document
 

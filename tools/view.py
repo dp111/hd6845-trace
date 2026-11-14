@@ -4,7 +4,10 @@
 usage: view.py x y w h [options]
   x y w h        region in metal-shot pixels (top-left corner and size)
   --scale S      output scale (default 1)
-  --layers L     comma list from: metal, acid, blend, edges   (default metal,acid)
+  --layers L     comma list from: metal, acid, blend, edges, and for the first chip
+                 metal1, acid1, acid1b; acidmed = per-pixel median of the three
+                 stripped shots; metalmax = brighter of the two metal shots
+                 (default metal,acid)
                  edges = dark outlines present in BOTH shots. Edges of poly and
                  diffusion show in both; metal edges show only in the metal shot and
                  interference fringes only in the acid shot, so both drop out.
@@ -45,7 +48,8 @@ def use_comp(name):
 
 def arr(layer):
     if layer not in _arr:
-        name = {'metal': 'metal.npy', 'acid': 'acid_aligned.npy'}[layer]
+        name = {'metal': 'metal.npy', 'acid': 'acid_aligned.npy', 'metal1': 'metal1.npy',
+                'acid1': 'acid1.npy', 'acid1b': 'acid1b.npy'}[layer]
         _arr[layer] = np.load(os.path.join(CACHE, name), mmap_mode='r')
     return _arr[layer]
 
@@ -81,10 +85,15 @@ def raw(layer, x, y, w, h):
         tint = np.array([255, 170, 60], np.float32)
         rgb = rgb * (1 - 0.45 * poly[..., None]) + (rgb / 255.0) * tint * 0.45 * poly[..., None]
         return rgb.astype(np.uint8)
+    if layer == 'acidmed' and _comp is None:
+        st = np.stack([raw(l, x, y, w, h) for l in ('acid', 'acid1', 'acid1b')])
+        return np.median(st, axis=0).astype(np.uint8)
+    if layer == 'metalmax' and _comp is None:
+        return np.maximum(raw('metal', x, y, w, h), raw('metal1', x, y, w, h))
     if layer == 'blend':
         return ((raw('metal', x, y, w, h).astype(np.uint16) +
                  raw('acid', x, y, w, h)) // 2).astype(np.uint8)
-    if _comp is not None:
+    if _comp is not None and layer in ('metal', 'acid'):
         a = _comp[0] if layer == 'metal' else _comp[1]
         ox, oy = _comp[2], _comp[3]
     else:

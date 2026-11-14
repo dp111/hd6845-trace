@@ -30,8 +30,14 @@ first, then `notes/journal.md` (latest entry) and `notes/ambiguities.md` if they
 
 - Use `.venv/bin/python` (shapely, opencv, scikit-image, networkx are installed there).
 - `cache/` is derived data and is not in git. `tools/prepare.py` then `tools/align.py`
-  rebuild it. `cache/acid_aligned.npy` is the acid shot resampled into the metal frame,
-  so every tool takes metal-shot coordinates for both layers.
+  rebuild it. Every shot is resampled into the frame of the chip-2 metal shot, so all
+  tools take the same coordinates for every layer.
+- Five shots, as `view.py --layers` names: `metal`, `acid` (chip 2: metal intact,
+  metal stripped) and `metal1`, `acid1`, `acid1b` (chip 1, added 2026-11-14).
+  **`acid1b` (hd6845acid2.jpg) is the clean one**: no interference fringes, readable
+  under where the metal rails were. Use `metal`, `acid` and `acid1b` together. Poly is
+  easiest in `acid`; diffusion, contacts and anything under metal in `acid1b`. Its
+  colour legend is in `notes/layers.md`.
 - Keep large arrays on disk under `cache/`, not in `/tmp`: `/tmp` is RAM-backed here
   and the machine has 12 GB. Scratch renders go in `cache/scratch/`.
 - `tools/view.py x y w h --scale 2.5 --grid 50 [--layers metal,acid] [--stack v]

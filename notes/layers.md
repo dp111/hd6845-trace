@@ -56,3 +56,34 @@ cut every wire into fragments. Bridging those gaps would also bridge real gaps b
 neighbouring wires, so the result cannot be trusted for connectivity. Geometry is
 entered by hand; image processing is kept for checking and for comparing repeated
 cells.
+
+## The chip-1 shots (added 2026-11-14)
+
+Three more shots, of a different die, registered into the same frame by
+`tools/align.py` (about 0.5 px residual for the metal shot, 1 px for the stripped
+ones). An existing trace of chip 2 laid over them sits on the features to within a
+few pixels.
+
+| Layer name | File | What it is |
+|---|---|---|
+| `metal1` | hd6845metal.jpg | metal intact; a second look at any metal join |
+| `acid1` | hd6845acid.jpg | metal stripped; still has fringes, a little less than `acid` |
+| `acid1b` | hd6845acid2.jpg | metal stripped, clean: no fringes at all |
+
+`acid1b` is the important one. Under the wide rails, where `acid` shows only
+interference fringes, it shows gates, diffusion and contacts plainly. First reading
+of its colours, from the pilot cell and two formerly unreadable spots; to be checked
+on more known cells before it is relied on:
+
+| Appearance in `acid1b` | Reading |
+|---|---|
+| Salmon, sharp red outline | poly that was under metal (over diffusion or field) |
+| Dark red-brown, textured | poly over thin oxide that was not under metal (load gates, long gate strips) |
+| Olive strip with a dark outline, on pink | poly over field that was not under metal |
+| Plain tan with dark specks in rows | diffusion, the specks are where metal contacts were |
+| Pink | field oxide |
+| Bright green areas | not yet identified (seen inside the large structures of the clock driver logic and at buried contacts) |
+
+So the salmon/brown difference is about what was above the poly, not about
+depletion implants; AMB-002 stays open. A per-pixel median of the three stripped
+shots (`acidmed`) is worse than `acid1b` alone and is not worth using.
