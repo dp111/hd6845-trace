@@ -131,14 +131,66 @@ of every slice cross both; exact x in the table above plus dx, to be confirmed t
   beside the body (x 9395-9432 and 9505-9537, below the pads). Read as open field: the
   chip-2 metal shot shows the body outline at x 9433-9500 only.
 
+## Row C cell: what is established so far (not traced)
+
+Master s4, x 9340-9730, y 9200-9500. Read from 3x and 4x views of the median composite
+`cdp3_c` (cache/comp; six instances) in `metal`, `acid` and `acid1b`. None of this is in
+the trace file. Colours of the clean shot here: poly salmon under metal and orange-red
+textured in the open; diffusion flat tan under metal and flat pink with a dark outline
+in the open; field khaki in the open, pink under metal; narrow open gaps bright green.
+
+Metal:
+- Rail a enters at the top at x 9375-9425, is x 9335-9425 wide over y 9230-9265 (contact
+  to diffusion at 9357,9252), then runs down the left edge at x 9335-9375 (second,
+  elongated contact at 9350,9475 on a diffusion 9333-9375 x 9375-9510).
+- Line b: its top end is a contact at 9427,9343 on a POLY pad (9405-9450 x 9327-9365,
+  green-speckled paler patch, no dark specks). So the per-slice west line `cdp3_cw_sK`
+  is on poly here: a gate input, or an output that arrives in poly.
+- Line c: a contact to DIFFUSION at 9490,9470 (tan region 9477-9520 x 9452-9495, dark
+  specks). Line c itself is at x 9458-9475 below y 9500; how the contact pad joins it
+  was not examined.
+- Rail d x 9552-9592 over a wide diffusion (9547-9595 x 9210-9500, wider in places) with
+  contacts at 9565,9327 / 9575,9380 / 9562,9437. At the top right the rail has a bulge
+  with a contact at 9592,9220 that lands on POLY (salmon pad 9582-9657 x 9201-9240).
+- Lines e (9627-9647), f (9675-9692), g (9725-9745) run through; f shows contact-like
+  blobs (9684,9213 and lower). Not examined.
+
+Poly and diffusion, left half:
+- Load at the top left: VCC contact box 9340-9395 x 9229-9275; diffusion strip y 9229-9259
+  east under a poly block 9399-9455 x 9200-9269; output diffusion 9459-9515 x 9234-9255;
+  buried-contact box 9475-9498 x 9200-9223 at the top right of the block.
+- The load's poly continues WEST along y 9201-9222 out of the cell (seen to x 9325), and
+  at the cell's top right a heavy-outlined box (9680-9712 x 9197-9230) sends a poly line
+  east at y 9204-9214 into the next slice. So there is a chain along the top of the row:
+  a node per slice boundary, loaded in the slice to the east. This is what a comparator's
+  combining line or a carry chain would look like; which, and its direction, is open.
+- Band U: poly from the cell's left edge (stair, about y 9340-9370 at x 9325) up to
+  y 9292-9302 over x 9390-9475, then y 9280-9297 east to the column.
+- Column: vertical poly x 9525-9545 over the whole cell height (y 9202-9502) between the
+  left half and the wide diffusion under rail d. A light strip (x 9515-9525) with a dark
+  line either side runs along its left edge for the whole height. Whether the regions
+  to its left (9459-9515 x 9234-9255; 9477-9515 x 9325-9380; 9477-9520 x 9452-9495) pass
+  under it to the rail d diffusion (three pull-downs) or stop short (a plain wire, or a
+  capacitor on the rail d diffusion) is NOT settled; a 5x view of 9500-9560 x 9220-9500
+  in `acid` and `metal1` should settle it.
+- Vertical poly strips at x 9391-9407 (y 9352-9400 and y 9442-9500) crossing strips that
+  run east from the diffusion under rail a: probably two more loads or pull-ups, one of
+  them into the line c node.
+- Horizontal poly along the bottom of the row at y 9483-9503 (the "9493 line").
+
+Right half (x 9600-9740): dense, with a vertical poly strip at x 9612-9622 (y 9290-9500)
+beside the rail d diffusion and several horizontal diffusion fingers. Not decoded.
+
+Working guess (not traced): a static register bit with a comparator bit against the
+per-slice west line and a read path to bus N, i.e. row C = a 6-bit readable register
+with an equality comparator (the cursor register R14 against MA8-13 would fit, and row
+H = R15 against MA0-7).
+
 ## Not done
 
-- Row C cell (9340-9730 x 9200-9500 in s4; composite `cdp3_c` exists in cache/comp). First
-  observations: top-left load (VCC contact 9357,9250; poly block 9395-9455 x 9225-9265;
-  small box at 9478-9497 x 9200-9222, probably the load's buried contact); line b's
-  contact at 9427,9338; a contact at 9490,9470; wide poly areas at 9455-9530 x 9310-9400;
-  rail d over the wide diffusion 9545-9615 x 9200-9480; vertical poly strip at
-  x 9600-9612 beside it; a contact at about 9630,9525 below the cell.
+- Row C cell (9340-9730 x 9200-9500 in s4): see the section above for what is known. It
+  needs 4-5x views junction by junction; start with the column question, then the right
+  half. Budget about twenty views. A contact at about 9630,9525 sits just below the cell.
 - Row A and row H cells (variants of C), row I, channel B, s0/s1 logic of rows A-C
   (x 7600-8560), the through lines, rails over their full length, lines e, f, g, and the
   top/bottom port tables.
