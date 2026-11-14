@@ -1,0 +1,278 @@
+# Register-select logic below the decode array, x 14100-15850, y 14650-16550.
+# The 18 select columns of the decode array (rsel<N>, trace/decode.txt) end at
+# y ~14650. Each crosses under the VSS rail at y 14697-14747 in poly and is carried
+# on to a gate either in poly or on a vertical metal line.
+@block sel
+@requires decode
+@w M=20 P=22
+@s 26x26
+
+# ---------------------------------------------------------------- supply rails
+M 14140,14697:15720,14747          # VSS, joins the decode array's VSS bus at the left
+N M 15000,14722 vss
+
+# ---------------------------------------------------------------- top band
+# Each select column: contact at y ~14650 from the column metal to poly, poly under
+# the VSS rail, then (most of them) a contact to a vertical metal line going down.
+
+# rsel7 (col x 14260): poly left along y 14653 to a contact at 14083, metal down x 14083
+C 14259,14651
+P 14274,14653 x14070 w=26
+C 14083,14651
+M 14083,14636 y16490 w=20              # ends at the 6l inverter's input contact
+
+# rsel6 (col x 14347): poly down to y 14690, left, down x 14128 to a contact
+C 14347,14650
+P 14347,14636 y14690 x14128 y14797 w=20
+C 14128,14783
+M 14128,14770 y16185 w=20              # ends at the 5l inverter's input contact
+
+# rsel4 (col x 14434): poly down to y 14737 (under the VSS rail), left, down x 14172
+C 14440,14650
+P 14446,14636 y14737 x14173 y14840 w=20
+C 14171,14826
+M 14171,14812 y15883 w=20              # ends at the 4l inverter's input contact
+
+# rsel0 (col x 14520): poly down to y 14783, left to a contact at 14217
+C 14520,14650
+P 14520,14636 y14783 x14203 w=22
+C 14217,14783
+M 14217,14770 y15580 w=20              # ends at the 3l inverter's input contact
+
+# rsel2 (col x 14607): poly down to y 14825, left to a contact at 14347
+C 14607,14650
+P 14607,14636 y14825 x14333 w=22
+C 14347,14825
+M 14347,14812 y15254 w=18              # ends at the 2l inverter's input contact
+
+# rsel1 (col x 14694): poly down to y 14865, left to x 14328, then down into the
+# first gate pair (left inverter input)
+C 14694,14650
+P 14694,14636 y14865 x14328 y14957 x14350 w=22
+
+# rsel10 (col x 14780): poly down x 14797 under the VSS rail to y 14853, right to
+# x 14886, down into the first gate pair (right inverter input)
+C 14782,14650
+P 14797,14636 y14853 x14886 y14957 x14872 w=20
+
+# rsel5 (col x 14867): poly down to a contact at y 14783; metal down, right along
+# y 14822 to x 14951, down
+C 14867,14650
+P 14867,14636 y14797 w=20
+C 14867,14783
+M 14867,14770 y14822 x14954 y15272 w=20     # track T1, ends at the R5 inverter's input contact
+
+# rsel3 (col x 14954): poly down to a contact at y 14783; metal right to x 15000, down
+C 14954,14650
+P 14954,14636 y14797 w=20
+C 14954,14783
+M 14942,14783 x14998 y15577 w=20            # track T2, ends at the R3 inverter's input contact
+
+# rsel8 (col x 15040): poly down to a contact at y 14825; metal down
+C 15040,14650
+P 15040,14636 y14839 w=20
+C 15040,14825
+M 15041,14812 y15880 w=20                   # track T3, ends at the R8 inverter's input contact
+
+# rsel9 (col x 15127): poly jogs left to x 15088, down to a contact at y 14783
+C 15127,14650
+P 15140,14650 x15088 y14797 w=20
+C 15086,14783
+M 15085,14770 y16185 w=20                   # track T4, ends at the R9 inverter's input contact
+
+# rsel11 (col x 15214): poly jogs left to x 15177, down, contact at 15152,14783
+C 15214,14650
+P 15227,14650 x15177 y14783 x15140 w=20
+C 15152,14783
+M 15152,14770 y14803 x15128 y16490 w=20     # track T5, ends at the R11 inverter's input contact
+
+# rsel13 (col x 15300): poly down to a contact at y 14783
+C 15300,14650
+P 15300,14636 y14797 w=20
+C 15300,14783
+M 15300,14770 y14860 x15210 y14900 w=20
+
+# rsel12 (col x 15387): poly down to a contact at y 14825
+C 15387,14650
+P 15387,14636 y14839 w=20
+C 15387,14825
+M 15387,14812 y14905 x15262 y14950 w=20
+
+# rsel14 (col x 15474): poly jogs left to x 15436, down to a contact at y 14783
+C 15474,14650
+P 15487,14650 x15436 y14797 w=20
+C 15432,14783
+M 15432,14770 y14900 w=20
+
+# rsel15 (col x 15560): poly down to y 14698, left to x 15479, down to a contact at y 14825
+C 15560,14650
+P 15560,14636 y14698 x15479 y14839 w=20
+C 15472,14825
+M 15472,14812 y14900 w=20
+
+# rsel17 (col x 15647): poly down to y 14739, left to x 15527, down to a contact at y 14783
+C 15647,14650
+P 15648,14636 y14739 x15527 y14797 w=20
+C 15519,14783
+M 15518,14770 y15144 w=20                   # track T14 down to a contact at 15516,15130
+C 15516,15130
+P 15516,15116 y15175 x15650 w=26            # poly on east into the right-hand gate column
+
+# rsel16 (col x 15734): the column metal itself runs on, jogs right, to a contact at
+# 15755,14783; poly from there left along y 14783
+M 15734,14650 y14662 x15755 y14797 w=20
+C 15755,14783
+P 15769,14783 x15552 y14900 w=22
+
+# ---------------------------------------------------------------- write-strobe gate column
+# x 14380-14850, y 14880-16720: six rows of two gate pairs, 304 px apart, the right
+# half a mirror image of the left about x 14611.5 (the VCC rail). Each half-row is
+# an inverter (row A) feeding a 2-input NOR (row B):
+#     out = NOR(NOT sel, strobe_n) = sel AND NOT strobe_n
+M 14434,14745 y16760 w=52          # left ground rail, down from the VSS rail
+M 14789,14745 y16760 w=52          # right ground rail
+M 14609,14904 y16760 w=50          # supply rail between the halves (top end at y 14904)
+N M 14609,14950 vcc
+
+@cell sel_wr tag=1
+# --- contacts
+@s 30x34
+C 14423,14920 14422,15050 14422,15212     # ground rail to diffusion
+C 14606,14972 14606,15124                 # supply rail to diffusion
+C 14305,15176 s=26x26                     # strobe line (metal x 14307) to gate C poly
+@s 26x26
+
+# --- row A: inverter
+D 14406,14898:14460,15002          # pull-down strip under the ground rail
+D 14350,14975:14628,15002          # output band, through the load channel to the supply contact
+D 14350,14978:14380,15016          # left end, under the buried contact to gate B poly
+D 14498,14929:14522,14976          # bump up to the load's gate tie
+D 14498,14929:14550,14954
+D 14580,14950:14628,15002          # supply contact land
+P 14345,14957 x14474 w=22          # gate A (select input), fed from the left per instance
+P 14524,14956:14576,15019          # load gate
+P 14524,14930:14548,14958          # load gate stem to buried contact
+B 14520,14927:14550,14955          # load gate tied to output
+B 14348,14980:14380,15016          # output to gate B poly
+N D 14480,14990 sel_n{}                # NOT rsel<N>
+
+# --- row B: 2-input NOR
+D 14405,15028:14460,15240          # pull-down strip under the ground rail
+D 14380,15052:14460,15212          # widened to the left of the rail
+D 14348,15114:14630,15149          # output band, through the load channel to the supply contact
+D 14348,15112:14376,15142          # left end, under the buried contact to the output poly
+D 14478,15149:14505,15198          # bump down to the load's gate tie
+D 14478,15170:14532,15198
+D 14582,15100:14630,15150          # supply contact land
+P 14378,15000 x14327 y15087 x14468 w=20   # from row A output: gate B
+P 14295,15172 x14472 w=22                 # gate C (strobe input)
+P 14340,15131 x14372 w=20          # output stub; continues per instance
+P 14508,15094:14550,15192          # load gate
+B 14498,15168:14534,15198          # load gate tied to output
+B 14346,15110:14378,15144          # output to poly
+N D 14480,15130 sel_w{}                # write strobe of register N (see notes)
+@end
+
+@inst sel_wr 0,304 tag=2
+@inst sel_wr 0,608 tag=0
+@inst sel_wr 0,912 tag=4
+@inst sel_wr 0,1216 tag=6
+@inst sel_wr 0,1520 tag=7
+@inst sel_wr 0,0 mx=14611.5 tag=10
+@inst sel_wr 0,304 mx=14611.5 tag=5
+@inst sel_wr 0,608 mx=14611.5 tag=3
+@inst sel_wr 0,912 mx=14611.5 tag=8
+@inst sel_wr 0,1216 mx=14611.5 tag=9
+@inst sel_wr 0,1520 mx=14611.5 tag=11
+
+# ---- left half: select inputs, strobe line, outputs
+# R1: select input is rsel1, in poly straight from the top band (above).
+#     Output: poly up x 14285, then west along y 14909 under the left bundle.
+P 14345,15131 x14285 y14909 x14095 w=20
+# R2: rsel2 arrives on metal x 14347, contact at 14345,15240.
+C 14345,15240
+P 14331,15226:14361,15272
+#     Output: poly west along y 15435 to x 14241, up between the metal lines, west along y 14957.
+P 14345,15435 x14241 y14957 x14095 w=18
+# R0: rsel0 arrives on metal x 14217, contact at 14215,15566.
+C 14215,15566
+P 14201,15565 x14350 w=22
+#     Output: west along y 15739 to x 14150, up between the metal lines, west along y 15001.
+P 14345,15739 x14150 y15001 x14095 w=18
+# R4: rsel4 arrives on metal x 14171, contact at 14173,15869.
+C 14173,15869
+P 14159,15869 x14350 w=22
+#     Output: west along y 16040 to x 14107, up between the metal lines, west along y 15043.
+P 14345,16040 x14107 y15043 x14095 w=18
+# R6: rsel6 arrives on metal x 14128, contact at 14128,16171.
+C 14128,16171
+P 14114,16173 x14350 w=22
+#     Output: west along y 16347 to a contact at 14260,16342; metal x 14262 up to a
+#     contact at 14260,14870; poly west along y 14867.
+P 14345,16347 x14247 w=20
+C 14260,16344
+M 14262,14857 y16357 w=20
+C 14260,14870
+P 14274,14867 x14095 w=26
+# R7: rsel7 arrives on metal x 14083, contact at 14087,16476.
+C 14087,16476
+P 14073,16477 x14350 w=22
+#     Output: west along y 16651 to x 14135, then down (leaves the region to the south).
+P 14345,16651 x14135 y16760 w=22
+# Strobe line of the left half: metal x 14307 from the 1l contact down past the region.
+M 14307,15163 y16760 w=20
+N M 14307,16555 sel_stb_l
+
+# ---- right half: select inputs, strobe line, outputs. The vertical metal lines of the
+# bundle to the right sit on a 43.3 px grid: T0 14912, T1 14954, T2 14998, T3 15041,
+# T4 15084, T5 15128, T6 15171, T7 15214, T8 15258, T9 15301, T10 15344, T11 15388,
+# T12 15431, T13 15474, T14 15517, T15 15561.
+# R10: select input is rsel10, in poly straight from the top band.
+#      Output: poly east along y 15128 to a contact on T6, which starts there and runs down.
+P 14874,15129 x15182 w=20
+C 15168,15128
+M 15171,15115 y16560 w=20
+# R5: rsel5 on T1, contact at 14956,15259. Output: contact at 14956,15431, T1 on down.
+C 14956,15259
+P 14870,15261 x14970 w=22
+P 14874,15435 x14970 w=20
+C 14956,15432
+M 14954,15418 y16560 w=20
+# R3: rsel3 on T2, contact at 14996,15564. Output: contact at 14996,15737, T2 on down.
+C 14996,15564
+P 14870,15565 x15010 w=22
+P 14874,15739 x15010 w=20
+C 14996,15737
+M 14998,15724 y16560 w=20
+# R8: rsel8 on T3, contact at 15040,15866. Output: contact at 15040,16043, T3 on down.
+C 15040,15866
+P 14870,15869 x15054 w=22
+P 14874,16043 x15054 w=20
+C 15040,16043
+M 15041,16030 y16560 w=20
+# R9: rsel9 on T4, contact at 15084,16170. Output: contact at 15084,16347, T4 on down.
+C 15084,16170
+P 14870,16173 x15098 w=22
+P 14874,16347 x15098 w=20
+C 15084,16347
+M 15085,16334 y16560 w=20
+# R11: rsel11 on T5, contact at 15128,16475. Output: contact at 15130,16648 (below the
+#      region's edge), T5 on down.
+C 15128,16475
+P 14870,16477 x15142 w=22
+P 14874,16651 x15144 w=20
+C 15130,16648
+M 15128,16635 y16760 w=20                   # T5 on down, below the region
+# Strobe line of the right half: the wide poly bar along y 15178 (gate C of R10) runs
+# east under the bundle to a contact at 15474,15172; metal T0 (contact at 14912,15174)
+# carries it down the column.
+P 14870,15159:15490,15197
+C 15474,15172
+M 14912,15161 y16760 w=20
+N M 14912,16555 sel_stb_r
+M 15474,15098 y15218 x15561 w=20            # from the bar's contact (stub up to y 15098, no contact there) across to T15
+# T15 carries the strobe: from a contact at 15622,14822 (poly arriving from the east
+# along y 14825) down the whole region.
+M 15635,14822 x15561 y16560 w=20
+C 15622,14822
+P 15608,14825 x15850 w=22

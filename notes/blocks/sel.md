@@ -1,0 +1,147 @@
+# Register-select logic below the decode array (`sel`, x 14100-15850, y 14650-16550)
+
+## Status
+
+- Traced and extracted (trace/sel.txt): how all 18 select columns leave the decode
+  array; the gate column at x 14380-14850 (twelve identical inverter + NOR pairs, one
+  per register R0-R11) with every input and output followed to the region boundary.
+- Not yet traced: the right-hand gate column (x 15560-15800), which is where
+  rsel12-rsel17 are used, and the lower part of the wiring bundle that feeds it.
+
+## Inventory
+
+| What | Where | Notes |
+|---|---|---|
+| VSS rail | y 14697-14747, x 14140-15720 | joins the decode array's VSS bus at the left; three ground rails hang from it (x 14434, 14789, 15690) |
+| Top band | y 14636-14900 | each select column: contact at y ~14650 to poly, poly under the VSS rail, contact to a metal line (or straight on in poly) |
+| Left bundle | x 14070-14320 | metal lines at x 14083 (rsel7), 14128 (rsel6), 14171 (rsel4), 14217 (rsel0), 14262 (sel_w6 going up), 14307 (strobe), 14347 (rsel2); poly lines in the gaps at x 14107, 14150, 14241, 14285 (outputs going up) |
+| Gate column | x 14330-14890, y 14890-16720 | cell `sel_wr` x 12: left half at dy 0, 304, 608, 912, 1216, 1520; right half the same mirrored about x 14611.5. VCC rail x 14609 between the halves (top end y 14904), ground rails x 14434 and 14789 |
+| Middle bundle | x 14900-15575 | 16 metal tracks on a 43.3 px grid, T0 14912 ... T15 15561 (list below) |
+| Right gate column | x 15560-15800, y 14800-16550 | NOT TRACED. Ground rail x 15665-15715, supply rail x 15790-15840, a pull-down every ~130 px |
+
+Row k of the gate column (k = 0..5) has its inverter at y 14957 + 304k (gate A) and
+its NOR at y 15087 / 15172 + 304k (gates B, C), output buried contact at y 15127 + 304k.
+Row 5's NOR (y 16600-16720) lies below the region boundary but is traced here because
+it is the same cell.
+
+## Logic
+
+All of this is traced (extracted by netlist.py), except where marked believed.
+
+Each half-row of the gate column is
+
+    sel_nN = NOT rselN
+    sel_wN = NOR(sel_nN, strobe)        = rselN AND NOT strobe
+
+| Row | Left half: register, select arrives by | Right half: register, select arrives by |
+|---|---|---|
+| 0 | R1: poly straight from the column (y 14865, x 14328) | R10: poly straight from the column (x 14797, y 14853, x 14886) |
+| 1 | R2: metal x 14347, contact 14345,15240 | R5: T1, contact 14956,15259 |
+| 2 | R0: metal x 14217, contact 14215,15566 | R3: T2, contact 14996,15564 |
+| 3 | R4: metal x 14171, contact 14173,15869 | R8: T3, contact 15040,15866 |
+| 4 | R6: metal x 14128, contact 14128,16171 | R9: T4, contact 15084,16170 |
+| 5 | R7: metal x 14083, contact 14087,16476 | R11: T5, contact 15128,16475 |
+
+Every select line of R0-R11 goes to exactly one gate, the inverter of its row, and
+nowhere else (each metal line ends at its contact; checked with tools/sel_tracks.py
+and by overlay).
+
+The strobe input (gate C of each NOR):
+- left half: metal x 14307 (`sel_stb_l`), contacts at 14305,15176 + 304k. It has no
+  other connection inside the region and leaves it downwards.
+- right half: metal T0 x 14912 (`sel_stb_r`), contacts at 14912,15174 + 304k. In row 0
+  the gate C poly is a wide bar (y 15159-15197) that runs on east under the bundle to a
+  contact at 15474,15172; metal from there joins T15 (x 15561), which comes down from
+  a contact at 15622,14822 on a poly line arriving from the east along y 14825.
+- Believed, not traced: `sel_stb_l` and `sel_stb_r` are one signal, an active-low write
+  pulse, so that sel_wN is the write strobe of register N (high while the register is
+  addressed and the pulse is low). Below the region (y 16715-17000) the left line has a
+  metal branch to x 14240 and T0 turns west into a horizontal metal at y 16990; whether
+  they meet is for package bd3 to trace.
+
+Outputs: see Ports. The left half's six outputs go west in poly (five of them as
+bars at y 14867-15043 under the left bundle); the right half's go down the bundle on
+the track their select line came down on (R10's on T6).
+
+Not used by the gate column: rsel12, rsel13, rsel14, rsel15, rsel16, rsel17. Where
+they go (from the top band; the rest is in Not done):
+- rsel13 -> T7 (x 15214), rsel12 -> T8 (x 15258): both run the whole height of the
+  region and leave it at the bottom, with no contact inside it (track scan).
+- rsel14 -> x 15432 to y 15000, west, T9 (x 15301) down; contacts at 15299,15692 and
+  about 15301,16250 (poly taps going east to the right-hand column).
+- rsel15 -> x 15474 to y 15040, west, T10 (x 15344) down; contacts at 15340,15428 and
+  15340,15953 (poly taps going east).
+- rsel17 -> T14 (x 15518) down to a contact at 15516,15130; poly east along y 15175
+  into the right-hand column.
+- rsel16 -> the column metal runs on to a contact at 15755,14783; poly west along
+  y 14783 to x 15552, then down into the right-hand column.
+
+## Middle bundle: what is on each track (from tools/sel_tracks.py, y ranges)
+
+| Track | x | Segments |
+|---|---|---|
+| T0 | 14912 | 15161 - below region: sel_stb_r |
+| T1 | 14954 | 14822-15272 rsel5; 15418 - below: sel_w5 |
+| T2 | 14998 | 14783-15577 rsel3; 15724 - below: sel_w3 |
+| T3 | 15041 | 14812-15880 rsel8; 16030 - below: sel_w8 |
+| T4 | 15085 | 14770-16185 rsel9; 16334 - below: sel_w9 |
+| T5 | 15128 | 14803-16490 rsel11; 16635 - below: sel_w11 |
+| T6 | 15171 | 15115 - below: sel_w10 |
+| T7 | 15214 | 14860 - below: rsel13 |
+| T8 | 15258 | 14905 - below: rsel12 |
+| T9 | 15301 | 15000-16241 rsel14 (tap at 15692); a new line from 16423 (not traced) |
+| T10 | 15344 | 15040-15938 rsel15 (tap at 15428, ends at tap 15953); a new line from 16120 (not traced) |
+| T11 | 15388 | from a contact at 15387,15086 to below (not traced: comes from the right-hand column) |
+| T12 | 15431 | from a contact at 15431,15349 to below (not traced) |
+| T13 | 15474 | from a contact at 15471,15606 to below (not traced) |
+| T14 | 15517 | 14770-15144 rsel17; from a contact at 15515,15866 to below (not traced) |
+| T15 | 15561 | 14822 - below: sel_stb_r |
+
+## Ports
+
+Local name, layer, where it crosses the boundary, direction.
+
+| Name | Layer | Crossing | Direction | What |
+|---|---|---|---|---|
+| rsel0..rsel17 | metal | x of the column, y 14650 (top) | in | select columns of the decode array |
+| vss | metal | 14140-14200, 14700 (top left) | - | decode array's VSS bus |
+| vcc | metal | 14609, 16550 (bottom) | - | gate column supply rail, comes from below |
+| rsel7 | metal | 14083, 14636-16490 | - | this line runs just outside the region's west edge (x < 14100) but belongs to it |
+| sel_w6 | poly | 14100, 14867 (west) | out | rsel6 AND NOT strobe |
+| sel_w1 | poly | 14100, 14909 (west) | out | rsel1 AND NOT strobe |
+| sel_w2 | poly | 14100, 14957 (west) | out | rsel2 AND NOT strobe |
+| sel_w0 | poly | 14100, 15001 (west) | out | rsel0 AND NOT strobe |
+| sel_w4 | poly | 14100, 15043 (west) | out | rsel4 AND NOT strobe |
+| sel_w7 | poly | 14135, 16550 (bottom; drawn to 16760) | out | rsel7 AND NOT strobe. Its NOR is at y 16600-16720 |
+| sel_stb_l | metal | 14307, 16550 (bottom) | in | strobe of the left half |
+| sel_stb_r | metal | 14912, 16550 (bottom) | - | strobe of the right half, continues down |
+| sel_stb_r | metal | 15561, 16550 (bottom) | - | same net on T15, continues down |
+| sel_stb_r | poly | 15850, 14825 (east) | in | where the strobe arrives |
+| sel_w5 | metal | 14954, 16550 (bottom) | out | T1 |
+| sel_w3 | metal | 14998, 16550 (bottom) | out | T2 |
+| sel_w8 | metal | 15041, 16550 (bottom) | out | T3 |
+| sel_w9 | metal | 15085, 16550 (bottom) | out | T4 |
+| sel_w11 | metal | 15128, 16550 (bottom; starts at y 16635) | out | T5. At y 16550 T5 is still unconnected: rsel11's line ended at 16490 |
+| sel_w10 | metal | 15171, 16550 (bottom) | out | T6 |
+| rsel13 | metal | 15214, 16550 (bottom) | out | T7, not used inside the region |
+| rsel12 | metal | 15258, 16550 (bottom) | out | T8, not used inside the region |
+
+The bars of the five west outputs run on west under two wide rails at x 13895-13935
+and 13985-14030 to at least x 13880.
+
+## Ambiguities
+
+- `sel_stb_l` / `sel_stb_r`: see Logic. Working assumption: one net. Settled by
+  tracing y 16700-17050, x 14200-14930 (package bd3).
+- The supply rail x 14609 is called vcc from the orientation of the loads; its top end
+  is at y 14904 and its source is below the region.
+- decode.txt draws the rsel16 column metal to y 14662 like the others. That column has
+  no contact at y 14650: its metal continues (jogging right) to 15755,14783. Harmless;
+  sel.txt adds the continuation.
+
+## Not done
+
+- Right-hand gate column, x 15560-15800, y 14800-16550, and the taps into it listed
+  above.
+- Tracks T9-T14 below their first contact; the horizontal poly taps at y 15086, 15349,
+  15428, 15606, 15692, 15866, 15953 and below.
