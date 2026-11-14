@@ -284,6 +284,8 @@ class Trace:
             if os.path.abspath(p) in self.files:
                 continue
             self.files.append(os.path.abspath(p))
+            if not os.path.exists(p) and os.environ.get('TRACE'):
+                continue          # a block that has no trace file yet
             req = []
             parse_file(p, self.items, self.labels, self.cells, self.insts, req)
             files += [os.path.join(TRACE_DIR, n + ('' if n.endswith('.txt') else '.txt')) for n in req]
