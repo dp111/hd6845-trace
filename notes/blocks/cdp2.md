@@ -80,8 +80,8 @@ the most significant of the five compared bits, s7 the least.**
 | 6948-6966 | `cdp2_b_hl`: diffusion line along rows B, x 8705-10762 | - | traced; its metal exit at the left followed to y 7400 |
 | 6900-7480, x 7900-8750 | irregular logic left of rows B | - | not traced |
 | 7500-7825 | **row C: seven static latch bits**, same cell as row A (dy 1476; dx -1171, -781, -391, 0, 390, 781, 1171) | s1..s7 | traced |
-| 7830-7960 | channel 3: horizontal poly lines; at the left (x 7700-7950) bundles turn down | - | not traced |
-| 7980-8450+ | row D: cell, 5 copies + a weaker sixth at dx -781 (0.73); may extend below 8450 | s3..s7 (+s2?) | not traced |
+| 7830-8030 | channel 3: five horizontal poly lines (y 7843, 7886, 7930, 7973, 8017); at the left (x 7650-7800) they turn down; only the bus lines and the rails cross it | - | not traced |
+| 8040-8450+ | row D: large cell, six copies (s2's differs at the top), continues below y 8450 as cdp3's row A | s2..s7 | not traced |
 
 Per-slice vertical metal in channel 2 (measured at y 6542/6563, master slice): VSS rail
 x 9165-9205, line a x 9243-9252, a line at x 9333-9340, VCC x 9378-9402, a narrow line
@@ -231,15 +231,19 @@ That 5 + 2 split fits **R10** (cursor start raster in bits 0-4, blink mode in bi
 better than R4, R6 or R7. A guess from widths only: the strobe `cdp2_c_ld` has not been
 followed to a select line.
 
-### Channel 2 (surveyed, tested)
+### Channel 2 (surveyed, tested; line 6888 traced)
 
 13 poly lines at y 6366 ... 6888. In slices s3..s7 the per-slice metal over them is: VSS
-rail, bus line (x 9243-9254), the line at x 9329-9340 (Ambiguities 3), VCC rail
-(x 9379-9421, with a dark line down its middle). Every crossing of the bus line, the
-x 9337 line and x 9415 with the 13 lines was put through the contact test in s3..s7:
-all plain poly, **no contact**. So in the sliced part channel 2 only passes through: its
-lines join things left of x 8780 or right of x 10790. (One contact-like reading in s2:
-(8556,6888).)
+rail, bus line (x 9243-9254), the through track b (x 9326-9346), VCC rail (x 9379-9421,
+with a dark line down its middle). Every crossing of the bus line, track b and x 9415
+with the 13 lines was put through the contact test in s3..s7 (first run): all plain
+poly, **no contact**. So in the sliced part channel 2 only passes through.
+
+**Line 6888 is the comparator's chain output** (`cdp2_b_s7_x`): s7's x comes up in poly
+at x 10806-10817 (under a narrow metal line that is not connected to it) and joins the
+line, which runs west across the whole array and turns down at x 8672-8692 to a pad with
+a contact (8683,7018) to a metal line going down at x 8685 (overlay-checked). The
+contact at (8548,6885) that the first run noted sits on a separate pad beside the line.
 
 ### Rows B1/B2: 5-bit comparator (traced)
 
@@ -379,8 +383,10 @@ How the nets are made (coordinates of the master):
    chip, while q's load, also in the open, is textured orange. The geometry is drawn as
    in rdp3's cell (strip, block, gate tie); the connectivity (n2 land - strip - VCC
    land, gate tied to n2) is the only one that gives n2 a load. A thin bright line
-   (x 9335-9343, y 6191-6246) shows in both metal shots over the strip; it is too narrow
-   (8 px) for metal and is read as the strip itself.
+   (x 9335-9343, y 6191-6246) shows in both metal shots over the strip. Second run: it
+   is the metal of track b, which looks narrow wherever it runs over a poly block
+   (Conventions); that metal is also why the block is smooth salmon (protected), so the
+   colour says nothing against the load.
 3. **Track b in the latch cell: contact to n2 or not** (9337,6184; and 9338,6276 on
    the VCC land). The first run read both as contacts from the speckle test, with track
    b ending at y 6190 and a second metal piece below y 6252. Second run: (a) the metal is
@@ -406,7 +412,7 @@ How the nets are made (coordinates of the master):
    9277-9298 x 6288-6313): read as bulges of the strobe poly over field. No diffusion
    there, so no device.
 
-6. **Rows B: driver of `p1`, load of nothing on `o2`** (per slice). p1 (the poly of
+6. **Rows B: what drives `p1`, and what `o2` drives** (per slice). p1 (the poly of
    bar 1 and of the lower NAND gate) has no buried contact and no metal contact along
    the whole of its length as far as can be seen; o2 (the inverter of the left
    neighbour's x) drives no gate. The two nets meet at one corner: p1's poly steps down
