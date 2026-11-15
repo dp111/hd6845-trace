@@ -118,88 +118,88 @@ N M 8686,9520 cdp3_cq_c2
 # s0
 P 7600,10664 x7874
 C 7860,10664 s=28x28
-M 7861,10652 y10720                 # west piece down into the row H cell
+M 7861,10652 y10745                 # west piece down into the row H cell
 P 7934,10664 x10850
 C 7948,10664 s=28x28
 M 7948,9956 y10676                  # line h: row E right contact, row F right contact, east piece
-M 7861,10175 y10520 7905,10568 y10720     # row F left contact down into the row H cell
+M 7861,10175 y10520 7905,10568 y10745     # row F left contact down into the row H cell
 N P 7610,10664 cdp3_hw_c0
 N P 10840,10664 cdp3_n_c0
 N M 7905,10710 cdp3_hq_c0
 # s1
 P 7600,10621 x8264
 C 8250,10621 s=28x28
-M 8251,10609 y10720                 # west piece down into the row H cell
+M 8251,10609 y10745                 # west piece down into the row H cell
 P 8324,10621 x10850
 C 8338,10621 s=28x28
 M 8338,9956 y10633                  # line h: row E right contact, row F right contact, east piece
-M 8251,10175 y10533 8295,10583 y10720     # row F left contact down into the row H cell
+M 8251,10175 y10533 8295,10583 y10745     # row F left contact down into the row H cell
 N P 7610,10621 cdp3_hw_c1
 N P 10840,10621 cdp3_n_c1
 N M 8295,10710 cdp3_hq_c1
 # s2
 P 7600,10577 x8654
 C 8640,10577 s=28x28
-M 8641,10565 y10720                 # west piece down into the row H cell
+M 8641,10565 y10745                 # west piece down into the row H cell
 P 8714,10577 x10850
 C 8728,10577 s=28x28
 M 8728,9913 y10589                  # line h: row E right contact, row F right contact, east piece
-M 8641,10175 y10489 8685,10539 y10720     # row F left contact down into the row H cell
+M 8641,10175 y10489 8685,10539 y10745     # row F left contact down into the row H cell
 N P 7610,10577 cdp3_hw_c2
 N P 10840,10577 cdp3_n_c2
 N M 8685,10710 cdp3_hq_c2
 # s3
 P 7600,10535 x9045
 C 9031,10535 s=28x28
-M 9032,10523 y10720                 # west piece down into the row H cell
+M 9032,10523 y10745                 # west piece down into the row H cell
 P 9105,10535 x10850
 C 9119,10535 s=28x28
 M 9119,9872 y10547                  # line h: row E right contact, row F right contact, east piece
-M 9032,10175 y10447 9076,10497 y10720     # row F left contact down into the row H cell
+M 9032,10175 y10447 9076,10497 y10745     # row F left contact down into the row H cell
 N P 7610,10535 cdp3_hw_c3
 N P 10840,10535 cdp3_n_c3
 N M 9076,10710 cdp3_hq_c3
 # s4
 P 7600,10490 x9435
 C 9421,10490 s=28x28
-M 9422,10478 y10720                 # west piece down into the row H cell
+M 9422,10478 y10745                 # west piece down into the row H cell
 P 9495,10490 x10850
 C 9509,10490 s=28x28
 M 9509,9872 y10502                  # line h: row E right contact, row F right contact, east piece
-M 9422,10175 y10394 9466,10447 y10720     # row F left contact down into the row H cell
+M 9422,10175 y10394 9466,10447 y10745     # row F left contact down into the row H cell
 N P 7610,10490 cdp3_hw_c4
 N P 10840,10490 cdp3_n_c4
 N M 9466,10710 cdp3_hq_c4
 # s5
 P 7600,10447 x9825
 C 9811,10447 s=28x28
-M 9812,10435 y10720                 # west piece down into the row H cell
+M 9812,10435 y10745                 # west piece down into the row H cell
 P 9885,10447 x10850
 C 9899,10447 s=28x28
 M 9899,9872 y10459                  # line h: row E right contact, row F right contact, east piece
-M 9812,10175 y10359 9856,10409 y10720     # row F left contact down into the row H cell
+M 9812,10175 y10359 9856,10409 y10745     # row F left contact down into the row H cell
 N P 7610,10447 cdp3_hw_c5
 N P 10840,10447 cdp3_n_c5
 N M 9856,10710 cdp3_hq_c5
 # s6
 P 7600,10404 x10216
 C 10202,10404 s=28x28
-M 10203,10392 y10720                 # west piece down into the row H cell
+M 10203,10392 y10745                 # west piece down into the row H cell
 P 10276,10404 x10850
 C 10290,10404 s=28x28
 M 10290,9872 y10416                  # line h: row E right contact, row F right contact, east piece
-M 10203,10175 y10316 10247,10366 y10720     # row F left contact down into the row H cell
+M 10203,10175 y10316 10247,10366 y10745     # row F left contact down into the row H cell
 N P 7610,10404 cdp3_hw_c6
 N P 10840,10404 cdp3_n_c6
 N M 10247,10710 cdp3_hq_c6
 # s7
 P 7600,10361 x10606
 C 10592,10361 s=28x28
-M 10593,10349 y10720                 # west piece down into the row H cell
+M 10593,10349 y10745                 # west piece down into the row H cell
 P 10666,10361 x10850
 C 10680,10361 s=28x28
 M 10680,9872 y10373                  # line h: row E right contact, row F right contact, east piece
-M 10593,10175 y10273 10637,10323 y10720     # row F left contact down into the row H cell
+M 10593,10175 y10273 10637,10323 y10745     # row F left contact down into the row H cell
 N P 7610,10361 cdp3_hw_c7
 N P 10840,10361 cdp3_n_c7
 N M 10637,10710 cdp3_hq_c7
@@ -279,15 +279,12 @@ N M 10465,8800 cdp3_f_c7
 # (tools/cdp3_px.py); see notes/blocks/cdp3.md for what was seen where.
 #   x  = bit line while the write line is high, held from q through a grounded-gate device
 #   q1 = NOT x     q = NOT q1     cw = NOT q1 (to the west)     cq = NOT q1 (to bus N)
-@cell cdp3_reg tag=c5
+@cell cdp3_reg tag=c_c5
 # --- metal. Rails and the lines e, f run on through the rows above and below.
 M 9570,9192 y9560 w=44                # VSS rail of the column (rail d)
 M 9575,9200:9607,9237                 # its bulge at the top right, onto the grounded poly
 N M 9570,9300 vss
-M 9638,9192 y9560 w=20                # line e: the bit line
-N M 9638,9300 cdp3_bl_{}
-M 9683,9192 y9560 w=17                # line f: passes through, no contact in this cell
-N M 9683,9300 cdp3_f_{}
+M 9638,9192 y9560 w=20                # line e: the bit line (line f, 9675-9692, is drawn outside the cell)
 M 9765,9192:9815,9232                 # VCC rail (rail a): stem from the row above
 M 9725,9228:9815,9296                 # its pad over the contact of load 2
 M 9727,9292:9767,9560                 # and down the left of the output buffers
@@ -318,9 +315,9 @@ B 9676,9197:9706,9221                 # top band (q) -> strip
 
 # --- node x: vertical poly, gate of pull-down 1, tail to the write transistor
 P 9609,9292:9634,9453
-N P 9620,9380 cdp3_c_x_{}
+N P 9620,9380 cdp3_{}_x
 D 9590,9350:9657,9412                 # pull-down 1: VSS | x | q1
-N D 9646,9380 cdp3_c_q1_{}
+N D 9646,9380 cdp3_{}_q1
 D 9618,9436:9640,9456                 # small box at the foot of x
 B 9614,9430:9644,9458
 D 9620,9450:9692,9520                 # write transistor: x side (above the write line) ...
@@ -329,6 +326,7 @@ D 9620,9515:9665,9548                 # ... and bit-line side, with the contact 
 # --- write line: comes along y 9533, loops up round the bit-line contact in every cell
 P 9540,9533 x9592 y9487 x9708 y9533 x9935 w=22
 N P 9650,9487 cdp3_c_wr
+
 
 # --- load 1 (VCC -> q1): strip from the VCC diffusion west under the block C
 D 9650,9388:9735,9412
@@ -360,7 +358,7 @@ P 9852,9200:9886,9222
 B 9850,9198:9892,9226                 # tie: q poly -> q diffusion
 D 9852,9200:9890,9232
 D 9843,9228:9908,9262                 # q
-N D 9870,9245 cdp3_c_q_{}
+N D 9870,9245 cdp3_{}_q
 D 9895,9216:9945,9266                 # pull-down 2: q | column | next VSS
 
 # --- west buffer: load from the VCC diffusion under the poly strip that hangs from the
@@ -374,7 +372,6 @@ B 9828,9370:9856,9396
 ?D 9855,9374:9868,9390                # joint between the tie's diffusion and R1: not resolved
 D 9862,9322:9912,9388                 # R1
 D 9893,9308:9945,9387                 # pull-down: cw | column | next VSS
-N P 9815,9360 cdp3_cw_{}
 
 # --- read buffer: the same again below, its poly a band along the bottom of the cell
 D 9728,9448:9805,9474
@@ -385,7 +382,6 @@ P 9833,9458:9850,9485                 # arm into the tie
 B 9828,9453:9856,9478
 D 9862,9442:9912,9495                 # R2, with the contact of line c
 D 9895,9415:9945,9494                 # pull-down: cq | column | next VSS
-N M 9856,9500 cdp3_cq_{}
 @end
 
 # --- VSS diffusion under the rail of a column, with the rail's contacts. The pull-downs of the
@@ -409,8 +405,71 @@ N M 10743,9300 vss
 D 10722,9215:10765,9490
 C 10736,9322 10736,9365 10736,9437
 
-@inst cdp3_reg -1171,0 tag=c2
-@inst cdp3_reg -781,0 tag=c3
-@inst cdp3_reg -390,0 tag=c4
-@inst cdp3_reg 390,0 tag=c6
-@inst cdp3_reg 781,0 tag=c7
+@inst cdp3_reg -1171,0 tag=c_c2
+@inst cdp3_reg -781,0 tag=c_c3
+@inst cdp3_reg -390,0 tag=c_c4
+@inst cdp3_reg 390,0 tag=c_c6
+@inst cdp3_reg 781,0 tag=c_c7
+
+# =====================================================================================
+# Row H (y 10690-11050): the same register cell upside down, eight, columns c0..c7
+# =====================================================================================
+# findcell: mirror about y 9347.5, dy 1549 (y' = 20244 - y), scores 0.82-0.89 (c0 0.75).
+# Line b of the cell is here the west output going up to the channel G track (cdp3_hw),
+# line c the read output going up to the row F transistor (cdp3_hq). The write line is the
+# "y 10708" line: along y 10711, looping down to y 10757 in every cell.
+@inst cdp3_reg -1951,1549 my=9347.5 tag=h_c0
+@inst cdp3_reg -1562,1549 my=9347.5 tag=h_c1
+@inst cdp3_reg -1172,1549 my=9347.5 tag=h_c2
+@inst cdp3_reg -781,1549 my=9347.5 tag=h_c3
+@inst cdp3_reg -390,1549 my=9347.5 tag=h_c4
+@inst cdp3_reg 0,1549 my=9347.5 tag=h_c5
+@inst cdp3_reg 390,1549 my=9347.5 tag=h_c6
+@inst cdp3_reg 781,1549 my=9347.5 tag=h_c7
+N P 9650,10757 cdp3_h_wr
+@inst cdp3_c_vss -1562,1549 my=9347.5 tag=h_c1
+@inst cdp3_c_vss -1172,1549 my=9347.5 tag=h_c2
+@inst cdp3_c_vss -781,1549 my=9347.5 tag=h_c3
+@inst cdp3_c_vss -390,1549 my=9347.5 tag=h_c4
+@inst cdp3_c_vss 0,1549 my=9347.5 tag=h_c5
+@inst cdp3_c_vss 390,1549 my=9347.5 tag=h_c6
+@inst cdp3_c_vss 781,1549 my=9347.5 tag=h_c7
+
+# --- bit lines between the two register rows (c1..c7), and line f (c2..c7 only: in c0 and c1 block B
+# of the row H cell lies in the open, so no line f passes there). Seen at 0.95x in c1, 1.6x in c4.
+M 8076,9555 y10690 w=20
+N M 8076,9600 cdp3_bl_c1
+M 8466,9555 y10690 w=20
+N M 8466,9600 cdp3_bl_c2
+M 8857,9555 y10690 w=20
+N M 8857,9600 cdp3_bl_c3
+M 9248,9555 y10690 w=20
+N M 9248,9600 cdp3_bl_c4
+M 9638,9555 y10690 w=20
+N M 9638,9600 cdp3_bl_c5
+M 10028,9555 y10690 w=20
+N M 10028,9600 cdp3_bl_c6
+M 10419,9555 y10690 w=20
+N M 10419,9600 cdp3_bl_c7
+M 8511,9192 y11052 w=17              # line f, from channel B down through both register rows, no contact
+M 8902,9192 y11052 w=17              # line f, from channel B down through both register rows, no contact
+M 9293,9192 y11052 w=17              # line f, from channel B down through both register rows, no contact
+M 9683,9192 y11052 w=17              # line f, from channel B down through both register rows, no contact
+M 10073,9192 y11052 w=17              # line f, from channel B down through both register rows, no contact
+M 10464,9192 y11052 w=17              # line f, from channel B down through both register rows, no contact
+
+# --- row H, c0: no cell to its left, so only a box of VSS diffusion with one contact
+D 7598,10832:7650,10894
+C 7615,10855
+M 7622,10684 y11052 w=44             # VSS rail of c0 beside the cell (the cell draws only its own column's)
+N M 7622,10900 vss
+N M 7687,10800 cdp3_bl_c0             # bit line of c0: seen only inside the row H cell so far
+# --- row H, c8: rail, diffusion and contacts ending the pull-downs of c7 (mirror of row C's)
+M 10743,10684 y11052 w=48
+N M 10743,10900 vss
+D 10722,10754:10765,11029
+C 10736,10797 10736,10908           # the two seen (rings in the metal, specks in the clean shot)
+
+# --- write lines beyond the cells, to the region's edge
+P 10705,10711 x10850 w=22             # row H's: runs on east; its west end is the loop of c0
+P 10705,9533 x10850 w=22              # row C's: runs on east

@@ -38,18 +38,21 @@ Which columns each row occupies:
 | C (register cell) | c2..c7 |
 | E (pass transistor to bus N) | c0..c7 (c0, c1 pass VSS) |
 | F (pass transistor to bus N) | c0..c7 |
-| H (large cell) | c0..c7 |
+| H (register cell, upside down) | c0..c7 |
+| lines e (bit lines) | c0..c7 in row H; c1..c7 in rows D-G; c2..c7 in row C |
+| lines f | c2..c7 only |
 
 ## Status
 
 - Traced, extracted (0 errors, no open nets) and overlay-checked:
   - row C: the register cell `cdp3_reg`, placed in c2..c7 (10 transistors each), with the
     VSS diffusion of each rail and the write line that loops through the cells;
+  - row H: the same cell upside down in c0..c7, with its own write line;
   - rows E and F (two pass transistors per column), their two gate lines, the tracks of
     channels D and G and the vertical metal joining them;
   - channel B: six tracks onto line g, six poly links from line f to the "x 9893" line.
-- NOT traced: rows A, H, I; the s0/s1 logic at x 7600-8560; the through lines at
-  y 8819 and 10708; rails and lines e, f outside row C.
+- NOT traced: rows A and I; the logic at x 7600-8560 beside rows A-C; the through line at
+  y 8819; rails outside the two register rows.
 
 ## Inventory
 
@@ -64,7 +67,7 @@ Rows (y), top to bottom:
 | E | 9828-10060 | one pass transistor per column, eight |
 | F | 10088-10320 | one pass transistor per column, eight |
 | G | 10300-10720 | channel: eight poly tracks in two pieces each |
-| H | 10738-11038 | large cell, eight (c0..c7) |
+| H | 10690-11050 | register cell `cdp3_reg` mirrored top to bottom, eight (c0..c7) |
 | I | 11040-11200+ | next row, continues below the region |
 
 Horizontal poly lines (y centres):
@@ -73,11 +76,11 @@ Horizontal poly lines (y centres):
 |---|---|
 | 8819 | through line in channel B, from about x 8420 east past x 10870. Not traced |
 | 8907 ... 9123 | channel B tracks onto line g of c7 ... c2 |
-| 9533 | `cdp3_c_wr`, write line of row C: runs along y 9520-9546 and in every cell loops up (x 9581-9603 in c5), east along y 9476-9498 over the write transistor, and down again (x 9697-9719). West of c2 and east of c7 it runs straight on (seen to x 8355 and x 10900). The first run listed its two levels as separate lines "9493" and "9537" |
+| 9533 | `cdp3_c_wr`, write line of row C: runs along y 9520-9546 and in every cell loops up (x 9581-9603 in c5), east along y 9476-9498 over the write transistor, and down again (x 9697-9719). West of c2 and east of c7 it runs straight on (seen to x 8355 and x 10900). The first run listed its two levels as separate lines "9493" and "9537". Its west end is the loop of c2 (x 8370; no poly at y 9533 west of that, measured); it runs on east past x 10900 |
 | 9581, 9624, 9668, 9711, 9754, 9797 | channel D tracks of c7 ... c2: from the west edge to the tap contact under line b |
 | 10057, 10317 | gate lines of rows E and F |
 | 10361 ... 10664 | channel G tracks of c7 ... c0, each in a west piece (to the row H cell) and an east piece (node N, to the east edge) |
-| 10708 | another line, present from about x 8200 east. Not traced |
+| 10711 | `cdp3_h_wr`, write line of row H: the mirror image of row C's, along y 10700-10722 with a loop down to y 10746-10768 in every cell. Its west end is the loop of c0 (x 7605); it runs on east past x 10900 |
 
 ## Logic
 
@@ -149,6 +152,28 @@ on bus N, whose outputs go west. R12 (display start, high) and R14 (cursor, high
 the 6-bit readable registers of this chip type; which one this is depends on where the
 `cdp3_cw` lines go west of x 7600, and on which select line drives `cdp3_c_wr`.
 
+### Row H: the same register cell, eight bits (traced)
+
+`cdp3_reg` mirrored about a horizontal line (y' = 20244 - y) in c0..c7; findcell scores
+0.82-0.89 (0.75 for c0), cellcheck 3-6 % of blocks for c1..c7. The first run's "variant,
+score 0.40 at offset 0,1538" was the unmirrored cell locking onto the rails. Same
+equations with
+
+    x  = bl while cdp3_h_wr is high
+    hw = NOT q1       west output: line b up to the west piece of the channel G track
+    hq = NOT q1       read output: line c up to the row F pass transistor -> bus N
+
+- The bit line is the same line e as in row C (contacts at 9637,9527 in row C and
+  9637,10717 in row H, c5): the two registers share bit lines in c2..c7. In c1 the line
+  runs on up past y 9500 (not followed); in c0 it was seen only inside the cell (its
+  contact at 7686,10717), because above the cell a wide rail lies at x 7680-7728.
+- c0 differs only at its VSS rail (one box of diffusion, 7598-7650 x 10832-10894, one
+  contact), like c2 in row C. In c0 and c1 block B lies in the open: no line f there.
+
+*Believed:* rows C and H are one 14-bit read/write register pair, high 6 bits in row C
+(c2..c7) and low 8 bits in row H, i.e. R12/R13 or R14/R15, with c0, c1 of the high byte
+reading 0. Bit order within a byte is not established here.
+
 ### Rows E and F (traced)
 
     row E, c2..c7:  pass transistor, gate cdp3_gate_e, between cdp3_cq_cN and cdp3_n_cN
@@ -180,18 +205,18 @@ West edge, x 7600 (all poly, all continue west beyond x 7540):
 |---|---|---|---|
 | cdp3_g_c7 .. cdp3_g_c2 | 8907, 8950, 8994, 9037, 9080, 9123 | ? | one line into each row A cell |
 | (not traced) | 8864, 9167 | ? | lines into the logic at x 7600-8560 |
-| cdp3_c_wr | 9533 | in | write line of row C (seen at x 8355; not yet followed to x 7600) |
 | cdp3_cw_c7 .. cdp3_cw_c2 | 9581, 9624, 9668, 9711, 9754, 9797 | out | row C register outputs (true), each from a 26/16 load |
 | cdp3_gate_e | 10057 | in | read row C onto N |
 | cdp3_gate_f | 10317 | in | read row H onto N |
-| cdp3_hw_c7 .. cdp3_hw_c0 | 10361, 10404, 10447, 10490, 10535, 10577, 10621, 10664 | ? | per-column line of the row H cells |
+| cdp3_hw_c7 .. cdp3_hw_c0 | 10361, 10404, 10447, 10490, 10535, 10577, 10621, 10664 | out | row H register outputs (true), each from a 26/16 load |
 
 East edge, x 10850 (poly):
 
 | Name | y | What |
 |---|---|---|
 | cdp3_n_c7 .. cdp3_n_c0 | 10361, 10404, 10447, 10490, 10535, 10577, 10621, 10664 | bus N. c7's track ends at a metal contact at about 10855,10355 and c6's at about 10900,10400, each on a vertical metal line that comes down from the north with a diagonal jog at y 10250-10330 (seen at 0.85x); the other six run on east at least to x 10960 |
-| cdp3_c_wr | 9533 | write line of row C, runs on east (seen to x 10900) under three thin vertical metal lines at x 10803, 10848, 10888 |
+| cdp3_c_wr | 9533 | in: write line of row C, comes from the east (seen to x 10900) under three thin vertical metal lines at x 10803, 10848, 10888; no contact to them seen |
+| cdp3_h_wr | 10711 | in: write line of row H, the same |
 | (not traced) | 8819 | through line of channel B |
 
 Top edge (y 8450) and bottom edge (y 11200), per column (x for c5):
@@ -199,16 +224,14 @@ Top edge (y 8450) and bottom edge (y 11200), per column (x for c5):
 | Line | x | What |
 |---|---|---|
 | VSS rail | 9548-9596 | contacts at 9568,8437 and 9568,8500 (row A), 9570,11200 |
-| cdp3_bl_cN | 9628-9648 | bit line: drawn only in row C so far |
-| cdp3_f_cN | 9675-9692 | from the row A cell (via the link in channel B); drawn y 8790-9560 |
+| cdp3_bl_cN | 9628-9648 | bit line: drawn y 9192-11052 (c2..c7), from 9555 (c1), from 10684 (c0). Not yet followed to either edge |
+| cdp3_f_cN (N 2..7) | 9675-9692 | from the row A cell (via the link in channel B); drawn y 8790-11052, no contact in rows C-H. Not yet followed to the bottom edge |
 | VCC rail | 9765-9815 at the top, 9770-9815 at the bottom | |
 
 Into rows not yet traced (the labels sit on the stubs):
 
 | Name | Layer | Where | To |
 |---|---|---|---|
-| cdp3_hq_cN (N 0..7) | metal | x 9466 + 390 (N-4), y 10720 | row H cell |
-| cdp3_hw_cN (N 0..7) | metal | x 9422 + 390 (N-4), y 10720 | row H cell |
 | cdp3_g_cN (N 2..7) | metal | x 9731 + 390 (N-5), y 8790 | row A cell |
 | x 9893 line (same net as cdp3_f_cN) | metal | x 9893 + 390 (N-5), y 8790 | row A cell |
 
@@ -239,13 +262,20 @@ Into rows not yet traced (the labels sit on the stubs):
 
 ## Not done
 
-- Row A cell (c2..c7, y about 8400-8790, cut by the top edge) and row H cell (c0..c7,
-  y 10738-11038): believed variants of `cdp3_reg`; not traced.
-- Row I (y 11040-11200+).
+- Row A cell (c2..c7, y about 8400-8790, cut by the top edge): not a copy of `cdp3_reg` in
+  any orientation (findcell finds nothing above 0.5 in y 8250-8900). Not traced.
+- Row I (y 11050-11200+): likewise not a copy of `cdp3_reg` (nothing above 0.5 in
+  y 10950-11600). Not traced.
 - The logic at x 7600-8560 beside rows A-C; channel B lines at y 8864 and 9167 (contacts
   near x 7834 and 8290).
-- Through lines y 8819 and 10708; `cdp3_c_wr` west of x 8355 and east of x 10900.
-- Rails and lines e, f over their full length (drawn only in row C and channel B).
+- Through line y 8819.
+- Rails over their full length (drawn only inside the two register rows); the bit lines
+  above row C and below row H; line f below row H.
+- c0 in rows D-G is not standard: a wide rail at x 7680-7728 from the top of row D to
+  y 10150, which jogs right (y 10150-10400, contacts at about 7770,10135 and 7685,10280)
+  to the usual VCC position x 7775-7822 above row H; a thin line at x 7772 comes down from
+  the logic above and ends at the 7770,10135 contact. c1's VCC rail starts at y 9750 with
+  a tab to x 8255; above it a narrower line at x 8215-8255 comes down from the logic.
 
 ## Tools and method notes
 

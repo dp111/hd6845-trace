@@ -3,6 +3,6 @@
 7600,9550:10850,9815    route  row C register outputs going west | six poly lines, one from each row C cell (true data, buffered) to the west edge
 7600,10300:10850,10720  route  channel G tracks | per column: one poly line between the west edge and the row H cell, and the column's bus N line leaving east
 8380,9195:10770,9550    array  6-bit read/write register (row C) | static register cell per column c2..c7: written from the column bit line when the write line is high, held through a grounded-gate device; one buffered output west, one onto bus N. Believed R12 or R14 (high bits)
-7780,10735:10900,11040  ?array row H cells (8 bit) | large cell per column; not traced. Believed an 8-bit register read onto bus N
+7600,10690:10770,11050  array  8-bit read/write register (row H) | the row C register cell upside down in all eight columns, on the same bit lines, with its own write line; outputs west on the channel G tracks and onto bus N. Believed R13 or R15 (low byte)
 8560,8450:10900,8790    ?array row A cells (6 bit) | large cell per column c2..c7; not traced
 7600,8790:10850,9200    route  channel B tracks and links | six poly lines from the west, one into each row A cell; short poly links take a second line of each row A cell onto vertical line f, which runs down through row C to the rows below
