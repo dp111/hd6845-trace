@@ -340,7 +340,7 @@ P 14791,11810:14816,11898            #   right arm
 P 14620,11876:14816,11898            #   bottom arm (over the edge of the inner diffusion)
 P 14622,11890:14646,11927            #   down to the tie on the x tab
 B 14620,11911:14648,11930
-D 14584,11776:14838,11871            # eq above the top arm and right of the right arm; VSS inside
+D [ 14584,11776 x14610 y11786 x14795 y11776 x14838 y11871 x14584 ]   # eq above the top arm and right of the right arm; VSS inside. The top edge is notched 10 px down under the bus, T2 and c tracks (both stripped shots, composite view eqstrip2.png)
 D 14545,11848:14602,11900            # VSS land (upper)
 C 14562,11870 s=30x34
 @end
@@ -395,10 +395,29 @@ B 14473,11774:14499,11803
 @inst rdp3_mpd 1951,-846 tag=cb_s7
 
 # --- eq lines: row-wide diffusion strips, dead ends under the first and the ninth VSS rail
-D 13768,11776:16925,11798
-N D 15000,11787 rdp3_ca_eq
-D 13768,10930:16925,10952
-N D 15000,10941 rdp3_cb_eq
+# (run 3: the strip's top edge is 10 px lower across x 14610-14795 of each regular slice,
+# so it is drawn as a full-length lower part and upper parts between the notches. Slice
+# s1, whose cell differs and where the exit tab comes up, was not examined for the notch.)
+D 13768,11786:16925,11798            # lower 12 px: present all along
+D 13768,11776:13828,11788
+D 14013,11776:14610,11788
+D 14795,11776:15000,11788
+D 15185,11776:15390,11788
+D 15575,11776:15780,11788
+D 15965,11776:16170,11788
+D 16355,11776:16561,11788
+D 16746,11776:16925,11788
+N D 15000,11793 rdp3_ca_eq
+D 13768,10940:16925,10952            # lower 12 px: present all along
+D 13768,10930:13828,10942
+D 14013,10930:14610,10942
+D 14795,10930:15000,10942
+D 15185,10930:15390,10942
+D 15575,10930:15780,10942
+D 15965,10930:16170,10942
+D 16355,10930:16561,10942
+D 16746,10930:16925,10942
+N D 15000,10947 rdp3_cb_eq
 # --- right end: lower VSS land that slice s7's T7 and series pair end on (ninth rail)
 D 16886,12090:16940,12167
 C 16903,12127 s=24x40

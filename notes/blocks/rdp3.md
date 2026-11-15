@@ -177,7 +177,11 @@ so x = c XOR q and `eq` is high when the register equals the eight `c` lines.
 - Match pull-down `rdp3_mpd`: C-shaped gate round a VSS diffusion (land and contact at
   14562,11870); outside the C the diffusion is the `eq` line, a strip y 11776-11798
   that runs through all eight slices (under the VSS rails) and ends dead under the
-  first rail (x 13768) and under the ninth (x 16925).
+  first rail (x 13768) and under the ninth (x 16925). Its top edge is notched 10 px
+  down (to y 11786) across x 14610-14795 of each regular slice, under the bus, T2 and c
+  tracks (both stripped shots; drawn so in run 3). None of those tracks has a contact
+  to the strip: under T2 the strip is the same flat tan as under the c track and the
+  bus line, which cannot have one.
 - **Exit of the `eq` line (run 3).** In slice s1 a tab of the strip comes up under the c
   track (x 14314-14336) to a buried contact (box 14312-14338 x 11744-11766 in band A,
   y 10898-10920 in band B) on the end of a poly line. The line runs up 50 px, then west
