@@ -62,19 +62,23 @@ C 16032,15122 s=34x26
 N P 16100,15089 bd2_n1
 # bd2_n1: metal from the gate contact down and west to the trunk x 16168
 M 16255,15076 y15222 x16168 y15442
-# The metal x 16158-16178 ENDS at the contact 16167,15432 (both metal shots show bare
-# poly at y 15450-15468 and the track scan a gap 15443-15470). From the contact a poly
-# (strip 1) runs down under the lower trunk, diagonally across to under the metal
-# x 16200-16222, down to y 15612, and steps right into a block (16226-16248 x 15598-15662)
-# that the band y 15646-15668 leaves westwards to row 1 of the gate column.
+# The metal x 16158-16178 ENDS at the contact 16167,15432: measured (notes, "Verdict"):
+# both metal shots have bare poly at y 15455-15464, chip 2's stripped shot a dark bar.
+# From the contact a poly (strip 1) runs down under the lower trunk, diagonally across to
+# under the metal x 16200-16222, down to y 15612, and steps right into a block
+# (16224-16248 x 15600-15660). From the block's foot a band goes west: y 15643-15657 under
+# the metal x 16210, slanting down under the e_b trunk to y 15664-15680, and ends on the
+# buried contact at the east end of row 1's output strip (the "hook"). The salmon of the
+# clean shot is unbroken under both metals (tools/bd2_umap.py 16140 15580 16260 15700).
 C 16167,15432
 P 16152,15418:16184,15448              # pad
 P 16168,15440 y15505 16210,15565 y15612 w=24
-?P 16205,15598:16232,15614             # strip 1 into the block: seen as one shape, edge under the metal's edge
+P 16205,15598:16232,15614              # strip 1 into the block (continuous salmon x 16206-16226 under the metal)
 P 16226,15598:16248,15662              # block
-P 16140,15657 x16232                   # band west, under both trunks
-P 16108,15630:16148,15670              # its west end on the output strip of row 1
-?B 16106,15628:16144,15670             # heavy-outlined hook; taken as the strip's buried contact (style of G1, G2)
+P [ 16118,15664 16152,15664 16184,15643 16232,15643 y15657 16186,15657 16154,15680 16118,15680 ]   # band
+P 16104,15640:16136,15668              # poly over the output strip's end: box 16102-16118 x 15644-15654 and the bar x 16130-16134 down into the band
+D 16095,15628:16128,15657              # east end of row 1's output strip
+?B 16100,15636:16132,15662             # box with plain centre and heavy outline, as on G1 and G2; the window itself is not resolved
 
 # ---------------------------------------------------------------- areg_load driver
 # G2, y 15225-15360: one inverter. Output = areg_load, input = bd2_n2.
@@ -128,45 +132,115 @@ M 16122,15378 y15480 x16169 y17100
 N M 16169,16000 e_b
 @alias e_b bd2_n2
 
+# ================================================================ the strobe latch
+# Rows 1-3 of the gate column (y 15500-15915) and one inverter west of the rail (G4) are a
+# D latch that is open while e_b is high:
+#     bd2_n1 = NOT( bd2_qb OR (e_b AND bd2_a) )        row 1      (Q)
+#     bd2_qb = NOT( bd2_n1 OR (e_b AND bd2_c) )        rows 2-3   (Q bar)
+#     bd2_a  = NOT bd2_c                               G4
+# Layers under the ground rail and under the thin metals were read from the clean shot
+# with tools/bd2_umap.py (pink field / tan diffusion / salmon poly), open areas from the
+# metal shots and chip 2's stripped shot with tools/bd2_cmap.py and bd2_patch.py.
+
 # ---------------------------------------------------------------- row 1 (y 15500-15670)
-# Drives bd2_n1. Established: ground land with contact 16047,15522, two gate bands in
-# series below it, the output strip under the second band, its buried contact to the
-# band that goes east to the block / strip 1. NOT established: everything left of
-# x 16018 (see notes: the L-shaped poly bd2_r1_l and the diffusion around its end), so
-# no load is drawn and the gate may have a third input.
 D 16028,15505:16075,15545              # ground land
 C 16047,15522
 D 16018,15535:16100,15650              # column, through under both bands
-P 16005,15555:16105,15578              # upper band: gate bd2_r1_a
+P 16005,15555:16105,15578              # upper band: gate bd2_a
 P 16098,15545:16135,15580              # pad
 C 16114,15560
-M 16110,15550 y15792                   # bd2_r1_a: thin metal down to a pad at 16098-16140 x 15768-15797
-N M 16110,15700 bd2_r1_a
 P 16005,15603:16105,15625              # lower band: gate e_b
 P 16095,15600:16152,15620              # east to the tap on the trunk
 P 16150,15590:16185,15620              # pad
 C 16167,15605
-?D 16095,15630:16142,15668             # output strip's east end under the buried contact (not seen separately)
 N D 16060,15638 bd2_n1
-# The L-shaped poly west of the column: bar 15908-15992 x 15558-15587, neck down to the
-# pad 15925,15625, metal x 15912-15935 down to a contact at 15925,15825.
-P 15908,15558:15992,15587
-P 15908,15580:15937,15612
+# Third pull-down, west of the rail. The ground land runs on west as an arm y 15537-15552
+# (tan and unbroken under the rail), turns down at x 15942-15978, passes under the bar of
+# the L-shaped poly (channel: the poly is brighter over it, and the arm's left edge crosses
+# the bar at x 15937) and comes back east along y 15638-15657 into the output strip. The
+# pocket 15978-16020 x 15590-15637 inside this loop is field.
+D 15942,15537:16032,15552              # arm of the ground land
+D 15942,15537:15978,15600              # down, through under the bar
+D 15958,15587:15978,15657
+D 15958,15638:16030,15657              # into the output strip, under the rail
+P 15908,15558:15992,15587              # bar: gate bd2_qb
+P 15908,15580:15937,15612              # neck
 P 15906,15606:15946,15646              # pad
 C 15925,15625
-# (the metal ends on a contact at 15925,15825; what is under it is not traced)
-M 15924,15615 y15835
-N M 15924,15700 bd2_r1_l
+M 15924,15615 y15835                   # bd2_qb: metal down to the pad of row 2's load gate
+N M 15924,15700 bd2_qb
+# Load of row 1. The output diffusion goes on south from the strip (x 15962-15981 to
+# y 15708); a strip from the VCC land joins it from the west under a poly block. That
+# block, the thin bar above it and the band below it are one poly (6-9 px dark lines
+# between them are the strip's edges), and the band runs on east as the gate of row 2.
+# A finger of the band (15986-16008 x 15658-15712) ends in a boxed cell with a light
+# centre on the output diffusion: the tie.
+D 15962,15650:15981,15712              # output diffusion going south
+D 15850,15682:15970,15704              # load strip from the VCC land
+D 15850,15682:15898,15912              # VCC land under the rail (one land for rows 1-3 and G4)
+C 15866,15729 15869,15822 s=24x30      # two of its contacts (specks in the clean shot)
+P 15902,15664:15952,15735              # load gate: thin bar, block over the strip, west end of the band
+P 15945,15712:15992,15735              # band, west part
+P 15985,15722:16100,15747              # band, east part: gate of row 2
+P 15986,15660:16008,15726              # finger up to the tie
+D 15986,15650:16008,15682              # output diffusion under the tie
+?B 15984,15656:16010,15684             # boxed cell 15988-16006 x 15660-15680, light centre in all shots
+
+# ---------------------------------------------------------------- rows 2 and 3 (y 15678-15915)
+# One column: ground land, band (bd2_n1), output bd2_qb, band (e_b), node, band (bd2_c),
+# ground land. The output widens east below y 15768 (to x 16102) and has a west arm
+# y 15778-15798 under the rail to its load.
+D 16036,15678:16085,15810              # ground land, under the first band, output
+C 16047,15700
+D 16038,15768:16102,15915              # output's lower part, under the two bands, ground land
+C 16047,15898
+N D 16060,15790 bd2_qb
+P 16020,15811:16160,15831              # band: gate e_b, from the tap on the trunk
+C 16166,15822
+P 16152,15808:16185,15840              # pad
+P 16004,15857:16290,15877              # band: gate bd2_c; runs on east to the contact 16270,15870
+N P 16130,15867 bd2_c
+# Load of rows 2-3 and the tie that makes its gate bd2_qb: strip from the VCC land under
+# a poly block; block, thin bar above and the contact pad below are one poly; the pad's
+# poly wraps a boxed cell (15956-15996 x 15800-15842) that sits on the output's west arm.
+D 15958,15778:16040,15798              # west arm of the output
+D 15890,15778:15962,15797              # load strip from the VCC land
+P 15902,15757:15952,15847              # load gate: thin bar, block, pad
+C 15925,15825
+P 15946,15830:15992,15844              # the pad's poly along the foot of the boxed cell
+D 15958,15795:15990,15842              # output diffusion under the cell
+?B 15956,15806:15994,15846             # boxed cell: two plain patches inside a heavy outline; the window is not resolved
+
+# ---------------------------------------------------------------- G4: bd2_a = NOT bd2_c
+# The west end of the bd2_c band turns down under the rail's edge (x 16004-16022) and
+# crosses a strip that runs from the ground land of row 3 west to an output land
+# (15958-15996 x 15890-15920). Load as in rows 1-3 (block 15900-15956 x 15890-15909 under
+# one poly with the bars above and below). The lower bar turns down (x 15933-15952) to a
+# boxed cell at 15966-15978 x 15956-15970, where the output diffusion ends; the poly bar
+# y 15955-15973 starts on the other side of that cell and runs east under the rail (field
+# above and below it there: a wire) to the contact 16105,15962 on the thin metal bd2_a.
+P 16004,15857:16022,15925              # gate: bd2_c
+D 15958,15890:16040,15918              # output land, channel, ground land
+D 15966,15915:15980,15972              # output diffusion going south to the boxed cell
+D 15890,15890:15962,15909              # load strip from the VCC land
+P 15900,15868:15956,15929              # load gate: bar, block, bar
+P 15933,15925:15952,15973              # ... turning down
+P 15933,15955:16125,15973              # through the boxed cell and east under the rail
+?B 15962,15952:15984,15976             # boxed cell: load gate and bar both taken as tied to the output here
+P 16088,15944:16128,15984              # pad
+C 16105,15962
+# bd2_a: thin metal from that contact up to the pad of row 1's upper band. Narrow (about
+# 13 px) where it crosses rows 1 and 3, 16 px between. No contact on the way: it passes
+# over row 1's output contact and over a second boxed structure at 16088-16142 x
+# 15764-15798 (not drawn; see notes, Ambiguities).
+M 16112,15548 y15572 x16104 y15975 w=14
+N M 16104,15700 bd2_a
 
 # ---------------------------------------------------------------- bundle, y 15700-15900
-# Seen in sharpened 3x views (metal and clean shot); the gates these lines feed are not traced.
 # Taps on the e_b trunk: a contact on a poly pad each.
 C 16167,15735
 P 16152,15722:16185,15750              # pad
 P 16180,15737 x16262 w=18              # east: band G_d of the gate group right of the bundle
-C 16166,15822
-P 16152,15808:16185,15840              # pad
-P 16100,15822 x16160 w=20              # west: upper band of row 3 (y 15812-15832)
 # Contact 16207,15778: a metal x 16200-16222 starts here and runs down to about y 16050
 # (track scan); the pad's poly goes east as band G_e of the gate group.
 C 16207,15778
@@ -174,8 +248,3 @@ P 16192,15762:16226,15795              # pad
 P 16220,15779 x16262 w=20
 M 16210,15768 y16045
 N M 16210,15900 bd2_m210
-# Lower end of bd2_r1_a: a poly pad with a heavy outline at the east end of row 2's output
-# strip (y 15745-15790). Believed to be that strip's buried contact, which would make
-# bd2_r1_a the output of row 2; the diffusion side is not traced.
-P 16098,15765:16148,15797
-?C 16114,15780
