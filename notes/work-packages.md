@@ -8,6 +8,15 @@ its centre.
 Status: `queued`, `running`, `done` (traced and reported), `checked` (an independent
 agent has verified it), `partial` (reported, with work left: see its notes).
 
+**2026-11-15 18:00.** The usage limit stopped all eleven running agents at once; they
+were resumed when it reset. By the user's instruction no further agents are started
+after this round: once these eleven have reported, the remaining packages below are
+worked serially by the coordinating session, in priority order.
+
+Running in this last round: `bd2` (run 2), `cdp1` (run 2), `bc1`, `rdp3` (run 3),
+`mra` (run 3), `larr` (run 2), `cdp3` (run 2), `rdp2`, `cdp2` (run 2), `tc1` (run 2),
+`bd1` (run 2).
+
 ## Wave 1
 
 | Prefix | Region | What | Status |

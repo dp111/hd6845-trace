@@ -54,6 +54,12 @@ The user asked for parallel agents and for the session to work unsupervised unti
 weekly usage limit is reached, committing and pushing each new traced piece and
 keeping the floor plan up to date.
 
+**Update, 2026-11-15 evening (user instruction after the usage limit was hit):** the
+eleven agents that were interrupted were resumed to finish their runs. When they
+have all reported, **go back to serial work: do not start new agents** unless the
+user asks again. Integrate their reports as below, then carry on tracing in this
+session, one block at a time, in the priority order in `notes/work-packages.md`.
+
 - Every agent works from `notes/tracing-guide.md`. Read it before tracing anything,
   whoever you are.
 - One block = one agent = one file prefix. An agent owns `trace/PREFIX*.txt`,
