@@ -563,3 +563,66 @@ M 10419,8790 y9195 w=20
 ?M 9683,11048 y11200 w=17
 ?M 10073,11048 y11200 w=17
 ?M 10464,11048 y11200 w=17
+
+# =====================================================================================
+# Gate beside row C, in c0-c1 (x 7600-8360, y 9150-9500): one two-input NAND on c1's line e
+# =====================================================================================
+# Seen at 1.56x (both shots), 2.9x (clean) and 2x (metal); overlay at 1.56x. Not zoomed junction
+# by junction: the doubtful joins are marked '?' and listed in the notes.
+# --- pull-down chain: output diffusion at the top, two gates in series, VSS at the bottom
+D 7932,9250:8062,9372                 # body
+D 7975,9365:8030,9396                 # lobe with the contact of c1's VSS rail
+C 8000,9378
+P 7895,9279:8068,9300                 # gate 1
+P 7870,9280:7902,9305                 # its pad
+P 7868,9328:8076,9348                 # gate 2 ...
+P 7868,9325:7890,9432                 # ... down the left side ...
+P 7868,9423 x8348 w=17                # ... and east along y 9423 to a contact on the x 8327 line
+C 8335,9428
+M 8327,9150 y9442 w=26                # x 8327 line: comes down from above the region shown
+N M 8327,9160 cdp3_k_c
+# --- load: strip from the output east under the poly block to the VCC contact
+D 8055,9248:8215,9273
+D 8148,9250:8212,9300
+P 8116,9240:8150,9302                 # block over the strip
+P 8081,9221:8150,9246                 # its top, west to the pad that line e of c1 lands on
+P 8083,9240:8105,9254
+C 8080,9234 s=24x24
+?B 8079,9241:8107,9258                # pad on the output strip too (metal, poly and diffusion in one box)? see notes
+M 8160,9150:8250,9395                 # VCC metal: wide here, narrower below, joins c1's rail at y 9750
+M 8228,9390 y9760 w=44
+N M 8200,9200 vcc
+C 8178,9275
+M 8076,9150 y9560 w=20                # line e of c1: runs on up past y 9150
+# --- output also leaves on a poly strip from a buried contact at the top left of the body to a
+# pad, and up from there on the upper piece of the x 7880 line
+D 7926,9240:7956,9270
+B 7924,9238:7958,9271
+P 7895,9247:7955,9265
+P 7866,9212:7902,9252
+C 7878,9228
+M 7880,9150 y9242 w=22                # upper piece: runs on up past y 9150
+# --- gate 1 input: poly from the west edge along y 9450, contact, metal bar, up the lower piece
+# of the x 7880 line to the pad of gate 1
+P 7600,9450 x7785 w=18
+N P 7610,9450 cdp3_k_b
+C 7765,9448
+M 7752,9451 x7892 w=22
+M 7880,9285 y9462 w=22
+C 7878,9297
+# --- a line that only passes: x 7835 metal from channel B (contact on the y 8864 poly, seen by the
+# first run only) down to a contact on the y 9168 poly (which runs east to a contact at 8290,9165)
+# and to a poly cross-under below the metal bar; then west and down on the x 7772 line, which ends
+# at a contact at about (7770,10135) that is not traced
+?P 7600,8864 x7848 w=18
+?C 7834,8862 s=24x24
+M 7835,8850 y9414 w=24
+C 7833,9165 s=24x24
+P 7820,9168 x8305 w=18
+C 8290,9165 s=24x24
+M 8290,9150 y9178 w=24                # stub: the metal on this contact was not followed
+C 7835,9401 s=24x24
+P 7826,9390:7848,9502                 # cross-under: no metal over it between the two contacts (4x, both chips)
+C 7835,9490 s=24x24
+M 7848,9490 x7772 y10150 w=18
+N M 7835,9300 cdp3_k_a

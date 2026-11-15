@@ -48,11 +48,14 @@ Which columns each row occupies:
   - row C: the register cell `cdp3_reg`, placed in c2..c7 (10 transistors each), with the
     VSS diffusion of each rail and the write line that loops through the cells;
   - row H: the same cell upside down in c0..c7, with its own write line;
+  - the one gate beside row C in c0-c1 (a two-input NAND whose output is c1's line e),
+    with the lines around it;
+  - the three through lines to both ends, the VSS rails, the bit lines to both edges;
   - rows E and F (two pass transistors per column), their two gate lines, the tracks of
     channels D and G and the vertical metal joining them;
   - channel B: six tracks onto line g, six poly links from line f to the "x 9893" line.
-- NOT traced: rows A and I; the logic at x 7600-8560 beside rows A-C; the through line at
-  y 8819; rails outside the two register rows.
+- NOT traced: row A (a different, larger cell, cut by the top edge), row I (the top
+  150 px of cdp4's row R1), the logic beside row A (x 7600-8400, y 8440-8800).
 
 ## Inventory
 
@@ -186,6 +189,38 @@ high and the eight row H values when `cdp3_gate_f` is high: a read bus, with the
 unused top bits of the 6-bit register reading 0. That makes c0, c1 the two most
 significant bits if the order is monotonic (not established).
 
+### Gate beside row C, c0-c1 (traced; x 7810-8360, y 9150-9500)
+
+Where row C has no cells there is one gate. Its pull-down chain is a diffusion
+7932-8062 x 9250-9372 with two poly gates across it in series and the contact of c1's VSS
+rail at the bottom (8000,9378); its load is a poly block 8116-8150 over a strip to a VCC
+contact (8178,9275) under a wide VCC metal that becomes c1's VCC rail.
+
+    out = NAND(cdp3_k_b, cdp3_k_c)        extracted as cdp3_bl_c1 (see below)
+
+- `cdp3_k_b` (gate 1, y 9279-9300): poly from the west edge along y 9450 to a contact
+  (7765,9448), a metal bar east along y 9451, up the lower piece of the x 7880 line to
+  the gate's pad (contact 7878,9297).
+- `cdp3_k_c` (gate 2, y 9328-9348): the gate poly runs down the left side and east along
+  y 9423 to a contact (8335,9428) on a metal line at x 8327 that comes down from above
+  y 9150 (not followed).
+- Output: (1) a buried contact at the top left of the chain (7924-7958 x 9238-9271) to a
+  poly strip and pad, contact 7878,9228, and up the upper piece of the x 7880 line past
+  y 9150 (not followed; the two pieces of that line are separate, poly lies between the
+  two contacts); (2) the load block's pad (8081-8105 x 9221-9254), on which **line e of
+  c1** lands (contact 8080,9234). The pad is read as joining metal, load gate and output
+  strip in one box (`?B`), which makes the gate's output and c1's line e one net.
+- So, as traced, c1's line e (the "bit line" of the row H cell in c1, running on up past
+  y 9150 and down to the bottom edge) is driven by this gate. What that means for the
+  row H bit in c1 is open: see Ambiguities.
+- `cdp3_k_a` only passes: metal at x 7835 from channel B (contact on the y 8864 poly from
+  the west edge: seen by the first run, not re-checked, drawn `?`) down to a contact
+  (7833,9165) on a poly line y 9168 that runs east to a contact at (8290,9165) (metal
+  there not followed), on down to a contact (7835,9401), a poly cross-under below the
+  metal bar of `cdp3_k_b` (no metal over it, checked at 4x in both metal shots), contact
+  (7835,9490), metal west and then down at x 7772 to a contact at about (7770,10135)
+  between rows E and F, which is not traced.
+
 ### Channel B (traced, wiring only)
 
 - Six poly tracks from the west edge (y 8907 ... 9123) each end at a contact on line g of
@@ -204,7 +239,8 @@ West edge, x 7600 (all poly, all continue west beyond x 7540):
 | Name | y | Direction | What |
 |---|---|---|---|
 | cdp3_g_c7 .. cdp3_g_c2 | 8907, 8950, 8994, 9037, 9080, 9123 | ? | one line into each row A cell |
-| (not traced) | 8864, 9167 | ? | lines into the logic at x 7600-8560 |
+| cdp3_k_a | 8864 | ? | poly to the x 7835 metal (first run's observation, drawn `?`); passes the gate beside row C and ends at about (7770,10135). The y 9168 poly on the same net starts at x 7820, not at the west edge |
+| cdp3_k_b | 9450 | in | gate 1 of the NAND beside row C |
 | cdp3_cw_c7 .. cdp3_cw_c2 | 9581, 9624, 9668, 9711, 9754, 9797 | out | row C register outputs (true), each from a 26/16 load |
 | cdp3_gate_e | 10057 | in | read row C onto N |
 | cdp3_gate_f | 10317 | in | read row H onto N |
@@ -232,10 +268,13 @@ Top edge (y 8450) and bottom edge (y 11200), per column (x for c5):
 | cdp3_f_cN (N 2..7) | 9675-9692 | from the row A cell (via the link in channel B); no contact in rows C-H; drawn `?` through row I to the bottom edge |
 | VCC rail | 9765-9815 at the top, 9770-9815 at the bottom | |
 
-Into rows not yet traced (the labels sit on the stubs):
+Into parts not yet traced (the labels sit on the stubs):
 
 | Name | Layer | Where | To |
 |---|---|---|---|
+| cdp3_k_c | metal | x 8327, y 9150, going up | gate 2 of the NAND; source above not followed |
+| cdp3_bl_c1 | metal | x 7880, y 9150, going up (output of the NAND) and x 8076, y 9150, going up (line e of c1) | logic beside row A |
+| cdp3_k_a | metal | stub at (8290,9150-9178); and x 7772, y 10150 | not followed |
 | cdp3_g_cN (N 2..7) | metal | x 9731 + 390 (N-5), y 8790 | row A cell |
 | x 9893 line (same net as cdp3_f_cN) | metal | x 9893 + 390 (N-5), y 8790 | row A cell |
 
@@ -256,6 +295,18 @@ Into rows not yet traced (the labels sit on the stubs):
   9287-9312 (between the two edges of the strip under it), in all six cells. Read as no
   contact: the line is no wider than elsewhere, and the clean shot shows unbroken poly
   below. A contact there would put line f on the grounded poly.
+- **Pad of the NAND's load** (8079-8107 x 9241-9258, `?B`). In the clean shot the pad is a
+  pale box with a heavy outline directly above the output strip, with a thin dark line
+  between them at 1.85x; line e's contact ring sits on it. Readings: (a) one box joining
+  metal, poly and diffusion (adopted: a depletion load needs its gate on its output, and
+  no other tie is visible); (b) metal to poly only, the load being a pull-up gated by
+  line e. Needs a 5x look at 8060-8110 x 9215-9280.
+- **A gate driving a bit line.** With reading (a) c1's line e is the NAND's output, yet
+  the same line is the bit line of the row H register cell in c1 and runs on south. Either
+  line e of c0/c1 is not a data-bus bit line below (the row H bits in c0, c1 would then
+  be loaded from logic), or it is cut somewhere between y 9560 and 10690 (seen unbroken
+  only at 0.95x), or the reading is wrong. Not resolved; the c2..c7 bit lines are not
+  affected.
 - Rail identity. The rails are labelled from structure (loads hang from "rail a", pull-
   downs end on "rail d") and from their x matching the VSS / VCC rails that `cdp1`
   followed to the VSS pad plane at y 4530. Not followed through cdp2 here.
@@ -268,10 +319,20 @@ Into rows not yet traced (the labels sit on the stubs):
 
 - Row A cell (c2..c7, y about 8400-8790, cut by the top edge): not a copy of `cdp3_reg` in
   any orientation (findcell finds nothing above 0.5 in y 8250-8900). Not traced.
-- Row I (y 11050-11200+): likewise not a copy of `cdp3_reg` (nothing above 0.5 in
-  y 10950-11600). Not traced.
-- The logic at x 7600-8560 beside rows A-C; channel B lines at y 8864 and 9167 (contacts
-  near x 7834 and 8290).
+- Row I (y 11050-11200+): not a copy of `cdp3_reg` (nothing above 0.5 in y 10950-11600),
+  nor of cdp2's latch. It is the top of the tall cell row that `cdp4` lists as its row R1
+  (y about 11100-11800), so it belongs with that block; lines e and f run into it.
+- The logic beside row A, x 7600-8400, y 8440-8800 (contacts at about 7840,8480;
+  7880,8480; 7790,8560; 7850,8600; 7960,8640; 8060,8620; 8140,8590), and where the lines
+  from the gate beside row C go in it (x 7880, 8076, 8327 and 8290 at y 9150).
+- What is known of the row A cell (c5 coordinates, from a 1.5x view): spans y about
+  8330-8790 and probably further up (cdp2 calls y 7980-8450 its row D); contacts on the
+  VSS rail at 9568,8437 / 9568,8510 / 9570,8635 / 9565,8780; a bit-line contact on a
+  diffusion box 9615-9680 x 8752-8812 (9636,8782), 30 px above `cdp3_l8819`; other metal
+  contacts at about 9716,8427 / 9838,8537 / 9828,8622 / 9760,8687 / 9872,8750; line g
+  (from the west, channel B) and the x 9893 line (to line f, going south to cdp4) end
+  in it. *Believed:* a second 6-bit register on the same bit lines, with more logic per
+  bit (comparator?), whose per-bit output is line f.
 - The VCC rails are drawn in channel B, in the register rows and between them (c2..c7);
   not through rows A and I, and not for c0, c1 in rows D-G (next item).
 - c0 in rows D-G is not standard: a wide rail at x 7680-7728 from the top of row D to
@@ -293,5 +354,9 @@ Into rows not yet traced (the labels sit on the stubs):
 - `tools/cdp3_px.py` (colour classes along a scan line) settled several things a view did
   not: that the strips at x 9782-9798 are two pieces, where the pull-downs cross the
   column, that the stair between R1 and R2 is field. Letters next to an edge are noise.
+- `tools/cdp3_strips.py` cuts a long horizontal strip into pieces and stacks them: one
+  picture follows a through line across the whole array.
+- `findcell.py` must be run without `--orient` restrictions: row H is the row C cell
+  mirrored top to bottom, which the first run's search (two orientations) missed.
 - `tools/cdp3_prof.py --mode metal` needs `--thr 150`; with a lower threshold plain field
   counts as metal.
