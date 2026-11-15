@@ -283,7 +283,13 @@ P 7260,3838:7294,3866
 P 7176,3928:7422,3950              # band f, from contact (7190,3938) on W1
 P 7176,3924:7207,3953
 C 7190,3938 s=24x24
-P 7150,3885:7394,3905              # output poly, west under W4, W3, W2, W1 without contact; continues west (not followed)
+P 7085,3885:7394,3905              # output poly, west under W4, W3, W2, W1 without contact to contact (7099,3897)
+P 7083,3882:7116,3912
+C 7099,3897 s=24x24
+M 7100,3384 y3909 w=19             # north in the channel (x 7091-7110) to contact (7100,3395)
+C 7100,3395 s=24x24
+P 7085,3381:7116,3410
+P 6960,3388:7114,3403              # poly west into the gate columns (seen to x 6930; not followed)
 B 7364,3878:7400,3910
 D 7368,3889:7500,3907              # output strip, under the rail (no contact), to the load
 D 7490,3889:7610,3912              # load strip
@@ -301,7 +307,14 @@ N P 7155,3895 tc1_l4_out
 M 7185,2976 y3952 w=20             # ends on contact (7190,3938): bare field below it (measured)
 C 7186,2986 s=24x24
 P 7174,2977:7308,2997
-P 7290,2950:7308,2997              # continues north
+P 7290,2760:7308,2997              # north under four bus lines (no contacts), then east to contact (7362,2770)
+P 7290,2760:7378,2781
+C 7362,2770 s=24x24
+M 7350,2771 x7675 w=15             # bus line y 2764-2778 east to its cross-under at the right VSS rail
+C 7663,2769 s=24x24
+P 7650,2759:7872,2780              # poly under the rail
+C 7858,2769 s=24x24
+M 7846,2771 x7892 w=15             # ... and on east as ns1: W1 and ns1 are one net
 N M 7185,3000 tc1_w1
 
 # =====================================================================================
@@ -331,7 +344,11 @@ C 7380,4114 s=24x24
 P 7366,4107:7745,4127
 C 7730,4116 s=24x24
 M 7718,4118 x8010 w=19
-M 7392,4117 x7275 y4450 w=19       # continues south (a contact at about 7273,4439 not looked at)
+M 7392,4117 x7275 y4449 w=19       # south to contact (7270,4437), where the metal ends
+C 7270,4437 s=24x24
+P 7179,4424:7288,4443              # poly west from that contact, under W2 lower (no contact: measured along x 7230),
+P 7256,4421:7288,4449
+P 7179,4424:7196,4450              # ... turning south at x 7179-7196: leaves south (tc2)
 
 # =====================================================================================
 # Bus field below the island (y 4130-4450) and the wiring east of the island.
@@ -354,13 +371,17 @@ P 7991,4089 8122,4220 x8350 w=17   # diagonal x - y = 3903 (measured at y 4170 a
 #      (7317,4158), whose metal goes south to contact (7315,4395) and a poly going west.
 M 8053,4050 y4159 x7672 w=16
 C 7685,4158 s=24x24
-P 7181,4144:7700,4167              # west end turns north at x 7177-7202 (run 1's note; drawn in the channel section when verified)
+P 7178,4144:7700,4167              # west end turns north:
+P 7178,3995:7202,4167              # ... x 7178-7202 up to y 3995,
+P 6960,3995:7202,4014              # ... and west along y 3995-4014 under the channel metals (no contact) into the gate columns, where it is a gate (see notes)
+P 7007,3976:7031,4000              # bump on that poly under the metal x 7001-7023: no contact (no ring in either metal shot, no pale patch in acid1b)
 P 7668,4141:7702,4173
 C 7317,4158 s=24x24
 P 7302,4141:7334,4173
 M 7317,4147 y4406 w=19
 C 7315,4395 s=24x24
-P 7150,4385:7332,4403              # west under W3, W2 (no contacts); continues west
+P 7134,4385:7332,4403              # west under W3, W2 (no contacts),
+P 7134,4385:7153,4450              # ... turning south at x 7134-7153: leaves south (tc2)
 P 7300,4381:7334,4408
 
 # ---- tap of tc1_l2_out: contact (7511,4242), poly south under the VSS bus, west, south
@@ -397,7 +418,10 @@ P 7503,4405:7522,4450              # leaves south (tc2)
 # ---- a line that only passes through: poly from the west along y 4344-4362, contact
 #      (7359,4352), metal east along y 4369-4383 to contact (7815,4372), poly north
 #      under the VSS bus and east along y 4255-4275 into the datapath
-P 7150,4344:7376,4362
+P 7042,4344:7376,4362              # west end: contact (7056,4352), metal south at x 7049-7068 (leaves south, tc2)
+P 7040,4338:7072,4366
+C 7056,4352 s=24x24
+M 7058,4340 y4450 w=19
 C 7359,4352 s=24x24
 M 7347,4337:7382,4372
 M 7350,4376 x7828 w=15
@@ -413,9 +437,19 @@ N P 8300,4265 tc1_x1
 M 7890,2771 x8097 y3659 x8140 y3716 w=15
 C 8139,3704 s=24x24
 P 8125,3691:8350,3712
-N M 8097,3000 tc1_ns1
-# ns2: from a contact at (7901,2724) (not drawn yet) east along y 2720-2734, south to contact (8139,3567);
+@alias tc1_w1 tc1_ns1
+# ns2: bus line y 2720-2734. From the west: poly along y 2867-2883 (seen from x 7180; not followed further), north at
+#      x 7247-7267, east along y 2717-2737 to contact (7403,2727); metal east to contact (7707,2725); poly under the
+#      right VSS rail to contact (7901,2724); metal east, then south (x 8132-8148) to contact (8139,3567);
 #      poly east along y 3556-3578 to x 8332, where it turns south (not followed)
+P 7180,2867:7267,2883              # continues west (1.5x view only)
+P 7247,2717:7267,2883
+P 7247,2717:7418,2737
+C 7403,2727 s=24x24
+M 7392,2727 x7719 w=15
+C 7707,2725 s=24x24
+P 7694,2715:7916,2736
+C 7901,2724 s=24x24
 M 7890,2727 x8140 y3579 w=15
 C 8139,3567 s=24x24
 P 8125,3556:8332,3578

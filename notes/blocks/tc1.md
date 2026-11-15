@@ -4,14 +4,16 @@ Trace: `trace/tc1.txt`. Coordinates are metal-shot pixels. Local names start `tc
 
 ## Status
 
-Run 1 (2026-11-15). Surveyed the whole region; traced and overlay-checked the whole
-**island** (x 7330-7900, y 3050-4050: nine gates, 26 transistors, no latch) together
-with the wiring that joins its gates to each other: the four metal verticals in the
-channel west of it (x 7174-7325), the verticals east of it (x 7914-8064) and three
-tracks that pass under its south end (y 4018-4127) from the west side to the east.
-Not traced: the gate columns at x 6400-7000, the rest of the channel x 7000-7170, and
-the bus fields above (y < 2975) and below (y > 4060), where every signal that enters or
-leaves the island still has its far end. See Ports and Not done.
+Runs 1 and 2 (2026-11-15). Traced, overlay-checked and extracting (26 transistors, no
+errors, no open nets): the **island** (x 7330-7900, y 3050-4050: nine static gates), all
+of its wiring, the **bus field below it** (y 4130-4450), the **six north-south metals**
+east of it (x 8089-8321, each end to end) and the two top bus lines that feed them from
+the west. **Every input of the island is now followed to the edge of the region; none is
+driven inside this block**: `a` and `w1` come from the east (datapath side), `b`, `g`
+and `i` from the south (tc2). See "Where the island's inputs come from".
+Not traced: the gate columns at x 6400-7000 (about 40 loads; one structure in them, a
+big driver gated by `g`, is described under Not done but not drawn), the channel
+x 7000-7170 except the lines that concern the island, and most of the top bus field.
 
 ## How this area reads in the photos (cost me a third of the run; read this first)
 
@@ -122,76 +124,86 @@ tc1_f      = NOR(tc1_r2_out, tc1_r4_out)   = (a + b) . NOT(b.(g.NOT a + i.a))   
 In words: `f` is high when (a,b) = (1,0); when (a,b) = (0,1) unless `g`; when (a,b) =
 (1,1) unless `i`; never when a = b = 0.
 
-**No latch, no flip-flop, no clocked device and no pass transistor in the island**: nine
-static gates. What the signals are is **not known**; none is traced to a pad or to a
-named line. What is traced about each:
+**No latch, no flip-flop, no clocked device and no pass transistor in the island or in
+anything else traced in this block**: nine static gates and wiring. No named line
+(`res_b`, `lpstb_b`, a clock) reaches anything traced here; `notes/blocks/trunks.md`
+puts `res_b` and `lpstb_b` at x 5265-5330, west of this region.
 
-- `tc1_a`. Metal V3 (x 8002-8022, y 3016-3297) with three contacts: (8010,3028) to a
-  poly running west under the VSS strap to contact (7381,3030), then metal W3 upper to
-  contact (7273,3375) = L2's band a; (8009,3204) = R1's input; (8009,3286) = R2's band
-  a. From that last contact a poly runs down x 8004-8025 and east along y 3387-3402
-  into the datapath. **That east end is the only way out of what is traced, so `a` is
-  believed to come from the datapath** (not followed past x 8290).
-- `tc1_b`. Poly y 2977-2994 under the VSS strap between contacts (7338,2987) and
-  (7859,2984). West end: metal W2 upper down to contact (7228,3117), poly round to L1's
-  input band. East end: metal V2 (x 7957-7977) to contact (7968,3375) = R2's band b;
-  the poly goes on from there (down x 7959-7977, east y 3452-3472, down x 8004-8024) to
-  contact (8009,3549), metal down x 8002-8022 to y 3725 and east along y 3716-3733
-  (seen to x 8100, where it meets a vertical at x 8085-8100 going down). **That is the
-  only way out, so `b` is believed to arrive there.**
+### Where the island's inputs come from (all traced to the region edge)
+
+| Input | Used by | Route back from the island | Leaves the region at |
+|---|---|---|---|
+| `tc1_a` | R1, R2, L2 | metal V3, poly east | east: poly y 3387-3402 at x 8250, in the datapath channel between cdp1's rows A and B (cdp1's notes: that line runs the full width, contact at 10615,3385) |
+| `tc1_b` | L1, R2 | metal V2/V3-lower, corner (8100,3725), metal south x 8088-8105, contact (8139,4090), poly east y 4079-4101, contact (8313,4090), metal south x 8307-8321 and west along y 4411-4426, contact (8247,4417), poly west y 4408-4427, contact (7859,4417), metal west y 4411-4426, contact (7511,4417), poly south | south: poly x 7503-7522 at y 4450 |
+| `tc1_g` | R5 | metal x 8045-8063 south, west along y 4151-4167, contact (7685,4158), poly west y 4144-4167; contact (7317,4158) on the way, metal south to contact (7315,4395), poly west y 4385-4403, south at x 7134-7153 | south: poly x 7134-7153 at y 4450. The other end of the y 4144-4167 poly (north at x 7177-7202, west along y 3995-4014, under the channel metals without contact) is the **gate** of transistors in a big structure at x 6750-6940, y 3930-4200 (Not done), so `g` is not driven there |
+| `tc1_i` | R5 | track T3, metal south x 7265-7284, contact (7270,4437), poly west y 4424-4443, south at x 7179-7196 | south: poly x 7179-7196 at y 4450 |
+| `tc1_w1` | L4 | metal W1 up to contact (7186,2986), poly east and north (x 7290-7308) to contact (7362,2770), bus line y 2764-2778 east, cross-under at the right VSS rail (contacts 7663,2769 and 7858,2769), on east and south as **ns1** (x 8089-8104), jog east at y 3651-3667, contact (8139,3704), poly east | east: poly y 3691-3712 at x 8250 (seen to x 8350), into the random logic at the datapath's slice-0 position |
+
+So `w1` and ns1 are one net (`@alias tc1_w1 tc1_ns1`): the line has exactly two ends, L4's
+gate and the poly at (8350,3700). The bus line carries no other contact (its metal run
+is unbroken in `sel_tracks.py h 2771` between the contacts named).
+
+### Outputs and internal nets
+
 - `tc1_r1_out` (NOT a): buried contact, poly, contact (7924,3159), metal V1 up to
   y 3071 and west to contact (7862,3072), poly west along y 3065-3079 across the top of
   the island (under both VSS rails, over field) to contact (7317,3072), metal W4 upper
   down to contact (7316,3638) = L3's band c. Goes nowhere else.
 - `tc1_l1_out` (NOT b): buried contact 7354-7396 x 3164-3199, poly west to contact
   (7228,3181), metal W2 lower: contacts (7230,3482) = L2's band b and (7230,3740) =
-  L3's band d, and continues south past y 4450 (no contact seen on it between y 3760
-  and 4450; three poly lines cross under it at y 4150-4166, 4343-4360, 4385-4402).
+  L3's band d, and south past y 4450. No contact on it between y 3760 and 4450: the
+  polys of `g` (y 4144-4167, 4385-4403), `x1` (4344-4362) and `i` (4424-4443) cross
+  under it (the last checked by profile along x 7230).
 - `tc1_l2_out`: buried contact 7358-7396 x 3420-3452, poly west to contact (7279,3437),
-  metal W3 lower: contact (7273,3852) = L4's band e, then down to y 4070, east to
-  contact (7336,4070), and a poly east along y 4062-4081 (seen to x 7400).
+  metal W3 lower: contact (7273,3852) = L4's band e, then to track T2. Tap at
+  (7510,4069): metal south to contact (7511,4242), poly south under the VSS bus, west
+  along y 4320-4337, south at x 7422-7438 past y 4450.
 - `tc1_l3_out`: buried contact 7356-7396 x 3684-3717, poly west to contact (7316,3700),
-  metal W4 lower down to y 4026, east along y 4014-4037 to a contact at (7379,4026);
-  what is under that contact was at the edge of the view and is not drawn.
+  metal W4 lower to track T1. Tap at (7554,4028): metal south to contact (7556,4206),
+  poly south under both buses, west along y 4363-4382, south at x 7465-7481 past
+  y 4450. From the pad under contact (7922,4027) a second poly goes south, east along
+  y 4080-4097, diagonally (x - y = 3903) under the corner of `g`'s metal and under the
+  VCC bus, and east along y 4212-4228 into the datapath (seen at 3.5x from the pad to
+  the diagonal; the diagonal measured by profile at y 4170 and 4195).
 - `tc1_l4_out`: buried contact 7364-7400 x 3878-3910, poly west along y 3885-3905 under
-  W4, W3, W2, W1 (no contacts) and on past x 7150.
-- `tc1_w1`: metal W1. Top end contact (7186,2986) to a poly that runs east along
-  y 2977-2997 (under W2's horizontal) and turns north at x 7290-7308 into the top bus
-  field. Contact (7190,3938) = L4's band f, where the metal ends. So `w1` is an input
-  from the north, used only by L4.
-- `tc1_r2_out`: buried contact, poly, contact (7924,3332), V1 segment down to contact
-  (7924,3464), poly band c west to R3. Goes nowhere else.
-- `tc1_r4_out`: diffusion under the right rail to a buried contact (7856-7892 x
-  3621-3654) on the foot of an L-shaped poly (down x 7898-7918, y 3539-3647; west along
-  y 3539-3556) = R3's band d. Goes nowhere else. Checked at 6x in the metal shot: the
-  poly's outline widens round the box.
-- `tc1_r5_out`: buried contact, poly, contact (7922,3854), V1 segment up to contact
-  (7922,3679), poly band e west to R4. Goes nowhere else.
+  W4, W3, W2, W1 (no contacts) to contact (7099,3897); metal north x 7091-7110 to
+  contact (7100,3395); poly west along y 3388-3403 into the gate columns (seen to
+  x 6930; **not drawn west of x 7150**).
+- `tc1_r2_out`, `tc1_r4_out`, `tc1_r5_out`: as traced in run 1, each goes to one gate
+  only (R3, R3, R4).
 - `tc1_f`: R3's output; buried contact, poly band f, contact (7966,3506), metal east
   along y 3501-3519 and up x 8045-8064 to contact (8054,3354), poly east along
-  y 3348-3362 into the datapath.
-- R5's four inputs each arrive on a metal vertical from below: contacts (8052,3768)
-  x 8043-8063; (7968,3808) x 7957-7978; (8010,3894) x 8000-8020; (7922,3939)
-  x 7914-7931. Three of them are fed by tracks that run under the island's south end,
-  each made the same way (contact, poly east under the left and centre rails, contact
-  at x 7683-7730, metal east):
-  - T1, y 4018-4036: from `tc1_l3_out` (7380,4026) to the foot of the x 7922 vertical
-    at contact (7922,4027). So that input **is `tc1_l3_out`**. The metal is unbroken
-    into that contact (`tc1_px.py row 4028`).
-  - T2, y 4062-4081: from `tc1_l2_out` (7336,4070) to the foot of the x 7968 vertical.
-    So that input **is `tc1_l2_out`**.
-  - T3, y 4107-4127: from contact (7380,4114) to the foot of the x 8010 vertical =
-    `tc1_i`. West of that contact the net is metal: west along y 4108-4127, then south
-    at x 7265-7284 past y 4450.
-  - `tc1_g` (x 8043-8063) continues south past y 4060 into the bus field.
-- T1 and T2 are tapped on the way: contact (7554,4028) on T1 and contact (7510,4069)
-  on T2, each to a metal going south (x 7545-7565 and x 7501-7520; they cross the
-  tracks below them without contact; followed to y 4145).
-- The contact at (7922,4027) also has a poly pad under it. A poly leaves the pad
-  southward, turns east along about y 4078-4090 to x 8000, then runs diagonally to about
-  (8123,4207) and east along y 4207-4227 towards the datapath (seen at 1.5-1.7x only,
-  **not drawn**). If that reading holds, `tc1_l3_out` also goes to the datapath just
-  above cdp1's row C.
+  y 3348-3362 into the datapath under ns1..ns6 without contact.
+- R5's inputs h and j are `tc1_l2_out` and `tc1_l3_out` by tracks T2 and T1 (each:
+  contact, poly east under the left and centre rails, contact, metal east).
+
+### The six north-south metals (traced end to end; none has a transistor in this block)
+
+| Line | x | North end | South end | Contacts |
+|---|---|---|---|---|
+| ns1 = `tc1_w1` | 8089-8104 | from the west on bus line y 2764-2778 | jogs east at y 3651-3667 to x 8132-8148, ends on contact (8139,3704): poly east y 3691-3712 | see `w1` above |
+| ns2 | 8132-8148 | from the west on bus line y 2720-2734: cross-under at the VSS rail (contacts 7707,2725 and 7901,2724), metal west to contact (7403,2727), poly west y 2717-2737, south at x 7247-7267, west along y 2867-2883 (seen to x 7180) | ends on contact (8139,3567): poly east y 3556-3578 to x 8332, where it turns south | |
+| ns3 | 8176-8191 | from the east on y 2720-2734 | jogs east at y 4151-4169 to x 8197-8213, ends on contact (8206,4329): poly west y 4320-4342 under the VCC and VSS verticals, south to contact (7905,4370), metal south x 7894-7909 past y 4450 | |
+| ns4 | 8219-8234 | from the east on y 2764-2778 | jogs east at y 4112-4135 to x 8241-8257, west along y 4369-4383, south at x 8198-8212 past y 4450 | none in this block |
+| ns5 | 8262-8278 | starts on contact (8271,2857): poly east y 2846-2868 | ends on contact (8270,3833) | (8270,3739) and (8270,3833), each to a poly going east |
+| ns6 | 8307-8321 | from the east on y 2807-2821 | ends on contact (8313,3870) | (8313,3527) and (8313,3870), each to a poly going east; the metal is continuous across the upper one (profile along x 8314) |
+
+Below ns1's and ns2's ends the same two tracks are reused: x 8088-8105 from y 3716 down
+is `tc1_b` (field between y 3670 and 3710 at x 8096, measured), and x 8307-8321 from
+y 4078 down is `tc1_b` again (ns6 ends at y 3883; a C-shaped poly lies between).
+
+### Other lines through the bus field (routing only)
+
+- `tc1_x1`: poly from the east at y 4255-4275 (datapath), south at x 7807-7831 under the
+  VSS bus to contact (7815,4372), metal west along y 4369-4383 to contact (7359,4352),
+  poly west along y 4344-4362 to contact (7056,4352), metal south x 7049-7068 past
+  y 4450.
+- `tc1_x2`: poly from the east at y 4365-4383 to contact (8075,4372), metal south
+  x 8067-8082 past y 4450.
+- VCC bus y 4198-4250 from the foot of the centre rail east to x 8166, then south at
+  x 8116-8165. A plain rectangle: the diagonal lines on its east end are the edges of
+  the `tc1_l3_out` poly underneath. VSS bus y 4288-4335 from the foot of the left rail
+  east to x 7995, then south at x 7943-7990.
 
 Believed, not traced: L2, L3 and R3 have strong loads and wide pull-downs, so
 `tc1_l2_out` (NOT a AND b), `tc1_l3_out` (a AND b) and `tc1_f` are lines with a heavy
@@ -223,7 +235,7 @@ East side (into the datapath, or the random logic at its slice-0 position x 8290
 | `tc1_a` | P | x 8250, y 3387-3402 | in (believed) | same channel, 40 px below `tc1_f` |
 | `tc1_ns6` | P | x 8350, y 3516-3539 | ? | from contact (8313,3527) |
 | `tc1_ns2` | P | x 8250, y 3556-3578; reaches x 8332 and turns south there | ? | from contact (8139,3567) |
-| `tc1_ns1` | P | x 8250, y 3691-3712 (seen to x 8350) | ? | from contact (8139,3704) |
+| `tc1_w1` (= ns1) | P | x 8250, y 3691-3712 (seen to x 8350) | **in** (its only other end is L4's gate) | from contact (8139,3704) |
 | `tc1_ns5` | P | x 8350, y 3728-3751 | ? | from contact (8270,3739) |
 | `tc1_ns5` | P | x 8350, y 3822-3844 | ? | from contact (8270,3833) |
 | `tc1_ns6` | P | x 8350, y 3859-3881 | ? | from contact (8313,3870), the south end of ns6 |
@@ -245,24 +257,27 @@ South side (tc2), west to east:
 | `vcc` | M | x 8116-8165, y 4450 | | the VCC bus (y 4198-4250, from the foot of the centre rail) turns south |
 | `tc1_ns4` | M | x 8198-8212, y 4450 | ? | ns4 has no contact in this block |
 
-West side (the channel x 7000-7170; not yet followed):
+West side (drawn to x 6960, the east edge of the gate columns, which are not traced):
 
 | Name | Layer | Where it crosses | Dir | What |
 |---|---|---|---|---|
-| `tc1_l4_out` | P | 7150, y 3885-3905, going west | out | NOR(l2_out, w1) |
-| `tc1_g` | P | y 4144-4167 at x 7181, where it turns north (x 7177-7202) and then west along y 4000-4012 (run 1's reading; not drawn) | in | |
-| `tc1_g` | P | 7150, y 4385-4403, going west | ? | second branch, from contact (7315,4395) |
-| `tc1_x1` | P | 7150, y 4344-4362, going west | ? | |
-| `tc1_i` | P | from contact (7270,4437) west along y 4425-4445, seen to x 7215 (not drawn) | in | |
+| `tc1_l4_out` | P | x 6960, y 3388-3403, going west (seen to x 6930) | out | NOR(l2_out, w1); arrives by contact (7099,3897), metal x 7091-7110, contact (7100,3395) |
+| `tc1_g` | P | x 6960, y 3995-4014, going west | out of this wire (it is a gate there) | to the big structure at x 6750-6940, y 3930-4200, see Not done |
+| `tc1_ns2` | P | x 7180, y 2867-2883, going west | ? | far end of ns2 (1.5x view) |
+
+South side, in the channel (tc2), west to east:
+
+| Name | Layer | Where it crosses | Dir | What |
+|---|---|---|---|---|
+| `tc1_x1` | M | x 7049-7068, y 4450 | ? | from contact (7056,4352) |
+| `tc1_g` | P | x 7134-7153, y 4450 | **in** (believed: every other end of `g` is a gate) | from contact (7315,4395) |
+| `tc1_i` | P | x 7179-7196, y 4450 | **in** (its only other end) | from contact (7270,4437) |
 
 North side:
 
 | Name | Layer | Where it crosses | Dir | What |
 |---|---|---|---|---|
-| `tc1_w1` | P | 7299, 2950 going north (x 7290-7308) | in | the only other end of W1 |
-| `tc1_ns1` | M | 7890, y 2764-2778, going west | ? | |
-| `tc1_ns2` | M | 7890, y 2720-2734, to a contact at (7901,2724) (what is under it not seen) | ? | |
-| `vss` | M | right rail 7795 drawn y 3000-4000 (it continues up); strap y 2975-3040 | | |
+| `vss` | M | right rail x 7771-7819, drawn y 3000-4000; it continues north through the top bus field (the bus lines cross it in poly) | | |
 
 Seen while following these, **not mine and not drawn**: `cdp1_a0_q` (poly from the
 datapath at y 3017-3040) turns north at x 8047-8072 and west again along y 2930-2950; it
@@ -304,18 +319,64 @@ and touches neither (field at y 3896-3908 and 4056-4070, measured).
    contact shows there as a 30 px dark ring and a pad with a green dot in `acid1b`;
    every band has exactly one, at its end.
 
+8. **Bump on `g`'s poly** at x 7007-7031, y 3976-4000, directly under the channel metal
+   x 7001-7023. It looks like half a contact pad. Profiles along x 7012 show unbroken
+   bright metal in both metal shots and plain salmon poly in `acid1b`, where a real
+   contact 90 px away (7099,3897) shows a 12 px bright dot inside a thick dark ring and a
+   green-tan patch. Working assumption: no contact.
+9. **Direction of `b`, `g`, `i`.** "In" for these rests on every other end being a gate
+   or (for `g`) a gate in the untraced structure at x 6750-6940. If tc2 finds no driver
+   on the polys at (7512,4450), (7143,4450), (7187,4450), look again at that structure.
+10. **ns lines' polys east of x 8250** were drawn from 1.4-1.9x views only as far as
+   x 8350; what they meet there is outside this block.
+11. The supplies of the gate columns (rails x 6682-6757 and x 6857-6932 near y 4000) are
+   **not identified**: nothing traced ties them to the island's rails.
+
 ## Not done
 
-- Far ends of everything in the Ports table. Cheapest next steps: (a) the two taps
-  going south at x 7510 and x 7555 below y 4145, and the poly from the pad at
-  (7922,4027); (b) the bus field y 4040-4450 east of x 7900 for `tc1_g` and `tc1_b`;
-  (c) `tc1_w1` north of y 2950; (d) `tc1_a` and `tc1_f` east of x 8290 belong with
-  cdp1; (e) `tc1_l1_out` south of y 4450 belongs with tc2.
-- Seen in the channel, foreign, not drawn: a poly from the west along y 4000-4012 that
-  turns south at x 7177-7202 (it starts 40 px below W1's end and does not touch it),
-  east along y 4143-4168 to contact (7315,4158), metal south x 7307-7325 to contact
-  (7315,4395), poly west along y 4385-4402.
-- The six vertical metals at x 8090-8330 and where `cdp1_a1_q` ends.
-- Gate columns x 6400-7000 (about 40 loads visible; three vertical rails at x 6507-6557,
-  6686-6736, 6857-6900), the channel x 7000-7170, the top bus field y 2500-2975:
-  nothing traced.
+- **Gate columns x 6400-7000, y 2650-4450**: nothing drawn. Dense random logic with large
+  devices under wide rails (x 6510-6560, 6682-6757, 6857-6932 near y 4000) and thin
+  verticals between (x 6745-6762, 6766-6785, 6808-6828, 6913-6932, 6938-6955, 6959-6977).
+  It is not built like the island: budget for 3x views and profiles, not 2x.
+- **The structure that `g` gates, x 6750-6940, y 3930-4200** (surveyed at 2.4-4.2x, not
+  drawn because the circuit is not settled). Established, with the evidence:
+  - `g`'s poly arrives along y 3990-4009, runs up x 6850-6860 and back west along
+    y 3943-3961 to about x 6772: an L round a diffusion (region A, x 6863-6938,
+    y 3924-3987) that has a large metal contact at (6897,3964) to the wide rail
+    x 6861-6932.
+  - Below the L's bottom arm is diffusion again (region B, y 4014-4030, x 6851-6938;
+    tan under the rail on both sides of the salmon band in profiles along x 6875 and
+    x 6905): so the arm is a **gate**, W about 75.
+  - The west arm (y 3943-3961) crosses a diffusion column under the thin metal
+    x 6808-6828 (tan at x 6806-6830 both at y 3928-3936 and at y 3968 onward, profile
+    along x 6818): a second gate of `g`, W about 28.
+  - Below B a much larger U-shaped poly (top bar y 4034-4053, legs x 6863-6887 and
+    x 6923-6938, down to about y 4100) surrounds a diffusion island (x 6888-6923,
+    y 4056-4133) with contact pits at (6902,4090) and (6913,4117). The rail metal is
+    continuous from region A over `g`'s arm, B and the U to the island (`acid1b` shows
+    protected colours all the way along x 6875 and x 6905), so **A and the island are
+    on the same rail** and the L and the U are two transistors in parallel from that
+    rail to node B. The U's poly has a pad at about (6829,4091) under the thin metal
+    x 6808-6828 (dark ring in both metal shots): its gate signal comes on that metal.
+  - West of the column: a poly block x 6752-6792, y 4032-4100 (textured in the open,
+    its west 10 px salmon under the edge of the rail x 6682-6757), with a stem up
+    x 6752-6763 to y 3992 and a heavy-outlined box with an inner square (x 6765-6799,
+    y 3987-4020: looks like a buried contact) above it; a diffusion (tan, x 6710-6749,
+    y 4033-4110) lies under the rail to its west. Read as the **load** of node B (strip
+    from the rail's diffusion under the block to the column, gate tied at the box), but
+    whether the column joins B across the 14 px gap strip at x 6836-6850, and what the
+    box joins, were **not** settled.
+  - Candidate reading: node B = NOR(`g`, signal on the metal x 6808-6828), a strong
+    driver, rail x 6861-6932 = VSS, rail x 6682-6757 = VCC. Not adopted.
+- **Channel x 7000-7170**: verticals at x 7002-7022 (from contact 7010,3092 down), x 7048-7068
+  (from contact 7056,3138 down), x 7091-7110 (upper piece from the north to contact
+  7098,3180; lower piece is `tc1_l4_out`), x 7133-7152 (from the north down to y 4050,
+  west to contact 7099,4047, poly west y 4035-4055). Each contact's poly goes west into
+  the gate columns. Two C-shaped polys lie under them (y 3345-3360 / x 7135-7154 /
+  y 3476-3491, and y 3518-3534 / x 7050-7069 / y 3845-3865). None drawn.
+- **Top bus field y 2500-2975**: seven bus lines (y 2554, 2598, 2641, 2684, 2727, 2771,
+  2814), each crossing the right VSS rail in poly between contacts at x 7663 or 7707 and
+  x 7858 or 7902 (alternating). Only the y 2727 (ns2) and y 2771 (`w1`) lines are drawn.
+  The y 2814 line's poly runs on east from contact (7707,2811) without a second contact
+  in view. The row A outputs of cdp1 fan out west into it (see Ports).
+- Far ends of ns3..ns6 and of ns2's west poly; `tc1_x1`, `tc1_x2` (all in the Ports table).
