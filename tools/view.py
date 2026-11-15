@@ -7,6 +7,7 @@ usage: view.py x y w h [options]
   --layers L     comma list from: metal, acid, blend, edges, and for the first chip
                  metal1, acid1, acid1b; acidmed = per-pixel median of the three
                  stripped shots; metalmax = brighter of the two metal shots
+                 class = false-colour class map of acid1b (see tools/classmap.py)
                  (default metal,acid)
                  edges = dark outlines present in BOTH shots. Edges of poly and
                  diffusion show in both; metal edges show only in the metal shot and
@@ -100,6 +101,13 @@ def raw(layer, x, y, w, h):
         tint = np.array([255, 170, 60], np.float32)
         rgb = rgb * (1 - 0.45 * poly[..., None]) + (rgb / 255.0) * tint * 0.45 * poly[..., None]
         return rgb.astype(np.uint8)
+    if layer == 'class':
+        import classmap
+        c = classmap.classify(raw('acid1b', x, y, w, h))
+        img = np.zeros((h, w, 3), np.uint8)
+        for k, col in classmap.PAL.items():
+            img[c == k] = col
+        return img
     if layer == 'acidmed' and _comp is None:
         st = np.stack([raw(l, x, y, w, h) for l in ('acid', 'acid1', 'acid1b')])
         return np.median(st, axis=0).astype(np.uint8)

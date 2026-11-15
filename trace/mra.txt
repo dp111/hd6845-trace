@@ -399,7 +399,7 @@ P 12480,10028:12510,10058                 # poly pad
 C 12493,10041
 P 12505,10036:12612,10057                 # gate band (bright = over channel at x 12547-12610)
 D 12547,10012:12610,10088                 # node u above the band | channel | node na below it
-N D 12580,10024 mra_u_{}                  # u continues right along y 10012-10026 (not drawn; see notes)
+                                          # u (third run's name) is node A: the band runs on right to A's contact box (mra_col4)
 
 # --- L3 (ck_a): contact to a poly pad; the poly runs down as a gate between na and the vss rail's diffusion
 M 12572,10095:12610,10130
@@ -454,9 +454,9 @@ C 12713,10340
 
 # --- vertical poly under the rail's right half: gate between the rail's diffusion and node d2
 P 12730,10050:12747,10194                 # dull (over field) y 10052-10108, bright (channel) y 10120-10180; where it is driven from is not resolved
-N P 12738,10080 mra_gb_{}
+                                          # (the third run's gb: it is node A, tied at its top end in mra_col4)
 D 12700,10120:12770,10182                 # rail column | channel | d2 (x 12752-12770)
-N D 12762,10150 mra_d2_{}
+                                          # (the third run's d2: it is p3, see mra_col4)
 
 # --- p3: along y 10231-10246, down at x 12670-12689, on to the right under the rail at y 10277-10296
 P 12470,10231:12689,10246
@@ -495,3 +495,142 @@ D 12398,9957:12750,9969
 @inst mra_col3 1,5574 tag=r16
 @inst mra_col3 1,6051 tag=r17
 @inst mra_col3 2,6528 tag=r18
+
+# ---------------------------------------------------------------------------
+# Fourth column, x 12750-13045 (serial session, 2026-11-15). Read from the median of the
+# 19 rows in the clean shot with tools/classmap.py and colour profiles; see
+# notes/blocks/mra.md "Fourth column". What it shows: the row is a two-phase counter bit.
+#   na = NOR(ck_a, nb)            (nb's pull-down of na, C4, is drawn here)
+#   A  <- na while ck_b           (A = the node the third run called u; latch, see below)
+#   p3 = NOT A,  D = NOT p3,  n1 = NOT p3 (chain column)
+#   q  <- D  while ck_a
+# Lines through all rows, drawn once: the second ck_b line x 12896-12908 and the wide
+# VCC rail x 12936-12978. The ck_a rail x 13013-13037 is in trace/trunks.txt.
+M 12902,7240 y16996 w=13                  # ends on the contact (12892,16991) of the ck_b route in trunks.txt
+M 12957,7130 y17060 w=44
+N M 12957,9950 vcc
+
+@cell mra_col4 tag=r5
+@s 30x32
+
+# --- nb pulls na low (C4): narrow diffusion strip from na, flaring out at the gate; the far side
+#     joins the column under the vss rail. Plain to see in the chip-2 metal shot (no metal above).
+D 12596,10070:12640,10084                 # strip from na (x <= 12602, under L3)
+D 12636,10052:12692,10100                 # flare | channel under nb's poly (x 12653-12680) | strip beside the rail column
+
+# --- u band on to node A
+D 12606,10012:12830,10027                 # the gap x 12790-12826 between the two metal lines is dark and reddish (not field)
+
+# --- node A, the ck_b gate between A and B, node B
+D 12825,9988:12875,10034                  # A: box with the strap contact
+C 12847,10006
+D 12797,10022:12880,10108                 # A above the bar and left of the leg | gate | B inside
+P 12813,10033:12886,10052                 # gate: bar (bright = over channel)
+P 12813,10033:12835,10114                 # gate: leg
+P 12882,10022:12916,10050                 # pad of the gate under the second ck_b line
+C 12896,10035
+C 12857,10087                             # strap B on the inner box
+N D 12850,10000 mra_a_{}
+N D 12860,10080 mra_b_{}
+# A's finger to the top of the gb poly: buried contact, so gb = A. The poly end and the box
+# lie in the gap between the vss rail and the line x 12767-12782, where the clean shot only
+# shows "not field" (reddish dark at y 10058, green field at y 10040 and y 10196).
+D 12764,10049:12800,10065
+?P 12744,10050:12772,10066
+?B 12752,10047:12774,10068
+
+# --- strap A: contact box -> over the gate -> down x 12806-12822 -> pad on the box at (12840,10340)
+M 12825,9988:12873,10034
+M 12808,10030:12866,10048
+M 12806,10030:12822,10345
+M 12806,10321:12870,10364
+C 12840,10340
+D 12828,10320:12870,10364                 # box: left end of the feedback device
+# --- strap B: inner box -> down x 12852-12868 -> contact on the large poly
+M 12838,10065:12880,10108
+M 12852,10100:12868,10300
+M 12840,10272:12876,10310
+C 12858,10292
+
+# --- large poly on node B: body, left leg (over field, purpose not known), and the gate of a
+#     long narrow device (W 19, L 80) between the box of strap A and node D
+P 12797,10285:12900,10315                 # body, left part (the contact of strap B is on it)
+P [ 12843,10273 12872,10273 12900,10292 12900,10300 12843,10300 ]
+P 12895,10297:12965,10315                 # body, right part (field between it and D's diffusion above)
+P 12797,10285:12812,10355                 # left leg
+P 12882,10297:12964,10353                 # over the device: dull / edge / bright y 10320-10336 / edge / dull
+D 12865,10319:13014,10338                 # A box -> under the poly -> D (the strip under the ck_a rail)
+A 12882,10319:12964,10338 kind=hold       # long feedback device: A is held from D = buffered A. Depletion or not is not visible.
+
+# --- q: on to the right, then down into a buried contact on the outer diffusion of the ck_a gate
+P 12835,9957:12915,9974
+P 12890,9957:12915,9994
+B 12893,9976:12928,10003
+D 12897,9983:12947,10006                  # tab of the outer diffusion under the box
+D 12927,10004:12998,10107                 # outer (left column and top arm) | gate | inner
+P 12947,10030:13004,10050                 # ck_a gate: bar
+P 12947,10030:12968,10118                 # ck_a gate: leg
+P 13000,10028:13038,10058                 # pad under the ck_a rail
+C 13017,10043
+# --- node D: inner diffusion of the ck_a gate = strip under the ck_a rail = drain of the p3 pull-down
+D 12990,10074:13014,10106                 # across the gap between the two rails (reddish dark, as at y 10328; field is green at y 10160)
+D 13010,10074:13036,10338
+N D 13022,10200 mra_d_{}
+
+# --- inverter p3 = NOT A: pull-down is the gb transistor of mra_col3; node (the third run's d2), load
+D 12752,10131:12820,10150
+D 12815,10131:12920,10168                 # node | load channel under the block | vcc
+B 12830,10138:12853,10170                 # buried contact: the poly strip ends in the node (nested arcs in the clean shot)
+P 12834,10142:12849,10247                 # strip down to the pull-down gate of D
+P 12846,10175:12912,10196                 # bar
+P 12872,10110:12912,10196                 # load gate block (bright y 10136-10164 down x 12899)
+D 12915,10131:12987,10172                 # vcc under the wide rail
+C 12957,10161
+D 12940,10168:12980,10258                 # vcc | channel of D's load | D
+
+# --- inverter D = NOT p3: gate wraps the end of a vss band (band + strip + left leg)
+P 12742,10225:12849,10247                 # gate band (bright x 12752-12830)
+P 12742,10225:12757,10296                 # left leg, down into the p3 line of mra_col3 (y 10277-10296)
+D 12725,10205:12880,10224                 # vss band from the rail column, under the strip, into D's column
+D 12757,10205:12834,10270                 # vss band | channel | D
+?D 12725,10225:12760,10262                # channel under the left leg (colour there is neither clean poly nor field)
+D 12757,10248:12882,10270                 # D: band below the gate
+D 12849,10208:12880,10270                 # D: column right of the strip
+D [ 12878,10248 12900,10252 12925,10264 12940,10256 12992,10256 12992,10280 12925,10282 12905,10282 12880,10271 ]
+# D's load: gate band under the wide rail, tied to D at its right end
+P 12925,10222:13020,10254
+?B 12984,10219:13024,10270                # heavy double outline; the tie is inferred (the load's gate has no other connection)
+?D 12988,10238:13014,10280                # D between the boot and the strip, under the poly end
+
+# --- n1 on to the right (to the wiring channel)
+P 12760,9903:13010,9923
+P [ 13000,9903 13012,9903 13030,9924 13050,9924 13050,9945 13018,9945 13000,9923 ]
+
+# --- net z: the strip of mra_col3 jogs up under the vss rail and runs on at y 9932-9948 to a buried
+#     contact on a poly that leaves to the right at y 9955-9977
+?D 12744,9932:12758,9969                  # the jog (not looked at closely)
+D 12752,9932:12990,9948
+D 12962,9932:12990,9978
+B 12960,9950:12992,9980
+P 12962,9955:13050,9977
+N D 12900,9940 mra_z_{}
+@end
+
+@inst mra_col4 0,-2646 tag=r0
+@inst mra_col4 0,-2169 tag=r1
+@inst mra_col4 0,-1692 tag=r2
+@inst mra_col4 0,-1215 tag=r3
+@inst mra_col4 0,-477 tag=r4
+@inst mra_col4 0,477 tag=r6
+@inst mra_col4 0,1040 tag=r7
+@inst mra_col4 1,1518 tag=r8
+@inst mra_col4 1,1995 tag=r9
+@inst mra_col4 1,2472 tag=r10
+@inst mra_col4 1,3123 tag=r11
+@inst mra_col4 1,3601 tag=r12
+@inst mra_col4 1,4077 tag=r13
+@inst mra_col4 1,4554 tag=r14
+@inst mra_col4 1,5097 tag=r15
+@inst mra_col4 1,5574 tag=r16
+@inst mra_col4 1,6051 tag=r17
+@inst mra_col4 2,6528 tag=r18

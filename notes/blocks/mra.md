@@ -2,26 +2,28 @@
 
 ## Status
 
-- Surveyed: 19 rows at 477 px, in groups of 4, 3, 4, 4, 4 separated by routing channels.
-- Traced, placed 19 times and checked instance by instance (three runs), 477 transistors
-  with `trace/trunks.txt` loaded, extraction clean (0 errors, 0 warnings):
+**What it is (fourth run, serial session 2026-11-15): 19 bits of synchronous two-phase
+counter**, in the chain groups the first run found (r18..r11: eight bits, carry in at r18;
+r10..r4 and r3..r0: carry in at r10, see A1 for the r3/r4 link). Each row is one counter
+bit: a master latch `a` loaded during `ck_b`, a slave node `q` loaded during `ck_a`, and
+the toggle logic `m` between them. The earlier statement that "`q` is not made in the row"
+was wrong: the `q` poly ends in a buried contact on the `ck_a` pass gate.
+
+- Traced, placed 19 times, checked instance by instance, 629 transistors with
+  `trace/trunks.txt` loaded, extraction clean (0 errors, 0 warnings):
   - `mra_chain` (first run): the chain column x 11730-12060, group lines at x 11700, rails.
-  - `mra_col2` (second run, corrected in the third): x 12000-12470. Inverter `g1 = NOT q`, the
-    network on the row line `m`, routes of `p3`, `q`, `n1`, `m`; **the hold device between `q` and
-    line C's net `z` (B1, resolved)**.
-  - `mra_col3` (third run): x 12470-12770. Two depletion loads on the right of the VCC rail
-    (nodes `na`, `nb`), `nb = NOT m`, the `ck_b` pass gate `u <-> na`, the `ck_a` pull-down of
-    `na`, a pull-down of node `d2`, the routes of `q`, `p3`, `n1`, the end of `m`; three thin
-    clock lines and the VSS rail x 12696-12744.
-- NOT traced: x 12770-13040 of every row (read in part, see "Right-hand part: read, not
-  drawn"); load 1 and its node (B2); where `u`, `d2`, `gb`, `p3` and the gate driven by `nb` go;
-  the wiring channel x 13040-13375; the routing channels and both ends of the array.
-- What the array is: still not established. `q` is **not made in the row**: it is a poly line
-  that comes from the wiring channel on the right (x 13045) with only a hold device and one
-  inverter on it here, so the chain is an AND over 19 signals from outside. `m` is a per-row
-  node that is inverted (`nb`) and goes on to the clocked part. The clocked part (two
-  phases, big pass gates under `ck_a` and `ck_b`) is in x 12470-13040 and only its left
-  third is traced. See Logic.
+  - `mra_col2` (second and third runs): x 12000-12470. `g1 = NOT q`, the network on `m`,
+    routes of `p3`, `q`, `n1`, `m`; the hold device between `q` and net `z`.
+  - `mra_col3` (third run): x 12470-12770. Loads of `na` and `nb`, `nb = NOT m`, the `ck_b`
+    pass gate `na <-> a`, the `ck_a` pull-down of `na`, the pull-down of `p3`.
+  - `mra_col4` (fourth run): x 12750-13045. `nb`'s pull-down of `na`; node `a` and its
+    second `ck_b` gate to node `b`; `p3 = NOT a` with its load; `d = NOT p3` with its load;
+    the `ck_a` gate `d <-> q`; the long feedback device `d <-> a` gated by `b`; `z` and `n1`
+    on to the right edge.
+- NOT traced: load 1 and its node (B2) and the unresolved branch of `m` (B3, B4): **`m` still
+  has no pull-up and only half its pull-down network**, so the toggle function is believed
+  (XOR), not extracted. The wiring channel x 13040-13375 (where `n1` and `z` go), the
+  routing channels and both ends of the array; the line x 12767-12782.
 
 ## Survey
 
@@ -472,7 +474,86 @@ edge of r0, r4, r7, r11, r15 (no row above), grain on the wide rails, the rail c
 (12725-12745,10225) in several rows (pits), and in r18 the clean shot only along the `p3`
 line at x 12556-12646 (not in the metal shot; taken as residue, not looked at closer).
 
-## Right-hand part, x 12770-13040: read, not drawn (third run)
+## Fourth column `mra_col4`, x 12750-13045 (fourth run)
+
+Read from the median of the 19 rows (`--comp mrarow`) with the false-colour class map
+(`tools/classmap.py`, also `view.py --layers class`) and colour profiles
+(`tools/larr_px.py`); every junction below that decides connectivity was measured.
+
+One row as extracted (names `mra_<net>_rN`; `a` is what the third run called `u` and `gb`,
+`p3` is also its `d2`):
+
+```
+nb  = NOT m
+na  = NOR(ck_a, nb)                  load 27/48; pull-downs 40/22 (ck_a, line L3) and 48/27 (nb)
+a  <-> na   while ck_b               pass gate 63/21
+a  <-> b    while ck_b               pass gate, L-shaped, about 120/21
+p3  = NOT a                          pull-down 62/17 (the third run's gb gate), load 37/40
+n1  = NOT p3                         chain column: 109/22, load 85/39; leaves right, to the wiring channel
+d   = NOT p3                         pull-down about 106/21 + 20/14 (gate wraps the end of a vss band), load 40/32
+q  <-> d    while ck_a               pass gate, L-shaped, about 107/21
+d  <-> a    through 19/82, gate b    long device under the large poly of node b
+q  <-> z    through 16/82, gate vss  (mra_col2's hold device)
+```
+
+So during `ck_b` (with `ck_a` low) `a` takes `NOT nb = m`; `p3`, `d` and `n1` follow at once
+(static); during `ck_a` `q` takes `d = a`. `a` is a latch, `q` a clocked node: a
+master-slave bit with `m` as its next value. `n1` is a buffered copy of the **master**
+(`a`), and it is `n1`, not `q`, that leaves the row to the right.
+
+The feedback device `d <-> a` (W 19, L 80, the same shape as the hold device on `q`): its
+gate is the big poly on node `b`, and `b` is `a` passed through a second `ck_b` gate. If
+the device is a depletion one, `a` is simply held from `d` whenever `ck_b` is low and `b`
+does not matter. If it is an enhancement one, `b` remembers `a` while `ck_b` is low and
+turns the feedback on only for a stored 1 (restoring the high level, which a pass gate
+cannot deliver in full), a stored 0 being held by the capacitance alone. The photographs
+cannot tell these apart (AMB-002). Either way: a latch, transparent during `ck_b`. Tagged
+`kind=hold` in the trace.
+
+| Piece | Where (master row) | How sure |
+|---|---|---|
+| `nb` pull-down of `na` (C4) | diffusion strip y 10070-10084 from `na` (x 12602), flaring to y 10052-10100 at x 12637; `nb` poly x 12653-12680; far side x 12680-12690 joins the column under the vss rail | **plain in the chip-2 metal shot**, where no metal lies above (view `c4b.png`) |
+| `a`: band, box, finger | band y 10012-10027 (the third run's `u`) on to the contact box 12825-12875 x 9988-10034, contact (12847,10006); round the gate to the left strip x 12797-12813; finger 12764-12800 x 10049-10065 | band to box: the gap x 12790-12826 is reddish dark in the clean shot, not the olive of field |
+| `a` to the `p3` pull-down gate | the vertical poly x 12730-12747 (third run's `gb`) has a free top end at y 10049; the finger of `a` reaches x 12766 beside it | `?`: the 14 px between are in the gap between two metal lines; reddish dark there at y 10058, green (field) at y 10040 and y 10196. Read as poly end + buried contact. Nothing else can drive that gate |
+| `ck_b` gate `a <-> b` | bar y 10033-10052, x 12813-12886; leg x 12813-12835 to y 10114; pad 12882-12916 x 10022-10050, contact (12896,10035) to the line x 12896-12908 | bright (channel) in the clean shot; the line ends on the contact (12892,16991) of the `ck_b` route in `trunks.txt` |
+| `b` | box 12838-12880 x 10055-10108, contact (12857,10087); metal x 12852-12868 down to contact (12858,10292) on the large poly | contact discs seen in both metal shots and the clean shot |
+| strap of `a` | pad on the box; over the gate (y 10030-10048, x 12808-12866); down x 12806-12822; pad with contact (12840,10340) on the box 12828-12870 x 10320-10364 | the join of the column to the bottom pad is not resolved by eye (a topography line runs between); taken because the column ends there and the pad has no other feed |
+| large poly of `b` | body y 10285-10315 from x 12797 to 12965 (right of x 12900 only y 10297-10315); left leg x 12797-12812 to y 10355 (over field, under the strap of `a`; purpose unknown); over the device x 12882-12964, y 10297-10353 | profile: dull / edge / bright y 10320-10336 / edge / dull |
+| feedback device | diffusion y 10319-10338 from the box of `a` under the poly to the strip under the `ck_a` rail | measured across the gap x 12992-13010: reddish dark at y 10328, green at y 10300 |
+| `q` end | poly y 9957-9974 to x 12915, heavy box 12893-12928 x 9976-10003 with the tab of the outer diffusion in it | profile down x 12904: poly to y 9972, edge, dull tan y 9986-9996 (as inside the known buried contact at (12588,10280)), edge, field |
+| `ck_a` gate `d <-> q` | square 12927-12998 x 10004-10107; bar y 10030-10050; leg x 12947-12968 to y 10118; pad with contact (13017,10043) on the `ck_a` rail | bright in the clean shot; below y 10108 the clean shot is pink (field) for 20 px, so the gate's diffusions are **not** joined to the vcc diffusion under them (they look joined by eye) |
+| `d` | inner diffusion of the gate; across the gap to the strip x 13010-13036, y 10074-10338 under the `ck_a` rail; the "boot" under the wide rail y 10256-10282; diagonal to the band y 10248-10270 below the `p3` gate | gap at y 10090 reddish dark; boot-to-strip at y 10268 is hidden by the heavy outline of the load's tie (`?D`) |
+| `d` load | gate band y 10222-10254 under the wide rail (bright x 12945-12975), from vcc (contact (12957,10161)) down to the boot; right end in a heavy double outline on `d` | tie `?B`: inferred |
+| `p3` node and load | diffusion 12752-12870 x 10131-10168 (narrow, y 10131-10150, left of x 12815); poly strip x 12834-12849 ends in it (nested arcs: buried contact); block 12872-12912 x 10110-10196 is the load gate (bright y 10136-10164), joined to the strip by the bar y 10175-10196 | profiles along y 10150 and down x 12899 |
+| `p3` gate of `d` | band y 10225-10247 (bright x 12752-12830) between a vss band above (y 10205-10224, from the rail column) and `d` below; right end = the strip; left leg x 12742-12757 down into the `p3` line y 10277-10296 | the leg: poly-like at x 12753 only for y 10226-10244, odd colour at x 12746; the channel under it is `?D` |
+| `z` | diffusion y 9932-9948 from x 12752 to a buried contact 12960-12992 x 9950-9980 on a poly that leaves right at y 9955-9977 | band is pale (not orange) in chip-2 `acid`; the jog from the strip of `mra_col3` (y 9957-9969) is `?D`, not looked at closely |
+| `n1` | poly y 9903-9923 to x 13005, jog down to y 9924-9945, leaves right | orange in chip-2 `acid` |
+| wide rail x 12936-12978 | named `vcc`: drain of both loads | ends not looked at again (second run: meets the VCC bus at the bottom) |
+
+Row-to-row check (`cellcheck.py mra_col4 --bbox 12750,9895:13045,10385`, both shots): all
+18 instances match (bad blocks 0-4.4 %, median correlation 0.95-0.97).
+
+Corrections to the earlier runs:
+- `q` is the slave node of the bit, not a line from outside. The poly the third run followed
+  "to x 13045" along y 9957-9974 is two pieces: `q` ends at x 12915, and the piece from
+  x 12962 on is net `z`'s.
+- `u`, `gb` and node A are one net (`a`); `d2` is `p3`. `p3` does not "arrive from the
+  right": it is made here.
+- C4 resolved (`nb` pulls `na` low). C3 resolved (the `gb` gate is on `a`). C2: the strip
+  of `z` does not end at x 12750, it jogs up and runs on right.
+
+Reading aids found in this run:
+- Tan (diffusion), pink (field) and salmon (poly) under where metal was cannot be told
+  apart reliably by eye in the clean shot; twice the eye joined two diffusions that a
+  profile showed to be 20 px of field apart. Use the class map, then a profile.
+- In the class map, black over a large open area is not an edge: open field is a dark
+  olive (about 88/98/57, green >= red) that falls under the "dark" threshold. In a gap
+  between two metal lines compare red with green: reddish dark = diffusion or poly, olive
+  or green = field.
+- **Where no metal lies above, the chip-2 metal shot shows diffusion directly** (pinkish
+  tan against yellow-green field, poly orange): the clearest view of an open device.
+
+## Right-hand part, x 12770-13040: third-run readings (superseded by the section above)
 
 From `c_top.png` (3.2x), `q4.png`, `t3.png`, `t4.png` and metal runs; master row.
 
