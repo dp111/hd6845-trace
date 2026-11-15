@@ -343,8 +343,10 @@ N D 12100,10268 mra_rb_{}                 # bottom part of R: where it goes on i
 # --- VSS diffusion ring around the g1 pad: bottom band, right strip, (top band)
 D 12100,10325:12220,10356                 # bottom band, joins the VSS box at (12068,10335)
 D 12205,10210:12222,10330                 # strip up the right side: source of the q pull-down
-?D 12205,10153:12222,10215                # the strip continues up under the g1 poly (a transistor gated by g1) ...
-?D 12079,10153:12222,10168                # ... and left along the top to R (corner at 12185-12222 x 10153-10190 not resolved)
+D 12198,10153:12250,10215                 # third run: diffusion above and under the g1 poly, x 12198-12250 (mauve above and below the
+                                          # poly down x 12213; the poly is bright = over a channel under M1, x 12224-12248 along y 10197)
+?D 12079,10153:12222,10168                # band along the top to R: tan at x 12084-12136, mauve at 12196-12212 along y 10160, but olive-tan
+                                          # (neither field pink nor clean tan) at x 12140-12184 under the g1 metal: still uncertain
 @end
 
 @inst mra_col2 0,-2646 tag=r0

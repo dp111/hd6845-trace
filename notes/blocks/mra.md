@@ -98,7 +98,7 @@ g1  = NOT q                      q: line from outside (right), hold device q <->
 x   = cin AND q                  cin = x of the row below, or a group line, or external (table below)
 n2  = NOT cin
 n1  = NOT p3                     p3: line from the right-hand part; n1 goes back right
-m   : pulled low through [n2] -> [g1] -> VSS (the g1 device is uncertain, B4)
+m   : pulled low through [n2] -> [g1 52/17] -> VSS (the band joining the two is `?D`, B4)
       and through [cin] -> node rb (not resolved, B3); no pull-up found
 nb  = NOT m                      load 4; nb gates something not resolved (C4)
 na  = NOT ck_a                   load 3, pull-down gated by L3 (ck_a by trunks.md)
@@ -385,12 +385,15 @@ lines start inside the chain column.
   Drawn as a dead end with the tab as plain poly. A 7.5x view (`b3.png`) did not resolve it:
   a pale strip 12121-12127 x 10282-10307 lies between the rail-edge ghost and the poly tab,
   and below it (y 10309-10324) is field, so a straight run down into the VSS band is unlikely.
-- B4 (12185-12222 x 10153-10215). The diffusion strip right of the g1 pad (12205-12222) is
-  certain from y 10210 down to the VSS bottom band (one outlined region in chip-2 `acid`).
-  Its continuation up under the g1 poly (y 10188-10205) and round the corner into the band
-  along the top (y 10153-10168) to R is drawn `?D`: the corner is under the flare of the g1
-  metal and was not resolved. If the corner is open, R's top part is a dead end and the
-  17/17 transistor does not exist.
+- B4 (12140-12250 x 10153-10215). Third run, by profiles: the g1 device exists and is wider
+  than drawn before. Down x 12213 the clean shot is mauve (open diffusion) at y 10155-10175
+  and again at y 10209-10230, with the g1 poly between; along y 10197 the g1 poly is bright
+  (over a channel) under M1, x 12224-12248, and there is tan under M1 above it (y 10160,
+  y 10182). Drawn now as diffusion x 12198-12250 through under the poly: W/L 52/17, down to
+  the VSS strip. Still `?D`: the band along the top from there to R. Along y 10160 it is tan
+  at x 12084-12136 and mauve at x 12196-12212, but olive-tan (174/169/112: neither the pink of
+  field nor clean tan) at x 12140-12184 although the g1 metal covers part of that. If the
+  band is open there, R's top part is a dead end and `m` has no pull-down through g1.
 - B5 (12306-12327 x 10277-10332). The tie of the load-2 gate to the output: drawn `?B` at the
   left end of the block over the strip; what is visible is a dark-outlined blob at the
   block's upper left corner (12312-12327 x 10277-10297) next to a green (field) spot. The
