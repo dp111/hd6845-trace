@@ -1,7 +1,11 @@
 13040,14700:13850,15100  route  write strobes turning north | sel_w6 w1 w2 w0 w4 arrive in poly and each ends on a contact under a track of the 18-line bundle (x 13088-13826) that carries it north
 13040,15100:13700,17100  route  track channel | 18 vertical metal tracks with poly cross-unders; sel_w5 and sel_w7 climb it from the bottom and leave north on tracks k1, k2; other lines go into the mid-right array
 13760,15120:14055,15350  logic  two inverters on line X | both driven by X (the input of input-row gate 0); outputs NOT X leave north on track k6 and south on x 13716
-13700,15350:14080,16125  ?logic gate column, untraced part | gates under the ground rail x 13848; ck_out tap at y 15930
+13860,15385:14050,15515  logic  inverter of bd1_a | bd1_an = NOT bd1_a; output goes south on a metal line (x 13783) to the latch's lower half
+13700,15468:14050,15700  logic  latch gated by NOT X, upper half | bd1_n1 = NOT(bd1_a.bd1_xn2 + bd1_q); output on a metal line x 13957
+13770,15634:13806,15735  logic  pull-down of bd1_k | gate bd1_g (the input of X's driver)
+13700,15700:14050,15860  ?logic latch gated by NOT X, lower half | pull-down bd1_an.bd1_xn2 traced; load and feedback east of the rail not traced
+13700,15860:14080,16125  ?logic gate column, untraced part | gates under the ground rail x 13848; ck_out tap at y 15930
 13760,16125:14055,16280  logic  driver of line X | one inverter, X = NOT g; g arrives in poly along y 16231 from a line at x 13630
 13700,16280:14080,16900  ?logic gate column, untraced part | gates; ck_out taps at y 16490, 16565, 16711
 13380,16840:14100,17140  route  write strobes from below | sel_w7 w5 w3 w8 from bd3: w7 and w5 turn north into the channel, w3 goes north in poly, w8 west in poly along y 17125

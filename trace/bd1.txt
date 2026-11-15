@@ -113,7 +113,7 @@ N P 12990,17125 sel_w8
 # x 13910-13958 through an arm at y 15215-15246.
 M 13934,14690 y15246 w=48          # wide rail from the north; ends at the arm
 M 13860,15215:13958,15246          # arm to the column's ground rail
-M 13848,15100 y15440 w=46          # ground rail of the gate column (drawn as far as traced)
+M 13848,15100 y15845 w=46          # ground rail of the gate column (drawn as far as traced; below y 15833 it becomes two narrow lines)
 N M 13934,14700 vss
 M 14021,14690 y16290 w=46          # supply rail of the gate column (drawn as far as traced; by scan it runs on to y 16960)
 N M 14021,14700 vcc
@@ -203,8 +203,8 @@ N M 13848,16280 vss                # narrow lines (not traced), so this piece is
 # up under the rail, east along y 16194 and ends as a block (x 13886-13926).
 P 13614,15658:13648,15688
 C 13629,15673
-?P 13640,15671 x13806 w=18          # poly east from the top contact into the gate column; at 5x it crosses a diffusion
-#                                     strip x 13772-13802 (under the metal on x 13782) and ends: a gate there, not traced
+P 13640,15671 x13805 w=20           # poly east from the top contact into the gate column: gate of the pull-down of bd1_k
+#                                     on the strip x 13773-13804 (see "gate column, y 15385-15850")
 M 13630,15660 y16163 w=20
 P 13613,16136:13646,16164
 C 13629,16150
@@ -289,3 +289,98 @@ P 13650,15455 x13506 w=16            # poly west under X's line to a contact at 
 P 13504,15440:13537,15470
 C 13520,15455
 M 13521,15442 y15944 w=20            # a line on k10's position from that contact south to a contact at 13520,15931 (ring seen at 1.5x; what is under it is not traced)
+
+# ================================================================ gate column, y 15385-15850
+# Read from sharpened views at 4.3-6.4x (rdp3_sharp.py) and colour profiles (bd1_map.py, bd1_prof.py).
+# Under the ground rail one diffusion column carries, top to bottom:
+#   vss(13832,15461) - P2[a] - mid - P3[xn2] - N1 - G4[q] - vss(13845,15657) | field |
+#   N2 - G5[xn2] - N3 - G6[an] - vss(13842,15832)
+# East of the rail are the loads; the supply land x 14000-14048 feeds them.
+
+# --- bd1_a: metal on k13's position (x 13652, from y 15081: its upper end is not traced) to a contact
+# at 13655,15391; poly east, south along x 13723 under xn2's metal, east along y 15498 across the
+# column (P2) and north again east of the rail (P4), ending in a rounded cap at y 15427.
+M 13652,15095 y15404 w=20
+N M 13652,15110 bd1_a
+P 13640,15377:13670,15405
+C 13655,15391
+P 13655,15392 x13723 w=14
+P 13711,15385:13735,15508          # P1: south along x 13723
+P 13711,15488:13890,15508          # P2: gate across the column, y 15488-15508
+P 13868,15427:13890,15508          # P4: gate between the ground diffusion and inverter A's output
+
+# --- inverter A: bd1_an = NOT bd1_a. Pull-down P4 (W/L 38/22), load block x 13936-13992.
+D 13815,15439:13867,15490          # ground diffusion under the rail
+C 13832,15461 s=26x30
+D 13861,15440:13929,15478          # under P4 and on east: the output node
+D 13917,15400:13931,15445          # output: neck up to the buried contact
+B 13910,15398:13934,15424          # output to poly: the load's gate tie and the bar going west
+P 13908,15389:13936,15424
+P 13908,15389:13954,15402          # ... east to the load gate's neck
+P 13936,15389:13954,15436          # neck down to the load block
+P 13936,15432:13992,15490          # load gate (the strip under it is y 15447-15478)
+D 13925,15447:14000,15478          # load channel strip
+D 13996,15446:14043,15512          # supply land
+C 14019,15484 s=26x30
+P 13798,15393:13912,15410          # output bar west, under the rail over field
+P 13760,15388:13800,15417          # pad
+C 13779,15405
+M 13783,15392 y15797 w=20          # bd1_an south on x 13783 (no contact on the way: no pad, no ring, no specks)
+M 13753,15789:13792,15824          # pad at its foot
+C 13768,15806
+N M 13783,15600 bd1_an
+
+# --- the column, upper half: bd1_n1 = NOT( a.xn2 + q )
+D 13789,15468:13861,15556          # ground - P2 - mid strip (y 15510-15528) - P3 - top of N1
+P 13703,15526:13737,15554          # pad of P3 under xn2's metal
+C 13717,15541
+P 13705,15530:13874,15550          # P3: gate, y 15530-15550
+D 13787,15552:13882,15601          # N1
+D 13827,15595:13873,15680          # N1 - G4 - ground
+C 13845,15657 s=26x30
+P 13804,15602:13912,15623          # G4: gate y 15602-15623, rounded west end at x 13804; east of the rail a block
+N P 13890,15612 bd1_q
+?P 13896,15618:13908,15642         # ... from the block south (colour profile; 4.85x)
+P 13896,15630:13996,15650          # ... into a band going east to the edge of the supply land (what it does there: not traced)
+# N1's west end: buried contact to a poly pad that ends 20 px further west (nothing else joins it)
+D 13770,15575:13800,15597
+B 13766,15572:13802,15600
+P 13749,15575:13799,15597
+# N1's load: poly block x 13938-13992, y 15523-15608 over the strip y 15565-15593; the block has a
+# metal contact at 13956,15538 to the line that carries N1 south
+D 13875,15565:14004,15593          # N1 east of the rail, the load channel
+D 14000,15567:14048,15687          # supply land
+C 14020,15587 14018,15612 14022,15640 14022,15668
+P 13938,15523:13992,15608
+C 13956,15538
+M 13957,15525 y15753 w=22          # bd1_n1 south on x 13957
+C 13957,15740
+P 13946,15725:13985,15758          # poly pad at its foot (the poly goes on south: not traced)
+N M 13957,15650 bd1_n1
+# the load's gate tie: a buried contact with a bright centre at 13894-13926, 15558-15576 on N1, joined to the
+# block's top by a poly arm (dark complex 13897-13934, 15521-15556; seen at 4.3x and 4.85x, shape not resolved)
+?P 13896,15523:13940,15540
+?P 13896,15523:13926,15574
+?B 13894,15558:13926,15576
+?D 13896,15560:13924,15570
+
+# --- pull-down of bd1_k gated by bd1_g, on a strip under bd1_an's metal
+D 13773,15634:13804,15730          # strip: top segment, channel under g (y 15661-15681), lower segment
+?D 13800,15634:13830,15650         # top segment to the ground diffusion through the gap between the two metals (see notes)
+B 13768,15699:13792,15733          # lower segment to the poly from the west
+P 13674,15713 x13788 w=20
+P 13658,15700:13690,15730
+C 13674,15715
+M 13674,15702 y15986 w=20          # bd1_k south on x 13674 to a contact at 13674,15973 (scan; lower end not traced)
+N M 13674,15800 bd1_k
+
+# --- the column, lower half: N2 - G5[xn2] - N3 - G6[an] - ground
+D 13817,15709:13876,15745          # N2 (its east side, load and other pull-downs: not traced)
+N D 13850,15722 bd1_n2
+D 13797,15738:13873,15852
+P 13705,15745:13737,15775          # pad of G5 under the foot of xn2's metal
+C 13716,15760
+P 13730,15746:13876,15766          # G5: gate
+P 13748,15790:13792,15818          # pad under the foot of bd1_an's metal
+P 13748,15791:13876,15810          # G6: gate
+C 13842,15832 s=24x24
