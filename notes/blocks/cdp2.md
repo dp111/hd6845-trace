@@ -16,7 +16,7 @@ wide VSS rail of column N (c4: 9166); the first run's "VSS at x 9184 + 390 k" is
 *centre* of the same 46 px rail (s4: x 9161-9207). The two agree to 5 px: no conflict.
 The numbering is also cdp4's (its s2 rail x 8381-8427 is this block's s2 rail at
 x 8403). The rail at x 10744 is a ninth one, right of c7; it carries the pull-downs of
-s7's cells. Rows A, B1/B2 and D occupy c3..c7; row C occupies c1..c7.
+s7's cells. Rows A and B1/B2 occupy c3..c7, row C c1..c7, row D c2..c7.
 
 Bit order (believed, from the direction of the chain in rows B, see Logic): **s3 is
 the most significant of the five compared bits, s7 the least.**
