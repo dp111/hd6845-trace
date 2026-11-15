@@ -139,7 +139,10 @@ Traps, all of them real:
    *underneath*, not a break in the metal. Likewise, bright green bands in `acid1b`
    inside the arrays are gaps of open field between metal lines, not features.
 4. Tan (diffusion under metal) and khaki (field in the open) are close. Check where the
-   metal is before calling a tan area diffusion.
+   metal is before calling a tan area diffusion. A narrow diffusion wire in the open
+   may show no colour of its own at all, only a strip about 22 px wide between two
+   dark edges. The stripped shots also show an etch-boundary line beside every wide
+   rail, which is not a feature.
 5. Under wide metal, `acid` shows only fringes. Use `acid1b`, and `metal1` for outlines.
 6. Automatic alignment of `acid1b` is within about 1 px in random logic but only
    interpolated inside regular arrays; check it against `metal` at a contact before
