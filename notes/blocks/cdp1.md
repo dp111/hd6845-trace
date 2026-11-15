@@ -106,55 +106,70 @@ the diffusion under m6 at 9104-9130.
 - Believed function: `ne` = "this bit differs", so `eq` = "row C's 5-bit register equals
   the 5-bit value arriving on the channel B/C poly lines". Traced: only the NOR.
 
-### Row B lower half (surveyed at 3-4x, NOT traced; coordinates for slice 2, add 390 per slice)
+### Row B lower half (traced): `cdp1_bK_ne = A XOR B`, cell `cdp1_xor`
 
-Read from `cdp1_sr.py` composites of slices 2-4; slice 1 and slice 5 differ (findcell
-scores 0.74 and 0.82 against slice 2). What is established, and what is only believed:
+Master slice 2 (x 9150-9560, y 3650-3990), placed five times. Seven transistors:
 
-- **A diffusion line runs along the whole row** at y 3505-3540 (it passes under every VSS
-  rail; between x 9430 and 9560 it narrows to y 3510-3528, with a stub down x 9430-9448
-  to y 3610). In each slice one wide transistor pulls it to VSS: gate = a poly arm
-  y 3545-3568, x 9205-9420; VSS = the diffusion band y 3575-3606 below the arm, fed by
-  the rail contact at 9183,3608. In slice 1 only, at x 8990-9135 y 3505-3640, a depletion
-  load from the VCC contact at 9012,3605 (gate bar x 9070-9100, tie box at 9085,3520)
-  pulls the line up. So the line is a **5-input NOR, load in slice 1**: believed the
-  comparator's "all bits equal" output (high when no slice's gate is high). Where it
-  leaves the row (left end at x 8790, right end past slice 5) was not followed.
-- The pull-down's gate poly goes right, down the VCC-rail side (x 9397-9420), back left
-  along y 3612-3632 (over field), and down at x 9238-9262 to a buried contact at
-  9240-9262 x 3655-3680 (under the bit-line metal, which does **not** contact it: no pad,
-  no ring) onto the diffusion of the lower half. Call that node `g`.
-- Lower half (y 3650-3900), about eight transistors, believed to make
-  `g` = (row C bit) XOR (a second input):
-  - input 1: row C's `q`, poly up from the pad at 9503,3958, a vertical gate
-    x 9523-9545, y 3690-3830, between the diffusion on its left (x 9500-9520) and a
-    VSS strip under the next slice's rail (x 9550-9568);
-  - input 2: a vertical metal line x 9325-9347 with two poly contacts, 9337,3668 and
-    9337,3860. It comes up from channel B/C, where it is contacted to one horizontal
-    poly line (see below). From the upper pad a poly arm y 3662-3695 runs right to a
-    vertical gate x 9475-9498, y 3695-3772; from the lower pad a gate blob
-    x 9265-9318, y 3845-3885;
-  - VCC contact 9398,3757 on a diffusion 9350-9428 x 3732-3790; under the rail below it
-    a poly block 9350-9428 x 3790-3840 (load gate, part of the horizontal poly
-    y 3797-3823 that runs left to x 9190 as the gate of a pull-down between the
-    diffusion 9185-9232 x 3700-3795 and the VSS diffusion below it, contact 9185,3870);
-    a second load gate x 9430-9452, y 3795-3845 with its tie box 9450-9480 x 3820-3862;
-  - two horizontal gates y 3703-3728 and y 3738-3768 over a diffusion column x 9270-9322.
-  The exact series/parallel structure was not resolved; two honest passes at 4x left the
-  diffusion outlines between x 9260-9330 and around 9430-9460 unclear.
-- A hypothesis to test, **not traced**: with A = row C's bit and B = input 2,
-  `n2 = NOR(A, B)` (pull-downs: the two vertical gates x 9475-9498 and x 9523-9545;
-  load: the poly block under the VCC rail, whose poly is the long horizontal line
-  y 3797-3823 and ends in the tie box at 9450-9480 x 3820-3862), and
-  `ne = NOT(n2 + A.B)` (pull-down gated by that horizontal line at x 9185-9232, a
-  series pair somewhere in the column x 9270-9322, load = the two horizontal gates
-  y 3703-3768 if they are fingers of a poly tied to `ne`). That makes `ne = A XOR B` in
-  eight transistors. Things that must be seen before believing it: what the diffusion
-  left of the gate at x 9475 (9450-9475 x 3703-3768) connects to; whether the two
-  horizontal gates are joined to the poly that passes the buried contact at 9240-9262;
-  where the row C bit's poly crosses the column.
-- Composites for this row: `tools/cdp1_sr.py X Y W H --offsets "0,0 390,0 780,0"` with
-  slice 2 as master (x 9150-9560).
+| | Gate | Between | W/L | Where (slice 2) |
+|---|---|---|---|---|
+| load of `n2` | `n2` | VCC and `n2` | 27/54 | strip x 9400-9427 under the block 9377-9452 x 3792-3846 (half under the VCC rail) |
+| pull-down | A | `n2` and VSS | 37/23 | 9500-9523 x 3863-3900, VSS = the next slice's land |
+| pull-down | B | `n2` and VSS | 50/27 | blob 9259-9328 x 3853-3880 over the column x 9268-9318 |
+| load of `ne` | `ne` | VCC and `ne` | 23/49 | block 9272-9321 x 3727-3776 over the band y 3742-3765 |
+| pull-down | `n2` | `ne` and VSS | 39/25 | west end of the n2 poly (y 3798-3823) over x 9204-9243 |
+| series pair | B (upper), A (lower) | `ne` - mid - VSS | 69/22 each | x 9476-9498 and x 9521-9543 over the diffusion y 3699-3768 |
+
+    n2 = NOR(A, B)        ne = NOT(n2 + A.B) = A XOR B       (extracted, all five slices)
+
+- **A** is the poly that comes up from the pad at the foot of the slice (9503,3958): row C's
+  `q` in slices 1-4, in the same sense as the bit written into the register. **B** is the
+  thin metal line x 9325-9345 that comes up from channel B/C, with two poly taps
+  (9336,3672 and 9336,3858). Neither input is inverted and the gate is symmetric, so
+  `cdp1_b_eq` = 1 exactly when the five A bits equal the five B bits.
+- **Slice 5 is wired differently** (traced): its pad at the foot (10677,3958) is not fed
+  from row C below but by a metal line x 10669-10689 going *up* through the cell to a
+  contact (10680,3354) on the upper of the two poly lines under row A's foot
+  (`cdp1_b5_a`, y 3340-3362); row C's fifth bit `cdp1_c5_q` goes up on the next metal line
+  (x 10634, no contact in row B) to a contact (10634,3396) on the lower poly line
+  (y 3385-3408). Both poly lines run left under the whole array, with no other contact
+  between x 8340 and their pads (colour test along both lines), and leave the block at
+  x 8340. So the comparator's fifth bit is `B5 XOR cdp1_b5_a`, where `cdp1_b5_a` is made
+  from `cdp1_c5_q` (and whatever else) in the logic left of the array. Believed: this
+  is where a mode bit modifies the comparison; the left logic must be traced to say how.
+- How the nodes are made. `ne`: one diffusion: under `cdp1_nor`'s buried contact
+  (9240-9265 x 3650-3675), down the left side x 9204-9243 to the n2 gate, a band right
+  along y 3742-3765 through the load gate to the VCC land (9367-9427 x 3738-3786,
+  contact 9398,3758), and a band right along y 3678-3712 (narrowing to y 3699-3712 at
+  x 9318, passing under the B line and the VCC rail) to the series pair. The load's gate
+  is tied to `ne` by a buried contact at the west end of its tab (9220-9248 x 3703-3737).
+  `n2`: the load strip from the VCC land down to a band along the bottom (y 3885-3899 in
+  the middle, y 3863-3900 at its east end), which ends in the A pull-down on the east
+  and the B pull-down on the west; the load gate block is tied to it through the box at
+  9452-9480 x 3822-3852 and a neck (9457-9472) down to the band; the same poly runs
+  west along y 3798-3823 to gate `ne`'s pull-down.
+- VSS: each slice has a land under its rail (9166-9243 x 3830-3900, contact 9183,3865),
+  with a tab east under the bit line (y 3830-3848, source of the B pull-down), a west arm
+  (y 3864-3900, source of the previous slice's A pull-down) and, from slice 2 on, a strip
+  up under the rail (x 9158-9180, y 3702-3836, source of the previous slice's series
+  pair). Slice 1's rail has no strip (pink field, seen). Slice 5's pair and A pull-down
+  end on a wider strip and land under the extra rail at x 10716-10773.
+- The bit line of row A runs over `ne`'s buried contact without touching it (no contact
+  colour: 172/139/115 against 160/165/93 on the known contacts; the bright spot in the
+  metal shots there is the metal riding over the box).
+
+What rests on what (colour profiles are of the median of slices 2-4, `tools/cdp1_px.py`):
+
+| Junction | Evidence |
+|---|---|
+| series pair, not two parallel pull-downs | the middle region between the gates is closed top (y 3697) and bottom (y 3768) by lines that cross both gates; no contact, nothing else reaches it (6x view of all four shots) |
+| pair's east end is VSS | diffusion colour under the next rail (197/174/129 against field 185/116/122) continuous to the land with the rail contact |
+| band y 3699-3712 passes under the B line and the VCC rail | diffusion colour between dark lines at y 3696 and 3714 under both |
+| A pull-down of n2 | the band's top edge (y 3862) and bottom edge (y 3900) cross the A poly; poly brighter between them in all four shots |
+| n2 load | poly-over-channel colour (239/170/125) under the block for x 9400-9423, plain poly (210/155/115) left of x 9399; diffusion colour below the block down to y 3897 |
+| B pull-down of n2 | the bottom band reaches under the B line (diffusion colour y 3887-3897) to the column; the VSS tab reaches under the bit line (diffusion colour y 3834-3846). The column itself is in the open, where field and diffusion have the same colour: its sides are taken from outlines only |
+| n2 poly ends past ne's diffusion | poly to x 9194, diffusion edge x 9202, field colour between it and the VSS strip |
+| ne load gate tied to ne | tan box with heavy outline at the tab's west end, under the bit line |
+| band y 3678-3712 joined to the diffusion under the buried contact | **inferred**, see Ambiguities 8 |
 
 ### Channel B/C (surveyed)
 

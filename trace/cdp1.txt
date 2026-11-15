@@ -187,7 +187,7 @@ P 10272,3940:10302,3976
 P 10660,4204:10692,4246
 C 10672,4221 s=24x26
 M 10622,4205:10690,4240
-M 10632,3990 y4257 w=20
+M 10634,3384 y4257 w=20                # ... through row B without a contact, to the lower poly line below row A
 M 10672,4235 y4257 w=22
 @alias cdp1_c1_q cdp1_c1_m6
 @alias cdp1_c2_q cdp1_c2_m6
@@ -270,3 +270,99 @@ C 8725,3437 s=24x26
 M 8727,3424 y3530 w=22                 # goes on down (not followed)
 N D 9100,3513 cdp1_b_eq
 N M 8727,3520 cdp1_b_eq
+
+# ---------------------------------------------------------------------------------
+# Row B, lower half: one XOR per slice (seven transistors).  Master = slice 2
+# (x 9150-9560, y 3650-3990).  Inputs: A = poly up from the pad at the foot of the slice
+# (row C's q in slices 1-4), B = the thin metal line that comes up from channel B/C.
+#   n2 = NOR(A, B)            load under the VCC rail, pull-downs at the bottom corners
+#   ne = NOT(n2 + A.B)        load left of the VCC contact, pull-down under n2's poly,
+#                             series pair A.B on the right
+# so ne = A XOR B. ne is the diffusion under cdp1_nor's buried contact.
+# Read from the sharp median of slices 2-4 (tools/cdp1_sr.py) and colour profiles
+# (tools/cdp1_px.py); see notes/blocks/cdp1.md for which junction rests on what.
+@cell cdp1_xor tag=b2
+# --- input B: metal from the channel, two poly taps
+M 9335,3652 y3990 w=20
+C 9336,3672 s=24x26
+P 9324,3658:9354,3690                  # upper pad
+P 9340,3668:9498,3688                  # ... strip to the right, over field
+P 9476,3668:9498,3780                  # ... gate 1: upper transistor of the series pair
+C 9336,3858 s=24x26
+P 9324,3843:9354,3875                  # lower pad
+P 9259,3853:9328,3880                  # ... blob to the left: gate of n2's pull-down
+# --- input A: poly up from the pad at the foot (pad and its contact are outside the cell)
+P 9500,3825:9523,3960
+P 9500,3822:9543,3842                  # jog right
+P 9521,3684:9543,3842                  # gate 2: lower transistor of the series pair
+# --- ne: the output diffusion
+D 9204,3678:9243,3836                  # down the left side: ne | gate n2 | VSS land
+D 9204,3678:9270,3698                  # top, under cdp1_nor's buried contact
+?D 9258,3680:9308,3696                 # link to the band going right (junction at x 9262-9272 not clear: see notes)
+D 9300,3680:9318,3712
+D 9304,3699:9452,3712                  # band under the B line and the VCC rail
+D 9449,3699:9556,3768                  # ne | gate 1 (B) | middle | gate 2 (A) | VSS strip under the next rail
+D 9238,3742:9372,3765                  # load: ne | gate | VCC land
+D 9367,3738:9427,3786                  # VCC land
+C 9398,3758 s=28x30
+P 9272,3727:9321,3776                  # load gate block
+P 9226,3708:9298,3733                  # ... its tab, west to ne
+B 9220,3703:9248,3737
+# --- n2
+P 9194,3798:9430,3823                  # n2 poly along the cell: gate of ne's pull-down at its west end
+P 9377,3792:9452,3846                  # load gate block, half under the VCC rail
+P 9450,3826:9476,3850                  # ... tab into the tie box
+B 9450,3822:9480,3854
+D 9400,3780:9427,3900                  # load strip down from the VCC land, under the block
+D 9457,3830:9472,3868                  # neck from the tie box down to the band
+D 9425,3863:9540,3900                  # n2 | gate A | VSS (the next slice's land)
+D 9265,3885:9436,3899                  # band west along the bottom, under the B line
+D 9268,3828:9318,3899                  # VSS tab | gate B (blob) | n2
+# --- VSS land under the rail, with a tab east under the bit line
+D 9166,3830:9243,3900
+D 9240,3830:9318,3848
+C 9183,3865 s=26x40
+N P 9300,3810 cdp1_{}_n2
+N M 9335,3900 cdp1_{}_b
+@end
+@inst cdp1_xor -390,0 tag=b1
+@inst cdp1_xor 390,0 tag=b3
+@inst cdp1_xor 780,0 tag=b4
+@inst cdp1_xor 1170,0 tag=b5
+# VSS strip under each rail from the second slice on: the source of the previous slice's
+# series pair. Slice 1's rail has none (pink field there). Also the west arm of each
+# VSS land, which is the source of the previous slice's n2 pull-down (gate A).
+D 9158,3702:9180,3768
+D 9166,3760:9180,3836
+D 9140,3864:9170,3900
+D 9548,3702:9570,3768
+D 9556,3760:9570,3836
+D 9530,3864:9560,3900
+D 9938,3702:9960,3768
+D 9946,3760:9960,3836
+D 9920,3864:9950,3900
+D 10328,3702:10350,3768
+D 10336,3760:10350,3836
+D 10310,3864:10340,3900
+# ... and under the extra VSS rail right of slice 5 (wider there, with its own contact)
+D 10716,3700:10748,3840
+D 10716,3832:10773,3900
+D 10706,3864:10720,3900
+C 10737,3864 s=26x40
+
+# Slice 5's A input does not come from row C's cell below. Its pad at the foot has a
+# metal line going UP through the cell to the upper of two poly lines that run under
+# row A's foot to the left edge of the block; row C's fifth bit goes up on the next
+# metal line (x 10634) to the lower poly line. So bit 5 is compared after a detour
+# through the logic left of the array.
+P 10662,3940:10693,3976                # pad at the foot of slice 5
+C 10677,3958 s=24x26
+M 10679,3344 y3972 w=20
+C 10680,3354 s=24x26
+P 10660,3340:10694,3364                # pad on the upper line
+P 8340,3351 x10692 w=22                # upper line (cdp1_b5_a), to the left edge
+C 10634,3396 s=24x26
+P 10612,3384:10652,3410                # pad on the lower line
+P 8340,3396 x10650 w=22                # lower line (= cdp1_c5_q), to the left edge
+N P 8345,3351 cdp1_b5_a
+N P 8345,3396 cdp1_c5_q
