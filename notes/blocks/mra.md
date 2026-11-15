@@ -320,6 +320,86 @@ lines start inside the chain column.
   along the left side (x 12137-12145) it runs next to R's right edge. Inside it: field, the
   g1 poly pad, riser and tab.
 
+## Third run: readings of x 12470-12660, master row (working notes, being drawn)
+
+Colour key that made this column readable (clean shot, median of the rows, measured with
+`tools/mra_prof.py --raw`): under metal, **poly over a channel is bright orange-salmon
+(about 245/172/118), poly over field a duller salmon (217/163/116)**, diffusion tan
+(201/181/131), field pink (202/122/131); under the middle of a wide rail field is grey
+(155/138/112). A diffusion edge under poly is a dark line across it. So a load shows as a
+bright band between two dull ones.
+
+- Vertical metal: three thin lines. Body (y 10045-10290): L1 x 12495-12506, L2 x 12538-12549,
+  L3 x 12581-12593. Top of the row (y 9880-10000): the same lines at T1 x 12496-12508
+  (wiggles to 12508-12528 at y 9916-9964), T2 x 12559-12572, T3 x 12606-12615; T2 and T3 jog
+  22 px left at y 10000-10040, and back in the bottom of the row (y 10290-10370). By the
+  bottom-end table and `trunks.md`: **L1 = `ck_b`** (enters at x 12513-12533, y 16900),
+  **L3 = `ck_a`** (second route, from contact (12631,16954)), L2 unidentified (ends at
+  y 16942). No metal at x 12463-12490 (open field).
+- L1 contact (12493,10041) on a poly pad 12485-12506 x 10030-10055; its poly runs right at
+  y 10033-10056 to x 12618 and is a gate (bright) at x 12545-12566 and 12575-12616 over a
+  diffusion that lies above it (x 12545-12640, y 10010-10033, continues right) and below
+  it (y 10057-10095). **A wide pass transistor clocked by `ck_b`.**
+- L3 contact (12592,10113) on a poly pad 12578-12619 x 10091-10131; its poly runs down,
+  x 12578-12600, y 10139-10203, a gate (bright) between a diffusion on the left (node NA,
+  x 12531-12577, under L2) and one on the right (x 12614-12640, continues right).
+  **A pass transistor clocked by `ck_a`.**
+- The VCC boxes of the rail x 12412-12462 feed a load on each side. Right side:
+  **load 3**, poly block x 12481-12529, y 10148-10206 over a strip y 10163-10190 (profile
+  down x 12502: dull 10149-10159, edge 10162, bright 10165-10188, edge 10192, dull
+  10198-10206), from the VCC box (12433,10172) to node NA (D x 12536-12556 at y 10177; NA is a
+  column x 12544-12563 from y 10057, the lower terminal of the `ck_b` gate, down to y 10195).
+  Its tie is believed to be the heavy-outlined box 12509-12539 x 10120-10145.
+  **load 4**, poly block x 12474-12548, y 10286-10332 over a strip y 10303-10330 (profile
+  down x 12502: dull 10288-10296, edge 10300, bright 10306-10326, edge 10332), from the VCC
+  box (12433,10305) to node NB (D x 12552-12623, y 10300-10347).
+- Buried contact box 12577-12599 x 10267-10299 (heavy outline, open at the bottom towards NB).
+  The poly on it is a pad 12601-12651 x 10250-10290 with a metal contact at (12629,10271);
+  the pad has an arm to the left over the box. The load-4 block reaches the box along
+  y 10268-10283 (dark red in the gap between L2 and L3). A pink (field) strip y 10240-10250
+  separates this pad from the `p3` line (y 10228-10246) for x 12575-12650: **whether the pad is
+  joined to `p3` further right is not yet seen.**
+- Metal from the contact (12629,10271) goes up at x 12622-12636 to y 10172, right (x 12625-12667
+  at y 10164-10172) and up to a contact at about (12655,10120) on a poly pad 12640-12680 x
+  10095-10135, whose poly goes up (x 12655-12675, y 10040-10100).
+- A diffusion strip y 9955-9970 runs right from the "upper VSS box" (12355-12402 x 9963-10008)
+  under the VCC rail (tan at x 12410-12467, y 9958-9968) and on to the right: the net of
+  line C (believed VSS, B7) is distributed along the top of every row. That is what the
+  upper box is for.
+- Other pieces seen: orange poly (open) 12627-12655 x 10308-10350 right of NB.
+- More, same run (views `b_top.png`, `b4.png`, `neck6.png`, `hook5.png`, `u4.png`, `uv5.png`):
+  - The metal from the contact (12629,10271) is a strap: up at x 12624-12641, a bar x 12622-12668,
+    y 10159-10188, up to the contact (12655,10124) on the poly pad 12638-12675 x 10105-10148. The
+    bar stops 28 px short of the wide rail (open field colours at x 12678-12687 in the gap): the
+    strap is **not** on the rail. The pad's poly goes up as an open (orange) band x 12653-12680,
+    y 10030-10100.
+  - The wide rail is x 12696-12745. Under it lies a diffusion column, x 12688-12716 for
+    y 10048-10112 and x 12688-12727 below, down to y 10262, with the rail contact (12714,10237).
+  - The right-hand diffusion of the `ck_a` gate (x 12613-12682, y 10152-10190, under the bar) is
+    read as **joined to that column**: the 7 px dark line between them (x 12681-12688) lies
+    exactly in the gap between the bar and the rail, where a diffusion shows as a dark bar and
+    field as a green strip (the gap is green above, y 10105-10150, beside the pad). The gap
+    between L2 and L3 over node NA has the same signature. So the `ck_a` transistor connects NA
+    to the rail. If the two were separate (10 px apart, against the spacing used everywhere
+    else) the node under the bar would be an isolated island with no other connection: the
+    "box" 12651-12687 x 10200-10217 below it is open field (olive in the clean shot, R/G 1.01
+    in chip-2 `acid`, plain in the metal shot), not a buried contact.
+  - `p3` (y 10228-10240) runs right to x 12689, turns down at x 12670-12689 to y 10296 and
+    continues right under the rail along y 10277-10296 (orange in chip-2 `acid`).
+  - `ck_b` gate: channel x 12547-12610 (band ends rounded at x 12612). Above it the diffusion
+    U, x 12547-12630, y 10012-10036, which continues right as a band y 10012-10026 under the
+    rail to at least x 12750 (colour between poly and diffusion there: not settled).
+  - A vertical poly under the rail's right half, x 12728-12748, y 10050-10190: its lower part
+    (y 10118-10190) is a gate between the column under the rail and a diffusion D2 on its
+    right (x 12750-12775, y 10118-10190).
+  - The orange poly 12627-12651 x 10307-10365 is a gate between NB (left) and an open (mauve)
+    diffusion x 12654-12690, y 10320-10365 that runs on under the rail to the contact
+    (12714,10340). **The `m` line ends there** (it is present at x 12615 and absent at x 12662;
+    vertical cuts of chip-2 `acid`): the gate is believed to be `m` turning up, so NB = NOT m with
+    load 4; the junction at about (12640,10365) has not been looked at.
+  - `q` (y 9988-9998) is present to x 12712 and absent at x 12760. `n1` jogs up at x 12700-12720
+    and runs on along y 9906-9918 to beyond x 13045.
+
 ## Not done
 
 - x 12470-13000 of every row: where `q`, `p3` and `m` come from, the storage, the read
