@@ -473,3 +473,93 @@ C 10736,10797 10736,10908           # the two seen (rings in the metal, specks i
 # --- write lines beyond the cells, to the region's edge
 P 10705,10711 x10850 w=22             # row H's: runs on east; its west end is the loop of c0
 P 10705,9533 x10850 w=22              # row C's: runs on east
+
+# =====================================================================================
+# Lines that run through the whole block
+# =====================================================================================
+# --- the y 8819 line of channel B: poly, from a contact at about (10893,8817) on a vertical metal
+# line east of the region (x 10888, which comes up from the south and ends there) west to
+# x 8528 in c2. Seen unbroken in the clean shot at 1.5x. It passes just below the bit-line
+# contact of every row A cell; its branches into those cells are not traced.
+P 8528,8818 x10850 w=16
+N P 10840,8818 cdp3_l8819
+
+# --- VSS rails c0..c8 over the full height (straight; contacts are drawn with the cells)
+M 7623,8450 y11200 w=46
+N M 7623,8460 vss
+M 8013,8450 y11200 w=46
+N M 8013,8460 vss
+M 8403,8450 y11200 w=46
+N M 8403,8460 vss
+M 8793,8450 y11200 w=46
+N M 8793,8460 vss
+M 9184,8450 y11200 w=46
+N M 9184,8460 vss
+M 9574,8450 y11200 w=46
+N M 9574,8460 vss
+M 9964,8450 y11200 w=46
+N M 9964,8460 vss
+M 10355,8450 y11200 w=46
+N M 10355,8460 vss
+M 10743,8450 y11200 w=46
+N M 10743,8460 vss
+
+# --- VCC rails c2..c7: x 9765-9815 (c5) through channel B to the top of the row C cell, then
+# x 9725-9769 between the two register rows. (c0 and c1 differ in rows D-G: see notes.)
+M 8618,8790 y9200 w=50
+N M 8618,8800 vcc
+M 8575,9555 y10690 w=44
+N M 8575,9600 vcc
+M 9009,8790 y9200 w=50
+N M 9009,8800 vcc
+M 8966,9555 y10690 w=44
+N M 8966,9600 vcc
+M 9400,8790 y9200 w=50
+N M 9400,8800 vcc
+M 9357,9555 y10690 w=44
+N M 9357,9600 vcc
+M 9790,8790 y9200 w=50
+N M 9790,8800 vcc
+M 9747,9555 y10690 w=44
+N M 9747,9600 vcc
+M 10180,8790 y9200 w=50
+N M 10180,8800 vcc
+M 10137,9555 y10690 w=44
+N M 10137,9600 vcc
+M 10571,8790 y9200 w=50
+N M 10571,8800 vcc
+M 10528,9555 y10690 w=44
+N M 10528,9600 vcc
+
+# --- bit lines (line e) above row C: through channel B (seen in c5 at 1.8x, metal present in the
+# others by profile) and, uncertain, through the row A cells to the top edge. Each row A cell
+# has a contact on its bit line at about y 8782 (seen in c2 and c5); not drawn, row A is not traced.
+M 8466,8790 y9195 w=20
+?M 8466,8450 y8795 w=20
+M 8857,8790 y9195 w=20
+?M 8857,8450 y8795 w=20
+M 9248,8790 y9195 w=20
+?M 9248,8450 y8795 w=20
+M 9638,8790 y9195 w=20
+?M 9638,8450 y8795 w=20
+M 10028,8790 y9195 w=20
+?M 10028,8450 y8795 w=20
+M 10419,8790 y9195 w=20
+?M 10419,8450 y8795 w=20
+
+# --- bit lines and lines f below row H, to the bottom edge: metal is present at these x all the
+# way (profile); row I, which they cross, is not traced
+?M 7687,11048 y11200 w=20
+?M 8076,11048 y11200 w=20
+?M 8466,11048 y11200 w=20
+?M 8857,11048 y11200 w=20
+?M 9248,11048 y11200 w=20
+?M 9638,11048 y11200 w=20
+?M 10028,11048 y11200 w=20
+?M 10419,11048 y11200 w=20
+?M 8511,11048 y11200 w=17
+?M 8902,11048 y11200 w=17
+?M 9293,11048 y11200 w=17
+?M 9683,11048 y11200 w=17
+?M 10073,11048 y11200 w=17
+?M 10464,11048 y11200 w=17

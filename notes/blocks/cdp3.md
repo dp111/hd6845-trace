@@ -74,13 +74,13 @@ Horizontal poly lines (y centres):
 
 | y | Line |
 |---|---|
-| 8819 | through line in channel B, from about x 8420 east past x 10870. Not traced |
+| 8818 | `cdp3_l8819`: poly line of channel B, y 8810-8826. East end: a pad with a metal contact at about (10893,8817), on a vertical metal line at x 10888 that comes up from the south and ends there. West end: x 8528 in c2 (field west of it to x 8440, measured). It passes 30 px below the bit-line contact of each row A cell (c5: 9636,8782); its branches into the row A cells are not traced |
 | 8907 ... 9123 | channel B tracks onto line g of c7 ... c2 |
-| 9533 | `cdp3_c_wr`, write line of row C: runs along y 9520-9546 and in every cell loops up (x 9581-9603 in c5), east along y 9476-9498 over the write transistor, and down again (x 9697-9719). West of c2 and east of c7 it runs straight on (seen to x 8355 and x 10900). The first run listed its two levels as separate lines "9493" and "9537". Its west end is the loop of c2 (x 8370; no poly at y 9533 west of that, measured); it runs on east past x 10900 |
+| 9533 | `cdp3_c_wr`, write line of row C: runs along y 9520-9546 and in every cell loops up (x 9581-9603 in c5), east along y 9476-9498 over the write transistor, and down again (x 9697-9719). West of c2 and east of c7 it runs straight on (seen to x 8355 and x 10900). The first run listed its two levels as separate lines "9493" and "9537". Its west end is the loop of c2 (x 8370; no poly at y 9533 west of that, measured). East end: a pad with a metal contact at about (10940,9531), on a vertical metal line at x 10935 that comes up from the south and ends there |
 | 9581, 9624, 9668, 9711, 9754, 9797 | channel D tracks of c7 ... c2: from the west edge to the tap contact under line b |
 | 10057, 10317 | gate lines of rows E and F |
 | 10361 ... 10664 | channel G tracks of c7 ... c0, each in a west piece (to the row H cell) and an east piece (node N, to the east edge) |
-| 10711 | `cdp3_h_wr`, write line of row H: the mirror image of row C's, along y 10700-10722 with a loop down to y 10746-10768 in every cell. Its west end is the loop of c0 (x 7605); it runs on east past x 10900 |
+| 10711 | `cdp3_h_wr`, write line of row H: the mirror image of row C's, along y 10700-10722 with a loop down to y 10746-10768 in every cell. Its west end is the loop of c0 (x 7605). It runs on east past x 10990, under five vertical metal lines (x 10803, 10848, 10888, 10935, 10975) without a contact |
 
 ## Logic
 
@@ -215,17 +215,21 @@ East edge, x 10850 (poly):
 | Name | y | What |
 |---|---|---|
 | cdp3_n_c7 .. cdp3_n_c0 | 10361, 10404, 10447, 10490, 10535, 10577, 10621, 10664 | bus N. c7's track ends at a metal contact at about 10855,10355 and c6's at about 10900,10400, each on a vertical metal line that comes down from the north with a diagonal jog at y 10250-10330 (seen at 0.85x); the other six run on east at least to x 10960 |
-| cdp3_c_wr | 9533 | in: write line of row C, comes from the east (seen to x 10900) under three thin vertical metal lines at x 10803, 10848, 10888; no contact to them seen |
-| cdp3_h_wr | 10711 | in: write line of row H, the same |
-| (not traced) | 8819 | through line of channel B |
+| cdp3_l8819 | 8818 | in (believed): line into the row A cells; ends 43 px east of the edge on a contact to the vertical metal line x 10888 |
+| cdp3_c_wr | 9533 | in: write line of row C; ends 90 px east of the edge on a contact to the vertical metal line x 10935 |
+| cdp3_h_wr | 10711 | in: write line of row H; runs on east past x 10990 |
+
+The vertical metal lines east of the region (x 10803, 10848, 10888, 10935, 10975, seen at
+y 8780-8860, 9490-9575, 10670-10750) are not in this block: 10888 and 10935 end at the
+contacts above, coming from the south; 10803 and 10848 run on north past y 8780.
 
 Top edge (y 8450) and bottom edge (y 11200), per column (x for c5):
 
 | Line | x | What |
 |---|---|---|
 | VSS rail | 9548-9596 | contacts at 9568,8437 and 9568,8500 (row A), 9570,11200 |
-| cdp3_bl_cN | 9628-9648 | bit line: drawn y 9192-11052 (c2..c7), from 9555 (c1), from 10684 (c0). Not yet followed to either edge |
-| cdp3_f_cN (N 2..7) | 9675-9692 | from the row A cell (via the link in channel B); drawn y 8790-11052, no contact in rows C-H. Not yet followed to the bottom edge |
+| cdp3_bl_cN | 9628-9648 | bit line. Top edge: c2..c7 (through channel B; through the row A cells drawn `?`, each with a contact at about y 8782 that is not drawn). c1 runs on up past y 9500, not followed; c0 seen only from y 10684. Bottom edge: c0..c7, drawn `?` through row I (metal present all the way, profile) |
+| cdp3_f_cN (N 2..7) | 9675-9692 | from the row A cell (via the link in channel B); no contact in rows C-H; drawn `?` through row I to the bottom edge |
 | VCC rail | 9765-9815 at the top, 9770-9815 at the bottom | |
 
 Into rows not yet traced (the labels sit on the stubs):
@@ -268,9 +272,8 @@ Into rows not yet traced (the labels sit on the stubs):
   y 10950-11600). Not traced.
 - The logic at x 7600-8560 beside rows A-C; channel B lines at y 8864 and 9167 (contacts
   near x 7834 and 8290).
-- Through line y 8819.
-- Rails over their full length (drawn only inside the two register rows); the bit lines
-  above row C and below row H; line f below row H.
+- The VCC rails are drawn in channel B, in the register rows and between them (c2..c7);
+  not through rows A and I, and not for c0, c1 in rows D-G (next item).
 - c0 in rows D-G is not standard: a wide rail at x 7680-7728 from the top of row D to
   y 10150, which jogs right (y 10150-10400, contacts at about 7770,10135 and 7685,10280)
   to the usual VCC position x 7775-7822 above row H; a thin line at x 7772 comes down from
