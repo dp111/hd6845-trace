@@ -378,6 +378,11 @@ was not readable).
   second framed island at x 13878-13910, y 15679-15709. If the band is N2's load gate and
   the box its tie, `bd1_q` = `bd1_n2` and the latch closes. One 6x three-shot view
   (`acid1b`, `metal1`, `acid`) of x 13880-13995, y 15640-15710 should settle it.
+  A two-shot 5.6x view (`acid`, `acid1b`) did not: chip 2's shot shows a tan strip
+  x 13916-13937, y 15658-15697, continuous with N2's arm below and ending under an arch at
+  y 15649-15658 right below `bd1_q`'s band (which is orange, poly, x 13891-13948), which
+  fits the tie; but the features of the two chips do not line up within 10 px there, so
+  nothing was drawn.
 - y 15850-15880 under the rail: the ground diffusion ends at about y 15852.
 - y 15880-16125 (dense group): `ck_out` tap (13716,15930), poly east along y 15930 to
   x 13830; under the rail several poly bars about 20 px apart (y 15975-16050); a load
