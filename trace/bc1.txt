@@ -1,0 +1,165 @@
+# bc1: bottom-centre random logic, upper left part (x 7000-9000, y 14050-16300).
+# Notes: notes/blocks/bc1.md.  All coordinates are metal-shot pixels.
+@block bc1
+@w M=16 P=22
+@s 28x30
+
+# ======================================================================================
+# Right gate group, column A: gates between the VSS rail R1 (x 8336-8384) and the VCC
+# rail R2 (x 8510-8558).  Pull-downs lie under R1 (horizontal gate polys coming from the
+# wiring channel on the left cross the diffusion column under the rail); each output
+# node continues right as a diffusion strip through a depletion load to a land under
+# R2, and leaves to the left through a buried contact into a poly line.
+# ======================================================================================
+
+# --- rails
+M 8360,14890 y16300 w=48                  # R1
+N M 8360,15000 vss
+M 8534,14990 y16300 w=48                  # R2
+N M 8534,15060 vcc
+
+# --- channel metal (track centres measured with sel_cut: 8012 8056 8098 8143 8186 8229)
+M 8040,14832 x8186 y15089 x8229 y15792   # s0: bus line y 14832 turns down at x 8186, jogs right at y 15089
+N M 8186,14900 bc1_s0
+M 8040,14875 x8143 y15577                # s1: bus line y 14875 turns down at x 8143
+N M 8143,14900 bc1_s1
+M 8186,15160 y15617                       # gate 1 output
+M 8098,15291 y15739 x8198                 # gate 2 output
+M 8056,14948 y15489                       # gate 3 output, up to contact (8056,14960)
+M 8100,14913 x8012 y15655 x8068           # gate 4 output, up and right to contact (8100,14915)
+M 8198,15823 x8143 y16170 x8056 y16300    # gate 5 output, leaves the block at the bottom
+N M 8056,16290 bc1_dec01_n
+
+# --- gate 1: inverter, input s0
+D 8334,15072:8384,15180                   # VSS land, channel, output node
+C 8353,15092
+P 8221,15130 x8395                        # gate
+C 8229,15128
+D 8275,15152:8396,15180                   # output node, left to the buried contact
+B 8271,15150:8308,15184
+P 8178,15170 x8300                        # output poly to the channel
+C 8186,15172
+D 8380,15154:8512,15178                   # strip through the load
+D 8505,15118:8562,15182                   # VCC land
+C 8531,15158 s=30x40
+P 8448,15124:8500,15196                   # load gate
+D 8422,15098:8441,15165                   # bump up from the strip to the gate tie
+D 8422,15098:8476,15120
+B 8443,15096:8478,15130
+P 8452,15102:8474,15130                   # stem of the load gate on the buried contact
+N D 8360,15160 bc1_s0_n
+
+# --- gate 2: inverter, input s1
+D 8334,15203:8384,15312
+C 8353,15226
+P 8135,15261 x8395
+C 8143,15262
+D 8275,15284:8396,15312
+B 8271,15282:8308,15316
+P 8090,15301 x8300
+C 8098,15303
+D 8380,15285:8512,15309
+D 8505,15250:8562,15327
+C 8531,15290 s=30x56
+P 8448,15255:8500,15327
+D 8422,15229:8441,15296
+D 8422,15229:8476,15251
+B 8443,15227:8478,15261
+P 8452,15233:8474,15261
+N D 8360,15295 bc1_s1_n
+
+# --- gate 3: 2-input NAND (two gates in series under R1): s1_n, s0_n
+D 8334,15335:8384,15491
+C 8352,15357
+P 8090,15390 x8416                        # A: gate 2 output
+C 8098,15390
+P 8178,15433 x8416                        # B: gate 1 output
+C 8186,15433
+D 8275,15462:8396,15491
+B 8271,15460:8308,15494
+P 8048,15477 x8300
+C 8056,15477
+D 8380,15459:8512,15488
+D 8505,15422:8562,15531
+C 8531,15458 s=30x36
+P 8448,15438:8500,15507
+D 8422,15410:8441,15470
+D 8422,15410:8476,15432
+B 8443,15408:8478,15442
+P 8452,15414:8474,15444
+N D 8360,15475 bc1_dec00_n
+
+# --- gate 4: 2-input NAND: s1, s0_n
+D 8334,15507:8384,15662
+C 8352,15527
+P 8135,15560 x8416                        # A: s1
+C 8143,15563
+P 8178,15603 x8416                        # B: gate 1 output
+C 8186,15605
+D 8275,15632:8396,15662
+B 8271,15630:8308,15664
+P 8048,15648 x8300
+C 8056,15652
+D 8380,15629:8512,15658
+D 8505,15600:8562,15651
+C 8531,15627 s=30x40
+P 8448,15609:8500,15677
+D 8422,15580:8441,15640
+D 8422,15580:8476,15602
+B 8443,15578:8478,15612
+P 8452,15584:8474,15614
+N D 8360,15645 bc1_dec10_n
+
+# --- gate 5: 2-input NAND: s1_n, s0
+D 8334,15676:8384,15840
+C 8352,15700
+P 8178,15735 x8416                        # A: gate 2 output
+C 8186,15738
+P 8221,15781 x8416                        # B: s0
+C 8229,15780
+D 8275,15813:8396,15840
+B 8271,15811:8308,15845
+P 8178,15826 x8300
+C 8186,15823
+D 8380,15807:8512,15836
+D 8505,15768:8562,15834
+C 8531,15795 s=30x50
+P 8448,15787:8500,15855
+D 8422,15758:8441,15818
+D 8422,15758:8476,15780
+B 8443,15756:8478,15790
+P 8452,15762:8474,15792
+N D 8360,15825 bc1_dec01_n
+
+# --- gate 6: inverter with a long (weak) load; the load's hook hangs below the block
+D 8334,15853:8384,15964                   # VSS land, channel, output node
+C 8352,15877
+P 8178,15910 x8390                        # gate
+C 8186,15910
+D 8275,15945:8400,15964                   # output band: left to the buried contact, right to the load
+B 8271,15943:8308,15977
+P 8221,15957 x8300                        # output poly to the channel
+C 8229,15956
+D 8397,15899:8416,15985                   # strip turns up to the load and down to the gate tie
+D 8397,15901:8512,15934                   # strip through the load
+D 8505,15892:8562,15990                   # VCC land
+C 8531,15920 s=30x36
+P 8424,15886:8500,15957                   # load gate (L about 80)
+D 8397,15962:8458,15985                   # bump to the gate tie
+B 8420,15958:8460,15988
+P 8428,15950:8455,15982                   # stem of the load gate on the buried contact
+N D 8360,15950 bc1_g6_out
+M 8186,15900 y16260 x8143 y16300          # gate 6 input, from below (jog checked with sel_tracks)
+N M 8143,16290 bc1_g6_in
+M 8229,15945 y16118                       # gate 6 output down to contact (8229,16107)
+C 8229,16107
+P 8221,16107 x8300                        # continues right into the gates below y 16000 (not traced)
+
+# --- decoder outputs leaving the top of the channel
+C 8056,14960
+P 8048,14960 x8255 y14913 x8650 w=20      # dec00_n: right, up, right under R1 and the R2 feeder
+C 8642,14910
+M 8642,14898 y15060                       # thin vertical down the right side of R2 (continues, not traced)
+C 8100,14913
+P 8090,14913 x8210 y14870 x8500 w=20      # dec10_n: right, up, right under R1 (continues right, not traced)
+N P 8490,14870 bc1_dec10_n
