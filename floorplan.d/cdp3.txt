@@ -1,8 +1,8 @@
 # cdp3: central datapath, rows y 8450-11200
-7780,9820:10900,10330   array  pass-gate rows E, F onto bus N | two pass transistors per slice: gate_e joins bus N to the row C cells (rail d in the two left slices), gate_f joins it to the row H cells
-7600,9500:10850,9815    route  channel D tracks | six poly lines from the west, one to each row C cell
-7600,10300:10850,10720  route  channel G tracks | per slice: one poly line from the west into the row H cell, and the slice's bus N line leaving east
-8560,9200:10900,9500    ?array row C cells (6 bit) | large cell per slice, s2..s7; not traced. Believed a 6-bit register read onto bus N
-7780,10735:10900,11040  ?array row H cells (8 bit) | large cell per slice; not traced. Believed an 8-bit register read onto bus N
-8560,8450:10900,8790    ?array row A cells (6 bit) | variant of the row C cell; not traced
-7600,8790:10850,9200    route  channel B tracks and links | six poly lines from the west, one onto vertical line g at the left edge of each 6-bit cell; short poly links tie each row A cell to line f of the slice to its west. Traced
+7780,9820:10900,10330   array  read gates onto bus N (rows E, F) | two pass transistors per column: gate_e puts the six row C register bits (and 0 in the two left columns) on bus N, gate_f the eight row H values
+7600,9550:10850,9815    route  row C register outputs going west | six poly lines, one from each row C cell (true data, buffered) to the west edge
+7600,10300:10850,10720  route  channel G tracks | per column: one poly line between the west edge and the row H cell, and the column's bus N line leaving east
+8380,9195:10770,9550    array  6-bit read/write register (row C) | static register cell per column c2..c7: written from the column bit line when the write line is high, held through a grounded-gate device; one buffered output west, one onto bus N. Believed R12 or R14 (high bits)
+7780,10735:10900,11040  ?array row H cells (8 bit) | large cell per column; not traced. Believed an 8-bit register read onto bus N
+8560,8450:10900,8790    ?array row A cells (6 bit) | large cell per column c2..c7; not traced
+7600,8790:10850,9200    route  channel B tracks and links | six poly lines from the west, one into each row A cell; short poly links take a second line of each row A cell onto vertical line f, which runs down through row C to the rows below
