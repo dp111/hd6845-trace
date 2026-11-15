@@ -223,7 +223,7 @@ boundary). Per-row ports are given for the master row r5; add the row's dy (Surv
 | vcc (rail 2) | M | x 12412-12462. Top: continues up past y 7090. Bottom: runs into the horizontal VCC bus y 17035-17093 | in | VCC of the two loads per row |
 | vss (rail) | M | x 12055-12115 at y 7130 (top, continues up) | in | VSS |
 | vss (rail x 11828) | M | ends at y 7265 and y 16940 | - | how it is fed was not found (A4) |
-| `mra_la` | M | x 12276-12294. Top: contact at (12285,7127) onto a poly line y 7120-7138 that runs left past x 12180. Bottom: ends at y 16942, no contact seen at 1x | ? | signal line through all rows, no contact in any row body. Drawn only y 7265-16940 |
+| `mra_la`, `mra_la2`, `mra_la3` | M | x 12276-12294, **three pieces** (y 7110-12885, 13030-14965, 15010-16940; found 2026-11-16 from block wl). Top piece: contact (12285,7124) onto band H2 east, which ends on the gate of inverter I1 in `wl`. No contact found in any row or at the other ends: re-read item R8 | ? | not one through-line as first drawn; something on it has been missed |
 | `mra_q_rN` | P | 12840, 9965 (y 9957-9974); seen to x 13045 | in | node q, from the wiring channel on the right |
 | `mra_p3_rN` | P | 12765, 10286 (y 10277-10296, under the rail) | in | gate of INV1, from the right-hand columns |
 | `mra_n1_rN` | P | 12765, 9913 (y 9905-9922); seen to x 13045 | out | NOT p3, to the right |

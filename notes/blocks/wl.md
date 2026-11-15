@@ -78,12 +78,16 @@ la_n     = NOT mra_la      (42/22, load 30/38)   y 7265-7380
 i2_out   = NOT i2_in       (42/22, load 30/38)   y 7440-7550, mirror image
 ```
 
-- `mra_la` is the metal x 12276-12294 that runs down through all nineteen counter rows
-  without a contact (mra's notes). Its top end is a contact (12285,7124) on band H2's east
-  piece, which runs west to a pad with the contact (11350,7122); a metal x 11315-11338 hangs
-  from the pad and ends on the gate of this inverter. So the line is an **input** here and
-  must be driven at its other end (the bottom of the array, y 16942, where mra saw no
-  contact at 1x: to be looked at again at tracing zoom). The inverter's output goes by a
+- `mra_la` is the metal x 12276-12294 in the counter array. mra drew it as one line through
+  all nineteen rows with no contact. Looked at again from here at 3x: it is **three
+  pieces**, cut at the routing channels y 12885-13030 and y 14965-15010 (it passes over the
+  other two channels unbroken), each with plain rounded ends, and the bottom end at y 16940
+  has no contact either. The top piece (rows r0-r10: the 4-bit and the row counter) has a
+  top contact (12285,7124) on band H2's east piece, which runs west to a pad with the
+  contact (11350,7122); a metal x 11315-11338 hangs from the pad and ends on the gate of
+  this inverter. **Nothing has been found that drives this net**: a contact on the piece
+  inside the rows has been missed (re-read item R8 in `notes/work-packages.md`). Until
+  then the inverter's input is unknown. The inverter's output goes by a
   buried contact, a poly, the metal x 11277-11297 and band H2's west piece to a contact
   (11092,7122) and leaves north on the metal x 11080-11100.
 - I2 takes its input from the bus field on the poly y 7486-7508 and returns its output

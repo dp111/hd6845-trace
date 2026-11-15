@@ -362,3 +362,67 @@ show registers, comparators and counters as blocks plus one gate-level sheet per
 5. Then as before: remaining datapath rows, data bus and pad cell (AMB-003), bd1/bd2/bd3
    re-read in the clean shot, top-left / left-centre / bottom logic, pad ring.
 
+## 2026-11-16 West of the counters: the row counter's clock generator
+
+Serial. Blocks `wl` (new, complete) and `bw` (new, wiring part-way). Full extraction
+1,669 nets, 2,768 transistors, 0 errors, 0 warnings.
+
+**What was established**
+
+- West of the counters there is almost no logic: x 10850-11700 below y 9450 is a bus field
+  of about twenty vertical metals. The logic is one block beside the 4-bit counter
+  (x 11080-11660, y 6950-9150), 23 transistors, all extracted (`notes/blocks/wl.md`).
+- **The character-row counter's two clocks are made there from one step pulse `p`** by a
+  non-overlapping generator: slave clock = NOR(buffered master clock, p), master clock =
+  NOR(NOT p, buffered slave clock). The two NOR drivers are 350 px wide with strong loads.
+  So the row counter's master latches take the next count while `p` is high and its slaves
+  pass it on when `p` is low again: one step per pulse of `p`.
+- **`p` = NOR(a, b).** `a` is `bd1_xn1`, the same core signal whose other copy (`ck_src`)
+  holds `ck_b` low in the clock block: one signal stops both the horizontal counter's
+  master clock and the row counter's step. `b` comes from far away: followed west along the
+  central datapath's channel 3, north in a nested bundle at x 7790-7930, west through the
+  crossing field x 6330-7700 to a contact (5838,7470) and up a metal x 5841 that goes north
+  into the top-left logic (`notes/blocks/bw.md`).
+- `ck_a` and the R2 match (the horizontal sync position) are taken west on the same
+  channel; `ck_a` then goes north at x 7421, the R2 match ends on a metal at x 8340.
+- The VSS rail of the block feeds mra's "rail x 11828" (mra's open point A4, closed).
+
+**Corrections**
+
+- mra's line x 12285 (`mra_la`), "one metal through all nineteen rows, no contact", is
+  three pieces cut at two of the four routing channels. The top piece feeds an inverter in
+  `wl` and nothing found drives it: a contact has been missed in the rows (re-read R8).
+- cdp2's note that the channel-3 lines "turn down" at their west end: they turn north.
+
+**The user's instruction about revisits (2026-11-16)**
+
+"Make sure the need to revisit is noted somewhere where it will be done later, and please
+learn from this for the future." Done as: a **Re-read list** in `notes/work-packages.md`
+(nine entries now, each a task with region and reason, to be worked off before M5), a
+Re-read rule in `CLAUDE.md`, and traps 10-12 in `notes/tracing-guide.md`. A doubt about
+earlier work goes on that list in the same commit; a remark in a report does not count.
+
+**Tools and method**
+
+- `tools/classmap.py --open`: where neither chip has metal, the class comes from the two
+  chip-2 shots, which show open diffusion redder than open field. In the clean shot alone a
+  wide open diffusion is only slightly greener than field (it had been read as field) and
+  appears as pink boxes with heavy outlines between metals. With this the big drivers
+  could be read in one pass.
+- A crossing of a poly line under a metal in the clean shot shows a dark ring at each metal
+  edge. That is the metal's margin, not a contact: a contact has a widened pad and a green
+  dot. All five channel-3 lines cross twenty metals this way with no contact.
+- Trap 11 struck again within the hour (`mra_la`). Any line longer than one row group gets
+  looked at where it crosses each routing channel before it is used.
+
+**Open, in the order I would take them**
+
+1. The source of `b`: the metal x 5841 north of y 6300 (top-left logic, `tl`). That is
+   where the row counter's step is decided (scan line count, end of line): M4.
+2. What `a` / `ck_src` is: bd1's `bd1_g`, which comes from the bottom bus field.
+3. Re-read R8/R9 in the counters (the line x 12285 and node `z`), then the rest of the bit
+   cell (node `m`'s pull-up, B3/B4): the counters' next-state and clear are still not
+   extracted.
+4. North of the counters (`amr`): the 4-bit counter's outputs, bands H0/H1/H4, `la_n`.
+5. The bus field's own lines; the ends of the other channel-3 lines; then as before.
+

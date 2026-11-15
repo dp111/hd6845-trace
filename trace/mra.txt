@@ -249,8 +249,16 @@ N P 11700,12459 mra_n1_r10
 #   the rows (it jogs 10 px right at y 10200-10300 of each row; drawn straight).
 M 12437,7265 y16940 w=50
 N M 12437,9950 vcc
-M 12285,7265 y16940 w=18
+# The line x 12276-12294 is three pieces, not one (found 2026-11-16 from block wl, at 3x in both
+# shots): it is cut at the routing channels y 12885-13030 and y 14965-15010, and passes straight
+# over the channels y 9182-9435 and y 10874-10952. No contact was found on any piece in the rows;
+# the top piece's only known connection is its top contact (12285,7124), drawn in wl.txt.
+M 12285,7265 y12885 w=18
 N M 12285,9950 mra_la
+M 12285,13030 y14965 w=18
+N M 12285,14000 mra_la2
+M 12285,15010 y16940 w=18
+N M 12285,16000 mra_la3
 
 @cell mra_col2 tag=r5
 @s 30x32
