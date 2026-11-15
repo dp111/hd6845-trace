@@ -48,7 +48,7 @@ tools/t.sh BLOCK netlist.py
   four panels when you need the other shots; `--traceall` outlines the trace on every
   panel (useful to check metal). `view.py` shows one layer, or several
   with `--layers a,b --stack v`. `--layers edges` shows only outlines present in
-  both chip-2 shots.
+  both chip-2 shots. Three layers go in one row (keep W x S under 430).
 - `mosaic.py X Y W H --offsets "0,0 dx,dy ..." --scale S --layer acid1b --out NAME.png`
   shows the same rectangle at several offsets side by side, to compare repeats.
 - For following bundles of parallel wires, `tools/sel_tracks.py` and `tools/sel_cut.py`
@@ -225,8 +225,9 @@ Most of the die is repeated cells. Trace a cell once.
   is blurrier than a single clean shot; use it for dirt, not for fine junctions. In a
   composite the `acid` layer shows poly even under metal, because the fringes average
   out.
-- `tools/cdp1_sr.py` (read its docstring) makes a sub-pixel-aligned median of the
-  copies of a cell at 3-6x. The agent that wrote it says it is what made a register
+- `tools/rdp3_sharp.py` (unsharp mask; on a median composite it was one agent's most
+  useful view) and `tools/cdp1_sr.py` (read the docstrings). The latter makes a
+  sub-pixel-aligned median of the copies of a cell at 3-6x. The agent that wrote it says it is what made a register
   cell readable where the plain composite was too blurred.
 - `--shift dx,dy` on view.py / quad.py shows another instance in the master's
   coordinates: use it to compare instances.

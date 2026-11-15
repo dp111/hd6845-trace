@@ -6,8 +6,9 @@ usage: quad.py x y w h [--scale S] [--grid N] [--out FILE] [--layers a,b[,c,d]] 
 
 Default panels: metal | acid1b + trace outlines. An image costs context in proportion
 to its area, so two panels are the default; ask for four (in a 2 x 2 block) with
---layers metal,acid,acid1b,acid1b only when the extra shots are needed. Keep w*scale
-under about 640 so the result stays under 1400 px wide.
+--layers metal,acid,acid1b,acid1b only when the extra shots are needed. Three layers
+go side by side in one row (keep w*scale under 430 then). Keep w*scale under about
+640 for two panels so the result stays under 1400 px wide.
 """
 import argparse
 import os
@@ -31,11 +32,11 @@ def quad(x, y, w, h, scale=1.7, grid=50, layers=('metal', 'acid1b'), trace=True,
                font=view.font(14), stroke_width=3, stroke_fill=(0, 0, 0))
         ims.append(im)
     W, H = ims[0].size
-    cols = 2 if len(ims) > 1 else 1
-    rows = (len(ims) + 1) // 2
+    cols = len(ims) if len(ims) <= 3 else 2          # up to three in one row, four as 2 x 2
+    rows = (len(ims) + cols - 1) // cols
     o = Image.new('RGB', (W * cols + 6 * (cols - 1), H * rows + 6 * (rows - 1)), (255, 0, 255))
     for i, im in enumerate(ims):
-        o.paste(im, ((i % 2) * (W + 6), (i // 2) * (H + 6)))
+        o.paste(im, ((i % cols) * (W + 6), (i // cols) * (H + 6)))
     return o
 
 

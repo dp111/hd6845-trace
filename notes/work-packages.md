@@ -23,7 +23,8 @@ agent has verified it), `partial` (reported, with work left: see its notes).
 
 | `cdp2` | 7600-10850 x 5700-8450 | central datapath | running |
 | `cdp3` | 7600-10850 x 8450-11200 | central datapath | partial (run 1): wiring rows E, F and channels B, D, G traced (two rows of cells gated onto an 8-line bus); cell rows A, C, H, I not traced; run 2 running |
-| `cdp4` | 7600-10850 x 11200-14000 | central datapath, bottom rows | running |
+| `cdp4` | 7600-10850 x 11200-14000 | central datapath, bottom rows | done except the upper half of its top latch row (y 11100-11490): a 4-way selector per slice with three latch rows (8, 8 and 6 bits); no counters or comparators |
+| `bc1` | 7000-9000 x 14050-16300 | bottom-centre logic, upper left part; receives the six data tracks and strobe leaving the bottom of `cdp4` | running |
 | `bd3` | 14100-15900 x 16550-17100 and onward | where the strobe and select tracks from `sel` go; source of the write strobe | done: strobe = NOT e_b (so each write strobe = select AND E); R12/R13 gated and buffered like R14/R15; all 16 tracks to the region's edge |
 | `bd1` | 13000-14100 x 14700-17100 | logic left of the select gates; the write strobes pass through it heading west | running |
 | `bd2` | 15850-17000 x 14700-17100 | gate that makes the address register load strobe (x 15880-16150, y 15230-15330), source of the write strobe entering `sel` at (15850,14825), rest of that logic | running |
@@ -48,7 +49,8 @@ bus and pads.
 | `tc2` | 6400-8250 x 4450-6400 | top-centre random logic, lower half |
 | `trunks` (continue) | whole die | source of X, end of S, clk_b, taps and upper ends |
 | `lc1`-`lc3` | 4400-6450 x 6900-10400, in three parts | left-centre random logic |
-| `bc1`-`bc5` | 7000-11000 x 14600-18550, in five parts | bottom-centre random logic |
+| `bc2`, `bc3`, `bc4` | 9000-11000 x 14050-16300; 7000-9000 x 16300-18550; 9000-11000 x 16300-18550 | rest of the bottom-centre random logic |
+| `cdp4` (continue) | 7600-10850 x 11100-11490 | upper half of the top latch row: source of selector input a, bus taps, latch data |
 | `bl1`, `bl2` | 4800-6500 x 15800-18650 | bottom-left random logic |
 | `bd1`-`bd3` | 13000-14100 x 14700-17100; 15850-17000 x 14700-17100; 14100-15850 x 16550-17100 | rest of the logic below the decode array |
 | `tr1`, `tr2` | 11900-16400 x 3400-4500 | top-right logic rows |
