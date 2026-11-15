@@ -2,6 +2,7 @@
 # 19 rows at 477 px pitch. Master row for all cell coordinates: y 9912-10389 (row r5).
 # See notes/blocks/mra.md.
 @block mra
+@requires trunks                          # for ck_b, which L1 (x 12500) meets below the bottom row
 
 # ---------------------------------------------------------------------------
 # Supply rails that run through all rows (drawn once, full length).
@@ -357,3 +358,131 @@ D 12205,10210:12222,10330                 # strip up the right side: source of t
 @inst mra_col2 1,5574 tag=r16
 @inst mra_col2 1,6051 tag=r17
 @inst mra_col2 2,6528 tag=r18
+
+# ---------------------------------------------------------------------------
+# Third column, x 12470-12770 (third run). Lines through all rows, drawn once and
+# straight at their position in the body of a row (y 10045-10290 of the master):
+# x 12493-12507 "L1", x 12536-12550 "L2", x 12580-12594 "L3": three thin lines. In the top
+#   160 px of every row they run 0-22 px further right and wiggle (T1 12496-12528,
+#   T2 12559-12572, T3 12606-12615); no contact lies under them there.
+#   L1 is believed ck_b and L3 ck_a (bottom-end routes in notes/blocks/trunks.md); the
+#   bottom ends are not drawn, so they carry local names here.
+# x 12696-12744: wide rail. Named vss from structure: it is the source of two pull-downs
+#   whose drains have depletion loads to the VCC rail x 12412-12462 (nodes na and nb).
+M 12500,7265 y16940 w=14
+N M 12500,9950 mra_ckb
+@alias ck_b mra_ckb
+M 12493,16893:12532,16922                 # below row r18 the line steps right to x 12519-12532 (diagonal on the die) and meets
+                                          # the ck_b metal of trace/trunks.txt (x 12514-12532, drawn there up to y 16900)
+M 12543,7265 y16940 w=14
+N M 12543,9950 mra_l2
+M 12587,7265 y16940 w=14
+N M 12587,9950 mra_cka2
+M 12720,7265 y16940 w=48
+N M 12720,9950 vss
+
+@cell mra_col3 tag=r5
+@s 30x32
+
+# --- L1 (ck_b): contact to a poly pad; the poly runs right as the gate of a wide transistor
+M 12478,10027:12510,10058                 # metal pad round the contact
+P 12480,10028:12510,10058                 # poly pad
+C 12493,10041
+P 12505,10036:12612,10057                 # gate band (bright = over channel at x 12547-12610)
+D 12547,10012:12610,10088                 # node u above the band | channel | node na below it
+N D 12580,10024 mra_u_{}                  # u continues right along y 10012-10026 (not drawn; see notes)
+
+# --- L3 (ck_a): contact to a poly pad; the poly runs down as a gate between na and the vss rail's diffusion
+M 12572,10095:12610,10130
+P 12578,10093:12619,10131                 # poly pad
+C 12592,10113
+P 12578,10125:12600,10203                 # gate
+D 12535,10152:12684,10192                 # na | channel | diffusion under the strap bar
+D 12546,10080:12564,10160                 # na: column from under the ck_b band down to the gate
+D 12535,10108:12564,10192                 # na: wider below y 10108
+N D 12550,10120 mra_na_{}
+D 12680,10154:12702,10190                 # the diffusion runs on under the rail's edge (dark bar in the gap between bar and rail)
+D 12688,10048:12716,10116                 # column under the rail, upper part
+D 12690,10110:12727,10196                 # ... middle
+D 12700,10190:12727,10262                 # ... lower part, with the rail contact
+C 12714,10237
+
+# --- load 3: VCC box (12433,10172) -> strip under the gate block -> na
+D 12405,10150:12475,10198                 # VCC box under the rail x 12412-12462 (also feeds load 1 on its left, not traced)
+C 12433,10172
+D 12470,10163:12540,10190                 # strip
+P 12481,10148:12529,10206                 # gate block (dull 10149-10159, bright 10165-10188, dull 10198-10206 down x 12502)
+?P 12509,10122:12529,10150                # its tie up into the box
+B 12509,10118:12541,10147                 # heavy-outlined box on the left edge of na
+D 12515,10122:12548,10143                 # na inside the box
+
+# --- load 4: VCC box (12433,10305, in mra_col2) -> strip under the gate block -> nb
+D 12470,10303:12556,10330                 # strip
+P 12474,10286:12548,10332                 # gate block (dull 10288-10296, bright 10306-10326 down x 12502)
+P 12530,10268:12548,10290                 # block's upper part under L2
+?P 12545,10268:12580,10283                # ... and across the gap between L2 and L3 to the pad over the box
+D 12552,10300:12622,10347                 # nb
+N D 12590,10330 mra_nb_{}
+D 12580,10270:12596,10306                 # nb up into the box
+B 12577,10267:12599,10299                 # buried contact: nb to the pad poly
+P 12575,10252:12651,10290                 # pad with its arm over the box
+C 12629,10271
+# strap: nb pad -> bar -> pad at (12655,10124); the bar stops 28 px short of the rail
+M 12612,10254:12648,10290                 # metal pad round the contact
+M 12632,10260 y10173 w=17
+M 12622,10159:12668,10188
+M 12655,10108 y10165 w=30
+P 12638,10105:12676,10146                 # poly pad
+C 12655,10124
+P 12653,10030:12680,10108                 # its poly goes up, in the open (orange): a gate, what it crosses is not resolved
+
+# --- m: the row's bottom line ends by turning up as the gate of nb's pull-down
+P 12470,10364:12649,10381                 # m (poly continuous along y 10372 to x 12645)
+P 12626,10300:12649,10381                 # gate, ends free at y 10300
+D 12610,10319:12690,10349                 # nb | channel | open (mauve) diffusion
+D 12689,10304:12752,10363                 # ... under the rail
+C 12713,10340
+
+# --- vertical poly under the rail's right half: gate between the rail's diffusion and node d2
+P 12730,10050:12747,10194                 # dull (over field) y 10052-10108, bright (channel) y 10120-10180; where it is driven from is not resolved
+N P 12738,10080 mra_gb_{}
+D 12700,10120:12770,10182                 # rail column | channel | d2 (x 12752-12770)
+N D 12762,10150 mra_d2_{}
+
+# --- p3: along y 10231-10246, down at x 12670-12689, on to the right under the rail at y 10277-10296
+P 12470,10231:12689,10246
+P 12670,10231:12689,10296
+P 12670,10277:12765,10296                 # continues right
+
+# --- q: along y 9977-9997, up at x 12762-12784, on to the right at y 9957-9974
+P 12470,9977:12784,9997
+P 12762,9957:12784,9997
+P 12762,9957:12840,9974                   # continues right (seen to x 13045)
+
+# --- n1: along y 9924-9945, up at x 12700-12720, on to the right at y 9905-9922
+P 12470,9924:12720,9945
+P 12700,9905:12720,9945
+P 12700,9905:12765,9922                   # continues right (seen to x 13045)
+
+# --- narrow diffusion strip from the upper box of line C to under the rail (ends at x 12750; purpose not known)
+D 12398,9957:12750,9969
+@end
+
+@inst mra_col3 0,-2646 tag=r0
+@inst mra_col3 0,-2169 tag=r1
+@inst mra_col3 0,-1692 tag=r2
+@inst mra_col3 0,-1215 tag=r3
+@inst mra_col3 0,-477 tag=r4
+@inst mra_col3 0,477 tag=r6
+@inst mra_col3 0,1040 tag=r7
+@inst mra_col3 1,1518 tag=r8
+@inst mra_col3 1,1995 tag=r9
+@inst mra_col3 1,2472 tag=r10
+@inst mra_col3 1,3123 tag=r11
+@inst mra_col3 1,3601 tag=r12
+@inst mra_col3 1,4077 tag=r13
+@inst mra_col3 1,4554 tag=r14
+@inst mra_col3 1,5097 tag=r15
+@inst mra_col3 1,5574 tag=r16
+@inst mra_col3 1,6051 tag=r17
+@inst mra_col3 2,6528 tag=r18
