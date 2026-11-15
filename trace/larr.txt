@@ -111,7 +111,7 @@ D 3220,11740:3272,11772             # tab under the buried contact
 D 3250,11777:3300,11822             # under gate P4 to the box on the right
 D 3215,11843:3272,11858
 D 3215,11843:3235,11943
-D 3215,11925:3292,11943             # ends where poly Pq2 (y 11928-11948, not drawn) begins; junction not resolved
+D 3215,11925:3292,11943             # N2 strip; runs on under the plate Pq (below) as the hold device's channel
 P 3190,11775:3245,11840             # load gate block
 P 3220,11745:3248,11780
 B 3220,11745:3250,11775
@@ -126,9 +126,10 @@ P 3320,11730:3342,11758             # into the buried contact box
 P 3240,11863:3280,11907             # pad under the strap contact
 
 # ---------------- column 3: x 3290-3475 -----------------------------------
-# Rail E: wide vertical metal of irregular outline.  It is the source of three
-# pull-downs here (contacts to T1 and R2) and also contacts two poly lines, so it is
-# drawn as a signal (larr_phe), not as VSS: see notes, Ambiguities.
+# Rail E: wide vertical metal of irregular outline.  It is VSS: it is the lower end of
+# the wide trunk that comes down through the upper section (they join at y 10986-11000),
+# the source of four pull-downs per row, and the gate of the hold device (Pq) and of
+# the poly lines H1/H3.  See notes.
 M 3300,11462:3350,11632
 M 3300,11575:3400,11632             # widens to the right over Pv1
 M 3385,11625:3423,11730             # passes right of the H2 contact box
@@ -136,10 +137,10 @@ M 3320,11722:3418,11747
 M 3300,11740:3350,11870
 M 3310,11868:3350,11915
 M 3292,11900:3360,11955
-N M 3325,11480 larr_phe
+N M 3325,11480 vss
 C 3322,11587                        # to T1
 C 3324,11790                        # to R2
-C 3330,11890                        # to the tab of poly Pq1
+C 3330,11890                        # to the tab of the hold device's gate plate (Pq)
 
 # T1: diffusion on rail E; pull-down of net a (gate P2, the carry-in) on its left,
 # pull-down of N3 (gate Pv1 = mid) on its right
@@ -184,13 +185,113 @@ P 3360,11855:3397,11897             # poly square in a heavy box: buried contact
 B 3362,11858:3398,11897
 D 3362,11860:3422,11895             # under the contact and across to the strip
 D 3400,11872:3422,11935             # strip down the open space between rail E and Vm1 (diffusion by colour)
-?D 3400,11930:3422,11978            # ... on down into the band along the top of the next row (seen in the composite; not checked on the last row of each group)
+D 3400,11930:3422,11978             # ... on down into the band along the bottom of the row (measured continuous, col 3411)
 N P 3371,11800 larr_g6_{}
 
-# poly tap of rail E at the bottom of the row (the one at the top is in larr_top_n)
+# Hold device: one poly plate tied to rail E (VSS) by the contact on its tab.  Its upper
+# half (Pq1, y 11900-11921) lies on field; its lower half (Pq2, y 11924-11944, measured
+# brighter = poly on thin oxide) lies on a diffusion strip that joins the N2 strip to
+# the tab of the g6 strip.  Channel about 85 long x 17 wide, gate at VSS: believed a
+# depletion device, a weak N2 -> g6 feedback that makes the bit static (same structure
+# as the hold devices of cdp2 and rdp3).  The strip under the plate cannot be seen.
 P 3318,11880:3345,11902             # tab
-P 3290,11900:3388,11921             # Pq1
+P 3290,11900:3378,11921             # Pq1 (on field)
+P 3290,11915:3378,11946             # Pq2 (on the strip); one piece with Pq1
+?D 3285,11926:3392,11942            # strip under the plate
+D 3382,11920:3405,11940             # tab of the g6 strip (open diffusion, green)
+A 3295,11922:3375,11945 kind=hold
 
+@end
+
+# ----------------------------------------------------------------------
+# Latch part of a row, x 3480-3900 (master = row s1).  See notes, "Lower row, latch part".
+#   X1 (dynamic, gate of Pv7) <- N3 through Pv2 (Vm2), or <- X2 through Pv3 (Vm3)
+#   X2 = NOT ld          (ld = the poly band y 11553-11568 that arrives from the right)
+#   N5 = NOR(X1, Vm4)    (Vm4 is tied to VSS at the bottom of the array, so N5 = NOT X1)
+#   Y  <- N5 through the gate under Vm5;  g6 (the stored bit) <- Z through the gate of Vm6
+#   g6 -> VSS through the gate of Vm1 (clear)
+@cell larr_lat tag=s1
+# --- the two pass gates into X1
+D 3483,11637:3622,11692             # N3 end | Pv2 | X1 | Pv3 | X2
+P 3513,11606:3535,11700             # Pv2
+P 3513,11606:3554,11628             # ... link (in the open gap between rail C and Vm2: measured poly)
+P 3538,11585:3554,11628
+P 3540,11552:3580,11592             # pad under the contact of Vm2
+C 3560,11567
+M 3545,11552:3578,11583
+P 3577,11600:3598,11700             # Pv3
+P 3577,11598:3627,11620             # ... link
+P 3598,11552:3628,11615             # pad under the contact of Vm3
+C 3611,11567
+M 3596,11552:3626,11583
+# X1: from between the gates down and along to the buried contact of Pv7.  The 16 px
+# "bar" between X2 (above, to y 11692) and this branch (from y 11709) is field: it is
+# green in the open gap at x 3586, not poly.
+D 3551,11685:3568,11733
+D 3551,11709:3650,11733
+B 3615,11707:3651,11736
+P 3618,11709:3650,11740
+P 3626,11735:3649,11816             # Pv7
+N D 3556,11665 larr_x1_{}
+# --- load L5 (VCC box is in larr_bit), node N5, pull-downs Pv7 and Pv8 onto rail D
+D 3528,11752:3600,11782             # load strip under the block
+P 3535,11746:3592,11788             # load gate block
+P 3568,11784:3592,11822             # stem into the buried contact
+B 3566,11792:3602,11824
+D 3566,11794:3630,11822             # tab under the contact
+D 3594,11752:3758,11808             # N5 | Pv7 | rail D box | Pv8 | N5
+D 3594,11800:3624,11847
+D 3727,11800:3758,11847
+D 3594,11825:3765,11847             # strip under the rail D box joining the two halves of N5
+C 3668,11778                        # rail D
+P 3706,11740:3725,11816             # Pv8
+P 3702,11707:3750,11745             # pad under the contact of Vm4
+C 3736,11726
+M 3722,11710:3754,11742
+N D 3610,11770 larr_n5_{}
+# --- X2 = NOT ld: load on the VCC rail x 3823-3873, pull-down Pv5 onto rail D
+D 3618,11653:3788,11676             # X2 strip from the pass gate to the buried contact of its load
+D 3737,11630:3753,11657             # up to the drain of Pv5
+D 3650,11580:3704,11637             # rail D box
+C 3668,11605
+D 3700,11601:3880,11637             # Pv5 channel | X2 | load channel | VCC box
+D 3818,11601:3880,11662             # VCC box
+C 3848,11630
+P 3705,11553:3725,11648             # Pv5: comes down from the left end of ld
+P 3703,11561 x3965 w=16             # ld, on to the right (not followed past x 3965)
+P 3768,11590:3816,11646             # load gate block
+P 3757,11640:3792,11676             # stem / poly in the buried contact
+B 3754,11648:3792,11678
+N D 3745,11615 larr_x2_{}
+N P 3900,11561 larr_ld_{}
+# --- pass gate under Vm5: N5 -> Y
+P 3765,11707:3800,11745             # pad under the contact of Vm5
+C 3783,11726
+M 3768,11710:3798,11742
+P 3774,11740:3795,11830             # gate
+D 3750,11752:3813,11822             # N5 | gate | narrow strip in the open gap (measured: not field, not poly)
+D 3802,11752:3813,11824
+D 3802,11805:3895,11824             # Y, on to the right (not followed past x 3895)
+N D 3850,11815 larr_y_{}
+# --- clear: g6 -> rail D through the gate driven from Vm1
+P 3427,11895:3461,11930             # pad under the contact of Vm1
+C 3440,11912
+M 3425,11897:3452,11928
+P 3455,11901:3557,11920             # gate
+D 3490,11865:3549,11977             # rail D side | gate | down into the band (measured continuous)
+D 3490,11865:3704,11895             # ... along to the rail D box
+D 3650,11862:3705,11920             # rail D box
+C 3672,11885
+# --- the band along the bottom of the row: this row's stored bit g6
+D 3398,11950:3828,11977
+D 3800,11907:3828,11977             # ... up at its right end (its left half shows dark in the metal gap)
+D 3821,11862:3886,11933             # g6 | gate of Vm6 | Z
+P 3841,11851:3862,11946             # gate
+P 3841,11940:3926,11965             # ... foot along the bottom to the contact of Vm6
+C 3907,11955
+M 3894,11942:3924,11968
+D 3862,11913:3940,11933             # Z, on to the right (not followed past x 3940)
+N D 3875,11900 larr_z_{}
 @end
 
 # ----------------------------------------------------------------------
@@ -210,7 +311,7 @@ P 3020,11496 x3312 w=20
 ?P 3303,11486:3323,11532            # H1 turning down to the pad (junction itself not resolved)
 P 3318,11512:3352,11532             # pad under the contact from rail E
 C 3337,11522
-P 3345,11519 x3780 w=22             # H3, on to the right (not followed further)
+P 3345,11519 x4100 w=22             # H3, on to the right (seen to x 4100; tied to VSS at the pad)
 @end
 
 # Top edge of the first row of the second and third group (s7, s10): no metal from
@@ -246,6 +347,19 @@ C 2890,11810
 @inst larr_bit 1,5161 tag=s11
 @inst larr_bit 1,5639 tag=s12
 @inst larr_bit 1,6116 tag=s13
+@inst larr_lat 0,-478 tag=s0
+@inst larr_lat 0,477 tag=s2
+@inst larr_lat 0,954 tag=s3
+@inst larr_lat 0,1431 tag=s4
+@inst larr_lat 0,1909 tag=s5
+@inst larr_lat 0,2386 tag=s6
+@inst larr_lat 1,3079 tag=s7
+@inst larr_lat 1,3557 tag=s8
+@inst larr_lat 1,4034 tag=s9
+@inst larr_lat 1,4684 tag=s10
+@inst larr_lat 1,5161 tag=s11
+@inst larr_lat 1,5639 tag=s12
+@inst larr_lat 1,6116 tag=s13
 @inst larr_top_n 0,0 tag=s1
 @inst larr_top_n 0,477 tag=s2
 @inst larr_top_n 0,954 tag=s3
@@ -267,16 +381,24 @@ C 2890,11810
 @inst larr_l0tap 1,4034 tag=s9
 
 # ---- first group (s0-s6)
-# top of s0: the carry-in of the whole counter.  P2's top is a poly pad with a contact
-# to a wide metal line that comes down from the upper section at x 3250-3295 and ends
-# here.  The poly line from the left column joins the same pad.
-M 3252,10940:3294,11043
-N M 3273,10950 larr_cin_s0
-C 3277,11020
+# top of s0: the carry-in of the whole counter is the poly line that comes along from
+# x 2897 (where it turns up and leaves) and bends down into the row as P2.  The wide
+# metal above the bend is NOT connected to it: it is the trunk from the upper section,
+# which steps right here and goes on down as rail E (VSS).  Measured: the poly bend is
+# plain salmon everywhere (no contact patch; real metal-poly contacts here measure
+# greenish), the "contact" seen earlier is the field in the bend's inner corner, and
+# the dark lines round the bend in the metal shot are 8 px wide and sit on the poly's
+# edges (not a metal gap).
+M 3259,10900:3310,11000             # trunk (goes on up)
+M 3259,10984:3356,11002             # ... steps right
+M 3259,10998:3299,11038             # ... a lobe over the poly bend, no contact
+M 3302,10990:3356,11000
+N M 3285,10950 vss
 P 3258,11000:3295,11040
 P 3263,11035:3292,11070
 P 2897,11010 x3262 w=24             # ... comes along from x 2897, where it turns up
 P 2885,10945:2910,11022             # and leaves upward (not followed)
+N P 3275,11020 larr_cin_s0
 # L0 of the first group: metal x 2880-2900 from s0's tap to s6's.  s6's tap is moved up
 # (contact at 2893,14114, neck down to the row's stub) to clear a poly band.
 M 2880,11318:2900,14130
@@ -332,4 +454,29 @@ M 2770,18520:4780,18550             # top edge of the wide band below the array 
 N M 3400,18535 vcc
 M 3305,14320:3350,14560             # rail E through the first gap
 M 3305,15970:3350,16165             # ... and the second
-M 3302,10985:3350,11000             # ... top end of the part drawn (it goes on up beside the wide line that feeds s0)
+
+# ---- vertical lines through the latch part of all 14 rows.  All of them start at the
+# top of s0 (y 11045) except rail D; all run straight through both gaps (checked).
+M 3428,11045:3448,18350             # Vm1: clear.  Ends on a contact at 3438,18342 (line to the right, not followed)
+N M 3438,14400 larr_vm1
+M 3552,11045:3575,18436             # Vm2: gate of Pv2 (take the incremented value).  Turns right at y 18430
+N M 3563,14400 larr_vm2
+M 3599,11045:3621,18410             # Vm3: gate of Pv3 (take NOT ld).  Turns right at y 18405
+N M 3610,14400 larr_vm3
+M 3648,10950:3697,18130             # rail D = VSS (pull-downs); joins a wide band at y 10935-10985
+N M 3672,14400 vss
+M 3727,11045:3750,18243             # Vm4: gate of Pv8.  Its only other connection is the strip below
+M 3771,11045:3795,18180             # Vm5: N5 -> Y.  Ends on a contact at 3783,18166 (not followed)
+N M 3783,14400 larr_vm5
+M 3823,11041:3873,18525             # VCC rail of the X2 loads; top end at y 11041, bottom into the VCC band
+N M 3848,14400 vcc
+M 3903,11045:3922,18215             # Vm6: Z -> g6.  Ends on a contact at 3913,18207 (not followed)
+N M 3912,14400 larr_vm6
+# bottom end of rail E: a contact, then a diffusion strip (tan under the metal lines,
+# green in the open, nothing crosses it) to a contact under the end of Vm4.  So Vm4 is
+# tied to VSS and Pv8 never conducts.
+M 3302,18050:3356,18240
+C 3330,18212
+D 3312,18201:3752,18222
+D 3722,18201:3752,18246
+C 3737,18229
