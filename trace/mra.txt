@@ -98,8 +98,8 @@ P 11963,10245:12060,10262                 # band-3 (x(N+1) going right); jogs up
 P 11963,10245:11986,10335                 # down through the INV2 channel; continued by mra_link or a per-row piece
 # --- band-2: arrives from the right, ends in a stub under the metal strip
 P 11950,10158:12060,10178                 # jogs down at x 12052-12076, continued in mra_col2
-P 11950,10158:11985,10232
-N P 12040,10168 mra_b2_{}
+P 11950,10158:11985,10232                 # band-2 turns down under the metal strap ...
+P 11932,10207:11962,10228                 # ... and joins the INV2 load gate block: band-2 is n2 (seen at 6x in acid1b and acid, view a2b.png)
 @end
 
 # Row placements, r0 (top) .. r18 (bottom); offsets from findcell.py.
@@ -318,7 +318,7 @@ P 12125,9924:12470,9945
 
 # --- the stack under and right of the VSS rail x 12055-12115
 P 12052,10160:12076,10196                 # band-2 jogs down
-P 12070,10175:12153,10196                 # band-2, gate across R; ends at x 12153
+P 12070,10175:12153,10196                 # band-2 (n2 = NOT cin), gate across R; ends at x 12153
 P 12052,10233:12076,10262                 # band-3 (cin) jogs up
 P 12070,10233:12152,10256                 # band-3, gate across R; ends at x 12152
 D 12079,10153:12136,10279                 # R: top part | band-2 gate | middle | band-3 gate | bottom part

@@ -1,6 +1,6 @@
 11730,7260:12060,16945  logic  AND chain column of the mid-right array | per row: x(N) = x(N+1) AND q(N), rippling upward (bottom row first) in groups r0-r6, r7-r10, r11-r14, r15-r18; plus one inverter per row (n1 = NOT p3)
 11680,10880:11722,12580  route  group line A (rows r7-r10) | wired NOR of g1 = AND of q of rows r7-r10, feeds the chain input of row r6
 11680,14955:11722,17090  route  group line B (rows r15-r18) | wired NOR of g1 = AND of q of rows r15-r18 with its load at the bottom, feeds the chain input of row r14
-12060,7260:12470,16945  logic  chain input column of the mid-right array | per row: inverter g1 = NOT q, a stack gated by the chain value and by b2 on the row's bottom line m, routes of q, p3, n1, m; VCC rail x 12412-12462 and signal line A x 12276-12294 run through
-12470,7200:13000,17050  ?array  mid-right array, storage columns | not traced: 19 identical rows at 477 px; q, p3 and m of each row are made here; rails at x 12700 and 12935
-13000,7200:13320,17050  ?route  vertical bus right of the mid-right array | about 8 vertical metal lines, probably the internal data bus; not traced
+12060,7260:12470,16945  logic  chain input column of the mid-right array | per row: inverter g1 = NOT q, and a network on the row line m gated by the chain value, its inverse and NOT q (believed the toggle logic of a counter bit); routes of q, p3, n1, m; VCC rail x 12412-12462 and signal line A x 12276-12294 run through
+12470,7200:13040,17050  ?array  mid-right array, storage columns | not traced: 19 identical rows at 477 px; q, p3 and m of each row are made here; rails at x 12700 and 12935
+13040,7200:13375,17050  route  wiring channel right of the mid-right array | seven vertical metal lines at 43.5 px that start and stop at different rows (contacts in r0, r3, r4, r10, r14-r18); row outputs cross under it in poly; not traced
