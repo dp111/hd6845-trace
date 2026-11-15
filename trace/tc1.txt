@@ -174,22 +174,20 @@ P 7722,3799:7984,3818              # h, to contact (7968,3808)
 P 7722,3885:8028,3901              # i, to contact (8010,3894)
 P 7722,3927:7936,3946              # j, to contact (7922,3939)
 C 7922,3939 s=24x24
-M 7922,3928 y4060 w=20             # continues down (not yet followed)
+M 7922,3928 y4040 w=20             # down to contact (7922,4027), where track T1 arrives from the west
 P 7845,3843:7936,3866              # output poly
 B 7841,3839:7876,3870
 C 7922,3854 7922,3679 s=24x24
 M 7922,3668 y3866 w=20             # R5 output up to band e
 N M 7922,3760 tc1_r5_out
-N M 7922,4050 tc1_j
 # the four inputs of R5 arrive on metal verticals from below (not yet followed down)
 C 8052,3768 s=24x24
 M 8053,3758 y4060 w=20
 N M 8053,4050 tc1_g
 C 7968,3808 s=24x24
-M 7968,3798 y4060 w=21
-N M 7968,4050 tc1_h
+M 7968,3798 y4082 w=21             # down to track T2
 C 8010,3894 s=24x24
-M 8010,3884 y4060 w=20
+M 8010,3884 y4128 w=20             # down to track T3
 N M 8010,4050 tc1_i
 
 # =====================================================================================
@@ -250,7 +248,6 @@ P 7265,3425:7298,3450
 C 7279,3437 s=24x24
 M 7274,3427 y4070 x7346 w=19       # W3 lower: contacts L4's band e, then east along y 4060-4081 to contact (7336,4070)
 C 7336,4070 s=24x24
-P 7324,4062:7400,4081              # poly east from that contact (continues; not followed)
 C 7273,3852 s=24x24
 B 7358,3420:7396,3452
 N P 7395,4071 tc1_l2_out
@@ -306,3 +303,32 @@ C 7186,2986 s=24x24
 P 7174,2977:7308,2997
 P 7290,2950:7308,2997              # continues north
 N M 7185,3000 tc1_w1
+
+# =====================================================================================
+# Three tracks under the island (y 4018-4127), each: contact, poly east under the left
+# and centre rails, contact, metal east to one of R5's input verticals.
+# =====================================================================================
+# ---- T1: L3's output (W4 lower) to R5's input j. Tap at (7554,4028) to a metal going south.
+C 7380,4026 s=24x24
+P 7366,4018:7745,4036
+P 7536,4015:7576,4039
+C 7554,4028 s=24x24
+M 7555,4018 y4145 w=20             # south over T2 and T3 without contact; continues (not followed)
+C 7730,4026 s=24x24
+M 7718,4028 x7934 w=18             # continuous into the contact at V1's foot (measured along y 4028)
+C 7922,4027 s=24x24
+P 7909,4012:7942,4042              # poly pad under that contact; a poly leaves it southward (not drawn, see notes)
+# ---- T2: L2's output (W3 lower) to R5's input h. Tap at (7510,4069) to a metal going south.
+P 7324,4062:7700,4081
+P 7498,4056:7533,4081
+C 7510,4069 s=24x24
+M 7510,4059 y4145 w=19             # south over T3 without contact; continues (not followed)
+C 7683,4070 s=24x24
+M 7672,4073 x7968 w=19
+# ---- T3: R5's input i. West end: contact (7380,4114), metal west and then south at
+#      x 7265-7284 past y 4450.
+C 7380,4114 s=24x24
+P 7366,4107:7745,4127
+C 7730,4116 s=24x24
+M 7718,4118 x8010 w=19
+M 7392,4117 x7275 y4450 w=19       # continues south (a contact at about 7273,4439 not looked at)

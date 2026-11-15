@@ -7,7 +7,8 @@ Trace: `trace/tc1.txt`. Coordinates are metal-shot pixels. Local names start `tc
 Run 1 (2026-11-15). Surveyed the whole region; traced and overlay-checked the whole
 **island** (x 7330-7900, y 3050-4050: nine gates, 26 transistors, no latch) together
 with the wiring that joins its gates to each other: the four metal verticals in the
-channel west of it (x 7174-7325) and the verticals east of it (x 7914-8064).
+channel west of it (x 7174-7325), the verticals east of it (x 7914-8064) and three
+tracks that pass under its south end (y 4018-4127) from the west side to the east.
 Not traced: the gate columns at x 6400-7000, the rest of the channel x 7000-7170, and
 the bus fields above (y < 2975) and below (y > 4060), where every signal that enters or
 leaves the island still has its far end. See Ports and Not done.
@@ -112,10 +113,14 @@ tc1_l2_out = NOR(tc1_a, tc1_l1_out)        = NOT a . b        (driver)
 tc1_l3_out = NOR(tc1_r1_out, tc1_l1_out)   = a . b            (driver)
 tc1_l4_out = NOR(tc1_l2_out, tc1_w1)
 tc1_r2_out = NOR(tc1_a, tc1_b)
-tc1_r5_out = NOT(tc1_g.tc1_h + tc1_i.tc1_j)
-tc1_r4_out = NOT tc1_r5_out
-tc1_f      = NOR(tc1_r2_out, tc1_r4_out)   = (a + b) . NOT(g.h + i.j)   (driver)
+tc1_r5_out = NOT(tc1_g.tc1_l2_out + tc1_i.tc1_l3_out)
+tc1_r4_out = NOT tc1_r5_out                = b . (g.NOT a + i.a)
+tc1_f      = NOR(tc1_r2_out, tc1_r4_out)   = (a + b) . NOT(b.(g.NOT a + i.a))   (driver)
+           = a.NOT b  +  b.NOT a.NOT g  +  a.b.NOT i
 ```
+
+In words: `f` is high when (a,b) = (1,0); when (a,b) = (0,1) unless `g`; when (a,b) =
+(1,1) unless `i`; never when a = b = 0.
 
 **No latch, no flip-flop, no clocked device and no pass transistor in the island**: nine
 static gates. What the signals are is **not known**; none is traced to a pad or to a
@@ -165,15 +170,32 @@ named line. What is traced about each:
 - `tc1_f`: R3's output; buried contact, poly band f, contact (7966,3506), metal east
   along y 3501-3519 and up x 8045-8064 to contact (8054,3354), poly east along
   y 3348-3362 into the datapath.
-- `tc1_g`, `tc1_h`, `tc1_i`, `tc1_j`: each arrives on a metal vertical from below:
-  g contact (8052,3768), metal x 8043-8063; h contact (7968,3808), metal x 7957-7978;
-  i contact (8010,3894), metal x 8000-8020; j contact (7922,3939), metal x 7914-7931
-  down to another contact at about (7922,4027) (poly beyond, not followed).
+- R5's four inputs each arrive on a metal vertical from below: contacts (8052,3768)
+  x 8043-8063; (7968,3808) x 7957-7978; (8010,3894) x 8000-8020; (7922,3939)
+  x 7914-7931. Three of them are fed by tracks that run under the island's south end,
+  each made the same way (contact, poly east under the left and centre rails, contact
+  at x 7683-7730, metal east):
+  - T1, y 4018-4036: from `tc1_l3_out` (7380,4026) to the foot of the x 7922 vertical
+    at contact (7922,4027). So that input **is `tc1_l3_out`**. The metal is unbroken
+    into that contact (`tc1_px.py row 4028`).
+  - T2, y 4062-4081: from `tc1_l2_out` (7336,4070) to the foot of the x 7968 vertical.
+    So that input **is `tc1_l2_out`**.
+  - T3, y 4107-4127: from contact (7380,4114) to the foot of the x 8010 vertical =
+    `tc1_i`. West of that contact the net is metal: west along y 4108-4127, then south
+    at x 7265-7284 past y 4450.
+  - `tc1_g` (x 8043-8063) continues south past y 4060 into the bus field.
+- T1 and T2 are tapped on the way: contact (7554,4028) on T1 and contact (7510,4069)
+  on T2, each to a metal going south (x 7545-7565 and x 7501-7520; they cross the
+  tracks below them without contact; followed to y 4145).
+- The contact at (7922,4027) also has a poly pad under it. A poly leaves the pad
+  southward, turns east along about y 4078-4090 to x 8000, then runs diagonally to about
+  (8123,4207) and east along y 4207-4227 towards the datapath (seen at 1.5-1.7x only,
+  **not drawn**). If that reading holds, `tc1_l3_out` also goes to the datapath just
+  above cdp1's row C.
 
 Believed, not traced: L2, L3 and R3 have strong loads and wide pull-downs, so
 `tc1_l2_out` (NOT a AND b), `tc1_l3_out` (a AND b) and `tc1_f` are lines with a heavy
-load: strobes or enables. `a` and `b` together select which of them is active; `f` is
-additionally blocked by `g.h + i.j`.
+load: strobes or enables. `a` and `b` together select which of them is active.
 
 Sizes (W/L in px): weak loads 22/60 (R1, R2), 27/59 (L1), 28/59 (R4), 23/47 (L4);
 strong loads 38/45 (R3), 40/42 (R5), about 65/36 (L2, L3; the strip's height under the
@@ -194,14 +216,13 @@ island.
 | `tc1_a` | P | y 3387-3402 at x 8250, going east; seen to x 8290 | in (believed) | same channel, 40 px below `tc1_f` |
 | `tc1_b` | M | 8100, y 3716-3733, going east to a vertical at x 8085-8100 that goes down | in (believed) | |
 | `tc1_l1_out` | M | 7230, 4450 going south (W2 lower) | out | NOT b |
-| `tc1_l2_out` | P | 7400, y 4062-4081, going east (from contact 7336,4070) | out | NOT a AND b. Heads back under the island's south side |
-| `tc1_l3_out` | M | contact at (7379,4026), y 4014-4037; beyond not seen | out | a AND b |
+| `tc1_l2_out` | M | 7510, 4145 going south (x 7501-7520), from the tap on track T2 | out | NOT a AND b |
+| `tc1_l3_out` | M | 7555, 4145 going south (x 7545-7565), from the tap on track T1 | out | a AND b |
+| `tc1_l3_out` | P | pad at (7922,4027); poly south then east, believed to reach x 8250 at y 4207-4227 (1.5x view, not drawn) | out | would enter the datapath just above cdp1's row C (y 4232) |
 | `tc1_l4_out` | P | 7150, y 3885-3905, going west | out | NOR(l2_out, w1) |
 | `tc1_w1` | P | 7299, 2950 going north (x 7290-7308) | in | the only other end of W1 |
-| `tc1_g` | M | 8053, 4060 going down | in | below is the bus field |
-| `tc1_h` | M | 7968, 4060 going down; at about y 4070 it turns west (1.5x view) | in | |
-| `tc1_i` | M | 8010, 4060 going down; at about y 4115 it turns west (1.5x view) | in | |
-| `tc1_j` | M | 7922, 4027: contact to a poly pad, poly beyond not followed | in | |
+| `tc1_g` | M | 8053, 4060 going south | in | below is the bus field |
+| `tc1_i` | M | 7275, 4450 going south (x 7265-7284); a contact at about (7273,4439) not looked at | in | |
 | `vcc` | M | centre rail 7622, drawn y 3105-4060 | | continues down to the wide bus y 4193-4257 |
 | `vss` | M | right rail 7795 drawn y 3000-4000 (it continues up); left rail 7445 drawn y 2975-4060 (continues down); strap y 2975-3040 | | |
 
@@ -241,16 +262,15 @@ ends at about x 8108 by the vertical metal x 8087-8110 (junction not looked at).
 
 ## Not done
 
-- Far ends of everything in the Ports table. Cheapest next steps: (a) the strip
-  y 4000-4100, x 7330-7950 under the island for `tc1_l2_out`, `tc1_l3_out` and
-  `tc1_j`; (b) the bus field y 4040-4450 east of x 7900 for `tc1_g/h/i` and `tc1_b`;
+- Far ends of everything in the Ports table. Cheapest next steps: (a) the two taps
+  going south at x 7510 and x 7555 below y 4145, and the poly from the pad at
+  (7922,4027); (b) the bus field y 4040-4450 east of x 7900 for `tc1_g` and `tc1_b`;
   (c) `tc1_w1` north of y 2950; (d) `tc1_a` and `tc1_f` east of x 8290 belong with
   cdp1; (e) `tc1_l1_out` south of y 4450 belongs with tc2.
 - Seen in the channel, foreign, not drawn: a poly from the west along y 4000-4012 that
   turns south at x 7177-7202 (it starts 40 px below W1's end and does not touch it),
   east along y 4143-4168 to contact (7315,4158), metal south x 7307-7325 to contact
-  (7315,4395), poly west along y 4385-4402. And a metal from contact (7382,4114) west
-  along y 4108-4127, south at x 7265-7284 past y 4450.
+  (7315,4395), poly west along y 4385-4402.
 - The six vertical metals at x 8090-8330 and where `cdp1_a1_q` ends.
 - Gate columns x 6400-7000 (about 40 loads visible; three vertical rails at x 6507-6557,
   6686-6736, 6857-6900), the channel x 7000-7170, the top bus field y 2500-2975:
