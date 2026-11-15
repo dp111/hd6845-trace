@@ -3,22 +3,25 @@
 ## Status
 
 - Surveyed: 19 rows at 477 px, in groups of 4, 3, 4, 4, 4 separated by routing channels.
-- Traced, placed 19 times and checked instance by instance (two runs):
-  - `mra_chain` (first run): the chain column x 11730-12060, the two group lines at x 11700,
-    the supply rails at x 11828, 11917, 12081.
-  - `mra_col2` (second run): x 12000-12470. The source of `g1` (an inverter from node `q`),
-    the three-transistor network on the row's bottom line `m` (gated by cin, NOT cin and g1),
-    the routes of `p3`, `q`, `n1`, `m` to x 12470, the VCC rail x 12412-12462 and signal line A x 12276-12294.
-  - 248 transistors, extraction clean (0 errors, 0 warnings).
-- NOT traced: one load at 12361-12400 x 10142-10200 and what it loads; what is under the poly
-  block 12263-12350 x 10056-10091; everything right of x 12470 (about half of each row: where
-  `q`, `p3` and `m` are made); the vertical lines there; the bus field x 13000-13320; the
-  routing channels and both ends of the array.
-- "Counter carry or comparator chain": the chain is an AND chain of the per-row node `q`
-  (x(N) = x(N+1) AND q(N)), and the chain value and its inverse also gate a two-branch
-  network on a row node `m` together with NOT q. That is the shape of a counter bit's
-  toggle logic, so a counter (incrementer) is believed; it is not proven until `q`, `p3`
-  and `m` are followed into x 12470-13000. See Logic.
+- Traced, placed 19 times and checked instance by instance (three runs), 477 transistors
+  with `trace/trunks.txt` loaded, extraction clean (0 errors, 0 warnings):
+  - `mra_chain` (first run): the chain column x 11730-12060, group lines at x 11700, rails.
+  - `mra_col2` (second run, corrected in the third): x 12000-12470. Inverter `g1 = NOT q`, the
+    network on the row line `m`, routes of `p3`, `q`, `n1`, `m`; **the hold device between `q` and
+    line C's net `z` (B1, resolved)**.
+  - `mra_col3` (third run): x 12470-12770. Two depletion loads on the right of the VCC rail
+    (nodes `na`, `nb`), `nb = NOT m`, the `ck_b` pass gate `u <-> na`, the `ck_a` pull-down of
+    `na`, a pull-down of node `d2`, the routes of `q`, `p3`, `n1`, the end of `m`; three thin
+    clock lines and the VSS rail x 12696-12744.
+- NOT traced: x 12770-13040 of every row (read in part, see "Right-hand part: read, not
+  drawn"); load 1 and its node (B2); where `u`, `d2`, `gb`, `p3` and the gate driven by `nb` go;
+  the wiring channel x 13040-13375; the routing channels and both ends of the array.
+- What the array is: still not established. `q` is **not made in the row**: it is a poly line
+  that comes from the wiring channel on the right (x 13045) with only a hold device and one
+  inverter on it here, so the chain is an AND over 19 signals from outside. `m` is a per-row
+  node that is inverted (`nb`) and goes on to the clocked part. The clocked part (two
+  phases, big pass gates under `ck_a` and `ck_b`) is in x 12470-13040 and only its left
+  third is traced. See Logic.
 
 ## Survey
 
@@ -79,14 +82,39 @@ Traps met here:
 | g1 route | band-1 pad 12110-12152 x 10105-10140, contact (12136,10122); metal strip x 12157-12175 down to contact (12171,10296) on poly pad 12152-12192 x 10281-10314; poly riser x 12175-12192, then right at y 10188-10205, down under line A (x 12281-12303) to buried contact 12279-12313 x 10281-10312 | `mra_col2` |
 | inverter g1 = NOT q | gate 12227-12251 x 10270-10343 (hangs from the M1 pad); output diffusion 12251-12312 x 10283-10336; load block 12315-12375 x 10276-10338; VCC contact (12433,10305) | `mra_col2` |
 | node q | metal M1 x 12226-12250, y 10047-10276; diffusion box 12209-12260 x 10045-10092, contact (12226,10066); neck and buried contact 12234-12266 x 10010-10038; poly y 10015-10034 to x 12437, up, then y 9977-9997 to the right | `mra_col2` |
-| VSS link | VSS-land tongue onto poly pad (12183,10122); poly y 10119-10135, up at x 12283-12299, y 10096-10112; lower box 12350-12408 x 10066-10132, contact (12376,10098); metal "line C" x 12362-12390; upper box 12355-12402 x 9963-10008, contact (12374,9982) | `mra_col2` |
+| hold device (third run) | gate: VSS-land tongue onto poly pad (12183,10122); poly y 10119-10135, up at x 12263-12279 into the block 12264-12346 x 10056-10101; strip y 10072-10088 from the q box to the lower box | `mra_col2` |
+| net `z` | lower box 12350-12408 x 10066-10132, contact (12376,10098); metal "line C" x 12362-12390; upper box 12355-12402 x 9963-10008, contact (12374,9982); strip y 9957-9969 to x 12750 | `mra_col2`, `mra_col3` |
 | p3 route | INV1 gate poly continues right at y 9972-9994 to pad + contact (12325,9982); metal "line B" x 12320-12338 (12331-12349 below y 10152) down to contact (12337,10240) on a poly pad; poly y 10231-10248 to the right | `mra_col2` |
 | stack on node m | diffusion R 12079-12136 x 10153-10279 under the VSS rail, crossed by band-2 (y 10175-10196, = n2: its stub under the metal strap is joined to the INV2 load gate block by poly 11932-11962 x 10207-10228) and band-3 (y 10233-10256, = cin); middle of R -> neck -> box with contact (12014,10213) -> metal x 12003-12031 -> contact (12019,10353) on the pad of the bottom line (poly y 10364-10381, from x 12003 to the right) | `mra_col2` |
 | VSS diffusion ring | bottom band 12100-12220 x 10325-10356 (joins the VSS box at (12068,10335)); strip 12205-12222 x 10153-10330; top band 12079-12222 x 10153-10168 (uncertain corner) | `mra_col2` |
 | load 1, NOT traced | gate block 12361-12400 x 10142-10200, VCC box 12405-12473 x 10150-10198 with contact (12433,10172), output diffusion 12325-12360 x 10168-10199 | - |
-| poly block, drawn `?P` only | 12263-12350 x 10056-10091, under lines A and B, between the q box and the lower VSS box | `mra_col2` |
 
 ## Logic (traced)
+
+One row N as equations, state after the third run. **Traced** (extracted from the trace):
+
+```
+g1  = NOT q                      q: line from outside (right), hold device q <-> z, gate VSS
+x   = cin AND q                  cin = x of the row below, or a group line, or external (table below)
+n2  = NOT cin
+n1  = NOT p3                     p3: line from the right-hand part; n1 goes back right
+m   : pulled low through [n2] -> [g1] -> VSS (the g1 device is uncertain, B4)
+      and through [cin] -> node rb (not resolved, B3); no pull-up found
+nb  = NOT m                      load 4; nb gates something not resolved (C4)
+na  = NOT ck_a                   load 3, pull-down gated by L3 (ck_a by trunks.md)
+u  <-> na  while ck_b            pass gate 63/21 on L1
+d2  : pulled low by gb           neither followed
+```
+
+**Believed, not traced**: `m = NOT(cin XOR q)` or a similar function of cin and q (second
+run); u = node A, joined to node B by a second, larger `ck_b` pass gate; the `ck_a` rail
+gates a third big pass gate at x 12947. Not known: what q is outside the array, what is
+stored and where, what leaves the row besides `n1`.
+
+Tools of the third run: `tools/mra_prof.py` (colours along a cut, raw or as class runs;
+use `--raw`, the classes are rough) and `tools/mra_runs.py` (metal runs along cuts of the
+median or of the die; lines over poly and diffusion drop out, so read several cuts).
+
 
 Per row N (names `mra_<net>_rN`). First-run pieces (chain column):
 
@@ -106,8 +134,9 @@ Second-run pieces (`mra_col2`):
   (12136,10122). So **x(N) = x(N+1) AND q(N)**: the chain is an AND chain of `q`.
 - `q` is the node of metal M1: a diffusion box (12226,10066) + a buried contact to poly that
   runs right (y 10015-10034), up at x 12410-12437 and on to the right along the top of the
-  row (y 9977-9997, port at x 12470). Nothing in x < 12470 drives it except whatever the
-  untraced poly block 12263-12350 x 10056-10091 does (B1). It arrives from the right.
+  row (y 9977-9997) and, third run, on to x 13045 (y 9957-9974 from x 12784) with no
+  transistor on it. Nothing in the row drives it; the hold device is its only other
+  connection. It arrives from the wiring channel on the right.
 - `p3` (gate of INV1, so `n1 = NOT p3`) also arrives from the right: poly y 10231-10248,
   pad (12337,10240), metal line B, pad (12325,9982), poly y 9972-9994.
 - Node `m` (the row's bottom line, poly y 10364-10381, which the first run called "H0" of
@@ -121,9 +150,30 @@ Second-run pieces (`mra_col2`):
   - gate `cin` (57/23): `m` <-> the bottom part of R (`mra_rb`), whose continuation is not
     resolved (B3).
   `m` leaves to the right (port at x 12470); no load on it was found left of x 12470.
-- The VSS reaches two diffusion boxes at x 12350-12408 (lower, upper; joined by metal line C)
-  through a poly link from a pad on a tongue of the VSS land. Nothing was found that uses
-  the upper box; the lower box borders the untraced poly block (B1).
+- **Hold device (third run).** The poly from the pad on the tongue of the VSS land is the gate
+  of a load-shaped device, W/L 16/82, between the q box and the lower of two diffusion
+  boxes at x 12350-12408. The boxes are joined by metal line C and the upper one continues
+  as a narrow diffusion strip to x 12750: net `z`. Gate at VSS means a depletion device (as
+  in cdp2, rdp3, larr: tagged `kind=hold`): a weak link `q <-> z`. Nothing else was found on
+  `z` (C2), so what the link is for is not shown.
+
+Third-run pieces (`mra_col3`), traced:
+
+- `nb = NOT m`: pull-down 30/23 gated by the end of the `m` line, depletion load 27/73 (load 4).
+  `nb` leaves by a metal strap to a poly that runs up at x 12653-12680, y 10030-10108, and is a
+  gate there; what it crosses is not resolved (C4).
+- `na`: depletion load 27/48 (load 3); pulled to VSS through a transistor 40/22 gated by L3
+  (`mra_cka2`, believed `ck_a`); connected to node `u` through a pass transistor 63/21 gated
+  by L1 (`ck_b`). As extracted: `na = NOT ck_a`, and `u <-> na` while `ck_b`.
+- `d2` is pulled to VSS by a transistor 62/17 whose gate `gb` is the vertical poly under the
+  rail; neither `d2` nor `gb` has been followed.
+- `q`, `p3`, `n1` pass through this column as plain poly: no transistor on them here.
+
+Believed (not traced): `u` is node A of the right-hand part, which a second, larger `ck_b`
+pass gate joins to node B; so during `ck_b` the nodes B, A (= u) and `na` are connected, and
+during `ck_a` `na` is held low. That makes `na`/`u` a precharged or discharged line rather
+than a stored bit, but it cannot be stated until A, B and the `ck_a` gate at x 12947 are
+traced.
 
 Chain (`cin` of each row), unchanged from the first run:
 
@@ -146,7 +196,10 @@ What the traced logic shows, and what it does not:
   (r18-r15 feeding r14-r11; r10-r7 feeding r6-r0). In every row the chain value and its
   inverse gate the two branches of a network on the row node `m`, one branch of which also
   goes through a transistor gated by `g1 = NOT q`.
-- Believed: this is a counter (incrementer), not a comparator. A network on a per-row node
+- Third run: `q` is not a bit stored in the row but a line from outside, and `m` feeds an
+  inverter and the clocked part, so the "counter bit" reading below is no better supported
+  than "comparator with its result latched"; neither is shown.
+- Believed by the second run: this is a counter (incrementer), not a comparator. A network on a per-row node
   with one branch enabled by cin and the other by NOT cin, combined with q, is the shape of
   the bit's toggle logic (next = q XOR carry-in: `m` = NOT(NOT cin . NOT q + cin . q) if the
   unresolved cin branch ends in a transistor gated by q). An equality chain has no use for
@@ -169,17 +222,41 @@ boundary). Per-row ports are given for the master row r5; add the row's dy (Surv
 | vss (rail) | M | x 12055-12115 at y 7130 (top, continues up) | in | VSS |
 | vss (rail x 11828) | M | ends at y 7265 and y 16940 | - | how it is fed was not found (A4) |
 | `mra_la` | M | x 12276-12294. Top: contact at (12285,7127) onto a poly line y 7120-7138 that runs left past x 12180. Bottom: ends at y 16942, no contact seen at 1x | ? | signal line through all rows, no contact in any row body. Drawn only y 7265-16940 |
-| `mra_q_rN` | P | 12470, 9987 (y 9977-9997) | in | node q, from the right-hand columns |
-| `mra_p3_rN` | P | 12470, 10240 (y 10231-10248) | in | gate of INV1, from the right-hand columns |
-| `mra_n1_rN` | P | 12470, 9934 (y 9924-9945) | out | NOT p3, to the right-hand columns (jogs up to y 9905-9922 at x 12700-12720) |
-| `mra_m_rN` | P | 12470, 10372 (y 10364-10381) | ? | bottom line of the row, to the right-hand columns |
+| `mra_q_rN` | P | 12840, 9965 (y 9957-9974); seen to x 13045 | in | node q, from the wiring channel on the right |
+| `mra_p3_rN` | P | 12765, 10286 (y 10277-10296, under the rail) | in | gate of INV1, from the right-hand columns |
+| `mra_n1_rN` | P | 12765, 9913 (y 9905-9922); seen to x 13045 | out | NOT p3, to the right |
+| `mra_m_rN` | P | internal: ends at x 12649 as the gate of `nb` | - | row node; its pull-up has not been found |
+| `mra_nb_rN` | P | 12666, 10030 (top of the poly x 12653-12680) | out | NOT m; gate of something not resolved (C4) |
+| `mra_u_rN` | D | 12610, 10024 (y 10012-10036); band y 10012-10026 on to x 12790 | ? | node above the `ck_b` gate; believed node A |
+| `mra_d2_rN` | D | 12770, 10150 | ? | drain of the `gb` transistor |
+| `mra_gb_rN` | P | 12738, 10050 and 10194 (both ends of the poly) | in | gate under the rail; source not found (C3) |
+| `mra_z_rN` | D | strip y 9957-9969 ends at x 12750 | ? | far side of the hold device (C2) |
 | `mra_n1_r10` | P | 11700, 12459 | out | r10 only: the H2 stub is extended left to a contact at (11590,12460) on a vertical metal x 11580-11600 that runs up to about (11600,10500) and on, outside this block |
 | `mra_cin_r10` | P | 11700, 12911 | in | leaves the region to the left |
 | `mra_cin_r18` | P | 12215, 17016 | in | continues right |
 | `mra_cin_r3` | M/P | strap x 11967-11989, y 9035-9518 | ? | see A1 |
 | `mra_rb_rN` | D | 12100, 10268 | ? | bottom part of R, internal; continuation not resolved (B3) |
-| `mra_qblk_rN` | P | 12300, 10075 | ? | poly block, internal; connection not resolved (B1) |
 | gap-1 bus (6 poly lines) | P | y 9220-9425 at x 11700 | ? | not traced, pass under the rails |
+
+**Vertical lines through the rows, third run** (x measured on the median of the rows with
+`tools/mra_runs.py`, body of the row y 10045-10290; ends measured on the die at y 7200-7330
+and y 16880-17010). "T" = position in the top 100 px of a row, where the thin lines jog.
+
+| Line | x in the body | T / jog | Top end of the array | Bottom end | Net |
+|---|---|---|---|---|---|
+| VCC rail | 12412-12462 | straight | continues up | into the VCC bus y 17035 | `vcc` |
+| L1 | 12493-12507 | T 12496-12508, out to 12508-12528 at y 9916-9964 | seen at 12512-12520, y 7320; not seen above y 7310 | 12519-12532 at y 16920-16990, turns right along y 17000 | **`ck_b`** (joined to `trunks.txt`) |
+| L2 | 12536-12550 | T 12559-12572 | seen at 12562-12571, y 7320; not above | 12563-12575, ends about y 16940 | `mra_l2`, **no contact in the rows as far as traced**; not identified |
+| L3 | 12580-12594 | T 12606-12615 | 12604-12616, continues up past y 7240 | 12607-12618, ends about y 16940 at the contact (12631,16954) | `mra_cka2`; `ck_a` by `trunks.md` (second route, not drawn there) |
+| rail | 12696-12744 | straight | continues up (12696-12739 at y 7240) | 12700-12742, ends about y 16935 | `vss` (by structure) |
+| line | 12767-12782 | jogs to 12761-12790 at y 9950-9990 | not seen | 12773-12792, ends about y 16935 | not traced |
+| line | 12810-12821 | from the contact (12847,10006) down | - | - | node A of each row? (per row or through: not established) |
+| line | 12852-12868 | from the contact (12857,10087) down | - | - | node B? (same) |
+| line | 12896-12908 | straight | 12890-12897 at y 7240 | 12889-12898, down to the contact (12893,16989) | `ck_b` (by the bottom contact; not drawn) |
+| wide rail | 12936-12978 | straight | continues up | 12938-12980, continues down | VCC? (contact (12957,10161) per row) |
+| `ck_a` rail | 13013-13037 | straight | 13016-13032 at y 7300 | 13018-13032 | `ck_a` (`trunks.txt`; taps (13017,10043) per row not drawn) |
+
+Older table (second run, 1x views):
 
 Vertical metal right of x 12470, seen at 1x at the two ends (views `end_t2.png`,
 `end_b2.png`) and by `sel_cut.py`; none of it is traced, x to about 3 px:
@@ -212,7 +289,9 @@ lines start inside the chain column.
 - `mra_col2` (`--bbox 12000,9960:12470,10385`): all 18 instances match in both shots (bad
   blocks 0-2.2 % in `metal`, 1.1-4.5 % in `acid1b`, median correlation 0.95-0.97), including
   the bottom rows of the groups, so the bottom line `m` exists in r3, r6, r10, r14 and r18 too.
-  The pictures were not looked at one by one (numbers only).
+  Third run: the difference pictures of r0, r3, r4, r6, r7, r10, r11, r14, r15, r18 were
+  looked at as one montage (`cc2_acid1b.png`): the same structure in all; isolated bad blocks
+  at the contact (12337,10240), at the bottom edge near x 12365 and along the top edge.
 - Left margin (x 11545-11750): nothing is attached to the rows except the group-line
   contacts and, in r10 only, the extended n1 stub.
 - Right-hand columns (`--bbox 12200,9880:13010,10400`, first run): identical in all 19 rows;
@@ -272,24 +351,32 @@ lines start inside the chain column.
 - A6. In `acid1b` the INV1 load gate (x 11945-11984) is two-toned (textured left half,
   smooth right half) although no metal covers it in either metal shot. Read as one poly.
 
-- B1 (12263-12350 x 10056-10091). A poly block under lines A and B, between the q diffusion
-  box (left, 12209-12260) and the lower VSS box (right, 12350-12408). In `acid1b` it shows
-  an upper band y 10054-10067 (tan-pink), a dark line, a lower band y 10070-10089 (bright
-  salmon) and a thin tan strip y 10092-10100 below; in chip-2 `acid` both bands are orange,
-  the upper one duller. No contact on it, no poly leaves it. Readings: (a) one poly block over
-  a diffusion strip that joins the q box to the VSS box (channel 87 long, 19 wide): a weak
-  pull-down of `q`, depletion if it is to do anything, gate tied at one end by a buried
-  contact; (b) a gate y 10070-10089 between a diffusion strip above (part of the q box) and one
-  below (part of the VSS box), W 87, L 19, gate connection unknown; (c) a capacitor from `q`
-  to VSS. Drawn as an isolated `?P` (`mra_qblk`), no transistor. To settle: where its poly
-  is tied (5x at its two ends, (12262,10075) and (12351,10080)), and whether line C really is
-  VSS (B7).
-- B2 (12301-12400 x 10134-10200). Load 1: gate block 12361-12400 x 10142-10200, VCC box with
-  contact (12433,10172), output diffusion 12325-12360 x 10168-10199 under line B. Left of it,
-  under line B's jog and line A: a pale box with a double outline (12301-12331 x 10136-10160),
-  a salmon box with a heavy outline (12337-12359 x 10134-10162) and a tan area 12275-12305 x
-  10150-10190 above the bend of the g1 poly. What the load pulls up was not resolved (it may
-  be the load of `q`, of `m`, or of a node of the stack). Not drawn.
+- B1 (12263-12350 x 10056-10101). **Resolved in the third run: a hold device.** Profiles
+  down x 12285 and x 12329 (under lines A and B): dull poly y 10058-10064, edge, bright
+  (channel) y 10073-10085, edge, dull y 10094-10100. Along y 10081 the bright band runs
+  from x 12266 to 12344, between the q box (tan to x 12256) and the lower box (tan from
+  x 12352). So it is a poly block over a diffusion strip that joins the two boxes: channel
+  17 wide, 82-86 long. The block's lower margin is what the second run drew as the "link"
+  at y 10096-10112; the link from the pad (12183,10122) comes up at x 12263-12279 (poly
+  continuous down x 12270 from y 10095 to 10134) into the block's lower left corner, so the
+  block's gate is on that pad (VSS if B7 holds). The poly along y 10097 ends at x 12344 and
+  is followed by 12 px of green (field) before the box: the buried contact B6 does not
+  exist. Remaining doubt: B7, and what net `z` is (C2).
+- B2 (12262-12410 x 10130-10200). Load 1, third-run readings (view `b2z.png`, profiles), **not
+  drawn**: gate block x 12350-12401, y 10142-10197 (open, orange; a dark line across it at
+  y 10162-10170; bright where line B's margin covers its left end, x 12350-12360); VCC box
+  with contact (12433,10172) on its right (now drawn, it also feeds load 3); output diffusion
+  x 12325-12350, y 10170-10192. The block's upper part continues left as a poly arm over
+  field (the "salmon box", x 12338-12360, y 10140-10153) to a tan box with a double outline,
+  x 12311-12334, y 10135-10160: read as the load's buried-contact tie. Under line A there is
+  more diffusion, x 12270-12308, y 10149-10175 (tan down x 12290), right above the horizontal
+  run of the g1 poly; between it and the output diffusion, in the gap between lines A and
+  B, the clean shot is dark (not green) at y 10171-10192, so the two are probably one
+  region. Down x 12343 the output diffusion is **not** continuous with the lower box of
+  line C: the poly arm (dull, over field) lies between. Not found: the pull-down of this
+  node and where the node goes. Candidate: an inverter of `g1` (the g1 poly runs along its
+  lower edge), which would give a restored copy of `q`; with B4 this is the place to look
+  for the driver of `m` or of `z`.
 - B3 (12111-12140 x 10271-10310). The bottom part of R (`mra_rb`, below the cin gate) has a
   small tab at 12111-12132 x 10271-10282 towards the poly tab of the g1 pad (12127-12155 x
   10285-10308, dark-red blob in `acid1b`, orange in `acid`). Either R's bottom is a dead end
@@ -308,9 +395,9 @@ lines start inside the chain column.
   left end of the block over the strip; what is visible is a dark-outlined blob at the
   block's upper left corner (12312-12327 x 10277-10297) next to a green (field) spot. The
   gate is on the output side either way.
-- B6 (12346-12362 x 10094-10114). The VSS poly link ends at the left edge of the lower box
-  with a rounded dark end; the buried contact is drawn `?B`.
-- B7. That the pad at (12183,10122) is on the VSS land: metal is visible between the land's
+- B6 (12346-12362 x 10094-10114). Withdrawn in the third run: there is no buried contact
+  from the poly into the lower box (see B1).
+- B7 (now decides the gate of the hold device). That the pad at (12183,10122) is on the VSS land: metal is visible between the land's
   bottom edge and the contact in both metal shots, and `acid1b` is pink (under metal) between
   them, whereas above the neighbouring g1 pad it is green; the g1 pad's metal goes down
   instead. The contact rings themselves hide the join. If this is wrong, line C and the two
@@ -320,101 +407,119 @@ lines start inside the chain column.
   along the left side (x 12137-12145) it runs next to R's right edge. Inside it: field, the
   g1 poly pad, riser and tab.
 
-## Third run: readings of x 12470-12660, master row (working notes, being drawn)
+- C1 (12676-12690 x 10152-10190). The diffusion right of the `ck_a` gate (under the strap
+  bar) and the diffusion column under the rail are drawn as one region. Between them, in
+  the 28 px gap between the bar (ends x 12668) and the rail (from x 12696), the clean shot
+  has a dark line 7 px wide (x 12680-12687) with one pale-green sample at x 12678; above,
+  beside the pad (y 10105-10150), the same gap is plainly green (field). Tan resumes at
+  x 12690 only for y 10154-10186 (down x 12693), exactly the height of the left-hand region,
+  and the bottom edge line runs on to x 12699. The gap between L2 and L3 over `na` has the
+  same signature. If they were two regions 10 px apart, the left one would be an island
+  (the "box" 12651-12687 x 10200-10217 under it is open field: olive in the clean shot,
+  R/G 1.01 in chip-2 `acid`). Consequence of the reading: `ck_a` pulls `na` to VSS. The
+  functionally tempting alternative (a dynamic node under the bar feeding a gate) has no
+  support in the photos.
+- C2 (12750-12766 x 9955-9970). The strip of net `z` ends at x 12750; then 12 px of dark and
+  from x 12766 the poly of `q` (its jog up), dull along y 9963 and down x 12772, i.e. over
+  field. No box, no overlap: not joined as far as measured. That leaves `z` with only the
+  hold device on it, which cannot be the whole story: look for a branch of the strip
+  (350 px long, y 9957-9969, between the `n1` and `q` lines) or of the two boxes.
+- C3. The gate `gb` (x 12730-12747) has a free-looking top end at y 10048 and a foot at
+  y 10185-10207 (rounded outline 12718-12750) that was not resolved.
+- C4 (12610-12690 x 10030-10100). The poly driven by `nb` runs up beside the rail's column
+  (x 12688-12716, VSS) with a region on its left (x 12610-12650, y 10052-10100, outlined in
+  the metal shot, R/G like field in chip-2 `acid`) that may or may not be diffusion joined
+  to `na`. If it is, `nb` pulls `na` low and `na = NOR(ck_a, NOT m)`. Not drawn.
+- C5. L1 and L3 carry the clocks by the routes of `trunks.md`; only L1's join is drawn. The
+  line x 12896-12908 is taken as `ck_b` from the second run's 1x view of its bottom end.
+
+## Third column `mra_col3`, x 12470-12770 (third run)
 
 Colour key that made this column readable (clean shot, median of the rows, measured with
 `tools/mra_prof.py --raw`): under metal, **poly over a channel is bright orange-salmon
-(about 245/172/118), poly over field a duller salmon (217/163/116)**, diffusion tan
-(201/181/131), field pink (202/122/131); under the middle of a wide rail field is grey
-(155/138/112). A diffusion edge under poly is a dark line across it. So a load shows as a
-bright band between two dull ones.
+(about 240/170/120), poly over field a duller salmon (217/163/116)**, diffusion tan
+(200/180/132), field pink (202/122/131); under the middle of the VCC rail field is grey. A
+diffusion edge under poly is a dark line across it. A load therefore shows, down its length,
+as dull / edge / bright / edge / dull. In the 25-35 px gaps between metal lines the clean shot
+shows a bright green strip over field (140/170/85 for 12 px) but a dark bar over diffusion
+or poly (often with one pale-green sample at its edge); chip-2 `acid` shows only the ghosts
+of the two metal edges there and cannot tell.
 
-- Vertical metal: three thin lines. Body (y 10045-10290): L1 x 12495-12506, L2 x 12538-12549,
-  L3 x 12581-12593. Top of the row (y 9880-10000): the same lines at T1 x 12496-12508
-  (wiggles to 12508-12528 at y 9916-9964), T2 x 12559-12572, T3 x 12606-12615; T2 and T3 jog
-  22 px left at y 10000-10040, and back in the bottom of the row (y 10290-10370). By the
-  bottom-end table and `trunks.md`: **L1 = `ck_b`** (enters at x 12513-12533, y 16900),
-  **L3 = `ck_a`** (second route, from contact (12631,16954)), L2 unidentified (ends at
-  y 16942). No metal at x 12463-12490 (open field).
-- L1 contact (12493,10041) on a poly pad 12485-12506 x 10030-10055; its poly runs right at
-  y 10033-10056 to x 12618 and is a gate (bright) at x 12545-12566 and 12575-12616 over a
-  diffusion that lies above it (x 12545-12640, y 10010-10033, continues right) and below
-  it (y 10057-10095). **A wide pass transistor clocked by `ck_b`.**
-- L3 contact (12592,10113) on a poly pad 12578-12619 x 10091-10131; its poly runs down,
-  x 12578-12600, y 10139-10203, a gate (bright) between a diffusion on the left (node NA,
-  x 12531-12577, under L2) and one on the right (x 12614-12640, continues right).
+| Piece | Where (master row) | How sure |
+|---|---|---|
+| L1 = `ck_b` | metal x 12493-12507 in the body; contact (12493,10041) on poly pad 12480-12510 x 10028-10058 | joined to the `ck_b` metal of `trunks.txt` below r18 |
+| `ck_b` pass gate | poly band y 10036-10057, x 12505-12612 (ends rounded); bright at x 12547-12610 over a diffusion: `u` above (y 10012-10036), `na` below (y 10057-10088) | measured |
+| L3 = `ck_a` (second route) | metal x 12580-12594; contact (12592,10113) on pad 12578-12619 x 10093-10131 | identity by position at the bottom end only (name `mra_cka2`) |
+| `ck_a` pull-down of `na` | gate x 12578-12600, y 10125-10203 between `na` (x 12535-12577) and the diffusion under the strap bar (x 12613-12682, y 10152-10190), which runs on under the rail to its contact (12714,10237) | the join to the rail's diffusion is C1 below |
+| load 3 -> `na` | VCC box 12405-12475 x 10150-10198, contact (12433,10172); strip y 10163-10190; block 12481-12529 x 10148-10206; tie box 12509-12541 x 10118-10147 | profile down x 12502; tie stem `?P` |
+| load 4 -> `nb` | VCC box of `mra_col2` (12433,10305); strip y 10303-10330; block 12474-12548 x 10286-10332; `nb` = D 12552-12622 x 10300-10347; buried contact 12577-12599 x 10267-10299 to the pad 12575-12651 x 10252-10290 | profile down x 12502; arm of the block to the pad `?P` |
+| strap `nb` | contact (12629,10271); metal x 12624-12641 up to a bar x 12622-12668, y 10159-10188; up to contact (12655,10124) on pad 12638-12676 x 10105-10146; poly up x 12653-12680, y 10030-10108 (open, orange) | measured: the bar stops 28 px short of the rail |
+| `m` gate | `m` (y 10364-10381) ends by turning up, x 12626-12649, y 10300-10381, between `nb` and an open (mauve) diffusion x 12650-12690 that runs under the rail to contact (12713,10340) | poly continuous along y 10372 from x 12599 to 12645 |
+| rail | x 12696-12744, named `vss`; diffusion column under it x 12688-12727, y 10048-10262 | VSS by structure (source of both pull-downs) |
+| gate `gb` | vertical poly x 12730-12747, y 10050-10194; dull y 10052-10108, bright (channel) y 10120-10180 between the rail's column and `d2` (x 12752-12770) | measured; its source is not found (C3) |
+| `p3` | y 10231-10246 to x 12689, down x 12670-12689 to y 10296, right under the rail y 10277-10296 | orange in chip-2 `acid`; continues right |
+| `q` | y 9977-9997 to x 12784, up at x 12762-12784, right along y 9957-9974 (seen to x 13045) | continues right into the wiring channel |
+| `n1` | y 9924-9945, up at x 12700-12720, right along y 9905-9922 (seen to x 13045) | continues right |
+| strip of net `z` | diffusion y 9957-9969 from the upper box of line C to x 12750 | ends there: 12 px of dark, then q's poly from x 12766 lying over field (dull); no join measured (C2) |
+
+Row-to-row check (`cellcheck.py mra_col3`, both shots, pictures of r0, r3, r4, r6, r7, r10,
+r11, r14, r15, r18 looked at as montages `cc3_acid1b.png`, `cc3_metal.png`): all 18
+instances match (bad blocks 0.5-5.7 %, median correlation 0.94-0.97). Differences: the top
+edge of r0, r4, r7, r11, r15 (no row above), grain on the wide rails, the rail contact at
+(12725-12745,10225) in several rows (pits), and in r18 the clean shot only along the `p3`
+line at x 12556-12646 (not in the metal shot; taken as residue, not looked at closer).
+
+## Right-hand part, x 12770-13040: read, not drawn (third run)
+
+From `c_top.png` (3.2x), `q4.png`, `t3.png`, `t4.png` and metal runs; master row.
+
+- Vertical metal: line x 12767-12782 (jogs), **x 12810-12821**, **x 12852-12868**,
+  **x 12896-12908** (believed `ck_b`: at the bottom it ends on the contact (12893,16989) of the
+  `ck_b` route), wide rail x 12936-12978 (believed VCC), `ck_a` rail x 13013-13037.
+- Node A: diffusion 12822-12877 x 9991-10032 with contact (12847,10006); its metal goes left
+  and down as the line x 12810-12821. A also wraps down the left side (x 12790-12811) of
+- a Γ-shaped gate: bar y 10033-10052 from x 12813 to 12882, leg x 12813-12835 down to y 10112,
+  round the top and left of node B: diffusion box 12835-12888 x 10055-10110, contact
+  (12857,10087), metal down as the line x 12852-12868. The gate's bar ends on a poly pad
+  12883-12916 x 10022-10047 with contact (12896,10035) to the line x 12896-12908. **A pass
+  transistor of W about 115 between A and B, clocked by that line (`ck_b`).**
+- The band of `u` (y 10012-10026) runs right under the rail to x 12790 and appears to turn
+  down into A's left part (so u = A); not measured.
+- A second Γ gate under the wide rail: leg x 12947-12969, y 10027-10110, bar y 10027-10050
+  to the pad of the `ck_a` rail's contact (13017,10043). Diffusion left of and above it
+  (x 12927-12947, y 9990-10110), and right of the leg (x 12969-12990, y 10052-10104).
   **A pass transistor clocked by `ck_a`.**
-- The VCC boxes of the rail x 12412-12462 feed a load on each side. Right side:
-  **load 3**, poly block x 12481-12529, y 10148-10206 over a strip y 10163-10190 (profile
-  down x 12502: dull 10149-10159, edge 10162, bright 10165-10188, edge 10192, dull
-  10198-10206), from the VCC box (12433,10172) to node NA (D x 12536-12556 at y 10177; NA is a
-  column x 12544-12563 from y 10057, the lower terminal of the `ck_b` gate, down to y 10195).
-  Its tie is believed to be the heavy-outlined box 12509-12539 x 10120-10145.
-  **load 4**, poly block x 12474-12548, y 10286-10332 over a strip y 10303-10330 (profile
-  down x 12502: dull 10288-10296, edge 10300, bright 10306-10326, edge 10332), from the VCC
-  box (12433,10305) to node NB (D x 12552-12623, y 10300-10347).
-- Buried contact box 12577-12599 x 10267-10299 (heavy outline, open at the bottom towards NB).
-  The poly on it is a pad 12601-12651 x 10250-10290 with a metal contact at (12629,10271);
-  the pad has an arm to the left over the box. The load-4 block reaches the box along
-  y 10268-10283 (dark red in the gap between L2 and L3). A pink (field) strip y 10240-10250
-  separates this pad from the `p3` line (y 10228-10246) for x 12575-12650: **whether the pad is
-  joined to `p3` further right is not yet seen.**
-- Metal from the contact (12629,10271) goes up at x 12622-12636 to y 10172, right (x 12625-12667
-  at y 10164-10172) and up to a contact at about (12655,10120) on a poly pad 12640-12680 x
-  10095-10135, whose poly goes up (x 12655-12675, y 10040-10100).
-- A diffusion strip y 9955-9970 runs right from the "upper VSS box" (12355-12402 x 9963-10008)
-  under the VCC rail (tan at x 12410-12467, y 9958-9968) and on to the right: the net of
-  line C (believed VSS, B7) is distributed along the top of every row. That is what the
-  upper box is for.
-- Other pieces seen: orange poly (open) 12627-12655 x 10308-10350 right of NB.
-- More, same run (views `b_top.png`, `b4.png`, `neck6.png`, `hook5.png`, `u4.png`, `uv5.png`):
-  - The metal from the contact (12629,10271) is a strap: up at x 12624-12641, a bar x 12622-12668,
-    y 10159-10188, up to the contact (12655,10124) on the poly pad 12638-12675 x 10105-10148. The
-    bar stops 28 px short of the wide rail (open field colours at x 12678-12687 in the gap): the
-    strap is **not** on the rail. The pad's poly goes up as an open (orange) band x 12653-12680,
-    y 10030-10100.
-  - The wide rail is x 12696-12745. Under it lies a diffusion column, x 12688-12716 for
-    y 10048-10112 and x 12688-12727 below, down to y 10262, with the rail contact (12714,10237).
-  - The right-hand diffusion of the `ck_a` gate (x 12613-12682, y 10152-10190, under the bar) is
-    read as **joined to that column**: the 7 px dark line between them (x 12681-12688) lies
-    exactly in the gap between the bar and the rail, where a diffusion shows as a dark bar and
-    field as a green strip (the gap is green above, y 10105-10150, beside the pad). The gap
-    between L2 and L3 over node NA has the same signature. So the `ck_a` transistor connects NA
-    to the rail. If the two were separate (10 px apart, against the spacing used everywhere
-    else) the node under the bar would be an isolated island with no other connection: the
-    "box" 12651-12687 x 10200-10217 below it is open field (olive in the clean shot, R/G 1.01
-    in chip-2 `acid`, plain in the metal shot), not a buried contact.
-  - `p3` (y 10228-10240) runs right to x 12689, turns down at x 12670-12689 to y 10296 and
-    continues right under the rail along y 10277-10296 (orange in chip-2 `acid`).
-  - `ck_b` gate: channel x 12547-12610 (band ends rounded at x 12612). Above it the diffusion
-    U, x 12547-12630, y 10012-10036, which continues right as a band y 10012-10026 under the
-    rail to at least x 12750 (colour between poly and diffusion there: not settled).
-  - A vertical poly under the rail's right half, x 12728-12748, y 10050-10190: its lower part
-    (y 10118-10190) is a gate between the column under the rail and a diffusion D2 on its
-    right (x 12750-12775, y 10118-10190).
-  - The orange poly 12627-12651 x 10307-10365 is a gate between NB (left) and an open (mauve)
-    diffusion x 12654-12690, y 10320-10365 that runs on under the rail to the contact
-    (12714,10340). **The `m` line ends there** (it is present at x 12615 and absent at x 12662;
-    vertical cuts of chip-2 `acid`): the gate is believed to be `m` turning up, so NB = NOT m with
-    load 4; the junction at about (12640,10365) has not been looked at.
-  - `q` (y 9988-9998) is present to x 12712 and absent at x 12760. `n1` jogs up at x 12700-12720
-    and runs on along y 9906-9918 to beyond x 13045.
+- A large poly, salmon: x 12875-12912, y 10117-10200 with a bar y 10172-10200 from x 12803;
+  the orange stripe x 12838-12847, y 10172-10245 is poly seen in the gap between the two
+  metal lines. Diffusion with the rail contact (12957,10161) at x 12927-12990, y 10117-10200.
+- A poly line y 10224-10248 ends rounded at x 12862 (the continuation of `p3`?); poly under
+  the wide rail y 10222-10250 (x 12928-12990); contacts (12858,10292), (12840,10340).
 
 ## Not done
 
-- x 12470-13000 of every row: where `q`, `p3` and `m` come from, the storage, the read
-  gates. Seen but not traced (master row): n1 jogs up to y 9905-9922 at x 12700-12720; `q`
-  (y 9977-9997) continues at least to x 12760; vertical metal at x 12472-12487, 12488-12502
-  (contact (12493,10043)), 12520-12533, 12553-12573, 12597-12617 with diagonal jogs at
-  y 9900-10010; contact (12592,10113); wide rail x 12701-12750 with contacts (12715,10233)
-  and (12715,10338); line x 12766-12790; contacts (12847,10006), (12896,10036), (12857,10087)
-  inside a U-shaped gate 12813-12882 x 10033-10113, (12957,10161) on the wide rail
-  x 12931-12982, (12858,10292), (12840,10340), (13017,10043) on the line x 13012-13038; a
-  second U-shaped gate at 12950-13000 x 10029-10108. Large diffusion areas under metal there
-  (big transistors).
-- Load 1 and the poly block (B1, B2); the continuation of R's bottom part (B3).
-- Both ends of the array at tracing zoom (the table under Ports is from 1x views).
-- The field x 13040-13375 is a wiring channel, not a regular bus: seven vertical metal lines
+In the order that would pay most:
+
+1. **x 12770-13040 of every row** (readings under "Right-hand part"): nodes A and B and the
+   Γ gate between them, the `ck_a` gate at x 12947, the large poly at 12803-12912 x
+   10117-10200, the lower part y 10200-10390 (contacts (12858,10292), (12840,10340); poly
+   under the wide rail y 10222-10250 and y 10300-10340), and where `p3` is made (it runs
+   right under the VSS rail along y 10277-10296; a line y 10224-10248 ends at x 12862).
+   Views to start from: `c_top.png` (3.2x, x 12790-12990, y 9985-10275), `t3.png`, `t4.png`.
+   Draw the three lines x 12815, 12860, 12902 and the two rails once the contacts are placed.
+2. **Where `nb` acts** (C4) and whether `u` is node A: 12610-12800 x 10005-10100.
+3. **Load 1 and its node** (B2), the corner B4 and the tab B3 in `mra_col2`: with the colour
+   key of the third run (bright = channel) a profile along the g1 poly's horizontal run
+   (y 10188-10205, x 12175-12300) and one down x 12213 will say whether g1 is a gate there.
+   `m` still has no pull-up: this is where it should be.
+4. **Net `z`** (C2): follow the strip y 9957-9969 for a branch.
+5. `gb` and `d2` (C3); the foot of the `gb` poly at 12718-12750 x 10185-10207.
+6. The second `ck_a` route into L3 and the `ck_b` join of the line x 12902, at the bottom end
+   (y 16940-17000), at tracing zoom; the top ends of L1 and L2 (they are not seen above
+   y 7310: do they end inside r0?).
+7. The wiring channel x 13040-13375 (second-run notes below), the routing channels
+   (y 9182-9435 etc.) and the six-line poly bus in the first one; A1.
+
+Wiring channel, from the second run: seven vertical metal lines
   at centres 13087, 13130, 13174, 13217, 13261, 13304, 13348 (16-20 wide, pitch 43.5), which
   start and stop at different rows. Low-zoom mosaics of all 19 rows (`bm1.png`..`bm3.png`,
   0.45x) show contacts or jogs on the lines only in r0, r3, r4, r10, r14, r15, r16, r17 and
@@ -432,4 +537,3 @@ bright band between two dull ones.
   connects; whether the top rows of the groups have a line in the place of `m` of the row above.
 - Above the top row (y 7130-7265) and below the bottom row (y 16945-17050): three
   horizontal poly lines at y 7155, 7205 and the row's own top lines; not traced.
-- The instance pictures of `cellcheck.py` for `mra_col2` were not looked at (numbers only).
