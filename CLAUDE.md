@@ -27,6 +27,9 @@ first, then `notes/journal.md` (latest entry) and `notes/ambiguities.md` if they
   in a browser with a switch-level simulation of the extracted netlist running on it)
   is a deliverable once tracing is complete. Schematics may show a comparator as a
   block; the trace and netlist may not leave anything out. See `PLAN.md` M7.
+- Schematics (user, 2026-11-15): higher-order structures (N-bit registers, comparators,
+  counters) are drawn as blocks, **and** one instance of each kind gets its own
+  gate-level sheet. So every block's notes must give the bit cell's gates in full.
 - The user also wants a floor-plan overlay (`floorplan.txt` -> `out/floorplan.jpg`)
   kept current: rename and tighten a block whenever tracing identifies it.
 

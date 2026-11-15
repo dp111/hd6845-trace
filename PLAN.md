@@ -160,7 +160,11 @@ the real bus timing and produces frames; validation against the three references
 
 **M6. Schematics, model, write-up, cross-check.**
 Structural Verilog as the exact machine-checkable schematic; SVG schematic sheets per
-block; a detailed block diagram; the annotated full-die SVG; a write-up of findings
+block, in which N-bit registers, comparators, counters, selectors and similar repeated
+structures are drawn as blocks, **plus one gate-level sheet for one instance of each
+kind of such structure** (one register bit with its strobe gating, one comparator
+slice with its match line, one counter bit with its carry chain, one pad driver, and so
+on; user request 2026-11-15); a detailed block diagram; the annotated full-die SVG; a write-up of findings
 and of every disagreement with the datasheet, the CPC document and beebjit; a
 reference emulation model run in lock-step against the netlist simulation; comparison
 with Lance Ewing's work.
