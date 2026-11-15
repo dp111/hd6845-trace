@@ -296,8 +296,14 @@ N D 3875,11900 larr_z_{}
 
 # ----------------------------------------------------------------------
 # Top edge of a normal row (a row with another row directly above it):
-# carry-in by metal from the row above, and the poly line from the left column that
-# is tied to rail E at a pad and goes on to the right as H3.
+# carry-in by metal from the row above, and the line H that runs along the row boundary:
+# poly H1 from the left column, a buried contact, a diffusion strip under rails B and E
+# (measured: tan under the rails, open-diffusion colour between them; the first run had
+# it as poly), a T under rail E, and poly H3 on to the right.  The first run tied this
+# line to rail E by a metal contact on the pad beside the T.  That is NOT kept: the pad
+# is a pale box with a heavy outline, read here as a buried contact (strip to H3), and
+# the feed of this line in the left column goes to the bundle line that MA8 / MA9 use
+# on other rows (notes, "Bit numbering").  Open: see notes, Ambiguities, "Line H".
 @cell larr_top_n tag=s1
 M 3063,11462:3085,11545             # carry-in, from the row above
 M 3063,11513:3110,11545             # foot over the contact to poly P2
@@ -305,13 +311,16 @@ C 3095,11528
 P 3083,11515:3112,11545
 P 3083,11532 x3277 w=25             # P2, along and ...
 P 3263,11520:3292,11550             # ... down into the row
-P 2860,11511 x3020 w=20             # H1: poly line from the left column
-P 3008,11486:3032,11521
-P 3020,11496 x3312 w=20
-?P 3303,11486:3323,11532            # H1 turning down to the pad (junction itself not resolved)
-P 3318,11512:3352,11532             # pad under the contact from rail E
-C 3337,11522
-P 3345,11519 x4100 w=22             # H3, on to the right (seen to x 4100; tied to VSS at the pad)
+P 2860,11511 x3012 w=20             # H1: poly line from the left column
+P 3002,11486:3030,11521             # ... turns up into a buried contact
+B 3008,11482:3036,11510
+D 3012,11486:3326,11506             # strip
+D 3308,11486:3326,11538             # stem of the T (ends 15 px above T1; not seen to join it)
+?D 3320,11512:3350,11532            # pale box beside the stem
+?B 3326,11510:3353,11534
+P 3330,11512:3352,11532
+P 3345,11519 x4100 w=22             # H3, on to the right (seen to x 4277, not followed further)
+N P 3600,11519 larr_h_{}
 @end
 
 # Top edge of the first row of the second and third group (s7, s10): no metal from

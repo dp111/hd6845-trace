@@ -8,12 +8,10 @@ The lower section is a 14-bit counter, one row per bit, in three carry groups of
 and 4 rows. Traced, placed on all 14 rows and extracted clean (350 transistors, 0
 errors, 0 warnings): x 2860-3480, the incrementer and the static pair that holds the
 bit (cell `larr_bit`, first run), and x 3480-3900, the latch part (cell `larr_lat`,
-second run). Rail E is settled: VSS. Not traced: the rest of the row (x 3900-4720),
-the left column, the upper section, the logic in the two gaps. See Not done.
-
-Whether this counter is the MA counter is NOT established (it was the first run's
-working name). Evidence against taking it for granted is under Logic, "What the
-counter is".
+second run). Rail E is settled: VSS. Two `maN_drv_in` lines were followed into the
+array (MA8 to the s4|s5 row boundary, MA9 to the s8|s9 boundary): the rows are NOT in
+MA order, see "Bit numbering". Not traced: the rest of the row (x 3900-4720), the
+left column, the upper section, the logic in the two gaps. See Not done.
 
 ## Inventory
 
@@ -147,22 +145,56 @@ conducts: an unused clear of the X1 inverter.
   at x 2905 (`larr_l0nc_s10`..`s13`). Carry out of s13 continues down to a contact at
   about 3070,18122 on a horizontal poly at y 18105-18125 (not drawn).
 
-### Bit order (believed)
+### Bit numbering (two lines traced; the result contradicts the believed order)
 
-Carry direction makes s0 the least significant bit of group 0, and the chaining of
-the groups (group 2 takes group 1's all-ones line) makes s7 below s10. How group 0
-connects to group 1 is not traced (it happens in the left column / gap 1).
+Carry direction makes s0 the least significant bit of group 0 and puts group 2 above
+group 1. The first run concluded s0 = bit 0 ... s13 = bit 13. Following the driver
+inputs does not confirm that:
 
-### What the counter is (believed: MA; not confirmed by tracing)
+- **Line H.** Along every boundary between two rows (11 of them: the top edge of
+  s1-s6, s8, s9, s11-s13) runs one line: poly H3 from the right (seen to x 4277,
+  beyond the traced part), a pale box beside a T of diffusion under rail E, a
+  diffusion strip y top+16..36 from x 3326 back to a buried contact at
+  3008-3036 x top+12..40, then poly H1 to x 2860. Traced on s2 beyond that: H1 turns up
+  at x 2847-2860 to y 11824-11843 (114 px above the row top), runs left across the left
+  column and ends on a contact at 2283,11833 on a vertical metal line of the bundle.
+  Net name `larr_h_sN` (N = the row whose top edge it is).
+- **MA8.** `ma8_drv_in` (poly y 11852) ends on a contact at 2238,11880; from it a metal
+  line x 2231-2251 runs DOWN to y 13279, steps right to a contact at 2283,13268, and a
+  poly leaves it to the right along y 13257-13273 (seen to x 2590, into the left
+  column). That is the position of the H feed of s5 (13379 - 114). So MA8 belongs to
+  the s4|s5 boundary. (The first run's "short metal to 2197,11923" does not exist:
+  that contact is on a different vertical line, x 2192-2206, which comes from above.)
+- **MA9.** `ma9_drv_in` arrives as metal along y 14345-14362, turns down at x 2232-2252,
+  runs to y 14843, steps right to x 2317-2339, runs on to y 15404 and right to a
+  contact at 2458,15388; a poly leaves it to the right along y 15385-15398 (seen to
+  x 2544). That is the H feed position of s9 (15504 - 114): the s8|s9 boundary.
+- Not verified by a view: on s5 and s9 the poly was not followed from the left column
+  to H1 itself (only on s2); the equality with s2 rests on the identical position.
+- The H feed of s2 goes UP: contact 2283,11833, metal x 2283 to y 10809, step to
+  x 2326, to y 10207, step to x 2371 and on up past y 9640. So the s1|s2 boundary
+  serves a pad above MA7. `ma7_drv_in`'s metal (y 10110-10125) turns down at
+  x 2149-2164 (not followed). The line x 2192-2206 (runs y 8552-11931, top end level
+  with `ma6_drv_in` at y 8555, not checked) ends at 2197,11923 on a poly y 11905-11928
+  that goes into the left-column cell at 2550-2720 x 11880-12010.
+
+Two adjacent address bits four row boundaries apart cannot be two adjacent stages of
+one ripple chain. Either line H does not carry the bit of the row next to it (it
+comes from the cells at x > 4250, which may be another register with its own bit
+order), or these rows are not simply "MA counter bit n in row n". This is the most
+important open question of the block; it needs line H followed to its source on the
+right, and the remaining `maN_drv_in` lines followed like the two above
+(`tools/sel_tracks.py v X --a Y0 --b Y1` lists the runs of each bundle line; the
+lines step sideways, so check every end with a view).
+
+### What the counter is (open)
 
 7 + 3 + 4 rows read naturally as one 14-bit counter with its ripple carry broken
 twice (group 1's all-ones line is the carry into group 2; the carry into group 1
-comes from the left column, presumably from group 0's all-ones line `larr_l0_g0`).
-That fits the memory address counter, and every row also takes a value from the right
-(`larr_ld`, through Vm3), which fits a reload from a row-start latch. But the
-identity is not traced: the `maN_drv_in` lines have not been followed into the rows
-(the stage of MA8 is level with rows s1/s2, first run), and where `larr_ld` comes
-from is not traced either.
+comes from the left column), and every row can also take a value from the right
+(`larr_ld`, through Vm3), which fits a counter reloaded from a latch. The MA drivers
+are fed from lines that run along the row boundaries (above). But which row holds
+which MA bit, or whether line H carries a counter bit at all, is not established.
 
 ## Ports
 
@@ -174,7 +206,7 @@ traced.
 | `vss` rail A | metal x 2955-3003 | top 2979,10900 (goes on up); ends 18135 | in | ground of the carry gates |
 | `vcc` rail B | metal x 3105-3178 | top 3130,10900 (goes on up); bottom into band y 18520 | in | |
 | `vcc` rail C | metal x 3478-3528 | top 3503,10900; bottom into band y 18520 | in | |
-| `vss` rail E | metal x 3302-3356 | top: it is the lower end of the trunk x 3259-3310 that comes down through the upper section (step at y 10986-11000); bottom ends at contact 3330,18212 | in | ground of four gates per row, gate of the hold devices, and of the poly lines H1/H3 |
+| `vss` rail E | metal x 3302-3356 | top: it is the lower end of the trunk x 3259-3310 that comes down through the upper section (step at y 10986-11000); bottom ends at contact 3330,18212 | in | ground of four gates per row, gate of the hold devices |
 | `vss` rail D | metal x 3648-3697 | top joins a wide band y 10935-10985; ends y 18130 | in | ground of the latch part |
 | `vcc` rail x 3823-3873 | metal | top end y 11041; bottom into the band y 18520 | in | loads of X2 |
 | `larr_vm1` | metal x 3428-3448 | bottom contact 3438,18342, line to the right | in | clear of the stored bit |
@@ -192,18 +224,18 @@ traced.
 | `larr_cout_g0` (= `larr_cout_s6`) | poly y 14389 | 3300,14389 going right | out | carry out of group 0 |
 | `larr_cout_g1` (= `larr_cout_s9`) | contact 3095,16040 | poly under it not traced | out | carry out of group 1 |
 | `larr_cout_s13` | metal x 3063-3085 | leaves the last row at 3074,18070, contact about 3070,18122 | out | carry out of the counter |
-| H1 (on `vss`), 11 rows | poly y top+31..51 | 2860,11511 in the master; rows s1-s6, s8, s9, s11-s13 | to the left column | believed a tap of rail E |
-| H3 (on `vss`), same 11 rows | poly y top+38..60 | drawn to x 4100, goes on right | - | along the top of the row; purpose not found yet |
+| `larr_h_sN`, 11 rows (H1) | poly y top+31..51 | 2860,11511 in the master; rows s1-s6, s8, s9, s11-s13 | out (believed), to the bundle x 2150-2520 | row-boundary line; MA8 on s5's, MA9 on s9's |
+| `larr_h_sN` (H3) | poly y top+38..60 | drawn to x 4100, seen to x 4277, goes on right | in (believed) | the same line; its source is in the cells at x > 4250 |
 
 ## Ambiguities
 
 - **Rail E: settled, VSS.** It is the lower end of the wide metal trunk x 3259-3310
   that comes down through the upper section: the trunk steps right at y 10986-11000
   and goes on as rail E (one piece of metal in both metal shots, one protected
-  footprint in the clean shot). It is the source of four pull-downs per row, and the
-  two poly taps are explained: one is the gate plate of the hold device (a grounded
-  gate, as in cdp2/rdp3), the other the pad of H1/H3. Its bottom end is a contact and a
-  diffusion strip to the end of Vm4 (a tie-off). The trunk itself has not been
+  footprint in the clean shot). It is the source of four pull-downs per row, and its
+  poly tap at the bottom of the row is the gate plate of the hold device (a grounded
+  gate, as in cdp2/rdp3). The "tap" at the top of the row is not one (see "Line H").
+  Its bottom end is a contact and a diffusion strip to the end of Vm4 (a tie-off). The trunk itself has not been
   followed up to a pad; VSS rests on the orientation of the gates.
 - **s0 carry-in: the first run's contact does not exist.** At 3258-3295 x 11000-11040
   the poly of P2 bends left under a lobe of the trunk. Clean shot: the bend is plain
@@ -213,14 +245,24 @@ traced.
   round the lobe are 8 px wide and sit exactly on the poly edges (profiles: row 11012,
   col 3280). So `larr_cin_s0` is only the poly line that leaves at 2897,10945. If
   there were a contact, bit 0's carry-in would be grounded and group 0 could not count.
-- **What H1/H3 are for.** Both are tied to VSS at the pad 3337,11522 (11 rows). H3
-  runs along the top of the row to at least x 4100 just below the previous row's
-  stored-bit band; H1 goes to the left column. Not found: anything they gate.
-- **H1 to pad.** H1 (poly from the left column, y 11486-11506) ends under rail E in a
-  T shape (3290-3325 x 11485-11500, stem 3305-3322 down to 11537) beside the pad
-  (3328-3350 x 11512-11532) that rail E contacts and from which H3 starts. Whether the
-  T is poly joined to the pad could not be seen (stem drawn `?P`). It is taken as
-  joined because H1 crosses no diffusion and has no other end.
+- **Line H under rail E** (3290-3355 x top+14..68; master 11484-11538). Measured in the
+  clean shot: the strip y 11486-11506 is diffusion (199/173/131 under rail B,
+  137/136/96 in the open, 198/171/135 in the T; H1 left of x 3012 and H3 right of
+  x 3355 are poly, 215/167/113 and 131/75/51 open). The T's stem (3308-3326) runs down
+  to y 11538, 15 px short of T1 (which is on VSS). Beside the stem is a pale box
+  3332-3348 x 11514-11530 (199/171/125) from which H3 starts, and above it, at the end
+  of the T's bar, a greenish patch 3331-3341 x 11486-11504 (148/148/105, the colour
+  metal contacts have in this block). The first run read the pale box as a metal
+  contact from rail E, which grounds the whole line. Not kept, because the same line
+  on other rows is what `ma8_drv_in` and `ma9_drv_in` connect to (if the feed poly
+  really reaches H1 there, which was only seen on s2). Drawn instead: the pale box as
+  a buried contact joining the strip to H3 (`?B`, `?D`), no connection to rail E.
+  Candidates: (a) as drawn, H is a signal from the right to the bundle; (b) the
+  greenish patch or the stem ties H to VSS, H1/H3 are grounded gate plates for hold
+  devices left and right (as in cdp2), and the MA8 / MA9 polys end in the left-column
+  cells instead of on H1. Settle it with a 5x view of three layers at
+  3290-3360 x 11475-11545 on two rows, and by following the MA8 poly from 2590,13265
+  to x 2860.
 - **Three junctions that decide the adder**, all first misread by eye at 3-6x and
   then settled with colour profiles (`larr_px.py`):
   1. 2985-3045 x 11605-11652. There is no poly joining the bar of net a to the upright
@@ -274,19 +316,33 @@ traced.
   contact 3900-3934 x 11682-11700. Rail F (x 3999-4045) has four contacts on one wide
   diffusion (4002-4050 x 11690-11845) with wide gates on its right (x 4054-4090):
   a driver. Views: `u4.png`, `m4.png`, `z6.png` in the scratch folder.
+  More, from `u4b.png`, `u5.png`, `z7.png`: Z's diffusion turns right along the bottom
+  of the row (y 11939-11963) to at least x 4145. The poly that Y ends on (via the
+  U-shaped buried contact) is one piece: up 3915-3933, right y 11705-11737, block
+  3950-3976 x 11659-11700 (measured bright = on thin oxide), right y 11659-11676 to
+  x 4024, up to y 11626. Left of the block is the output node of the second load
+  (3921-3950 x 11618-11695), and a diffusion band y 11642-11657 runs from that node to
+  rail F's wide diffusion: Y's poly crosses it at 4000-4024. Believed: an inverter of
+  Y on rail F (rail F then VSS). The metal segment x 3949-3966 from the pad contact
+  3958,11847 passes over Z's band at 3958,11955 (a contact there is likely but not
+  certain: clean shot 165/163/105 on half of the 24 px band) and ends at y 11738 of
+  the next row without a visible contact. `larr_ld` and H3 both run on past x 4277.
+  Right of rail F: wide poly 4052-4098 x 11592-11680 and 4052-4098 x 11755-11845
+  (inner box 4072-4095 x 11777-11803), the strap's diffusion 4092-4147 x 11604-11652
+  (contact 4116,11633), a gate 4096-4121 x 11658-11774 under the strap, a poly in the
+  open gap x 4151-4162 the full height of the row, rail G's diffusion 4188-4225 x
+  11619-11915 (contact 4197,11885). Two honest passes did not give a circuit here;
+  it needs 4x views in three layers, about ten of them.
 - **Gaps 1 and 2** (y 14333-14549, 15981-16154): two poly bands per gap along the
   whole width, plus thin lines; they carry the group carries to logic further right.
-- **Left column** x 2480-2860 and the route from it to the `maN_drv_in` lines. One
-  observation to start from: `ma8_drv_in` (poly along y 11852 from the driver) ends at
-  about x 2255 on a pad with a metal contact (2237,11880); a short metal joins it to
-  a contact at 2197,11923 on a poly that runs right along y 11905-11928 into the
-  left-column cell at 2550-2720 x 11880-12010. So MA8's stage is the left-column cell
-  level with rows s1/s2, not with s8: the stages are placed near their pads and the
-  bits must reach them through the bundle of vertical metal lines at x 2150-2520
-  (eight lines counted at y 11600-12000). Bit numbers are therefore still unconfirmed.
-  A second poly along y 11823-11847 runs from a contact at 2283,11833 (on a bundle
-  line at x 2270-2290) to x 2850, where it turns down beside s1's L0 tap without
-  touching it.
+- **Left column** x 2480-2860: not traced. There is a cell at every row boundary
+  looked at (2550-2720 x 11880-12010 at s1|s2; 2545-2860 x 13247-13420 at s4|s5;
+  the same at s8|s9), each crossed by the H feed poly (114 px above the row top) and
+  entered by a second poly about 30 px above the row top (at s1|s2 the one from
+  2197,11923). The bundle x 2150-2520 has nine vertical metal lines at y 11800-12050
+  (centres 2157, 2199, 2241, 2283, 2326, 2371, 2413, 2458, 2501); they step from
+  track to track. See "Bit numbering" for the three followed so far. Horizontal
+  metal lines cross the whole bundle at y 16078-16101, 17380-17403 and 18031-18053.
 - **L0 of group 0**: find its pull-up and where it is read (look along x 2860-2905,
   y 11300-14140, and at the poly that crosses under it).
 - **Upper section** (9 rows) and the block at 4450-4780 x 8250-10500.
