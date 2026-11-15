@@ -1,0 +1,266 @@
+# Logic and routing channel left of the register-select gates: x 13000-14100, y 14700-17100.
+# West part (x 13040-13850) is a channel of 18 vertical metal tracks on a 43.4 px pitch that
+# enter from the north at y 14700: track k has x = 13088 + 43.4 k (k0 = 13088 ... k17 = 13826).
+# A net that leaves north on track k and has no better name is called bd1_k<k>.
+# East part (x 13700-14080, y 15090-16900) is a column of gates (see notes/blocks/bd1.md).
+@block bd1
+@requires sel
+@requires bd3
+@w M=20 P=18
+@s 26x26
+
+# ================================================================ write strobes, top five
+# Each arrives from sel in poly at x 14100, runs west under the two wide rails
+# (x 13895-13935, 13985-14030) and under the tracks east of its own, and ends on a contact
+# under the track that takes it north. (2.6x views; the contact rings are plain in `metal`.)
+
+# sel_w6: y 14867, all the way west to track k0
+P 14105,14867 x13072 w=18
+P 13071,14851:13106,14883
+C 13088,14867
+M 13088,14690 y14880 w=20
+N M 13088,14700 sel_w6
+
+# sel_w1: y 14909, to track k16
+P 14105,14909 x13770 w=18
+P 13768,14897:13802,14929
+C 13785,14913
+M 13782,14690 y14926 w=20
+N M 13782,14700 sel_w1
+
+# sel_w2: y 14957, to track k12
+P 14105,14957 x13595 w=18
+P 13593,14940:13627,14972
+C 13609,14956
+M 13608,14690 y14970 w=20
+N M 13608,14700 sel_w2
+
+# sel_w0: y 15001, to track k13
+P 14105,15001 x13638 w=18
+P 13636,14984:13670,15016
+C 13652,15000
+M 13652,14690 y15013 w=20
+N M 13652,14700 sel_w0
+
+# sel_w4: y 15043, to track k10
+P 14105,15043 x13506 w=18
+P 13504,15026:13538,15058
+C 13521,15042
+M 13521,14690 y15055 w=20
+N M 13521,14700 sel_w4
+
+# Track k14 ends on a contact 93 px west of sel_w1's, on a second poly in line with
+# sel_w1's (gap x 13712-13768 between the two pads). That poly runs west along y 14912
+# to x 13133, south, and west along y 15020 under track k0's line and the ck_a rail into
+# the mid-right array. Not a strobe.
+M 13694,14690 y14926 w=20
+C 13692,14913
+P 13676,14897:13710,14929
+P 13700,14912 x13133 y15020 x12990 w=18
+N M 13694,14700 bd1_k14
+
+# ================================================================ write strobes from bd3
+# sel_w7: poly along y 16864 (from bd3) to a contact at 13958,16861; metal west along
+# y 16862 to a contact at 13480,16864; poly west, diagonally up-left, north to a
+# contact at 13218,16642 where track k3's line ends.
+P 14095,16864 x13944 w=20
+P 13942,16846:13974,16878
+C 13958,16861
+M 13971,16862 x13467 w=18
+C 13480,16864
+P 13464,16848:13496,16880
+P 13480,16862 13358,16862 13218,16722 13218,16628 w=18
+P 13202,16626:13234,16660
+C 13218,16642
+
+# sel_w5: metal along y 17041 (from bd3), north at x 13915, west along y 16954, north at
+# x 13435 to a contact at 13435,16908; poly west along y 16905 and north at x 13164 to a
+# contact at 13174,16730 where a line on track k2 ends.
+M 14100,17041 x13915 y16954 x13435 y16895 w=18
+C 13435,16908
+P 13419,16892:13451,16924
+P 13435,16905 x13164 y16720 w=18
+P 13158,16714:13190,16748
+C 13174,16730
+
+# sel_w3: metal along y 17084 (from bd3), step up at x 13832 to y 17041, west, north at
+# x 13522 to a contact at 13522,16995; poly north at x 13518.
+M 14100,17084 x13832 y17041 x13522 y16982 w=18
+C 13522,16995
+P 13506,16978:13538,17010
+?P 13518,16990 y16840 w=20             # goes on north: not yet followed
+
+# sel_w8: metal along y 17128 (from bd3) to a contact at 13392,17126; poly west along
+# y 17125 under every vertical line, past x 12985 (below the mid-right array's bottom row).
+M 14100,17128 x13379 w=18
+C 13392,17126
+P 13376,17110:13408,17142
+P 13392,17125 x12985 w=18
+N P 12990,17125 sel_w8
+
+# ================================================================ supply rails of the gate column
+# Named from the loads: every load of the column ends on the rail x 13997-14044, every
+# pull-down on the rail x 13826-13870, which is fed from the north by the wide rail
+# x 13910-13958 through an arm at y 15215-15246.
+M 13934,14690 y15246 w=48          # wide rail from the north; ends at the arm
+M 13860,15215:13958,15246          # arm to the column's ground rail
+M 13848,15100 y15440 w=46          # ground rail of the gate column (drawn as far as traced)
+N M 13934,14700 vss
+M 14021,14690 y16290 w=46          # supply rail of the gate column (drawn as far as traced; by scan it runs on to y 16960)
+N M 14021,14700 vcc
+
+# ================================================================ line X and its two inverters
+# X (trunks' line "X", input of input-row gate 0): its metal on track k11 starts at the
+# contact 13567,15193 and runs south. Both contacts at its top end go to poly bars that
+# run east as the gates of two big inverters sharing one ground contact.
+P 13553,15179:13583,15207
+C 13567,15193
+P 13552,15267:13583,15295
+C 13567,15281
+M 13567,15180 y16188 x13672 w=20   # X: track k11, then east along y 16188 (trunks: y 16175-16200)
+P 13657,16176:13688,16204          # X's tap: a poly leaves east from here (see the gate column)
+C 13672,16190
+M 13672,16178 y16610 w=20          # X south on x 13672 (drawn in trunks.txt from y 16600)
+N M 13567,15600 bd1_x
+
+# --- inverter 1 (gate bar y 15183-15203)
+P 13567,15193 x13900 w=20          # gate bar 1, from X's upper contact
+D 13800,15159:13898,15184          # drain 1
+D 13767,15146:13800,15184          #   its west end, under the buried contact
+D 13767,15183:13898,15226          # channel 1 and the common source
+D 13815,15215:13872,15262          # source under the rail
+C 13838,15237 s=20x30              # ground rail to source
+B 13766,15144:13798,15173          # output 1 to the poly that leaves west
+P 13768,15146:13796,15171
+P 13782,15151 x13333 w=14          # output 1 west along y 15151, under tracks k7..k13
+P 13331,15135:13363,15167
+C 13347,15150                      # ... to track k6, which ends here
+M 13348,14690 y15163 w=20
+N M 13348,14700 bd1_xn1          # inverter 1's output leaves north on track k6
+D 13898,15157:13962,15177          # output band 1 east to the load
+D 13905,15130:13927,15160          # bump up under the load's gate tie
+B 13904,15128:13928,15154
+P 13904,15122:13930,15152          # load gate tie
+P 13925,15122:13970,15138          # ... east to the load block
+P 13962,15122:14000,15226          # load gate
+D 13945,15150:14050,15220          # load: strip west of the gate, channel, supply land
+C 14022,15185 s=26x36
+N D 13860,15170 bd1_xn1
+
+# --- inverter 2 (gate bar y 15271-15291)
+P 13567,15281 x13917 w=20          # gate bar 2, from X's lower contact
+D 13767,15250:13898,15319          # source strip, channel 2, drain 2
+D 13767,15303:13800,15333          # drain 2's west end, under the buried contact
+B 13766,15303:13797,15333          # output 2 to the poly that leaves west
+P 13768,15305:13795,15331
+P 13782,15322 x13681 w=16          # output 2 west to a contact under track k14's position
+P 13680,15310:13712,15340
+C 13695,15325
+D 13898,15300:13929,15345          # output band 2 east, under the load's gate tie
+B 13899,15310:13929,15347
+P 13900,15312:13928,15349          # load gate tie
+P 13925,15333:14000,15349          # ... east along y 15341 to the foot of the load block
+P 13959,15250:14000,15340          # load gate
+D 13926,15257:14049,15326          # load: strip west of the gate, channel, supply land
+C 14022,15289 14035,15311
+N D 13860,15305 bd1_xn2
+
+# ================================================================ track k17 into the mid-right array
+# k17 jogs west to k16's track at y 14975 (k16 having ended at sel_w1's contact), runs
+# down to y 15131, west to x 13696 and down to a contact; poly west along y 15238 under
+# the tracks to a contact at 13131,15235, where a new line on track k1 starts and runs
+# south to a contact at 13131,16413.
+M 13826,14690 y14975 x13782 y15131 x13696 y15252 w=18
+C 13697,15239
+P 13681,15224:13714,15252
+P 13697,15238 x13116 w=16
+P 13115,15220:13147,15250
+C 13131,15235
+M 13131,15222 y16426 w=20
+P 13115,16398:13147,16428
+C 13131,16413
+?P 13131,16413 y16451 x12970 w=20   # poly on into the mid-right array (trunks notes: y 16440-16462); not checked here
+N M 13826,14700 bd1_k17
+
+# ================================================================ X's driver (y 16125-16280)
+# One inverter: X = NOT g. The output diffusion (above the gate, under the rail) is tied
+# to X's tap poly by a buried contact, and has a metal contact at 13917,16155 to a line
+# going north. Sizes match the two inverters X drives at the top of the column.
+M 13848,16129 y16290 w=46          # ground rail here. Between y 15833 and 15991 the rail is two
+N M 13848,16280 vss                # narrow lines (not traced), so this piece is named from the pull-downs
+# --- g: track x 13630 from a contact at 13629,15673 down to a contact at 13629,16150; poly
+# link south under X's horizontal metal to a pad with a second contact at 13629,16235
+# (a metal line goes on south from it); from the pad the gate poly runs east, diagonally
+# up under the rail, east along y 16194 and ends as a block (x 13886-13926).
+P 13614,15658:13648,15688
+C 13629,15673
+?P 13640,15671 x13745 w=16          # poly east from the top contact into the gate column: not traced yet
+M 13630,15660 y16163 w=20
+P 13613,16136:13646,16164
+C 13629,16150
+P 13630,16150 y16235 w=14
+P 13614,16219:13648,16251
+C 13629,16235
+?M 13630,16222 y16300 w=20          # goes on south: not followed
+P [ 13640,16220 13802,16220 13846,16184 13890,16184 13890,16205 13853,16205 13812,16243 13640,16243 ]
+P 13886,16183:13926,16258          # the block at its east end
+N P 13700,16232 bd1_g
+# --- diffusion under the rail: X above the gate, ground below
+D 13817,16154:13888,16275
+C 13855,16250 s=22x34              # ground rail to source
+D 13795,16160:13820,16200          # X: west to the buried contact
+D 13764,16172:13800,16208
+B 13762,16170:13800,16210          # X's tap poly to the output diffusion
+P 13672,16194 x13770 w=20          # X's tap: poly east from the contact 13672,16190
+P 13764,16174:13797,16207
+D 13880,16133:13945,16178          # X: east of the rail, with a metal contact
+C 13917,16155
+?M 13917,16168 y16040 13922,16000 y15905 w=24   # metal north to a contact near 13928,15916 (dense group, not traced)
+D 13930,16170:13953,16265          # X: strip down the west side of the load
+?D 13880,16207:13940,16254         # under the gate's end block: a second pull-down, ground to X (continuity under the poly assumed)
+?D 13764,16200:13820,16275         # west of the rail: X (below the buried contact) and a ground strip (heavy-outlined box
+#                                    x 13759-13805, y 16247-16277) either side of the gate poly, as in the two inverters above
+# --- load
+D 13940,16142:13983,16172          # bump of X under the load's gate tie
+B 13953,16142:13985,16174
+P 13953,16140:13991,16265          # load gate, from the tie down
+D 13945,16196:14050,16263          # load channel and supply land
+C 14017,16228 s=26x40
+
+# ================================================================ tracks: strobes going north, nested jogs
+# sel_w7: from its contact at 13218,16642 a line runs north on k3's position, jogs west
+# at y 15390 (lying on a poly for 60 px, no contact: 4x in both metal shots) and
+# continues north as track k2.
+M 13174,14690 y15390 x13218 y16655 w=20
+N M 13174,14700 sel_w7
+# sel_w5: from its contact at 13174,16730 north on k2's position to a contact at
+# 13175,15562; poly link west to a contact at 13085,15563; north on k0's position,
+# east along y 14912 (k0 having ended at sel_w6's contact), north as track k1.
+M 13174,16743 y15549 w=20
+C 13175,15562
+P 13068,15548:13192,15578
+C 13085,15563
+M 13088,15576 y14912 x13131 y14690 w=20
+N M 13131,14700 sel_w5
+# k3, k4, k5 each step one track east in turn (y 15346, 15308, 15262) and run on south:
+# k3 to a contact near 13264,16455, k5 to one near 13347,16413, k4 past y 16700 (scans and
+# 0.9x views only below y 15420, so drawn to there).
+M 13218,14690 y15346 x13261 y15420 w=20
+N M 13218,14700 bd1_k3
+M 13261,14690 y15308 x13304 y15420 w=20
+N M 13261,14700 bd1_k4
+M 13304,14690 y15262 x13348 y15420 w=20
+N M 13304,14700 bd1_k5
+
+# ================================================================ where inverter 2's output goes
+# From the contact at 13695,15325: metal south to y 15452, where it meets a line from a
+# contact at 13655,15453 (poly going west along y 15455 to a line on x 13521) and goes on south on x 13716 to
+# a contact at 13713,15760 (gate column; not traced yet).
+M 13695,15312 y15453 w=18
+M 13642,15453 x13716 y15772 w=20
+P 13638,15440:13672,15468
+C 13655,15453
+P 13650,15455 x13506 w=16            # poly west under X's line to a contact at 13520,15455
+P 13504,15440:13537,15470
+C 13520,15455
+M 13521,15442 y15944 w=20            # a line on k10's position from that contact south to a contact at 13520,15931 (ring seen at 1.5x; what is under it is not traced)
