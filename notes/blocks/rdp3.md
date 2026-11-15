@@ -13,6 +13,10 @@ Own tools:
 - `tools/rdp3_boxstat.py`: mean colour of small boxes in all shots, by class, with R-G of
   the clean shot: tells a metal contact on poly (olive, R-G -22..+7, bright in `metal1`)
   from a buried contact or diffusion under metal (tan, R-G +30..+40).
+- `tools/rdp3_prof.py`: colour profile along a row or column, on the die or a composite,
+  with R-G per layer, in columns that line up.
+- `tools/rdp3_t7.py`: the measurement that settled T7 (strip against field and diffusion
+  references, 16 slices, three shots).
 - `tools/rdp3_jogs.py`: for a bundle of vertical tracks, where metal crosses the gaps
   between tracks (jogs) and where a track has no metal. `tools/sel_tracks.py` bridges
   gaps up to 14 px and so reads two nets that share a track across a jog as one line.
@@ -443,7 +447,11 @@ seen) and not drawn.
   s0 through bands A and B, so a contact from the strap to the latch's q drain (run 1's
   reading, and cdp2's reading of the same cell in the central datapath, "track c") is
   excluded at least in s7: it would tie bus s0 to bit s7 of RA and RB. In s0..s6 the
-  strap is a stub and a contact would change nothing. T2 lies over the gate of T6 at
+  strap is a stub and a contact would change nothing. Measured in run 3: the q drain
+  under the strap looks the same in all 16 cells of RA and RB, s7 included (clean shot
+  164/148/113, s.d. 15-18; chip-1 metal dim, 106-132), so whatever makes the strap look
+  dim and narrow over the q drain (y 12297-12349 in RA) is not a contact: it is there in
+  s7 too, where a contact is impossible. T2 lies over the gate of T6 at
   y 12121-12145 and over the VSS-tied band at its lower end; a contact to either was
   looked for at 5x by run 2 and not seen. Both look like unused feed-through tracks of
   the cells.
