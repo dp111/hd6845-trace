@@ -50,7 +50,7 @@ bus and pads.
 
 | Prefix | Region | What |
 |---|---|---|
-| `tc1` | 6400-8250 x 2500-4450 | top-centre random logic, upper half | partial (run 1): the nine-gate island at x 7330-7900, y 3050-4050 (static gates only; two lines into the datapath between cdp1's rows A and B); gate columns at x 6400-7000 (about 40 loads) and the channels left; run 2 running |
+| `tc1` | 6400-8250 x 2500-4450 | top-centre random logic, upper half | partial (runs 1, 2; 26 transistors): the nine-gate island and all its wiring; its five inputs followed to the region's edges: a from the datapath (cdp1's register bit), w1 leaves east at (8350,3700), b, g, i arrive from tc2 at (7512,4450), (7143,4450), (7187,4450). Left: the gate columns at x 6400-7000 (large devices under wide rails, need 3-4x views and profiles), an undrawn structure at x 6750-6940, y 3930-4200, the channel at x 7000-7170 |
 | `dbus` (continue) | as above | gate groups under the buffer chains, internal bus lines, P_x driver, D6/D7 buffers, then the pad cell |
 | `areg` (continue) | as above | finish the fifth register cell (with `rdp3`'s four), the right-hand column x 16480-16800 |
 | `rdp1` | 13350-16950 x 5450-8100 | right datapath, top rows |
