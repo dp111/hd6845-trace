@@ -234,6 +234,15 @@ lines start inside the chain column.
   the right-hand columns. (b) is unlikely: the right-hand columns of r3 are identical to
   those of every other row. (a) is the reading to test first, e.g. on a better metal
   shot of (11978,9450).
+  Second run (views `a1b.png`, r4 at 4.5x in three shots, and `a1c.png`, the same place in
+  the median of all rows at 6x): still no ring in either metal shot and no disc in `acid1b`
+  on r4's H1 blob or on H2 under the strap. In r4 alone `acid1b` shows a slightly paler patch
+  on the blob under the strap (11972-11990 x 9438-9463); the median of the rows does not.
+  What has changed is the argument: A2 shows that in ordinary rows the strap touches nothing
+  at its head, so there it can be dead metal; in r3 its head is on the chain poly, so the
+  strap is the only possible source of cin(r3) and must end on a driven node. A foot contact
+  in r4 therefore exists; H1 blob (x of r4, reading (a)) is the reading that continues the
+  chain, H2 (n1 of r4) the alternative. Still not drawn, `mra_cin_r3` stays an open port.
 - A2. The same metal strap exists in every row (from the band-2 stub of row N, y 10160,
   down to H2 of row N+1, y 9995+477), lying exactly over the chain poly, with no contact
   visible at either end. Drawn as isolated metal (`mra_md_rN`; `mra_mt_r0/r11/r15` where
