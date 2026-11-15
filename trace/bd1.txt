@@ -79,16 +79,25 @@ C 13218,16642
 M 14100,17041 x13915 y16954 x13435 y16895 w=18
 C 13435,16908
 P 13419,16892:13451,16924
-P 13435,16905 x13164 y16720 w=18
+P 13435,16905 x13170 y16720 w=18
 P 13158,16714:13190,16748
 C 13174,16730
 
 # sel_w3: metal along y 17084 (from bd3), step up at x 13832 to y 17041, west, north at
-# x 13522 to a contact at 13522,16995; poly north at x 13518.
+# x 13522 to a contact at 13522,16995; poly north at x 13518 to a contact at 13522,16820;
+# metal north on x 13521.
 M 14100,17084 x13832 y17041 x13522 y16982 w=18
 C 13522,16995
 P 13506,16978:13538,17010
-?P 13518,16990 y16840 w=20             # goes on north: not yet followed
+P 13518,16990 y16808 w=20              # north, under sel_w7's metal, to a contact at 13522,16820
+P 13506,16805:13538,16836
+C 13522,16820
+M 13521,16833 y16442 w=20              # north on k10's position to a contact at 13521,16455
+P 13504,16439:13542,16469
+C 13521,16455
+P 13521,16453 x13250 w=16              # poly west along y 16453 (3.6x: one unbroken band between the two pads)
+P 13248,16440:13281,16470
+C 13262,16456                          # ... to the foot of the line that leaves north as track k3
 
 # sel_w8: metal along y 17128 (from bd3) to a contact at 13392,17126; poly west along
 # y 17125 under every vertical line, past x 12985 (below the mid-right array's bottom row).
@@ -242,14 +251,19 @@ P 13068,15548:13192,15578
 C 13085,15563
 M 13088,15576 y14912 x13131 y14690 w=20
 N M 13131,14700 sel_w5
-# k3, k4, k5 each step one track east in turn (y 15346, 15308, 15262) and run on south:
-# k3 to a contact near 13264,16455, k5 to one near 13347,16413, k4 past y 16700 (scans and
-# 0.9x views only below y 15420, so drawn to there).
-M 13218,14690 y15346 x13261 y15420 w=20
-N M 13218,14700 bd1_k3
-M 13261,14690 y15308 x13304 y15420 w=20
+# k3, k4, k5 each step one track east in turn (y 15346, 15308, 15262) and run on south
+# (straight, no contact ring seen on them at 0.9x; ends at 3.6x).
+# k3 is sel_w3: its line ends on the contact 13262,16456 (see sel_w3 above).
+M 13218,14690 y15346 x13261 y16469 w=20
+N M 13218,14700 sel_w3
+# k4: by scan runs on past y 16700 into the diagonals; drawn as far as seen straight.
+M 13261,14690 y15308 x13304 y16500 w=20
 N M 13261,14700 bd1_k4
-M 13304,14690 y15262 x13348 y15420 w=20
+# k5: ends on a contact at 13347,16410; poly east along y 16410 towards the gate column.
+M 13304,14690 y15262 x13348 y16423 w=20
+P 13337,16398:13369,16427
+C 13348,16411
+?P 13360,16410 x13700 w=16              # seen to x 13565 at 3.6x, to about x 13700 at 0.9x; not followed
 N M 13304,14700 bd1_k5
 
 # ================================================================ where inverter 2's output goes

@@ -5,8 +5,8 @@ Trace: `trace/bd1.txt` (`@requires sel`, `@requires bd3`). Coordinates are metal
 ## Status
 
 - Traced, extracted (0 errors, 0 warnings, no open nets) and checked by overlay: the route
-  of every write strobe that enters the region (seven of them leave north on the track
-  bundle, one leaves west in poly); the two big inverters at the top of the gate column
+  of every write strobe that enters the region (eight of them, R0 to R7, leave north on the track
+  bundle, R8's leaves west in poly); the two big inverters at the top of the gate column
   (both driven by trunks' line X); X's own driver (one inverter, y 16125-16280); the
   rails of the gate column; six more of the 18 tracks as far as they were followed.
 - **The region is mostly a routing channel**, not logic: 18 vertical metal tracks
@@ -56,15 +56,15 @@ in this region.
 | sel_w4 | poly, (14100,15043) | contact (13521,15042) | north, k10 (13521,14700) |
 | sel_w7 | poly, (14100,16864) | contact (13958,16861); metal west along y 16862; contact (13480,16864); poly west, diagonally up-left, north to contact (13218,16642); metal north on x 13218; jog west at y 15390 to x 13174 | north, k2 (13174,14700) |
 | sel_w5 | metal, (14100,17041) | north at x 13915, west along y 16954, north at x 13435 to contact (13435,16908); poly west along y 16905, north at x 13164 to contact (13174,16730); metal north on x 13174 to contact (13175,15562); poly link to contact (13085,15563); metal north on x 13088; jog east at y 14912 to x 13131 | north, k1 (13131,14700) |
-| sel_w3 | metal, (14100,17084) | step up at x 13832 to y 17041, west, north at x 13522 to contact (13522,16995); poly north at x 13518 | **not followed** past y 16840 |
+| sel_w3 | metal, (14100,17084) | step up at x 13832 to y 17041, west, north at x 13522 to contact (13522,16995); poly north at x 13518 (under sel_w7's metal) to contact (13522,16820); metal north on x 13521 to contact (13521,16455); poly west along y 16453 to contact (13262,16456); metal north on x 13261; jog west at y 15346 to x 13218 | north, k3 (13218,14700) |
 | sel_w8 | metal, (14100,17128) | contact (13392,17126); poly west along y 17125 under every vertical line | west, (12985,17125), poly, still running |
 | sel_w9 | metal, y 17172 | below the region; by scan the metal runs west to x 13471 | not followed |
 | sel_w11 | metal, y 17215 | by scan to x 13414 | not followed |
 | sel_w10 | metal, y 17258 | by scan to x 13471 | not followed |
 
-So the strobes of R0, R1, R2, R4, R5, R6, R7 all go north in the bundle (towards the
-right datapath; believed). The order on the tracks is k0 w6, k1 w5, k2 w7, k10 w4,
-k12 w2, k13 w0, k16 w1.
+So the strobes of R0 to R7 all go north in the bundle (towards the right datapath;
+believed). The order on the tracks is k0 w6, k1 w5, k2 w7, k3 w3, k10 w4, k12 w2,
+k13 w0, k16 w1. R8's goes west in poly; R9, R10, R11's were not followed.
 
 The poly at y 14912 **west** of x 13712 is not sel_w1: sel_w1's poly ends at its
 contact (13785,14913); a second poly starts 56 px further west on a contact under
@@ -122,9 +122,9 @@ y 15671.
 | k0 13088 | sel_w6 | ends at contact (13088,14867) |
 | k1 13131 | sel_w5 | jogs to x 13088 at y 14912, down to contact (13085,15563) |
 | k2 13174 | sel_w7 | jogs to x 13218 at y 15390, down to contact (13218,16642) |
-| k3 13218 | bd1_k3 | jogs to x 13261 at y 15346; by scan runs on to a contact near (13264,16455) |
+| k3 13218 | sel_w3 | jogs to x 13261 at y 15346, down to contact (13262,16456) |
 | k4 13261 | bd1_k4 | jogs to x 13304 at y 15308; by scan runs on past y 16700 |
-| k5 13304 | bd1_k5 | jogs to x 13348 at y 15262; by scan runs on to a contact near (13347,16413) |
+| k5 13304 | bd1_k5 | jogs to x 13348 at y 15262, down to contact (13348,16411); poly east along y 16410 towards the gate column (seen to x 13700 at 0.9x, not followed) |
 | k6 13348 | bd1_xn1 | ends at contact (13347,15150) |
 | k10 13521 | sel_w4 | ends at contact (13521,15042) |
 | k12 13608 | sel_w2 | ends at contact (13609,14956) |
@@ -145,7 +145,7 @@ k7, k8, k9, k11, k15: Not done.
 | sel_w6 | metal | 13088,14700 (north) | out | track k0 |
 | sel_w5 | metal | 13131,14700 (north) | out | track k1 |
 | sel_w7 | metal | 13174,14700 (north) | out | track k2 |
-| bd1_k3 | metal | 13218,14700 (north) | ? | track k3 |
+| sel_w3 | metal | 13218,14700 (north) | out | track k3 |
 | bd1_k4 | metal | 13261,14700 (north) | ? | track k4 |
 | bd1_k5 | metal | 13304,14700 (north) | ? | track k5 |
 | bd1_xn1 | metal | 13348,14700 (north) | out | track k6: NOT X |
@@ -161,7 +161,6 @@ k7, k8, k9, k11, k15: Not done.
 | bd1_k17 | metal | 13826,14700 (north) | ? | track k17 |
 | bd1_k17 | poly | 12970,16451 (west) | ? | into the mid-right array (this last poly is `?`: from trunks' notes, not checked here) |
 | sel_w8 | poly | 12985,17125 (west) | out | goes on west below the array's bottom row |
-| sel_w3 | poly | 13518,16840 | out | going north; not followed |
 | bd1_x | metal | 13672,16610 (drawn to there) | out | line X; trunks.txt draws it from y 16600 south. Not labelled in trunks.txt: it reaches inrow's `t_g0_in` |
 | bd1_x | metal | 13922,15905 (`?`) | ? | from the driver's output north into the dense group |
 | bd1_g | poly | 13745,15671 (`?`) | ? | into the gate column |
@@ -218,8 +217,7 @@ was not readable).
 
 Channel:
 
-- sel_w3's poly north of (13518,16840).
-- Tracks k7, k8, k9, k11, k15 and the lower ends of k3, k4, k5.
+- Tracks k7, k8, k9, k11, k15, the lower end of k4 and where k5's poly (y 16410) goes.
 - Lines that start inside the channel. Scan (`sel_tracks.py v`, metal present, y ranges;
   gaps of 20-26 px are usually a poly passing under): x 13435: 15251-15934, 15972-16769;
   x 13478: 15124-16594; x 13521: 15080-15398, 15415-15899, 15990-16273, 16445-16805;
@@ -227,7 +225,7 @@ Channel:
   x 13630: `bd1_g`; x 13674: 15715-15973 (contacts at both ends; poly east at y 15713,
   poly west along y 15997 to a contact at (13522,15994)).
 - Contacts seen at 0.9x and not traced (x,y): (13432,15887) (13520,15931) (13432,15960)
-  (13523,16000) (13347,16413) (13264,16455) (13523,16455) (13505,15385).
+  (13523,16000) (13505,15385).
 - The diagonals at x 13150-13450, y 16680-16890: three metal lines step two tracks east
   there (seen at 1.5x), sel_w7's poly passes under them.
 - Bottom edge: a separate metal along y 17082 from contact (13480,17083) (poly going
