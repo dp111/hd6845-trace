@@ -362,7 +362,7 @@ P 13938,15523:13992,15608
 C 13956,15538
 M 13957,15525 y15753 w=22          # bd1_n1 south on x 13957
 C 13957,15740
-P 13946,15725:13985,15758          # poly pad at its foot (the poly goes on south: not traced)
+P 13946,15725:13985,15758          # poly pad at its foot; the poly goes on south and west as the gate of N2's third pull-down (below)
 N M 13957,15650 bd1_n1
 # the load's gate tie: a buried contact with a bright centre at 13894-13926, 15558-15576 on N1, joined to the
 # block's top by a poly arm (dark complex 13897-13934, 15521-15556; seen at 4.3x and 4.85x, shape not resolved)
@@ -388,7 +388,7 @@ C 13522,15999
 M 13521,15986 y16273 w=20          # ... and south on k10's position (scan: metal to y 16273; lower end not traced)
 
 # --- the column, lower half: N2 - G5[xn2] - N3 - G6[an] - ground
-D 13817,15709:13876,15745          # N2 (its east side, load and other pull-downs: not traced)
+D 13817,15709:13876,15745          # N2 (its load, east of the rail to the north, is not traced)
 N D 13850,15722 bd1_n2
 D 13797,15738:13873,15852
 P 13705,15745:13737,15775          # pad of G5 under the foot of xn2's metal
@@ -397,6 +397,17 @@ P 13730,15746:13876,15766          # G5: gate
 P 13748,15790:13792,15818          # pad under the foot of bd1_an's metal
 P 13748,15791:13876,15810          # G6: gate
 C 13842,15832 s=24x24
+# --- N2's third pull-down, east of the rail, gate = bd1_n1 (three shots at 4.95x; drawn uncertain: Ambiguities).
+# N2's diffusion goes east from the rail along y 15705-15728 and south along x 13919-13936 round an island of
+# field (x 13885-13912, y 15735-15812); a poly block (orange in `acid`, y 15782-15806, rounded west end at
+# x 13902) crosses it; below the block a diffusion band y 15815-15833 runs back west to the vss contact's diffusion.
+?D 13870,15705:13936,15728
+?D 13919,15720:13936,15785
+?D 13919,15766:13957,15820
+?D 13868,15815:13958,15833
+P 13902,15782:13958,15806          # the block
+?P 13950,15782:13986,15806         # ... joined on the east to the poly coming down from bd1_n1's pad
+?P 13966,15750:13986,15806
 
 # ================================================================ tracks k7, k8, k9, k11 (second run)
 # Nested jogs at y 15087-15176 (3.1x metal view): each steps one track east after the track
