@@ -142,7 +142,24 @@ C 3192,5237
 # west along y 3928-3948); a separate upper piece ends 50 px higher on its own contact
 # (3197,3892). Continuous from there down (checked at 5.5x where the profile showed gaps),
 # contacts (3192,5237) and (3192,5325), then east as a horizontal metal along y 5667-5688.
-M 3196,3944 y5677 x3400 w=20
+M 3196,3944 y5677 x3527 y5850 x3578 w=20
+# ... and on: contact (3565,5848); poly east along y 5838-5857 to x 5285; south at x 5275-5295
+# to y 6850; diagonally south-east to (5560,7122); east along y 7112-7132 to a pad with a
+# contact (6140,7124); metal north 40 px, east along y 7075-7093, south at x 6757-6781 to
+# y 8228, one pitch west, to a contact (6730,8275); poly south under six horizontal metals to a
+# contact (6730,8580); metal south at x 6722-6742 down the left bus field (continues).
+C 3565,5848
+P 3550,5832:3588,5864
+P 3575,5847 x5285 y6855 5552,7122 6128,7122 w=18
+P 6122,7106:6160,7140
+C 6140,7124
+M 6140,7138 y7084 x6769 y8228 x6732 y8290 w=20
+C 6730,8275
+P 6713,8258:6748,8292
+P 6731,8285 y8566 w=20
+P 6713,8562:6750,8597
+C 6730,8580
+M 6732,8566 y8680 w=20
 C 3197,3958
 P 3176,3944:3216,3976
 C 3192,5325
