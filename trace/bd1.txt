@@ -288,7 +288,14 @@ C 13655,15453
 P 13650,15455 x13506 w=16            # poly west under X's line to a contact at 13520,15455
 P 13504,15440:13537,15470
 C 13520,15455
-M 13521,15442 y15944 w=20            # a line on k10's position from that contact south to a contact at 13520,15931 (ring seen at 1.5x; what is under it is not traced)
+M 13521,15445 y15944 w=20            # a line on k10's position from that contact (13520,15458) south to a contact at 13520,15931.
+#                                      It starts at this contact: the line above it on the same track is k9's and ends at 13520,15390 (4.6x)
+C 13520,15931
+P 13506,15915:13540,15967            # poly pad, with a tail going west along y 15959 under k8's line
+P 13432,15959 x13540 w=16
+P 13418,15940:13450,15972
+C 13432,15955
+M 13435,15942 y16769 w=20            # ... and south on k8's position (scan: metal to y 16769; lower end not traced)
 
 # ================================================================ gate column, y 15385-15850
 # Read from sharpened views at 4.3-6.4x (rdp3_sharp.py) and colour profiles (bd1_map.py, bd1_prof.py).
@@ -297,11 +304,11 @@ M 13521,15442 y15944 w=20            # a line on k10's position from that contac
 #   N2 - G5[xn2] - N3 - G6[an] - vss(13842,15832)
 # East of the rail are the loads; the supply land x 14000-14048 feeds them.
 
-# --- bd1_a: metal on k13's position (x 13652, from y 15081: its upper end is not traced) to a contact
+# --- bd1_a: enters from the north on track k15, jogs west to k13's position (x 13652) and runs to a contact
 # at 13655,15391; poly east, south along x 13723 under xn2's metal, east along y 15498 across the
 # column (P2) and north again east of the rail (P4), ending in a rounded cap at y 15427.
-M 13652,15095 y15404 w=20
-N M 13652,15110 bd1_a
+M 13738,14690 y15087 x13652 y15404 w=20   # track k15 jogs west at y 15087 to k13's position (3.1x metal view)
+N M 13738,14700 bd1_a
 P 13640,15377:13670,15405
 C 13655,15391
 P 13655,15392 x13723 w=14
@@ -371,8 +378,14 @@ B 13768,15699:13792,15733          # lower segment to the poly from the west
 P 13674,15713 x13788 w=20
 P 13658,15700:13690,15730
 C 13674,15715
-M 13674,15702 y15986 w=20          # bd1_k south on x 13674 to a contact at 13674,15973 (scan; lower end not traced)
+M 13674,15702 y15988 w=20          # bd1_k south on x 13674 to a contact at 13674,15975
 N M 13674,15800 bd1_k
+C 13674,15975
+P 13658,15960:13692,16008
+P 13522,15997 x13690 w=20          # poly west under bd1_g's and X's metal (4.3x metal view)
+P 13506,15982:13540,16014
+C 13522,15999
+M 13521,15986 y16273 w=20          # ... and south on k10's position (scan: metal to y 16273; lower end not traced)
 
 # --- the column, lower half: N2 - G5[xn2] - N3 - G6[an] - ground
 D 13817,15709:13876,15745          # N2 (its east side, load and other pull-downs: not traced)
@@ -384,3 +397,31 @@ P 13730,15746:13876,15766          # G5: gate
 P 13748,15790:13792,15818          # pad under the foot of bd1_an's metal
 P 13748,15791:13876,15810          # G6: gate
 C 13842,15832 s=24x24
+
+# ================================================================ tracks k7, k8, k9, k11 (second run)
+# Nested jogs at y 15087-15176 (3.1x metal view): each steps one track east after the track
+# east of it has ended. k15 steps west and is bd1_a (drawn with the gate column).
+# k7: east at y 15176 to k8's position, south to a contact at 13432,15888; poly east along y 15889
+# under five lines into the gate column (seen to x 13695; what it does there is not traced).
+M 13391,14690 y15176 x13435 y15901 w=20
+C 13432,15888
+P 13418,15874:13449,15904
+?P 13432,15889 x13700 w=18
+N M 13391,14700 bd1_k7
+# k8: east at y 15130 to k9's position, south (scan: metal to y 16594, a 23 px break, then to y 16797; lower end not traced)
+M 13435,14690 y15130 x13478 y16590 w=20
+N M 13435,14700 bd1_k8
+# k9: east at y 15087 to k10's position, south to a contact at 13520,15390 where the line ends; poly west along
+# y 15388 (east end seen at 4.6x; the rest from the first run's notes: under sel_w7's jog without contact,
+# corner at x 13108, south, and west into the mid-right array at y 15497)
+M 13478,14690 y15087 x13521 y15403 w=20
+C 13520,15390
+P 13506,15376:13540,15402
+?P 13520,15388 x13108 y15497 x13030 w=18
+N M 13478,14700 bd1_k9
+# k11: east at y 15005 to k12's position, south to a contact at 13609,15608 (scan and the first run's 1.5x view);
+# the poly from there (west, then diagonally down-left) is not traced
+M 13565,14690 y15005 x13608 y15621 w=20
+?P 13594,15594:13626,15622
+?C 13609,15608
+N M 13565,14700 bd1_k11

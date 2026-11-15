@@ -13,7 +13,9 @@ Trace: `trace/bd1.txt` (`@requires sel`, `@requires bd3`). Coordinates are metal
   poly cross-unders. The gates are a single column at x 13700-14080, y 15100-16900.
 - NOT traced: the wiring east of the ground rail at y 15640-15850 (the second latch half's
   load and third pull-down), the gate column at y 15850-16125 and 16280-16900 (everything
-  `ck_out` feeds), tracks k7, k8, k9, k11, k15 and the channel contacts. See Not done.
+  `ck_out` feeds), and the lower ends of several channel lines. See Not done.
+- Tracks k7, k8, k9, k11, k15 are traced from the north edge to their first contact (k8: as
+  far as it runs straight); `bd1_xn2` and `bd1_k` are followed through the channel.
 
 How the gate column was read: plain views are not enough. `tools/rdp3_sharp.py` at 4.3-6.4x
 with `acid1b` and a metal shot side by side, plus two text tools written for this block:
@@ -133,8 +135,8 @@ bd1_xn2 = NOT bd1_x       lower inverter, gate bar y 15271-15291
   y 15151) to a contact at (13347,15150) where **track k6 ends: it goes north**.
 - `bd1_xn2` leaves west in poly (buried contact 13766-13797, 15303-15333) to a contact
   at (13695,15325); metal south to (13700,15452), where one arm goes to a contact at
-  (13655,15453) (poly west along y 15455 to a contact at (13520,15455), then metal south
-  on x 13521 to a contact at (13520,15931), not traced further) and the other runs south
+  (13655,15453) (poly west along y 15455 to a contact at (13520,15458), then metal south
+  on x 13521 to a contact at (13520,15931) and on, see "Tracks") and the other runs south
   on x 13716 with contacts at (13717,15541) and (13716,15760): the gates P3 and G5 of the
   latch below (next section).
 
@@ -158,8 +160,8 @@ gate P2 (y 15488-15508, `bd1_a`), a strip 18 px tall with no contact, gate P3 (y
 (y 15746-15766, `bd1_xn2`), a strip, gate G6 (y 15791-15810, `bd1_an`), vss contact
 (13842,15832).
 
-- **`bd1_a`** arrives on a metal line on k13's position (x 13652, y 15081-15374; where it
-  comes from: Not done), contact (13655,15391), poly east and south along x 13723 under
+- **`bd1_a`** enters from the north on track k15, jogs west at y 15087 to k13's position
+  (x 13652), contact (13655,15391), poly east and south along x 13723 under
   `bd1_xn2`'s metal, east along y 15498 across the column (P2) and north again east of
   the rail (P4, x 13868-13890, ending in a rounded cap at y 15427). P2 and P4 are one
   poly: an L round the ground diffusion (colour profile across the corner; the gap to P3
@@ -217,14 +219,37 @@ gate is `bd1_xn2`, the inverse of line X.
 | k4 13261 | bd1_k4 | jogs to x 13304 at y 15308; by scan runs on past y 16700 |
 | k5 13304 | bd1_k5 | jogs to x 13348 at y 15262, down to contact (13348,16411); poly east along y 16410 towards the gate column (seen to x 13700 at 0.9x, not followed) |
 | k6 13348 | bd1_xn1 | ends at contact (13347,15150) |
+| k7 13391 | bd1_k7 | jogs to x 13435 at y 15176, down to contact (13432,15888); poly east along y 15889 under five lines into the gate column's dense group (seen to x 13695) |
+| k8 13435 | bd1_k8 | jogs to x 13478 at y 15130, runs south; by scan metal to y 16594, a 23 px break, then to y 16797. Lower end not traced |
+| k9 13478 | bd1_k9 | jogs to x 13521 at y 15087, **ends at contact (13520,15390)**; poly west along y 15388 (under sel_w7's jog, no contact), corner at x 13108, south, west into the mid-right array at (13035,15497) (the poly's route is from the first run, `?`) |
 | k10 13521 | sel_w4 | ends at contact (13521,15042) |
+| k11 13565 | bd1_k11 | jogs to x 13608 at y 15005, down to a contact at (13609,15608) (scan, 1.5x); poly west then diagonally down-left towards (13250,15750), not traced |
 | k12 13608 | sel_w2 | ends at contact (13609,14956) |
 | k13 13652 | sel_w0 | ends at contact (13652,15000) |
 | k14 13694 | bd1_k14 | ends at contact (13692,14913); poly west into the mid-right array at y 15020 |
+| k15 13738 | **bd1_a** | jogs **west** to x 13652 at y 15087, down to contact (13655,15391): the latch's data input |
 | k16 13782 | sel_w1 | ends at contact (13785,14913) |
 | k17 13826 | bd1_k17 | jogs to x 13782 at y 14975, down to y 15131, west to x 13696, contact (13697,15239); poly west along y 15238 to contact (13131,15235); metal south on x 13131 to contact (13131,16413); poly on into the mid-right array (trunks: along y 16440-16462) |
 
-k7, k8, k9, k11, k15: Not done.
+The jogs at y 15087-15176 are nested: k9, k8, k7 each step one track east once the track
+east of them has ended (3.1x metal view, overlay checked). Below the jogs the track
+positions therefore carry other nets than at the top edge:
+
+| Position | Net below the jogs | Segments (contact to contact) |
+|---|---|---|
+| x 13435 | bd1_k7, then **bd1_xn2** | k7 to (13432,15888). A new line starts at contact (13432,15955) and runs south (scan: to y 16769, lower end not traced): it is `bd1_xn2`, see below |
+| x 13478 | bd1_k8 | from the jog south |
+| x 13521 | bd1_k9, then **bd1_xn2**, then **bd1_k** | k9 to (13520,15390). Break. (13520,15458) to (13520,15931): `bd1_xn2`. Break. (13522,15999) south (scan: to y 16273, lower end not traced; a further piece y 16445-16805 is sel_w3's): `bd1_k` |
+| x 13674 | bd1_k | (13674,15715) to (13674,15975) |
+
+**Where `bd1_xn2` goes** (all traced except the last line's lower end): contact (13695,15325),
+metal to (13700,15452); one arm south on x 13716 to the latch's gates P3 and G5; the other
+arm contact (13655,15453), poly west, contact (13520,15458), metal south on x 13521,
+contact (13520,15931), poly pad with a tail west along y 15959 under k8's line, contact
+(13432,15955), metal south on x 13435 towards y 16769.
+
+**Where `bd1_k` goes**: contact (13674,15975), poly west along y 15997 under `bd1_g`'s and
+X's lines, contact (13522,15999), metal south on x 13521 to about y 16273.
 
 ## Ports
 
@@ -240,15 +265,19 @@ k7, k8, k9, k11, k15: Not done.
 | bd1_k4 | metal | 13261,14700 (north) | ? | track k4 |
 | bd1_k5 | metal | 13304,14700 (north) | ? | track k5 |
 | bd1_xn1 | metal | 13348,14700 (north) | out | track k6: NOT X |
-| (k7, k8, k9) | metal | 13391 / 13435 / 13478, 14700 (north) | ? | not traced |
+| bd1_k7 | metal | 13391,14700 (north) | ? | track k7; ends on a poly going east along y 15889 into the dense group of the gate column |
+| bd1_k8 | metal | 13435,14700 (north) | ? | track k8; runs south past y 16590 (lower end not traced) |
+| bd1_k9 | metal | 13478,14700 (north) | ? | track k9; ends at contact (13520,15390) |
+| bd1_k9 | poly | 13035,15497 (west) | ? | k9's poly, into the mid-right array (`?`: route from the first run) |
+| bd1_xn2 | metal | 13435,16769 (drawn to there) | out | NOT X going south on k8's position; lower end not traced |
+| bd1_k | metal | 13521,16273 (drawn to there) | ? | going south on k10's position; lower end not traced |
 | sel_w4 | metal | 13521,14700 (north) | out | track k10 |
-| (k11) | metal | 13565,14700 (north) | ? | not traced; by 1.5x view it jogs to x 13608 at y 15005, ends at a contact at (13609,15608), poly west then diagonally down-left towards (13250,15750) |
+| bd1_k11 | metal | 13565,14700 (north) | ? | track k11; jogs to x 13608 at y 15005, ends at a contact at (13609,15608) (`?`), poly west then diagonally down-left towards (13250,15750), not traced |
 | sel_w2 | metal | 13608,14700 (north) | out | track k12 |
 | sel_w0 | metal | 13652,14700 (north) | out | track k13 |
 | bd1_k14 | metal | 13694,14700 (north) | ? | track k14 |
 | bd1_k14 | poly | 13000,15020 (west) | ? | into the mid-right array's routing channel, under the `ck_a` rail |
-| (not traced) | poly | 13035,15497 (west) | ? | the poly that lies along y 15385 turns south at x 13108 and leaves west here |
-| (k15) | metal | 13738,14700 (north) | ? | not traced; scan: metal to y 15141 |
+| bd1_a | metal | 13738,14700 (north) | in | track k15: data input of the latch and input of inverter A |
 | sel_w1 | metal | 13782,14700 (north) | out | track k16 |
 | bd1_k17 | metal | 13826,14700 (north) | ? | track k17 |
 | bd1_k17 | poly | 12970,16451 (west) | ? | into the mid-right array (this last poly is `?`: from trunks' notes, not checked here) |
@@ -257,12 +286,9 @@ k7, k8, k9, k11, k15: Not done.
 | bd1_x | metal | 13922,15905 (`?`) | ? | from the driver's output north into the dense group |
 | bd1_g | poly | 13805,15671 | - | ends as the gate of `bd1_k`'s pull-down (inside the block) |
 | bd1_g | poly | 13480,17150 (south) | in (believed) | X = NOT g; g has no driver in this region. Seen to y 17145, going south |
-| bd1_a | metal | 13652,15095 (drawn from there) | in | line on k13's position, scan: metal y 15081-15374; upper end not traced. Data input of the latch |
-| bd1_k | metal | 13674,15986 (drawn to there) | ? | from the contact (13674,15715) south to a contact at (13674,15973); earlier notes: poly west along y 15997 to a contact at (13522,15994) |
 | bd1_n1 | poly | 13966,15758 | out | poly pad under the foot of the line on x 13957; goes on south-east, not traced |
 | bd1_q | poly | 13996,15640 | in (believed) | east end of the band y 15630-15650; driver not traced (believed `bd1_n2`) |
 | bd1_n2 | diffusion | 13876,15722 | ? | east end of N2 under the rail; continues east, not traced |
-| bd1_xn2 | metal | 13521,15944 | out | line on x 13521 ending at a contact at (13520,15931) |
 | vss | metal | 13910-13958, 14700 (north) | - | wide rail; named from the pull-downs it feeds |
 | vcc | metal | 13997-14044, 14700 (north) | - | supply rail; joins bd3's wide rail at the bottom (by scan) |
 | ck_out | metal | rail x 13703-13727, y 15930-16711 | in | trunks; its taps are not traced here |
@@ -337,7 +363,14 @@ was not readable).
   rail to x 13934 (N2's level), the narrow poly going on down x 13921-13935 to y 15766 and
   turning east; a framed region x 13885-13912, y 15735-15775; a poly block x 13918-13954,
   y 15780-15798 that `bd1_n1`'s poly joins from the east at y 15790; a ring structure at
-  (13895-13917, 15777-15814); a long band x 13875-13958, y 15813-15834.
+  (13895-13917, 15777-15814) with a poly-coloured centre level with that block (a buried
+  contact?); a long band x 13875-13958, y 15813-15834 at the level of the lower vss contact.
+  At 5.2x the block shows a narrow poly (y about 15782-15800) with pale bands above and
+  below, and in `metal1` a single dark line at y 15807 under it, as under the load blocks.
+  Two readings were considered and neither adopted: (a) `bd1_n1`'s poly is the gate of a
+  pull-down between N2's extension and a ground arm; (b) it ends on a buried contact to the
+  framed diffusion. Start with a 6x view of x 13875-13960, y 15700-15840 in `acid1b`,
+  `metal1` and `acid`.
 - y 15850-15880 under the rail: the ground diffusion ends at about y 15852.
 - y 15880-16125 (dense group): `ck_out` tap (13716,15930), poly east along y 15930 to
   x 13830; under the rail several poly bars about 20 px apart (y 15975-16050); a load
@@ -348,15 +381,13 @@ was not readable).
 
 Channel:
 
-- Tracks k7, k8, k9, k11, k15, the lower end of k4 and where k5's poly (y 16410) goes.
-- Lines that start inside the channel. Scan (`sel_tracks.py v`, metal present, y ranges;
-  gaps of 20-26 px are usually a poly passing under): x 13435: 15251-15934, 15972-16769;
-  x 13478: 15124-16594; x 13521: 15080-15398, 15415-15899, 15990-16273, 16445-16805;
-  x 13565 below X: X itself to 16188; x 13608: 14992-15617; x 13652: 15081-15374;
-  x 13630: `bd1_g`; x 13674: 15715-15973 (contacts at both ends; poly east at y 15713,
-  poly west along y 15997 to a contact at (13522,15994)).
-- Contacts seen at 0.9x and not traced (x,y): (13432,15887) (13520,15931) (13432,15960)
-  (13523,16000) (13505,15385).
+- Lower ends, all in or near the diagonals at y 16560-16900: k4 (x 13304, past y 16700),
+  k8 (x 13478; scan: metal to y 16594, break, to y 16797), `bd1_xn2` on x 13435 (to y 16769),
+  `bd1_k` on x 13521 (to y 16273). Scan of x 13435 also shows metal at y 16812-16836 and
+  16899-16964.
+- Where k5's poly (y 16410) and k7's poly (y 15889) go in the gate column, and k11's poly
+  from (13609,15608).
+- Lines on x 13608 at y 16167-16224 and x 13565 at y 16251-16572 (scan only).
 - The diagonals at x 13150-13450, y 16680-16890: three metal lines step two tracks east
   there (seen at 1.5x), sel_w7's poly passes under them.
 - Bottom edge: a long vertical poly at x 13870-13885 passing under all the horizontal
