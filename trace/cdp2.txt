@@ -531,3 +531,8 @@ P 8672,6878:8692,7005                # down
 P 8662,7000:8700,7036                # pad
 C 8683,7018 s=24x24
 M 8685,7006 y7300 w=20               # on down into the logic left of rows B (crosses the chain input poly, no contact); seen to about y 7300
+# --- strobe lines, east ends: each runs on from s7's cell to the region's edge (x 10850)
+# and ends 46 px beyond it on a contact to a metal line going south at x 10896
+# (row A: contact 10896,6325; row C: contact 10894,7801; both seen, outside the region)
+P 10750,6314:10850,6334
+P 10750,7790:10850,7810

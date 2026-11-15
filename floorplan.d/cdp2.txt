@@ -3,4 +3,5 @@
 7990,7500:10790,7825  array  7-bit register latch row | seven copies of the same static latch cell with their own strobe line. Five bits feed the comparator above, the two leftmost bits leave to the left. Which register: not yet established (the 5 + 2 split would fit R10)
 8700,6930:10830,7480  array  5-bit comparator of the register below | per bit: XOR of the register bit with the bit on the slice's through track, a chain from left (most significant) to right, and a pull-down on a row-long line. Believed outputs: "equal" at the right end of the chain, "greater" on the line; one connection per bit not seen
 ?7600,6350:10850,6900  route  channel 2 | 13 horizontal poly lines under the per-slice metal lines and rails; the lowest carries the comparator's chain output
-?8400,7980:10790,8450  array  row of cells below the 7-bit register | five or six slices, not traced
+?8380,8040:10720,8450  array  row of large cells below the 7-bit register | six slices, continues below y 8450 (cdp3's row A); fed by the data bus lines only from above. Not traced
+?7650,7830:10850,8030  route  channel 3 | five horizontal poly lines across the array, no contact seen in the slices looked at

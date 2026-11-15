@@ -36,8 +36,11 @@ the most significant of the five compared bits, s7 the least.**
   in the file, no errors, no open nets): a 5-bit comparator of row C's register against
   the value on the through tracks. One connection inside the cell could not be seen
   and is left open (nets `p1` and `o2`, Ambiguities 6).
-- Not traced: row D, channels 2 and 3 (except what rows B use), the logic left of the
-  rows, the ends of the strobes. See Not done.
+- Loose ends followed in the second run: the comparator's three outputs/inputs to
+  where they enter the logic left of the rows, both strobes to their contacts just east
+  of the region, the lower ends of the through tracks (they stop at the foot of row C).
+- Not traced: row D (a large cell that continues below y 8450 as cdp3's row A),
+  channels 2 and 3 as such, the logic left of the rows. See Not done.
 
 ## Conventions
 
@@ -338,7 +341,7 @@ How the nets are made (coordinates of the master):
 
 | Name | Layer | Where it crosses | Direction | What |
 |---|---|---|---|---|
-| `cdp2_a_sK_bus` (K=3..7) = `cdp2_c_sK_bus` | metal | x 8856, 9246, 9636, 10026, 10416 at y 5700 (top edge, no contact in channel 1) and at y 7821 (down below row C, not followed) | into the rows | data bus bit lines; one line per slice through rows A, B and C |
+| `cdp2_a_sK_bus` (K=3..7) = `cdp2_c_sK_bus` | metal | x 8856, 9246, 9636, 10026, 10416 at y 5700 (top edge, no contact in channel 1) and at y 7821 (down below row C: they cross channel 3 without contact in s4, s5 and enter row D; drawn to y 7821 only) | into the rows | data bus bit lines; one line per slice through rows A, B and C |
 | `cdp2_c_s1_bus`, `cdp2_c_s2_bus` | metal | x 8118 and x 8535 at y 7395, going up; x 8075, 8465 at y 7821 going down | in | bus lines of row C's s1, s2 (jog at the cell top) |
 | `cdp2_a_sK_q` (K=3..7) | metal, contact at y 5740 | (9118,5740), (9508,5740), (9897,5740), (10287,5740), (10677,5740); beyond the contact not traced | out, to the rows above | row A latch output, same sense as the bus |
 | `cdp2_trk_s3` | metal | x 9334, y 5700 (the metal in s4's column, via the jumper y 5783) | ? | through track of s3, upper end |
@@ -349,20 +352,21 @@ How the nets are made (coordinates of the master):
 | `cdp2_trk_s5` | poly | line y 5913: x 8480 and x 10850 | ? | |
 | `cdp2_trk_s6` | poly | line y 5956: x 8480 and x 10850 | ? | |
 | `cdp2_trk_s7` | poly | line y 6000: x 8480 (ends at x 10518) | ? | |
-| `cdp2_trk_sK` (K=3..7) | metal | x 9336 + 390(K-4), y 7821 (below row C; not followed) | ? | lower end of the through tracks |
-| `cdp2_trk_s1` | metal | x 8165, y 7395 going up; y 7821 going down | ? | through track of row C's s1 |
+| `cdp2_trk_s1` | metal | x 8165, y 7395 going up | ? | through track of row C's s1 |
 | `cdp2_ch1_5826` | poly | line y 5826: x 8480 and x 10850; band at y 5730 to x 9086, then up across y 5700 at x 9080 (`?`) | unknown | not connected to row A |
 | `cdp2_a_c_s2_q` | poly | line L1, x 7990, y 7472, going left | out | output of row C's s2 |
 | `cdp2_a_c_s1_q` | poly | line L2, x 7990, y 7513, going left | out | output of row C's s1 |
 | `cdp2_a_c_s1_q` | metal | x 8338, y 7395, going up | out | same net in metal (if track c is contacted to q, Ambiguities 7) |
 | `cdp2_b_hl` | metal | x 8725, y 7400 (ends there on a diffusion in the logic left of rows B; not traced) | out | comparator's wired line: low when (believed) enable and N > register |
 | `cdp2_b_cin` | poly | y 7252, x 8650 (comes from the left; not followed) | in | chain input of the comparator (believed: enable, active low) |
-| `cdp2_b_s7_x` | poly | reaches channel 2's line y 6888 at x 10811 (the line not followed; a contact-like spot on it at 8556,6888) | out | chain output: low when (believed) enable and N == register |
-| `cdp2_c_ld` | poly | y 7800; about x 7650 at the left, runs on right of x 10850 | into the row | load strobe of row C |
-| `cdp2_a_ld` | poly | y 6324; runs on right of x 10850; left end about x 8520 | into the row | load strobe of row A |
+| `cdp2_b_s7_x` | metal | x 8685, y 7300 (seen to there; goes on down into the logic left of rows B). Route: poly up at x 10811, west along channel 2's line y 6888 across the whole array, down at x 8672-8692, contact (8683,7018) | out | chain output: low when (believed) enable and N == register |
+| `cdp2_c_ld` | poly | y 7800, x 10850 (east edge). Ends 46 px beyond on a contact (10894,7801) to a metal line that goes south at x 10894 (metal unbroken to y 9400 at least by profile). West end: poly colour to about x 7650, not examined | in | load strobe of row C |
+| `cdp2_a_ld` | poly | y 6324, x 10850 (east edge). Ends on a contact (10896,6325) to a metal line going south at x 10896 as far as y 7715, where it must step east (to about x 10940: the same staircase cdp1 and cdp3 report) to pass row C's contact. West end: s3's cell (x 8780); the poly seen at x 8518-8690 on the same y is a separate piece (field between, x 8704-8764) | in | load strobe of row A |
 | `vss` | metal | x 8794, 9184, 9574, 9964, 10354, 10744 (46 wide) at y 5960 and y 7830; x 8013, 8403 at y 7425 and 7830 | - | rails, run on both ways |
 | `vcc` | metal | x 9010 + 390k (50 wide) at y 5960; x 8997 + 390k (54 wide) at y 7830; x 8229, 8619 at y 7425 | - | rails, run on both ways |
-| (not named) | metal | x 8675-8695 from a contact (8683,7018) on a poly pad down to about y 7300; the pad's poly goes up at x 8684 across y 6920 | ? | beside the exit of `cdp2_b_hl`; belongs to the logic left of rows B |
+| channel 2 lines | poly | y 6366, 6410, 6456, 6498, 6542, 6584, 6626, 6672, 6756, 6802, 6844 at x 7600 and x 10850 (poly colour across the whole width by `cdp2_lines.py`; not drawn, not checked by eye outside s3..s7) | ? | pass over the array without contact in s3..s7; line 6714 is cut into pieces with contact pads at (8145,6705), (8315,6703), (8708,6703) |
+| channel 3 lines | poly | y 7843, 7886, 7930, 7973, 8017: from x 7650-7800 at the left (where they turn down) to beyond x 11100 at the right; no contact seen in s4, s5; not drawn | ? | |
+| (not named) | metal | x 8540-8560 from a contact (8548,6885) on a poly pad beside line 6888 (not on it) up through channel 2 to about y 5790 | ? | belongs to the logic left of the rows |
 
 ## Ambiguities
 
@@ -429,28 +433,39 @@ How the nets are made (coordinates of the master):
 
 ## Not done
 
-- **Row D** (y 7980-8450, s3..s7 and perhaps s2): not started. Row C's bus lines and
-  through tracks run down into it (ports at y 7821). findcell (first run) gives five
-  copies (s3..s7) and a weaker sixth at dx -781.
-- **Channel 2 (y 6350-6900)**: 13 poly lines at y 6366 ... 6888, no contact in s3..s7
-  (first run). The lowest (6888) takes the comparator's chain output at x 10811. Their
-  ends and contacts left of x 8780 and right of x 10790 are not traced; the far left
-  (x 7600-8700) has contacts at about y 6690 (x 8120, 8300, 8700) and y 6800-6850, and a
-  contact-like spot at (8556,6888). `cdp2_lines.py` gives a first pass but breaks at
-  every metal edge.
-- **Channel 3 (y 7830-7960)**: horizontal poly lines; at the left (x 7700-7950) bundles
-  turn down. Not traced.
+- **Row D** (y 8040-8450 and on below, to about y 8800: it is cdp3's untraced row A):
+  not traced. Six cells, pitch 390, at s2..s7 (x 8380-10720); s2's differs at the top.
+  Seen at 2.7x in s2 (x 8330-8800): VSS contacts at about (8400,8180), (8630,8180);
+  textured load blocks at (8700,8170), (8700,8310), (8745,8310), (8680,8400),
+  (8730,8410); horizontal poly bars y 8125-8145, 8195-8210, 8375-8390; contacts at
+  (8490,8295), (8545,8440), (8540,8245). From above only the bus line, the VSS rail and
+  the VCC rail of each slice reach it (the through tracks and track c stop at the foot
+  of row C); two metal pieces per slice start at y 8045 (x 9280-9295 and 9325-9340 in
+  s4). It is not the latch and not the comparator cell (findcell, four orientations).
+  Whoever traces it needs y 8040-8800, across the cdp2/cdp3 boundary.
+- **Channel 2 (y 6350-6900)**: only line 6888 (the chain output) is drawn. The other
+  twelve run the whole width by colour (Ports) with no contact in s3..s7; left of
+  x 8780 they are interwoven with the logic there (pads on line 6714, bends at
+  x 7800-8080, y 6780-6890).
+- **Channel 3 (y 7830-8030)**: five poly lines (Ports), not drawn.
 - **Logic left of the rows** (x 7600-8750, y 6000-7480): not traced. It receives
-  `cdp2_b_hl` (metal x 8725, ends about y 7400 on a diffusion), drives `cdp2_b_cin`
-  (poly y 7252 at x 8650), takes L1/L2 (row C's s1, s2 outputs, y 7472/7513 at x 7990)
-  and `cdp2_trk_s3` (metal 8335,6066).
+  `cdp2_b_hl` (metal x 8725, ends about y 7400 on a diffusion) and `cdp2_b_s7_x` (metal
+  x 8685, seen to y 7300), drives `cdp2_b_cin` (poly y 7252 at x 8650), takes L1/L2 (row
+  C's s1, s2 outputs, y 7472/7513 at x 7990), `cdp2_trk_s3` (metal 8335,6066) and the
+  metal x 8548 from (8548,6885).
 - **Channel 1, left part**: lines 5826-6000 left of x 8480 (they jog at x 8300-8470 and
   go on to x < 8150); right of x 10850 they belong to whoever has that area. The poly
-  from the y 5740 pads upward crosses into cdp1's rows.
-- **Strobes**: `cdp2_a_ld` right of x 10850 at y 6324 and its left end near x 8520;
-  `cdp2_c_ld` (y 7800) left about x 7650, right past x 10850. Neither has been followed
-  to a select line, so neither row is identified.
-- Rails outside rows A-C: x of the VSS rails 8013, 8403, 8793, 9184, 9574, 9965, 10355,
-  10745, of the VCC rails 8229 ... 10571; drawn for s3..s7 from y 5960 to 7830.
+  from the y 5740 pads upward crosses into cdp1's rows. These lines decide the polarity
+  question of the comparator (Logic) and Ambiguities 3.
+- **Which registers rows A and C are**: both strobes end on the innermost track
+  (x 10894) of the bundle of vertical metal lines east of the array, which is fed from
+  the south and steps one track east at every tap. Following that staircase from
+  y 7800 down to the select logic (sel/bd3 ports at x 14100) was not done, so neither
+  row is identified. Do not take the 5 + 2 width argument for more than a guess.
+- Rails are drawn for s3..s7 from y 5960 to 7830 and for s1, s2 over row C only.
 - Composites: `--comp cdp2_b` (rows B, master frame 9150,6890:9590,7500), `--comp cdp2_a`
   (row A, 9150,5940:9590,6350), `--comp cdp2_ctop` (top of row C, 9150,7420:9590,7610).
+- Tools written in the second run: `cdp2_cls.py` (class map; its metal mask is patchy
+  where poly edges cut the metal), `cdp2_mcol.py` (is there metal along a track, with
+  the clean shot's class under it: the quickest way to follow a line), `cdp2_reg.py`,
+  `cdp2_cmont.py`, `cdp2_w.py`.
