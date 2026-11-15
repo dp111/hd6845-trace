@@ -564,7 +564,7 @@ y 12869-13035 (between r10 and r11). Extracted, per group:
 |---|---|---|---|
 | master gate `na -> a` (L1) | `ck_b` | **`mra_m7`**: bus line E, from the west | `ck_b` |
 | slave gate `d -> q` (rail x 13025) | `ck_a` | **`mra_s7`**: bus line D, from the west | `ck_a` |
-| pull-down of `na` (L3) | `mra_l3n`: leaves north past y 7130 | `mra_l3m`: **no feed found (AMB-008)** | `mra_cka2`: `ck_a` by trunks' second route (not drawn) |
+| second pull-down of `na` (L3) | `mra_l3n`: leaves north past y 7130 | `mra_l3m`: from the west on a metal line along y 13005 (contact (11765,13005), poly, contact (12567,13005)) | `mra_cka2`: from the contact (12631,16954); trunks' notes take the poly behind it for a second `ck_a` route (seen at 0.9x only) |
 | gate `a <-> b` (line x 12902) | `mra_gab` | `mra_gab` | `mra_gab` |
 
 So the 8-bit counter (believed horizontal) and the 4-bit counter step on every clock
@@ -582,12 +582,20 @@ How the lines run (metal unless noted; views `gapA_m.png`, `gapA_b.png`, `gaps_m
   onto the L2 position, runs through r10-r4 there without a tap, steps left at
   y 9242-9258 and is L1 of r3-r0 (top end free at y 7275).
 - L1 of r4-r10: from a contact at (12521,9360) on bus line E to a free end at y 12885.
-- L2 elsewhere is unused: r0-r3 a stub (y 7275-9196); r11-r14 a piece from a contact at
-  (12567,13005) on a poly line that comes from a pad at about (11766,13010), no tap, free end
-  at y 14970; r15-r18 a piece with no contact (y 15012-16940).
-- L3: r0-r3 continues north; r4-r10 has free ends at y 9440 (lying over the `n1` line of r4,
-  no contact disc in the clean shot, no ring in either metal shot) and y 13018 (22 px short
-  of the next piece); r11-r18 starts at y 13040 and ends on the contact (12631,16954).
+- L2 elsewhere is unused, three pieces with no contact: r0-r3 (y 7275-9196), r11-r14
+  (y 13037-14970), r15-r18 (y 15012-16940).
+- L3: r0-r3 continues north; r4-r10 has a free top end at y 9440 (over the `n1` line of r4,
+  no contact) and at the bottom widens into a foot that turns west onto the contact
+  (12567,13005) (`l3foot.png`, 6.5x, all four shots; first read as L2's contact, which
+  left this piece without a feed: AMB-008, resolved); r11-r18 starts at y 13040 and ends on
+  the contact (12631,16954).
+- **What L3 is for.** `na = NOR(L3, nb)`, and `a` takes `na` on the master clock, so a high
+  L3 makes every bit of its group load 0. One L3 per counter, each fed from a different
+  place, reads as **the counter's synchronous clear** rather than as a clock. For the
+  8-bit counter that contradicts trunks' "second `ck_a` route" (a poly x 12733-12757 seen
+  at 0.9x only between y 17050 and 18220): to be checked at tracing zoom before either
+  reading is used. If L3 is the clear, the horizontal counter is cleared from below, the
+  row counter from the west (y 13005) and the 4-bit counter from the north.
 - Rail x 13013-13037: south piece from trunks up to a contact at (13021,12939); middle
   piece y 9326-12887 from a contact at (13021,9340) on bus line D; north piece y 7268-9290
   from a contact at (13021,9276) on bus line C. The earlier note of a contact at
@@ -613,7 +621,7 @@ east ends in the clean shot (`bus_w.png`):
 | G/F | 9397-9413, stepping up at x 12650-12670 to 9373-9391 | (contact near x 11656?) | wiring channel, leaves at (13420,9707): the R2 match line `rdp3_cb_eq` |
 
 In the channel y 12869-13035: the carry-in of r10 (`mra_cin_r10`, y 12905-12920, from the
-west), the line to the L2 contact (y 12996-13014), and the diffusion strip above.
+west), the poly line to L3's contact (y 12996-13014), and the diffusion strip above.
 
 ## Right-hand part, x 12770-13040: third-run readings (superseded by the section above)
 

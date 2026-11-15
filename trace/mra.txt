@@ -395,26 +395,33 @@ M 12493,16893:12532,16922                 # below row r18 the line steps right t
 M 12521,9346 y9420 x12500 y12885 w=14
 N M 12500,9950 mra_m7
 C 12521,9360
-# L2: a feed-through position. Rows r0-r3: a stub with no contact (ends y 9196). Rows r11-r14:
-#   from a contact on a poly line that comes from the west along y 12996-13014, no tap, ends free
-#   at y 14970. Rows r15-r18: a piece with no contact at all (y 15012-16940).
+# L2: a feed-through position, used only in rows r4-r10 (by ck_b, above). The other pieces have
+#   no contact: rows r0-r3 (y 7275-9196), r11-r14 (y 13037-14970), r15-r18 (y 15012-16940).
 M 12543,7275 y9196 w=14
 N M 12543,8000 mra_l2a
-M 12567,12992 y13060 x12543 y14970 w=14
+M 12543,13037 y14970 w=14
 N M 12543,13500 mra_l2b
-C 12567,13005
-P 12550,12990:12585,13020
-P 11760,12996:12585,13014                 # from a pad with a contact at about (11766,13010), not followed
 M 12543,15012 y16940 w=14
 N M 12543,16000 mra_l2c
-# L3 (gate of the pull-down of na). Rows r0-r3: continues north out of the array. Rows r4-r10:
-#   free ends at y 9440 and y 13018 in both metal shots, no contact found at either: its feed is
-#   NOT FOUND (AMB-008). Rows r11-r18: from the contact (12631,16954), by notes/blocks/trunks.md
-#   the second ck_a route (not drawn there).
+# L3 (gate of the second pull-down of na: na = NOR(L3, nb), so a high L3 makes every bit of
+#   the group load 0: believed the counter's clear line). One piece per counter:
+#   rows r0-r3: continues north out of the array.
+#   rows r4-r10: free top end at y 9440; at the bottom (y 12985-13018) the line widens into a foot
+#     that turns WEST onto the contact (12567,13005) (6.5x, both metal shots and the clean shot:
+#     the earlier reading gave this contact to L2). The contact is on a poly line that comes from
+#     the west along y 12996-13014.
+#   rows r11-r18: from the contact (12631,16954); notes/blocks/trunks.md takes the poly behind it
+#     for a second ck_a route (seen at 0.9x only). To be checked: see notes/blocks/mra.md.
 M 12587,7130 y9196 w=14
 N M 12587,8000 mra_l3n
-M 12587,9440 y12975 w=14                  # (on the die to y 13018, at x 12612; shortened here to clear the L2 contact)
+M 12587,9440 y13005 x12556 w=14
 N M 12587,9950 mra_l3m
+C 12567,13005
+P 12550,12990:12585,13020
+P 11760,12996:12585,13014
+P 11750,12990:11790,13020                 # west end: pad with a contact to a metal line that comes from the west along y 12995-13015
+C 11765,13005
+M 11640,13005 x11780 w=20                 # (west of x 11690 not followed)
 M 12587,13040 y16940 w=14
 N M 12587,14000 mra_cka2
 M 12720,7265 y16940 w=48
