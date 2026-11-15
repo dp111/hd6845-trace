@@ -300,10 +300,10 @@ N D 3875,11900 larr_z_{}
 # poly H1 from the left column, a buried contact, a diffusion strip under rails B and E
 # (measured: tan under the rails, open-diffusion colour between them; the first run had
 # it as poly), a T under rail E, and poly H3 on to the right.  The first run tied this
-# line to rail E by a metal contact on the pad beside the T.  That is NOT kept: the pad
-# is a pale box with a heavy outline, read here as a buried contact (strip to H3), and
-# the feed of this line in the left column goes to the bundle line that MA8 / MA9 use
-# on other rows (notes, "Bit numbering").  Open: see notes, Ambiguities, "Line H".
+# line to rail E by a metal contact on the pad beside the T.  That is NOT kept (not
+# proven; it may well be true through the greenish patch at the end of the T's bar):
+# the pad is drawn as a buried contact from the strip to H3, and the line is left as
+# its own net larr_h_{}.  Open: see notes, Ambiguities, "Line H under rail E".
 @cell larr_top_n tag=s1
 M 3063,11462:3085,11545             # carry-in, from the row above
 M 3063,11513:3110,11545             # foot over the contact to poly P2

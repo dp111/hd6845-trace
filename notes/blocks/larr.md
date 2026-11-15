@@ -8,9 +8,9 @@ The lower section is a 14-bit counter, one row per bit, in three carry groups of
 and 4 rows. Traced, placed on all 14 rows and extracted clean (350 transistors, 0
 errors, 0 warnings): x 2860-3480, the incrementer and the static pair that holds the
 bit (cell `larr_bit`, first run), and x 3480-3900, the latch part (cell `larr_lat`,
-second run). Rail E is settled: VSS. Two `maN_drv_in` lines were followed into the
-array (MA8 to the s4|s5 row boundary, MA9 to the s8|s9 boundary): the rows are NOT in
-MA order, see "Bit numbering". Not traced: the rest of the row (x 3900-4720), the
+second run). Rail E is settled: VSS. Two `maN_drv_in` lines were followed to the left
+column (MA8 to the cell at the s4|s5 row boundary, MA9 to the one at s8|s9); the bit
+order is still not confirmed, see "Bit numbering". Not traced: the rest of the row (x 3900-4720), the
 left column, the upper section, the logic in the two gaps. See Not done.
 
 ## Inventory
@@ -145,47 +145,43 @@ conducts: an unused clear of the X1 inverter.
   at x 2905 (`larr_l0nc_s10`..`s13`). Carry out of s13 continues down to a contact at
   about 3070,18122 on a horizontal poly at y 18105-18125 (not drawn).
 
-### Bit numbering (two lines traced; the result contradicts the believed order)
+### Bit numbering (two driver inputs followed to the left column; order still open)
 
 Carry direction makes s0 the least significant bit of group 0 and puts group 2 above
-group 1. The first run concluded s0 = bit 0 ... s13 = bit 13. Following the driver
-inputs does not confirm that:
+group 1. The first run concluded s0 = bit 0 ... s13 = bit 13. Not confirmed yet. What
+following the driver inputs gave:
 
-- **Line H.** Along every boundary between two rows (11 of them: the top edge of
-  s1-s6, s8, s9, s11-s13) runs one line: poly H3 from the right (seen to x 4277,
-  beyond the traced part), a pale box beside a T of diffusion under rail E, a
-  diffusion strip y top+16..36 from x 3326 back to a buried contact at
-  3008-3036 x top+12..40, then poly H1 to x 2860. Traced on s2 beyond that: H1 turns up
-  at x 2847-2860 to y 11824-11843 (114 px above the row top), runs left across the left
-  column and ends on a contact at 2283,11833 on a vertical metal line of the bundle.
-  Net name `larr_h_sN` (N = the row whose top edge it is).
 - **MA8.** `ma8_drv_in` (poly y 11852) ends on a contact at 2238,11880; from it a metal
   line x 2231-2251 runs DOWN to y 13279, steps right to a contact at 2283,13268, and a
-  poly leaves it to the right along y 13257-13273 (seen to x 2590, into the left
-  column). That is the position of the H feed of s5 (13379 - 114). So MA8 belongs to
-  the s4|s5 boundary. (The first run's "short metal to 2197,11923" does not exist:
-  that contact is on a different vertical line, x 2192-2206, which comes from above.)
+  poly leaves it to the right along y 13257-13273 and ends at the left side
+  (x 2570-2600) of the left-column cell 2545-2860 x 13247-13420, which sits on the
+  s4|s5 boundary (view `lc6.png`: nothing crosses the cell at that height). (The first
+  run's "short metal to 2197,11923" does not exist: that contact is on a different
+  vertical line, x 2192-2206, which comes from above.)
 - **MA9.** `ma9_drv_in` arrives as metal along y 14345-14362, turns down at x 2232-2252,
   runs to y 14843, steps right to x 2317-2339, runs on to y 15404 and right to a
-  contact at 2458,15388; a poly leaves it to the right along y 15385-15398 (seen to
-  x 2544). That is the H feed position of s9 (15504 - 114): the s8|s9 boundary.
-- Not verified by a view: on s5 and s9 the poly was not followed from the left column
-  to H1 itself (only on s2); the equality with s2 rests on the identical position.
-- The H feed of s2 goes UP: contact 2283,11833, metal x 2283 to y 10809, step to
-  x 2326, to y 10207, step to x 2371 and on up past y 9640. So the s1|s2 boundary
-  serves a pad above MA7. `ma7_drv_in`'s metal (y 10110-10125) turns down at
-  x 2149-2164 (not followed). The line x 2192-2206 (runs y 8552-11931, top end level
-  with `ma6_drv_in` at y 8555, not checked) ends at 2197,11923 on a poly y 11905-11928
-  that goes into the left-column cell at 2550-2720 x 11880-12010.
+  contact at 2458,15388; a poly leaves it to the right along y 15385-15398 into the
+  left-column cell on the s8|s9 boundary (seen to x 2544; the cell not looked at).
+- **MA6 (not verified).** The line x 2192-2206 runs y 8552-11931 (its top end is level
+  with `ma6_drv_in`, y 8555; not checked by a view) and ends at 2197,11923 on a poly
+  y 11905-11928 that goes into the left-column cell 2550-2720 x 11880-12010 on the
+  s1|s2 boundary. `ma7_drv_in`'s metal (y 10110-10125) turns down at x 2149-2164 (not
+  followed).
+- **Line H** (the line along each of the 11 row boundaries, net `larr_h_sN`): on s2 its
+  left end H1 turns up at x 2847-2860 to y 11824-11843, runs left ABOVE the cell of
+  that boundary and ends on a contact at 2283,11833; the metal goes up (x 2283 to
+  y 10809, step to x 2326, to y 10207, step to x 2371, on up past y 9640). At s5 a
+  poly stands at x 2848-2862 beside the row over the whole height looked at
+  (y 13240-13415), so the left ends are not the same on every row.
 
-Two adjacent address bits four row boundaries apart cannot be two adjacent stages of
-one ripple chain. Either line H does not carry the bit of the row next to it (it
-comes from the cells at x > 4250, which may be another register with its own bit
-order), or these rows are not simply "MA counter bit n in row n". This is the most
-important open question of the block; it needs line H followed to its source on the
-right, and the remaining `maN_drv_in` lines followed like the two above
-(`tools/sel_tracks.py v X --a Y0 --b Y1` lists the runs of each bundle line; the
-lines step sideways, so check every end with a view).
+So the stages of MA6 (unverified), MA8 and MA9 are the left-column cells on the
+boundaries s1|s2, s4|s5 and s8|s9: three, three and four rows apart, so a stage is
+not simply level with its bit's row, and the bit order cannot be read off the stage
+positions. To finish: trace one left-column cell (inputs from the right: line H of
+that boundary at x 2860, the poly at x 2848-2862, the second poly about 30 px above
+the row top), and follow line H to its source at x > 4277.
+`tools/sel_tracks.py v X --a Y0 --b Y1` lists the runs of each bundle line; the lines
+step from track to track, so check every end with a view.
 
 ### What the counter is (open)
 
@@ -193,8 +189,8 @@ lines step sideways, so check every end with a view).
 twice (group 1's all-ones line is the carry into group 2; the carry into group 1
 comes from the left column), and every row can also take a value from the right
 (`larr_ld`, through Vm3), which fits a counter reloaded from a latch. The MA drivers
-are fed from lines that run along the row boundaries (above). But which row holds
-which MA bit, or whether line H carries a counter bit at all, is not established.
+are fed from left-column cells that sit on the row boundaries (above), which ties
+this array to the MA outputs. Which row holds which MA bit is not established.
 
 ## Ports
 
@@ -224,7 +220,7 @@ traced.
 | `larr_cout_g0` (= `larr_cout_s6`) | poly y 14389 | 3300,14389 going right | out | carry out of group 0 |
 | `larr_cout_g1` (= `larr_cout_s9`) | contact 3095,16040 | poly under it not traced | out | carry out of group 1 |
 | `larr_cout_s13` | metal x 3063-3085 | leaves the last row at 3074,18070, contact about 3070,18122 | out | carry out of the counter |
-| `larr_h_sN`, 11 rows (H1) | poly y top+31..51 | 2860,11511 in the master; rows s1-s6, s8, s9, s11-s13 | out (believed), to the bundle x 2150-2520 | row-boundary line; MA8 on s5's, MA9 on s9's |
+| `larr_h_sN`, 11 rows (H1) | poly y top+31..51 | 2860,11511 in the master; rows s1-s6, s8, s9, s11-s13 | ? | row-boundary line; on s2 it goes on to the bundle contact 2283,11833 |
 | `larr_h_sN` (H3) | poly y top+38..60 | drawn to x 4100, seen to x 4277, goes on right | in (believed) | the same line; its source is in the cells at x > 4250 |
 
 ## Ambiguities
@@ -253,16 +249,16 @@ traced.
   3332-3348 x 11514-11530 (199/171/125) from which H3 starts, and above it, at the end
   of the T's bar, a greenish patch 3331-3341 x 11486-11504 (148/148/105, the colour
   metal contacts have in this block). The first run read the pale box as a metal
-  contact from rail E, which grounds the whole line. Not kept, because the same line
-  on other rows is what `ma8_drv_in` and `ma9_drv_in` connect to (if the feed poly
-  really reaches H1 there, which was only seen on s2). Drawn instead: the pale box as
-  a buried contact joining the strip to H3 (`?B`, `?D`), no connection to rail E.
-  Candidates: (a) as drawn, H is a signal from the right to the bundle; (b) the
-  greenish patch or the stem ties H to VSS, H1/H3 are grounded gate plates for hold
-  devices left and right (as in cdp2), and the MA8 / MA9 polys end in the left-column
-  cells instead of on H1. Settle it with a 5x view of three layers at
-  3290-3360 x 11475-11545 on two rows, and by following the MA8 poly from 2590,13265
-  to x 2860.
+  contact from rail E, which grounds the whole line. Not kept: it is not proven, and a wrong tie
+  to VSS would be worse than a missing one. Drawn instead: the pale box as a buried
+  contact joining the strip to H3 (`?B`, `?D`), no connection to rail E. Candidates:
+  (a) as drawn, H is a signal between the cells at x > 4250 and the left column /
+  bundle; (b) the greenish patch (a contact from rail E onto the end of the T's bar)
+  ties H to VSS, and H1/H3 are grounded gate plates for hold devices in the cells left
+  and right, as the poly band along the cell top is in cdp2. (b) is the more likely:
+  the patch has the contact colour, and the MA8 poly was seen to end in the
+  left-column cell, not on H1. Settle it with a 5x view of three layers at
+  3290-3360 x 11475-11545 on two rows, and by finding what H3 does at x > 4277.
 - **Three junctions that decide the adder**, all first misread by eye at 3-6x and
   then settled with colour profiles (`larr_px.py`):
   1. 2985-3045 x 11605-11652. There is no poly joining the bar of net a to the upright
