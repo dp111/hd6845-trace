@@ -408,7 +408,7 @@ South edge, y 13480 (metal unless noted):
 | `vcc` | 13990; 14382..15942 at y 13520 | | into the decode array's VCC bus |
 | `rdp3_ar_s1_q`..`s4_q` | contacts 15884,13482; 15839,13437; 15884,13392; 15839,13352 (then poly east) | | `ar0`..`ar3` |
 | `rdp3_ar_s5_q` | poly, 16170,13307 going east | | `ar4` |
-| `rdp3_ar_ld` | 16285,13080 going down | | load strobe of row AR (= `areg_load`) |
+| `rdp3_ar_ld` | 16296,13080 going down | | load strobe of row AR (= `areg_load`) |
 
 Lower right, y 12900 (x > 15800):
 
@@ -438,7 +438,6 @@ seen) and not drawn.
   y 12121-12145 and over the VSS-tied band at its lower end; a contact to either was
   looked for at 5x by run 2 and not seen. Both look like unused feed-through tracks of
   the cells.
-- **AMB-4, end of `rdp3_ar_ld`** (first run): contact (16285,13022) seen at 1.5x only.
 - **AMB-8, node x to the series pair.** The strip y 11963-11978 meets the band's right
   end at x 14694-14700 exactly under a metal-gap line (dark bar, as over diffusion;
   over field it would be an olive strip). Taken as joined.
@@ -450,7 +449,9 @@ seen) and not drawn.
 - **AMB-10, a break in `sel_w0`'s line on chip 2** at (13652,12708): a 10 px dark gap
   in the chip-2 metal shot only. Chip 1's metal is unbroken and nothing lies under the
   spot. Taken as dirt or a scratch on that die.
-- Settled in run 3 and removed: AMB-5 (AR track stubs: s1 runs through, s2..s5 are
+- Settled in run 3 and removed: AMB-4 (the contact at the east end of `rdp3_ar_ld` is at
+  (16296,13023), ring with a bright centre and a pad, metal south on x 16296: run 1 had
+  it 11 px too far west, `arld.png`), AMB-5 (AR track stubs: s1 runs through, s2..s5 are
   isolated stubs), AMB-6 (track continuous in the latch cells), AMB-7 (T7 is real).
 
 ## Not done
@@ -461,5 +462,5 @@ seen) and not drawn.
   x 13434 runs to about y 15139, with a jog between L2 and L3 at y 15126-15136.
 - The poly pad of `rdp3_s0` at (13328-13364,12829): where its poly goes west.
 - The stretch y 13480-14700 of the bundle (no package): followed by measurement only.
-- AMB-4 (the contact at the end of `rdp3_ar_ld`), AMB-3 (T2 and the strap).
+- AMB-3 (T2 and the strap).
 - Which slice is which data bit.

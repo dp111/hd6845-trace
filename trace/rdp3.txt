@@ -138,10 +138,10 @@ M 16125,13270 y13320 w=60            # continues downward, bending left (areg re
 
 # --- strobe line rdp3_ar_ld: left end, and right end to its contact (metal goes down from there)
 P 14155,13015:14190,13043
-P 16140,13015:16300,13043
-?C 16285,13024 s=26x26
-?M 16285,13010 y13080 w=22
-N M 16285,13070 rdp3_ar_ld
+P 16140,13015:16312,13043
+C 16296,13023 s=26x26                # ring with a bright centre in the metal shot, pad in the clean shot (run 3, 3x: arld.png)
+M 16296,13010 y13080 w=20
+N M 16296,13070 rdp3_ar_ld
 
 # --- outputs q0..q3: contact below each cell, metal down and to the right, a poly
 # cross-under beneath every VCC rail on the way. Drawn as far as the last contact before
