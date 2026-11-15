@@ -103,9 +103,14 @@ bd1_xn2 = NOT bd1_x       lower inverter, gate bar y 15271-15291
   wide diffusion strip (x 13772-13802, lying under the metal line on x 13782) and ends
   at x 13805 (5x view): so g is the **gate** of a small transistor there, not an output.
   Bottom end, (13629,16150): the line ducks under X's horizontal metal in poly to a pad
-  with a second contact, (13629,16235), from which the gate poly of X's driver runs east
-  and a metal goes on south (not followed). **What drives g was not found; it must be
-  south along x 13630.**
+  with a second contact, (13629,16235). From that pad the gate poly of X's driver runs
+  east, and a metal runs south on x 13630 to a contact at (13631,16758); poly east
+  under X's line and south along x 13699 to a contact at (13698,17080); metal west
+  along y 17082 to a contact at (13480,17083); poly south, **leaving the region at
+  (13480,17150)**. On the whole of g followed here no gate output was seen (its east end
+  at y 15671 was looked at once, at 5x: a plain gate crossing, no buried contact), so
+  **g is believed to come from the south** (bottom bus field): what drives it, and so
+  what X is, lies outside this block.
 - **X's metal** on track k11's position starts at the contact (13567,15193): that is
   its top end. A second contact 88 px lower, (13567,15281). Each goes to a poly bar
   running east, and each bar is the gate of one inverter: pull-down W/L 131/20, load
@@ -173,7 +178,7 @@ k7, k8, k9, k11, k15: Not done.
 | bd1_x | metal | 13672,16610 (drawn to there) | out | line X; trunks.txt draws it from y 16600 south. Not labelled in trunks.txt: it reaches inrow's `t_g0_in` |
 | bd1_x | metal | 13922,15905 (`?`) | ? | from the driver's output north into the dense group |
 | bd1_g | poly | 13806,15671 (`?`) | out | gate of a transistor in the untraced group |
-| bd1_g | metal | 13630,16300 (`?`) | in (believed) | going south; g's driver must be that way |
+| bd1_g | poly | 13480,17150 (south) | in (believed) | X = NOT g; g has no driver in this region. Seen to y 17145, going south |
 | bd1_xn2 | metal | 13716,15772 | out | to a contact at (13713,15760) in the gate column |
 | bd1_xn2 | metal | 13521,15944 | out | line on x 13521 ending at a contact at (13520,15931) |
 | vss | metal | 13910-13958, 14700 (north) | - | wide rail; named from the pull-downs it feeds |
@@ -247,7 +252,6 @@ Channel:
   (13523,16000) (13505,15385).
 - The diagonals at x 13150-13450, y 16680-16890: three metal lines step two tracks east
   there (seen at 1.5x), sel_w7's poly passes under them.
-- Bottom edge: a separate metal along y 17082 from contact (13480,17083) (poly going
-  south) to contact (13698,17080) (poly coming down x 13690 from y 16840); a long
-  vertical poly at x 13870-13885 passing under all the horizontal lines.
+- Bottom edge: a long vertical poly at x 13870-13885 passing under all the horizontal
+  lines (y 16840-17150).
 - sel_w9, sel_w11, sel_w10 west of x 14100 (they lie below y 17100).
