@@ -84,13 +84,13 @@ Channel west of the island, the four lines that serve it (all metal, about 20 wi
 
 | Line | x | y range | Net |
 |---|---|---|---|
-| W1 | 7174-7194 | 2976 to beyond 3985 | `tc1_w1` |
+| W1 | 7174-7194 | 2976-3952 (ends on its lower contact; bare field below, measured) | `tc1_w1` |
 | W2 upper | 7223-7240 | 2987-3128 (then east along y 2978-2995 to x 7350) | `tc1_b` |
-| W2 lower | 7220-7240 | 3170 to beyond 3985 | `tc1_l1_out` |
+| W2 lower | 7220-7240 | 3170 to beyond 4450 | `tc1_l1_out` |
 | W3 upper | 7265-7284 | 3032-3386 (from the east along y 3022-3042) | `tc1_a` |
-| W3 lower | 7265-7284 | 3427 to beyond 3985 | `tc1_l2_out` |
+| W3 lower | 7265-7284 | 3427-4070, then east along y 4060-4081 to contact (7336,4070) | `tc1_l2_out` |
 | W4 upper | 7307-7325 | 3062-3648 | `tc1_r1_out` |
-| W4 lower | 7307-7325 | 3690 to beyond 3985 | `tc1_l3_out` |
+| W4 lower | 7307-7325 | 3690-4026, then east along y 4014-4037 to a contact at (7379,4026) | `tc1_l3_out` |
 
 **Three of these verticals are cut where a gate is inserted in them**: W2 between
 y 3130 and 3168, W3 between 3404 and 3422, W4 between 3664 and 3680. At 1x each looks
@@ -140,16 +140,20 @@ named line. What is traced about each:
   down to contact (7316,3638) = L3's band c. Goes nowhere else.
 - `tc1_l1_out` (NOT b): buried contact 7354-7396 x 3164-3199, poly west to contact
   (7228,3181), metal W2 lower: contacts (7230,3482) = L2's band b and (7230,3740) =
-  L3's band d, and continues down past y 3985.
+  L3's band d, and continues south past y 4450 (no contact seen on it between y 3760
+  and 4450; three poly lines cross under it at y 4150-4166, 4343-4360, 4385-4402).
 - `tc1_l2_out`: buried contact 7358-7396 x 3420-3452, poly west to contact (7279,3437),
-  metal W3 lower: contact (7273,3852) = L4's band e, continues down past y 3985.
+  metal W3 lower: contact (7273,3852) = L4's band e, then down to y 4070, east to
+  contact (7336,4070), and a poly east along y 4062-4081 (seen to x 7400).
 - `tc1_l3_out`: buried contact 7356-7396 x 3684-3717, poly west to contact (7316,3700),
-  metal W4 lower, continues down past y 3985.
+  metal W4 lower down to y 4026, east along y 4014-4037 to a contact at (7379,4026);
+  what is under that contact was at the edge of the view and is not drawn.
 - `tc1_l4_out`: buried contact 7364-7400 x 3878-3910, poly west along y 3885-3905 under
   W4, W3, W2, W1 (no contacts) and on past x 7150.
 - `tc1_w1`: metal W1. Top end contact (7186,2986) to a poly that runs east along
   y 2977-2997 (under W2's horizontal) and turns north at x 7290-7308 into the top bus
-  field. Contact (7190,3938) = L4's band f. Continues down past y 3985.
+  field. Contact (7190,3938) = L4's band f, where the metal ends. So `w1` is an input
+  from the north, used only by L4.
 - `tc1_r2_out`: buried contact, poly, contact (7924,3332), V1 segment down to contact
   (7924,3464), poly band c west to R3. Goes nowhere else.
 - `tc1_r4_out`: diffusion under the right rail to a buried contact (7856-7892 x
@@ -189,12 +193,11 @@ island.
 | `tc1_f` | P | y 3348-3362 at x 8250, going east; seen to x 8290 under the six vertical metals without contact | out | R3 output. Enters the datapath in the channel between cdp1's row A (y 3040-3330) and row B (y 3480-3900) |
 | `tc1_a` | P | y 3387-3402 at x 8250, going east; seen to x 8290 | in (believed) | same channel, 40 px below `tc1_f` |
 | `tc1_b` | M | 8100, y 3716-3733, going east to a vertical at x 8085-8100 that goes down | in (believed) | |
-| `tc1_l1_out` | M | 7230, 3985 going down (W2 lower) | out | NOT b |
-| `tc1_l2_out` | M | 7274, 3985 going down (W3 lower) | out | NOT a AND b |
-| `tc1_l3_out` | M | 7316, 3985 going down (W4 lower) | out | a AND b |
+| `tc1_l1_out` | M | 7230, 4450 going south (W2 lower) | out | NOT b |
+| `tc1_l2_out` | P | 7400, y 4062-4081, going east (from contact 7336,4070) | out | NOT a AND b. Heads back under the island's south side |
+| `tc1_l3_out` | M | contact at (7379,4026), y 4014-4037; beyond not seen | out | a AND b |
 | `tc1_l4_out` | P | 7150, y 3885-3905, going west | out | NOR(l2_out, w1) |
-| `tc1_w1` | M | 7185, 3985 going down (W1) | ? | |
-| `tc1_w1` | P | 7299, 2950 going north (x 7290-7308) | ? | other end of W1 |
+| `tc1_w1` | P | 7299, 2950 going north (x 7290-7308) | in | the only other end of W1 |
 | `tc1_g` | M | 8053, 4060 going down | in | below is the bus field |
 | `tc1_h` | M | 7968, 4060 going down; at about y 4070 it turns west (1.5x view) | in | |
 | `tc1_i` | M | 8010, 4060 going down; at about y 4115 it turns west (1.5x view) | in | |
@@ -238,10 +241,16 @@ ends at about x 8108 by the vertical metal x 8087-8110 (junction not looked at).
 
 ## Not done
 
-- Far ends of everything in the Ports table. Cheapest next steps: (a) the channel
-  x 7150-7350 below y 3985 for W1, W2, W3, W4; (b) the bus field y 4040-4450 east of
-  x 7900 for `tc1_g/h/i/j` and `tc1_b`; (c) `tc1_a` and `tc1_f` east of x 8290 belong
-  with cdp1.
+- Far ends of everything in the Ports table. Cheapest next steps: (a) the strip
+  y 4000-4100, x 7330-7950 under the island for `tc1_l2_out`, `tc1_l3_out` and
+  `tc1_j`; (b) the bus field y 4040-4450 east of x 7900 for `tc1_g/h/i` and `tc1_b`;
+  (c) `tc1_w1` north of y 2950; (d) `tc1_a` and `tc1_f` east of x 8290 belong with
+  cdp1; (e) `tc1_l1_out` south of y 4450 belongs with tc2.
+- Seen in the channel, foreign, not drawn: a poly from the west along y 4000-4012 that
+  turns south at x 7177-7202 (it starts 40 px below W1's end and does not touch it),
+  east along y 4143-4168 to contact (7315,4158), metal south x 7307-7325 to contact
+  (7315,4395), poly west along y 4385-4402. And a metal from contact (7382,4114) west
+  along y 4108-4127, south at x 7265-7284 past y 4450.
 - The six vertical metals at x 8090-8330 and where `cdp1_a1_q` ends.
 - Gate columns x 6400-7000 (about 40 loads visible; three vertical rails at x 6507-6557,
   6686-6736, 6857-6900), the channel x 7000-7170, the top bus field y 2500-2975:
