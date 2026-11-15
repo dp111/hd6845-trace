@@ -370,11 +370,11 @@ C 16210,16086
 N D 16040,16070 bd2_c
 
 # ---------------------------------------------------------------- group 3 of the left column (y 16245-16470)
-#     bd2_m210 = NOR( rw_d, bd2_m210s, cs_d )
+#     bd2_m210 = NOR( rw_d, rs_d, cs_d )
 # The same gate again 261 px lower (under the rail: tools/bd2_umap.py 15996 16236 16080
 # 16490; west of it tools/bd2_cmap.py 15892 16296 16012 16476 shows group 2's pattern
 # shifted). Differences are on the east side only: band S' is fed from a contact at
-# 16211,16388 on a metal that goes south from there (bd2_m210s, not followed), and the
+# 16211,16388 on a metal that goes south from there to rs_d's band in group 4, and the
 # output band runs east across the bundle to the contact 16343,16344 at the lower end
 # of the bd2_m210 metal. Contacts by their olive footprints in the clean shot; the bands
 # are salmon (no contact) under every other metal they cross.
@@ -386,13 +386,12 @@ C 16025,16393
 P 16018,16293:16312,16309              # band R': gate rw_d (tap)
 P 16282,16286:16314,16318              # pad
 C 16298,16302
-P 15970,16351:16078,16369              # band S': gate bd2_m210s
+P 15970,16351:16078,16369              # band S': gate rs_d
 P 16066,16354:16078,16389              # link
 P 16066,16381:16226,16397              # band U' east to the contact 16211,16388
 P 16194,16372:16228,16404              # pad
 C 16211,16388
-M 16211,16378 y16570 w=18              # south from that contact (track scan: to about y 16568; not followed)
-N M 16211,16500 bd2_m210s
+M 16211,16378 y16616 w=18              # south to the contact 16211,16606 on group 4's band: this metal is rs_d
 P 15970,16421:16398,16439              # band T': gate cs_d (tap)
 P 16370,16414:16402,16446              # pad
 C 16386,16430
@@ -411,3 +410,35 @@ P 16068,16329:16110,16345
 P 16100,16339:16350,16353              # output band east to the contact 16343,16344
 ?B 16062,16315:16106,16349             # boxed cell (by the pattern of group 2; not looked at closely)
 N D 16040,16331 bd2_m210
+
+# ---------------------------------------------------------------- group 4, first gate (y 16570-16680): PULL-DOWN ONLY
+#     bd2_m255 is pulled low by rs_d (believed NOT rs_d; load and anything west of the rail not traced)
+# Under the rail (tools/bd2_umap.py 15996 16476 16080 16730): field down to y 16563,
+# land y 16575-16590, band y 16594-16612, land y 16620-16677 with contact specks, band
+# y 16681-16699 (rw_d taps it at 16298,16690: not traced), land y 16707-16725.
+# The band y 16594-16612 runs east across the bundle and has two contacts, both with
+# olive footprints: 16211,16606 (lower end of the metal that feeds band S' of group 3)
+# and 16343,16603 (top end of the rs_d metal). Under the e_b trunk, the bd2_m255 metal
+# and the rw_d metal it is salmon: no contact.
+D 16008,16575:16066,16677              # output land, under the band, ground land
+C 16041,16663
+P 16008,16594:16358,16612              # gate: rs_d
+P 16194,16590:16228,16622              # pad
+C 16211,16606
+P 16327,16588:16359,16620              # pad
+C 16343,16603
+M 16342,16593 y17100 w=18
+N M 16342,16800 rs_d
+# Output: the land's east end (x 16064-16124, y 16578-16590, plain) has a boxed cell on
+# its north side (16090-16130 x 16545-16578: heavy outline, inner box, cream bars in the
+# clean shot; view g4z), and a poly band leaves the cell east along y 16552-16568 to the
+# contact 16255,16562 on the bd2_m255 metal. The same idiom as the output contacts of
+# groups 2 and 3, turned upside down.
+D 16056,16575:16126,16590
+D 16092,16558:16126,16590              # under the cell
+P 16096,16552:16136,16582              # poly of the cell
+?B 16088,16544:16132,16584             # boxed cell; the window itself is not resolved
+P 16128,16554:16270,16570
+P 16238,16546:16270,16578              # pad
+C 16255,16562
+N D 16040,16582 bd2_m255
