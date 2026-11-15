@@ -171,21 +171,47 @@ What rests on what (colour profiles are of the median of slices 2-4, `tools/cdp1
 | ne load gate tied to ne | tan box with heavy outline at the tab's west end, under the bit line |
 | band y 3678-3712 joined to the diffusion under the buried contact | **inferred**, see Ambiguities 8 |
 
-### Channel B/C (surveyed)
+### Channel B/C, y 3990-4200 (traced)
 
-Five horizontal poly lines, y about 4003, 4047, 4090, 4133, 4177, in segments. The
-vertical metal line of each slice at x 8947+390k (row B's input 2) ends on a contact to
-a different one: slice 2 at 9337,4130; slice 3 at 9716,4088; slice 4 near 10106,4045;
-slice 5 near 10497,4003 (slice 1 not looked at). So five separate signals reach the five
-comparator slices from the side: believed the bits of a 5-bit counter that lives
-elsewhere. The lines are broken into segments and some segments are joined by short
-poly hooks (one at x 9240-9255, y 4085-4135 joins the y 4090 and y 4133 lines), so the
-routing must be traced, not assumed.
+Five horizontal poly lines, each 14-16 px wide, at y 4003, 4046, 4089, 4132, 4176. Each
+one **starts at a pad under the B line of one slice and runs east out of the block**
+(x 10850; scanned unbroken and without another contact to x 10900):
 
-The bit lines of row A do not all continue as the bit lines of row C: slice 2's
-(x 9247) jogs right at y 4035-4065 and goes on down at x 9287; slice 3's (x 9628)
-ends on a contact to the y 4090 poly line at 9628,4088. Row A's register therefore
-taps different bus bits from row C's in the same slice.
+| Line y | Starts at (pad, contact) | Feeds |
+|---|---|---|
+| 4176 | 8928-8962, contact 8946,4180 | `cdp1_b1_b`, B input of slice 1 |
+| 4132 | 9316-9352, contact 9336,4138 | `cdp1_b2_b` |
+| 4089 | 9706-9742, contact 9724,4092 | `cdp1_b3_b` |
+| 4046 | 10098-10132, contact 10116,4049 | `cdp1_b4_b` |
+| 4003 | 10488-10522, contact 10506,4006 | `cdp1_b5_b` |
+
+So the five-bit value that row C is compared with comes from the **east**, one bit per
+line, the top line going to the rightmost slice. What drives them is outside the block.
+
+A sixth poly net lies in the same channel and is **not** one of those: the bit line of
+row A's slice 3 (`cdp1_a3_bl`) ends on a pad at 9620-9656 x 4078-4106 (contact
+9637,4092); from there poly runs west along y 4090, down a hook at x 9243-9260, west
+along y 4132, down at x 8656-8672 (in the open gap east of slice 0's VCC rail) and west
+along y 4372 out of the block at x 8340. It is in line with two of the five lines but
+separate from them: field under metal between x 9265 and 9315 on y 4132 (colour map),
+open field between x 9656 and 9705 on y 4090.
+
+### `cdp1_b_eq` (traced to the edge)
+
+From the pad at 8725,3437 the metal runs down x 8716-8738 past row B and channel B/C
+with no contact (colour scan y 3440-4470), steps west at y 4460 to a contact at
+8683,4460, and a poly line (y 4452-4466) runs west under slice 0's rails. It crosses
+no diffusion between x 8340 and the pad and leaves the block at x 8340; a colour scan
+shows it unbroken to x 7900 at least.
+
+### The two poly lines under row A's foot (traced)
+
+y 3340-3362 (`cdp1_b5_a`) and y 3385-3408 (`cdp1_c5_q`), from their pads at x 10660-10694
+and 10612-10652 west under every rail and bit line (no contact: colour test at every
+crossing) to x 8285, where they meet the two polys that `trace/tc1.txt` draws to
+x 8290: **`cdp1_b5_a` is tc1's `tc1_f` and `cdp1_c5_q` is tc1's `tc1_a`**. tc1's island
+gives (its notes): `f = a.NOT b + b.NOT a.NOT g + a.b.NOT i`. So the fifth comparator bit
+sees row C's fifth bit itself when `tc1_b` is low, and a modified bit when it is high.
 
 ## Ports
 

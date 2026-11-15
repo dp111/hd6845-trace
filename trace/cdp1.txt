@@ -267,9 +267,13 @@ B 8928,3476:8962,3510
 P 8708,3424:8958,3450
 P 8708,3420:8746,3456
 C 8725,3437 s=24x26
-M 8727,3424 y3530 w=22                 # goes on down (not followed)
+M 8727,3424 y4460 x8672 w=22           # down past row C's top, then a short step west
+C 8683,4460 s=24x24
+P 8670,4447:8704,4476                  # pad; from it a poly line runs west under slice 0's rails
+P 8340,4459 x8690 w=16                 # ... out of the block (seen unbroken to x 7900)
 N D 9100,3513 cdp1_b_eq
 N M 8727,3520 cdp1_b_eq
+N P 8345,4459 cdp1_b_eq
 
 # ---------------------------------------------------------------------------------
 # Row B, lower half: one XOR per slice (seven transistors).  Master = slice 2
@@ -360,9 +364,55 @@ C 10677,3958 s=24x26
 M 10679,3344 y3972 w=20
 C 10680,3354 s=24x26
 P 10660,3340:10694,3364                # pad on the upper line
-P 8340,3351 x10692 w=22                # upper line (cdp1_b5_a), to the left edge
+P 8285,3351 x10692 w=22                # upper line (cdp1_b5_a): west to meet tc1's poly (its output tc1_f, drawn to x 8290)
 C 10634,3396 s=24x26
 P 10612,3384:10652,3410                # pad on the lower line
-P 8340,3396 x10650 w=22                # lower line (= cdp1_c5_q), to the left edge
+P 8285,3396 x10650 w=22                # lower line (= cdp1_c5_q): west to meet tc1's poly (its input tc1_a, drawn to x 8290)
 N P 8345,3351 cdp1_b5_a
 N P 8345,3396 cdp1_c5_q
+
+# ---------------------------------------------------------------------------------
+# Channel B/C (y 3990-4200): five horizontal poly lines, 14-16 wide, 43 apart. Each
+# starts at a pad under the B line of one slice and runs EAST out of the block: the
+# five B inputs of the comparator arrive from the right. Extents from colour scans
+# (tools/cdp1_line.py) and two 1.2x views; no other contact on any of them up to x 10900.
+M 10505,3985 y4018 w=20                # B line of slice 5
+C 10506,4006 s=24x24
+P 10488,3992:10522,4018
+P 10505,4003 x10850 w=16
+N P 10845,4003 cdp1_b5_b
+M 10115,3985 y4062 w=20                # slice 4
+C 10116,4049 s=24x24
+P 10098,4035:10132,4062
+P 10115,4046 x10850 w=16
+N P 10845,4046 cdp1_b4_b
+M 9725,3985 y4106 w=20                 # slice 3
+C 9724,4092 s=24x24
+P 9706,4078:9742,4106
+P 9724,4089 x10850 w=16
+N P 10845,4089 cdp1_b3_b
+M 9335,3985 y4150 w=20                 # slice 2
+C 9336,4138 s=24x24
+P 9316,4120:9352,4150
+P 9334,4132 x10850 w=16
+N P 10845,4132 cdp1_b2_b
+M 8945,3985 y4192 w=20                 # slice 1
+C 8946,4180 s=24x24
+P 8928,4165:8962,4192
+P 8945,4176 x10850 w=16
+N P 10845,4176 cdp1_b1_b
+
+# The bit line of row A's slice 3 ends in this channel on a poly line of its own, which
+# comes from the WEST: along y 4372 under slice 0, up at x 8664, east along y 4132 (in
+# line with slice 2's B line, but a separate piece: field between x 9265 and 9315), up a
+# hook at x 9251 and east along y 4090 to the pad (a separate piece from slice 3's B
+# line: open field between x 9656 and 9705).
+M 9637,3325 y4106 w=18                 # bit line of a3, down from the cell
+C 9637,4092 s=24x24
+P 9620,4078:9656,4106
+P 9243,4090 x9640 w=16
+P 9243,4082:9260,4140                  # hook
+P 8656,4132 x9260 w=16
+P 8656,4124:8672,4380                  # down the gap east of slice 0's VCC rail
+P 8340,4372 x8672 w=16                 # west, out of the block
+N P 8345,4372 cdp1_a3_bl
