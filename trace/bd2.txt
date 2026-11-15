@@ -290,5 +290,62 @@ P 16180,15737 x16262 w=18              # east: band G_d of the gate group right 
 C 16207,15778
 P 16192,15762:16226,15795              # pad
 P 16220,15779 x16262 w=20
-M 16210,15768 y16045
+M 16210,15768 y16100
 N M 16210,15900 bd2_m210
+
+# ---------------------------------------------------------------- group 2 of the left column (y 15985-16210)
+#     bd2_m210 = NOR( rw_d, bd2_m255, cs_d )
+# One gate with three pull-downs in the column and an output that wraps round the west
+# side. Under the rail (tools/bd2_umap.py 15996 15876 16072 16070 and 15996 16056 16112
+# 16236): ground land y 15987-16026, band R y 16032-16047, output y 16056-16083, band S
+# y 16090-16108, ground land y 16113-16155 (contact specks), band T y 16160-16178,
+# output again y 16185-16203. The two output pieces are one node: the upper has an arm
+# west under the rail (y 16064-16080) to the load, and from the load's east end a
+# diffusion wire (x 15944-15964; pink in the metal shots, green in the clean shot,
+# R-G +24 in chip 2's stripped shot against +3 for field) goes down to y 16208 and back
+# east under the rail into the lower piece.
+D 16032,15987:16060,16086              # ground land, under R, output
+C 16044,16008
+D 16008,16056:16060,16208              # output, under S, ground land, under T, output
+D 15992,16113:16060,16155              # ground land between S and T
+C 16025,16132
+P 16018,16032:16312,16048              # band R: gate rw_d, east under the e_b trunk and the bd2_m210 metal (no contacts) to rw_d's top end
+P 16282,16024:16314,16056              # pad
+C 16297,16040
+M 16298,16030 y17100 w=18
+N M 16298,16500 rw_d
+P 15970,16090:16078,16108              # band S: gate bd2_m255
+P 16066,16093:16078,16128              # link down to band U (orange in all three shots, x 16064-16073)
+P 16066,16120:16264,16136              # band U east to the contact 16252,16128
+P 16238,16112:16270,16144              # pad
+C 16252,16128
+M 16255,16118 y17100 w=18              # metal x 16255 from that contact south (not followed; scan: to y 17300 at least)
+N M 16255,16500 bd2_m255
+P 15970,16160:16398,16178              # band T: gate cs_d, east across the bundle (no contacts) to cs_d's top end
+P 16370,16155:16402,16187              # pad
+C 16386,16171
+M 16385,16161 y17100 w=18
+N M 16385,16500 cs_d
+# output: arm west, diffusion wire, load
+D 15944,16064:16012,16080              # arm west of the rail to the top of the wire
+D 15944,16064:15964,16208              # the wire
+D 15944,16196:16012,16208              # back east into the lower output piece
+D 15890,16068:15948,16096              # load strip from the VCC land
+D 15850,16060:15898,16104              # VCC land under the rail
+C 15866,16084 s=24x30
+P 15898,16046:15938,16118              # load gate: bar, block over the strip, bar (one poly)
+P 15918,16110:15940,16142              # down to the boxed cell
+D 15914,16122:15950,16144              # the wire's bulge under the cell
+?B 15914,16120:15944,16146             # boxed cell 15915-15940 x 16121-16141: the tie
+# output to the bd2_m210 metal: at the east end of the upper output piece, just east of
+# the rail, a boxed cell (16075-16102 x 16058-16081, light square inside); a poly band
+# leaves it east along y 16078-16092 (dark in the open, salmon under the e_b trunk: no
+# contact) to the contact 16210,16086 (olive footprint), where the metal x 16200-16222
+# from G_e ends.
+D 16056,16056:16100,16084
+P 16068,16068:16110,16084              # poly round the foot of the cell (orange x 16067-16085, y 16069-16078)
+P 16100,16078:16226,16092
+?B 16062,16054:16106,16088             # the boxed cell
+P 16194,16070:16228,16102              # pad
+C 16210,16086
+N D 16040,16070 bd2_m210
