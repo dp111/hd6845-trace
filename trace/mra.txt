@@ -290,19 +290,26 @@ P 12240,10015:12437,10034                 # q in poly to the right, under lines 
 P 12410,9977:12437,10034                  # ... up
 P 12410,9977:12470,9997                   # ... and right along the top of the row (continues beyond x 12470)
 N P 12460,9987 mra_q_{}
-?P 12263,10056:12350,10091                # poly block between the q box and the VSS box of line C; lies under lines A and B.
-N P 12300,10075 mra_qblk_{}               #   Its own connection and what is under it are not resolved (ambiguity B1).
+# Hold device (third run, B1): a load-shaped block over a strip from the q box to the lower box of
+# line C. Down x 12285 and x 12329: dull 10058-10064, edge, bright (channel) 10073-10085, edge,
+# dull 10094-10100; along y 10081 the bright band runs from x 12266 to 12344 between the two
+# boxes. The block is one poly with the link from the pad at (12183,10122), so its gate is on
+# that pad's net (VSS, B7): the same structure as the hold devices of cdp2, rdp3 and larr.
+P 12264,10056:12346,10101                 # block
+D 12255,10072:12355,10088                 # strip under it: q box | channel 17/86 | lower box
+A 12264,10070:12346,10090 kind=hold
 
-# --- VSS brought across under M1, line A and line B in poly
+# --- the pad on the VSS land's tongue and its poly: the gate of the hold device
 M 12168,10080:12198,10138                 # tongue of the VSS land down onto the pad
 P 12165,10105:12202,10140                 # poly pad
 C 12183,10122
-P 12183,10127 x12291 y10104 x12358 w=16   # link: right at y 10119-10135, up at x 12283-12299, right at y 10096-10112
-?B 12346,10094:12362,10114                # buried contact into the box (the poly ends at the box edge; contact not resolved)
-D 12350,10066:12408,10132                 # lower VSS box
+P 12183,10127 x12271 y10096 w=16          # link: right at y 10119-10135, up at x 12263-12279 into the block's lower left corner
+                                          # (third run: the poly along y 10097 ends at x 12344, 12 px of field before the box: no buried contact)
+D 12350,10066:12408,10132                 # lower box of line C: net z (not VSS: only the hold device's strip reaches it)
+N D 12392,10120 mra_z_{}
 C 12376,10098
 M 12376,9964 y10116 w=28                  # "line C": lower box to upper box
-D 12355,9963:12402,10008                  # upper VSS box (nothing else seen on it)
+D 12355,9963:12402,10008                  # upper box of line C (a narrow diffusion strip leaves it to the right: mra_col3)
 C 12374,9982
 
 # --- p3: the poly of the INV1 gate continues right to a pad; line B; pad; poly to the right
