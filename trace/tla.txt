@@ -221,9 +221,35 @@ C 2625,5278
 D 2550,5120:2605,5140
 D 2550,5120:2592,5282
 D 2550,5262:2605,5282
-# gate w2: poly y 5142-5164 from the west bus (not followed)
-P 2420,5142:2598,5164
+# gate w2: poly y 5142-5164. At its west end it turns north under the metal x 2361-2389
+# (poly x 2346-2363, y 5015-5161: hidden in the metal shots) and comes back east along
+# y 5015-5032 to a buried contact on the node of the inverter below: w2 = NOT c1.
+P 2346,5142:2598,5164
+P 2346,5015:2363,5164
+P 2346,5015:2575,5032
 N P 2470,5153 tla_w2
+
+# ---- w2 = NOT c1: a "rail gate", the pull-down is under R1 itself. Node = diffusion under
+# R1 at y 5028-5057 (between the two VSS boxes of the rail: field above it, the gate below
+# it), gate = poly y 5057-5075 across the rail from a pad with a contact (2414,5067) at the
+# bottom end of the metal x 2404-2430 (c1, from the north). The node reaches west to the
+# buried contact with w2's poly and east to its load.
+D 2598,5028:2652,5082
+P 2420,5057:2672,5075
+P 2396,5050:2434,5084
+C 2414,5067
+M 2417,4900 y5082 w=24
+N M 2417,4950 tla_c1
+D 2540,5018:2602,5047
+B 2540,5012:2578,5047
+D 2648,5030:2700,5048
+D 2676,5030:2714,5055
+D 2694,5050:2712,5100
+D 2706,5030:2782,5048
+P 2722,5003:2775,5068
+P 2700,5075:2745,5098
+P 2722,5062:2745,5080
+B 2690,5072:2716,5100
 # gate w3 = e4: poly y 5230-5250 from a pad with a contact (2497,5238) under a metal x 2485-2510
 # that comes round from bus line C (above)
 P 2490,5230:2598,5250
