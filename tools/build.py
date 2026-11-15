@@ -55,14 +55,20 @@ def _read_floorplan_file(path, blocks):
             continue
         head, _, desc = line.partition('|')
         tok = head.split()
-        a, b = tok[0].split(':')
-        x0, y0 = map(float, a.split(','))
-        x1, y1 = map(float, b.split(','))
-        kind = tok[1]
-        prov = kind.startswith('?')
+        try:
+            lead = tok[0].startswith('?')       # some fragments put the ? on the coordinates
+            a, b = tok[0].lstrip('?').split(':')
+            x0, y0 = map(float, a.split(','))
+            x1, y1 = map(float, b.split(','))
+            kind = tok[1]
+        except (ValueError, IndexError):
+            print(f'{os.path.basename(path)}:{n}: skipped, not a floor-plan line: {line[:60]}')
+            continue
+        prov = kind.startswith('?') or lead
         kind = kind.lstrip('?')
         if kind not in KIND_COL:
-            raise SystemExit(f'{os.path.basename(path)}:{n}: unknown kind {kind}')
+            print(f'{os.path.basename(path)}:{n}: skipped, unknown kind {kind}')
+            continue
         blocks.append(dict(x0=min(x0, x1), y0=min(y0, y1), x1=max(x0, x1), y1=max(y0, y1),
                            kind=kind, prov=prov, name=' '.join(tok[2:]), desc=desc.strip()))
     return blocks
