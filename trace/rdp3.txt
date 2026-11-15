@@ -94,7 +94,7 @@ C 14562,13256 s=24x22                # band to the VSS rail
 @inst rdp3_lat 1170,0 tag=ar_s5
 N P 14850,13029 rdp3_ar_ld
 # AR only: the two spare tracks end at the cell edges
-N M 14322,13020 rdp3_ar_s1_trk
+# (the s1 track is rdp3_c_s1: it runs through the cell, see "Routing zone")
 N M 14712,13020 rdp3_ar_s2_trk
 N M 15102,13020 rdp3_ar_s3_trk
 N M 15492,13020 rdp3_ar_s4_trk
@@ -482,7 +482,8 @@ N M 16663,11650 rdp3_c_s7
 # --- slice s7 only: the strap track of the latch cells is one through line here
 # (metal seen from y 11483 to 12282 across band A; upper part by track scan only).
 M 16838,10745 y12550 w=20
-N M 16838,11700 rdp3_t16837
+# (run 3: below the array it runs diagonally down-left to a contact on bus s0's poly
+# line, see "Routing zone": this is bus line s0 brought across to the right side.)
 
 # =====================================================================================
 # Exits of the two equality lines (run 3). In slice s1 of each band a tab of the eq
@@ -583,3 +584,134 @@ P 13677,10798:13760,10830            # west end of RC's strobe poly (the row is 
 C 13690,10815 s=26x26
 M 13694,10803 y12400 x13651 y13480 w=18
 N M 13651,13400 rdp3_rc_ld
+
+# =====================================================================================
+# Routing zone between row RA and row AR (y 12437-13010) and the lines that leave it
+# (run 3). Poly lines 20 wide run east-west under the rails; every end is a contact
+# with a ring in the metal shot and a pad in the clean shot. Views rz1.png, rz2.png,
+# rz3.png (1.1x, whole zone), rz_s0.png, rz_se.png, arleft.png, cs1_west.png; line
+# positions measured from the dark edges in the metal shot.
+# =====================================================================================
+# --- first VSS rail below the array: narrows, steps right at y 12631, on down at x 13912
+M 13783,12437 y12640 w=40
+M 13765,12631 x13937 w=38
+M 13912,12612 y13480 w=50
+N M 13912,13000 vss
+# --- first VCC rail (x 13990) runs straight on down
+M 13990,12437 y13480 w=56
+N M 13990,13000 vcc
+# --- right-hand rails step left on their way down (drawn to the region's edge y 12900)
+M 16332,12437 16332,12820 16262,12900 w=56
+N M 16332,12600 vcc
+M 16516,12437 16516,12450 16428,12535 16428,12900 w=52
+N M 16428,12700 vss
+M 16723,12437 16723,12555 16520,12745 16520,12900 w=56
+N M 16520,12850 vcc
+M 16906,12437 16906,12540 16690,12760 16690,12900 w=56
+N M 16690,12850 vss
+
+# --- bus s0: contact, poly east along y 12506 under everything to a contact at x 16058,
+# metal link down, contact, poly east along y 12831, down at x 16798, out of the region.
+# On the way a contact at (16601,12830) takes it up the diagonal metal to the x 16838
+# track that runs north through slice s7.
+M 13845,12437 y12518 w=24
+C 13843,12505 s=24x24
+P 13829,12496:16074,12516
+C 16058,12506 s=24x24
+M 16058,12493 y12843 w=18
+C 16058,12831 s=24x24
+P 16043,12821:16808,12841
+P 16788,12821:16808,12900
+N P 16798,12890 rdp3_bus_s0
+C 16601,12830 s=24x24
+M 16838,12540 16838,12530 16603,12757 16603,12843 w=20
+# --- bus s5: the line goes on to row AR (drawn above); a contact at (15797,12744), poly
+# east to a contact at x 16818, metal south
+C 15797,12744 s=24x24
+P 15783,12734:16833,12754
+C 16818,12744 s=24x24
+M 16818,12731 y12900 w=18
+# --- bus s6: ends on a contact; poly east along y 12700; contact; metal south
+M 16187,12437 y12712 w=24
+C 16187,12699 s=24x24
+P 16172,12690:16877,12710
+C 16862,12700 s=24x24
+M 16862,12687 y12900 w=18
+# --- bus s7: ends on a contact; poly down, then east along y 12657; contact; metal south
+M 16577,12437 y12583 w=24
+C 16580,12570 s=24x24
+P 16565,12556:16597,12586
+P 16573,12570:16593,12667
+P 16573,12647:16923,12667
+C 16908,12656 s=24x24
+M 16908,12643 y12900 w=18
+
+# --- c lines. s0: ends on a contact; poly down x 13933, west along y 12744 under the
+# bundle, down between L1 and L2 (x 13413), west along y 13004, out of the region
+M 13931,12437 y12580 w=22
+C 13933,12568 s=24x24
+P 13918,12553:13950,12585
+P 13923,12568:13943,12754
+P 13403,12734:13943,12754
+P 13403,12734:13423,13014
+P 13330,12994:13423,13014
+N P 13335,13004 rdp3_c_s0
+# s1: straight on down through the routing zone and through AR's cell (the cell's own
+# piece of the track is in the cell), ends on a contact below the row; poly west along
+# y 13461, south at x 13871, out of the region
+M 14321,12437 y13020 w=22
+M 14322,13270 y13473 w=22
+C 14324,13458 s=24x24
+P 13861,13451:14340,13471
+P 13861,13451:13881,13480
+N P 13871,13478 rdp3_c_s1
+# s2: contact; poly west along y 12961 to a contact on bundle track L5; metal south
+M 14712,12437 y12973 w=22
+C 14712,12961 s=24x24
+P 13550,12951:14727,12971
+C 13565,12959 s=24x24
+M 13565,12947 y13480 w=18
+N M 13565,13400 rdp3_c_s2
+# s3: contact; poly west along y 12917 to a contact on bundle track L3; metal south
+M 15102,12437 y12929 w=22
+C 15105,12917 s=24x24
+P 13463,12907:15120,12927
+C 13478,12916 s=24x24
+M 13478,12904 y13480 w=18
+N M 13478,13400 rdp3_c_s3
+# s4: contact; poly west along y 12874 to a contact on bundle track L8; metal south
+M 15492,12437 y12886 w=22
+C 15496,12873 s=24x24
+P 13677,12864:15511,12884
+C 13692,12872 s=24x24
+M 13694,12860 y13480 w=18
+N M 13694,13400 rdp3_c_s4
+# s5: contact; poly west along y 12831 to a contact at x 14107; metal south at x 14108
+M 15882,12437 y12843 w=22
+C 15885,12830 s=24x24
+P 14092,12821:15900,12841
+C 14107,12830 s=24x24
+M 14108,12818 y13480 w=18
+N M 14108,13400 rdp3_c_s5
+# s6: contact; poly west along y 12787 to a contact on bundle track L10; metal south
+M 16272,12437 y12799 w=22
+C 16276,12786 s=24x24
+P 13765,12777:16291,12797
+C 13780,12786 s=24x24
+M 13782,12774 y13480 w=18
+N M 13782,13400 rdp3_c_s6
+# s7: contact; poly west along y 12461; contact; metal link down x 15668; contact; poly
+# west along y 12744 to a contact at x 14065; metal south to a contact at y 13408; poly
+# west along y 13418 under the whole bundle, out of the region
+M 16663,12437 y12474 w=22
+C 16666,12462 s=24x24
+P 15653,12451:16681,12471
+C 15668,12461 s=24x24
+M 15668,12448 y12757 w=18
+C 15668,12744 s=24x24
+P 14050,12734:15683,12754
+C 14065,12743 s=24x24
+M 14065,12730 y13421 w=18
+C 14065,13409 s=24x24
+P 13330,13408:14080,13428
+N P 13335,13418 rdp3_c_s7

@@ -1,10 +1,12 @@
 14140,13005:16160,13285  array  Address register (5 bit latch) | five transparent latch bits loaded from bus lines s1..s5 when rdp3_ar_ld (areg_load) is high; outputs ar0..ar4 leave to the right
 14450,13285:15900,13500  route  Address register outputs | the five latch outputs running right to the area beside the decode array
-13760,12167:16940,12437  array  ?Register RA (8 bit latch) | same latch cell as the address register, upside down; written from the bus lines when rdp3_ra_ld is high; strobe comes up bundle track L11 from the gate column at 13776,15155, register not identified
-13760,11905:16950,12167  logic  Comparator A, XOR row | per slice x = c XOR q (two gates, 7 transistors) of the RA bit and the per-slice line c
-13760,11770:16950,11905  logic  Comparator A, match line | wired NOR of the eight XORs on a row-wide diffusion line (rdp3_ca_eq, high when RA = c); its load is in slice s1
-13620,11321:16940,11591  array  R0 register, horizontal total (8 bit latch) | written from the bus lines when sel_w0 is high (strobe followed down track L7 to sel's west port)
-13760,11056:16950,11321  logic  Comparator B, XOR row | per slice x = c XOR q of the R0 bit and the per-slice line c
-13760,10925:16950,11056  logic  Comparator B, match line | wired NOR of the eight XORs (rdp3_cb_eq, high when R0 = c); its load is in slice s1
-13700,12437:16950,13000  route  Bus and c-line routing | bus lines s0, s5, s6, s7 leave to the lower right; the c lines leave to the lower left; not traced
-13340,10700:13840,13480  route  Left-edge bundle | twelve vertical tracks; L7 carries sel_w0 up to R0, L11 the RA strobe; the rest not traced
+13760,12167:16940,12437  array  R1 register, horizontal displayed (8 bit latch) | same latch cell as the address register, upside down; written from the bus lines when sel_w1 is high (strobe followed down bundle track L11, jog to L10 at y 14000, to bd1's sel_w1)
+13760,11905:16950,12167  logic  R1 comparator, XOR row | per slice x = c XOR q (two gates, 7 transistors) of the R1 bit and the per-slice line c
+13760,11770:16950,11905  logic  R1 comparator, match line | wired NOR of the eight XORs on a row-wide diffusion line (rdp3_ca_eq, high when R1 = c); load and exit in slice s1; leaves west in poly, then south on the bundle
+13620,11321:16940,11591  array  R2 register, horizontal sync position (8 bit latch) | written from the bus lines when sel_w2 is high (strobe followed down the bundle, which steps one track left at y 12357, to bd1's sel_w2)
+13760,11056:16950,11321  logic  R2 comparator, XOR row | per slice x = c XOR q of the R2 bit and the per-slice line c
+13760,10925:16950,11056  logic  R2 comparator, match line | wired NOR of the eight XORs (rdp3_cb_eq, high when R2 = c); load and exit in slice s1; leaves west in poly, then north on the bundle
+13400,10840:14340,10925  route  R2 match line exit | poly line from the buried contact in slice s1 west to bundle track L3
+13400,11690:14340,11770  route  R1 match line exit | poly line from the buried contact in slice s1 west to bundle track L3
+13830,12437:16950,13005  route  Bus and c-line routing | poly cross-unders: bus lines s0, s5, s6, s7 leave to the lower right (s0 also goes up the right edge on x 16838); the eight c lines leave to the lower left
+13330,10700:13840,13480  route  Left-edge bundle | twelve vertical tracks stepping one place left at y 12300-12540: write strobes sel_w0 (to R0 above), sel_w2, sel_w1, sel_w4 coming up; R2 match going north, R1 match going south; four c lines going south
