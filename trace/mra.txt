@@ -378,15 +378,45 @@ D 12198,10153:12250,10215                 # third run: diffusion above and under
 #   bottom ends are not drawn, so they carry local names here.
 # x 12696-12744: wide rail. Named vss from structure: it is the source of two pull-downs
 #   whose drains have depletion loads to the VCC rail x 12412-12462 (nodes na and nb).
-M 12500,7265 y16940 w=14
-N M 12500,9950 mra_ckb
+# Fourth run: the three thin lines are NOT continuous. They are cut and re-arranged in the
+# routing channels between the counters (y 9182-9435 and y 12869-13035), so that each
+# counter has its own clocks. Drawn straight at their body positions in the rows; in the
+# channels they run about 20 px further right (12520, 12568, 12612), which the jogs below
+# only approximate.
+# ck_b: L1 of rows r0-r3; at y 9242-9258 it steps right onto the L2 position and runs through
+#   rows r4-r10 without a tap; at y 12907-12927 it steps back left and is L1 of rows r11-r18.
+M 12500,7275 y9250 x12543 y12917 x12500 y16940 w=14
+N M 12500,8000 mra_ckb
 @alias ck_b mra_ckb
 M 12493,16893:12532,16922                 # below row r18 the line steps right to x 12519-12532 (diagonal on the die) and meets
                                           # the ck_b metal of trace/trunks.txt (x 12514-12532, drawn there up to y 16900)
-M 12543,7265 y16940 w=14
-N M 12543,9950 mra_l2
-M 12587,7265 y16940 w=14
-N M 12587,9950 mra_cka2
+# L1 of rows r4-r10: starts on a contact on bus line E, ends free at y 12885. The master clock
+#   of the 7-bit counter.
+M 12521,9346 y9420 x12500 y12885 w=14
+N M 12500,9950 mra_m7
+C 12521,9360
+# L2: a feed-through position. Rows r0-r3: a stub with no contact (ends y 9196). Rows r11-r14:
+#   from a contact on a poly line that comes from the west along y 12996-13014, no tap, ends free
+#   at y 14970. Rows r15-r18: a piece with no contact at all (y 15012-16940).
+M 12543,7275 y9196 w=14
+N M 12543,8000 mra_l2a
+M 12567,12992 y13060 x12543 y14970 w=14
+N M 12543,13500 mra_l2b
+C 12567,13005
+P 12550,12990:12585,13020
+P 11760,12996:12585,13014                 # from a pad with a contact at about (11766,13010), not followed
+M 12543,15012 y16940 w=14
+N M 12543,16000 mra_l2c
+# L3 (gate of the pull-down of na). Rows r0-r3: continues north out of the array. Rows r4-r10:
+#   free ends at y 9440 and y 13018 in both metal shots, no contact found at either: its feed is
+#   NOT FOUND (AMB-008). Rows r11-r18: from the contact (12631,16954), by notes/blocks/trunks.md
+#   the second ck_a route (not drawn there).
+M 12587,7130 y9196 w=14
+N M 12587,8000 mra_l3n
+M 12587,9440 y12975 w=14                  # (on the die to y 13018, at x 12612; shortened here to clear the L2 contact)
+N M 12587,9950 mra_l3m
+M 12587,13040 y16940 w=14
+N M 12587,14000 mra_cka2
 M 12720,7265 y16940 w=48
 N M 12720,9950 vss
 
@@ -506,9 +536,56 @@ D 12398,9957:12750,9969
 #   q  <- D  while ck_a
 # Lines through all rows, drawn once: the second ck_b line x 12896-12908 and the wide
 # VCC rail x 12936-12978. The ck_a rail x 13013-13037 is in trace/trunks.txt.
-M 12902,7240 y16996 w=13                  # ends on the contact (12892,16991) of the ck_b route in trunks.txt
+M 12902,7200 y16943 w=13                  # gate line of the a <-> b pass gates of all 19 rows. Bottom end free at y 16943
+                                          # (it does NOT reach trunks' ck_b contact 55 px below). Fed at the top:
+C 12889,7214                              # contact on a poly line that comes from the west along y 7200-7225
+P 11690,7200:12910,7225                   # (crosses the whole array above row r0; west end not followed)
+N M 12902,9950 mra_gab
 M 12957,7130 y17060 w=44
 N M 12957,9950 vcc
+
+# The rail x 13013-13037 (taps: the ck_a gate pads of mra_col4) is in three pieces. The south
+# piece (rows r11-r18) is ck_a from the clock block (trace/trunks.txt) and ends on a contact at
+# (13021,12939). From there a diffusion strip runs west to a contact at (12784,12940) on the
+# line x 12775, which carries ck_a north past rows r10-r4 (no tap) to a contact on bus line C,
+# and line C feeds the north piece of the rail (rows r0-r3) at (13021,9276). The middle piece
+# (rows r4-r10) hangs on bus line D: the slave clock of the 7-bit counter comes from the west.
+C 13021,12939
+D 12770,12920:12806,12965
+D 12800,12932:13010,12948                 # diffusion cross-under (pale, heavy outline, in both stripped shots)
+D 13003,12918:13049,12965
+C 12784,12940
+M 12775,9262 y12955 w=16                  # line x 12767-12782, rows r4-r10 piece
+C 12784,9275
+M 13025,7268 y9290 w=21                   # rail, north piece (rows r0-r3)
+C 13021,9276
+M 13025,9326 y12887 w=21                  # rail, middle piece (rows r4-r10)
+N M 13025,9950 mra_s7
+C 13021,9340
+# the other pieces of the line x 12775: rows r0-r3 (free top end, bottom contact on bus line A),
+# rows r11-r14 and r15-r18 (no contact found; ends at y 13040?, 14970, 15015, 16940 not looked at closely)
+M 12775,7275 y9192 w=16
+C 12783,9178
+?M 12775,13045 y14970 w=16
+?M 12775,15015 y16940 w=16
+
+# Bus lines of the routing channel between rows r3 and r4 (poly, straight, from the west edge
+# of the array; all five were followed from x 11640 in the clean shot). West of x 11640: B, D
+# (and probably G) end on contacts at x 11656, C and E run on.
+P 12700,9178:13050,9195                   # A: from under the vss rail (west end not resolved) east into the wiring channel
+N P 12900,9186 mra_busa
+P 11640,9222:13050,9240                   # B: on east into the wiring channel
+N P 12300,9231 mra_busb
+P 11640,9266:13040,9284                   # C: ck_a for rows r0-r3 (contacts to the line x 12775 and to the rail)
+P 12767,9258:12802,9292
+P 13003,9258:13042,9292
+P 11640,9310:13040,9328                   # D: slave clock of rows r4-r10
+P 13003,9310:13042,9358
+P 11640,9351:12541,9369                   # E: master clock of rows r4-r10
+P 11640,9397:12670,9413                   # G: ... steps up at x 12650-12670 ...
+P 12650,9373:12670,9413
+P 12650,9373:13050,9391                   # F: ... and runs on east into the wiring channel (it is the R2 match line)
+N P 12300,9405 mra_busg
 
 @cell mra_col4 tag=r5
 @s 30x32

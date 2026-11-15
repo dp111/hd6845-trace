@@ -89,7 +89,8 @@ N M 13022,17500 ck_b
 C 13085,18709
 P 13102,18724 y18455 w=36
 C 13108,18471
-M 13120,18471 x13066 y16952 x13025 y7270 w=21    # the rail up the right edge of the mid-right array (taps not drawn)
+M 13120,18471 x13066 y16952 x13025 y12921 w=21   # the rail up the right edge of the mid-right array, rows r18-r11 only: it ends on a
+                                                   # contact at (13021,12939) (mra.txt); the rail above is two more pieces on other nets
 N M 13066,17500 ck_a
 
 # ====================================================================

@@ -26,3 +26,10 @@
 # bd1's line X is the input of the lone inverter in the pad buffer row (inrow gate 0),
 # whose output is the clock block's ck_src. Joined by geometry at about (13567,15679).
 @alias t_g0_in bd1_x
+
+# Counter outputs meet bd1's tracks (found by geometry when mra_col4 was added, 2026-11-15):
+# the n1 line (master output) of rows r15, r16, r18 of the mid-right array runs into the poly
+# leads bd1 had followed west from its tracks k14, k9, k17.
+@alias mra_n1_r15 bd1_k14
+@alias mra_n1_r16 bd1_k9
+@alias mra_n1_r18 bd1_k17

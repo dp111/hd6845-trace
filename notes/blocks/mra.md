@@ -553,6 +553,68 @@ Reading aids found in this run:
 - **Where no metal lies above, the chip-2 metal shot shows diffusion directly** (pinkish
   tan against yellow-green field, poly orange): the clearest view of an open device.
 
+## Clock lines and routing channels (fourth run)
+
+**The three counters do not share their clocks.** The thin lines L1, L2, L3, the line
+x 12775 and the rail x 13025 were drawn by the earlier runs as lines through all 19 rows;
+they are cut and re-arranged in the routing channels y 9182-9435 (between r3 and r4) and
+y 12869-13035 (between r10 and r11). Extracted, per group:
+
+| | rows r0-r3 (4 bits) | rows r4-r10 (7 bits) | rows r11-r18 (8 bits) |
+|---|---|---|---|
+| master gate `na -> a` (L1) | `ck_b` | **`mra_m7`**: bus line E, from the west | `ck_b` |
+| slave gate `d -> q` (rail x 13025) | `ck_a` | **`mra_s7`**: bus line D, from the west | `ck_a` |
+| pull-down of `na` (L3) | `mra_l3n`: leaves north past y 7130 | `mra_l3m`: **no feed found (AMB-008)** | `mra_cka2`: `ck_a` by trunks' second route (not drawn) |
+| gate `a <-> b` (line x 12902) | `mra_gab` | `mra_gab` | `mra_gab` |
+
+So the 8-bit counter (believed horizontal) and the 4-bit counter step on every clock
+cycle, and the 7-bit counter (believed character rows) steps only when the logic to the
+west pulses its two clock lines. `mra_gab` is not `ck_b` as the third run believed: the
+line x 12902 ends free 55 px above trunks' `ck_b` contact at the bottom and is fed at the
+top, from a contact at (12889,7214) on a poly line that crosses the array along
+y 7200-7225 from the west. What it is has to be found there; if it is simply a supply or a
+clock, node `b` is the bootstrapped gate of the feedback device (see above).
+
+How the lines run (metal unless noted; views `gapA_m.png`, `gapA_b.png`, `gaps_m.png`,
+`gaps2.png`, `l3ends.png`, `rail_gap.png`):
+
+- `ck_b` comes in at the bottom (trunks), is L1 of r18-r11, steps right at y 12907-12927
+  onto the L2 position, runs through r10-r4 there without a tap, steps left at
+  y 9242-9258 and is L1 of r3-r0 (top end free at y 7275).
+- L1 of r4-r10: from a contact at (12521,9360) on bus line E to a free end at y 12885.
+- L2 elsewhere is unused: r0-r3 a stub (y 7275-9196); r11-r14 a piece from a contact at
+  (12567,13005) on a poly line that comes from a pad at about (11766,13010), no tap, free end
+  at y 14970; r15-r18 a piece with no contact (y 15012-16940).
+- L3: r0-r3 continues north; r4-r10 has free ends at y 9440 (lying over the `n1` line of r4,
+  no contact disc in the clean shot, no ring in either metal shot) and y 13018 (22 px short
+  of the next piece); r11-r18 starts at y 13040 and ends on the contact (12631,16954).
+- Rail x 13013-13037: south piece from trunks up to a contact at (13021,12939); middle
+  piece y 9326-12887 from a contact at (13021,9340) on bus line D; north piece y 7268-9290
+  from a contact at (13021,9276) on bus line C. The earlier note of a contact at
+  (13023,7277) onto the `n1` line of r0 is wrong: the rail just ends over that poly.
+- `ck_a` to the north piece: from the south piece's top contact a **diffusion** strip
+  (y 12932-12948, pale with a heavy outline, contact boxes at both ends) runs west to a
+  contact at (12784,12940) on the line x 12775; that line runs north past r10-r4 with no
+  tap to a contact at (12784,9275) on bus line C. Line C also runs on west across the
+  whole array.
+- The other pieces of the line x 12775: r0-r3 from a free top end to a contact at
+  (12783,9178) on bus line A; r11-r14 and r15-r18 pieces, ends not looked at closely (`?M`).
+
+Bus lines of the channel y 9182-9435, all poly, straight, followed from x 11640 to their
+east ends in the clean shot (`bus_w.png`):
+
+| Line | y | West | East |
+|---|---|---|---|
+| A | 9178-9195 | starts under the vss rail at x 12700 (not resolved) | wiring channel, leaves at (13420,9405) |
+| B | 9222-9240 | contact at about (11656,9230) | wiring channel, leaves at (13420,9447) |
+| C | 9266-9284 | runs on west of x 11640 | contacts (12784,9275) and (13021,9276): `ck_a` |
+| D | 9310-9328 | contact at about (11656,9317) | contact (13021,9340): `mra_s7` |
+| E | 9351-9369 | runs on west of x 11640 | contact (12521,9360): `mra_m7` |
+| G/F | 9397-9413, stepping up at x 12650-12670 to 9373-9391 | (contact near x 11656?) | wiring channel, leaves at (13420,9707): the R2 match line `rdp3_cb_eq` |
+
+In the channel y 12869-13035: the carry-in of r10 (`mra_cin_r10`, y 12905-12920, from the
+west), the line to the L2 contact (y 12996-13014), and the diffusion strip above.
+
 ## Right-hand part, x 12770-13040: third-run readings (superseded by the section above)
 
 From `c_top.png` (3.2x), `q4.png`, `t3.png`, `t4.png` and metal runs; master row.

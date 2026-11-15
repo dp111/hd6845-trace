@@ -169,3 +169,25 @@ Still open, neither affecting the logic:
 
 To settle: a delayered shot (poly removed), or measuring the phase lines' high level
 on a real chip.
+
+## AMB-008: the pull-down clock of rows r4-r10 of the counters has no feed (open)
+
+Where: mid-right array, the thin metal line L3 (x 12587 in the rows, 12612 in the routing
+channels), piece y 9440-13018.
+
+What is seen: in every counter bit a transistor gated by L3 pulls node `na` low (in the
+8-bit counter L3 is `ck_a`). L3 is cut in both routing channels. The piece that serves
+rows r4-r10 has a rounded free end at y 9440, lying over the `n1` poly of row r4 with no
+contact disc in the clean shot and no ring in either metal shot, and a widened free end at
+y 13018, 22 px short of the next piece. In the channel between r6 and r7 it passes
+straight. Its seven taps are gate pads with no other connection (median of the rows).
+
+Readings: (a) a contact at one of its ends that does not show (then L3 = `n1` of r4, which
+makes no sense, or it joins the r11-r18 piece = `ck_a`); (b) a link in one of the seven
+rows that the row median hides; (c) it really floats, and the 7-bit counter works without
+that pull-down (`na` = NOT `nb` at all times, which is still a correct master-slave bit as
+long as its two clocks do not overlap).
+
+Assumed for now: none; the net is left open under the name `mra_l3m`. To resolve: look at
+each of r4-r10 on its own round (12592,10113) + dy and along the line's top 160 px.
+
