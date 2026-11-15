@@ -14,7 +14,7 @@
 @cell cdp2_lat tag=s4
 # --- metal that belongs to one cell
 M 9246,6075 y6345 w=16               # a: per-slice bus line, runs through the cell
-M 9336,6075 y6190 w=22               # b: track from above; ends on the n2 land
+M 9336,6075 y6345 w=20               # b: through track, NO contact in this cell (second run, see notes: it looks narrow over the n2 load)
 M 9509,6084 y6338 w=20               # c: track on the q drain; ends over the strobe line, no contact
 M 9458,6117 y6241 w=30               # strap: load gate of inverter 1 up to the output land
 C 9244,6313 s=28x30                  # bus to the pass-transistor land
@@ -23,10 +23,8 @@ C 9446,6223 s=26x26                  # strap to poly (load gate = q)
 C 9460,6135 s=28x30                  # strap to the output land
 C 9508,6222 s=14x40                  # track c to the q drain (speckled strip in the clean shot)
 C 9183,6183 s=28x46                  # VSS rail to its land (oval)
-C 9337,6184 s=18x10                  # track b to the n2 land, at the very end of the track
+# (no contact from track b to the n2 land, nor to the VCC land: removed in the second run, notes Ambiguities 3)
 C 9182,6096 s=22x20                  # VSS rail to the band of the hold device
-?M 9337,6254 y6345 w=20              # second metal on the VCC land, below the end of track b (not joined to it);
-?C 9338,6276 s=14x36                 #   speckled like a contact in all slices. Runs on down in s4..s7 (notes)
 
 # --- pass transistor T1: bus -> node a, gate = row strobe (the strobe line loops round
 # the bus contact in every cell and runs on to the next one)
@@ -325,3 +323,204 @@ M 8465,7519 y7556 w=16               # s2 bus line: the same jog
 M 8457,7519 x8544 w=18
 M 8535,7395 y7528 w=18
 # s2's track b ends at the cell top: its n2 is not used outside the cell.
+
+# =====================================================================================
+# Rows B1/B2 (y 6940-7480): one comparator cell per slice, s3..s7, between the two latch
+# rows. Inputs: q of the row C latch below (poly, x 9511) and the through track b of the
+# column (metal x 9336, tapped in row C's top and brought up in poly at x 9463): "c".
+# Master slice s4. Each piece was read from 3-6x views of the five-slice composite and of
+# single slices, with colour profiles under the metal (notes: Rows B1/B2).
+# =====================================================================================
+@cell cdp2_cmp tag=s4
+# --- the pair of transistors from the row-long diffusion line (y 6948-6966, drawn
+# outside the cell) down to VSS: gate bar 1 (net p1) above gate bar 2 (net y, via m4)
+D 9292,6950:9425,7068                # the stack: line, bar 1, strip, bar 2, VSS strip
+D 9292,7048:9545,7070                # VSS strip, on to the right under m4 to the next slice's land
+D 9523,7008:9605,7066                # VSS land under the next slice's rail, two contacts (s3's own rail has none here)
+C 9537,7030 s=24x28
+C 9570,7030 s=26x30
+M 9520,7012:9562,7050                # tab of the next slice's VSS rail over the left contact
+P 9262,6972:9428,6995                # bar 1
+P 9240,6972:9262,7160                # p1: down under the bus line (over field all the way)
+P 9240,7142:9308,7160                #   right,
+P 9298,7158:9412,7171                #   a step down, under track b and under the VCC rail,
+P 9398,7127:9412,7171                #   up,
+P 9398,7126:9547,7142                #   right: the lower gate of the NAND pair
+N P 9250,7060 cdp2_b_{}_p1
+P 9275,7014:9450,7040                # bar 2, ending on a pad
+P 9443,6996:9490,7044
+C 9463,7016 s=24x24
+M 9463,7003 y7290 w=18               # m4: bar 2's pad down to the land of net y
+C 9465,7273 s=24x26
+
+# --- NAND pair and its load: VSS strip, gate ne (from m3), gate p1, node x
+D 9485,7052:9533,7176                # down from the VSS strip through both gates
+D 9506,7168:9546,7226                # x: on down into the buried-contact box
+P 9278,7078:9312,7118                # pad of m3's top contact
+C 9289,7096 s=24x26
+P 9300,7082:9547,7100                # ne: from the pad right, upper gate of the pair
+M 9289,7083 y7448 w=18               # m3 = net ne: three contacts
+D 9345,7185:9435,7260                # VCC land
+D 9362,7250:9400,7302                #   its extension down,
+D 9320,7265:9368,7300                #   and left under track b (the line seen at x 9355 is a metal-gap artefact)
+C 9395,7235 s=40x30
+D 9430,7192:9512,7214                # load strip of x, from the VCC land to the box
+P 9443,7176:9500,7246                # load gate block,
+P 9480,7222:9540,7246                #   its body (textured in the open),
+P 9506,7240:9545,7272                #   which wraps round the land of m4,
+P 9510,7194:9544,7240                #   up into the box: the gate tie
+B 9506,7186:9548,7228
+N D 9510,7160 cdp2_b_{}_x
+P 9520,7243:9634,7262                # x on to the right under the next VSS rail: gate of the next slice's inverter
+
+# --- inverter of the previous slice's x: gate (S1) between the VSS land and node o2
+D 9160,7180:9225,7228                # VSS land
+C 9186,7205 s=28x30
+D 9220,7195:9258,7230                # under the gate
+P 9228,7180:9248,7262                # gate; the poly comes in from the left at y 7243-7262
+P 9150,7243:9248,7262
+D 9251,7176:9279,7262                # o2
+D 9251,7176:9305,7194                #   and its arm to the right under m3 (no contact to m3)
+D 9272,7214:9350,7245                # load strip of o2, to the VCC land
+P 9285,7200:9345,7258                # load gate block
+?P 9264,7246:9290,7258               # its tie to o2: position not resolved (lower left corner assumed)
+?B 9262,7244:9282,7262
+N D 9265,7200 cdp2_b_{}_o2
+
+# --- net y = NOR(q, c): pull-down gated by c beside the VSS tab land, pull-down gated by
+# q under the next slice's VSS rail, load from the VCC land extension
+D 9408,7285:9452,7400                # y: strip under the narrow part of the VCC rail (V2)
+D 9360,7366:9452,7400                #   its foot
+D 9440,7324:9490,7365                # under the c gate to the tab land
+D 9482,7322:9600,7365                # VSS tab land, on under the q gate to y's part under the next rail
+C 9506,7340 s=26x30
+M 9492,7326:9560,7360                # tab of the next slice's VSS rail
+D 9566,7285:9597,7365                # y under the next slice's VSS rail (no contact to the rail)
+D 9480,7285:9597,7300                #   band back to the land of m4
+D 9450,7252:9497,7300                #   land of m4
+?D 9440,7285:9460,7300               # y: neck between the land and the strip, hidden by a metal-gap line
+N D 9420,7340 cdp2_b_{}_y
+P 9456,7318:9477,7432                # c: poly up from row C's top (track b)
+P 9500,7375:9522,7432                # q: poly up from the row C latch
+P 9498,7375:9565,7397                #   head, on to the right
+P 9543,7302:9563,7397                #   and up under the next slice's VSS rail: the q gate of y
+D 9366,7296:9386,7372                # load strip of y, from the VCC land extension down to the foot
+P 9362,7305:9390,7362                # load gate block
+?P 9386,7308:9406,7358               # its tie to y (thin outlined strip beside the block)
+?D 9398,7308:9412,7366               #   y reaching under the tie
+?B 9394,7304:9410,7362
+
+# --- net ne (m3) = NOT(c.q + y): c and q in series to the next VSS land, y to the own one
+D 9437,7405:9540,7472                # the series pair: ne | c | middle | q | VSS land
+D 9534,7405:9600,7470                # next slice's VSS land
+D 9150,7405:9232,7470                # own VSS land
+C 9185,7430 s=30x36
+D 9225,7415:9270,7447                # under the y gate
+P 9245,7385:9350,7403                # y gate poly: along,
+P 9246,7385:9260,7455                #   down under the bus line (the gate),
+P 9333,7302:9352,7403                #   and up under track b
+?P 9343,7305:9366,7325               #   to the load block of y (join hidden by a metal-gap line)
+D 9265,7410:9312,7452                # land of m3's bottom contact
+C 9288,7430 s=24x30
+D 9300,7442:9445,7462                # band under track b and the VCC rail to the pair
+# load of ne: strip from the VCC diffusion to a land, gate = the pad of m3's middle contact
+D 9232,7288:9330,7318
+D 9232,7288:9250,7362
+P 9262,7280:9305,7330
+P 9255,7322:9308,7365
+C 9289,7342 s=24x28
+P 9228,7338:9258,7360                # tab to the gate tie
+B 9226,7336:9254,7362
+N M 9289,7200 cdp2_b_{}_ne
+@end
+@inst cdp2_cmp -390,0 tag=s3
+@inst cdp2_cmp 390,0 tag=s5
+@inst cdp2_cmp 780,0 tag=s6
+@inst cdp2_cmp 1170,0 tag=s7
+
+# --- per-slice lines through channel 2 and rows B (x of slice s4 + 390 k)
+# VSS rails, bus lines (one line from row A to row C: it only looks narrow where it runs
+# over poly blocks at y 7180-7265 and 7335-7372), through tracks b, VCC rails
+M 8794,6345 y7430 w=46
+N M 8794,6500 vss
+M 8856,6340 y7430 w=16               # bus line of s3
+M 8942,6340 y7262 w=20               # track b of s3
+M 8947,7248 y7430 w=20
+N M 8942,6500 cdp2_trk_s3
+M 9000,6345 y6900 w=46               # VCC rail of s3: channel 2,
+M 9010,6890 y7195 w=50               #   rows B top,
+M 8958,7186:9035,7262               #   pad over the VCC land,
+M 9025,7255 y7380 w=20               #   narrow part,
+M 9010,7370 y7430 w=50               #   and on to row C
+N M 9000,6500 vcc
+@alias cdp2_a_s3_bus cdp2_c_s3_bus
+M 9184,6345 y7430 w=46
+N M 9184,6500 vss
+M 9246,6340 y7430 w=16               # bus line of s4
+M 9332,6340 y7262 w=20               # track b of s4
+M 9337,7248 y7430 w=20
+N M 9332,6500 cdp2_trk_s4
+M 9390,6345 y6900 w=46               # VCC rail of s4: channel 2,
+M 9400,6890 y7195 w=50               #   rows B top,
+M 9348,7186:9425,7262               #   pad over the VCC land,
+M 9415,7255 y7380 w=20               #   narrow part,
+M 9400,7370 y7430 w=50               #   and on to row C
+N M 9390,6500 vcc
+@alias cdp2_a_s4_bus cdp2_c_s4_bus
+M 9574,6345 y7430 w=46
+N M 9574,6500 vss
+M 9636,6340 y7430 w=16               # bus line of s5
+M 9722,6340 y7262 w=20               # track b of s5
+M 9727,7248 y7430 w=20
+N M 9722,6500 cdp2_trk_s5
+M 9780,6345 y6900 w=46               # VCC rail of s5: channel 2,
+M 9790,6890 y7195 w=50               #   rows B top,
+M 9738,7186:9815,7262               #   pad over the VCC land,
+M 9805,7255 y7380 w=20               #   narrow part,
+M 9790,7370 y7430 w=50               #   and on to row C
+N M 9780,6500 vcc
+@alias cdp2_a_s5_bus cdp2_c_s5_bus
+M 9964,6345 y7430 w=46
+N M 9964,6500 vss
+M 10026,6340 y7430 w=16               # bus line of s6
+M 10112,6340 y7262 w=20               # track b of s6
+M 10117,7248 y7430 w=20
+N M 10112,6500 cdp2_trk_s6
+M 10170,6345 y6900 w=46               # VCC rail of s6: channel 2,
+M 10180,6890 y7195 w=50               #   rows B top,
+M 10128,7186:10205,7262               #   pad over the VCC land,
+M 10195,7255 y7380 w=20               #   narrow part,
+M 10180,7370 y7430 w=50               #   and on to row C
+N M 10170,6500 vcc
+@alias cdp2_a_s6_bus cdp2_c_s6_bus
+M 10354,6345 y7430 w=46
+N M 10354,6500 vss
+M 10416,6340 y7430 w=16               # bus line of s7
+M 10502,6340 y7262 w=20               # track b of s7
+M 10507,7248 y7430 w=20
+N M 10502,6500 cdp2_trk_s7
+M 10560,6345 y6900 w=46               # VCC rail of s7: channel 2,
+M 10570,6890 y7195 w=50               #   rows B top,
+M 10518,7186:10595,7262               #   pad over the VCC land,
+M 10585,7255 y7380 w=20               #   narrow part,
+M 10570,7370 y7430 w=50               #   and on to row C
+N M 10560,6500 vcc
+@alias cdp2_a_s7_bus cdp2_c_s7_bus
+M 10744,6345 y7430 w=46                # sixth VSS rail, right of s7
+N M 10744,6500 vss
+
+# --- the row-long diffusion line of rows B: from under the sixth VSS rail (it ends there,
+# x about 10762) left to a land beyond s3's rail, with a contact to a metal line going down
+D 8748,6948:10764,6966
+D 8705,6935:8752,6975                # land at the left end
+C 8727,6951 s=26x26
+M 8725,6938 y7400 w=20               # down into the logic left of rows B; ends about y 7400 on a diffusion (not traced)
+N D 9300,6957 cdp2_b_hl
+# --- the chain: enters s3's inverter gate from the left (poly, y 7243-7262; seen from
+# x 8650, not followed further), leaves s7 to the right under the sixth VSS rail and
+# turns up at x 10811 (poly under a narrow metal line) to channel 2's lowest line, y 6888
+P 8650,7243:8765,7262
+N P 8660,7252 cdp2_b_cin
+P 10800,7243:10817,7262
+P 10806,6880:10817,7262
+C 10745,7430 s=30x36                 # sixth VSS rail to its land at the foot of s7's series pair (ring seen)
