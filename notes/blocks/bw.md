@@ -1,0 +1,66 @@
+# bw: bus field between the central datapath and the counters, and the lines that cross it
+
+Serial work, started 2026-11-16. Trace: `trace/bw.txt`. Views: `cache/scratch/bw/`.
+
+## Status
+
+Drawn and extracted: the routes of the five poly lines that leave block `wl` westwards,
+as far as each was followed (table below). Wiring only, no transistors.
+Not drawn: the bus field's own vertical lines (surveyed only, see the last section).
+
+## The five lines from `wl`
+
+They do **not** stop in the bus field. Each crosses it without a contact (clean shot: the
+salmon band is unbroken under every vertical metal; the dark rings at the crossings are
+the metal's margins), runs west as one of the lines of the central datapath's "channel 3"
+(y 7830-8030, cdp2's notes), and four of them turn **north** at the channel's west end as
+a nested bundle (x 7790-7930), bend twice (y 7560-7700 and y 7250-7480) and run west into
+a crossing field of horizontal poly lines and vertical metals (x 6330-7700, y 7150-7700).
+There each ends on a pad with a contact to one vertical metal.
+
+| Line (name in `wl`) | Channel y | Turns north at x | Ends on | Then |
+|---|---|---|---|---|
+| bus line B's line (`mra_busb`) | 7831-7849 | 7925, then 7832 | pad, contact (7466,7343) | metal x 7455-7478 **north** (seen to y 7150) |
+| `ck_a` | 7873-7891 | 7880, then 7787 | pad, contact (7419,7387) | metal x 7410-7432 **north** (seen to y 7150) |
+| `wl_b` (row counter step, active low) | 7917-7935 | 7839, then under the wide metal at x 7753 | after y 7436 west, x 7407 south, y 7519 west through the whole crossing field, x 6300 north, y 7471 west: pad, contact (5838,7470) | metal x 5830-5852 **north** (seen to y 6300, continues): into the top-left logic |
+| `wl_h1` (band H1's line) | 7962-7980 | 7792, then x 7709 | after y 7477 west, x 7450 south, y 7562 west: pad, contact (7031,7560) | metal x 7025-7048, direction not followed |
+| R2 match (`mra_busg`) | 8006-8024 | does not turn | pad, contact (8340,8010) | metal x 8330-8352, not followed |
+
+So the row counter's step signal is made somewhere up the metal x 5841, north of y 6300:
+the **top-left logic**. `ck_a` and bus line B's signal go north on two metals at x 7421
+and x 7467 (west edge of the central datapath, towards the top-centre logic).
+
+Two corrections to cdp2's notes on channel 3: the four lines turn **north** at its west
+end, not down; and the whole channel has now been read in the clean shot from x 7950 to
+x 11040: there is no contact on any of the five lines on the way (cdp2 had looked at two
+slices only).
+
+Stretches that lie under metal and cannot be seen in the metal shots: `wl_b` and `wl_h1`
+under the wide vertical metal x 7725-7775 (y 7430-7700), all crossings in the crossing
+field, and the piece of the first line of the bundle (not one of ours) that runs down
+under the metal x 7300-7322. Read with `tools/classmap.py --open`.
+
+## Other things seen at the bus field's top (not drawn)
+
+- `wl_i2_out` (poly y 7441-7462) ends at a contact (11022,7432) under a metal x 11010-11035
+  that goes north; `wl_i2_in` (poly y 7486-7508) ends at a contact (11022,7503) under a
+  metal x 11010-11032 that goes **south**, stepping one pitch east at y 7600-7650, at
+  y 8580-8640 and again at y 9280-9320, and on down the bus field.
+- The load strobe of cdp2's row C (`cdp2_c_ld`, poly y 7790-7808) ends at a contact
+  (10893,7797) under the top of a metal x 10880-10905 that goes south.
+- Band H4 (`mra_gab`) runs on west of x 11040 along y 7200-7222: not followed.
+
+## Survey of the bus field itself (y 9400-17200)
+
+About twenty vertical metal lines, x 10760-11480 at their widest. Where a line leaves the
+field to the east the ones to its west step one pitch (43-44 px) east by a diagonal, so a
+line's x changes along its length. Two staircases of contacts tie eight of the lines to
+eight horizontal poly lines of the central datapath: at y 10345-10650 (contacts from
+(10890,10355) to about (11200,10630)) and at y 13300-13620 (from (11070,13450) to
+(10890,13610)): an eight-line bus between cdp3's rows and cdp4's rows. The field's lines
+must be read in the clean shot end to end (tracing guide, trap 10); a 1x metal view shows
+only the staircases.
+
+## Not done
+
+Everything in the survey; the far ends of the five lines (table); H4 west of x 11040.
