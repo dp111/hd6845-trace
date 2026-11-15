@@ -10,3 +10,8 @@
 @alias ar4 rdp3_ar_s5_q
 # its load strobe: areg's metal at x 16299 to rdp3's row-wide poly at (16285,13022)
 @alias areg_load rdp3_ar_ld
+
+# R0's load strobe: rdp3's track L7 (x 13652) ends on a contact at (13652,15000) on the
+# bar of sel_w0, which sel.txt draws only as far east as x 14100. The piece between is
+# in bd1's region; until it is drawn the two nets are not joined by geometry.
+@alias sel_w0 rdp3_rb_ld

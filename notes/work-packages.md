@@ -15,7 +15,7 @@ agent has verified it), `partial` (reported, with work left: see its notes).
 | `areg` | 15800-16950 x 12900-14700 | row inverters right of the decode array, fifth address register cell, bundle at x 16200-16400 | partial: inverters done; register cell partly; right-hand column x 16480-16800 not started |
 | `sel` | 14100-15850 x 14650-16550 | where the 18 register select lines go below the decode array (latch column, strobe gating) | done: write strobe gates for R0-R11, R14, R15; R16/R17 buffered only; R12/R13 pass through |
 | `trunks` | whole die | routes of the global signals (clocks, E, R/W, RS, CS, RES, LPSTB) from where their traces end into the core | partial (run 1): ck_out, ck_a, ck_b, e_b, rw_d, rs_d, cs_d, res_b, lpstb_b, clk to their first entries; left: source of X (input of input-row gate 0), end of S, clk_b, upper ends and taps |
-| `rdp3` | 13350-16950 x 10700-12900, and 13350-15800 x 12900-13480 | right datapath, lower rows, including the row of cells above the decode array | partial (run 1): address register latch row traced (5 bits); two 8-bit register rows found, not placed; run 2 running |
+| `rdp3` | 13350-16950 x 10700-12900, and 13350-15800 x 12900-13480 | right datapath, lower rows | partial (runs 1, 2): address register (5 latches); two 8-bit register rows, the lower one **is R0** (strobe traced to sel_w0); under each an 8-bit equality comparator against a per-slice line c. Left: where the two equality lines go (both ends look dead), which register the upper row is, routing zone; run 3 running |
 | `cdp1` | 7600-10850 x 2950-5700 | central datapath, top rows | partial (run 1): rows A and C are static register bits (6 and 5 cells), row B upper half is a 5-input equality NOR; row B per-bit logic, bit lines, channels, rows D, E left; run 2 running |
 | `larr` | 2400-4780 x 6450-18550 | left vertical array (rows every 477 px), by the MA pads | partial (run 1): it is the MA counter: incrementer (carry groups of 7, 3, 4) traced on the 14 lower rows; rest of the row, left column, 9 upper rows of another type, bit numbering left; run 2 running |
 | `mra` | 11700-13320 x 7200-17050 | mid-right vertical array (rows every 477 px) | partial (runs 1, 2): columns x 11730-12470 in all 19 rows: an AND chain over a per-row node q (x(N) = x(N+1) AND q(N)) with what looks like toggle logic; x 12470-13000 (storage, source of q) untouched; run 3 running |
@@ -24,6 +24,7 @@ agent has verified it), `partial` (reported, with work left: see its notes).
 | `cdp2` | 7600-10850 x 5700-8450 | central datapath | partial (run 1): row A = five latch bits, row C = seven latch bits (same cell as the address register latch); rows B1/B2, D, channels 2, 3 left; run 2 running |
 | `cdp3` | 7600-10850 x 8450-11200 | central datapath | partial (run 1): wiring rows E, F and channels B, D, G traced (two rows of cells gated onto an 8-line bus); cell rows A, C, H, I not traced; run 2 running |
 | `cdp4` | 7600-10850 x 11200-14000 | central datapath, bottom rows | done except the upper half of its top latch row (y 11100-11490): a 4-way selector per slice with three latch rows (8, 8 and 6 bits); no counters or comparators |
+| `rdp2` | 13350-16950 x 8100-10700 | right datapath, middle rows: the source of the per-slice line c that R0 is compared with (the horizontal counter?) | running |
 | `bc1` | 7000-9000 x 14050-16300 | bottom-centre logic, upper left part; receives the six data tracks and strobe leaving the bottom of `cdp4` | running |
 | `bd3` | 14100-15900 x 16550-17100 and onward | where the strobe and select tracks from `sel` go; source of the write strobe | done: strobe = NOT e_b (so each write strobe = select AND E); R12/R13 gated and buffered like R14/R15; all 16 tracks to the region's edge |
 | `bd1` | 13000-14100 x 14700-17100 | logic left of the select gates; the write strobes pass through it heading west | running |
@@ -44,7 +45,6 @@ bus and pads.
 | `dbus` (continue) | as above | gate groups under the buffer chains, internal bus lines, P_x driver, D6/D7 buffers, then the pad cell |
 | `areg` (continue) | as above | finish the fifth register cell (with `rdp3`'s four), the right-hand column x 16480-16800 |
 | `rdp1` | 13350-16950 x 5450-8100 | right datapath, top rows |
-| `rdp2` | 13350-16950 x 8100-10700 | right datapath, middle rows |
 | `tl1`-`tl6` | 2100-6400 x 2500-6350, in six parts | top-left random logic |
 | `tc2` | 6400-8250 x 4450-6400 | top-centre random logic, lower half |
 | `trunks` (continue) | whole die | source of X, end of S, clk_b, taps and upper ends |

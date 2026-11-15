@@ -11,7 +11,9 @@ File format (trace/*.txt), one item per line, '#' starts a comment:
           A annotation: not geometry. A transistor whose channel centre lies inside
             an A rectangle takes its kind= attribute, e.g.  A 100,100:150,150 kind=clamp
             Kinds used: clamp (gate tied to its own node, other side on a supply, off
-            in normal operation), field (thick-oxide device, off in normal operation).
+            in normal operation), field (thick-oxide device, off in normal operation),
+            hold (a weak always-on device, gate on VSS and believed depletion-mode,
+            that feeds a latch's output back to its storage node).
   A leading '?' marks the item as uncertain, e.g.  ?P 7140,1700 y1755
 
   shapes

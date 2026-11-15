@@ -170,7 +170,8 @@ C 14423,14920 14422,15050 s=30x34      # contacts, one per point
 B 14520,14927:14550,14955              # buried contact
 N P 14328,14890 in_a                   # name the net that owns the poly at this point
 ?P 100,100:120,160                     # uncertain shape (drawn in yellow)
-A 100,100:150,150 kind=clamp           # mark a transistor here as off in normal operation
+A 100,100:150,150 kind=clamp           # mark a transistor here: clamp, field (both off in
+                                       # normal operation) or hold (weak always-on feedback)
 @requires inrow                        # load another file (for cells defined there)
 ```
 
@@ -231,6 +232,7 @@ Most of the die is repeated cells. Trace a cell once.
   is blurrier than a single clean shot; use it for dirt, not for fine junctions. In a
   composite the `acid` layer shows poly even under metal, because the fringes average
   out.
+- `tools/rdp3_cmp.py` compares instances as text and costs no images.
 - `tools/rdp3_sharp.py` (unsharp mask; three agents found it on a median composite at
   3-5x their most useful view), `tools/cdp2_pt.py` (a colour-and-speckle test for
   whether a contact is present, which reversed one by-eye reading) and `tools/cdp1_sr.py` (read the docstrings). The latter makes a

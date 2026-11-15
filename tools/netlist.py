@@ -310,7 +310,7 @@ class Netlist:
             return gates, list(self.transistors)
         loads = {}
         for t in self.transistors:
-            if t.kind in ('clamp', 'field'):
+            if t.kind in ('clamp', 'field', 'hold'):
                 used.add(t.id)          # off in normal operation: not part of any gate
                 continue
             for a, b in ((t.c1, t.c2), (t.c2, t.c1)):
@@ -325,7 +325,7 @@ class Netlist:
             out = []
             for tid in self.nodes[node].chans:
                 t = self.transistors[tid]
-                if t.kind in ('load', 'clamp', 'field') or tid in seen_t:
+                if t.kind in ('load', 'clamp', 'field', 'hold') or tid in seen_t:
                     continue
                 other = t.c2 if t.c1 == node else t.c1
                 if other == target:
