@@ -11,11 +11,13 @@ Goal: recover the complete internal logic of the Hitachi HD6845S CRTC (die marki
 - a reference model that is checked against the netlist and reproduces the
   undocumented edge-case behaviour.
 
-Status (2026-11-15, night): M0 done. M1 done except the data pad cell and pad-ring
-wiring. M2 largely done (address register, decode, strobe logic; data bus interface
-partly). M3 about half done, by a round of parallel agents: 2,593 transistors traced
-in seventeen blocks. M4 (control logic) barely started. See `notes/journal.md` and
-`notes/work-packages.md`. "Provisional" marks things that still need proper tracing.
+Status (2026-11-16): M0 done. M1 done except the data pad cell and pad-ring
+wiring. M2 largely done (strobe latch and decode traced; data bus interface partly).
+M3 well under way: 2,745 transistors traced in eighteen blocks. The mid-right array is
+identified as the counters (horizontal 8 bits, character row 7 bits, one of 4 bits) and
+their outputs are joined by geometry to the R0, R1, R2 comparators; the row counter's
+clocks come from control logic to the west that is not traced yet. M4 barely started:
+that control logic is the next target.
 
 ## 1. What reconnaissance established
 

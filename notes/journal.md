@@ -283,3 +283,82 @@ Next (serial, in this order)
    one comparator bit), and the cross-coupled group below the central datapath.
 4. Memory address counter: reload path and bit numbering.
 5. Remaining rows of both datapaths; data bus; pad ring; then simulation (M5).
+
+## 2026-11-15/16  Serial again: the counters
+
+After the parallel round, back to one block at a time (user instruction). Two requests
+from the user during the session, both recorded in `PLAN.md` and `CLAUDE.md`: a "visual
+6845" as a deliverable (so every transistor is to be traced, M7), and schematics that
+show registers, comparators and counters as blocks plus one gate-level sheet per kind.
+
+**Established**
+
+- The mid-right array is three synchronous counters built from one bit cell: 8 bits
+  (rows r11-r18), 7 bits (r4-r10), 4 bits (r0-r3). The cell is a master-slave pair:
+  `na = NOR(L3, NOT m)`, master `a` takes `na` on the master clock, `p3 = NOT a`,
+  `d = n1 = NOT p3`, slave `q` takes `d` on the slave clock; `m` is the next value, made
+  from `q` and the carry. Extracted, 629 transistors, all 19 rows checked against the
+  master in two shots.
+- **The 8-bit counter is the horizontal character counter.** Its master outputs `n1`
+  are the `c` lines of the R0, R1 and R2 comparators: six of the eight joins closed by
+  geometry when the wiring channel was drawn (rdp3's and bd1's ports met mine), the
+  other two are named in both blocks' notes. Bit 0 is the bottom row; in the right
+  datapath slices s1..s7 are bits 0..6 and s0 is bit 7.
+- **The comparators see the master, not the slave.** What leaves each bit is `n1`, the
+  buffered master latch, which already holds the next count during `ck_b`.
+- **The three counters have separate clocks.** The horizontal and the 4-bit counter run
+  on `ck_b`/`ck_a` every cycle. The 7-bit counter's master and slave clocks are two bus
+  lines from the west (E and D of the routing channel between r3 and r4), so it steps
+  only when the logic there pulses them. Its outputs go to the upper right array (the R4
+  and R6 comparators): the character-row counter.
+- rdp2's unidentified 7-bit register "RF" is **R6**: its strobe line runs down track T0
+  of the wiring channel into bd1's `sel_w6`.
+- `ck_a` reaches the 4-bit counter by a diffusion cross-under, a tapless line through
+  rows r10-r4 and a bus line; the same bus line carries `ck_a` on west.
+- Fourteen cross-block joins closed by geometry (`trace/zz_joins.txt`); full extraction
+  2,745 transistors, 0 errors, 0 warnings.
+
+**Corrections to what was reported before**
+
+- "`q` is a line from outside, so the array is probably not a counter" (third mra run,
+  repeated in my last summary): wrong. The `q` poly ends in a buried contact on the slave
+  pass gate. My own hypothesis in that summary (8 + 7 + 4 counters) is what the trace
+  now shows.
+- "The line x 12902 is `ck_b`" and "the rail x 13025 is `ck_a` for all 19 rows" (third
+  run and trunks): both wrong. The first ends free above the `ck_b` contact and is fed
+  from the top; the second is three pieces on three nets.
+- My first drawing of L3 for rows r4-r10 had no feed (AMB-008). It has one: its widened
+  lower end turns onto a contact I had given to the neighbouring line.
+- Twice in this session the eye joined two diffusions in the clean shot that a colour
+  profile showed to be 20 px of field apart.
+
+**Tools and method**
+
+- `tools/classmap.py` and `view.py --layers class`: false-colour class map of the clean
+  shot (poly / channel / diffusion / field). It made the fourth column readable in an
+  afternoon. Limits are in its docstring and in `notes/blocks/mra.md`.
+- `tools/strips.py`: a long channel as strips side by side, any layer, with the trace.
+- **Wiring channels must be read in the clean shot.** Poly runs hidden under the metal
+  tracks for hundreds of pixels; the metal shot shows none of it. bd1's and bd3's
+  channels were read mostly from the metal shot and should be looked at again.
+- Where no metal lies above, the chip-2 metal shot shows diffusion directly.
+- A through-line drawn "once, full length" by an agent is a claim about every routing
+  channel it crosses. Three of those claims were wrong here. Check each crossing.
+
+**Open, in the order I would take them**
+
+1. The logic west of the counters (x 10400-11700 and the bands above row r0): it makes
+   the row counter's two clocks (bus lines D, E), its L3 line (metal along y 13005), the
+   carry-ins of r10 and r18, `mra_gab`, and it receives the R2 match (bus line F/G) and
+   `ck_a` (bus line C). This is the end-of-line / end-of-frame control: M4.
+2. The rest of the bit cell: node `m`'s pull-up and the unresolved branch (B3, B4, load
+   1 in `mra_col2`). Until then "next = q XOR carry" is believed, not extracted, and how
+   a counter is cleared is unknown (L3 is `ck_a` for the horizontal counter, verified by
+   following its poly in the clean shot, so the clear is not there).
+3. North of the array (y < 7130): the 4-bit counter's outputs, `sel_w3`, `sel_w5`, L3 of
+   r0-r3 and the VSS/VCC rails all leave there (`amr`, `rdp1`).
+4. The east ends of the wiring channel that rdp2 saw and did not draw (row counter bits
+   r4-r6, bus lines A, B, F), and the stretch between rdp3 and bd1 (bits r13, r14, r17).
+5. Then as before: remaining datapath rows, data bus and pad cell (AMB-003), bd1/bd2/bd3
+   re-read in the clean shot, top-left / left-centre / bottom logic, pad ring.
+
