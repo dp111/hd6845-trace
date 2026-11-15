@@ -1,0 +1,3 @@
+# wl: logic west of the 4-bit counter
+11090,7890:11665,8900   logic   row counter clock generator | makes the character-row counter's two non-overlapping clocks from one step pulse p: slave clock = NOR(buffered master clock, p), master clock = NOR(NOT p, buffered slave clock); two NOR drivers 350 px wide
+11090,6950:11665,7890   ?logic  logic above the row counter clock generator | not traced; the step pulse p comes from here

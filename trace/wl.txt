@@ -1,0 +1,220 @@
+# Logic and wiring west of the counters (mid-right array). Notes: notes/blocks/wl.md.
+@block wl
+@requires mra
+@requires mrach
+@w M=18 P=18
+@s 28x28
+
+# ====================================================================
+# Supply rails of the block.
+# VSS: wide vertical metal x 11437-11487; at the bottom it turns east along y 9100-9150
+# and runs into the mid-right array's rail x 11800-11850 (mra's "vss rail x 11828", whose
+# feed mra could not find: A4 there).
+M 11462,7890 y9125 x11832 w=50
+N M 11462,8950 vss
+# VCC: vertical metal x 11605-11655 with a contact about every 40 px onto a diffusion strip
+# under it; bottom end y 8895.
+M 11630,7890 y8895 w=50
+D 11602,7945:11660,8847
+C 11632,7980 11632,8020 11632,8057 11632,8095 11632,8136 11632,8177 11632,8218 11632,8259 11632,8293 11632,8336 11632,8375 11632,8414 11632,8455 11632,8491 11632,8532 s=28x24
+C 11632,8570 11632,8607 11632,8645 11632,8689 11632,8727 11632,8768 11632,8807 s=28x24
+N M 11630,8870 vcc
+
+# ====================================================================
+# The row counter's two clock lines as they come up from the bus channel y 9182-9435.
+# D (mra_s7, slave clock): metal y 9315 from mra's contact (11655,9315) west to a contact at
+# (11517,9315); poly north under the VSS bus; contact (11517,9010); metal north.
+M 11668,9316 x11505 w=18
+C 11655,9315
+C 11519,9315
+P 11518,9330 y8996 w=24
+C 11519,9010
+M 11522,9024 y8136 w=21
+# E (mra_m7, master clock): mra's poly y 9351-9369 runs on west to x 11552 and turns north;
+# contact (11563,9057); metal north to a contact at (11567,8622) on a poly pad.
+P 11640,9360 x11565 y9044 w=22
+C 11564,9057
+M 11566,9072 y8608 w=25
+C 11567,8622
+
+# ---- inverter 1: e_n = NOT E
+# E's pad; the same poly runs west as the gate (y 8621-8643) of a pull-down 62/22 on the
+# diffusion column under the VSS rail, between the VSS contact (11452,8597) and node e_n.
+P 11500,8601:11597,8646
+P 11405,8621:11505,8643
+D 11430,8560:11492,8706
+C 11452,8597
+# e_n: the column below the gate, a neck down to a buried contact, and a strip east under
+# the load gate to the VCC strip.
+D 11443,8700:11463,8746
+D 11485,8683:11606,8708
+# load gate: poly plate x 11505-11592 over the strip (W/L 25/87), with a tail west to the
+# buried contact on the neck: gate tied to e_n. The plate also runs south as a poly line in
+# the gap between the VSS rail and line D (x 11495-11510) and becomes the gate of inverter 2.
+P 11505,8665:11592,8745
+P 11447,8713:11510,8742
+B 11443,8709:11467,8747
+P 11495,8740:11510,8842
+N P 11550,8730 wl_e_n
+
+# ---- inverter 2: e_buf = NOT e_n
+# gate y 8815-8842 across the column under the VSS rail (64/27): VSS contact (11452,8787)
+# above, node e_buf below.
+P 11395,8815:11510,8842
+D 11428,8760:11492,8875
+C 11452,8787
+# e_buf: west along y 8855-8875 and up a diffusion wire to a box with a contact
+# (11378,8712), from which a metal line leaves north; east under line D, up a strip
+# x 11528-11545 to the load.
+D 11363,8855:11432,8875
+D 11363,8740:11383,8875
+D 11363,8692:11417,8747
+C 11378,8712
+D 11488,8850:11545,8875
+D 11528,8762:11545,8860
+D 11528,8762:11592,8782
+# load: strip y 8806-8847 from the e_buf strip east to the VCC strip, under a vertical poly
+# x 11557-11592 (W/L 41/35) whose top end is tied to e_buf by a buried contact.
+D 11540,8806:11606,8847
+P 11557,8780:11592,8862
+B 11553,8776:11596,8803
+D 11553,8778:11592,8802
+N D 11537,8800 wl_e_buf
+
+# ====================================================================
+# Driver of E (mra_m7): E = NOR(pb, d_buf). Two pull-downs about 320 px wide, made of one
+# diffusion area x 11140-11497 crossed by two poly bands; depletion load 97/40 in the right
+# column. Rows of the area: VSS (y 8428-8476, contacts (11420,8443), (11432,8460)), band Gq,
+# node E (y 8503-8546), band Gr, VSS (y 8570-8605 and the column down to (11452,8597)).
+# Under the vertical metals the area shows tan in the clean shot; between them it is open and
+# was told from field by the chip-2 shots (classmap --open).
+D 11140,8428:11462,8502
+D 11140,8496:11497,8605
+M 11416,8428:11445,8482           # tab of the VSS rail over the contact
+C 11432,8455 s=30x34
+# Gq: y 8478-8499, free end at x 11123; its east end runs into a vertical poly x 11465-11493
+# (y 8412-8500) that comes from the gate of pb's load (below).
+P 11123,8478:11493,8499
+P 11465,8412:11493,8499
+# Gr: fed by the vertical metal x 11325-11347 (contact (11340,8662) on a pad). West along
+# y 8656-8680, up at x 11108-11126, east along y 8565-8590 across the two left columns,
+# diagonally up to y 8526-8546, diagonally down across the column under its own metal, and
+# east along y 8548-8568 to x 11497.
+P 11322,8640:11363,8690
+C 11340,8662
+P 11108,8656:11330,8680
+P 11108,8565:11126,8680
+P 11108,8565:11228,8590
+P [ 11215,8565 11225,8565 11262,8526 11275,8526 11275,8546 11240,8590 11215,8590 ]
+P 11262,8526:11320,8546
+P [ 11312,8526 11325,8526 11362,8548 11362,8568 11345,8568 11312,8546 ]
+P 11350,8548:11497,8568
+M 11336,8674 y8030 w=22
+# node E's way east, under line D, to the load; a neck up to a buried contact with the load gate
+D 11490,8503:11553,8532
+D 11540,8498:11606,8597
+D 11519,8462:11533,8506
+# load gate: vertical poly x 11557-11597 from E's pad up to y 8460 (97/40), tied to node E
+# by a branch west onto the neck
+P 11557,8460:11597,8603
+P 11517,8462:11560,8488
+B 11514,8458:11537,8498
+
+# ---- pb = NOT p. Pull-down under the VSS rail and the open strip beside it (x 11400-11462),
+# gate Gp; load 35/40 in the right column, its gate tied to pb and running on, by the branch
+# y 8412-8445 and the vertical poly, to Gq.
+D 11368,8300:11462,8348
+C 11437,8325
+D 11400,8343:11462,8380
+D 11400,8376:11500,8407
+D 11495,8383:11553,8407
+D 11513,8368:11553,8407
+D 11540,8372:11606,8407
+D 11519,8340:11533,8372
+P 11557,8338:11597,8445
+P 11517,8340:11560,8366
+B 11514,8336:11537,8370
+P 11465,8412:11597,8445
+N P 11480,8450 wl_pb
+# Gp: y 8350-8372, free end at x 11105, contact (11285,8362) under the foot of the metal
+# x 11277-11297 that comes from the north: signal p. Its east end runs into a vertical poly
+# x 11465-11493 (y 8270-8372) that joins it to the band Gt of the other driver.
+P 11105,8350:11493,8372
+P 11265,8343:11305,8380
+C 11285,8362
+M 11287,8376 y7960 w=20
+N M 11287,8200 wl_p
+P 11465,8275:11493,8372
+
+# ====================================================================
+# Driver of D (mra_s7): D = NOR(e_buf, p). Same construction: diffusion area x 11140-11497,
+# rows VSS (y 8170-8205, contact (11455,8185)), band Gs, node D (y 8235-8272), band Gt, VSS
+# (y 8303-8348, contact (11437,8325)); depletion load 100/40.
+D 11140,8174:11490,8272
+D 11140,8265:11462,8322
+C 11455,8185
+# Gt = p: y 8275-8300, free end at x 11122
+P 11122,8275:11493,8300
+# Gs = e_buf: fed by the vertical metal x 11372-11395 that comes up from the box at
+# (11378,8712); contact (11385,8092) on a pad. West along y 8098-8118, down at x 11107-11130,
+# east along y 8190-8212, diagonally down to y 8232-8255, diagonally up to y 8207-8231, east.
+M 11384,8726 y8078 w=23
+P 11362,8075:11410,8118
+C 11385,8092
+P 11105,8098:11370,8118
+P 11107,8098:11130,8212
+P 11107,8190:11218,8212
+P [ 11205,8190 11222,8190 11280,8232 11280,8255 11262,8255 11200,8212 ]
+P 11262,8232:11338,8255
+P [ 11330,8232 11355,8207 11372,8207 11372,8231 11347,8255 11330,8255 ]
+P 11355,8207:11522,8231
+# node D's way east to the load, and the neck down to the buried contact with the load gate
+D 11485,8240:11553,8268
+D 11510,8250:11553,8287
+D 11540,8188:11606,8288
+D 11519,8280:11533,8316
+# load gate: vertical poly x 11557-11597, y 8120-8318, tied to node D by the branch onto the
+# neck; at its top a pad with the contact (11517,8150) to line D's metal, and from the pad a
+# poly west (y 8135-8160): gate Gu of the inverter d_n = NOT D.
+P 11557,8135:11597,8318
+P 11517,8292:11560,8316
+B 11514,8286:11537,8320
+P 11490,8138:11560,8170
+C 11517,8150
+P 11400,8135:11495,8160
+
+# ---- inverter d_n = NOT D (mirror image of e_n, about a horizontal axis)
+# pull-down Gu (gate = D's pad poly) on the column under the VSS rail, between the VSS row
+# of the D driver (contact (11455,8185)) and node d_n above it.
+D 11432,8068:11492,8210
+# d_n: neck up to a buried contact, strip east under the load plate to the VCC strip
+D 11445,8036:11461,8072
+D 11485,8072:11606,8100
+P 11505,8033:11597,8118
+P 11447,8037:11510,8062
+B 11441,8032:11466,8068
+N P 11550,8048 wl_d_n
+# the plate's poly goes up the gap between the VSS rail and line D to the gate of inverter 2
+P 11495,7937:11510,8040
+
+# ---- inverter d_buf = NOT d_n
+P 11395,7937:11510,7958
+D 11428,7898:11492,8012
+C 11450,7991
+# d_buf: west along y 7903-7923 and down a diffusion wire to a box with a contact
+# (11356,8036) under a metal pad; the metal x 11325-11347 leaves the pad downwards and ends
+# on the pad of band Gr. So r = d_buf.
+D 11365,7903:11432,7923
+D 11365,7903:11383,8022
+D 11330,8016:11384,8066
+C 11356,8036
+M 11333,8018:11378,8062
+# east under line D and down a strip to the load
+D 11488,7900:11545,7925
+D 11527,7900:11545,8012
+D 11527,7994:11592,8012
+D 11540,7930:11606,7970
+P 11557,7913:11592,7997
+B 11553,7972:11596,8000
+D 11553,7974:11592,8000
+N D 11536,7960 wl_d_buf

@@ -2,7 +2,7 @@
 """False-colour class map of the clean shot (acid1b): a reading aid.
 
 usage: classmap.py x y w h [--scale S] [--grid N] [--comp NAME] [--shift dx,dy]
-                           [--trace] [--out FILE]
+                           [--trace] [--open] [--out FILE]
 
 Tan (diffusion) and pink (field under metal) are hard to tell apart by eye in the
 clean shot, and so are salmon (poly) and tan. This paints each pixel by class, from the
@@ -15,6 +15,14 @@ elsewhere):
   yellow   diffusion where metal was above (tan)       olive      diffusion in the open (mauve)
   white    field where metal was above (pink)          pale green field in the open
   black    dark: an edge line, a contact pit           blue       none of these
+
+--open: where chip 2 had no metal either, take the class from the two chip-2 shots instead
+(`metal` and `acid`), which show open diffusion redder than open field: the sum of red
+minus green over both shots is about 15-27 on field, 48-63 on diffusion, 80 or more on
+poly (measured west of the 4-bit counter, 2026-11-16; check locally). In the clean shot
+alone a wide open diffusion is merely a little greener than field and cannot be told
+by eye, while a narrow one is red-brown. Open diffusion is painted olive, open field pale
+green, open poly dark red, as before; what --open cannot place stays blue.
 
 The class is taken on a lightly blurred image, so a border is good to about 2 px. An
 edge line is 6-8 px wide and separates everything: two patches of one colour either
@@ -58,6 +66,22 @@ def classify(rgb):
     return out
 
 
+def classify_open(x, y, w, h):
+    """Class of open pixels from the chip-2 shots; '' where chip 2 has metal."""
+    m = cv2.GaussianBlur(view.raw('metal', x, y, w, h).astype(np.float32), (0, 0), 1.5)
+    a = cv2.GaussianBlur(view.raw('acid', x, y, w, h).astype(np.float32), (0, 0), 1.5)
+    s = (m[..., 0] - m[..., 1]) + (a[..., 0] - a[..., 1])
+    out = np.full(s.shape, '', dtype='<U1')
+    openm = m[..., 1] < 158
+    dark = (m[..., 0] < 105) | (a[..., 0] < 100)
+    out[openm] = '?'
+    out[openm & (s < 36)] = ','
+    out[openm & (s >= 40) & (s < 72)] = 'd'
+    out[openm & (s >= 76)] = 'p'
+    out[openm & dark] = '#'
+    return out
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('x', type=int)
@@ -69,6 +93,7 @@ def main():
     ap.add_argument('--comp', default=None)
     ap.add_argument('--shift', default=None)
     ap.add_argument('--trace', action='store_true')
+    ap.add_argument('--open', action='store_true')
     ap.add_argument('--out', default='classmap.png')
     a = ap.parse_args()
     if a.comp:
@@ -77,6 +102,11 @@ def main():
         view._shift = tuple(int(v) for v in a.shift.split(','))
     rgb = view.raw('acid1b', a.x, a.y, a.w, a.h)
     c = classify(rgb)
+    if a.open:
+        o = classify_open(a.x, a.y, a.w, a.h)
+        lo = ~np.isin(c, ['P', 'C', 'D', '.'])
+        use = lo & (o != '')
+        c[use] = o[use]
     img = np.zeros(rgb.shape, np.uint8)
     for k, col in PAL.items():
         img[c == k] = col
