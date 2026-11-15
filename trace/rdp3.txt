@@ -309,7 +309,11 @@ P 14826,12084:14860,12110            # tab into the tie
 D 14838,12086:14873,12140            # diffusion under the tie, down to the nor node
 B 14832,12082:14862,12114
 D 14652,12150:14810,12165            # nor: band to the left, to T6
-?D 14808,12128:14945,12164           # nor: to the right, under the q poly (T7), to the next VSS land
+D 14808,12128:14945,12164            # nor: to the right, under the q poly (T7), to the next VSS land
+# (T7's strip was drawn uncertain by run 2; settled by measurement in run 3, notes "T7":
+# in the chip-2 stripped shot it has the colour of diffusion and not of field in all 16
+# slices, tools/rdp3_t7.py; its source end is a tab of the VSS land exactly as tall as
+# the strip; and the load's gate tie reaches the nor band only through it.)
 N D 14790,12140 rdp3_{}_nor
 # --- T6: c pulls nor down. Gate = poly from the lower contact on the c track
 D 14620,12090:14693,12116            # VSS arm from the land

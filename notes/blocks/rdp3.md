@@ -197,12 +197,33 @@ so x = c XOR q and `eq` is high when the register equals the eight `c` lines.
   taken by the load of `eq`: VCC land with contact (14403,11862), strip east under a
   gate block (14455-14497 x 11812-11915), up at x 14502-14524 to the `eq` strip; the
   block's neck ends on a buried contact on the strip (14473-14499 x 11774-11803).
-- T7's diffusion (14808-14945 x 12128-12164, `?D`): the part left of the q poly is in
-  the open and has the colour of field in the clean shot; read as diffusion because the
-  nor node's tie box and neck (14838-14873 x 12086-12140) lead into it, the strip right
-  of the q poly (tan under the rail's margin) needs a partner, and the chip-2 stripped
-  shot shows it warmer than the field above it. If it were field, nor = NOT c and
-  x = c AND NOT q.
+- **T7's diffusion (14808-14945 x 12128-12164): settled in run 3, it is diffusion, the
+  gate is a true XOR.** Run 2 left it uncertain because the part left of the q poly
+  (x 14818-14872), which is not under metal, has roughly the colour of field in the
+  clean shot. Measured (`tools/rdp3_t7.py`, R-G of the strip against a field reference
+  and a diffusion reference inside the same cell, all 16 slices):
+
+  | Shot | strip | field (two points) | diffusion (node x) |
+  |---|---|---|---|
+  | chip 2 stripped | +22 (sd 2.8; range +17..+26) | +0.4 (sd 4.6), +2.7 (sd 4.8) | +20 (sd 3.6) |
+  | chip 2 metal (area not under metal) | +38 (sd 2.3) | +27 (sd 4.8), +23 (sd 1.7) | +42 (sd 1.7) |
+  | chip 1 clean | +8 (sd 25; -27..+65) | +16 (sd 3.8), +19 (sd 2.1) | +34 (sd 20) |
+
+  In both chip-2 shots the strip is diffusion in 16 slices of 16, with no overlap with
+  field. In the clean shot field is uniform from slice to slice (sd 2-4) while the strip
+  scatters as widely as the known open diffusion does (sd 25 and 20) and lies inside the
+  field's range in only 4 slices of 16: open thin-oxide areas have no stable colour in
+  that shot here, which is why it looked like field in the composite. Three more things
+  agree: (a) right of the q poly, in the margin protected by the VSS rail, a tab of the
+  VSS land reaches towards the poly at exactly the strip's height (clean shot at
+  x 14929: tan, R-G +15..+27 in 14 slices of 14, between dark edges at y 12126 and
+  12162; pink field below); (b) the strip is outlined on all four sides in both
+  stripped shots; (c) the buried contact that ties load L3's gate to its output
+  (14847,12098) reaches the nor band and T6 only through this strip, so its left part
+  must be diffusion whatever the colour.
+  With T7: nor = NOR(c, q), x = c XOR q, eq = (register = c), which is what an equality
+  comparator needs. T6 and T7 are the same size (41/24, 36/22). The AND-NOT reading
+  (x = c AND NOT q) is excluded.
 
 Believed: the `c` lines are the bits of the horizontal character counter (R0, R2 and
 R1 are all compared with them, R0 in rdp2's band C). Then `rdp3_cb_eq` is "counter =
