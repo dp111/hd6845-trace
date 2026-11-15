@@ -290,11 +290,30 @@ P 16180,15737 x16262 w=18              # east: band G_d of the gate group right 
 C 16207,15778
 P 16192,15762:16226,15795              # pad
 P 16220,15779 x16262 w=20
-M 16210,15768 y16100
+# That metal is BROKEN at y 15968-15988 (second run; same three signatures as the break in
+# the x 16169 metal: both metal shots orange there, 144/96/47 and 141/90/45, G/R 0.67 and
+# 0.63, against 195-204/164-169 on the metal either side; chip 2's stripped shot has a
+# dark bar at y 15968-15980 across the poly underneath).
+#  - Upper piece = bd2_m210: down to y 15967, where it turns east (bar y 15947-15967; the
+#    6 px line at x 16221-16226 between them is the edge of the poly underneath), runs to
+#    x 16349 and down x 16329-16349 to the contact 16343,16344 on the output band of
+#    group 3.
+#  - Lower piece = bd2_c: from contact 16211,15997 down to contact 16210,16086 on the
+#    output band of group 2. The pad of the upper contact is the foot of a poly that runs
+#    up under the upper piece (x 16206-16216, salmon y 15877-15982, no contact) into row
+#    3's lower band: that is how bd2_c reaches the latch.
+M 16210,15768 y15957 x16339 y16354
 N M 16210,15900 bd2_m210
+P 16327,16328:16359,16360              # pad
+C 16343,16344
+P 16211,15867 y15990 w=14              # poly from the bd2_c band down under the metal
+P 16194,15980:16228,16014              # pad
+C 16211,15997
+M 16210,15987 y16100
+N M 16210,16050 bd2_c
 
 # ---------------------------------------------------------------- group 2 of the left column (y 15985-16210)
-#     bd2_m210 = NOR( rw_d, bd2_m255, cs_d )
+#     bd2_c = NOR( rw_d, bd2_m255, cs_d )
 # One gate with three pull-downs in the column and an output that wraps round the west
 # side. Under the rail (tools/bd2_umap.py 15996 15876 16072 16070 and 15996 16056 16112
 # 16236): ground land y 15987-16026, band R y 16032-16047, output y 16056-16083, band S
@@ -309,7 +328,7 @@ C 16044,16008
 D 16008,16056:16060,16208              # output, under S, ground land, under T, output
 D 15992,16113:16060,16155              # ground land between S and T
 C 16025,16132
-P 16018,16032:16312,16048              # band R: gate rw_d, east under the e_b trunk and the bd2_m210 metal (no contacts) to rw_d's top end
+P 16018,16032:16312,16048              # band R: gate rw_d, east under the e_b trunk and the bd2_c metal (no contacts) to rw_d's top end
 P 16282,16024:16314,16056              # pad
 C 16297,16040
 M 16298,16030 y17100 w=18
@@ -337,15 +356,58 @@ P 15898,16046:15938,16118              # load gate: bar, block over the strip, b
 P 15918,16110:15940,16142              # down to the boxed cell
 D 15914,16122:15950,16144              # the wire's bulge under the cell
 ?B 15914,16120:15944,16146             # boxed cell 15915-15940 x 16121-16141: the tie
-# output to the bd2_m210 metal: at the east end of the upper output piece, just east of
+# output to the bd2_c metal: at the east end of the upper output piece, just east of
 # the rail, a boxed cell (16075-16102 x 16058-16081, light square inside); a poly band
 # leaves it east along y 16078-16092 (dark in the open, salmon under the e_b trunk: no
-# contact) to the contact 16210,16086 (olive footprint), where the metal x 16200-16222
-# from G_e ends.
+# contact) to the contact 16210,16086 (olive footprint) at the lower end of the bd2_c
+# metal.
 D 16056,16056:16100,16084
 P 16068,16068:16110,16084              # poly round the foot of the cell (orange x 16067-16085, y 16069-16078)
 P 16100,16078:16226,16092
 ?B 16062,16054:16106,16088             # the boxed cell
 P 16194,16070:16228,16102              # pad
 C 16210,16086
-N D 16040,16070 bd2_m210
+N D 16040,16070 bd2_c
+
+# ---------------------------------------------------------------- group 3 of the left column (y 16245-16470)
+#     bd2_m210 = NOR( rw_d, bd2_m210s, cs_d )
+# The same gate again 261 px lower (under the rail: tools/bd2_umap.py 15996 16236 16080
+# 16490; west of it tools/bd2_cmap.py 15892 16296 16012 16476 shows group 2's pattern
+# shifted). Differences are on the east side only: band S' is fed from a contact at
+# 16211,16388 on a metal that goes south from there (bd2_m210s, not followed), and the
+# output band runs east across the bundle to the contact 16343,16344 at the lower end
+# of the bd2_m210 metal. Contacts by their olive footprints in the clean shot; the bands
+# are salmon (no contact) under every other metal they cross.
+D 16032,16248:16060,16347              # ground land, under R', output
+C 16044,16268
+D 16008,16317:16060,16469              # output, under S', ground land, under T', output
+D 15992,16374:16060,16416              # ground land between S' and T'
+C 16025,16393
+P 16018,16293:16312,16309              # band R': gate rw_d (tap)
+P 16282,16286:16314,16318              # pad
+C 16298,16302
+P 15970,16351:16078,16369              # band S': gate bd2_m210s
+P 16066,16354:16078,16389              # link
+P 16066,16381:16226,16397              # band U' east to the contact 16211,16388
+P 16194,16372:16228,16404              # pad
+C 16211,16388
+M 16211,16378 y16570 w=18              # south from that contact (track scan: to about y 16568; not followed)
+N M 16211,16500 bd2_m210s
+P 15970,16421:16398,16439              # band T': gate cs_d (tap)
+P 16370,16414:16402,16446              # pad
+C 16386,16430
+D 15944,16325:16012,16341              # output: arm west of the rail
+D 15944,16325:15964,16469              # diffusion wire
+D 15944,16457:16012,16469
+D 15890,16329:15948,16357              # load strip from the VCC land
+D 15850,16321:15898,16365              # VCC land under the rail (no contact drawn: not looked for)
+N D 15870,16343 vcc
+P 15898,16307:15938,16379              # load gate
+P 15918,16371:15940,16403
+D 15914,16383:15950,16405
+?B 15914,16381:15944,16407             # tie (boxed cell, by the pattern of group 2; cell seen at 15922-15934 x 16392-16398)
+D 16056,16317:16100,16345              # east end of the upper output piece
+P 16068,16329:16110,16345
+P 16100,16339:16350,16353              # output band east to the contact 16343,16344
+?B 16062,16315:16106,16349             # boxed cell (by the pattern of group 2; not looked at closely)
+N D 16040,16331 bd2_m210
