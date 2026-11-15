@@ -165,6 +165,17 @@ and of every disagreement with the datasheet, the CPC document and beebjit; a
 reference emulation model run in lock-step against the netlist simulation; comparison
 with Lance Ewing's work.
 
+**M7. Visual 6845 (added 2026-11-15, user request).**
+A browser page in the manner of the transistor-level "visual" chip simulators: the
+traced layout drawn from `out/`, every node clickable, a switch-level simulation of the
+extracted netlist running in the page with the nodes coloured by state, the pins driven
+by a small bus/clock script, and the registers, counters and outputs shown as they
+change. It needs **every transistor traced**: nothing may stay a black box, including
+the comparators, the pad drivers and the input protection (schematics may still draw a
+comparator as a block; the trace and the netlist may not). It also needs every node as
+polygons with a stable number, which the trace already is. The deep-zoom viewer
+(decision 4) becomes the same page: photos underneath, layout and simulation on top.
+
 Order within M3 and M4 will follow the signals outward from M1 and M2 rather than a
 fixed list, so that every block is entered from nets that are already named.
 
@@ -205,3 +216,6 @@ notes/                        journal, ambiguities, findings
 4. A browsable deep-zoom viewer (tiled photos with the trace overlaid and clickable
    nets) is the final task.
 5. A functional floor-plan overlay is a deliverable, kept up to date throughout.
+6. A "visual 6845" is a deliverable once everything is traced (M7), so the trace must
+   end with all transistors in it: complete coverage of the die, not only the logic
+   needed to explain behaviour.

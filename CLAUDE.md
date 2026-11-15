@@ -23,6 +23,10 @@ first, then `notes/journal.md` (latest entry) and `notes/ambiguities.md` if they
   machine, the interlace odd/even logic, and whatever makes some registers hold N and
   others N-1.
 
+- **All transistors are to be traced** (user, 2026-11-15): a "visual 6845" (the layout
+  in a browser with a switch-level simulation of the extracted netlist running on it)
+  is a deliverable once tracing is complete. Schematics may show a comparator as a
+  block; the trace and netlist may not leave anything out. See `PLAN.md` M7.
 - The user also wants a floor-plan overlay (`floorplan.txt` -> `out/floorplan.jpg`)
   kept current: rename and tighten a block whenever tracing identifies it.
 
