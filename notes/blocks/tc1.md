@@ -42,20 +42,21 @@ Rails and channels (from two 0.7x views of the whole region):
 
 | What | Where |
 |---|---|
-| Horizontal bus field (metal lines, poly cross-unders) | y 2500-2950, whole width |
-| Gate columns, continuing the top-left logic | x 6400-7000, y 2650-4450; vertical rails at x 6507-6557, 6686-6736, 6857-6900; not traced, rails not identified |
-| Routing channel, about 14 vertical metal lines; the four nearest the island (W1-W4, x 7174-7325) are traced | x 7000-7330, y 2950-4450 |
+| Top bus field: seven horizontal metal lines at y 2554, 2598, 2641, 2684, 2727, 2771, 2814 (each 14 px wide), crossing the island's right VSS rail in poly | y 2500-2950, whole width; two lines traced |
+| Gate columns, continuing the top-left logic | x 6400-7000, y 2650-4450; vertical rails at x 6507-6557, 6682-6757, 6857-6932 (widths near y 4000); not traced, rails not identified. Large devices under the rails, not island-style gates |
+| Routing channel: verticals at x 7002-7022, 7048-7068, 7091-7110, 7133-7152 (west part, see Not done) and W1-W4 at x 7174-7325 (traced). South of y 4050 the west part is empty field except the polys of `g` | x 7000-7330, y 2950-4450 |
 | **Island**: three vertical rails and nine gates | x 7330-7900, y 3050-4050 |
-| Island left rail, VSS | x 7420-7470, y 2975 to beyond 4300 (0.7x view) |
-| Island centre rail, VCC | x 7597-7647, top end y 3105, down to a wide bus at y 4190-4255 |
+| Island left rail, VSS | x 7420-7470, y 2975-4335, where it becomes the VSS bus y 4288-4335 going east to x 7995 and then south (x 7943-7990) |
+| Island centre rail, VCC | x 7597-7647, top end y 3105, down to the VCC bus y 4198-4250, which runs east to x 8166 and then south (x 8116-8165) |
 | Island right rail, VSS | x 7770-7820, from above y 2500 (0.7x view) to its end at y 4000 |
 | VSS strap joining the two outer rails | x 7420-7820, y 2975-3040 |
 | Wiring between island and datapath: verticals V1 x 7914-7931, V2 x 7957-7977, V3 x 8002-8022, then x 8043-8063 | x 7900-8080 |
-| Six vertical metal lines, 44 px pitch (x 8100, 8143, 8187, 8231, 8272, 8317), from the top bus field down past y 3440 | x 8090-8330 |
-| Bus field below the island (horizontals, a diagonal, the wide VCC bus y 4193-4257) | y 4040-4450 |
+| Six north-south metal lines ns1..ns6, 44 px pitch (centres x 8096, 8140, 8184, 8227, 8270, 8314), traced end to end (table under Logic) | x 8089-8321, y 2720-4450 |
+| Bus field below the island: tracks T1-T3, the `g` line, VCC and VSS buses, lines to tc2 and to the datapath; traced | y 4010-4450 |
 
 VSS/VCC are assigned from the loads (all hang from the centre rail) and the pull-down
 sources (all contact the outer rails); the rails have not been followed to the pads.
+Both supplies leave this block southwards (ports).
 
 **The datapath's regular slices start at x 8340** (cdp1's slice 0 rail is at x 8403),
 not at 7600-7650. x 8090-8330 is a bundle of six north-south metal lines.
@@ -106,7 +107,7 @@ edges print through the metal as dark lines and make the strap look like three m
 lines. The metal that brings each of them is separate from the strap: a 20 px gap at
 x 7822-7842 (`tc1_b`, measured) and at x 7397-7420 (`tc1_a`, seen at 2x).
 
-## Logic (traced; extraction: 26 transistors, no errors)
+## Logic (traced; extraction: 26 transistors, 25 nets, no errors)
 
 ```
 tc1_r1_out = NOT tc1_a
@@ -354,9 +355,10 @@ and touches neither (field at y 3896-3908 and 4056-4070, measured).
     x 6923-6938, down to about y 4100) surrounds a diffusion island (x 6888-6923,
     y 4056-4133) with contact pits at (6902,4090) and (6913,4117). The rail metal is
     continuous from region A over `g`'s arm, B and the U to the island (`acid1b` shows
-    protected colours all the way along x 6875 and x 6905), so **A and the island are
-    on the same rail** and the L and the U are two transistors in parallel from that
-    rail to node B. The U's poly has a pad at about (6829,4091) under the thin metal
+    protected colours all the way along x 6875 and x 6905; a slit narrower than about
+    20 px would not show, but an island of metal inside the rail would have nowhere to
+    go), so **A and the island are believed to be on the same rail** and the L and the U
+    two transistors in parallel from that rail to node B. The U's poly has a pad at about (6829,4091) under the thin metal
     x 6808-6828 (dark ring in both metal shots): its gate signal comes on that metal.
   - West of the column: a poly block x 6752-6792, y 4032-4100 (textured in the open,
     its west 10 px salmon under the edge of the rail x 6682-6757), with a stem up
@@ -364,8 +366,14 @@ and touches neither (field at y 3896-3908 and 4056-4070, measured).
     y 3987-4020: looks like a buried contact) above it; a diffusion (tan, x 6710-6749,
     y 4033-4110) lies under the rail to its west. Read as the **load** of node B (strip
     from the rail's diffusion under the block to the column, gate tied at the box), but
-    whether the column joins B across the 14 px gap strip at x 6836-6850, and what the
-    box joins, were **not** settled.
+    what the box joins was **not** settled. The column probably joins B: in the 14 px
+    strip between them (x 6836-6850, in the gap between the two metals) a profile along
+    y 4021 gives `acid1b` 112-144/59-77/56-77 (red, not the khaki of open field) and the
+    metal shot 155/145/95 (not the orange of poly), i.e. a narrow open diffusion.
+  - The ns-line checks of this run are worth repeating here: `sel_tracks.py` reported
+    breaks on ns3 at y 3341-3367 and 2953-2975 and on ns5 at y 3365-3387; profiles show
+    metal with plain poly or field under it at all three (chip 2 has blemishes there,
+    chip 1 does not). They are not contacts.
   - Candidate reading: node B = NOR(`g`, signal on the metal x 6808-6828), a strong
     driver, rail x 6861-6932 = VSS, rail x 6682-6757 = VCC. Not adopted.
 - **Channel x 7000-7170**: verticals at x 7002-7022 (from contact 7010,3092 down), x 7048-7068
