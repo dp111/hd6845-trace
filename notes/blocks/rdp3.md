@@ -37,6 +37,9 @@ slice) at x 13783 + 390 K, i.e. s(K) = right-datapath column c(K-1); s0 lies lef
   west to bundle track L3: `rdp3_cb_eq` then goes **north** (out of the region at
   13478,10700), `rdp3_ca_eq` **south** (out at 13434,13480, bd1's track k8). Neither is
   gated or latched inside the region.
+- The R0 match itself (rdp2's `rdp2_cc_eq`) crosses this region in the bundle as
+  `rdp3_n2s1`: in on L2 at (13434,10700), jog left at y 12486, out on L1 at
+  (13391,13480) = bd1's track k7. No contact, gate or latch on the way.
 - Not done: only details (see the end).
 
 ## Inventory
@@ -326,12 +329,14 @@ the routing zone each one is taken to the lower left:
   the clean shot is plain field colour, and the metal shot shows no poly edges at
   x 16022 (`tools/rdp3_prof.py`); between x 13950 and 14050 on y 12744 there is no poly
   (`rz_s0.png`).
-- **Source of `c_s1`** (run 2 had a poly line from the west feeding it: that line is the
-  exit of `rdp3_ca_eq`). Nothing in the region drives any c line: all eight come in at
-  the top edge and all eight go out at the lower left. Seen from here they are through
-  lines with comparator taps. Whether they are driven from the north (rdp2 and above)
-  or from the south-west is for those blocks to say; every one of the eight lower ends
-  heads for the mid-right array or the logic below it.
+- **Source of `c_s1`, and of all the c lines.** Run 2 had a poly line from the west
+  feeding c_s1: that line is the exit of `rdp3_ca_eq`. Nothing in the region drives any
+  c line: all eight come past the top edge and all eight go out at the lower left.
+  rdp2 finds no driver north of here either (the lines end at y 9705-10220 after R0's
+  comparator). So the c lines are driven from the lower left: they **enter** at the
+  eight lower-left ports above, each from the mid-right array or the logic below it
+  (bd1 has two of them, `bd1_k14` and `bd1_k17`, coming out of the mid-right array),
+  and run north through the comparators of R1, R2 and R0.
 - **The track inside the latch cells (was AMB-6): continuous, no contact.** In both
   metal shots the track looks interrupted over the n2 load of every latch cell (AR
   y 13100-13170; only a 5 px bright line at x 14720) and its piece above seems to end on
@@ -359,17 +364,17 @@ North edge, y 10700 (all metal, all continue into rdp2):
 
 | Name | x | Direction | What |
 |---|---|---|---|
-| `rdp3_bus_s0`..`s7` | 13845, 14236, 14626, 15016, 15407, 15797, 16187, 16577 | through | data lines |
-| `rdp3_bus_s0` (second branch) | 16838 (drawn to y 10745) | through | bus s0 on the strap track of slice s7 |
-| `rdp3_c_s0`..`s7` | 13931, 14321, 14712, 15102, 15492, 15882, 16272, 16663 | through | lines compared with R1 and R2 |
-| `rdp3_n0` | 13348 (L0) | ? | goes south, leaves at (13307,12850) |
-| `rdp3_n1s4` | 13391 (L1) | driven from the south | `sel_w4` going north |
-| `rdp3_n2s1` | 13434 (L2) | ? | leaves south on L1 |
-| `rdp3_cb_eq` | 13478 (L3) | **out** | **R2 = c**, to rdp2 (metal seen to y 9960) |
+| `rdp3_bus_s0`..`s7` | 13845, 14236, 14626, 15016, 15407, 15797, 16187, 16577 | through | data lines (rdp2: s0's own line ends at y 10567, in row RC) |
+| `rdp3_bus_s0` (second branch) | 16838 (drawn to y 10745) | through | bus s0 on the strap track of slice s7; rdp2 follows it north past y 9440 (its `rdp3_t16837`), so this is how bit s0 reaches the upper array |
+| `rdp3_c_s0`..`s7` | 13931, 14321, 14712, 15102, 15492, 15882, 16272, 16663 | out (to rdp2's R0 comparator) | lines compared with R1 and R2; rdp2 finds no driver either and has them end at y 9705-10220, so they are driven from the lower left |
+| `rdp3_n0` | 13348 (L0) | in | rdp2's `rdp2_cd_eq` (its comparator D); goes south, leaves at (13307,12850) |
+| `rdp3_n1s4` | 13391 (L1) | out (driven from the south) | `sel_w4` going north = rdp2's `rdp2_re_ld` |
+| `rdp3_n2s1` | 13434 (L2) | in | **rdp2's `rdp2_cc_eq`: R0 = c**, the end-of-line match; passes through here, leaves south on L1 |
+| `rdp3_cb_eq` | 13478 (L3) | **out** | **R2 = c**; rdp2 has it end on a contact at (13475,9705), poly west along y 9705 |
 | `rdp3_n4` | 13521 (L4) | ? | turns west at y 12397 |
 | `rdp3_n5` | 13565 (L5) | ? | turns west at y 11920 |
 | `rdp3_n6` | 13608 (L6) | ? | turns west at y 11440 |
-| `rdp3_n7s9` | 13651 (L7) | ? | leaves south on L9 |
+| `rdp3_n7s9` | 13651 (L7) | ? | leaves south on L9; rdp2: its top is a contact at (13649,9919), poly bar from L2's upper piece |
 | `rdp3_n8` | 13694 (L8) | ? | turns west at y 10965 |
 | `vss` | 13783 + 390 k (9 rails) | - | |
 | `vcc` | 13990 + 390 k (8 rails) | - | |
@@ -395,7 +400,7 @@ South edge, y 13480 (metal unless noted):
 | Name | x | bd1's track at y 14700 | What |
 |---|---|---|---|
 | `rdp3_s0` | 13347 (L0) | k6 `bd1_xn1` | |
-| `rdp3_n2s1` | 13391 (L1) | k7 (untraced) | |
+| `rdp3_n2s1` | 13391 (L1) | k7 (untraced) | **R0 = c** (`rdp2_cc_eq`), out |
 | `rdp3_ca_eq` | 13434 (L2) | k8 (untraced) | **R1 = c**, out |
 | `rdp3_c_s3` | 13478 (L3) | k9 (untraced) | |
 | `rdp3_n1s4` | 13521 (L4) | k10 `sel_w4` | in |
