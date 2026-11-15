@@ -142,7 +142,7 @@ N P 11480,8450 wl_pb
 P 11105,8350:11493,8372
 P 11265,8343:11305,8380
 C 11285,8362
-M 11287,8376 y7960 w=20
+M 11287,8376 y7738 w=20
 N M 11287,8200 wl_p
 P 11465,8275:11493,8372
 
@@ -218,3 +218,177 @@ P 11557,7913:11592,7997
 B 11553,7972:11596,8000
 D 11553,7974:11592,8000
 N D 11536,7960 wl_d_buf
+
+# ====================================================================
+# p = NOR(a, b): the row counter's step pulse. Two pull-downs 43/20 on the column under the
+# VSS rail (VSS contacts (11450,7680) and (11452,7836), node between the two gates), load
+# 30/40 to a VCC box under the VCC rail (contact (11622,7752)).
+M 11456,6930 y7895 w=44              # VSS rail, a little narrower up here (x 11434-11478); continues north
+M 11630,6930 y7895 w=50              # VCC rail; continues north
+D 11426,7657:11470,7857
+C 11450,7680 11452,7836
+# gate a: poly y 7700-7722 from a pad (contact (11238,7710)) under the foot of the metal
+# x 11232-11252 that comes from the north
+P 11225,7692:11262,7730
+C 11238,7710
+P 11250,7700:11480,7722
+M 11242,7724 y7154 w=20
+# gate b: poly y 7790-7812 from a pad (contact (11238,7800)); a metal x 11230-11250 runs
+# south from it to a contact (11243,7925) at the end of a poly line that comes from the bus
+# field in the west along y 7915-7937
+P 11225,7782:11262,7820
+C 11238,7800
+P 11250,7790:11480,7812
+M 11240,7786 y7940 w=20
+C 11243,7925
+P 11040,7915:11262,7937
+P 11225,7908:11262,7944
+N P 11100,7926 wl_b
+# node p: west in the open to a buried contact with the poly y 7743-7765, which ends on a pad
+# (contact (11287,7752)) under the top of the metal x 11277-11297: that metal runs south to
+# the gate bands Gp/Gt of the clock generator.
+D 11398,7740:11430,7775
+B 11393,7737:11418,7773
+P 11268,7735:11305,7772
+P 11290,7743:11414,7765
+C 11287,7752
+# load: strip east from the node to the VCC box, under a poly plate x 11527-11568 that is
+# tied to the node by a buried contact at its lower left corner (on a tab of the node)
+D 11465,7745:11655,7775
+D 11598,7738:11655,7778
+C 11622,7752
+P 11527,7722:11568,7822
+D 11497,7745:11527,7822
+D 11520,7796:11547,7818
+B 11524,7792:11549,7821
+
+# ====================================================================
+# Horizontal poly bands across the top of the block (they go on east over the top of the
+# mid-right array) and the metals that hang from them.
+# H3, y 7158-7178: the band of bd1_xn1 (mrach). Its west end is a pad with the contact
+# (11240,7168): the metal x 11232-11252 down to gate a of the p NOR. So a = bd1_xn1.
+P 11220,7150:11260,7187
+C 11240,7168
+P 11250,7158:11700,7178
+# H4, y 7200-7222: comes from the bus field in the west, goes on east as the feed of mra's
+# line x 12902 (mra_gab). A pad with a contact (11392,7210) under a metal that leaves north.
+P 11040,7200:11700,7222
+P 11372,7192:11412,7230
+C 11392,7210
+M 11390,7224 y6930 w=22
+# H2, y 7112-7132, is two pieces. East piece (H2b): from a pad with the contact (11350,7122)
+# east to mra's line x 12285 (mra_la). The metal x 11315-11338 hangs from the pad and ends on
+# the gate pad of inverter I1.
+P 11330,7103:11370,7140
+C 11350,7122
+P 11360,7112:12275,7132
+P 12265,7104:12305,7142             # pad at the top of mra's line x 12285 (mra_la)
+C 12285,7124
+M 12285,7110 y7270 w=18
+M 11333,7108:11368,7136
+M 11326,7108 y7332 w=22
+N P 11600,7122 mra_la
+# West piece (H2a): between two pads, contacts (11092,7122) and (11285,7122). The metal
+# x 11277-11297 brings I1's output up to it; the metal x 11080-11100 takes it on north.
+P 11072,7103:11112,7140
+C 11092,7122
+P 11265,7103:11305,7140
+C 11285,7122
+P 11100,7112:11275,7132
+M 11287,7108 y7372 w=20
+M 11090,7136 y6930 w=20
+N M 11090,7000 wl_la_n
+# H1, y 7068-7088: from a pad with the contact (11155,7078) east. The metal x 11145-11165
+# runs down from the pad, jogs west at y 7262-7284 and goes on down at x 11090-11110 to a
+# contact (11107,7972) at the end of a poly line from the west (y 7960-7982).
+P 11135,7060:11175,7096
+C 11155,7078
+P 11165,7068:11965,7088
+P 11957,7063:12000,7100             # east end: pad with a contact; a metal strap x 11965-11992 north to a second
+C 11978,7083                        # contact (11978,7000) on a poly that goes on north (not followed: amr)
+M 11978,6986 y7098 w=26
+C 11978,7000
+P 11962,6986:11995,7012
+P 11968,6930:11990,6990
+M 11155,7064 y7273 x11100 y7986 w=20
+C 11107,7972
+P 11040,7960:11125,7982
+P 11090,7954:11125,7990
+N P 11400,7078 wl_h1
+# H0, y 7030-7048: from x 11350 east; its west end turns north in poly (x 11345-11362).
+P 11345,7030:12060,7048             # east: under the rails, north at x 12042-12060, east along y 6943-6962 (on into amr)
+P 12042,6943:12060,7048
+P 12042,6943:12360,6962
+P 11345,6930:11362,7048
+N P 11500,7039 wl_h0
+
+# ---- inverter I1: la_n = NOT mra_la
+D 11428,7268:11470,7358
+C 11447,7285
+P 11302,7300:11342,7336
+C 11320,7318
+P 11330,7308:11480,7330
+# node: east to the load, west in the open to a buried contact with the poly y 7348-7368
+# whose pad (contact (11287,7358)) is under the foot of the metal x 11277-11297
+D 11428,7335:11492,7358
+D 11378,7342:11432,7362
+B 11375,7339:11402,7372
+P 11265,7344:11302,7378
+C 11286,7360
+P 11295,7348:11400,7368
+# load: plate x 11562-11600 over the strip to the VCC box (contact (11630,7350)); the plate's
+# arm west along its top edge is tied to a tab of the node by a buried contact
+D 11465,7341:11560,7359
+D 11555,7337:11655,7367
+D 11603,7335:11655,7375
+C 11630,7350
+P 11562,7297:11600,7385
+P 11522,7297:11600,7330
+D 11527,7303:11547,7359
+B 11524,7300:11549,7333
+
+# ---- inverter I2 (mirror image of I1): input on the poly y 7486-7508 from the bus field in
+# the west, output back west on the poly y 7441-7462
+D 11428,7456:11470,7552
+C 11447,7532
+P 11040,7486:11480,7508
+N P 11100,7497 wl_i2_in
+D 11428,7458:11492,7482
+D 11378,7444:11432,7476
+B 11375,7440:11402,7474
+P 11040,7441:11400,7462
+N P 11100,7451 wl_i2_out
+D 11465,7459:11560,7477
+D 11555,7450:11655,7480
+D 11603,7440:11655,7480
+C 11630,7458
+P 11562,7432:11600,7522
+P 11522,7490:11600,7522
+D 11527,7459:11547,7516
+B 11524,7487:11549,7520
+
+# ====================================================================
+# Three vertical metals that cross the block over the clock drivers without touching them.
+# Each starts on the pad of a poly line that comes from the bus field in the west, steps one
+# pitch east by a diagonal at y 8500-8600, and ends on one of the bus lines of the channel
+# y 9182-9435 (mra.txt draws those from x 11640).
+# mD: poly line y 7830-7850 <-> bus line B (mra_busb), which goes on east into rdp2
+P 11040,7830:11190,7850
+P 11180,7824:11216,7858
+C 11197,7842
+M 11199,7828 y8498 11245,8562 y9205 11268,9229 x11668 w=20
+C 11655,9228
+# mC: poly line y 7872-7893 <-> bus line C (ck_a, from the counters' ck_a line)
+P 11040,7872:11145,7893
+P 11137,7866:11174,7900
+C 11155,7882
+M 11157,7868 y8512 11200,8582 y9198 11243,9262 11260,9273 x11622 w=20
+P 11592,9262:11650,9284
+C 11608,9272
+# mB: poly line y 8005-8025 <-> bus line G (the R2 match line from the right datapath)
+P 11040,8005:11125,8025
+P 11102,8005:11125,8050
+P 11092,8042:11128,8080
+C 11106,8060
+M 11111,8048 y8546 11155,8602 y9240 11300,9396 11315,9404 x11668 w=20
+C 11655,9402

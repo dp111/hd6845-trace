@@ -4,10 +4,15 @@ Serial work, started 2026-11-16. Trace: `trace/wl.txt`. Views: `cache/scratch/wl
 
 ## Status
 
-Traced and extracted (16 transistors): **the clock generator of the character-row
-counter**, y 7890-8900. Not yet traced: everything north of y 7890 in this block (where
-signal `p` comes from), the vertical metals x 11060-11210 that pass over the drivers, and
-the other lines that enter from the bus channel y 9182-9435 (bus lines B, C, G).
+All the logic of the block is traced and extracted (23 transistors, no errors): **the clock
+generator of the character-row counter** (y 7890-8900), the NOR that makes its step pulse
+`p` (y 7650-7860) and two plain inverters (y 7265-7550). The rest of the block is wiring,
+also drawn: four horizontal poly bands across its top that run on east over the counters,
+three vertical metals that cross it from poly lines in the west to the bus channel below,
+and five poly lines that arrive from the bus field in the west.
+
+Not done: where those five poly lines and the bands' west and north ends come from. That
+is the bus field x 10850-11080 and the logic north of y 6930 (`amr`), the next pieces.
 
 ## What is west of the counters
 
@@ -47,8 +52,67 @@ other's fall by two inverters. The counter's master latches take the next count 
 is high, the slaves pass it on when `p` is low again: the row counter steps once per pulse
 of `p`.
 
-`p` arrives on the vertical metal x 11277-11297 from the north (contact (11285,8362) on
-the gate band). Not yet followed.
+### The step pulse `p`
+
+`p` arrives on the vertical metal x 11277-11297 (contact (11285,8362) on the gate band)
+from a contact (11287,7752) on the output of a NOR at y 7650-7860:
+
+```
+p = NOR(a, b)              pull-downs 44/22 each, load 31/40
+a = bd1_xn1                band H3 (y 7158-7178) -> contact (11240,7168) -> metal x 11232-11252
+b = wl_b                   poly line y 7915-7937 from the bus field -> contact (11243,7925) -> metal
+```
+
+`a` is the line the strobe channel calls `bd1_xn1` (NOT X, where X is the line whose
+inverse, made by input-row gate 0, is the clock block's `ck_src`: so `a` and `ck_src` are
+two copies of one signal, `NOT X`). In the clock block a high `ck_src` holds `ck_b` low.
+Here a high `a` holds `p` low. So **one core signal stops both the horizontal counter's
+master clock and the row counter's step**; what it is has still to be found at its source
+(bd1's `bd1_g`, which comes from the bottom bus field). While `a` is low, `p = NOT b`: the
+row counter steps on a low pulse of `b`.
+
+## The two inverters
+
+```
+la_n     = NOT mra_la      (42/22, load 30/38)   y 7265-7380
+i2_out   = NOT i2_in       (42/22, load 30/38)   y 7440-7550, mirror image
+```
+
+- `mra_la` is the metal x 12276-12294 that runs down through all nineteen counter rows
+  without a contact (mra's notes). Its top end is a contact (12285,7124) on band H2's east
+  piece, which runs west to a pad with the contact (11350,7122); a metal x 11315-11338 hangs
+  from the pad and ends on the gate of this inverter. So the line is an **input** here and
+  must be driven at its other end (the bottom of the array, y 16942, where mra saw no
+  contact at 1x: to be looked at again at tracing zoom). The inverter's output goes by a
+  buried contact, a poly, the metal x 11277-11297 and band H2's west piece to a contact
+  (11092,7122) and leaves north on the metal x 11080-11100.
+- I2 takes its input from the bus field on the poly y 7486-7508 and returns its output
+  there on the poly y 7441-7462.
+
+## Wiring through the block
+
+Horizontal poly bands at the top (all go on east over the top of the mid-right array):
+
+| Band | y | West end | East | Net |
+|---|---|---|---|---|
+| H0 | 7030-7048 | turns north in poly at x 11345-11362, leaves at y 6930 | under the rails to x 12060, north, then east along y 6943-6962 (into `amr`) | `wl_h0` |
+| H1 | 7068-7088 | pad, contact (11155,7078): metal down, jogging west at y 7273, to a contact (11107,7972) on a poly line from the west (y 7960-7982) | pad, contact (11978,7083), metal strap north to a contact (11978,7000) on a poly going north | `wl_h1` |
+| H2 west | 7112-7132 | pad, contact (11092,7122), metal x 11080-11100 north | pad, contact (11285,7122): metal down to I1's output | `wl_la_n` |
+| H2 east | 7112-7132 | pad, contact (11350,7122): metal down to I1's gate | pad, contact (12285,7124): the line x 12285 down the array | `mra_la` |
+| H3 | 7158-7178 | pad, contact (11240,7168): metal down to gate a | into the wiring channel (mrach) | `bd1_xn1` |
+| H4 | 7200-7222 | runs on west into the bus field | feed of mra's line x 12902 (`mra_gab`); on the way a pad with a contact (11392,7210) under a metal that leaves north (x 11380-11400) | `mra_gab` |
+
+Vertical metals over the clock drivers (no contact to them). Each steps one pitch east by a
+diagonal at y 8500-8600:
+
+| Metal (top / bottom x) | Top end | Bottom end | Net |
+|---|---|---|---|
+| 11189-11209 / 11235-11255 | contact (11197,7842), poly line y 7830-7850 from the west | bus line B, contact (11655,9228): on east through the channel into rdp2 at (13425,9447) | `mra_busb` |
+| 11147-11167 / 11190-11210 | contact (11155,7882), poly line y 7872-7893 | bus line C, contact (11608,9272): **`ck_a`** from the counters' own `ck_a` line | `ck_a` |
+| 11101-11121 / 11145-11165 | contact (11106,8060), poly up to the line y 8005-8025 | bus line G, contact (11655,9402): the **R2 match** line from the right datapath | `mra_busg` |
+
+So `ck_a` and the R2 match (horizontal sync position) are taken west into the bus field
+here, and a signal on bus line B passes between the bus field and the upper right datapath.
 
 ### How it is built (for reading the rest of the block)
 
@@ -67,17 +131,29 @@ the gate band). Not yet followed.
   metal (tracing guide, trap 2), not layout. Open diffusion was told from open field by the
   chip-2 shots: `tools/classmap.py --open`.
 
-## Ports (so far)
+## Ports
 
 | Name | Layer | Where | Dir | What |
 |---|---|---|---|---|
 | `mra_s7` | M | (11655,9315) | out | slave clock of the row counter |
 | `mra_m7` | P | (11640,9360) | out | master clock of the row counter |
-| `wl_p` | M | x 11277-11297 at y 7960, continues north | in | the row counter's step pulse |
-| vss | M | y 9100-9150 at x 11832 | - | joins mra's rail |
-| vcc | M | x 11605-11655 at y 7890, continues north | - | |
+| `wl_b` | P | (11040,7926) | in | from the bus field: NOT (row counter step), while `a` is low |
+| `wl_i2_in`, `wl_i2_out` | P | (11040,7497), (11040,7451) | in, out | inverter I2 |
+| `wl_la_n` | M | (11090,6930) | out | NOT `mra_la`, leaves north |
+| `mra_gab` | P / M | (11040,7211); (11390,6930) | ? | band H4: from the bus field, and a branch north |
+| `wl_h0` | P | (11353,6930); (12360,6952) | ? | band H0 |
+| `wl_h1` | P | (11040,7971); (11979,6930) | ? | band H1 and the poly line y 7960-7982 |
+| `mra_busb` | P | (11040,7840) | ? | bus line B's line into the bus field |
+| `ck_a` | P | (11040,7882) | out | `ck_a` into the bus field |
+| `mra_busg` | P | (11040,8015) | out | R2 match into the bus field |
+| vss | M | y 9100-9150 at x 11832; x 11434-11478 at y 6930 | - | joins mra's rail; continues north |
+| vcc | M | x 11605-11655 at y 6930, continues north | - | |
 
 ## Not done
 
-Listed under Status. Tools: `tools/wl_net.py` (extraction report restricted to a box),
-`tools/wl_px.py` (patch colours in three shots).
+- Sources and sinks of everything in the Ports table that ends at x 11040 or y 6930.
+- The bottom end of `mra_la` (y 16942).
+- The leftmost vertical metals (x 11010-11080) are bus-field lines and are not drawn.
+
+Tools: `tools/wl_net.py` (extraction report restricted to a box), `tools/wl_px.py` (patch
+colours in three shots), `tools/classmap.py --open`.
