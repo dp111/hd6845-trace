@@ -163,6 +163,26 @@ Traps, all of them real:
    agent had judged wrongly by eye three times. Most wrong readings so far were junctions judged at too low a zoom.
 9. If a region will not give a consistent circuit after two honest passes, stop, record
    exactly what is established (with coordinates) and what is not, and move on.
+10. **A wiring channel cannot be read from the metal shot.** Between the metal tracks of a
+   channel, and directly under them, poly lines of *other* nets run for hundreds of
+   pixels: a track ends on a contact, its net carries on in poly beneath the neighbouring
+   track and comes back up to metal three tracks away. The metal shots show none of this
+   (trap 8 at full scale). Read every channel in `acid1b`, end to end
+   (`strips.py --layer acid1b`, and `classmap.py` where the colours are close), and
+   account for every track end: a track that stops has gone somewhere. First seen in
+   `mrach` (x 13040-13425), where half the nets change track under the metal.
+11. **"Drawn once, at full length" is a claim about every crossing.** A rail or clock line
+   that looks continuous through an array at 1x may be cut at each routing channel and
+   re-fed from somewhere else. In the mid-right array the `ck_a` rail, the master clock
+   line and line L3 are each three pieces on three nets. Look at such a line at 3x at
+   every channel and row-group boundary before drawing it through.
+12. **A line that ends in a widened foot ends *on* something.** Look at 6x for the contact
+   or the turn before leaving it as a free end.
+
+**When a trap turns out to affect work already done**, add the affected blocks to the
+"Re-read list" in `notes/work-packages.md` in the same commit that records the finding.
+A remark in a journal entry or a report is not enough: nobody re-reads those when
+choosing the next task.
 
 ## 5. The trace file
 

@@ -403,8 +403,9 @@ M 12543,13037 y14970 w=14
 N M 12543,13500 mra_l2b
 M 12543,15012 y16940 w=14
 N M 12543,16000 mra_l2c
-# L3 (gate of the second pull-down of na: na = NOR(L3, nb), so a high L3 makes every bit of
-#   the group load 0: believed the counter's clear line). One piece per counter:
+# L3 (gate of the second pull-down of na: na = NOR(L3, nb), so na is valid only while L3 is
+#   low). For r11-r18 L3 is ck_a (verified in the clean shot); what the other two carry is
+#   not known. One piece per counter:
 #   rows r0-r3: continues north out of the array.
 #   rows r4-r10: free top end at y 9440; at the bottom (y 12985-13018) the line widens into a foot
 #     that turns WEST onto the contact (12567,13005) (6.5x, both metal shots and the clean shot:

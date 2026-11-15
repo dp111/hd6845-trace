@@ -47,6 +47,32 @@ notes. Order of priority for free slots: central datapath and the control logic
 around it, select/address logic, the two 14-bit arrays, right datapath, trunks, data
 bus and pads.
 
+## Re-read list
+
+Work already marked `done` or `partial` whose method later turned out to be unreliable.
+**Every entry here is a task**: it is worked through before M5 (simulation) starts and
+struck out, with the date and what was found, when done. Whoever finds that a method used
+on earlier blocks can miss things adds the affected blocks here in the same commit
+(`CLAUDE.md`, "Re-read rule").
+
+Why the first four are here (found 2026-11-15/16 in `mrach`): in a wiring channel poly
+runs *under* the metal tracks, on other nets, for hundreds of pixels (a track ends on a
+contact, the net carries on in poly beneath its neighbour, comes back up three tracks
+away). The metal shots show none of it. A channel read from the metal shot alone can
+have wrong connections between tracks and missing taps. The clean shot (`acid1b`) shows
+the poly as salmon under where the metal was; `tools/strips.py --layer acid1b` and
+`tools/classmap.py` are the tools.
+
+| # | Block | Region | What to re-read | Why suspect | Status |
+|---|---|---|---|---|---|
+| R1 | `bd1` | 13000-13700 x 14700-17100 | all 18 vertical tracks, end to end, in `acid1b`: every track end, every place a track is interrupted, poly under tracks; tracks k7/k8 beyond their first jog | channel read mostly from the metal shots; `mrach` already corrected one of its leads (bd1.txt line 191) | open |
+| R2 | `bd3` | 14100-15900 x 16550-17100 | the 16 tracks, same check | notes cite the metal shot for the track checks (3 mentions of the clean shot in 247 lines) | open |
+| R3 | `sel` | 14100-15850 x 14650-16550 | the track field T0-T17 between and below the gates, same check; rsel12/rsel13 "carried through with no contact" in particular | notes never mention the clean shot | open |
+| R4 | `trunks` | whole die | every long run: taps and cross-unders along bus lines L3-L6 (y 18335-18470), the left bus field (x 6790-6870), the bottom trunk (y 18947), each "followed at 1x" stretch | read at 1x in the metal shot only; a tap in poly under a neighbouring line would not have been seen | open |
+| R5 | `rdp2` | 13350-16950 x 8100-10700 | bundle lines and the zone y 9080-9560 in `acid1b` when its routing zone is traced | notes never mention the clean shot; the channel's east ends at y 9406, 9447, 9707, 9748, 9884, 9963 arrive there undrawn | open |
+| R6 | every array block (`larr`, `cdp1`-`cdp4`, `rdp2`, `rdp3`, `areg`) | - | each line drawn once at full length across many rows (rails, clock lines, bit lines): look at it where it crosses each routing channel or row boundary | in `mra` three of the agents' full-length lines were really two or three pieces on different nets (ck_a rail, L1, L3) | open |
+| R7 | any junction or contact accepted by eye in the clean shot between tan, pink and salmon areas | - | when a block is next opened: class map plus a profile across each junction that decides a connection | twice in `mra` the eye joined two diffusions that a profile showed 20 px apart | standing |
+
 ## Queue
 
 | Prefix | Region | What |
@@ -62,7 +88,7 @@ bus and pads.
 | `bc2`, `bc3`, `bc4` | 9000-11000 x 14050-16300; 7000-9000 x 16300-18550; 9000-11000 x 16300-18550 | rest of the bottom-centre random logic |
 | `cdp4` (continue) | 7600-10850 x 11100-11490 | upper half of the top latch row: source of selector input a, bus taps, latch data |
 | `bl1`, `bl2` | 4800-6500 x 15800-18650 | bottom-left random logic |
-| `bd1`-`bd3` | 13000-14100 x 14700-17100; 15850-17000 x 14700-17100; 14100-15850 x 16550-17100 | rest of the logic below the decode array |
+| `bd1`-`bd3` | 13000-14100 x 14700-17100; 15850-17000 x 14700-17100; 14100-15850 x 16550-17100 | rest of the logic below the decode array; **start with re-read items R1, R2** |
 | `tr1`, `tr2` | 11900-16400 x 3400-4500 | top-right logic rows |
 | `amr` | 11400-13050 x 5250-6450 | logic above the mid-right array |
 | `busL`, `busB`, `busT` | 4850-7550 x 10400-15000; 6500-13300 x 17000-18600; 11000-17000 x 3000-5300 | bus fields: follow the wiring between blocks and join their ports |

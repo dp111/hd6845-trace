@@ -589,13 +589,17 @@ How the lines run (metal unless noted; views `gapA_m.png`, `gapA_b.png`, `gaps_m
   (12567,13005) (`l3foot.png`, 6.5x, all four shots; first read as L2's contact, which
   left this piece without a feed: AMB-008, resolved); r11-r18 starts at y 13040 and ends on
   the contact (12631,16954).
-- **What L3 is for.** `na = NOR(L3, nb)`, and `a` takes `na` on the master clock, so a high
-  L3 makes every bit of its group load 0. One L3 per counter, each fed from a different
-  place, reads as **the counter's synchronous clear** rather than as a clock. For the
-  8-bit counter that contradicts trunks' "second `ck_a` route" (a poly x 12733-12757 seen
-  at 0.9x only between y 17050 and 18220): to be checked at tracing zoom before either
-  reading is used. If L3 is the clear, the horizontal counter is cleared from below, the
-  row counter from the west (y 13005) and the 4-bit counter from the north.
+- **What L3 is for.** `na = NOR(L3, nb)`, and `a` takes `na` on the master clock, so while
+  L3 is high every bit of its group presents 0 to its master. One L3 per counter, each fed
+  from a different place. I first read that as each counter's synchronous clear. **For the
+  8-bit counter it is not: its L3 is `ck_a`** (verified: the poly x 12733-12757 was
+  followed in the clean shot from the route at (12631,16954) south to clock.txt's `ck_a`
+  bus line at (12740,18471)). There L3 is a clock phase: `na` is forced low during `ck_a`
+  and is `NOT nb` otherwise, i.e. `na` is valid only outside `ck_a`, when the master
+  (clocked by `ck_b`) samples it. So the horizontal counter's clear is elsewhere (in the
+  untraced part of node `m`'s network, or in `m`'s inputs). What the L3 lines of the row
+  counter (metal from the west along y 13005) and of the 4-bit counter (leaves north) carry
+  is not known; they may be that counter's slave phase too, or a real clear.
 - Rail x 13013-13037: south piece from trunks up to a contact at (13021,12939); middle
   piece y 9326-12887 from a contact at (13021,9340) on bus line D; north piece y 7268-9290
   from a contact at (13021,9276) on bus line C. The earlier note of a contact at

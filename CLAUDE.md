@@ -30,6 +30,11 @@ first, then `notes/journal.md` (latest entry) and `notes/ambiguities.md` if they
 - Schematics (user, 2026-11-15): higher-order structures (N-bit registers, comparators,
   counters) are drawn as blocks, **and** one instance of each kind gets its own
   gate-level sheet. So every block's notes must give the bit cell's gates in full.
+- **Re-read rule** (user, 2026-11-16): when tracing shows that a method used on earlier
+  blocks can miss or misread things, the affected blocks go on the "Re-read list" in
+  `notes/work-packages.md` in the same commit, as tasks with a region and a reason, and
+  the lesson goes into the traps of `notes/tracing-guide.md`. A mention in the journal
+  or in a report does not count. The list is worked off before simulation (M5).
 - The user also wants a floor-plan overlay (`floorplan.txt` -> `out/floorplan.jpg`)
   kept current: rename and tighten a block whenever tracing identifies it.
 

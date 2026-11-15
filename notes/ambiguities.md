@@ -180,5 +180,7 @@ neighbouring line L2. Feed: a metal line from the west along y 13005, contact
 (11765,13005), poly east, that contact. Lesson: a line that ends in a widened foot ends on
 something; look at the foot at 6x before calling it free.
 
-Still open under this number: whether L3 is each counter's clear line (as its logic
-suggests) or a clock (as trunks' notes have it for the 8-bit counter).
+For the 8-bit counter L3 is `ck_a` (poly followed in the clean shot to clock.txt's bus
+line), so there it is a clock phase, not a clear. What the L3 lines of the row counter
+(from the west along y 13005) and of the 4-bit counter (north) carry is open until their
+sources are traced.
