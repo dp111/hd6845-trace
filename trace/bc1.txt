@@ -1,5 +1,6 @@
 # bc1: bottom-centre random logic, upper left part (x 7000-9000, y 14050-16300).
 # Notes: notes/blocks/bc1.md.  All coordinates are metal-shot pixels.
+@requires cdp4
 @block bc1
 @w M=16 P=22
 @s 28x30
@@ -163,3 +164,81 @@ M 8642,14898 y15060                       # thin vertical down the right side of
 C 8100,14913
 P 8090,14913 x8210 y14870 x8500 w=20      # dec10_n: right, up, right under R1 (continues right, not traced)
 N P 8490,14870 bc1_dec10_n
+
+# ======================================================================================
+# Left gate group, right part: the two strong inverters that drive the row D latch
+# strobe (cdp4_ld6) and its twin.  Rails: RL2 = VCC (x 7470-7520), RL3 = VSS
+# (x 7640-7692).  Both inverters have the same input (metal x 7795, bc1_ld_n).
+# Each: an active area under and beside RL3 whose source part is contacted by RL3;
+# an S-shaped gate poly wraps the source on two sides and along the bottom; the drain
+# is the strip above the gate plus the block left of it; a wide depletion load comes
+# down from a VCC band above (vertical current flow) with its gate tied to the drain
+# by the left buried contact.
+# ======================================================================================
+M 7666,14900 y16300 w=50                  # RL3
+N M 7666,14920 vss
+M 7495,14950 y16300 w=50                  # RL2
+N M 7495,15060 vcc
+
+@cell bc1_drv tag=1
+D 7546,14978:7600,15163                   # column: VCC band, load channel, drain block, bottom-gate channel, source strip
+D 7530,14978:7600,15000                   # VCC band, left to the land under RL2
+D 7546,15059:7758,15163                   # drain strip above the gate, channel, source land
+D 7620,15022:7658,15064                   # under the left buried contact
+D 7722,15030:7766,15064                   # under the right buried contact
+B 7618,15020:7660,15060                   # left: load gate (and in cell 1 the output poly) to the drain
+B 7717,15028:7771,15063                   # right: output poly to the drain (used in cell 2 only)
+P 7540,15006:7632,15050                   # load gate
+P 7730,15036:7762,15058                   # poly patch in the right buried contact
+P [ 7604,15075 x7808 y15098 x7634 y15140 x7532 y15111 x7604 ]   # gate: top band to the pad, down the left side, along the bottom
+C 7663,15131 s=40x36                      # RL3 to the source land
+C 7795,15086                              # input pad
+@end
+@inst bc1_drv 0,218 tag=2
+
+# land under RL2 feeding the VCC band of each cell
+D 7470,14978:7540,15030
+C 7492,15005
+D 7462,15194:7540,15284
+C 7492,15215
+C 7500,15255
+
+# input of both inverters
+M 7795,15076 y15447
+C 7795,15435
+N M 7795,15200 bc1_ld_n
+
+# cell 1 output: poly from the left buried contact up, then left along y 14961 to a metal going up
+P 7330,14961 x7648 y15046 w=20
+C 7338,14958
+M 7338,14968 y14880
+N M 7338,14890 bc1_ld_a
+
+# cell 2 output: poly from the right buried contact to the strobe metal, which runs up to row D
+P 7740,15265 x7846 w=20
+C 7838,15260
+M 7838,15270 y15045 x7795 y14913 x7752 y14283 x7947 y13835   # joins cdp4's strobe metal (its drawn end is y 13840)
+
+# --- gate 3 of the group: 2-input NAND under RL3 that makes bc1_ld_n
+D 7637,15442:7699,15598                   # column under RL3: output node, two channels, VSS land
+C 7674,15560 s=30x34
+P 7604,15467:7850,15486                   # band 1 (nearer the output), from the pad at x 7838
+C 7838,15477
+P 7604,15514:7892,15534                   # band 2 (nearer VSS), from the contact at (7880,15522)
+C 7880,15522
+D 7690,15442:7770,15463                   # output node right to the buried contact
+D 7728,15420:7768,15463
+B 7723,15417:7772,15453
+P 7735,15435 x7810                        # output poly from the buried contact to the pad under metal x 7795
+D 7585,15441:7645,15461                   # output strip left to the load
+D 7480,15441:7592,15481                   # strip through the load to the land under RL2
+D 7472,15436:7530,15490
+C 7485,15462
+P 7523,15404:7567,15483                   # load gate
+P 7560,15404:7600,15434                   # its arm to the gate tie
+D 7584,15408:7608,15446                   # bump up from the strip
+B 7580,15402:7610,15436
+M 7838,15467 y15808                       # in1: metal down the channel (followed with sel_tracks to y 15808)
+N M 7838,15700 bc1_ld_in1
+M 7882,15512 y16227                       # in2: metal down the channel (followed with sel_tracks to y 16227)
+N M 7882,15700 bc1_ld_in2
