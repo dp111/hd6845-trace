@@ -81,7 +81,7 @@ D 16095,15628:16128,15657              # east end of row 1's output strip
 ?B 16100,15636:16132,15662             # box with plain centre and heavy outline, as on G1 and G2; the window itself is not resolved
 
 # ---------------------------------------------------------------- areg_load driver
-# G2, y 15225-15360: one inverter. Output = areg_load, input = bd2_n2.
+# G2, y 15225-15360: one inverter. Output = areg_load, input = bd2_al_n (NOT e_b: see below).
 # areg_load route: metal x 16299 down to contact 16296,14822, poly under the ground band,
 # contact 16296,15003, metal down to y 15258, west to contact 16255,15258, poly west to
 # the buried contact 16098-16132 x 15243-15277 on the output strip.
@@ -113,24 +113,29 @@ C 16210,15300
 D 16003,15262:16130,15332              # through under the band
 D 16003,15312:16068,15358
 C 16040,15338
-N P 16100,15301 bd2_n2
-# bd2_n2 is e_b. From the gate pad 16210,15300:
-#  - metal x 16200-16222 down to its end at contact 16205,15690 (poly from there east: not traced)
-#  - poly under that metal (strip 2) down to y 15488, diagonal to 16240,15515, then east as
-#    the band y 15503-15527 into the gate group right of the bundle (gate G_b there, not traced)
-#  - a poly branch west along y 15358-15378 to the pad 16122,15388; contact; metal down to
-#    y 15480, east, and down as the trunk x 16158-16180: continuous to y 17702 (track scan,
-#    both metal shots), which is the e_b line of trunks.txt.
+N P 16100,15301 bd2_al_n
+# G2's gate is NOT e_b (correction, second run). From the gate pad 16210,15300 only a
+# metal leaves: x 16200-16222 down to its end at contact 16205,15690, whose pad's poly
+# runs east (bar y 15688-15702 over field) to the boxed cell at the west end of the
+# node bd2_al_n of the gate group right of the bundle (see there). Under that metal the
+# clean shot is pink field from y 15313 to 15355 (tools/bd2_umap.py 16100 15286 16246
+# 15500): the poly "strip 2" under it starts only at y 15358, where the branch from the
+# e_b pad 16122,15388 arrives, and there is no contact where the metal crosses that
+# poly (metal bright and unbroken y 15364-15400, salmon unbroken under it).
 M 16210,15290 y15700
 C 16205,15690
 P 16190,15675:16230,15710              # pad
-P 16210,15318 y15488 16240,15515 x16285 w=24
-P 16122,15368 x16210 w=20
+# e_b: the trunk x 16158-16180 (continuous to y 17702 by track scan, the e_b line of
+# trunks.txt) turns west at y 15470-15490 and up x 16112-16135 to contact 16122,15388;
+# poly branch east along y 15358-15378 under the bd2_n1 trunk (no contact) to x 16218;
+# strip 2 down x 16208-16218 under the bd2_al_n metal (no contact) to y 15488, diagonal
+# to 16240,15515 and east as the gate band G_b of the gate group.
+P 16122,15368 x16218 w=20
+P 16212,15358 y15488 16240,15515 x16285 w=20
 P 16106,15370:16140,15404              # pad
 C 16122,15388
 M 16122,15378 y15480 x16169 y17100
 N M 16169,16000 e_b
-@alias e_b bd2_n2
 
 # ================================================================ the strobe latch
 # Rows 1-3 of the gate column (y 15500-15915) and one inverter west of the rail (G4) are a
@@ -235,6 +240,45 @@ C 16105,15962
 # 15764-15798 (not drawn; see notes, Ambiguities).
 M 16112,15548 y15572 x16104 y15975 w=14
 N M 16104,15700 bd2_a
+
+# ---------------------------------------------------------------- gate group right of the bundle
+# x 16240-16480, y 15400-15850. Diffusion column under the ground rail x 16312-16362 (the
+# rail the first run followed from areg_rail_r; its jog at y 15330-15400 is not drawn,
+# the pieces are joined by name). Two gates, pull-downs read from the clean shot under
+# the rail (tools/bd2_umap.py 16250 15404 16384 15850):
+#     bd2_nu   = NOT( bd2_c AND e_b )                         y 15420-15565
+#     bd2_al_n = NOT( bd2_x OR (e_b AND bd2_m210) )           y 15596-15832
+# THEIR LOADS ARE NOT TRACED (east of the rail, x 16370-16480), nor where bd2_nu goes.
+M 16312,15400:16362,15850
+N M 16337,15500 vss
+# upper gate
+D 16314,15420:16366,15565              # ground land, under G_a, node, under G_b, bd2_nu
+C 16338,15432
+P 16250,15458:16286,15492              # pad of G_a
+C 16260,15473
+P 16280,15466:16378,15488              # G_a: gate bd2_c (the band may run on east: not followed)
+P 16280,15509:16378,15531              # G_b: gate e_b (strip 2)
+N D 16340,15552 bd2_nu
+# bd2_c: metal pad on that contact and a thin metal x 16270-16284 down to contact
+# 16274,15872 on the east end of row 3's lower band. It passes over two boxed cells (west
+# ends of bd2_nu and bd2_al_n, 16266-16296 x 15552-15570 and 15684-15704) without
+# contact: their centres are cream in the clean shot like diffusion under metal, not the
+# olive green of the four known contacts of this metal and its neighbours.
+M 16250,15460:16286,15488
+M 16277,15466 y15882 w=14
+C 16274,15872
+P 16258,15856:16292,15888              # pad
+# lower gate
+D 16312,15596:16350,15832              # ground land, under band x, bd2_al_n, under G_d, node, under G_e, ground land
+C 16327,15612 16330,15812
+P 16306,15638:16376,15656              # gate bd2_x: band arriving from the east (not followed)
+N P 16366,15647 bd2_x
+D 16266,15686:16316,15704              # bd2_al_n: west arm to the boxed cell
+P 16226,15688:16274,15702              # bar from the pad 16205,15690 into the cell
+?B 16262,15682:16292,15706             # boxed cell; joined here because the bar and G2's gate have no other driver
+N D 16330,15690 bd2_al_n
+P 16255,15726:16352,15744              # G_d: gate e_b
+P 16255,15770:16376,15788              # G_e: gate bd2_m210 (the band runs on east of the column: not followed)
 
 # ---------------------------------------------------------------- bundle, y 15700-15900
 # Taps on the e_b trunk: a contact on a poly pad each.
