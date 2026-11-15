@@ -524,3 +524,10 @@ N P 8660,7252 cdp2_b_cin
 P 10800,7243:10817,7262
 P 10806,6880:10817,7262
 C 10745,7430 s=30x36                 # sixth VSS rail to its land at the foot of s7's series pair (ring seen)
+# --- the chain output on channel 2's lowest line (y 6888): west across the array (no
+# contact in s3..s7), down at x 8672-8690 to a pad left of s3's rail, then metal down
+P 8672,6878:10842,6898               # line 6888 (poly colour continuous from x 8685 to 10842)
+P 8672,6878:8692,7005                # down
+P 8662,7000:8700,7036                # pad
+C 8683,7018 s=24x24
+M 8685,7006 y7300 w=20               # on down into the logic left of rows B (crosses the chain input poly, no contact); seen to about y 7300
