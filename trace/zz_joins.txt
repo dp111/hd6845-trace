@@ -14,3 +14,15 @@
 # (An alias "sel_w0 = rdp3_rb_ld" stood here on the strength of rdp3's second run. It was
 # wrong: a track-scanning tool had bridged a jog in the bundle. Two later runs, working
 # independently, followed the strobes again: R0 is rdp2's row RC, and rdp3's row RB is R2.)
+
+# cdp1 (top of the central datapath) and tc1 (the nine-gate island left of it): the
+# register bit of the comparator's last slice goes west to the island, and the island's
+# output comes back as that slice's comparator input. Both blocks drew the lines to meet.
+@alias cdp1_c5_q tc1_a
+@alias cdp1_c5_q cdp1_c5_m6
+@alias cdp1_b5_a tc1_f
+@alias cdp1_a3_bl tc1_x2
+
+# bd1's line X is the input of the lone inverter in the pad buffer row (inrow gate 0),
+# whose output is the clock block's ck_src. Joined by geometry at about (13567,15679).
+@alias t_g0_in bd1_x
