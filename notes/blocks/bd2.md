@@ -21,6 +21,46 @@ Extracts with 0 errors, 0 warnings.
   of the bundle (x 16240-16470, y 15400-15900), the whole right-hand column
   (x 16480-17000). Observations and coordinates for all three are under Not done.
 
+## Verdict: the input of the `sel_stb_r` driver is NOT `e_b` (second run, measured)
+
+bd3 reads the metal at x 16169 as one line from G1's gate down to `e_b`; the first run
+here read a break at y 15443-15470. **The break is real: `trace/bd3.txt`'s `bd3_stb`
+section is wrong in its last two `M` lines and its `N M 16167,15500 e_b` label** (the
+inverter itself, its load, output route and the gap to the pad at 16255,15085 are
+right and duplicate G1 here). Evidence, all from numbers (`tools/bd2_prof.py`):
+
+1. Colour and grain of both metal shots down x 16162-16177 (`bd2_prof.py col 16169
+   15405 15500 7 3`): metal (R about 180-200, G/R 0.8-0.9, grain 21-39) down to y 15411;
+   the ring of contact 16167,15432 (dark 15414-15426, bright centre 15429-15438, dark
+   15441-15453); then y 15455-15464 is **orange and smooth in both chips**: chip 2
+   165/114/58, G/R 0.69, grain 11.5; chip 1 150/97/51, G/R 0.65, grain 6.7. Bare poly
+   beside it measures G/R 0.58-0.75; twelve other 8 px pieces of the same trunk between
+   dark crossings (y 16080-17325) measure R 158-212, G/R 0.78-0.90 (one shot at most
+   down to 0.68, never both), grain 13-30. Then a dark line y 15465-15471, then metal.
+2. That dark line at y 15465-15471 runs straight across from x 16136 to 16184
+   (`bd2_prof.py map 16100 15396 16235 15504`): it is the top edge of the metal that
+   arrives from contact 16122,15388 and turns down. Nothing underneath has an edge there:
+   in the clean shot the poly under the line is uniform (221-231/158-179/118-133) from
+   y 15442 to 15500.
+3. Chip 2's stripped shot has a very dark bar across that poly at y 15451-15467
+   (R 51-74; everywhere else from y 15380 to 15720 along x 16169 it is 96 or more,
+   including under the three tap contacts further down): the uncovered piece of poly.
+4. The thin dark line at x 16154-16160 between the horizontal metal y 15470-15490 and
+   the lower trunk (`bd2_prof.py row 15479 16104 16192 4 2`) is 6 px wide and sits on
+   the left edge of the poly underneath (red outline at x 16158-16163 in the clean
+   shot): an edge printing through, not a gap. So the metal from 16122,15388 does join
+   the lower trunk.
+5. Gate polys followed at 3x (view k3): G1's band y 15078-15100 -> pad/contact
+   16255,15086 -> metal x 16255, y 15222 west, x 16168 down -> ends on contact
+   16167,15432 (poly "strip 1" goes on south from the pad). G2's band y 15290-15312
+   passes under that metal with no contact -> pad/contact 16210,15300 -> poly branch
+   west along y 15358-15378, again under the upper trunk without contact -> contact
+   16122,15388 -> metal x 16112-16135 down, east at y 15470-15490, down as the lower
+   trunk = `e_b`.
+
+So `areg_load = NOT e_b` and `sel_stb_r = NOT bd2_n1`, where `bd2_n1` is the output of
+the gate in row 1 (below).
+
 ## Inventory
 
 | What | Where | State |
