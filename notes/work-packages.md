@@ -27,7 +27,7 @@ agent has verified it), `partial` (reported, with work left: see its notes).
 | `rdp2` | 13350-16950 x 8100-10700 | right datapath, middle rows: the source of the per-slice line c that R0 is compared with (the horizontal counter?) | running |
 | `bc1` | 7000-9000 x 14050-16300 | bottom-centre logic, upper left part; receives the six data tracks and strobe leaving the bottom of `cdp4` | running |
 | `bd3` | 14100-15900 x 16550-17100 and onward | where the strobe and select tracks from `sel` go; source of the write strobe | done: strobe = NOT e_b (so each write strobe = select AND E); R12/R13 gated and buffered like R14/R15; all 16 tracks to the region's edge |
-| `bd1` | 13000-14100 x 14700-17100 | logic left of the select gates; the write strobes pass through it heading west | running |
+| `bd1` | 13000-14100 x 14700-17100 | mostly a routing channel of 18 vertical tracks, plus one gate column at x 13700-14080 | partial (run 1): strobes R0-R7 followed to the north edge on named tracks (R8 leaves west); the driver of line X and two big inverters of it traced; gate column y 15350-16125 and 16280-16900 (what ck_out feeds) and several tracks left; run 2 running |
 | `bd2` | 15850-17000 x 14700-17100 | bus control logic right of the select gates | partial (run 1): areg_load = NOT e_b (one inverter). **Disagrees with bd3 about the common strobe**: bd2 reads its driver's input as the output of a further gate (e_b in series with another signal, possibly a latch), bd3 as e_b itself. Run 2 running to settle it and go on to CS, RS, R/W |
 
 Measured on the first report: one agent run lasts about 20 minutes and about 60-80
