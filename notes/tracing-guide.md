@@ -147,6 +147,8 @@ Traps, all of them real:
 6. Automatic alignment of `acid1b` is within about 1 px in random logic but only
    interpolated inside regular arrays; check it against `metal` at a contact before
    measuring anything.
+   Under metal, poly over a channel is distinctly brighter (redder) in `acid1b` than
+   poly over field: that is how the decode array was read, and it works elsewhere.
 7. **Your eye is unreliable for repeated patterns.** In the decode array, impressions at
    2.7x of which crossings had transistors were wrong where a colour measurement was
    right. For arrays, measure (see `tools/pla_read.py`) and cross-check.
