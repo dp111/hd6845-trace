@@ -1,9 +1,11 @@
 # tc1: top-centre logic, upper half. x0,y0:x1,y1  kind  name | description
-7600,3100:7900,4000   logic  gating for datapath line tc1_f | five gates: f = (a + b) AND NOT(g.h + i.j), plus NOT a returned west; f and a run east into the datapath at y 3355 and y 3395. Signals not yet identified
-7330,3050:7600,4050   ?logic drivers facing west | inverter, two 2-input NOR drivers with wide transistors, one more gate; inputs and outputs all leave west as poly. Read at 2x, not traced
-7900,2950:8090,4060   route  island to datapath wiring | metal verticals joining the gates to each other, to the top bus field and to the bus field below
+7600,3100:7900,4000   logic  gating for datapath line tc1_f | five static gates: f = (a + b) AND NOT(g.h + i.j), and NOT a. f and a are poly lines into the datapath at y 3355 and y 3395. Signals not yet identified
+7330,3100:7600,4000   logic  2-bit decode drivers | NOT b; two strong NOR drivers giving (NOT a AND b) and (a AND b); NOR of the first with line W1. Outputs leave by the channel on the west
+7170,2975:7330,3985   route  channel lines W1-W4 | four metal verticals serving the island; three are cut where a gate is inserted (a/NOT a/b/NOT b in, driver outputs out, all continuing south)
+7420,2975:7820,3040   power  VSS strap | joins the two outer rails of the island; the poly lines a and b run west under it
+7900,2950:8090,4060   route  island to datapath wiring | metal verticals joining the gates to each other, to the datapath and to the bus field below
 8090,2900:8335,4060   ?route six north-south metal lines | 44 px pitch, between the island and the datapath's first slice (which starts at x 8340)
-7000,2950:7330,4450   ?route channel west of the island | about 14 vertical metal lines; not traced
+7000,2950:7170,4450   ?route channel west of the island | about ten more vertical metal lines; not traced
 6400,2650:7000,4450   ?logic gate columns | continuation of the top-left random logic, three vertical rails; not traced
-6400,2500:8250,2950   ?route top bus field | horizontal metal lines with poly cross-unders; not traced
-7330,4050:8250,4450   ?route bus field below the island | horizontals, wide VCC bus at y 4193-4257; not traced
+6400,2500:8250,2975   ?route top bus field | horizontal metal lines with poly cross-unders; not traced
+7170,4060:8250,4450   ?route bus field below the island | horizontals, wide VCC bus at y 4193-4257; not traced

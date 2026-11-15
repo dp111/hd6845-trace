@@ -16,6 +16,7 @@ M 7622,3105 y4060 w=50             # centre rail
 N M 7622,3120 vcc
 M 7795,3000 y4000 w=48             # right rail
 N M 7795,3010 vss
+M 7420,2975:7820,3040              # strap joining the left and right rails; the poly lines of tc1_b and tc1_a run west under it
 
 # =====================================================================================
 # Right half, top: R1 (inverter) and R2 (2-input NOR)
@@ -41,7 +42,10 @@ B 7853,3146:7888,3178
 C 7924,3159 s=24x24
 M 7856,3071 x7924 y3170 w=19       # output metal: up, then left to contact (7862,3072)
 C 7862,3072 s=24x24
-P 7338,3065:7876,3079              # poly band west along the top of the island, under both VSS rails (field there); continues west
+P 7306,3065:7876,3079              # poly band west along the top of the island, under both VSS rails (field there)
+P 7306,3060:7335,3083
+C 7317,3072 s=24x24
+M 7316,3062 y3648 w=18             # W4 upper, down to contact (7316,3638) on L3's band c. The metal is broken between the two contacts (y 3655-3685)
 N M 7924,3100 tc1_r1_out
 
 # ---- R2: 2-input NOR. Inputs: poly bands y 3281-3298 and y 3364-3384 from the right.
@@ -71,8 +75,13 @@ N M 7924,3400 tc1_r2_out
 # V3: metal from above, contacts both the R1 input band and R2's band a; from the lower
 #     contact a poly runs down and then right into the datapath (y 3387-3402).
 M 8012,3016 y3297 w=21
+C 7381,3030 s=24x24                # west end of the poly y 3020-3038
+M 7392,3032 x7275 y3386 w=19       # W3: west along y 3022-3042, down x 7265-7284 to contact (7273,3375) on L2's band a
+C 7273,3375 s=24x24
+P 7262,3363:7298,3407
+P 7262,3388:7340,3407
 C 8010,3028 8009,3204 8009,3286 s=24x24
-P 7800,3020:8029,3038              # poly west from the top contact (continues; not yet followed). Ends 15 px short of the cdp1_a0_q hairpin at x 8047
+P 7369,3020:8029,3038              # poly west from the top contact (continues; not yet followed). Ends 15 px short of the cdp1_a0_q hairpin at x 8047
 P 8004,3290:8025,3402
 P 8004,3387:8290,3402              # runs on right under the datapath's vertical metals (seen to x 8290)
 N M 8012,3100 tc1_a
@@ -80,7 +89,13 @@ N M 8012,3100 tc1_a
 #     (8009,3549) and the metal V3-lower going down.
 M 7850,2988 x7967 y3386 w=20       # from contact (7859,2984) along y 2978-2998, then down
 C 7859,2984 s=24x24
-P 7800,2977:7872,2994              # poly west from that contact (continues; not yet followed)
+P 7326,2977:7872,2994              # poly west from that contact, under the VSS strap, to contact (7338,2987)
+C 7338,2987 s=24x24
+M 7350,2987 x7231 y3128 w=18       # W2 upper: west along y 2978-2995, down x 7223-7240 to contact (7228,3117). The metal is broken between y 3130 and 3168 (measured)
+C 7228,3117 s=24x24
+P 7183,3104:7247,3129              # poly from that contact: west,
+P 7183,3104:7200,3235              # ... down (lengthwise under metal W1, no contact),
+P 7183,3215:7340,3235              # ... and east to L1's input band
 C 7968,3375 s=24x24
 P 7959,3380:7977,3472
 P 7959,3452:8024,3472
@@ -176,3 +191,116 @@ N M 7968,4050 tc1_h
 C 8010,3894 s=24x24
 M 8010,3884 y4060 w=20
 N M 8010,4050 tc1_i
+
+# =====================================================================================
+# Left half of the island: L1 (inverter), L2 and L3 (2-input NOR drivers), L4 (NOR).
+# All inputs arrive from the west and all outputs leave to the west, in poly.
+# =====================================================================================
+M 7445,2975 y4060 w=50             # left rail (continues both ways)
+N M 7445,3000 vss
+
+# ---- diffusion of the left rail: a column under the rail and, below y 3290, widened
+#      on both sides (x 7366-7410 in the open on the left, x 7478-7547 on the right)
+D 7410,3188:7482,3295              # upper part: L1's drain / channel / source
+C 7433,3258 s=24x26
+D 7366,3290:7482,3832              # column: VSS / a / L2 out / b / VSS / c / L3 out / d / VSS
+C 7446,3335 s=38x56
+C 7445,3527 s=36x24
+C 7445,3597 s=36x60
+C 7437,3803 s=22x50
+D 7478,3290:7547,3830              # right part: source strips and the two drain regions
+
+# ---- L1: inverter (mirror image of R1)
+D 7530,3180:7605,3207              # load strip from VCC pad A
+D 7478,3187:7540,3206              # output strip to the rail
+P 7532,3160:7591,3214              # load gate
+D 7507,3200:7530,3246              # bump down to the gate tie
+D 7507,3218:7562,3246
+P 7527,3210:7560,3234              # load gate stem
+B 7523,3210:7564,3238
+P 7330,3215:7487,3235              # input band from the west
+D 7388,3187:7412,3206              # output strip west of the rail
+D 7357,3167:7393,3196              # ... under the buried contact
+P 7216,3171:7389,3192              # output poly, west under W4 and W3 to contact (7228,3181)
+P 7216,3167:7250,3196
+C 7228,3181 s=24x24
+M 7230,3170 y3985 w=20             # W2 lower: contacts L2's band b and L3's band d, continues down (not followed below y 3985)
+C 7230,3482 7230,3740 s=24x24
+B 7354,3164:7396,3199
+N M 7230,3980 tc1_l1_out
+
+# ---- L2: 2-input NOR, wide transistors, strong load. Each input band crosses the rail
+#      column and then wraps round the drain region as an L.
+P 7330,3388:7518,3407              # band a
+P 7490,3306:7518,3407              # ... up the side of the drain region
+P 7490,3306:7556,3332              # ... and across its top
+P 7218,3471:7518,3492              # band b, from contact (7230,3482) on W2 lower
+P 7218,3469:7254,3495
+P 7490,3471:7518,3539              # ... down the side
+P 7490,3515:7591,3539              # ... and across the bottom
+D 7540,3385:7605,3447              # load strip from VCC pad C
+D 7602,3383:7652,3449              # VCC pad C
+C 7620,3415 s=26x40
+P 7552,3370:7588,3460              # load gate
+D 7540,3464:7582,3511              # drain region bulges right under the gate tie
+P 7553,3456:7578,3493              # load gate stem
+B 7549,3463:7582,3497
+P 7265,3426:7390,3448              # output poly, west under W4 to contact (7279,3437)
+P 7265,3425:7298,3450
+C 7279,3437 s=24x24
+M 7274,3427 y3985 w=19             # W3 lower: contacts L4's band e, continues down (not followed below y 3985)
+C 7273,3852 s=24x24
+B 7358,3420:7396,3452
+N M 7274,3980 tc1_l2_out
+
+# ---- L3: the same again, 258 px lower
+P 7303,3642:7518,3663              # band c, from contact (7316,3638) on W4 upper
+P 7303,3622:7336,3663
+C 7316,3638 s=24x24
+P 7490,3562:7518,3663
+P 7490,3562:7556,3588
+P 7218,3729:7518,3750              # band d, from contact (7230,3740) on W2 lower
+P 7218,3727:7254,3758
+P 7490,3727:7518,3801
+P 7490,3775:7591,3801
+D 7540,3640:7605,3710              # load strip from the VCC pad it shares with R4
+P 7552,3630:7588,3720              # load gate
+D 7540,3724:7582,3771
+P 7553,3716:7578,3751
+B 7549,3723:7582,3755
+P 7303,3691:7390,3713              # output poly, to contact (7316,3700)
+P 7303,3687:7336,3716
+C 7316,3700 s=24x24
+M 7316,3690 y3985 w=18             # W4 lower, going down (not followed below y 3985)
+B 7356,3684:7396,3717
+N M 7316,3980 tc1_l3_out
+
+# ---- L4: 2-input NOR (mirror image of R2: pull-downs in a column west of the rail)
+D 7368,3828:7410,3972              # column: VSS / e / out / f / VSS
+D 7405,3951:7468,3998              # lower VSS pad
+C 7437,3975 s=26x26
+P 7260,3843:7422,3864              # band e, from contact (7273,3852) on W3 lower
+P 7260,3838:7294,3866
+P 7176,3928:7422,3950              # band f, from contact (7190,3938) on W1
+P 7176,3924:7207,3953
+C 7190,3938 s=24x24
+P 7150,3885:7394,3905              # output poly, west under W4, W3, W2, W1 without contact; continues west (not followed)
+B 7364,3878:7400,3910
+D 7368,3889:7500,3907              # output strip, under the rail (no contact), to the load
+D 7490,3889:7610,3912              # load strip
+D 7602,3890:7652,3940              # VCC pad F
+C 7620,3912 s=26x26
+P 7541,3874:7588,3950              # load gate
+D 7500,3905:7535,3968              # bump down to the gate tie
+P 7505,3935:7545,3962              # load gate stem
+B 7500,3930:7537,3967
+N P 7155,3895 tc1_l4_out
+
+# ---- W1: metal x 7174-7194 in the channel west of the island. Top end: contact
+#      (7186,2986) to a poly that runs east under W2's horizontal and turns north at
+#      x 7290-7308 into the top bus field (not followed). Feeds L4's band f.
+M 7185,2976 y3985 w=20             # continues down (not followed below y 3985)
+C 7186,2986 s=24x24
+P 7174,2977:7308,2997
+P 7290,2950:7308,2997              # continues north
+N M 7185,3980 tc1_w1
