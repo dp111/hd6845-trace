@@ -443,6 +443,11 @@ The lists marked ? at the south, east and top edges come from `tools/sel_cut.py`
    reach 16255,15085; the strobe is not NOT E); trunks.md, which has `rs_d` on the
    metal x 16333-16352 "above 15900" with a tap at y 16335: `rs_d` ends at 16343,16603,
    and the metal above is `bd2_m210` ending on the contact 16343,16344.
+   **With all files loaded the extraction reports two errors that come from these, not
+   from bd2**: "net carries several names: bd2_n1, e_b" (bd3_stb's metal drawn through
+   the break at 16169,15443-15470) and "bd2_m210, rs_d" (`trace/trunks.txt`,
+   `M 16342,17528 y16200`: `rs_d`'s metal should stop at y 16593; between y 16354 and
+   16593 the track is empty, open colours in the clean shot).
 10. **Ground rail x 16008-16058 below y 16600**: the scans show several short gaps
    (16655-16679, 16797-16815, 16921-16975, 17053-17112 in chip 2, none of them in chip 1
    above 17049). Drawn continuous to y 17050. Under it the clean shot shows only
