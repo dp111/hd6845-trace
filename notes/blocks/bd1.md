@@ -5,21 +5,27 @@ Trace: `trace/bd1.txt` (`@requires sel`, `@requires bd3`). Coordinates are metal
 ## Status
 
 - Traced, extracted (0 errors, 0 warnings, no open nets) and checked by overlay: the route
-  of every write strobe that enters the region (eight of them, R0 to R7, leave north on the track
-  bundle, R8's leaves west in poly); the two big inverters at the top of the gate column
-  (both driven by trunks' line X); X's own driver (one inverter, y 16125-16280); the
-  rails of the gate column; six more of the 18 tracks as far as they were followed.
+  of every write strobe that enters the region (those of R0 to R7 all leave north on the
+  track bundle, R8's leaves west in poly); the two big inverters at the top of the gate
+  column, both driven by trunks' line X; X's own driver (one inverter, y 16125-16280);
+  the rails of the gate column; 13 of the 18 tracks from the top edge to where they end
+  or as far as they run straight.
 - **The region is mostly a routing channel**, not logic: 18 vertical metal tracks
   (x 13088-13826) with poly cross-unders. The gates are a single column at
-  x 13700-14080, y 15100-16900. About a quarter of that column is traced.
-- NOT traced: the rest of the gate column (y 15330-16125 and 16280-16900), most of the
-  channel wiring. See Not done; scans of the untraced tracks are tabulated there.
+  x 13700-14080, y 15100-16900, of which three inverters are traced.
+- NOT traced: the rest of the gate column (y 15350-16125 and 16280-16900) and about half
+  of the channel wiring. See Not done; scans of the untraced tracks are tabulated there.
 
 Boundary with `mra`: the mid-right array's own lines end with the `ck_a` rail at
 x 13013-13037 (trunks). Everything from the track at x 13088 eastwards belongs to this
-channel. There is no separate "bus at x 13000-13320": those lines are tracks k0-k5 of the
-channel and carry write strobes north. Poly lines cross the boundary westward under the
-`ck_a` rail at several y (ports table).
+channel. There is no separate "bus at x 13000-13320": the lines there are tracks k0-k5
+of the channel (k0-k3 are write strobes going north). Poly lines cross the boundary
+westward under the `ck_a` rail at several y (ports table).
+
+Reading coordinates off a view: a grid line is at the left edge of its label, and in a
+two-panel image the right panel has its own origin (subtract the panel's offset before
+dividing by the scale). `tools/sel_cut.py h Y x0 x1 --brief` gives track centres to 2 px
+and is the quickest check.
 
 ## Inventory
 
@@ -92,11 +98,14 @@ bd1_xn2 = NOT bd1_x       lower inverter, gate bar y 15271-15291
   a buried contact at its top (13953-13985, 16142-16174), supply contact (14017,16228).
   W/L of the load 68/37; of the pull-down 90/24 as certain, up to 188/26 with the two
   uncertain pieces (Ambiguities).
-- `bd1_g` arrives on a metal line at x 13630 that starts at a contact at (13629,15673)
-  (from there a poly goes east into the gate column at y 15671: not traced, so **what
-  drives g is not known**), runs down to a contact at (13629,16150), ducks under X's
-  horizontal metal in poly, and has a second contact at (13629,16235) from which a
-  metal goes on south (not followed).
+- `bd1_g` is on a metal line at x 13630 with a contact at each end. Top end,
+  (13629,15673): a poly goes east into the gate column along y 15671, crosses a 30 px
+  wide diffusion strip (x 13772-13802, lying under the metal line on x 13782) and ends
+  at x 13805 (5x view): so g is the **gate** of a small transistor there, not an output.
+  Bottom end, (13629,16150): the line ducks under X's horizontal metal in poly to a pad
+  with a second contact, (13629,16235), from which the gate poly of X's driver runs east
+  and a metal goes on south (not followed). **What drives g was not found; it must be
+  south along x 13630.**
 - **X's metal** on track k11's position starts at the contact (13567,15193): that is
   its top end. A second contact 88 px lower, (13567,15281). Each goes to a poly bar
   running east, and each bar is the gate of one inverter: pull-down W/L 131/20, load
@@ -112,8 +121,7 @@ bd1_xn2 = NOT bd1_x       lower inverter, gate bar y 15271-15291
 
 Believed: X, S (= NOT X, made by input-row gate 0), `bd1_xn1` and `bd1_xn2` are four
 separately buffered copies of one clock-like signal `NOT bd1_g` and its inverse; all
-three inverters here are the same size. What `bd1_g` is depends on the untraced gate at
-y 15671.
+three inverters here are the same size.
 
 ### Tracks traced so far
 
@@ -156,6 +164,7 @@ k7, k8, k9, k11, k15: Not done.
 | sel_w0 | metal | 13652,14700 (north) | out | track k13 |
 | bd1_k14 | metal | 13694,14700 (north) | ? | track k14 |
 | bd1_k14 | poly | 13000,15020 (west) | ? | into the mid-right array's routing channel, under the `ck_a` rail |
+| (not traced) | poly | 13035,15497 (west) | ? | the poly that lies along y 15385 turns south at x 13108 and leaves west here |
 | (k15) | metal | 13738,14700 (north) | ? | not traced; scan: metal to y 15141 |
 | sel_w1 | metal | 13782,14700 (north) | out | track k16 |
 | bd1_k17 | metal | 13826,14700 (north) | ? | track k17 |
@@ -163,8 +172,8 @@ k7, k8, k9, k11, k15: Not done.
 | sel_w8 | poly | 12985,17125 (west) | out | goes on west below the array's bottom row |
 | bd1_x | metal | 13672,16610 (drawn to there) | out | line X; trunks.txt draws it from y 16600 south. Not labelled in trunks.txt: it reaches inrow's `t_g0_in` |
 | bd1_x | metal | 13922,15905 (`?`) | ? | from the driver's output north into the dense group |
-| bd1_g | poly | 13745,15671 (`?`) | ? | into the gate column |
-| bd1_g | metal | 13630,16300 (`?`) | ? | going south |
+| bd1_g | poly | 13806,15671 (`?`) | out | gate of a transistor in the untraced group |
+| bd1_g | metal | 13630,16300 (`?`) | in (believed) | going south; g's driver must be that way |
 | bd1_xn2 | metal | 13716,15772 | out | to a contact at (13713,15760) in the gate column |
 | bd1_xn2 | metal | 13521,15944 | out | line on x 13521 ending at a contact at (13520,15931) |
 | vss | metal | 13910-13958, 14700 (north) | - | wide rail; named from the pull-downs it feeds |
@@ -192,6 +201,12 @@ k7, k8, k9, k11, k15: Not done.
   No contact: both metal shots at 4x show plain metal there, and in `acid1b` the band
   shows no pad. That poly (from a corner at x 13108, where it goes south and then west
   into the mid-right array at y 15497, east to a contact near (13505,15385)) is not traced.
+- X has **two** contacts at the top of its metal, 88 px apart, one per inverter gate
+  bar, although the two bars could have been one poly. Both rings are plain in `metal`
+  (2.9x) and the metal runs unbroken between them, so the two inverters do have the
+  same input. They are separate gates with separate loads and outputs, not one
+  double-width inverter: the outputs leave by different buried contacts to different
+  wires and no diffusion or poly joins them.
 - Contact pads look two ways in `acid1b` here: pale with a green centre, or a dark red
   box with a heavy outline (for example (13567,15281), (13522,16995), (13629,16235)).
   Both kinds have a plain contact ring in `metal`; both are treated as metal-to-poly
@@ -203,7 +218,11 @@ Gate column (x 13700-14080). The photos are at their limit there: use
 `tools/rdp3_sharp.py` at 2.9x for a group and 4.3-5.6x for junctions (plain view.py
 was not readable).
 
-- y 15350-15880: untraced. Seen: a contact at (13781,15403) on a diffusion with a metal
+- y 15350-15880: untraced. One sharpened 2.9x view of y 15570-15800 shows a compound
+  group: a ground contact under the rail at (13845,15657); gate bars under the rail at
+  y 15600-15621 and y 15741-15761; `bd1_g`'s gate on the strip at x 13772-13802 (above);
+  a metal on x 13952-13972 ending at a contact at (13957,15738); a large supply land
+  x 14000-14048, y 15577-15687 with several contacts. Seen elsewhere: a contact at (13781,15403) on a diffusion with a metal
   going south on x 13782; poly from contact (13655,15391) (the line on x 13652 from
   y 15081) going east then south along x 13720 under the metal; polys entering from the
   channel at y 15671 (`bd1_g`), 15713 (from contact (13674,15715)), 15887 (from contact
