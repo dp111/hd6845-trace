@@ -207,30 +207,74 @@ visible edges; whether a source strip lies under the far end of each bottom arm
 
 ## Ports
 
-Nothing below has been followed to its far end; "going" is the direction away from the
-island.
+Region edges: x 8250 on the east (drawn to x 8350, where the datapath's first slice
+starts), y 4450 on the south (tc2), y 2500 on the north, x 6400 on the west. "In/out"
+is as seen from this block; where no driver has been found the direction is "?".
+
+East side (into the datapath, or the random logic at its slice-0 position x 8290-8750):
 
 | Name | Layer | Where it crosses | Dir | What |
 |---|---|---|---|---|
-| `tc1_f` | P | y 3348-3362 at x 8250, going east; seen to x 8290 under the six vertical metals without contact | out | R3 output. Enters the datapath in the channel between cdp1's row A (y 3040-3330) and row B (y 3480-3900) |
-| `tc1_a` | P | y 3387-3402 at x 8250, going east; seen to x 8290 | in (believed) | same channel, 40 px below `tc1_f` |
-| `tc1_b` | M | 8100, y 3716-3733, going east to a vertical at x 8085-8100 that goes down | in (believed) | |
-| `tc1_l1_out` | M | 7230, 4450 going south (W2 lower) | out | NOT b |
-| `tc1_l2_out` | M | 7510, 4145 going south (x 7501-7520), from the tap on track T2 | out | NOT a AND b |
-| `tc1_l3_out` | M | 7555, 4145 going south (x 7545-7565), from the tap on track T1 | out | a AND b |
-| `tc1_l3_out` | P | pad at (7922,4027); poly south then east, believed to reach x 8250 at y 4207-4227 (1.5x view, not drawn) | out | would enter the datapath just above cdp1's row C (y 4232) |
+| `tc1_ns5` | P | x 8350, y 2846-2868 | ? | north end of ns5, from contact (8271,2857) |
+| `tc1_ns3` | M | x 8350, y 2720-2734 | ? | ns3 arrives from the east over the top of the datapath |
+| `tc1_ns4` | M | x 8350, y 2764-2778 | ? | ns4, the same |
+| `tc1_ns6` | M | x 8350, y 2807-2821 | ? | ns6, the same |
+| `tc1_f` | P | x 8250, y 3348-3362 | out | R3 output; runs on under ns1..ns6 without contact, in the channel between cdp1's rows A and B |
+| `tc1_a` | P | x 8250, y 3387-3402 | in (believed) | same channel, 40 px below `tc1_f` |
+| `tc1_ns6` | P | x 8350, y 3516-3539 | ? | from contact (8313,3527) |
+| `tc1_ns2` | P | x 8250, y 3556-3578; reaches x 8332 and turns south there | ? | from contact (8139,3567) |
+| `tc1_ns1` | P | x 8250, y 3691-3712 (seen to x 8350) | ? | from contact (8139,3704) |
+| `tc1_ns5` | P | x 8350, y 3728-3751 | ? | from contact (8270,3739) |
+| `tc1_ns5` | P | x 8350, y 3822-3844 | ? | from contact (8270,3833) |
+| `tc1_ns6` | P | x 8350, y 3859-3881 | ? | from contact (8313,3870), the south end of ns6 |
+| `tc1_l3_out` | P | x 8250, y 4212-4228 (drawn to x 8350) | out | a AND b, to the datapath just above cdp1's row C |
+| `tc1_x1` | P | x 8250, y 4255-4275 (drawn to x 8350) | ? | passes through: see the west side, y 4344-4362 |
+| `tc1_x2` | P | x 8250, y 4365-4383 (drawn to x 8350) | ? | passes through: see the south side, x 8075 |
+
+South side (tc2), west to east:
+
+| Name | Layer | Where it crosses | Dir | What |
+|---|---|---|---|---|
+| `tc1_l1_out` | M | 7230, 4450 (W2 lower, x 7220-7240) | out | NOT b |
+| `tc1_l2_out` | P | x 7422-7438, y 4450 | out | NOT a AND b; from the tap on track T2 |
+| `tc1_l3_out` | P | x 7465-7481, y 4450 | out | a AND b; from the tap on track T1 |
+| `tc1_b` | P | x 7503-7522, y 4450 | in (believed: its only other end) | from contact (7511,4417) |
+| `tc1_ns3` | M | x 7894-7909, y 4450 | ? | from contact (7905,4370) |
+| `vss` | M | x 7943-7990, y 4450 | | the VSS bus (y 4288-4335, from the foot of the left rail) turns south |
+| `tc1_x2` | M | x 8067-8082, y 4450 | ? | to contact (8075,4372) |
+| `vcc` | M | x 8116-8165, y 4450 | | the VCC bus (y 4198-4250, from the foot of the centre rail) turns south |
+| `tc1_ns4` | M | x 8198-8212, y 4450 | ? | ns4 has no contact in this block |
+
+West side (the channel x 7000-7170; not yet followed):
+
+| Name | Layer | Where it crosses | Dir | What |
+|---|---|---|---|---|
 | `tc1_l4_out` | P | 7150, y 3885-3905, going west | out | NOR(l2_out, w1) |
+| `tc1_g` | P | y 4144-4167 at x 7181, where it turns north (x 7177-7202) and then west along y 4000-4012 (run 1's reading; not drawn) | in | |
+| `tc1_g` | P | 7150, y 4385-4403, going west | ? | second branch, from contact (7315,4395) |
+| `tc1_x1` | P | 7150, y 4344-4362, going west | ? | |
+| `tc1_i` | P | from contact (7270,4437) west along y 4425-4445, seen to x 7215 (not drawn) | in | |
+
+North side:
+
+| Name | Layer | Where it crosses | Dir | What |
+|---|---|---|---|---|
 | `tc1_w1` | P | 7299, 2950 going north (x 7290-7308) | in | the only other end of W1 |
-| `tc1_g` | M | 8053, 4060 going south | in | below is the bus field |
-| `tc1_i` | M | 7275, 4450 going south (x 7265-7284); a contact at about (7273,4439) not looked at | in | |
-| `vcc` | M | centre rail 7622, drawn y 3105-4060 | | continues down to the wide bus y 4193-4257 |
-| `vss` | M | right rail 7795 drawn y 3000-4000 (it continues up); left rail 7445 drawn y 2975-4060 (continues down); strap y 2975-3040 | | |
+| `tc1_ns1` | M | 7890, y 2764-2778, going west | ? | |
+| `tc1_ns2` | M | 7890, y 2720-2734, to a contact at (7901,2724) (what is under it not seen) | ? | |
+| `vss` | M | right rail 7795 drawn y 3000-4000 (it continues up); strap y 2975-3040 | | |
 
 Seen while following these, **not mine and not drawn**: `cdp1_a0_q` (poly from the
 datapath at y 3017-3040) turns north at x 8047-8072 and west again along y 2930-2950; it
 passes 15 px from the `tc1_a` contact pad at (8010,3028) **without touching it** (field
-gap at x 8030-8046, measured with `tc1_px.py row 3029`). `cdp1_a1_q` (poly, y 2972-2992)
-ends at about x 8108 by the vertical metal x 8087-8110 (junction not looked at).
+gap at x 8030-8046, measured with `tc1_px.py row 3029`). `cdp1_a1_q` (poly, y 2978-2993)
+turns north at x 8094-8112 up to y 2893 and west along y 2893-2907; two more polys of
+the same kind (y 2850-2864 down x 8134-8152 to y 2935-2950; y 2805-2821 down
+x 8181-8202 to y 2893-2908) nest round it: they are the row A outputs fanning out west
+into the top bus field, all under ns1..ns6 without contact (1.4x view only).
+A large C-shaped **poly** at x 8307-8360, y 3907-4062 (orange in the metal shot; at 1x
+it looks like metal) lies between ns6's south end and `tc1_b`'s contact (8313,4090)
+and touches neither (field at y 3896-3908 and 4056-4070, measured).
 
 ## Ambiguities
 

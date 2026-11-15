@@ -12,7 +12,7 @@
 @block tc1
 
 # ---- rails (extents beyond the island not yet followed)
-M 7622,3105 y4060 w=50             # centre rail
+M 7622,3105 y4250 w=50             # centre rail, down into the VCC bus
 N M 7622,3120 vcc
 M 7795,3000 y4000 w=48             # right rail
 N M 7795,3010 vss
@@ -194,7 +194,7 @@ N M 8010,4050 tc1_i
 # Left half of the island: L1 (inverter), L2 and L3 (2-input NOR drivers), L4 (NOR).
 # All inputs arrive from the west and all outputs leave to the west, in poly.
 # =====================================================================================
-M 7445,2975 y4060 w=50             # left rail (continues both ways)
+M 7445,2975 y4335 w=50             # left rail, down into the VSS bus y 4288-4335
 N M 7445,3000 vss
 
 # ---- diffusion of the left rail: a column under the rail and, below y 3290, widened
@@ -313,16 +313,16 @@ C 7380,4026 s=24x24
 P 7366,4018:7745,4036
 P 7536,4015:7576,4039
 C 7554,4028 s=24x24
-M 7555,4018 y4145 w=20             # south over T2 and T3 without contact; continues (not followed)
+M 7555,4018 y4219 w=20             # south over T2, T3 and the tc1_g poly without contact, to contact (7556,4206)
 C 7730,4026 s=24x24
 M 7718,4028 x7934 w=18             # continuous into the contact at V1's foot (measured along y 4028)
 C 7922,4027 s=24x24
-P 7909,4012:7942,4042              # poly pad under that contact; a poly leaves it southward (not drawn, see notes)
+P 7909,4012:7942,4042              # poly pad under that contact; a poly leaves it southward (drawn in the bus-field section)
 # ---- T2: L2's output (W3 lower) to R5's input h. Tap at (7510,4069) to a metal going south.
 P 7324,4062:7700,4081
 P 7498,4056:7533,4081
 C 7510,4069 s=24x24
-M 7510,4059 y4145 w=19             # south over T3 without contact; continues (not followed)
+M 7510,4059 y4254 w=19             # south over T3 and the tc1_g poly without contact, to contact (7511,4242)
 C 7683,4070 s=24x24
 M 7672,4073 x7968 w=19
 # ---- T3: R5's input i. West end: contact (7380,4114), metal west and then south at
@@ -332,3 +332,129 @@ P 7366,4107:7745,4127
 C 7730,4116 s=24x24
 M 7718,4118 x8010 w=19
 M 7392,4117 x7275 y4450 w=19       # continues south (a contact at about 7273,4439 not looked at)
+
+# =====================================================================================
+# Bus field below the island (y 4130-4450) and the wiring east of the island.
+# Run 2. Every line here is routing; the far ends are ports (see notes).
+# =====================================================================================
+# ---- supplies
+M 7597,4198:8166,4250              # VCC bus: from the foot of the centre rail east (a plain rectangle: the diagonal lines on it are the edges of the poly underneath)
+M 8116,4245:8165,4450              # ... and south into tc2
+M 7420,4288:7995,4335              # VSS bus: from the foot of the left rail east
+M 7943,4330:7990,4450              # ... and south into tc2
+
+# ---- tc1_l3_out to the datapath: poly from the pad at (7922,4027) south, east, then
+#      diagonally under the VCC bus's corner, then east along y 4212-4228
+P 7919,4030:7937,4097
+P 7919,4080:7995,4097
+P 7991,4089 8122,4220 x8350 w=17   # diagonal x - y = 3903 (measured at y 4170 and 4195), then east; passes under tc1_g's metal corner, the VCC bus and ns3, ns4, ns6 without contact
+
+# ---- tc1_g: R5's input g. Metal down from (8052,3768), west along y 4151-4167 to
+#      contact (7685,4158); poly west along y 4144-4167 with a second contact at
+#      (7317,4158), whose metal goes south to contact (7315,4395) and a poly going west.
+M 8053,4050 y4159 x7672 w=16
+C 7685,4158 s=24x24
+P 7181,4144:7700,4167              # west end turns north at x 7177-7202 (run 1's note; drawn in the channel section when verified)
+P 7668,4141:7702,4173
+C 7317,4158 s=24x24
+P 7302,4141:7334,4173
+M 7317,4147 y4406 w=19
+C 7315,4395 s=24x24
+P 7150,4385:7332,4403              # west under W3, W2 (no contacts); continues west
+P 7300,4381:7334,4408
+
+# ---- tap of tc1_l2_out: contact (7511,4242), poly south under the VSS bus, west, south
+C 7511,4242 s=24x24
+P 7499,4228:7523,4337
+P 7422,4320:7523,4337
+P 7422,4320:7438,4450              # leaves south (tc2)
+# ---- tap of tc1_l3_out: contact (7556,4206), poly south under both buses, west, south
+C 7556,4206 s=24x24
+P 7544,4192:7570,4222
+P 7551,4200:7568,4382
+P 7465,4363:7568,4382
+P 7465,4363:7481,4450              # leaves south (tc2)
+
+# ---- tc1_b: from the corner at (8100,3725) south at x 8088-8105 to contact (8139,4090),
+#      poly east under ns3 and ns4 to contact (8313,4090), metal south and west to
+#      contact (8247,4417), poly west to contact (7859,4417), metal west to contact
+#      (7511,4417), poly south.
+M 8096,3716 y4091 x8152 w=18
+C 8139,4090 s=24x24
+P 8125,4079:8328,4101
+C 8313,4090 s=24x24
+M 8314,4078 y4419 x8234 w=15
+C 8247,4417 s=24x24
+P 7845,4408:8262,4427              # under ns4's lower part, the VCC and VSS verticals and three more metals, no contacts
+P 8232,4404:8262,4431
+P 7845,4404:7874,4431
+C 7859,4417 s=24x24
+M 7872,4418 x7499 w=15
+C 7511,4417 s=24x24
+P 7498,4404:7524,4431
+P 7503,4405:7522,4450              # leaves south (tc2)
+
+# ---- a line that only passes through: poly from the west along y 4344-4362, contact
+#      (7359,4352), metal east along y 4369-4383 to contact (7815,4372), poly north
+#      under the VSS bus and east along y 4255-4275 into the datapath
+P 7150,4344:7376,4362
+C 7359,4352 s=24x24
+M 7347,4337:7382,4372
+M 7350,4376 x7828 w=15
+C 7815,4372 s=24x24
+P 7802,4358:7832,4388
+P 7807,4255:7831,4380
+P 7807,4255:8350,4275
+N P 8300,4265 tc1_x1
+
+# ---- the six north-south metals x 8089-8321 (ns1..ns6 from the left)
+# ns1: from the west along y 2764-2778; south; jogs east at y 3651-3667; ends on contact
+#      (8139,3704); poly east into the logic at the datapath's slice-0 position
+M 7890,2771 x8097 y3659 x8140 y3716 w=15
+C 8139,3704 s=24x24
+P 8125,3691:8350,3712
+N M 8097,3000 tc1_ns1
+# ns2: from a contact at (7901,2724) (not drawn yet) east along y 2720-2734, south to contact (8139,3567);
+#      poly east along y 3556-3578 to x 8332, where it turns south (not followed)
+M 7890,2727 x8140 y3579 w=15
+C 8139,3567 s=24x24
+P 8125,3556:8332,3578
+N M 8140,3000 tc1_ns2
+# ns3: from the east along y 2720-2734; south; jogs east at y 4151-4169; ends on contact
+#      (8206,4329); poly west under the VCC and VSS verticals to x 7897, south to
+#      contact (7905,4370); metal south
+M 8350,2727 x8184 y4160 x8205 y4341 w=15
+C 8206,4329 s=24x24
+P 7897,4320:8222,4342
+P 8190,4316:8222,4344
+P 7897,4320:7915,4385
+P 7892,4357:7918,4385
+C 7905,4370 s=24x24
+M 7902,4358 y4450 w=15             # leaves south (tc2)
+N M 8184,3000 tc1_ns3
+# ns4: from the east along y 2764-2778; south; jogs east at y 4112-4135; west along
+#      y 4369-4383; south at x 8198-8212. No contact in this block.
+M 8350,2771 x8227 y4124 x8248 y4376 x8205 y4450 w=15
+N M 8227,3000 tc1_ns4
+# ns5: starts on contact (8271,2857) (poly east along y 2846-2868); two more contacts
+#      near its south end, each to a poly going east
+C 8271,2857 s=24x24
+M 8270,2845 y3846 w=16
+P 8256,2846:8350,2868
+C 8270,3739 8270,3833 s=24x24
+P 8257,3728:8350,3751
+P 8257,3822:8350,3844
+N M 8270,3000 tc1_ns5
+# ns6: from the east along y 2807-2821; south; contacts (8313,3527) and (8313,3870),
+#      each to a poly going east. Metal continuous across the upper contact (measured).
+M 8350,2814 x8314 y3883 w=15
+C 8313,3527 8313,3870 s=24x24
+P 8299,3516:8350,3539
+P 8299,3859:8350,3881
+N M 8314,3000 tc1_ns6
+# ---- one more line through the bus field: metal from the south at x 8067-8082 to
+#      contact (8075,4372), poly east along y 4365-4382 into the datapath
+C 8075,4372 s=24x24
+M 8075,4360 y4450 w=15
+P 8062,4365:8350,4383
+N P 8300,4374 tc1_x2
