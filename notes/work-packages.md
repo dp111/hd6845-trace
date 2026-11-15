@@ -31,7 +31,7 @@ Running in this last round: `bd2` (run 2), `cdp1` (run 2), `bc1`, `rdp3` (run 3)
 | `dbus` | 17050-17700 x 5300-17000, and the D0-D7 pad cells | data bus interface column; then finish the data pad cell (AMB-003) | partial: input buffers D0-D5 traced; gate groups, bus lines, pad cell left (continue as the same block) |
 
 | `cdp2` | 7600-10850 x 5700-8450 | central datapath | partial (run 1): row A = five latch bits, row C = seven latch bits (same cell as the address register latch); rows B1/B2, D, channels 2, 3 left; run 2 running |
-| `cdp3` | 7600-10850 x 8450-11200 | central datapath | partial (run 1): wiring rows E, F and channels B, D, G traced (two rows of cells gated onto an 8-line bus); cell rows A, C, H, I not traced; run 2 running |
+| `cdp3` | 7600-10850 x 8450-11200 | central datapath | partial (runs 1, 2; 159 transistors): row C (6 bits, columns c2-c7) and row H (8 bits) are static register bits, same circuit as cdp1's, each readable onto bus N through rows E/F and driving a line west; write lines traced to the region's east edge. Left: row A (a different, larger cell), row I, the logic beside row A, and one unexplained NAND onto a bit line |
 | `cdp4` | 7600-10850 x 11200-14000 | central datapath, bottom rows | done except the upper half of its top latch row (y 11100-11490): a 4-way selector per slice with three latch rows (8, 8 and 6 bits); no counters or comparators |
 | `rdp2` | 13350-16950 x 8100-10700 | right datapath, middle rows: the source of the per-slice line c that R0 is compared with (the horizontal counter?) | running |
 | `bc1` | 7000-9000 x 14050-16300 | bottom-centre logic, upper left part; receives the six data tracks and strobe leaving the bottom of `cdp4` | running |
