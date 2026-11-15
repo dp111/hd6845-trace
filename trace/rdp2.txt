@@ -302,3 +302,170 @@ P 13911,9480:13924,9700
 # line rdp3 calls rdp3_t16837: it runs into the strap of RC's s7 cell and on south.
 # Seen here from y 9440; by track scan the metal goes on north to y 8100.
 M 16838,9440 y10575 w=20
+
+# =====================================================================================
+# UPPER ARRAY (y 8048-9080): seven slices on the same pitch, one place further left
+# than the lower array. Tags keep the lower array's slice numbers: sm1 is the slice left
+# of s0 (cells between the rails at x 13393 and 13783), then s0..s5.
+#
+# Register row RE (y 8807-9077): rdp3_lat upside down, seven copies; compared copy by
+# copy with rdp3's row RB (tools/rdp3_cmp.py): identical. Its strobe is traced to L1 =
+# rdp3_n1s4, which rdp3 follows to sel_w4: RE is R4.
+# =====================================================================================
+@inst rdp3_lat -1172,-4213 mx=14790 rot=180 o=14790,13150 tag=re_sm1
+@inst rdp3_lat -782,-4213 mx=14790 rot=180 o=14790,13150 tag=re_s0
+@inst rdp3_lat -392,-4213 mx=14790 rot=180 o=14790,13150 tag=re_s1
+@inst rdp3_lat -1,-4213 mx=14790 rot=180 o=14790,13150 tag=re_s2
+@inst rdp3_lat 390,-4213 mx=14790 rot=180 o=14790,13150 tag=re_s3
+@inst rdp3_lat 780,-4213 mx=14790 rot=180 o=14790,13150 tag=re_s4
+@inst rdp3_lat 1170,-4213 mx=14790 rot=180 o=14790,13150 tag=re_s5
+N P 14850,9058 rdp2_re_ld
+@alias rdp2_re_ld rdp3_n1s4
+# right end: VSS land and contact for s5's second pull-down, under the rail x 16125
+D 16097,8902:16145,8962
+D 16097,8958:16124,8987
+C 16117,8930 s=30x40
+# --- strobe: at the foot of sm1's loop the poly steps left and runs south under the
+# VSS rail (x 13385-13403) to a pad with a contact at (13391,9311), just below the
+# rail's end; thin metal (bundle track L1) goes south from there, straight, to y 10700,
+# where rdp3 draws it on.
+P 13377,9048:13425,9066
+P 13385,9048:13403,9300
+P 13378,9292:13406,9328
+C 13391,9311 s=26x26
+M 13391,9297 y10700 w=18
+
+# =====================================================================================
+# Comparator E (y 8415-8806) above RE: the same cells again, seven slices; the load of
+# its eq line is in sm1. Compared with band A by tools/rdp3_cmp.py: identical, T2
+# pieces included (plain metal pieces with no contact, as in rdp3's bands).
+#   rdp2_ce_K_x = uc_K XOR q(RE, K);  rdp2_ce_eq = NOR of the seven x
+# =====================================================================================
+@inst rdp2_xor -1171,-1670 tag=ce_sm1
+@inst rdp3_mpd1 -781,-3361 tag=ce_sm1
+@inst rdp2_xor -781,-1670 tag=ce_s0
+@inst rdp3_mpd -782,-3361 tag=ce_s0
+@inst rdp2_xor -391,-1670 tag=ce_s1
+@inst rdp3_mpd -392,-3361 tag=ce_s1
+@inst rdp2_xor 0,-1670 tag=ce_s2
+@inst rdp3_mpd -1,-3361 tag=ce_s2
+@inst rdp2_xor 390,-1670 tag=ce_s3
+@inst rdp3_mpd 389,-3361 tag=ce_s3
+@inst rdp2_xor 781,-1670 tag=ce_s4
+@inst rdp3_mpd 780,-3361 tag=ce_s4
+@inst rdp2_xor 1171,-1670 tag=ce_s5
+@inst rdp3_mpd 1170,-3361 tag=ce_s5
+# --- eq line: row-wide diffusion strip, ends under the rails x 13393 and x 16125
+D 13378,8415:16144,8437
+N D 15000,8426 rdp2_ce_eq
+# --- its exit, in sm1 (same structure as comparator C's): tab up at x 13535-13557,
+# buried contact, poly up and then WEST along y 8331-8347 under the rail x 13393 and
+# out of the region
+D 13535,8378:13557,8421
+B 13533,8376:13558,8399
+P 13533,8331:13556,8399
+P 13340,8331:13556,8347
+# --- right end: lower VSS land that s5's T7 and series pair end on (rail x 16125)
+D 16105,8729:16159,8806
+C 16122,8766 s=24x40
+# --- T2 pieces (metal, no contact found)
+M 13501,8377 y8839 w=22
+M 13891,8377 y8839 w=22
+M 14281,8377 y8839 w=22
+M 14672,8377 y8839 w=22
+M 15063,8377 y8839 w=22
+M 15453,8377 y8839 w=22
+M 15843,8377 y8839 w=22
+# --- upper array, lines through RE and comparator E. Drawn over y 8300-8815 (the latch
+# cells carry their own pieces below that); all go on north, and south into the routing
+# zone, untraced.
+# supply rails
+M 13393,8300 y9270 w=56              # ends at y 9275; the track below it is L1
+N M 13393,8600 vss
+M 13783,8300 y9540 w=60
+M 14174,8300 y9540 w=60
+M 14565,8300 y9540 w=60
+M 14955,8300 y9540 w=60
+M 15345,8300 y9540 w=60
+M 15735,8300 y9540 w=60
+M 16125,8300 y9540 w=60
+M 13600,8300 y9080 w=56
+N M 13600,8600 vcc
+M 13990,8300 y9540 w=56
+M 14381,8300 y9540 w=56
+M 14772,8300 y9540 w=56
+M 15162,8300 y9540 w=56
+M 15552,8300 y9540 w=56
+M 15942,8300 y9540 w=56
+# data lines of the upper array (one contact per latch cell)
+M 13455,8300 y8815 w=24
+N M 13455,8500 rdp2_ubus_sm1
+M 13845,8300 y8815 w=24
+N M 13845,8500 rdp2_ubus_s0
+M 14236,8300 y8815 w=24
+N M 14236,8500 rdp2_ubus_s1
+M 14626,8300 y8815 w=24
+N M 14626,8500 rdp2_ubus_s2
+M 15016,8300 y8815 w=24
+N M 15016,8500 rdp2_ubus_s3
+M 15407,8300 y8815 w=24
+N M 15407,8500 rdp2_ubus_s4
+M 15797,8300 y8815 w=24
+N M 15797,8500 rdp2_ubus_s5
+# c lines of the upper array (two contacts per XOR cell)
+M 13541,8300 y8815 w=22
+N M 13541,8500 rdp2_uc_sm1
+M 13931,8300 y8815 w=22
+N M 13931,8500 rdp2_uc_s0
+M 14321,8300 y8815 w=22
+N M 14321,8500 rdp2_uc_s1
+M 14712,8300 y8815 w=22
+N M 14712,8500 rdp2_uc_s2
+M 15102,8300 y8815 w=22
+N M 15102,8500 rdp2_uc_s3
+M 15492,8300 y8815 w=22
+N M 15492,8500 rdp2_uc_s4
+M 15882,8300 y8815 w=22
+N M 15882,8500 rdp2_uc_s5
+# sm1 only: a thin through line on the strap track
+M 13714,8300 y8815 w=20
+N M 13714,8500 rdp2_t13714
+
+# =====================================================================================
+# Register row RF (y 8048-8318, centre inside this region; its comparator is above it,
+# in rdp1's region): rdp3_lat upside down, seven copies in the same slices as RE;
+# compared copy by copy with rdp3's row RB (tools/rdp3_cmp.py): identical, top edge
+# included (q goes up in poly as in rows RA, RB, RE).
+# =====================================================================================
+@inst rdp3_lat -1172,-4972 mx=14790 rot=180 o=14790,13150 tag=rf_sm1
+@inst rdp3_lat -782,-4972 mx=14790 rot=180 o=14790,13150 tag=rf_s0
+@inst rdp3_lat -392,-4972 mx=14790 rot=180 o=14790,13150 tag=rf_s1
+@inst rdp3_lat -1,-4972 mx=14790 rot=180 o=14790,13150 tag=rf_s2
+@inst rdp3_lat 389,-4972 mx=14790 rot=180 o=14790,13150 tag=rf_s3
+@inst rdp3_lat 779,-4972 mx=14790 rot=180 o=14790,13150 tag=rf_s4
+@inst rdp3_lat 1169,-4972 mx=14790 rot=180 o=14790,13150 tag=rf_s5
+N P 14850,8299 rdp2_rf_ld
+# --- strobe: from the foot of sm1's loop the poly runs WEST along y 8287-8303, under
+# the rail x 13393, out of the region
+P 13340,8287:13425,8303
+# right end: VSS land for s5's second pull-down under the rail x 16125. Placed as RE's;
+# not looked at.
+?D 16097,8143:16145,8203
+?D 16097,8199:16124,8228
+?C 16117,8171 s=30x40
+# --- rails through RF (bus, c and strap tracks are the cells' own pieces here)
+M 13393,8040 y8300 w=56
+M 13783,8040 y8300 w=60
+M 14174,8040 y8300 w=60
+M 14565,8040 y8300 w=60
+M 14955,8040 y8300 w=60
+M 15345,8040 y8300 w=60
+M 15735,8040 y8300 w=60
+M 16125,8040 y8300 w=60
+M 13600,8040 y8300 w=56
+M 13990,8040 y8300 w=56
+M 14381,8040 y8300 w=56
+M 14772,8040 y8300 w=56
+M 15162,8040 y8300 w=56
+M 15552,8040 y8300 w=56
+M 15942,8040 y8300 w=56

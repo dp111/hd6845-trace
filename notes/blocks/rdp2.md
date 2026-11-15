@@ -10,22 +10,32 @@ pull-downs use the land under this rail) and the one at x 14174 + 390 K. Taking 
 rail to be the one at its left edge, **sK = column c(K-1)**: s1..s7 are c0..c6 (rails
 x 14174..16516), **s0 lies one pitch left of c0** (rail x 13783), and c7 (rail x 16906,
 the ninth rail) has no cells in the rows traced here.
-Believed bit order (see Logic, comparator D): s1..s7 = bits 0..6, s0 = bit 7, i.e. column
-cN = bit N and bit 7 sits left of c0.
+The **upper array** (y 8048-9080) has seven slices one place further left: tag `sm1`
+(cells between the rails x 13393 and 13783, two pitches left of c0), then s0..s5 at the
+same x as the lower array's s0..s5 (so its columns are c-2..c4).
+Believed bit order of the lower array (see Logic, comparator D): s1..s7 = bits 0..6,
+s0 = bit 7, i.e. column cN = bit N and bit 7 sits left of c0. The upper array's bit
+order is not known.
 
 ## Status
 
-- Traced, placed, every instance checked, extracts with no errors and no open nets
-  (170 transistors of this block): register row RC (8 latches) = **R0**; comparator C
-  above it (8 XORs, wired NOR) = "c = R0"; comparator D above that (7 XORs, wired NOR),
-  which compares c of each slice with the R0 bit of the next slice = "c = R0 shifted by
-  one bit"; the wiring between them; both equality lines out to bundle tracks at the
-  left edge; R0 bit 7's line round the array.
-- **Nothing in this block drives the `c` lines.** Each c track ends at its topmost
+- Lower array, traced, placed, every instance checked: register row RC (8 latches) =
+  **R0**; comparator C above it (8 XORs, wired NOR) = "c = R0"; comparator D above that
+  (7 XORs, wired NOR), which compares c of each slice with the R0 bit of the next slice
+  = "c = R0 shifted by one bit"; the wiring between them; both equality lines out to
+  bundle tracks at the left edge; R0 bit 7's line round the array.
+- Upper array, cells placed and checked: register row RE (7 latches) = **R4** (strobe
+  traced to track L1, which rdp3 follows to `sel_w4`); comparator E above it (7 XORs,
+  wired NOR; output leaves west in poly at y 8339); register row RF (7 latches; strobe
+  leaves west in poly at y 8295, register not identified; its comparator is in rdp1).
+  The upper array's c lines and data lines are drawn only through these rows.
+- 369 transistors of this block; extracts with no errors and no open nets.
+- **Nothing in this block drives the lower `c` lines.** Each c track ends at its topmost
   comparator contact (s1..s7 at y 9723 in comparator D, s0 at y 10244 in comparator C).
   They are fed from rdp3's side (routing zone below row RA).
-- Not traced: everything above y 9440 (routing zone y 9000-9560, the seven-slice array
-  y 8048-9080), the other lines of the s0 column and of the left bundle.
+- Not traced: the routing zone y 9080-9560 between the arrays (where the upper array's
+  c lines and data lines go), the other lines of the s0 column and of the left bundle,
+  x 16160-16950 at y 8100-9440 (a bundle of vertical lines).
 
 ## Inventory
 
@@ -35,10 +45,11 @@ x 16838).
 
 | y | What |
 |---|---|
-| 8048-8318 | latch row, 7 cells, centres x 13620 + 390 k (k = 0..6): one pitch left of s0 up to s5. `findcell` only (score 0.7), not looked at |
-| 8415-8806 | comparator cells (`rdp3_mpd` centres y 8480, `rdp3_xor` centres y 8675), x centres 13966..15918 (six, score 0.87-0.90) and a weak one at 13576. `findcell` only |
-| 8807-9077 | latch row, 7 cells, same x as the first. `findcell` only |
-| 9000-9560 | routing zone: many horizontal poly lines; seen only at 0.35x except the two lines traced (below) |
+| 8048-8318 | **register row RF**, slices sm1, s0..s5: `rdp3_lat` upside down; strobe poly y 8285-8313 |
+| 8318-8415 | gap: RF's strobe going west (y 8287-8303), comparator E's exit line (y 8331-8347), rounded top ends of the T2 pieces (y 8377) |
+| 8415-8806 | **comparator E**, slices sm1, s0..s5: `rdp3_mpd1` (sm1, with the load) / `rdp3_mpd` at y 8415-8544, `rdp2_xor` at y 8544-8806 |
+| 8807-9077 | **register row RE = R4**, same slices: `rdp3_lat` upside down; strobe poly y 9044-9072 |
+| 9080-9560 | routing zone: many horizontal poly lines; seen only at 0.35x except the lines traced (R0 bit 7 at y 9480-9494, comparator D's exit at y 9523-9541, RE's strobe at x 13385-13403) |
 | 9563-9954 | **comparator D**, slices s1..s7: `rdp3_mpd1` (s1, with the load) / `rdp3_mpd` at y 9563-9692, `rdp2_xor` at y 9692-9954 |
 | 9440-10084, x 13800-14180 | s0 has no comparator D cell: routing column (poly bars from the bundle to tracks going north), see Not done |
 | 9954-10084 | gap: T2 top contacts (y 10010) and poly bars to the XORs of comparator D; exit line of comparator C (y 10000-10021, s0) |
@@ -46,8 +57,15 @@ x 16838).
 | 10475-10564 | gap: q of RC up into the XORs, bar and contact to the T2 track (y 10529) |
 | 10564-10834 | **register row RC = R0**: `rdp3_lat` upside down, eight copies; strobe poly y 10801-10829 |
 
-Left of the array, x 13348-13782: the bundle L0..L8 (x 13348 + 43.4 k), continued from
-rdp3. Top ends of its lines inside this region are under Not done.
+Left of the lower array, x 13348-13782: the bundle L0..L8 (x 13348 + 43.4 k), continued
+from rdp3. Top ends of its lines inside this region are under Not done. The upper
+array's leftmost VSS rail (x 13393, 56 wide) ends at y 9275; the thin track below it on
+the same x is L1.
+
+Upper array, x per slice (sm1; add 390 per slice): VSS rail 13393, data line 13455, T2
+piece 13501, c track 13541, VCC rail 13600, strap track 13714 (in sm1 a through line).
+Right of the upper array, x 16160-16950, y 8100-9440: vertical metal lines (not looked
+at).
 
 ## Logic
 
@@ -142,6 +160,40 @@ compared**. This fits the CPC document's "VSYNC on C0 = R0/2" for interlace and 
 guess that the address register (slices s1..s5) takes D0..D4. If c is the horizontal
 counter, `rdp2_cc_eq` is end of line. Not traced: which slice is which data bit.
 
+### Upper array: rows RE = R4 and RF, comparator E (traced)
+
+All three rows are rdp3's cells unchanged, seven slices (sm1, s0..s5). Checked with
+`rdp3_cmp` against row RB and band A: no difference except at the row ends; overlays
+`ov_upmid.png`, `ov_upleft.png`, `up_right.png`, `ov_rf_right.png`.
+
+```
+RE:  a <- rdp2_ubus_K while rdp2_re_ld;  q = a (two inverters, hold device)
+RF:  a <- rdp2_ubus_K while rdp2_rf_ld;  q = a
+rdp2_ce_K_x = rdp2_uc_K XOR q(RE, K)        K = sm1, s0..s5
+rdp2_ce_eq  = NOR(the seven x)              high when the seven uc lines equal RE
+```
+
+- **RE's strobe = track L1 = `sel_w4`, so RE is R4** (vertical total, 7 bits). At the
+  foot of sm1's loop the row poly steps left and runs south under the VSS rail
+  (x 13385-13403) to a pad with a contact at (13391,9311) just below the rail's end;
+  thin metal south on L1, straight to y 10700 (`re_ld2.png`, `re_s_c.png`,
+  `re_s_m.png`; the crossings at y 9650-9760 checked in both metal shots, `l1_x.png`).
+  rdp3 follows L1 from there to `sel_w4` (its `rdp3_n1s4`).
+- RF's strobe: from the foot of sm1's loop the poly goes west along y 8287-8303 and
+  leaves the region (`rf_ld.png`). Not identified. RF's q lines go up in poly into the
+  comparator above it (rdp1).
+- Comparator E's load is in sm1. Exit as comparator C's (`eqe_exit.png`): tab at
+  x 13535-13557, buried contact, poly up and west along y 8331-8347 under the rail
+  x 13393, out of the region. The c track of sm1 passes over the buried contact without
+  touching it (rdp3 settled this for the same structure in its bands; in comparator C
+  the box has no metal over it at all).
+- Both registers hang on the same seven data lines `rdp2_ubus_K` and comparator E on
+  the seven lines `rdp2_uc_K`; all of these go on north (RF's comparator) and south
+  (routing zone), untraced. Believed: `uc` is the vertical (character row) counter and
+  `rdp2_ce_eq` is "row counter = R4".
+- sm1 has a thin through line on its strap track (x 13714), as s7 has in the lower
+  array (x 16838).
+
 ## Ports
 
 | Name | Layer | Where | Direction | What |
@@ -153,8 +205,15 @@ counter, `rdp2_cc_eq` is end of line. Not traced: which slice is which data bit.
 | `rdp2_cc_eq` (= `rdp3_n2s1`) | metal | 13434,10700 going south (track L2) | out | high when c = R0 |
 | `rdp2_cd_eq` (= `rdp3_n0`) | metal | 13348,10700 going south (track L0) | out | high when c_s1..s7 = R0_s2..s7,s0 |
 | `rdp3_t16837` | metal | 16838,9440 going north | through | thin line on s7's strap track, no contact seen in comparators C, D or row RC |
-| `vss` | metal | x 13783 + 390k (9) at y 9540 | - | rails, go on north |
-| `vcc` | metal | x 13990 + 390k (8) at y 9540 | - | rails, go on north |
+| `rdp2_re_ld` (= `rdp3_n1s4`) | metal | 13391,10700 going south (track L1) | in | R4 load strobe = `sel_w4` |
+| `rdp2_rf_ld` | poly | 13340,8295 going west | in | RF load strobe, not identified |
+| `rdp2_ce_eq` | poly | 13340,8339 going west | out | high when uc = R4 |
+| `rdp2_ubus_sm1`, `_s0`..`_s5` | metal | x 13455, 13845, 14236, 14626, 15016, 15407, 15797; north at y 8051, south at y 9075 | through | data lines of the upper array |
+| `rdp2_uc_sm1`, `_s0`..`_s5` | metal | x 13541, 13931, 14321, 14712, 15102, 15492, 15882; north at y 8051, south at y 9075 | in | compared with R4 (and by rdp1's comparator with RF) |
+| `rdp3_rf_sm1_q`, `_s0_q`..`_s5_q` | poly | x 13707, 14097, 14487, 14878, 15268, 15658, 16048 (22 wide) at y 8048 going north | out | RF's bits, into rdp1's comparator |
+| `rdp2_t13714` | metal | 13714,8051 north; 13714,9075 south | through | thin line on sm1's strap track |
+| `vss` | metal | x 13783 + 390k (9) at y 9540; x 13393 and 13783..16125 at y 8040 | - | rails, go on north. The rails x 13783..16125 are drawn over y 8040-10700, x 16516 and 16906 from y 9540 |
+| `vcc` | metal | x 13990 + 390k (8) at y 9540; x 13600 and 13990..15942 at y 8040 | - | rails, go on north. x 13600 is drawn to y 9080 only |
 
 `rdp3_rc_s0_q` (R0 bit of slice s0) leaves the region for 14 px at (16950-16964, 9480 to
 10020) and comes back; nothing else is on it out there as far as seen (`east1.png`).
@@ -174,14 +233,23 @@ counter, `rdp2_cc_eq` is end of line. Not traced: which slice is which data bit.
   them; seen as tan areas with contact specks at 1.3x and 2x, not at tracing zoom.
 - **AMB-3, the through line x 16838** lies over the q input poly of s7's XORs for its
   whole length. No contact ring seen at 2x (`ov_right.png`); not looked at closer.
+- **AMB-4, RF's right-end VSS land** (16097-16145 x 8143-8228, `?D`, `?C`): placed as
+  RE's (which was seen at 1.35x with its contact speck); seen at 1.4x only.
+- **AMB-5, rails between the arrays.** The rails x 13783..16125 and 13990..15942 are
+  drawn straight through y 9080-9540 from the 0.35x survey and the strip views; not
+  looked at closely there.
 - Inherited from rdp3's cells: its AMB-1 (hold device), AMB-7 (T7's diffusion, `?D`),
   AMB-8.
 
 ## Not done
 
-- **Routing zone y 9000-9560** (all slices) and the **seven-slice array y 8048-9080**
-  (findcell hits in Inventory; its cells sit one pitch further left than rdp3's
-  slices). Not surveyed beyond `sv_metal.png` (0.35x).
+- **Routing zone y 9080-9560.** Here the upper array's data lines and c lines end or
+  turn (track scan: upper data lines reach about y 9055-9370, the lower array's start
+  at about y 9480; so the two sets are joined, crossed or fed here) and many horizontal
+  poly lines run. Needed to know which upper slice is which bit and where `uc` comes
+  from. Not surveyed beyond `sv_metal.png` (0.35x).
+- RF's comparator and everything above y 8048 (rdp1).
+- x 16160-16950, y 8100-9440: vertical metal lines right of the upper array.
 - **s0 routing column, x 13800-14180, y 9440-10084** (`s0_d.png`, `bundle1.png`,
   `ov_s0s1.png`). Poly bars come in from the west under the first VSS rail; seen, not
   drawn:
