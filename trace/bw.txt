@@ -20,8 +20,22 @@
 P 11045,7926 x7839 y7649 x7753 y7436 x7407 y7519 x6300 y7471 x5825 w=18
 P 5818,7455:5858,7487
 C 5838,7470
-M 5841,7484 y6300 w=22
+M 5841,7484 y5571 w=22
 N M 5841,6800 wl_b
+# ... the metal ends at y 5571 on a pad with a contact (5838,5585); poly west along
+# y 5576-5594 across a second crossing field (no contact on the way) to a pad with a contact
+# (3518,5587); metal west along y 5578-5598 and north at x 3272-3294 to a contact (3283,5238)
+# on a pad; poly east to x 3323, north under a vertical metal to y 5018, and west along
+# y 5008-5028 into a gate group of the top-left logic at about (3070,5018): block tla.
+P 5820,5571:5857,5601
+C 5838,5585
+P 5830,5585 x3505 w=18
+P 3498,5568:3546,5604
+C 3518,5587
+M 3532,5588 x3283 y5224 w=22
+P 3265,5222:3302,5256
+C 3283,5238
+P 3290,5239 x3324 y5018 x3050 w=18
 
 # ck_a. Channel line y 7873-7891 to x 7880; north to y 7605; west to x 7787; north to y 7387;
 # west to a pad with a contact (7419,7387) under a vertical metal x 7410-7432 going north.

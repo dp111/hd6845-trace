@@ -1,0 +1,4 @@
+# tla: top-left logic, cluster where the row counter's step is made
+2440,4590:3090,5330   ?logic  step gate cluster | random logic between three rails. Traced so far: the row counter's step b = NOR of three bus signals, and a NOR of two of them. Rest not traced
+3090,2400:3400,6400   ?route  vertical bus of the top-left logic | seven metal positions in pieces, joining the gate clusters at x 2450-3090 to each other and to poly lines going east. Surveyed
+3400,5480:5860,5700   ?route  second crossing field | horizontal poly lines over vertical metals; the step signal b crosses it on the poly y 5585
