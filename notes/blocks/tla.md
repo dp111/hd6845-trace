@@ -4,12 +4,17 @@ Serial work, started 2026-11-16. Trace: `trace/tla.txt`. Views: `cache/scratch/t
 
 ## Status
 
-Two gates traced and extracted (7 transistors); the rest of the cluster is surveyed only.
+Three gates traced and extracted (10 transistors); the rest of the cluster is surveyed only.
 
 ```
 wl_b    = NOR(in1, in2, in3)     the row counter's step signal (active low); load 29/30
+in3     = NOR(e3, e4)            load 28/55; also leaves north on the thin metal x 2903-2923
 tla_m2  = NOR(in2, in3)          no load found yet; feeds gate E0 further up the same column
 ```
+
+So the step is `b = NOT(in1 OR in2 OR NOT(e3 OR e4))`: the row counter steps (b low) when
+`in1` or `in2` is high, or when `e3` and `e4` are both low. What those four signals are is
+not known yet: each leads into the bus fields of the top-left logic (table below).
 
 ## How the row counter's step signal gets here
 
@@ -52,12 +57,13 @@ Inputs (pieces of the vertical bus):
 
 | Input | Gate poly | Bus piece | Other contacts on the piece |
 |---|---|---|---|
-| `in1` | y 4929-4947, pad contact (3360,4937) | line G, upper piece, x 3352-3375, comes from the north (seen to y 4380) | not followed |
-| `in2` | y 4970-4992 then south at x 3000-3012 into the band y 5001-5020; pad contact (3148,4976) | line B, y 4705-5428 | (3150,4719): gate E1 of `m2`; (3150,5412): poly west along y 5400-5422, not followed |
-| `in3` | y 5055-5075, pad contact (3108,5068) | line A, y 4790-5212 | (3108,4805): gate E2 of `m2`; (3108,5197): poly west along y 5188-5208 across R3, not followed |
+| `in1` | y 4929-4947, pad contact (3360,4937) | line G, upper piece, x 3352-3378, y 2754-4952 | top contact (3368,2768): poly east along y 2758-2778 to a contact (4225,2765) on a vertical metal of the next bus field (x 4140-4420). Not followed further |
+| `in2` | y 4970-4992 then south at x 3000-3012 into the band y 5001-5020; pad contact (3148,4976) | line B, y 4705-5428 | (3150,4719): gate E1 of `m2`; (3150,5412): poly west along y 5400-5422, not followed: its driver |
+| `in3` | y 5055-5075, pad contact (3108,5068) | line A, y 4790-5212 | (3108,4805): gate E2 of `m2`; (3108,5197): the output of the gate `in3 = NOR(e3, e4)` |
+| `e3` | y 5147-5167, pad contact (3283,5152) | line E, upper piece, ends here; comes from the north (seen from y 5060) | not followed |
+| `e4` | y 5230-5250, pad contact (3192,5237) | line C; another contact on it at (3192,5325), and it turns east at y 5665-5690 | extent not read |
 
-So `in2` and `in3` are driven from further south-west (the two polys not yet followed), and
-`in1` from the north.
+
 
 ## The small NOR `m2` (traced)
 
@@ -67,6 +73,28 @@ them has a buried contact (box x 3045-3068, y 4750-4780) to a poly that runs eas
 y 4753-4772, north under bus line C (x 3186-3206) and back west along y 4626-4645, where it
 is gate E0 on the upper part of the same column (VSS below it; what is above: next piece).
 No load has been found on `m2`.
+
+## The gate that makes `in3` (traced)
+
+Same construction as `m2`, one rail box further down (column x 3030-3063, y 5122-5266,
+between the east arms of the VSS boxes at y 5080-5140 and y 5258-5297). Gates E3 (`e3`,
+y 5147-5167) and E4 (`e4`, y 5230-5250). The node between them goes three ways: a buried
+contact (box x 3042-3068, y 5181-5214) to the poly that runs east to bus line A's bottom
+contact; a diffusion strip **west under the VSS rail** (y 5186-5208, tan between two thin
+dark lines in the clean shot) to a box under the thin metal; and from that box, by a contact
+(2915,5250), up the thin metal x 2903-2923. The load is on the far side of that box: a strip
+y 5188-5216 under a poly plate x 2842-2897 to the VCC box under R2 (contact (2805,5212)).
+The plate is one piece of poly from y 5168 to y 5265 (it looks like two plates in the clean
+shot because the strip's edges show through it); its tie to the node is drawn uncertain.
+
+## What the chase showed about this part of the die
+
+The top-left "logic" is gate clusters joined by bus fields: the vertical bus x 3090-3380
+beside this cluster, seven horizontal poly lines along its top (y 2630-2900) and another
+vertical bus field at x 4140-4420. Following one signal at a time through them costs a
+handful of views per hop and does not converge: every input found so far leads to another
+field. The region has to be traced whole, cluster by cluster and bus by bus, like the
+arrays were.
 
 ## Not done
 

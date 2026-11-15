@@ -61,8 +61,17 @@ P 2845,4962:2875,5052
 
 # ---- the three input lines are pieces of the vertical bus x 3095-3380 (each piece joins two
 # or three poly lines by contacts and has plain ends)
-# in1: bus line G, upper piece: comes from the north, ends on the contact (3360,4937)
-M 3362,4380 y4952 w=22
+# in1: bus line G, upper piece: from a contact (3368,2768) at its top down to the contact
+# (3360,4937) (followed at 1.85x in both shots: unbroken, no other contact). At the top a poly
+# runs east along y 2758-2778, one of seven parallel lines, to a pad with a contact
+# (4225,2765) under a vertical metal of the next bus field (x 4140-4420): not followed further.
+M 3363,2754 y4952 w=22
+P 3350,2752:3386,2786
+C 3368,2768
+P 3375,2768 x4212 w=20
+P 4205,2749:4245,2782
+C 4225,2765
+M 4226,2745 y2785 w=22
 # in2: bus line B, piece y 4705-5428, contacts (3150,4719), (3148,4976), (3150,5412)
 M 3150,4705 y5428 w=20
 C 3150,4719
@@ -74,7 +83,6 @@ M 3108,4790 y5212 w=22
 C 3108,4805
 C 3108,5197
 P 3090,5180:3126,5214
-P 3005,5188:3100,5208                 # poly west from the bottom contact, towards the VSS rail (not followed)
 
 # ====================================================================
 # m2 = NOR(in2, in3): a small gate on a diffusion column just east of the VSS rail
@@ -102,3 +110,44 @@ N P 3120,4762 tla_m2
 # above it the column goes on north (next piece)
 D 3005,4650:3063,4663
 D 3028,4600:3063,4663
+
+# ====================================================================
+# in3 = NOR(e3, e4): the same kind of small gate on the column x 3030-3063, one rail
+# box further down. Its node (y 5175-5228) goes three ways: by a buried contact and a poly
+# east to bus line A's bottom contact (3108,5197) (so in3 is this gate's output); by a
+# diffusion strip WEST under the VSS rail (y 5186-5208) to its load; and from the load side
+# by a contact (2915,5250) up the thin metal x 2903-2923.
+D 3005,5122:3063,5142
+D 3030,5122:3063,5266
+D 2965,5258:3008,5297                 # rail box below, contact to VSS
+C 2985,5276
+D 3000,5252:3063,5266
+# gate E3: poly y 5147-5167 from a pad with a contact (3283,5152) at the bottom end of bus
+# line E's upper piece
+P 3012,5157 x3270 w=20
+P 3265,5137:3302,5170
+C 3283,5152
+M 3283,5060 y5166 w=22
+N P 3200,5157 tla_e3
+# gate E4: poly y 5230-5250 from a pad with a contact (3192,5237) on bus line C
+P 3012,5240 x3180 w=20
+P 3172,5222:3212,5253
+C 3192,5237
+M 3193,5215 y5260 w=20                # bus line C over the contact (its extent: not yet read)
+N P 3120,5240 tla_e4
+# output: buried contact, poly east to the pad of bus line A
+B 3042,5181:3068,5214
+P 3045,5186:3095,5208
+# load: strip under the VSS rail to a box under the thin metal, on under a poly plate
+# x 2842-2897 (W/L 28/55) to the VCC box under R2 (contact (2805,5212)). The plate reaches
+# down to y 5265; its tie to the node at its lower right corner is drawn uncertain.
+D 2925,5186:3048,5208
+D 2898,5188:2930,5262
+C 2915,5250
+D 2835,5188:2932,5216
+D 2778,5193:2842,5237
+C 2805,5212
+P 2842,5168:2897,5265
+?P 2890,5238:2908,5262
+?B 2893,5234:2912,5264
+M 2913,4590 y5266 w=20                # thin metal: carries in3 north from the contact (taps not yet read)

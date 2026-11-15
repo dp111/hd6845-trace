@@ -426,3 +426,50 @@ earlier work goes on that list in the same commit; a remark in a report does not
 4. North of the counters (`amr`): the 4-bit counter's outputs, bands H0/H1/H4, `la_n`.
 5. The bus field's own lines; the ends of the other channel-3 lines; then as before.
 
+## 2026-11-16 (later) The row counter's step followed to its gate
+
+Serial. Blocks `bw` (route completed), `tla` (new, three gates). Full extraction 1,676
+nets, 2,778 transistors, 0 errors, 0 warnings.
+
+**What was established**
+
+- `wl_b`, the row counter's step, was followed to its driver: up the metal x 5841 to
+  (5838,5585), west as poly through a second crossing field to (3518,5587), by metal to
+  (3283,5238) and by poly to a buried contact on the output node of a gate at (2975,5035)
+  in the top-left logic. About 9,000 px of wire from the counters, all drawn.
+- That gate: **`b = NOR(in1, in2, in3)`**. Beside it: `in3 = NOR(e3, e4)` and
+  `m2 = NOR(in2, in3)`. All three extracted (`notes/blocks/tla.md`). So the row counter
+  steps when `in1` or `in2` is high, or when `e3` and `e4` are both low.
+- `in1`, `in2`, `e3`, `e4` each lead on into bus fields: `in1` up a 2,200 px bus line and
+  east along the top of the logic to another field at x 4140-4420; `in2` to a poly going
+  west at y 5411; `e3` and `e4` onto two more bus lines. None reached a gate yet.
+
+**What it means for the plan**
+
+The top-left "logic" (2100-6400 x 2500-6350) is gate clusters joined by bus fields whose
+lines are in pieces. Chasing one signal at a time does not converge there. It has to be
+traced whole: every cluster, and every bus piece with its contacts. That is the bulk of M4
+and it is large (my estimate: 300-500 transistors and several hundred wire pieces). It
+would divide well among parallel agents (one cluster or one bus field each), which by the
+standing rule needs the user's word.
+
+**Method notes**
+
+- Under a wide rail the clean shot shows field as pink with an olive stripe down the
+  middle, and the class map paints the stripe as diffusion. It is not: diffusion under a
+  rail is the tan boxes only. (Read as a continuous column at first; it would have made a
+  transistor with VSS on both sides.)
+- A load plate in the open shows the edges of the diffusion strip under it as two dark
+  lines across the plate, so one plate over a 28 px strip looks like two or three plates.
+  The chip-2 shots show it as one piece of poly.
+- A bus line piece and the next piece at the same x can be 40 px apart end to end. Every
+  bus line is followed in both shots; a 1x metal view shows one line.
+
+**Open, in the order I would take them**
+
+1. The cluster x 2440-3090, y 4590-5330 in full (R1's columns, the remaining loads, the
+   column above gate E0, the thin metal's taps), then the vertical bus x 3090-3380 piece by
+   piece, then the clusters above and below it.
+2. The rest as listed in the previous entry (what `a` is; re-read R8/R9; `amr`; the bus
+   field between datapath and counters).
+
