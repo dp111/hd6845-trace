@@ -4,15 +4,24 @@ Trace: `trace/bc1.txt`. Scratch: `cache/scratch/bc1/`. Coordinates are metal-sho
 
 ## Status
 
-Traced and shipped (extracts clean, overlays checked on both shots): **column A of the
-right gate group**, six gates between the rails at x 8360 and x 8534 (y 15070-15990):
-two inverters, three 2-input NANDs that decode two bus lines (`bc1_s0`, `bc1_s1`) into
-three of the four one-of-four lines (active low), and one more inverter with a weak
-load. All their wiring in the channel x 7990-8250 is traced.
+Traced and shipped (extracts clean with `@requires cdp4`: no errors, no open nets;
+overlays checked on the clean, stripped and metal shots):
 
-Not traced: everything else (see Inventory and Not done). In particular the dense
-logic right of the VCC rail (x 8560-8900), the whole left gate group (x 7100-7850) and
-the routing field above y 14900 are only surveyed.
+1. **The driver of the row D latch strobe** (left gate group, x 7470-7860,
+   y 14950-15600): a 2-input NAND and two identical strong inverters.
+   `cdp4_ld6` = `bc1_ld_in1` AND `bc1_ld_in2`; a twin output `bc1_ld_a` (same logic,
+   separate inverter) leaves upward at x 7448. The strobe metal is traced all the way
+   to `cdp4`'s drawn end.
+2. **Column A of the right gate group** (x 7990-8565, y 15070-15990): two inverters and
+   three 2-input NANDs that decode two bus lines (`bc1_s0`, `bc1_s1`) into three of the
+   four one-of-four lines (active low), plus one inverter with a weak load. All their
+   wiring in the channel is traced.
+3. **Routing field**: the six data lines of `cdp4` row D as far as they were followed
+   (lines 1 and 2 joined to `cdp4_in6_s1`, `cdp4_in6_s2`).
+
+Not traced: the sources of `bc1_ld_in1` / `bc1_ld_in2` (lower left gate group), the
+left column of the left group, the dense column B right of the VCC rail x 8534, the
+gates below y 16000 in column A, most of the routing field. See Not done.
 
 ## Inventory
 
@@ -21,18 +30,17 @@ Survey views: `cache/scratch/bc1/sv_metal.png`, `sv_acid.png` (whole block, 0.6x
 The block has three parts.
 
 **1. Routing field, y 14050-14900 (whole width).** Not logic.
-- Six horizontal poly lines at y 14085, 14128, 14172, 14215, 14258, 14300 (pitch 43),
-  x 7000 to about 8050 and on to the right in a nested staircase (x 8050-8200,
-  y 14045-14240). They carry the six data tracks of `cdp4` row D (`cdp4_in6_s1..s6`):
-  `cdp4_in6_s1` (metal x 8073) ends on a contact at (8075,14085) on the first line;
-  the other lines step up at x 8100-8190 and continue right under the VCC rail x 8228
-  to the other tracks (seen at 2x, not traced). Each line has a contact to a vertical
-  metal further left: (7180,14080), (7222,14128), (7268,14172), (7312,14215),
-  (7355,14258), (7400,14300); those six verticals arrive from above (y < 14040) and
-  appear to end on the contacts; the poly lines continue left past the contacts to
-  x 7000 (seen at 1.6x, `topL.png`).
-- The strobe `cdp4_ld6` (metal x 7947) comes down to y about 14295 and turns left into a
-  horizontal metal at y 14270-14295 (seen at 2x to x 7760; not followed further).
+- Six horizontal poly lines at y 14089, 14132, 14175, 14218, 14261, 14304 (pitch 43),
+  the data lines of `cdp4` row D (traced in part; see Logic, "Row D data lines").
+- The strobe `cdp4_ld6` and its twin `bc1_ld_a` cross the field in metal (traced; see
+  Logic, "Strobe driver").
+- Other metal seen at the top left (`s1.png`, `o6.png`), not traced: two wide
+  verticals from above at x 7770-7815 and x 7860-7905; the first joins a wide horizontal
+  band y 14110-14160 that runs left to a wide vertical x 7575-7622 (which becomes RL2's
+  feed, so these are VCC), the second a band y 14200-14250 that runs left to a wide
+  vertical x 7662-7710 (which becomes RL3, VSS). A wide vertical x 7488-7537. A thin
+  line that arrives from the left along y 14176, goes down at x 7190 to y 14285, right
+  to x 7230 and down.
 - Supplies: the VSS rail x 8013 of `cdp4` ends in a wide horizontal metal band
   y 14250-14305 running right to x about 8300, where rail R1 goes down (seen at 0.6x and
   2x). The VCC rail x 8228 turns right at y 14170-14240 and feeds a wide vertical
@@ -70,14 +78,94 @@ The block has three parts.
 - Right of x 8900: vertical tracks at x 8925, 8967, ... (boundary with `bc2`), not
   examined.
 
-**3. Left gate group, x 7100-7850, y 14950-16300.** Not examined beyond the survey.
-Wide vertical metals at x about 7310, 7490 and 7665 (rails; which is which not
-established). Loads (textured poly blocks) seen at x 7250-7290 and x 7400-7460; two
-large devices at 7330-7480 x 15020-15100 and 15240-15330 (wide poly rings: drivers?).
-Horizontal polys enter from the left field (x 7000-7150) with contacts on verticals at
-x 7060 and 7110.
+**3. Left gate group, x 7100-7860, y 14950-16300.**
+- Rails (traced where used): RL1 = VSS, x 7296-7345 (comes from a wide vertical
+  x 7380-7430 above y 15020; not drawn); RL2 = VCC, x 7470-7520 (top at y 14935, fed
+  from the right by a wide horizontal band y 14933-14976); RL3 = VSS, x 7640-7692.
+  RL2 is VCC because the loads hang on it; RL1 and RL3 carry the pull-down sources.
+- **Right part, upper (x 7520-7860, y 14950-15600): strobe driver (traced)**: two
+  strong inverters (`bc1_drv`, y 14978-15163 and 218 lower) and the NAND under RL3
+  (y 15400-15600).
+- **Left column, upper (x 7200-7520, y 15030-15560)**, between RL1 and RL2, the same
+  style as column A (seen in `L2.png`, not traced): an inverter at y 15032-15146 (VSS
+  contact (7310,15050), gate poly y 15077-15095 from the left, output buried contact
+  7238-7283 x 15109-15146 with a poly going left, load block 7411-7461 x 15085-15146,
+  VCC contact (7492,15100)); a 2-input NOR at y 15159-15359 (VSS contacts (7310,15180)
+  and (7310,15335), gate polys y 15207-15226 and y 15292-15311 from the left, shared
+  output node between them, tall load poly 7395-7435 x 15231-15322, VCC contacts
+  (7490,15215), (7500,15255)); a wider structure at y 15400-15560.
+- **Lower part (x 7190-7860, y 15570-16300)**: dense, large gates (`LL_a.png`, stripped
+  shot at 1.5x). Not traced. `bc1_ld_in1` and the tap of `bc1_ld_in2` enter it as polys
+  going left from (7838,15820) and (7880,16252).
+- Wiring between the two groups (x 7700-7990): verticals x 7727 (from a contact at
+  (7745,15610)), x 7795 (contact (7793,15655) down to contact (7793,15865)), x 7838
+  (contact (7838,15915) to contact (7838,16080)), x 7925 (from contact (7925,15700)
+  down past y 16300), x 7969; a poly along y 15860 from the contact (8012,15865) left
+  past (7793,15865) (`m1.png`).
 
 ## Logic
+
+### Strobe driver (traced)
+
+```
+bc1_ld_n = NAND(bc1_ld_in1, bc1_ld_in2)      gate under RL3, y 15442-15598
+cdp4_ld6 = NOT bc1_ld_n                      inverter cell 2 (y 15196-15381)
+bc1_ld_a = NOT bc1_ld_n                      inverter cell 1 (y 14978-15163)
+```
+
+So the row D latches of `cdp4` are transparent while `bc1_ld_in1` and `bc1_ld_in2`
+are both high, and `bc1_ld_a` is an identical, separately buffered copy.
+
+- **NAND.** VSS contact (7674,15560) on RL3; diffusion column x 7637-7699 crossed by
+  band 2 (y 15514-15534, input 2, next to VSS) and band 1 (y 15467-15486, input 1,
+  next to the output); output node y 15442-15464. Load: poly block 7523-7567 x
+  15404-15483 over the strip y 15441-15481, land contacted by RL2 at (7485,15462), gate
+  tie by a buried contact 7580-7610 x 15402-15436 on a bump above the strip. The output
+  node runs right to a buried contact 7723-7772 x 15417-15453, poly to a pad, contact
+  (7795,15435) to a vertical metal x 7795 (y 15076-15447) that feeds both inverters.
+  - input 1: pad and contact (7838,15477), metal x 7838 down to contact (7838,15820),
+    poly going left along y 15822 (followed to x 7750).
+  - input 2: contact (7880,15522), metal x 7882 down past y 16300; on the way a contact
+    (7880,16252) to a poly going left along y 16258.
+- **Inverter cell `bc1_drv`** (two copies, 218 apart). One active area under and right
+  of RL3 (7546-7758 x 15059-15163 in cell 1) contacted by RL3 at (7663,15131). An
+  S-shaped gate poly (pad at (7795,15086) under the metal x 7795; band y 15075-15098
+  across the top, down the left side x 7604-7634, band y 15111-15140 along the bottom
+  to x 7532) separates the source (the land with the contact and a strip along the
+  bottom) from the drain (a strip above the top band, y 15059-15075, plus the block
+  7546-7600 x 15052-15111 left of the gate). Extracted W/L about 250/26. Load: a wide
+  poly block 7540-7632 x 15006-15050 between the drain block and a VCC diffusion band
+  above it (y 14978-15000, joined to a land contacted by RL2 at (7492,15005); in
+  cell 2 contacts (7492,15215), (7500,15255)); current flows vertically, W/L about
+  54/44. Two buried contacts sit on the drain strip: the left one (7618-7660 x
+  15020-15060) ties the load gate, the right one (7717-7771 x 15028-15063) holds a
+  poly patch.
+  - Cell 1 output: a poly from the left buried contact goes up at x 7648 and left
+    along y 14961 (under the RL2 feed) to a contact at (7338,14958); metal x 7338 up to
+    y 14803, right to x 7427, up to y 14627, right to x 7448, up through the routing
+    field (followed to y 14050; continues). The right buried contact of cell 1 has no
+    wire (measured: no poly and no contact between it and the strobe metal).
+  - Cell 2 output: poly from the right buried contact to a contact at (7838,15260);
+    metal x 7838 up to y 15045, left to x 7795, up to y 14913, left to x 7752, up to
+    y 14283, right to x 7947, up into `cdp4` (`cdp4_ld6`). Cell 2 has no poly on its
+    left buried contact other than the load gate.
+
+**Believed, not traced:** `bc1_ld_a` goes up the bundle left of `cdp4` to the strobe of
+its 8-bit row C latch (`cdp4_ld`), so that rows C and D form one 14-bit register loaded
+by one event; `cdp4.md` reports a contact near that strobe line at (7557,12975). The
+six data lines of row D arrive on the poly lines y 14089-14304 (below).
+
+### Row D data lines (traced in part)
+
+Six poly lines at y 14089, 14132, 14175, 14218, 14261, 14304 from x 7000 eastwards.
+Line 1 ends on the foot contact of `cdp4_in6_s1` at (8075,14084). Line 2 steps up at
+x 8118 to y 14087 and ends on the foot contact of `cdp4_in6_s2` at (8463,14083). Lines
+3-6 (`bc1_d3`..`bc1_d6`) step up in the same nested way (x 8150-8200) and continue
+right past x 8500, in order, presumably to `cdp4_in6_s3`..`s6` (not followed). Each
+line also has a contact to a vertical metal that arrives from above and ends on it:
+(7188,14091), (7230,14131), (7274,14172), (7317,14217), (7361,14260), (7405,14304).
+The lines continue left past these contacts to x 7000. Which end drives them is not
+known.
 
 ### Column A (traced)
 
@@ -128,6 +216,13 @@ The vertical x 8837 has further contacts at about y 15127, 15300, 15455, 15520.
 
 | Name | Layer | Where it crosses | Direction | What |
 |---|---|---|---|---|
+| `cdp4_ld6` | metal | x 7947, y 14050 (drawn up to y 13835, overlapping `cdp4`'s metal) | driven inside | row D latch strobe = in1 AND in2 |
+| `bc1_ld_a` | metal | x 7448, y 14050 (continues up) | driven inside | twin of the strobe; believed to go to `cdp4_ld` |
+| `bc1_ld_in1` | poly | y 15822, drawn to x 7750 (continues left into the lower left group) | from the lower left group | NAND input next to the output |
+| `bc1_ld_in2` | metal | x 7882, y 16300 (continues down); tap poly y 16258 drawn to x 7750 | unknown | NAND input next to VSS |
+| `cdp4_in6_s1` | poly | y 14089, x 7000; metal x 7189, y 14040 | unknown | row D data line 1 |
+| `cdp4_in6_s2` | poly | y 14132, x 7000; metal x 7231, y 14040 | unknown | row D data line 2 |
+| `bc1_d3`..`bc1_d6` | poly | y 14175, 14218, 14261, 14304 at x 7000; drawn east to x 8040 (continue); metal x 7274, 7317, 7360, 7404 at y 14040 | unknown | row D data lines 3-6 (believed `cdp4_in6_s3`..`s6`) |
 | `bc1_s0` | metal | bus line y 14832, drawn from x 8040 (the line continues left to about x 7790) | from outside | decoder input, low bit |
 | `bc1_s1` | metal | bus line y 14873, drawn from x 8040 (continues left to about x 7790) | from outside | decoder input, high bit |
 | `bc1_dec01_n` | metal | x 8056, y 16300 (continues down) | driven inside | low when s1=0, s0=1 |
@@ -135,21 +230,20 @@ The vertical x 8837 has further contacts at about y 15127, 15300, 15455, 15520.
 | `bc1_dec00_n` | metal | x 8642, drawn y 14898-15060 (continues down column B) | driven inside | low when s1=0, s0=0 |
 | `bc1_g6_in` | metal | x 8143, y 16300 (continues down) | from outside (below) | input of inverter 6 |
 | `bc1_g6_out` | poly | y 16107, drawn to x 8300 | driven inside | into the untraced gates at y 16000-16300 |
-| `vss` | metal | R1 x 8360, drawn y 14890-16300 (continues both ways) | - | rail |
-| `vcc` | metal | R2 x 8534, drawn y 14990-16300 (continues both ways) | - | rail |
+| `vss` | metal | R1 x 8360 and RL3 x 7666, drawn to y 16300 (continue down); tops not joined to `cdp4`'s rails in the trace | - | rails |
+| `vcc` | metal | R2 x 8534 and RL2 x 7495, drawn to y 16300 (continue down); tops not joined | - | rails |
 
-Not yet drawn, seen in the survey (for the next agent): the six data polys at x 7000
-(y 14085..14300) and their six verticals at y 14040 (x 7180..7400); the strobe
-`cdp4_ld6` heading left along y 14285; the 13 bus lines at their left ends (x 7790) and
-right ends.
+Seen, not drawn: the 13 bus lines at their left ends (x 7790) and right ends.
 
 ## Ambiguities
 
-1. **Supply identity of R1 and R2.** Taken from the orientation of all six loads (tie
-   on the R1 side, land on the R2 side) and from the low-zoom path of the rails up to
-   the `cdp4` rails (R1 to the VSS rail x 8013 through the band y 14250-14305; R2 to the
-   VCC rail x 8228 through the wide vertical x 8405-8465). The joints of those paths
-   were seen at 0.6x and 2x only and are not drawn.
+1. **Supply identity of the rails.** R1, R3, RL1, RL3 = VSS and R2, RL2 = VCC are taken
+   from the circuits: every depletion load (gate tied to its output node by a buried
+   contact) has its other end on a land contacted by R2 or RL2, and every pull-down
+   source is contacted by R1, R3, RL1 or RL3. The low-zoom path of the rails up to the
+   `cdp4` rails agrees for R1 (to the VSS rail x 8013 through the band y 14250-14305)
+   and R2 (to the VCC rail x 8228 through the wide vertical x 8405-8465). None of these
+   joints is drawn; the rails are joined by name only.
 2. **Load hooks.** The hook between each load block and the strip is drawn as a
    diffusion bump with a buried contact at its end (as in the pilot example). It could
    equally be a poly stem with the buried contact on the strip; the connectivity (load
@@ -157,16 +251,45 @@ right ends.
 3. **Right end of `bc1_dec10_n`** (poly y 14870 at x about 8500): the poly appears to
    continue right underneath a horizontal metal line that starts at x 8510; a contact
    there was not looked for.
+4. **Extent of the active areas of the strobe driver.** Open diffusion and open field
+   have nearly the same colour in this part of the die in every shot, so the active
+   areas right of RL3 are drawn from their outlines: the rectangle 7700-7758 x
+   15098-15163 (and its copy) is taken as part of the source land because one closed
+   outline surrounds both; the drain block 7546-7600 x 15052-15111 because it lies
+   between the load gate and the bottom band of the gate. If the block were field, the
+   inverter would have only the top band as its gate (W about 120 instead of 250) and
+   the load would have no drain: so the drawn reading is the only one that gives the
+   load a path. For the NAND the column is drawn only as wide as RL3 (x 7637-7699);
+   whether it extends right of the rail under the two bands was not settled (width only).
+5. **Data lines between x 7430 and x 8040**: followed at 1.6x and 2x only
+   (`topL.png`, `top2.png`): straight salmon bands at constant y in the clean shot,
+   under seven vertical metals. No contact was seen on them there, but they were not
+   examined at high zoom. The four `bc1_d` lines are not joined to their `cdp4` tracks.
+6. **`bc1_ld_in2` at the contact (7880,16252)**: the vertical metal x 7882 appears to
+   continue below this contact (bright in the metal shot to y 16320, 20 px gap in the
+   automatic metal detection at the contact itself). Drawn as one line.
 
 ## Not done
 
-- Column B, x 8560-8900, y 14940-16300 (dense; start with `d1a.png`, `e1.png`). Open
-  questions there: the boxes under the thin metal x 8642 at 8616-8651 x 14977-15006 and
-  8621-8648 x 15157-15193 (buried contacts or taps of `bc1_dec00_n`?); the island at
-  8569-8619 x 15145-15190 with a metal contact at (8590,15170) to a short vertical metal
-  x 8592 that ends on a second contact at (8590,15380).
+In order of value:
+
+- **Sources of `bc1_ld_in1` and `bc1_ld_in2`**: the lower left gate group, x 7190-7860,
+  y 15570-16300 (`LL_a.png`). Start from the poly y 15822 going left from (7838,15820)
+  and the poly y 16258 going left from (7880,16252). This is the logic that times the
+  14-bit latch (rows C and D of `cdp4`).
+- Where `bc1_ld_a` goes above y 14050 (x 7448), to confirm it is `cdp4_ld`.
+- Left column of the left group, x 7200-7520, y 15030-15560 (inverter, NOR, one more:
+  see Inventory) and its inputs from the field on the left (verticals x 7058, 7101,
+  7145, 7188 with contacts on polys).
+- Column B, x 8560-8900, y 14940-16300 (dense; start with `d1a.png`, `e1.png`,
+  `e1b.png`). Open questions there: the boxes under the thin metal x 8642 at 8616-8651 x
+  14977-15006 and 8621-8648 x 15157-15193 (buried contacts or taps of `bc1_dec00_n`?);
+  the island at 8569-8619 x 15145-15190 with a metal contact at (8590,15170) to a short
+  vertical metal x 8592 that ends on a second contact at (8590,15380). The stripped
+  chip-2 shot (`--layers acid`) showed poly far more clearly than the clean shot in
+  the left group; try it here first.
 - Column A below y 16000 (the gates fed by `bc1_g6_out`; contacts at (8290,16030),
   (8229,16171), (8143,16215)).
-- Left gate group x 7100-7850.
-- Routing field y 14050-14900: draw the data polys, the strobe, the bus.
-- Channel tracks x 7882, 7924, 7969 and 8012 below y 15865.
+- Routing field: the 13-line bus (where `bc1_s0`, `bc1_s1` and the other 11 lines come
+  from and go), data lines 3-6 east of x 8040, the supply joints.
+- Channel tracks x 7924, 7969 and 8012 below y 15865.

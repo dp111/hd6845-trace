@@ -211,8 +211,8 @@ N M 7795,15200 bc1_ld_n
 # cell 1 output: poly from the left buried contact up, then left along y 14961 to a metal going up
 P 7330,14961 x7648 y15046 w=20
 C 7338,14958
-M 7338,14968 y14880
-N M 7338,14890 bc1_ld_a
+M 7338,14968 y14803 x7427 y14627 x7448 y14050   # up through the field: jogs right at y 14803 and y 14627 (f1.png); continues up at x 7448
+N M 7448,14060 bc1_ld_a
 
 # cell 2 output: poly from the right buried contact to the strobe metal, which runs up to row D
 P 7740,15265 x7846 w=20
@@ -238,7 +238,42 @@ P 7523,15404:7567,15483                   # load gate
 P 7560,15404:7600,15434                   # its arm to the gate tie
 D 7584,15408:7608,15446                   # bump up from the strip
 B 7580,15402:7610,15436
-M 7838,15467 y15808                       # in1: metal down the channel (followed with sel_tracks to y 15808)
+M 7838,15467 y15830                       # in1: metal down the channel to contact (7838,15820)
+C 7838,15820
+P 7750,15822 x7848                        # poly going left into the lower left group (not traced further)
 N M 7838,15700 bc1_ld_in1
-M 7882,15512 y16227                       # in2: metal down the channel (followed with sel_tracks to y 16227)
+M 7882,15512 y16300                       # in2: metal down the channel, past contact (7880,16252), out of the block
+C 7880,16252
+P 7750,16258 x7890                        # tap: poly going left into the lower left group (not traced further)
 N M 7882,15700 bc1_ld_in2
+
+# ======================================================================================
+# Routing field: the six data lines of cdp4 row D.  Six horizontal poly lines (pitch 43)
+# run from the left edge of the block under the vertical metal bundles; each has a
+# contact to a vertical metal that arrives from above (staircase x 7180-7400).  Line 1
+# ends on the foot of track cdp4_in6_s1, line 2 steps up at x 8112-8122 and goes on
+# under the VCC rail to the foot of cdp4_in6_s2.  Lines 3-6 step up the same way
+# (nested) and continue right beyond x 8500: drawn only as far as they were followed.
+# ======================================================================================
+P 7000,14089 x8087 w=18                   # line 1
+C 8075,14084
+M 8073,14045 y14094 w=20                  # foot of cdp4_in6_s1
+P 7000,14132 x8118 y14087 x8475 w=18      # line 2
+C 8463,14083
+M 8465,14045 y14094 w=20                  # foot of cdp4_in6_s2
+P 7000,14175 x8040 w=18                   # line 3 (continues right: staircase, then beyond x 8500)
+P 7000,14218 x8040 w=18                   # line 4
+P 7000,14261 x8040 w=18                   # line 5
+P 7000,14304 x8040 w=18                   # line 6
+N P 8030,14175 bc1_d3
+N P 8030,14218 bc1_d4
+N P 8030,14261 bc1_d5
+N P 8030,14304 bc1_d6
+# verticals from above ending on the lines
+C 7188,14091 7230,14131 7274,14172 7317,14217 7361,14260 7405,14304
+M 7189,14040 y14102
+M 7231,14040 y14142
+M 7274,14040 y14184
+M 7317,14040 y14229
+M 7360,14040 y14272
+M 7404,14040 y14316
