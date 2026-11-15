@@ -3,7 +3,9 @@
 Trace: `trace/cdp2.txt`. Scratch: `cache/scratch/cdp2/`. Tools: `tools/cdp2_pt.py`
 (colour at points, both chips; used to test for contacts), `tools/cdp2_map.py` (text map
 of colour classes), `tools/cdp2_lines.py` (follow a horizontal poly line by colour),
-`tools/cdp2_mo.py` (stripped shot with the metal outline). `tools/rdp3_sharp.py` (unsharp
+`tools/cdp2_mo.py` (stripped shot with the metal outline), `tools/cdp2_cls.py` (false-colour
+class map), `tools/cdp2_reg.py` and `tools/cdp2_cmont.py` (registration of the clean shot
+against the metal shot), `tools/cdp2_w.py` (sharpened panels with the metal outline). `tools/rdp3_sharp.py` (unsharp
 mask) at 3.3-5x on a median composite (`--comp cdp2_a`) is what made the junctions readable.
 
 ## Status
@@ -202,14 +204,70 @@ all plain poly, **no contact**. So in the sliced part channel 2 only passes thro
 lines join things left of x 8780 or right of x 10790. (One contact-like reading in s2:
 (8556,6888).)
 
-### Rows B1/B2 (surveyed)
+### Rows B1/B2 (in progress: established so far, NOT yet in the trace file)
 
-One cell about 440 x 560 per slice (s3..s7), 5-instance composite `--comp cdp2_b`
-(master frame 9150,6890:9590,7500). Not the latch. Seen at 1.45x: VSS contacts at about
-(9175,7020), (9175,7040), (9180,7200), (9175,7340), (9180,7430); a VCC contact near
-(9390,7235); loads (textured blocks) near (9505,7110), (9500,7240), (9470,7400);
-contacts at (9455,7010), (9277,7095), (9287,7345), (9460,7275), (9505,7345), (9285,7430).
-Perhaps 12-16 transistors.
+One cell about 390 x 560 per slice (s3..s7), composite `--comp cdp2_b` (master frame
+9150,6890:9590,7500, slice s4). Not the latch. Coordinates are the master's.
+
+Reading the clean shot here (measured, second run): under metal poly over field is
+salmon (221,164,120), **poly over a channel under metal is brighter (240,172,124)**,
+diffusion tan (196,178,134), field pink (195,117,126). In the open: poly over a channel
+is dark orange and textured, poly over field can be smooth bright salmon (the same
+colour as a channel under metal, so the metal shot must be consulted), field khaki,
+diffusion mauve to light tan. `tools/cdp2_cls.py` paints these classes; its metal mask
+is patchy where poly edges cut the metal, so it is reliable only inside the white
+outlines. Registration of the clean shot against the metal shot was checked on five
+contacts of this cell (`tools/cdp2_cmont.py`): within 2 px.
+
+Established (each from a 3-4x view plus a colour profile):
+
+- **`hl1`: a diffusion line along the whole row, y 6948-6966** (tan under every rail,
+  no contact to any rail in the cell). The same arrangement as cdp1's row B.
+- **Two transistors in series from `hl1` to VSS**, both about 130 wide (x 9292-9425):
+  gate bar 1 (poly, y 6972-6995), a diffusion strip y 6998-7012, gate bar 2 (poly,
+  y 7014-7040), then a diffusion strip y 7044-7070 that runs on to the right under the
+  metal m4 and joins the tail (9485-9535 x 7052-7072) of the VSS land of the next slice
+  (contacts at 9537,7030 and 9570,7030 = 9147,7030 and 9180,7030 in this slice).
+  Column profile at x 9333 (under the track-b metal): tan 6952-6968, bright poly
+  6976-6990, tan 7000-7012, bright poly 7020-7032, tan 7044-7066.
+  So `hl1` is pulled low in a slice when bar 1 AND bar 2 are high.
+- **Bar 1** joins, at its left end, the poly P1 that runs down under the row A bus line
+  (x 9240-9262, y 6972-7160; orange = over field all the way), turns right along
+  y 7142-7162, passes under track b (y 7158-7172) and the VCC rail (y 7160-7170, up at
+  x 9400-9412, right along y 7128-7140) and becomes the lower gate of the pair below.
+  The join of bar 1 and P1 goes through a small heavy-outlined box (9266-9290 x
+  6972-6997): `?`, see Ambiguities.
+- **Bar 2** ends on a pad (9443-9490 x 6995-7045) with a contact (9463,7015) to the
+  metal **m4** (x 9455-9472), which runs down to a contact (9465,7272) on a diffusion
+  land (9450-9495 x 7250-7300, tan under the metal). Profile along m4: metal present
+  throughout; under it diffusion at y 7058-7066 (the VSS strip), poly at 7082-7100 and
+  7130-7142, a channel at 7193-7212, poly over field 7224-7240, the land from 7262.
+- **A two-input NAND with its load** at x 9440-9550, y 7050-7265: from the VSS tail
+  (y 7052-7072) down through gate "top bar" (poly, y 7080-7097, x 9483-9533) and gate
+  "bottom bar" (y 7125-7142) to the node X (diffusion 9485-9535 x 7145-7185), which
+  continues into a buried-contact box (9508-9547 x 7188-7226, a dark-outlined box with
+  no metal in both metal shots). The load: VCC land (9345-9435 x 7185-7260, contact about
+  9395,7235) -> strip y 7190-7215 under a poly block (9443-9500 x 7176-7222) -> the box;
+  the block continues as the textured blob 9480-9540 x 7222-7265 and is tied to X at the
+  box. Top bar = the poly line y 7082-7100 that comes from the contact pad
+  (9278-9312 x 7078-7118) of the metal **m3** (x 9280-9298, contact 9288,7095); bottom
+  bar = P1. So **X = NAND(m3, P1)**.
+- m3 runs down from (9288,7095) to a second contact (9289,7341) on a large poly pad
+  (9255-9305 x 7320-7365) and on to a third near (9287,7430).
+- A second long poly block (9283-9345 x 7200-7248) lies over a horizontal strip
+  y 7214-7245 that leaves the VCC land to the left: a second load. Its output end
+  (x 9253-9282, y 7170-7265) is not resolved.
+- The row A bus line (metal x 9240-9255) **ends at y 7178** over field, no contact
+  (pink, s.d. 4-6 in five slices). Below it, x 9240-9248, both metal shots show an 8 px
+  bright streak over a smooth salmon poly box (9228-9248 x 7195-7235): not resolved
+  (narrow metal neck, or the channel of a narrow load as in the latch's n2 load).
+- From row C: the n2 poly (x 9453-9474) runs up to y 7325 and the q poly (x 9502-9520)
+  to y 7380, both textured (over a channel or in the open) across the region
+  9432-9545 x 7400-7470. VSS contacts: (9186,7205), (9185,7430), and on a tab of the
+  next slice's rail (9507,7340) with its land 9482-9535 x 7320-7365.
+
+Not resolved: everything in y 7160-7500 left of x 9440 and the bottom right
+(y 7300-7500). Do not build on the list above beyond what it says.
 
 ## Ports
 
