@@ -371,18 +371,43 @@ have to be followed east.
 ## Not done
 
 - **Rows D and E** (y 5150-5700, slices 1-5; slice 5 = slices 2-4 by `tools/cdp1_diff.py`,
-  slice 1 differs only at its left edge x 8750-8830). Sharp medians of the whole cell:
-  `tools/cdp1_sr.py 9140 5130 410 590 --offsets "390,0 780,0 1170,0" --layers acid1b` (and
-  `metal`), coordinates in slice 2's frame. What they show, **not traced**: VSS rail
-  x 9158-9205 with contacts at y 5250, 5425, 5650; the column bit line x 9240-9256 running
-  through; a metal x 9283-9305 from a contact at (9293,5315) down to (9293,5650); a metal
-  x 9320-9345 from y 5152 to 5700 (in slice 2 this is where a2's line arrives after its
-  jog: check whether it is the same wire in the other slices); VCC rail x 9375-9425 with
-  a contact at (9395,5460); a metal strap x 9440-9465 between contacts (9455,5240) and
-  (9455,5500); contacts at (9530,5250) and (9500,5565). Poly gates in the open at
-  x 9280-9350 y 5195-5260 (two horizontal bars), x 9490-9540 y 5300-5365 (two bars) and
-  vertical bars at x 9450-9530 y 5550-5700. cdp2 reports that its row A's outputs come up
-  to contacts at (9118+390k,5740) and its bus lines are these bit lines.
+  slice 1 differs only at its left edge x 8750-8830). **Surveyed, not traced**: the cell
+  has more junctions than the rest of the block together and I stopped rather than
+  ship unchecked geometry. Sharp medians, coordinates in slice 2's frame:
+  `tools/cdp1_sr.py 9140 5130 410 590 --offsets "390,0 780,0 1170,0" --layers acid1b`
+  (whole cell, 2x) and the quadrants `9140 5140 210 285`, `9345 5140 210 285`,
+  `9140 5415 210 290` at `--up 3 --layers acid1b,metal`. What those show (seen, not
+  measured; every item needs its junctions checked):
+  - Metal: VSS rail x 9158-9208 with contacts at (9180,5250), (9180,5430), (9183,5655);
+    the column bit line x 9240-9256 straight through to y 5700; a line x 9283-9305 from
+    a contact at (9292,5315) down to contacts at (9288,5562) and (9288,5652); a line
+    x 9320-9345 from y 5153 to 5700 (in slice 2 a2's bus line arrives on this track
+    after its jog at y 5095-5110: whether the other slices' line is fed there too was
+    not looked at); VCC rail x 9375-9425 with a contact at (9395,5460); a strap
+    x 9440-9465 between contacts (9460,5240) and (9455,5500).
+  - **A band along the whole row at y 5165-5185** between two heavy lines (seen from
+    x 8790 to 10750 at 0.5x). It is diffusion-coloured under the VSS rail, the bit line
+    and the VCC rail, with no contact specks there. Believed a shared node along the
+    row, like `cdp1_b_eq`'s line; its ends and its load were not looked for.
+  - A diffusion column x 9290-9315 hangs from that band down to y 5297 and is crossed
+    by two poly bars, y 5195-5217 and y 5237-5262: believed two transistors in series.
+    The upper bar's poly runs from x 9430 west to x 9257, down under the bit line to
+    y 5373 and east again along y 5370-5390. The lower bar's poly runs east under the
+    VCC rail to a pad (9452-9492 x 5225-5267) with the strap's contact (9460,5240).
+    What the column's foot (y 5268-5297) joins was not seen; a poly band lies just
+    below it.
+  - That poly band, y 5300-5330, starts at a pad with the contact (9292,5315) and runs
+    east to a bar at x 9482-9538, y 5303-5322. A second bar, y 5345-5365, comes from
+    under the VCC rail (x 9400-9420, where it turns down to y 5400). Both bars cross a
+    column x 9485-9535 that starts on the next slice's VSS land (9515-9555 x 5233-5297):
+    believed a series pair to VSS with its lower end at y 5370-5395.
+  - Row E: a poly pad 9253-9310 x 5550-5588 under contact (9288,5562), a diffusion land
+    9268-9313 x 5635-5682 under contact (9288,5652), several short poly gates at
+    x 9230-9340, y 5425-5545. Not analysed.
+  - The colour test gives a contact-like patch on the left edge of the bit line at about
+    (9243 + 390 k, 5546) in three of the five slices. Not established either way.
+  - cdp2 reports that its row A's outputs come up to contacts at (9118+390k,5740) and
+    that its bus lines are these bit lines.
 - The logic in the slice-0 position and under slice 1's left edge (see Inventory).
 - **The write strobes.** `cdp1_a_wr` and `cdp1_c_wr` leave on two metal lines going south
   just east of the block (x 10937 and x 10894 at y 5700). `sel_tracks.py` shows both
