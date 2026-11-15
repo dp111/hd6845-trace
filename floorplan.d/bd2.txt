@@ -1,7 +1,11 @@
 15895,15020:16280,15165  logic  Write strobe driver | inverter: sel_stb_r = NOT bd2_n1 (the strobe latch); output north and west to the register select gates
-15895,15220:16280,15365  logic  Address register load driver | inverter: areg_load = NOT bd2_al_n = x OR (E AND m210); output up the bundle to the address register
-15895,15500:16150,15990  logic  Write strobe latch | D latch open while E is high: two cross-coupled AND-OR-invert gates plus the inverter of its data input bd2_c; its Q drives the write strobe driver
-16090,14700:16300,15900  route  Strobe and E bundle | areg_load and sel_stb_r up, E (x 16169) from below, latch input bd2_c (x 16277) and its inverse (x 16104)
-16240,15400:16480,15850  logic  Address load gate and latch input gate | under a ground rail: bd2_al_n = NOT(x OR (E AND m210)) for the address register strobe; bd2_nu = NOT(bd2_c AND E); loads and inputs from the east not traced
-?15890,15990:16420,17100  logic  Bus control gate column | not traced: three similar gate groups 260 px apart; R/W (y 16040, 16300), CS (y 16171, 16430) and RS (y 16605) end here on gate bands
+15895,15220:16280,15365  logic  Address register load driver | inverter: areg_load = NOT bd2_al_n = bd2_x OR (E AND write to the address register); output up the bundle to the address register
+15895,15500:16150,15990  logic  Write strobe latch | D latch open while E is high: two cross-coupled AND-OR-invert gates plus the inverter of its data input; holds "write to a data register" through E low; its Q drives the write strobe driver
+16090,14700:16300,15900  route  Strobe and E bundle | areg_load and sel_stb_r up, E (x 16169) from below, latch data input (x 16277) and its inverse (x 16104)
+16240,15400:16480,15850  logic  Address load gate | under a ground rail: bd2_al_n = NOT(bd2_x OR (E AND bd2_m210)) for the address register strobe, and bd2_nu = NOT(bd2_c AND E); loads and inputs from the east not traced
+15890,15985:16400,16210  logic  Data register write decode | 3-input NOR of R/W, NOT RS and CS: write AND chip selected AND RS high; data input of the write strobe latch
+15890,16245:16400,16470  logic  Address register write decode | 3-input NOR of R/W, RS and CS: write AND chip selected AND RS low; gates the address register strobe
+?15890,16540:16400,16730  logic  RS inverter and R/W gate | top gate pulled low by RS (its output is the NOT RS of the data register decode); the gate below it takes R/W: not traced
+16150,15900:16400,17100  route  R/W, RS, CS and E risers | E (x 16169), R/W (x 16298, ends y 16040), RS (x 16342, ends y 16603), CS (x 16385, ends y 16171), with the decode outputs between them
+?15890,16730:16150,17100  logic  Bus control gate column, lower part | not traced
 ?16480,14700:17000,17100  unknown  Right-hand column and routing | not looked at

@@ -8,22 +8,28 @@ Extracts with 0 errors, 0 warnings. Two runs; this file was rewritten by the sec
 - **Traced and extracted**
   - G1, the driver of `sel_stb_r`, and G2, the driver of `areg_load` (first run).
   - The **strobe latch** behind G1: rows 1-3 of the left gate column and the inverter
-    G4 west of the rail (second run). A D latch, open while `e_b` is high.
-  - The wiring of `e_b`, `bd2_n1`, `bd2_al_n`, `bd2_a`, `bd2_c` in the bundle down to
-    y 15900.
+    G4 west of the rail. A D latch, open while `e_b` is high.
+  - **Where R/W, CS and RS act**: groups 2 and 3 of the left column, two three-input
+    NORs of `rw_d`, `cs_d` and RS (one takes `rs_d`, the other its inverse). Group 2's
+    output is the latch's data input, group 3's gates the address register strobe.
+  - The wiring of `e_b`, `bd2_n1`, `bd2_al_n`, `bd2_a`, `bd2_c`, `bd2_m210`, `bd2_m255`
+    and the top ends of `rw_d`, `rs_d`, `cs_d` in the bundle.
 - **Pull-downs traced, loads not**: the two gates of the gate group right of the bundle
-  (`bd2_nu`, `bd2_al_n`).
-- **Two results of the first run are corrected**: `areg_load` is not `NOT e_b` (G2's
-  gate is a separate net, `bd2_al_n`), and row 1 has a third pull-down and a load.
-- **Not traced**: where `bd2_c`, `bd2_x` and `bd2_m210` come from (east of x 16376, the
-  right-hand column), the left column below y 15990 (where `rw_d`, `cs_d` and `rs_d`
-  end: located, not traced), the right-hand column. See Not done.
-- Images used: about 44 (first run) + 40 (second). What worked in the second run was
+  (`bd2_nu`, `bd2_al_n`) and the `rs_d` inverter at the top of group 4 (`bd2_m255`).
+- **Three results of the first run are corrected**: `areg_load` is not `NOT e_b` (G2's
+  gate is a separate net, `bd2_al_n`); row 1 has a third pull-down and a load; the metal
+  at x 16210 is two wires (a second break, at y 15968-15988).
+- **Not traced**: the source of `bd2_x`, the rest of group 4 and the column below
+  y 16730, the right-hand column. See Not done.
+- Images used: about 44 (first run) + 46 (second). What worked in the second run was
   **numbers instead of pictures**: character maps of small areas by colour class
   (`tools/bd2_umap.py` for what lies under metal in the clean shot, `tools/bd2_cmap.py`
   for poly against plain areas in the open, `tools/bd2_patch.py` / `bd2_prof.py` for
-  single patches and profiles). At 5-6x the pictures of this area are too blurred to
-  decide a junction; the maps decided them.
+  single patches and profiles), and **contact footprints**: under a metal the clean shot
+  is olive green (G >= R, B about 100) where the metal had a contact, salmon where it
+  only crosses a poly, pink over field. At 5-6x the pictures of this area are too
+  blurred to decide a junction; the maps decided them, and the pictures were then used
+  to check the trace by overlay.
 
 ## Verdict on the disagreement with bd3: the input of the `sel_stb_r` driver is NOT `e_b`
 
@@ -65,43 +71,54 @@ So `sel_stb_r = NOT bd2_n1`, and `bd2_n1` is the Q of the latch below.
     sel_stb_r = NOT bd2_n1                                   G1          traced
     bd2_n1    = NOT( bd2_qb OR (e_b AND bd2_a) )             row 1       traced
     bd2_qb    = NOT( bd2_n1 OR (e_b AND bd2_c) )             rows 2-3    traced
-    bd2_a     = NOT bd2_c                                    G4          traced (two junctions inferred, below)
+    bd2_a     = NOT bd2_c                                    G4          traced (the tie of its output to the bar is inferred)
+    bd2_c     = NOR( rw_d, bd2_m255, cs_d )                  group 2     traced
+    bd2_m255  : pulled low by rs_d                           group 4     pull-down and output band traced; load not: believed NOT rs_d
     areg_load = NOT bd2_al_n                                 G2          traced
-    bd2_al_n  = NOT( bd2_x OR (e_b AND bd2_m210) )           pull-downs traced, load and the tie to G2 uncertain
-    bd2_nu    = NOT( bd2_c AND e_b )                         pull-downs traced, load and destination not traced
+    bd2_al_n  = NOT( bd2_x OR (e_b AND bd2_m210) )           gate group  pull-downs traced; load not, tie to G2 inferred
+    bd2_m210  = NOR( rw_d, rs_d, cs_d )                      group 3     traced (by the pattern of group 2 west of the rail)
+    bd2_nu    = NOT( bd2_c AND e_b )                         gate group  pull-downs traced; load and destination not
 
-Read as logic: rows 1-3 with G4 are a transparent latch. While `e_b` is high
-`bd2_n1 = bd2_c` (and `bd2_qb = NOT bd2_c`); while `e_b` is low both hold. Hence
+Read as logic (believed; `rw_d`, `rs_d`, `cs_d` have the sense of their pins):
 
-    sel_stb_r = NOT bd2_c   while E is high;  held at its last value while E is low
-    sel_wN    = rselN AND bd2_c(latched)      (the NOR in sel)
+- `bd2_c` = write AND chip selected AND RS high: a write to the data register.
+- `bd2_m210` = write AND chip selected AND RS low: a write to the address register.
+- Rows 1-3 with G4 are a transparent latch: while `e_b` is high `bd2_n1 = bd2_c`
+  (and `bd2_qb = NOT bd2_c`); while `e_b` is low both hold. Hence
 
-- **Set** (strobes on, `bd2_n1` high): `e_b AND bd2_c` pulls `bd2_qb` low.
-- **Cleared** (strobes off): `e_b AND bd2_a`, i.e. `e_b AND NOT bd2_c`, pulls `bd2_n1` low.
-- **Held**: the cross-coupling `bd2_n1` -> row 2's gate, `bd2_qb` -> row 1's third
-  pull-down, whenever `e_b` is low.
+      sel_stb_r = NOT bd2_c   while E is high;  held at its last value while E is low
+      sel_wN    = rselN AND bd2_c(latched)      (the NOR in sel)
 
-`bd2_c` is not yet traced to its source (it is the gate band G_a of the gate group and
-may run on east of x 16376): **uncertain what it is**. Nothing in the traced part gates
-the strobe with E low, so as traced a selected register stays open after E falls until
-E rises again with `bd2_c` low; whether `bd2_c` itself contains E has to come from its
-source.
+  - **Set** (strobes on, `bd2_n1` high): `e_b AND bd2_c` pulls `bd2_qb` low.
+  - **Cleared** (strobes off): `e_b AND bd2_a`, i.e. `e_b AND NOT bd2_c`, pulls `bd2_n1` low.
+  - **Held**: the cross-coupling `bd2_n1` -> row 2's gate, `bd2_qb` -> row 1's third
+    pull-down, whenever `e_b` is low.
+- `areg_load = bd2_x OR (e_b AND bd2_m210)`: the address register is loaded while E is
+  high in a write to it, or when `bd2_x` (not traced) is high.
+
+Nothing in the traced part turns the write strobe off when E falls: as traced, the
+selected register's strobe stays on from E rising in a data write until E next rises
+with `bd2_c` low. Whether that is the whole story depends on what `sel` does with it
+and on the data path; it is what the silicon here says.
 
 ## Inventory
 
 | What | Where | State |
 |---|---|---|
 | VCC rail | x 15795-15890, whole height (shared with `sel`'s right-hand column); band y 14745-14805 to areg's inverter rail x 16142-16194 | drawn |
-| VCC land under that rail | x 15850-15898, y 15682-15912 continuous (and on down, not followed) | drawn to 15912 |
+| VCC land under that rail | x 15850-15898, continuous from y 15682 down at least to y 16120 | drawn in pieces where a load uses it |
 | Ground rail of the left column | x 16008-16058, y 14908 to about 17050; joined by the band y 14908-14960 to `areg_rail_r` | drawn; lower end not looked at |
-| `areg_rail_r` | x 16401-16450 above y 14908; jogs to x 16355-16405 (y 14908-15330), then to x 16312-16362 (y 15400 to about 16330, the ground rail of the gate group) | drawn to y 15330 and y 15400-15850; the jog between is the first run's observation, not drawn |
+| `areg_rail_r` | x 16401-16450 above y 14908; jogs to x 16355-16405 (y 14908-15330), then to x 16312-16362 (y 15400 on), the ground rail of the gate group, which **ends at y 15922** | drawn to y 15330 and y 15400-15850; the jog between is the first run's observation, not drawn |
 | G1, driver of `sel_stb_r` | 15900-16272 x 15030-15160 | traced |
 | G2, driver of `areg_load` | 15895-16272 x 15225-15360 | traced |
 | Row 1 (latch, Q side) | 15900-16150 x 15500-15715 | traced |
 | Rows 2-3 (latch, Q bar side) | 15900-16150 x 15655-15915 | traced |
 | G4 (`bd2_a = NOT bd2_c`) | 15900-16125 x 15857-15985 | traced |
 | Gate group right of the bundle | x 16240-16480, y 15400-15850 | pull-downs traced, loads not |
-| Left column below y 15990 | x 15890-16150, y 15990-17100 | located only (see Not done) |
+| Group 2 (`bd2_c`, NOR of R/W, NOT RS, CS) | 15890-16400 x 15985-16210 | traced |
+| Group 3 (`bd2_m210`, NOR of R/W, RS, CS) | 15890-16400 x 16245-16470 | traced, west part by the pattern of group 2 |
+| Group 4, first gate (`bd2_m255`, from `rs_d`) | 16000-16360 x 16545-16680 | pull-down and output band traced, load not |
+| Left column below y 16680 | x 15890-16150, y 16680-17100 | not traced |
 | Right-hand column | x 16480-16800, y 14700-16450; routing east and south of it | not looked at |
 
 ## Logic
@@ -156,8 +173,9 @@ One inverter, `areg_load = NOT bd2_al_n`.
   field: the plain areas above and below it measure as field) runs east to the boxed
   cell at the west end of `bd2_al_n`'s diffusion (16266-16296 x 15684-15704).
 
-So the address register's load strobe is `x OR (E AND m210)` in terms of the two
-untraced inputs, not simply NOT E. **This changes what areg.md should assume.**
+So the address register's load strobe is `bd2_x OR (e_b AND bd2_m210)`, with
+`bd2_m210 = NOR(rw_d, rs_d, cs_d)` (group 3): E high in a write to the address
+register, not simply NOT E. **This changes what areg.md should assume.**
 
 ### The strobe latch (traced, second run)
 
@@ -241,10 +259,12 @@ Diffusion column x 16312-16366 under the ground rail x 16312-16362
   (contact 16327,15612); band y 15638-15656, gate `bd2_x`, arriving from the east; the
   node `bd2_al_n` y 15663-15720 (arm east at y 15687-15708 to x 16374, arm west to the
   boxed cell); band G_d y 15726-15744, gate `e_b` (tap 16167,15735); node; band G_e
-  y 15770-15788, gate `bd2_m210` (contact 16207,15778; the band also runs on east of
-  the column); ground land y 15795-15831 (contact 16330,15812). Load not traced.
-- `bd2_c`: metal pad on contact 16260,15473 and thin metal x 16270-16284 down to contact
-  16274,15872 on the east end of row 3's lower band. It crosses both boxed cells.
+  y 15770-15788, gate `bd2_m210` (contact 16207,15778, from group 3; the band's poly
+  also extends east of the column to about x 16372); ground land y 15795-15831 (contact
+  16330,15812). Load not traced.
+- `bd2_c` here: metal pad on contact 16260,15473 and thin metal x 16270-16284 down to
+  contact 16274,15872 on the east end of row 3's lower band (its driver is group 2,
+  below). It crosses both boxed cells.
   No contact there: the cell centres are cream in the clean shot (193-201/170-183/126-138)
   like diffusion under metal, not olive green like the footprints of the known contacts
   of these metals (154-165/167-183/96-103), although in the metal shots the centres are
@@ -254,6 +274,82 @@ Diffusion column x 16312-16366 under the ground rail x 16312-16362
   16450,15539 with a thin metal x 16444-16459 going down to contact 16450,15740; the
   wide vertical metal x 16489-16547 with a long contact strip.
 
+### Groups 2, 3 and 4 of the left column: where R/W, CS and RS act (traced, second run)
+
+**Group 2: `bd2_c = NOR( rw_d, bd2_m255, cs_d )`** (y 15985-16210)
+
+- Under the rail (`bd2_umap.py 15996 15876 16072 16070` and `15996 16056 16112 16236`):
+  ground land y 15987-16026 (contact 16044,16008); band R y 16032-16047; output
+  y 16056-16083; band S y 16090-16108; ground land y 16113-16155 (contact 16025,16132);
+  band T y 16160-16178; output again y 16185-16203.
+- The two output pieces are **one node**. The upper has an arm west under the rail
+  (y 16064-16080) to the load (block 15898-15938 x 16068-16096 over the strip from the VCC
+  land, one poly with the bars above and below, tie at the boxed cell 15915-15940 x
+  16121-16141). From the load's east end a diffusion wire (x 15944-15964) goes down to
+  y 16208 and back east under the rail into the lower piece. The wire is pink in the
+  metal shots, green in the clean shot, and measures R-G +24/+25 in chip 2's stripped
+  shot against +3 for field and -3 for the field pocket it encloses.
+- Band R: east under the `e_b` trunk and the `bd2_c` metal (salmon, no contact) to the
+  contact 16297,16040 = **top end of `rw_d`** (olive footprint).
+- Band S (x 15970-16076): its east end is joined by a poly link (x 16064-16073,
+  y 16093-16120, orange in all three shots) to a band y 16120-16136 that runs east to the
+  contact 16252,16128 (olive footprint) on the metal x 16255 = `bd2_m255`.
+- Band T: from x 15970 east across the whole bundle (salmon under `e_b`, `bd2_m255`,
+  `rw_d` and `bd2_m210`: no contact) to the contact 16386,16171 = **top end of `cs_d`**.
+- Output: boxed cell 16075-16102 x 16058-16081 at the east end of the upper output
+  piece; poly band y 16078-16092 east under the `e_b` trunk to the contact 16210,16086 at
+  the lower end of the `bd2_c` metal.
+
+**The metal at x 16210 is two wires** (measured like the first break):
+
+- y 15972-15981, x 16204-16219: chip 2 144/96/47 (G/R 0.67), chip 1 141/90/45 (0.63), in
+  both orange like the proven gap of the x 16169 metal (155/107/55, 143/94/50), against
+  195-204/164-169 and 182-189/142-145 on the metal either side; chip 2's stripped shot
+  has a dark bar at y 15968-15980 (R 55-118, elsewhere 127-205)
+  (`bd2_prof.py stat 16204,15972:16219,15981 ...`).
+- **Upper piece = `bd2_m210`**: from contact 16207,15778 (band G_e) down to y 15967, east
+  as a bar y 15947-15967 (the 6 px dark line at x 16221-16226 between them lies on the
+  edge of the poly underneath: an edge printing through) to x 16349, down x 16329-16349
+  (pink field under it all the way, salmon where it crosses band T) to the contact
+  16343,16344 on group 3's output band. The first run took this vertical for the gate
+  group's ground rail running on; that rail ends at y 15922 (view q1).
+- **Lower piece = `bd2_c`**: contact 16211,15997 (olive) down to contact 16210,16086.
+  The pad of the upper contact is the foot of a poly that runs up under the upper
+  piece (x 16206-16216, salmon and unbroken from y 15982 to 15877) into row 3's lower
+  band. So group 2's output reaches the latch (rows 2-3, G4) and, by the thin metal
+  x 16277, the gate band G_a.
+
+**Group 3: `bd2_m210 = NOR( rw_d, rs_d, cs_d )`** (y 16245-16470)
+
+- The same gate 261 px lower: under the rail ground land y 16250-16287, band R'
+  y 16293-16308, output y 16317-16347, band S' y 16353-16367, ground land y 16374-16416,
+  band T' y 16422-16438, output y 16446-16467 (`bd2_umap.py 15996 16236 16080 16490`);
+  west of the rail the character map shows group 2's load, wire and tie cell shifted
+  by 261 (`bd2_cmap.py 15892 16296 16012 16476`). Drawn from group 2's shapes; checked
+  by one overlay (view ov6).
+- Band R' ends on `rw_d`'s tap 16298,16302; band T' on `cs_d`'s tap 16386,16430 (olive
+  footprints both). Band S' is linked (x 16064-16073, y 16354-16381) to a band
+  y 16381-16397 that ends on the contact 16211,16388, the top end of a metal that goes
+  south to the contact 16211,16606 on `rs_d`'s band in group 4.
+- Output: boxed cell at the east end of the upper output piece, band y 16339-16353 east
+  across the bundle (salmon under `e_b`, `bd2_m255`, `rw_d`) to the contact 16343,16344.
+
+**Group 4, first gate: `bd2_m255` pulled low by `rs_d`** (y 16545-16680)
+
+- Under the rail: field down to y 16563; land y 16575-16590 (the output); band
+  y 16594-16612; ground land y 16620-16677 (contact about 16041,16663); band
+  y 16681-16699; land y 16707-16725 (`bd2_umap.py 15996 16476 16080 16730`).
+- The band y 16594-16612 runs east across the bundle to the contact 16343,16603 =
+  **top end of `rs_d`**, and on the way has the contact 16211,16606 of the metal that
+  feeds band S' of group 3. Salmon, no contact, under `e_b`, `bd2_m255` and `rw_d`.
+- Output: a boxed cell (16090-16130 x 16545-16578) on the north side of the land's east
+  end; poly band y 16552-16568 east to the contact 16255,16562 on the `bd2_m255` metal
+  (view g4z). That metal runs up to band S of group 2 (contact 16252,16128) and on
+  south (track scan: to y 17300 at least, not followed).
+- **Not traced**: this gate's load and whatever else is west of the rail (a different
+  pattern from groups 2-3), so "`bd2_m255 = NOT rs_d`" is a belief; the band
+  y 16681-16699, which `rw_d` taps at 16298,16690.
+
 ## Bundle x 16100-16400: what is on each track
 
 | x | Segment | Net |
@@ -261,16 +357,19 @@ Diffusion column x 16312-16366 under the ground rail x 16312-16362
 | 16104 | 15560-15962 | `bd2_a`: contact 16114,15560 (row 1 upper band) to contact 16105,15962 (G4's bar) |
 | 16122 | 15384-15490 | `e_b`: contact 16122,15388 down to the corner into the lower trunk |
 | 16169 | 15211-15443 | `bd2_n1` (upper trunk), contact 16167,15432 at its lower end |
-| 16169 | 15470-17702 | `e_b` (lower trunk); taps 16167,15605 (row 1), 16167,15735 (G_d), 16166,15822 (row 3); scan gaps at about 16127, 16389, 17018-17044 are probably contacts |
+| 16169 | 15470-17702 | `e_b` (lower trunk); taps 16167,15605 (row 1), 16167,15735 (G_d), 16166,15822 (row 3). No contact where it crosses the bands of groups 2-4 down to y 16700 (salmon in the clean shot); scan gaps at about 17018-17044 not looked at |
 | 16210 | 15296-15690 | `bd2_al_n`: contact 16210,15300 (G2's gate) to contact 16205,15690 |
-| 16210 | 15771-16051 (16094 in chip 1) | `bd2_m210`: starts at contact 16207,15778 (band G_e); contacts seen at about 16210,15992 and 16210,16083 in a 1.2x survey |
-| 16210 | 16424-16568, 16754-17745 | not identified |
-| 16255 | 15947-15983, 16144-17300+ | not identified; contact at about 16255,16127 on a poly band going west |
+| 16210 | 15771-15967 | `bd2_m210`: contact 16207,15778 (band G_e), then east along y 15957 and down x 16339 |
+| 16210 | 15990-16096 | `bd2_c`: contact 16211,15997 (poly up to row 3's lower band) to contact 16210,16086 (group 2's output) |
+| 16210 | 16378-16616 | `rs_d`: contact 16211,16388 (band S' of group 3) to contact 16211,16606 (group 4's band) |
+| 16210 | 16754-17745 | not identified |
+| 16255 | 16118-17300+ | `bd2_m255`: contact 16252,16128 (band S of group 2), contact 16255,16562 (group 4's output band), on south |
+| 16255 | 15947-15983 | this is the bar of `bd2_m210` crossing the track |
 | 16277 | 15466-15872 | `bd2_c`: contact 16260,15473 (G_a) to contact 16274,15872 (row 3's lower band) |
-| 16299 | 16033-17569 | `rw_d` per trunks.md; **top end at contact about 16297,16040**, tap about 16298,16300 |
-| 16342 | 15400-16330 | ground rail of the gate group (x 16312-16362) and its continuation; ends at a contact about 16343,16342 |
-| 16342 | 16596-17515 | `rs_d` per trunks.md; **top end at contact about 16342,16605** |
-| 16385 | 16138-17569 | `cs_d` per trunks.md; **top end at contact about 16386,16171**, tap about 16386,16430 |
+| 16299 | 16030-17569 | `rw_d`: top end at contact 16297,16040 (group 2); taps 16298,16302 (group 3), 16298,16690 (group 4, not traced) |
+| 16339 | 15957-16354 | `bd2_m210`: down to contact 16343,16344 (group 3's output band) |
+| 16342 | 16593-17515 | `rs_d`: top end at contact 16343,16603 (group 4's band) |
+| 16385 | 16161-17569 | `cs_d`: top end at contact 16386,16171 (group 2); tap 16386,16430 (group 3); taps at 16815, 17170 per trunks.md not looked at |
 
 ## Ports
 
@@ -284,15 +383,13 @@ Diffusion column x 16312-16366 under the ground rail x 16312-16362
 | `areg_w6` | metal | x 16341, y 14700 (top) | unknown | contact 16337,14866, poly down x 16330-16345 and on to the right-hand column (areg.md). Not drawn |
 | `areg_w7` | poly | x 16364, y 14700 (top) | unknown | to the right-hand column. Not drawn |
 | `e_b` | metal | x 16169, y 17100 (bottom) | from outside | E buffered; lower trunk |
-| `bd2_c` | poly | x 16378, y 15477 (band G_a's east end, inside the region) | from outside the traced part | data input of the strobe latch; source not found |
-| `bd2_x` | poly | x 16376, y 15647 | from outside the traced part | band arriving from the east |
-| `bd2_m210` | metal / poly | metal x 16210 down to about y 16050; poly band G_e east of x 16376, y 15779 | unknown | |
-| `bd2_nu` | diffusion | x 16374, y 15555 | driven here | goes east, not followed |
+| `rw_d` | metal | x 16298, y 17100 | from outside | per trunks.md; ends at 16297,16040 |
+| `rs_d` | metal | x 16342, y 17100 | from outside | per trunks.md; ends at 16343,16603 |
+| `cs_d` | metal | x 16385, y 17100 | from outside | per trunks.md; ends at 16386,16171 |
+| `bd2_m255` | metal | x 16255, y 17100 | driven here (group 4) | believed NOT `rs_d`; runs on south, destination unknown |
+| `bd2_x` | poly | x 16376, y 15647 (inside the region) | from the untraced part | band arriving from the east; second term of `areg_load` |
+| `bd2_nu` | diffusion | x 16374, y 15555 (inside the region) | driven here | goes east, not followed |
 | ? | metal | x 16212, y 17100 | ? | track 16210, segment 16754-17745 |
-| ? | metal | x 16257, y 17100 | ? | track 16255, runs up to about y 16144 |
-| `rw_d` | metal | x 16298, y 17100 | from outside | per trunks.md |
-| `rs_d` | metal | x 16342, y 17100 | from outside | per trunks.md |
-| `cs_d` | metal | x 16385, y 17100 | from outside | per trunks.md |
 | ? | metal | x 16016-16026, y 17100 | ? | thin line where the ground rail was; not looked at |
 | ? | metal, 49 wide | x 16492-16540, y 17100; x 16505-16540 at y 14700 | supply? | wide vertical of the right-hand column, whole height |
 | ? x 6 | metal | x 16580, 16624, 16668, 16711, 16755, 16799 at y 17100 | ? | six lines on a 43.5 px pitch leaving south |
@@ -307,70 +404,61 @@ The lists marked ? at the south, east and top edges come from `tools/sel_cut.py`
 1. **The boxed cells.** Every tie of an output to poly in this block is a "boxed cell":
    one to three small plain patches inside a heavy outline, at the end of a diffusion,
    with a poly ending at or wrapping it. At 6x the buried-contact window itself cannot
-   be told from its outlines, so each is a `?B` in the trace: row 1's output to the band
-   for G1 (16100-16132 x 15636-15662), row 1's tie (15984-16010 x 15656-15684), rows
-   2-3's tie (15956-15994 x 15806-15846), G4's (15962-15984 x 15952-15976), `bd2_al_n`'s
-   (16262-16292 x 15682-15706). Each is taken as a poly-to-diffusion contact because the
-   poly that ends there has no other driver (G1's gate, G2's gate, row 1's upper band)
-   or is a load gate. G1's and G2's own output contacts look the same and are certain.
+   be told from its outlines, so each is a `?B` in the trace (row 1's output to the band
+   for G1, the ties of the loads of row 1, rows 2-3, G4, groups 2 and 3, the output
+   cells of groups 2, 3 and 4, `bd2_al_n`'s west end). Each is taken as a
+   poly-to-diffusion contact because the poly that ends there has no other driver or
+   is a load gate. G1's and G2's own output contacts look the same and are certain.
 2. **Two boxed cells with no poly leaving them**: at the east end of `bd2_qb`
    (16088-16142 x 15764-15798, three plain cells; the mirror image of row 1's output
    contact about y 15716) and at the west end of `bd2_nu` (16246-16296 x 15552-15572).
-   Not drawn. The thin metals `bd2_a` and `bd2_c` pass over them. If `bd2_a` had a
-   contact on the first, `bd2_a` would be `bd2_qb` and row 1 would reduce to
-   `NOT bd2_qb`: the latch could then be set and never cleared, and G4's output would
-   be shorted to it. If `bd2_c` had a contact on the second, `bd2_c = NOT(bd2_c AND e_b)`.
-   Neither makes a circuit, and the clean shot shows no contact footprint on either
-   (and none under `bd2_a` where it widens at y 15753-15762: tan, not olive; but that
-   patch is small). Working assumption: unused cells, no contact. What would settle it:
-   a sharper photo, or tracing `bd2_nu`'s and `bd2_c`'s other ends.
+   Not drawn. The thin metals `bd2_a` and `bd2_c` pass over them. A contact from
+   `bd2_a` to the first would short G4's output to `bd2_qb` and leave the latch unable
+   to clear; a contact from `bd2_c` to the second would short group 2's output to
+   `bd2_nu`. The clean shot shows no contact footprint on either (cream / tan, not
+   olive). Working assumption: unused cells, no contact.
 3. **`bd2_a` across rows 1 and 3** is only a 3-6 px bright core in the metal shots
-   between y 15566-15668 and 15800-15898 (R 140-200), dark where it crosses the two
-   boxed cells. Taken as one metal from 16114,15560 to 16105,15962 because the clean shot
-   has a protected (pink) strip under it all the way and the core is metal-yellow over
-   the orange band at y 15606 in both chips. No contact on rows 1 or 3's bands (salmon
-   unbroken under it).
-4. **Loads of G1 and G2**: the VCC lands under the rail are shared with the loads of
+   between y 15566-15668 and 15800-15898, dark where it crosses the two boxed cells.
+   Taken as one metal from 16114,15560 to 16105,15962 because the clean shot has a
+   protected (pink) strip under it all the way and the core is metal-yellow over the
+   orange band at y 15606 in both chips. No contact on rows 1 or 3's bands.
+4. **G4's output cell** (15966-15978 x 15956-15970): that it ties both the load gate and
+   the bar (and so the thin metal `bd2_a`) to G4's output is inferred: the bar has no
+   other driver and row 1's upper band no other source.
+5. **`bd2_al_n`'s west cell** (16262-16292 x 15682-15706): that it joins the node to the
+   bar from the pad 16205,15690 is inferred the same way (G2's gate has no other driver).
+6. **Group 3 west of the rail** is drawn from group 2's shapes shifted by 261 px on the
+   strength of the character maps and one overlay; its VCC land has no contact drawn
+   (labelled `vcc`).
+7. **`bd2_m255`**: only the pull-down under the rail and the output band are traced;
+   if the gate has another pull-down west of the rail (as row 1 has), it is not
+   `NOT rs_d`.
+8. **Loads of G1 and G2**: the VCC lands under the rail are shared with the loads of
    `sel`'s right-hand column on the other side of the rail (`sel.txt` draws those
    schematically). The strips from the lands to the load blocks are drawn from edge
    lines seen in the metal shot.
-5. **areg.md, "seen below the region"**: the poly from contact 16252,14862 does not
-   reach the contact at 16255,15085 (see G1), and the metal below 16255,15085 does not
-   continue as `e_b`: it ends at 16167,15432. And `areg_load` is not NOT E (G2).
-6. **trunks.md** has `rs_d` on the metal x 16333-16352 "above 15900, not followed" with
-   a tap at y 16335. The track is empty between about y 16345 and 16596: `rs_d`'s metal
-   ends at the contact about 16342,16605, and the metal above y 16342 is the lower end
-   of the gate group's ground rail, ending on a contact about 16343,16342 (1.2x survey).
-7. **Ground rail x 16008-16058 below y 16600**: the scans show several short gaps
+9. **Other blocks' notes that this trace contradicts** (not edited): `trace/bd3.txt`
+   block `bd3_stb` (its `e_b` label on G1's gate, and the metal it draws through the
+   break); areg.md "seen below the region" (the poly from contact 16252,14862 does not
+   reach 16255,15085; the strobe is not NOT E); trunks.md, which has `rs_d` on the
+   metal x 16333-16352 "above 15900" with a tap at y 16335: `rs_d` ends at 16343,16603,
+   and the metal above is `bd2_m210` ending on the contact 16343,16344.
+10. **Ground rail x 16008-16058 below y 16600**: the scans show several short gaps
    (16655-16679, 16797-16815, 16921-16975, 17053-17112 in chip 2, none of them in chip 1
-   above 17049). Drawn continuous to y 17050.
+   above 17049). Drawn continuous to y 17050. Under it the clean shot shows only
+   pink field from y 16479 to 16563.
 
 ## Not done
 
-- **Source of `bd2_c`** (the latch's data input). Its net: band G_a (16250-16378 x
-  15466-15488), pad/contact 16260,15473, thin metal x 16270-16284, contact 16274,15872,
-  row 3's lower band, G4's gate. No driver found on it. Look first at G_a's east end
-  (x 16364-16395): a poly bar 16395-16483 x 15475-15498 lies in line with it.
-- **Loads of `bd2_nu` and `bd2_al_n`**, where `bd2_nu` goes, the sources of `bd2_x`
-  (band y 15638-15656 from x 16376 east) and `bd2_m210` (band G_e east of x 16376;
-  metal x 16200-16222 from 16207,15778 down to about y 16050).
-- **Left column below y 15990: where R/W, CS and RS act** (located in a 1.2x survey,
-  view `sv4.png`; nothing traced). The column repeats about every 260 px:
-  - ground land y 15990-16026 with a contact about 16044,16004; gate band y 16032-16047
-    whose poly runs east to the contact about 16297,16040 = **top end of `rw_d`**;
-    diffusion below it from y 16056;
-  - poly band at y about 16127 from the column east to a contact about 16255,16127
-    (metal x 16255 from there down);
-  - poly band at y about 16171 from x 15973 east across the column and the bundle to the
-    contact about 16386,16171 = **top end of `cs_d`**;
-  - the same three again 260 px lower: band to `rw_d`'s tap 16298,16300; band at
-    y about 16342 to the contact 16343,16342 (end of the gate group's ground metal);
-    band at y about 16385 to a contact about 16211,16386; band at y about 16430 to
-    `cs_d`'s tap 16386,16430;
-  - a third group from y about 16480: contacts at about 16255,16558, 16210,16602 and
-    **16342,16605 = top end of `rs_d`**.
-  - Loads of these rows are west of the rail at x 15900-15990 as in rows 1-4 (the VCC
-    land continues); `tools/bd2_umap.py 15996 15876 16072 16070` already shows the first
-    row under the rail.
+- **`bd2_x`** (second term of the address register strobe): band y 15638-15656 of the
+  gate group, arriving from x 16376 east. Not followed.
+- **Loads of `bd2_nu` and `bd2_al_n`** and where `bd2_nu` goes (east of the gate
+  group's rail, x 16370-16480; seen in one 3x view, `gg4.png`: a poly bar 16395-16483 x
+  15475-15498 turning down at x 16465-16483, contact 16450,15539 with a thin metal
+  x 16444-16459 down to contact 16450,15740, the wide vertical x 16489-16547).
+- **Group 4 below its first gate, and the column to y 17100**: load of the `rs_d`
+  gate (west of the rail, x 15895-15990, y 16540-16640: big poly blocks, a different
+  pattern); the band y 16681-16699 with `rw_d`'s tap 16298,16690 and the land below it;
+  `cs_d`'s taps at about y 16815 and 17170; where `bd2_m255` goes south of y 16570.
 - **Right-hand column** (x 16480-16800, y 14700-16450) and the routing east and south of
-  it: not looked at. `areg_w6`, `areg_w7`, and probably `bd2_c`, `bd2_x`, `bd2_m210` go there.
+  it: not looked at. `areg_w6`, `areg_w7`, and probably `bd2_x`, `bd2_nu` go there.
