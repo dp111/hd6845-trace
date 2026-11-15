@@ -155,6 +155,29 @@ its 8-bit row C latch (`cdp4_ld`), so that rows C and D form one 14-bit register
 by one event; `cdp4.md` reports a contact near that strobe line at (7557,12975). The
 six data lines of row D arrive on the poly lines y 14089-14304 (below).
 
+### Source of `bc1_ld_in1` (seen at 2.3-2.9x in `n1.png`, `n2.png`; NOT traced)
+
+Recorded so the next agent can start here; none of it is in the trace.
+
+- The poly y 15818-15831 from the pad at (7838,15822) runs left to x about 7735 and ends
+  against a narrow outlined strip (7706-7730 x 15790-15855) that continues the
+  diffusion under RL3: taken to be a buried contact onto node N1, so `bc1_ld_in1`
+  would be the output node N1 of the gate under RL3 at y 15745-15945.
+- Under RL3 (diffusion x 7660-7708), top to bottom: VSS contact (7677,15745); poly A
+  y 15768-15790; node N1 y 15792-15855; poly B y 15858-15877; node N2 y 15880-15899;
+  poly C y 15901-15919; VSS land with contact (7672,15945). Read as
+  N1 = NOT(A OR (B AND C)), if N1 has a load (not found yet).
+- Poly B is the long poly along y 15860 that carries contacts at (8012,15865) (metal
+  x 8012 going down) and (7793,15865) (metal x 7795 up to a contact at (7793,15655));
+  it continues left of RL3 to about x 7527. Poly C comes from the contact (7838,15915)
+  (metal x 7838 down to a contact at (7838,16080)).
+- Poly A (y 15759-15790) runs left from RL3 to about x 7523, the edge of a large VCC
+  land under RL2 (7475-7521 x 15723-15852, long contact). Between RL2 and RL3 there are
+  poly blocks at 7525-7577 x 15724-15742, 15757-15776, 15800-15814, 15823-15842 and a
+  poly pad with a metal contact at (7552,15872). So poly A is probably the output of
+  another gate whose load sits there: two gates feeding each other, i.e. a latch. This
+  is where the flip-flops of the strobe timing are.
+
 ### Row D data lines (traced in part)
 
 Six poly lines at y 14089, 14132, 14175, 14218, 14261, 14304 from x 7000 eastwards.
