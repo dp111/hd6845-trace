@@ -416,3 +416,78 @@ P 8656,4132 x9260 w=16
 P 8656,4124:8672,4380                  # down the gap east of slice 0's VCC rail
 P 8340,4372 x8672 w=16                 # west, out of the block
 N P 8345,4372 cdp1_a3_bl
+
+# ---------------------------------------------------------------------------------
+# Bit lines. Each register cell's bit-line metal (x 8857 + 390 k) is drawn inside the
+# cell only; here are the pieces between and below the rows.
+#   slices 1, 4, 5: one straight metal line serves row A and row C (and goes on down)
+#   slice 2: row A's line jogs right in channel B/C and passes row C at x 9290 with no
+#            contact (4x view of both metal shots: no pad anywhere over cell c2)
+#   slice 3: row A's line ends in channel B/C on the poly traced above
+#   slice 0: row A's line steps right under the cell and runs down at x 8509
+M 8857,3325 y4260 w=16                 # slice 1, row A to row C
+M 10027,3325 y4260 w=16                # slice 4
+M 10417,3325 y4260 w=16                # slice 5
+@alias cdp1_c1_bl cdp1_a1_bl
+@alias cdp1_c4_bl cdp1_a4_bl
+@alias cdp1_c5_bl cdp1_a5_bl
+M 9247,3325 y4047 x9290 y5084 w=16     # slice 2, row A: jog at y 4047, down past row C to its bus line
+M 8466,3325 8466,3350 8509,3382 y4952 w=16   # slice 0, row A: diagonal step, then straight down to its bus line
+M 8857,4520 y5150 w=16                 # row C's lines on down through the big channel (they go on: see rows D, E)
+M 9247,4520 y5150 w=16
+M 9637,4520 y5150 w=16
+M 10027,4520 y5150 w=16
+M 10417,4520 y5150 w=16
+
+# Big channel (y 4530-5150): fourteen horizontal poly lines, 11-12 wide, 43.5 apart.
+# Positions and extents from tools/cdp1_under.py (which lines pass under each rail and
+# each bit line) and two 1x views; contacts from the colour test along every vertical.
+# Five lines cross the whole block (west edge to east edge) with no contact in it:
+P 8340,4544 x10850 w=12
+P 8340,4588 x10850 w=12
+P 8340,4632 x10850 w=12
+P 8340,4676 x10850 w=12
+P 8340,4719 x10850 w=12
+N P 10845,4544 cdp1_l4544
+N P 10845,4588 cdp1_l4588
+N P 10845,4632 cdp1_l4632
+N P 10845,4676 cdp1_l4676
+N P 10845,4719 cdp1_l4719
+# The others each start at a contact under one bit line and run EAST out of the block.
+# Between x 9412 and 9580 the six lines that exist there step down one track.
+C 10417,4765 s=22x22                   # slices 5 (rows A and C): track y 4764
+P 10400,4752:10434,4778
+P 10417,4764 x10850 w=12
+C 10027,4809 s=22x22                   # slice 4 (rows A and C): track y 4806
+P 10010,4795:10044,4821
+P 10027,4806 x10850 w=12
+C 9636,4850 s=22x22                    # slice 3 (row C only): track y 4850
+P 9620,4837:9654,4863
+P 9637,4850 x10850 w=12
+C 9247,4852 s=22x22                    # slice 2 (row C only): track y 4850, then 4893 east of the step
+P 9230,4838:9264,4864
+P 9247,4850 x9537 9580,4893 x10850 w=12
+C 8857,4893 s=22x22                    # slice 1 (rows A and C): track y 4893, then 4937
+P 8840,4880:8874,4906
+P 8857,4893 x9512 9555,4937 x10850 w=12
+C 8509,4940 s=22x22                    # slice 0 (row A only): track y 4937, then 4981
+P 8492,4926:8526,4952
+P 8509,4937 x9487 9530,4981 x10850 w=12
+C 8727,4937 s=22x22                    # ... the same line is tapped by a metal going down at x 8727 (to rows D, E)
+P 8712,4925:8742,4950
+M 8727,4925 y5150 w=18
+C 9290,5070 s=22x22                    # slice 2 (row A only): track y 5068, then 5110
+P 9274,5056:9306,5084
+P 9290,5068 x9412 9455,5110 x10850 w=12
+# Two more lines come from the west edge and also step down: tracks y 4981 -> 5024 and 5024 -> 5068
+P 8340,4981 x9462 9505,5024 x10850 w=12
+P 8340,5024 x9437 9480,5068 x10850 w=12
+N P 8345,4981 cdp1_lw1
+N P 8345,5024 cdp1_lw2
+N P 10845,4764 cdp1_c5_bl
+N P 10845,4806 cdp1_c4_bl
+N P 10845,4850 cdp1_c3_bl
+N P 10845,4893 cdp1_c2_bl
+N P 10845,4937 cdp1_c1_bl
+N P 10845,4981 cdp1_a0_bl
+N P 10845,5110 cdp1_a2_bl
