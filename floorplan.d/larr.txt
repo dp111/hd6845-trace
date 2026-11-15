@@ -1,6 +1,7 @@
 # Left vertical array (larr). x0,y0:x1,y1  kind  name | description
-2860,10992:3480,18063  logic  MA counter incrementer (14 rows) | per row: carry = carry-in AND Q (NOR gate to the row below), sum = carry-in XOR Q by pass gates, all-ones line per group; inverters round the stored bit. Traced
-3480,10992:4250,18063  ?array  MA counter latches (14 rows) | clocked pass gates under four vertical strobe lines, loads on VCC rail C, pull-downs on rail D; believed counter latch and row-start latch. Not traced
+2860,10992:3480,18063  logic  14-bit counter: incrementer and stored bit (14 rows) | per row: carry = carry-in AND Q, sum = carry-in XOR Q by pass gates, all-ones line per group; the bit is a static pair with a weak hold device. Believed the MA counter. Traced
+3480,10992:3900,18063  logic  counter latch stage (14 rows) | dynamic node X1 takes the incremented value (strobe Vm2) or a value from the right (Vm3); inverter; pass gate to Y (Vm5); write gate of the stored bit (Vm6); clear (Vm1). Traced
+3900,10992:4250,18063  ?array  counter rows, middle part (14 rows) | Y ends on a gate here, Z (the value written back) and the load value come from here; a wide driver on rail F. Not traced
 4250,10992:4720,18063  ?array  MA row cells, right column (14 rows) | one cell per counter row; not looked at
 2860,14333:4720,14549  ?route  carry gap 1 | carry out of bits 0-6 leaves here, carry into bit 7 arrives; horizontal poly bands
 2860,15981:4720,16154  ?route  carry gap 2 | carry out of bits 7-9; all-ones line of bits 7-9 becomes carry into bit 10
