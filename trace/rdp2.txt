@@ -378,11 +378,16 @@ M 15453,8377 y8839 w=22
 M 15843,8377 y8839 w=22
 # --- upper array, lines through RE and comparator E. Drawn over y 8300-8815 (the latch
 # cells carry their own pieces below that); all go on north, and south into the routing
-# zone, untraced.
+# zone, untraced. The rails x 14174..16125 and 13990..15942 are seen running straight
+# through the routing zone to the lower array (0.9x, rz_l.png, rz_r.png); the rail
+# x 13600 turns east at y 9140-9190 into the rail x 13990 (not drawn), and the rail
+# x 13783 is cut there.
 # supply rails
 M 13393,8300 y9270 w=56              # ends at y 9275; the track below it is L1
 N M 13393,8600 vss
-M 13783,8300 y9540 w=60
+M 13783,8300 y9100 w=60              # upper piece only: this rail is interrupted in the routing zone
+N M 13783,8600 vss
+M 13783,9400 y9540 w=60              # lower piece (the lower array's first rail), fed from the west (notes)
 M 14174,8300 y9540 w=60
 M 14565,8300 y9540 w=60
 M 14955,8300 y9540 w=60

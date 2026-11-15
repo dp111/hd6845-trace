@@ -29,7 +29,7 @@ order is not known.
   wired NOR; output leaves west in poly at y 8339); register row RF (7 latches; strobe
   leaves west in poly at y 8295, register not identified; its comparator is in rdp1).
   The upper array's c lines and data lines are drawn only through these rows.
-- 369 transistors of this block; extracts with no errors and no open nets.
+- 311 transistors of this block; extracts with no errors and no open nets.
 - **Nothing in this block drives the lower `c` lines.** Each c track ends at its topmost
   comparator contact (s1..s7 at y 9723 in comparator D, s0 at y 10244 in comparator C).
   They are fed from rdp3's side (routing zone below row RA).
@@ -212,8 +212,8 @@ rdp2_ce_eq  = NOR(the seven x)              high when the seven uc lines equal R
 | `rdp2_uc_sm1`, `_s0`..`_s5` | metal | x 13541, 13931, 14321, 14712, 15102, 15492, 15882; north at y 8051, south at y 9075 | in | compared with R4 (and by rdp1's comparator with RF) |
 | `rdp3_rf_sm1_q`, `_s0_q`..`_s5_q` | poly | x 13707, 14097, 14487, 14878, 15268, 15658, 16048 (22 wide) at y 8048 going north | out | RF's bits, into rdp1's comparator |
 | `rdp2_t13714` | metal | 13714,8051 north; 13714,9075 south | through | thin line on sm1's strap track |
-| `vss` | metal | x 13783 + 390k (9) at y 9540; x 13393 and 13783..16125 at y 8040 | - | rails, go on north. The rails x 13783..16125 are drawn over y 8040-10700, x 16516 and 16906 from y 9540 |
-| `vcc` | metal | x 13990 + 390k (8) at y 9540; x 13600 and 13990..15942 at y 8040 | - | rails, go on north. x 13600 is drawn to y 9080 only |
+| `vss` | metal | x 13393, 13783, 14174, .., 16125 (8) at y 8040 going north; x 16516, 16906 at y 9540 going north | - | rails. x 13393 ends at y 9275; x 13783 is cut at y 9100-9400 (AMB-5) |
+| `vcc` | metal | x 13600, 13990, .., 15942 (7) at y 8040 going north; x 16332, 16723 at y 9540 going north | - | rails. x 13600 is drawn to y 9080 only (AMB-5) |
 
 `rdp3_rc_s0_q` (R0 bit of slice s0) leaves the region for 14 px at (16950-16964, 9480 to
 10020) and comes back; nothing else is on it out there as far as seen (`east1.png`).
@@ -235,19 +235,29 @@ rdp2_ce_eq  = NOR(the seven x)              high when the seven uc lines equal R
   whole length. No contact ring seen at 2x (`ov_right.png`); not looked at closer.
 - **AMB-4, RF's right-end VSS land** (16097-16145 x 8143-8228, `?D`, `?C`): placed as
   RE's (which was seen at 1.35x with its contact speck); seen at 1.4x only.
-- **AMB-5, rails between the arrays.** The rails x 13783..16125 and 13990..15942 are
-  drawn straight through y 9080-9540 from the 0.35x survey and the strip views; not
-  looked at closely there.
+- **AMB-5, rails between the arrays** (`rz_l.png`, `rz_r.png`, 0.9x). The rails
+  x 14174..16125 (VSS) and 13990..15942 (VCC) run straight through y 9080-9540 and are
+  drawn so. Not drawn, because seen only at 0.9x: the upper array's VCC rail x 13600
+  turns east in a wide strap at about y 9140-9190 and joins the rail x 13990; the VSS
+  rail x 13783 is cut by that strap (upper piece drawn to y 9100, lower piece from
+  y 9400); the lower piece appears to be fed by a wide horizontal piece at about
+  y 9250-9290 from the foot of the rail x 13393. Each piece is labelled by what its
+  cells' lands and loads use.
 - Inherited from rdp3's cells: its AMB-1 (hold device), AMB-7 (T7's diffusion, `?D`),
   AMB-8.
 
 ## Not done
 
-- **Routing zone y 9080-9560.** Here the upper array's data lines and c lines end or
-  turn (track scan: upper data lines reach about y 9055-9370, the lower array's start
-  at about y 9480; so the two sets are joined, crossed or fed here) and many horizontal
-  poly lines run. Needed to know which upper slice is which bit and where `uc` comes
-  from. Not surveyed beyond `sv_metal.png` (0.35x).
+- **Routing zone y 9080-9560.** Here the upper array's data lines and c lines end on
+  contacts to horizontal poly lines (about twelve, y 9130-9450), and the lower array's
+  data lines begin. Needed to know which upper slice is which bit, how the two sets of
+  data lines are joined, and where `uc` comes from. Seen at 0.9x only (`rz_l.png`,
+  `rz_r.png`). Track scan (metal present, y): upper c tracks end at about 9176 (s0),
+  9218 (s1), 9242 (s2), 9196 (s3), 9153 (s4), 9108 (s5); upper data lines at 9370 (s0),
+  9055 (s1), 9285 (s2), 9241 (s3), 9196 (s4), 9055 (s5); lower data lines start at
+  about 9481 (s1), 9480 (s2), 9394 (s3), 9352 (s4), 9309 (s5), 9264 (s6), 9093 (s7).
+  Two extra tracks come down into the s0 column: x 14062 (top contact about 14061,9172)
+  and x 14105 (about 14109,9220).
 - RF's comparator and everything above y 8048 (rdp1).
 - x 16160-16950, y 8100-9440: vertical metal lines right of the upper array.
 - **s0 routing column, x 13800-14180, y 9440-10084** (`s0_d.png`, `bundle1.png`,
