@@ -145,6 +145,9 @@ are both high, and `bc1_ld_a` is an identical, separately buffered copy.
     y 14803, right to x 7427, up to y 14627, right to x 7448, up through the routing
     field (followed to y 14050; continues). The right buried contact of cell 1 has no
     wire (measured: no poly and no contact between it and the strobe metal).
+    The corner of this poly (x 7610-7640, y 14950-14963, in the open between the RL2
+    feed and RL3) was checked by a colour grid in both stripped shots: poly-coloured
+    all the way, field-coloured just below it.
   - Cell 2 output: poly from the right buried contact to a contact at (7838,15260);
     metal x 7838 up to y 15045, left to x 7795, up to y 14913, left to x 7752, up to
     y 14283, right to x 7947, up into `cdp4` (`cdp4_ld6`). Cell 2 has no poly on its
