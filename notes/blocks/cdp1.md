@@ -1,41 +1,53 @@
 # cdp1: central datapath, top rows (x 7600-10850, y 2950-5700)
 
+**Slice tags and array columns.** This block's slices are tagged by position, `s0`..`s5`
+left to right (cells `a0`..`a5`, `b1`..`b5`, `c1`..`c5`). The array's column cN has its
+wide VSS rail starting at x = 7605 + 390.3 N; here the rails start at x 8377, 8770, 9161,
+9551, 9941, 10331. So **s0 = c2, s1 = c3, s2 = c4, s3 = c5, s4 = c6, s5 = c7.** Row A
+occupies c2..c7; rows B, C, D and E occupy c3..c7. Columns c0 and c1 do not exist in
+this block (x 7600-8340 is random logic and belongs to tc1 / tc2).
+
 ## Status
 
-Rows A and C (two rows of the same static register cell, 6 and 5 bits) are traced,
-instanced, checked instance by instance and extract cleanly. Row B's upper half (a
-5-input NOR along the row, its load and its output tap) is traced; its lower half
-(what drives each NOR input) is surveyed but not traced. Rows D and E, the wiring
-channels and the per-slice bit lines are surveyed only (see Inventory and Not done). The area left of x 8340 was not touched: it is random
-logic and overlaps the queued packages `tc1`/`tc2`.
+Traced, placed in every slice, extracting (107 transistors, no errors, no open nets):
+rows A and C (static register cell, 6 and 5 bits), row B (five XORs and the NOR that
+makes the equality line), the wiring of channel B/C, the two poly lines under row A,
+all bit lines down to y 5150, the fourteen bus lines of the big channel, and
+`cdp1_b_eq` to the block's edge. Second run (2026-11-15) added everything from row B's
+XOR on. Not traced: rows D and E (surveyed, one median pair of views), the logic in
+the slice-0 position below row A (x 8340-8750 and a little of slice 1 at y 4740-4870),
+and where the two write lines go after they leave the block (both leave east and turn
+south outside it).
 
 ## Inventory
 
-The array is **not eight slices wide here**. In this region it has six slice positions
-at a pitch of 390 px, `s0`..`s5`, left edges at x 8380, 8770, 9160, 9550, 9940, 10330
-(the wide VSS rail of each slice). Only row A uses s0; every other row uses s1..s5.
-Slices are numbered by position; no bit order is established yet (see Not done).
+In this region the array has six slice positions at a pitch of 390 px, left edges at
+x 8380, 8770, 9160, 9550, 9940, 10330 (the wide VSS rail of each slice). Only row A
+uses s0.
 
-| Row | y | Slices | What it looks like | State |
+| Row | y | Slices | What | State |
 |---|---|---|---|---|
 | top wiring | 2950-3040 | - | VSS band and feeds, the q outputs of row A leaving upward | traced (to y 2950) |
 | A | 3040-3330 | s0-s5 (6) | register cell `cdp1_reg` | traced |
-| below A | 3330-3420 | all | two horizontal poly lines y 3340-3360 and 3385-3405 running the full width, contacts at 10655,3345 and 10615,3385 | not traced |
-| B | 3440-3990 | s1-s5 (5) | comparator slice (believed): pull-down on a row-long NOR line plus about eight transistors; input pad at its foot (9113,3958) fed by row C's q | surveyed, see Logic |
-| channel B/C | 3990-4230 | all | five horizontal poly lines (y about 4003, 4047, 4090, 4133, 4177) crossed by thin vertical metal lines with contacts (9310,4130; 9617,4085; 9703,4085; 10093,4040; 10483,4000) | not traced |
+| below A | 3330-3420 | all | two horizontal poly lines y 3340-3362 and 3385-3408, full width, one contact each at the right end | traced |
+| B upper | 3440-3650 | s1-s5 | 5-input NOR `cdp1_b_eq` | traced |
+| B lower | 3650-3990 | s1-s5 | XOR cell `cdp1_xor` | traced |
+| channel B/C | 3990-4230 | all | five poly lines from the east (the compare value), plus the poly that feeds a3's bit line from the west | traced |
 | C | 4232-4524 | s1-s5 (5) | `cdp1_reg` again (dy = 1194) | traced |
-| channel | 4530-5150 | all | about 15 horizontal metal lines, the rails crossing over/under | not traced |
-| D | 5150-5370 | s1-s5 (5) | small cells under a horizontal poly line | not traced |
-| E | 5380-5700 | s1-s5 (5) | larger cells; may run past y 5700 | not traced |
+| big channel | 4530-5150 | all | fourteen horizontal poly lines; bit lines cross in metal, one contact each | traced (lines and contacts; not the logic at x 8380-9080, y 4740-4870) |
+| D | 5150-5390 | s1-s5 (5) | part of one cell with row E, see Not done | not traced |
+| E | 5390-5700 | s1-s5 (5) | | not traced |
 
-Per slice, vertical metal: VSS rail (52 px wide, left edge of the slice), bit line
-(20 px, 62 px right of the rail centre), VCC rail (50 px, 214 px right of the VSS
-rail centre). Slice s5 has one more VSS rail on its right at x 10711-10765, and a thin
-vertical metal line runs at x 10795-10820 right of that (seen at y 4224-4544, not
-followed).
+Per slice, vertical metal: VSS rail (about 48 wide, left edge of the slice), bit line
+(16 wide, 62 px right of the rail centre), VCC rail (50 wide, 214 px right of the VSS
+rail centre). Slice s5 has one more VSS rail on its right at x 10711-10765. East of it
+two thin metal lines run north-south at x 10808 and x 10850 (see Ports).
 
-Left of x 8750 between y 3440 and 5700 (slice-0 position below row A) and everything
-left of x 8340 is random logic, not part of the array.
+Left of x 8750 below row A (the slice-0 position) there is random logic: two small
+gates at y 4020-4100 and y 4190-4270 (x 8480-8650: VCC contacts at 8620,4060 and
+8620,4230, pull-downs under the slice-0 VSS rail x 8395-8440), more at y 4740-4870
+(x 8380-9080, including a diffusion strip with contacts at 8705,4808 and 8930,4800 and a
+metal going down at x 8943 to a contact at 8940,5120) and at y 5150-5700. Not traced.
 
 ## Logic
 
@@ -78,18 +90,29 @@ the diffusion under m6 at 9104-9130.
 ### Row A (traced): 6-bit register, **believed R8** (interlace 2 bits, DISPTMG skew 2 bits, cursor skew 2 bits)
 
 - Six cells `a0`..`a5`. Each `q` leaves upward on its own wire to the logic above and
-  left of the array, not to a comparator: that and the width of six are the reasons for
-  the R8 guess. Which cell is which bit is not known (bit lines not followed).
-- `cdp1_a_wr` (believed: write strobe of this register) is one poly line that meanders
-  through the cells; it starts under the VSS rail of slice 0 (8395-8445 x 3250-3322,
-  no connection found there) and leaves to the right past x 10786 at y 3300-3322.
+  left of the array, not to a comparator.
+- Bit lines (traced, see "Bit lines and the big channel"): a1, a4 and a5 share their bit
+  line with row C's cell in the same slice; a0, a2 and a3 have bit lines of their own.
+  That is what a register using data bits 0, 1, 4, 5, 6, 7 beside one using bits 0-4
+  would look like (three shared, three not), which is R8's pattern; with the width of six
+  it is the reason for the R8 belief. Not proven: the bus lines are not followed to the
+  data pads, and the write line is not followed to a strobe.
+- `cdp1_a_wr`: one poly line that meanders through the cells; its west end is the leg
+  of cell a0 (8395-8445 x 3250-3322, nothing connected there); east of the block it
+  ends on a contact at (10890,3308) to a metal line that runs south at x 10894 and
+  shifts to x 10937 at y 4420-4440 (seen and scanned; outside the block).
 
-### Row C (traced): 5-bit register, function not known
+### Row C (traced): 5-bit register, function not known (a 5-bit register compared for equality)
 
-- Five cells `c1`..`c5`. Each `q` goes up in metal from a poly pad at the top of the
-  cell (9113+k*390, 4222) to a poly pad at the foot of row B (9113+k*390, 3958), i.e. it
-  drives a gate in row B. Slice 5 differs: its metal goes left and up at x 10632.
-- `cdp1_c_wr`: the same kind of meander, y 4494-4516.
+- Five cells `c1`..`c5`. `q` of c1..c4 goes up in metal from a poly pad at the top of the
+  cell (9113+k*390, 4222) to the pad at the foot of row B (9113+k*390, 3958): the A input
+  of that slice's XOR. c5's `q` goes up at x 10634 past row B to the lower poly line under
+  row A and west out of the block (to tc1's island, which returns the bit for slice 5's
+  XOR: see row B).
+- `cdp1_c_wr`: the same kind of meander, y 4494-4516. West end: the leg of cell c1 under
+  slice 1's VSS rail (x 8780), nothing connected. East of the block it ends on a contact
+  at (10893,4505) to a metal line going south at x 10894 (below where row A's line has
+  left that track).
 
 ### Row B upper half (traced): `cdp1_b_eq = NOR(cdp1_b1_ne .. cdp1_b5_ne)`
 
@@ -99,12 +122,12 @@ the diffusion under m6 at 9104-9130.
   at 9070-9112 x 3505-3546).
 - It leaves through a buried contact in slice 1 (8928-8962 x 3476-3510) into a poly
   line y 3424-3450 going left under slice 1's VSS rail to a pad at 8725,3437, and from
-  there in metal downward (x 8727), into the logic left of the array. Not followed.
-- `cdp1_bN_ne` (N = 1..5) are the gates of the pull-downs; each comes up from the lower
-  half of its slice through a buried contact at 9234-9266 x 3652-3682 (+390 per slice;
-  slice 1: 8844-8876). Named as open ports until the lower half is traced.
-- Believed function: `ne` = "this bit differs", so `eq` = "row C's 5-bit register equals
-  the 5-bit value arriving on the channel B/C poly lines". Traced: only the NOR.
+  there in metal downward (x 8727): see "`cdp1_b_eq` (traced to the edge)".
+- `cdp1_bN_ne` (N = 1..5) are the gates of the pull-downs; each comes up from the XOR
+  of its slice through a buried contact at 9234-9266 x 3652-3682 (+390 per slice;
+  slice 1: 8844-8876).
+- `eq` = 1 exactly when no slice's `ne` is high: row C's value equals the compare value
+  (with the fifth bit as modified by tc1's island).
 
 ### Row B lower half (traced): `cdp1_bK_ne = A XOR B`, cell `cdp1_xor`
 
@@ -213,12 +236,52 @@ x 8290: **`cdp1_b5_a` is tc1's `tc1_f` and `cdp1_c5_q` is tc1's `tc1_a`**. tc1's
 gives (its notes): `f = a.NOT b + b.NOT a.NOT g + a.b.NOT i`. So the fifth comparator bit
 sees row C's fifth bit itself when `tc1_b` is low, and a modified bit when it is high.
 
+### Bit lines and the big channel, y 4530-5150 (traced)
+
+The bit lines are the per-column vertical metal lines at x 8857 + 390 k (16 wide). The
+same lines run on down past y 5700, where cdp2 calls them `cdp2_a_sK_bus`. In the big
+channel each one has exactly one contact, to a horizontal poly line that starts there
+and runs **east** out of the block:
+
+| Bit line | Serves | Route | Contact | Track at the east edge (x 10850) |
+|---|---|---|---|---|
+| `cdp1_a0_bl` | a0 | x 8466 under the cell, diagonal step at y 3350-3382, down x 8509 | 8509,4940 | y 4981 |
+| `cdp1_c1_bl` | a1 and c1 | x 8857 straight | 8857,4893 | y 4937 |
+| `cdp1_c2_bl` | c2 | x 9247, starts at the top of cell c2 | 9247,4852 | y 4893 |
+| `cdp1_a2_bl` | a2 | x 9247, jog right at y 4047, down x 9290 over cell c2 without a contact | 9290,5070 | y 5110 |
+| `cdp1_c3_bl` | c3 | x 9637, starts at the top of cell c3 | 9636,4850 | y 4850 |
+| `cdp1_a3_bl` | a3 | x 9637 down to channel B/C, then poly west (see channel B/C) | 9637,4092 | leaves **west** at 8340,4372 |
+| `cdp1_c4_bl` | a4 and c4 | x 10027 straight | 10027,4809 | y 4806 |
+| `cdp1_c5_bl` | a5 and c5 | x 10417 straight | 10417,4765 | y 4764 |
+
+Fourteen poly lines, 11-12 px wide on a 43.5 px pitch (which lines pass under each rail
+and each bit line was measured with `tools/cdp1_under.py`; contacts by colour test along
+every vertical line):
+
+- y 4544, 4588, 4632, 4676, 4719 (`cdp1_l4544` ..): cross the whole block from x 8340 to
+  x 10850 with no contact in it. Not identified.
+- The six that exist at x 9412-9580 step down one track there (diagonals, 2.6x view):
+  west of the step they lie at y 4850 (c2), 4893 (c1), 4937 (a0), 4981, 5024, 5068 (a2),
+  east of it at 4893 .. 5110. Three more start east of the step, at c3's, c4's and c5's
+  contacts. So at the east edge the order from the top is c5, c4, c3, c2, c1, a0,
+  `cdp1_lw1`, `cdp1_lw2`, a2.
+- `cdp1_lw1` (west y 4981, east y 5024) and `cdp1_lw2` (west y 5024, east y 5068) cross the
+  whole block, west edge to east edge, with no contact in it.
+- The a0 line (track y 4937 west of the step) has a second contact at (8727,4937): a
+  metal line goes down from it at x 8727 into rows D and E's slice-0 position (drawn
+  to y 5150, not followed further).
+
+Believed, not traced: these are the internal data bus, c5..c1 = five adjacent data bits
+in order and a0, a3, a2 the other three (a3 reaching its bus line west of the block,
+perhaps as `cdp1_lw1` or `cdp1_lw2`). Which end is bit 0 is not established here: the lines
+have to be followed east.
+
 ## Ports
 
 | Name | Layer | Where it crosses | Dir | What |
 |---|---|---|---|---|
 | `vss` | M | feeds at 9140-9197, 9900-9987, 10711-10765 x y 2950 (from the plane under the VSS pad); band continues left at 8340, y 2987-3037 | in | supply |
-| `vss` | M | rails x 8796, 9187, 9577, 9967, 10357, 10738 at y 4530 (drawn to there; they continue down). Slice 0's rail (x 8403) is drawn only to y 3440: below that it widens to x 8375-8470 and continues at x 8420-8465 into the logic under row A | - | |
+| `vss` | M | rails x 8796, 9187, 9577, 9967, 10357, 10738 at y 4530 (drawn to there; they continue down). Slice 0's rail (x 8403) is drawn only to y 3440: below that it widens and continues at x 8395-8440 through the slice-0 logic | - | |
 | `vcc` | M | rails x 9010, 9400, 9790, 10180, 10570 at y 4530 (drawn to there; they continue down; top end is in row A). Slice 0's (x 8620) drawn to y 3530 only | in | supply, from below. VCC is identified by the loads hanging from it, not by following it to the pad |
 | `cdp1_a0_q` | P | 8340,3024 going left | out | row A bit, slice 0 |
 | `cdp1_a1_q` | P | 8340,2985 going left | out | row A bit, slice 1 |
@@ -226,13 +289,21 @@ sees row C's fifth bit itself when `tc1_b` is low, and a modified bit when it is
 | `cdp1_a3_q` | P | 9872,2950 (pad with metal contact at 9865,2940 just above) | out | row A bit, slice 3 |
 | `cdp1_a4_q` | M | 10275,2950 going up | out | row A bit, slice 4 |
 | `cdp1_a5_q` | P | 10665,2950 (pad with metal contact at 10655,2940 just above) | out | row A bit, slice 5 |
-| `cdp1_a_wr` | P | 10786,3311 going right (not followed further) | in | row A write line |
-| `cdp1_c_wr` | P | 10786,4505 going right; left end not looked at | in | row C write line |
-| `cdp1_aN_bl` | M | 8857+k*390, 3330 going down (k = -1..4 for a0..a5) | in/out | bit lines of row A; continue down through row B, not followed |
-| `cdp1_cN_bl` | M | 8857+k*390, 4524 going down (k = 0..4 for c1..c5) | in/out | bit lines of row C; continue down into the channel, not followed |
-| `cdp1_c5_q` | M | 10632,3990 going up | out | row C slice 5 output, not followed into row B |
-| `cdp1_b_eq` | M | 8727,3530 going down (drawn to there) | out | NOR of the five row B slices: believed "register C equals the incoming 5-bit value" |
-| `cdp1_bN_ne` | D | 9238-9262 x 3658-3700 (+390 per slice; slice 1 at 8848-8872) | in | top of the lower-half diffusion that drives each NOR input; internal to the block, open until the lower half is traced |
+| `cdp1_a_wr` | P | 10850,3311 going east; contact (10890,3308) to metal south at x 10894, shifting to x 10937 at y 4420-4440; that line is at x 10937 at y 5700 | in | row A write line. Not followed to its strobe |
+| `cdp1_c_wr` | P | 10850,4505 going east; contact (10893,4505) to metal south at x 10894; at x 10894 at y 5700 | in | row C write line. Not followed to its strobe |
+| `cdp1_b5_a` | P | 8285,3351 (drawn to there to meet `trace/tc1.txt`) | in | = `tc1_f`. A input of slice 5's XOR |
+| `cdp1_c5_q` | P | 8285,3396 (likewise) | out | = `tc1_a`. Row C's fifth bit |
+| `cdp1_bK_b` (K = 1..5) | P | 10850, y 4176, 4132, 4089, 4046, 4003 | in | the compare value, one bit per line; K = 5 is the top line |
+| `cdp1_a3_bl` | P | 8340,4372 going west | in/out | bit line of a3 |
+| `cdp1_b_eq` | P | 8340,4459 going west (unbroken to x 7900 by colour scan) | out | 1 when row C equals the compare value |
+| `cdp1_l4544`, `_l4588`, `_l4632`, `_l4676`, `_l4719` | P | 8340 and 10850 at those y | - | pass through |
+| `cdp1_c5_bl`, `_c4_bl`, `_c3_bl`, `_c2_bl`, `_c1_bl`, `_a0_bl` | P | 10850, y 4764, 4806, 4850, 4893, 4937, 4981 | in/out | bus lines of the bit lines (c1, c4, c5 also serve a1, a4, a5) |
+| `cdp1_lw1`, `cdp1_lw2` | P | 8340, y 4981 and 5024; 10850, y 5024 and 5068 | - | pass through, one track lower on the east |
+| `cdp1_a2_bl` | P | 10850,5110 | in/out | bus line of a2's bit line |
+| `cdp1_cK_bl` (K = 1..5) | M | x 8857, 9247, 9637, 10027, 10417 at y 5150 (drawn to there), going down through rows D and E to cdp2 (`cdp2_a_sK_bus` at y 5700) | - | continuity through rows D and E seen in the metal median of slices 3-5 only |
+| `cdp1_a0_bl` | M | 8727,5150 going down (the tap at 8727,4937) | - | not followed |
+| `cdp1_a2_bl` | M | the metal goes on down from its contact, jogging to x 9335 at y 5095-5110 | - | not drawn below y 5084, not followed |
+| (not mine) | M | x 10808 from a contact at (10808,3637) on a poly line from the east (y 3625-3645); x 10850 from a contact at (10850,3590) on a poly line from the east (y 3580-3597); both run south past y 5750 | - | two trunks along the east edge; not drawn |
 
 ## Ambiguities
 
@@ -270,24 +341,61 @@ sees row C's fifth bit itself when `tc1_b` is low, and a modified bit when it is
 6. **NOR load in slice 1** (`?D 9040,3575:9140,3640`): the diffusion between the VCC
    contact land and the gate bar is hidden by heavy outlines; drawn as inferred. The
    bar, its buried contact on the line and the diffusion on its right are clear.
-7. Whether the diffusion strip under each VSS rail in row B (x 9160-9178, y 3700-3830
-   in slice 2) is diffusion or field decides whether the vertical gate of the previous
-   slice (x 9133-9155) is a transistor to VSS. Left for the lower-half trace.
+7. (Settled.) The strip under each VSS rail in row B (x 9158-9180, y 3702-3836 in
+   slice 2) is diffusion (197/174/129 against 185/116/122 for field under metal) and is
+   the source of the previous slice's series pair. Slice 1's rail has none.
+8. **Row B XOR: how the band to the series pair joins the output diffusion**
+   (`?D 9258,3680:9308,3696`). The band y 3699-3712 under the B line and the VCC rail is
+   diffusion-coloured and its lower edge runs on west as one line, curves up round the
+   load gate's tab at x 9300 and runs along y 3696 to x 9250; above it a plain region
+   reaches up to a heavy line at y 3676 (the region's top edge, from x 9200 to 9325).
+   So the band widens to y 3678-3696 west of x 9318 and heads for the diffusion under
+   `cdp1_nor`'s buried contact. Between the two, at x 9262-9272, all four shots show a
+   narrow outlined strip coming down from the right side of the buried-contact box to
+   y 3688, with about 8 px of plain colour between its end and the y 3696 line.
+   Candidate readings: (a) the diffusion is continuous past the end of the strip
+   (drawn); (b) the strip is part of the buried contact and joins both sides; (c) the
+   band is a separate island. In (a) and (b) the pair hangs on `ne`. In (c) it would
+   hang on nothing at all: there is no contact on it and the only poly near its west
+   end is the load gate, itself tied to `ne`. So the logic `ne = NOT(n2 + A.B)` does
+   not depend on the choice between (a) and (b); what is not directly seen is the
+   8 px passage. A sharper shot of 9255-9280 x 3675-3700 would settle it.
+9. **Row B XOR, B pull-down of n2** (column x 9268-9318, y 3828-3899). The column lies
+   in the open between the bit line and the B line, where field and diffusion have the
+   same colour (142/128/92 against 143/134/100), so its two sides were placed from
+   outlines that coincide with the edges of the metal's protection margin. Both ends
+   are measured (VSS tab under the bit line, n2 band under the B line) and the blob
+   poly with the B contact has no other purpose, so the transistor is certain; its
+   width (50) is not.
 
 ## Not done
 
-- **Bit lines.** Each cell's bit line goes down from the contact at 8857+k*390, 3301
-  (row A) / 4495 (row C). Row A's must pass row B and reach the poly lines of channel
-  B/C or the big channel; row C's go straight into the big channel. Following them to
-  the data bus gives the bit order and settles R8 / which 5-bit register row C is.
-- **Row B lower half** (y 3650-3990, five cells): the logic that makes each `ne`. Survey notes are under Logic. Slices 1 and 5 differ from 2-4 and must be looked at separately.
-- Where `cdp1_b_eq` goes (metal down from 8727,3530).
-- A third horizontal poly line below row A, y 3424-3450, is the NOR output only between x 8708 and 8958; whether another segment of it exists further right was not checked.
-- The two poly lines below row A (y 3340-3360, 3385-3405) and their contacts.
-- Channel B/C, the big channel y 4530-5150, rows D and E.
-- Where `cdp1_a_wr` and `cdp1_c_wr` come from (right of x 10786).
-- Thin vertical metal line at x 10795-10820. Slice 5 also has two more thin vertical metal lines through row B at x 10612-10640 and 10660-10690 (the first is row C slice 5's q going up).
-- Everything left of x 8340.
+- **Rows D and E** (y 5150-5700, slices 1-5; slice 5 = slices 2-4 by `tools/cdp1_diff.py`,
+  slice 1 differs only at its left edge x 8750-8830). Sharp medians of the whole cell:
+  `tools/cdp1_sr.py 9140 5130 410 590 --offsets "390,0 780,0 1170,0" --layers acid1b` (and
+  `metal`), coordinates in slice 2's frame. What they show, **not traced**: VSS rail
+  x 9158-9205 with contacts at y 5250, 5425, 5650; the column bit line x 9240-9256 running
+  through; a metal x 9283-9305 from a contact at (9293,5315) down to (9293,5650); a metal
+  x 9320-9345 from y 5152 to 5700 (in slice 2 this is where a2's line arrives after its
+  jog: check whether it is the same wire in the other slices); VCC rail x 9375-9425 with
+  a contact at (9395,5460); a metal strap x 9440-9465 between contacts (9455,5240) and
+  (9455,5500); contacts at (9530,5250) and (9500,5565). Poly gates in the open at
+  x 9280-9350 y 5195-5260 (two horizontal bars), x 9490-9540 y 5300-5365 (two bars) and
+  vertical bars at x 9450-9530 y 5550-5700. cdp2 reports that its row A's outputs come up
+  to contacts at (9118+390k,5740) and its bus lines are these bit lines.
+- The logic in the slice-0 position and under slice 1's left edge (see Inventory).
+- **The write strobes.** `cdp1_a_wr` and `cdp1_c_wr` leave on two metal lines going south
+  just east of the block (x 10937 and x 10894 at y 5700). `sel_tracks.py` shows both
+  unbroken to y 6209 / 6255, where a group of lines (x 10894, 10937, 10981) shifts
+  track one after another (again near y 7690 and 8700). Following them means following
+  that bundle down the east edge of cdp2-cdp4. Until then neither row is tied to a
+  register number by its strobe.
+- East ends of the bus lines, of the five compare lines and of the five pass-through
+  lines (x 10850); west ends of `cdp1_b_eq`, `cdp1_a3_bl`, `cdp1_lw1`, `cdp1_lw2` and the five
+  pass-through lines (x 8340).
+- The metal of a2's bus line below its contact (jog to x 9335, on down through rows D
+  and E), and the tap of a0's bus line at x 8727 below y 5150.
+- m3 and m6 of the register cell (Ambiguities 1).
 
 ## Method notes for whoever continues
 
@@ -302,3 +410,15 @@ sees row C's fifth bit itself when `tc1_b` is low, and a modified bit when it is
   1172,1192 1562,1192` (acid1b offsets; the trace uses the metal-shot offsets).
 - `tools/cdp1_tab.py` prints a brightness table of a strip; metal reads 60-75, bare
   field 45-55. It showed where a thin metal line really runs.
+- `tools/cdp1_px.py` measures colours on the sharp median (boxes, profiles averaged over a
+  band, and a text class map). Single-shot pixels are too grainy to profile; the median
+  is not. In this area field and diffusion have the same colour *in the open*; under
+  metal they differ plainly (pink against tan), and poly over a channel under metal is
+  brighter than poly over field. That is what decided the XOR's junctions.
+- `tools/cdp1_diff.py` prints where one copy of a cell differs from the median of the
+  others; `tools/cdp1_line.py` classifies what lies along a track; `tools/cdp1_under.py`
+  lists the poly lines passing under a rail (it gave the whole bus-line map of the big
+  channel in two commands).
+- Contact test used throughout: a metal contact is a greenish patch in the clean shot
+  (R about equal to G, B under 100: 160/165/93, 143/135/80), plain poly under metal is
+  216/160/115, a buried contact under metal 172/139/115.
