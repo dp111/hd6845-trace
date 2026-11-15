@@ -1,0 +1,5 @@
+13780,10561:16940,10834  array  R0 register (8 bit) | horizontal total; latches loaded from the data lines by sel_w0; feeds the two comparators above
+13780,10084:16940,10475  array  Comparator c = R0 (8 bit) | XOR per bit and wired NOR; output south on bundle track L2 (end of line if c is the horizontal counter)
+14170,9563:16940,9954  array  Comparator c = R0 shifted one bit (7 bit) | c of each slice against the R0 bit of the next slice, bit 7 of c not compared (believed c = R0/2, the interlace half line); output south on bundle track L0
+13800,9440:14170,10084  route  Routing column beside comparator D | exit lines of both comparators, R0 bit 7 going north and round the array, poly bars from the bundle to tracks going north
+13340,9440:13780,10700  route  Left-edge bundle L0..L8 | continues rdp3's; the two comparator outputs join it here

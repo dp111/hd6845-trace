@@ -1,0 +1,304 @@
+# Right datapath, middle rows (rdp2): x 13350-16950, y 8100-10700
+# Notes: notes/blocks/rdp2.md
+# Slice tags follow rdp3: s0..s7 from the left, pitch 390. Slice sK is array column cK:
+# its cells lie between the VSS rail at x 13783 + 390 K (left edge) and the one at
+# x 14175 + 390 K (right edge, the rail that defines column cK).
+@requires rdp3
+@block rdp2
+@w M=22 P=22
+@s 28x28
+
+# =====================================================================================
+# Register row RC (y 10564-10834): the rdp3 latch cell upside down, eight copies, exactly
+# as rows RA and RB of rdp3 (same mirror/rotation; RC = RB moved up by 757). Every copy
+# compared with RB's by tools/rdp3_cmp.py (identical except the top edge, where q leaves).
+# Its load strobe is traced to sel_w0 (notes): RC is R0.
+# =====================================================================================
+@inst rdp3_lat -781,-2456 mx=14790 rot=180 o=14790,13150 tag=rc_s0
+@inst rdp3_lat -391,-2456 mx=14790 rot=180 o=14790,13150 tag=rc_s1
+@inst rdp3_lat 0,-2456 mx=14790 rot=180 o=14790,13150 tag=rc_s2
+@inst rdp3_lat 390,-2456 mx=14790 rot=180 o=14790,13150 tag=rc_s3
+@inst rdp3_lat 780,-2456 mx=14790 rot=180 o=14790,13150 tag=rc_s4
+@inst rdp3_lat 1170,-2456 mx=14790 rot=180 o=14790,13150 tag=rc_s5
+@inst rdp3_lat 1561,-2456 mx=14790 rot=180 o=14790,13150 tag=rc_s6
+@inst rdp3_lat 1951,-2456 mx=14790 rot=180 o=14790,13150 tag=rc_s7
+# right end: VSS land and contact for s7's second pull-down, under the ninth VSS rail
+D 16878,10659:16926,10719
+D 16878,10715:16905,10744
+C 16898,10687 s=30x40
+
+# --- RC load strobe: the row poly runs on west under the first VSS rail to a pad with a
+# contact at (13690,10815) on bundle track L8. Pad, contact and the metal south from it
+# are drawn and named in rdp3.txt (rdp3_rc_ld, followed there to sel_w0); here only the
+# piece of poly between that pad and slice s0's loop.
+P 13750,10801:13800,10829
+
+# =====================================================================================
+# XOR cell of the comparators: rdp3_xor copied as text (rdp3.txt as of commit 13abdda),
+# geometry unchanged, less its metal piece on the x 14673 track ("T2"): that piece is
+# absent in comparator D and in slice s1 of comparator C, and in comparator C it is a
+# real wire (drawn below, outside the cell). The master stands at comparator C, slice s2
+# (rdp3's master moved by -1,-1691).
+#   nor = NOR(c, q);  x = NOT(nor + c.q) = c XOR q
+# =====================================================================================
+@cell rdp2_xor tag=cc_s2
+# --- node x (XOR output): band under the bus, strip down its left side, strip to the right
+D 14583,10246:14693,10270            # band
+D 14583,10246:14623,10409            # left strip, on down through the T5 gate to the VSS land
+D 14681,10246:14693,10287            # right end of the band, down to
+D 14681,10272:14851,10287            #   the strip that runs right under the VCC rail
+D 14825,10272:14951,10344            # band under the series pair G1, G2 and on to the VSS strip
+D 14929,10272:14951,10409            # VSS strip down to the next slice's VSS land
+D 14623,10222:14643,10251            # tab up to the buried contact of the pull-down gate
+N D 14599,10259 rdp2_{}_x
+# --- load L4 of x: strip from the VCC land leftwards under the gate block
+D 14617,10310:14711,10337
+P 14649,10292:14699,10347            # gate block (overhangs the strip above and below)
+P [ 14599,10277 14669,10277 14675,10292 14699,10292 14699,10305 14599,10305 ]   # bar to its tie
+B 14597,10275:14626,10307            # tie to x
+D 14705,10309:14807,10345            # VCC land
+D 14755,10309:14807,10355
+C 14781,10329 s=30x30                # VCC rail to the land
+# --- T5: nor pulls x down. Gate = bar of the L3 block
+D 14544,10399:14625,10476            # VSS land (lower)
+C 14561,10436 s=24x40
+P 14568,10371:14751,10394            # bar: gate of T5, runs right into the L3 gate block
+# --- load L3 of nor: strip from the VCC land down under the gate block
+D 14776,10349:14807,10474
+P 14747,10361:14832,10419            # gate block
+P 14825,10393:14859,10419            # tab into the tie
+D 14837,10395:14872,10449            # diffusion under the tie, down to the nor node
+B 14831,10391:14861,10423
+D 14651,10459:14809,10474            # nor: band to the left, to T6
+?D 14807,10437:14944,10473           # nor: to the right, under the q poly (T7), to the next VSS land
+N D 14789,10449 rdp2_{}_nor
+# --- T6: c pulls nor down. Gate = poly from the lower contact on the c track
+D 14619,10399:14692,10425            # VSS arm from the land
+D 14651,10399:14692,10474            # down through the gate to the nor band
+P 14639,10430:14698,10454            # gate
+P 14696,10414:14735,10454            # pad
+C 14714,10430 s=26x26                # c track to the pad
+# --- series pair: G1 gate = c (poly from the upper contact on the c track), G2 gate = q
+P 14705,10231:14739,10259            # pad
+C 14719,10245 s=26x26                # c track to the pad
+P 14705,10235:14877,10259            # along, under the VCC rail
+P 14852,10235:14877,10351            # G1
+P 14900,10254:14924,10413            # G2: upper part of the q poly
+P 14878,10397:14924,10413            # jog
+P 14878,10404:14900,10509            # q poly up from the latch's output buried contact
+@end
+
+# =====================================================================================
+# Comparator C (y 10084-10475) above RC: the cells of rdp3's comparators (band A moved
+# up by 1692). The load of its eq line is in slice s0 (in bands A and B it is in s1).
+# Every copy compared with the median of bands A, C, D (tools/rdp3_cmp.py).
+#   rdp2_cc_sK_x = c_sK XOR q(RC, sK);  rdp2_cc_eq = NOR of the eight x
+# =====================================================================================
+@inst rdp2_xor -780,-1 tag=cc_s0
+@inst rdp3_mpd1 -390,-1692 tag=cc_s0
+@inst rdp2_xor -390,0 tag=cc_s1
+@inst rdp3_mpd -391,-1691 tag=cc_s1
+@inst rdp3_mpd -1,-1691 tag=cc_s2
+@inst rdp2_xor 391,0 tag=cc_s3
+@inst rdp3_mpd 390,-1691 tag=cc_s3
+@inst rdp2_xor 781,-1 tag=cc_s4
+@inst rdp3_mpd 780,-1692 tag=cc_s4
+@inst rdp2_xor 1171,-1 tag=cc_s5
+@inst rdp3_mpd 1170,-1692 tag=cc_s5
+@inst rdp2_xor 1562,-1 tag=cc_s6
+@inst rdp3_mpd 1561,-1692 tag=cc_s6
+@inst rdp2_xor 1952,0 tag=cc_s7
+@inst rdp3_mpd 1951,-1691 tag=cc_s7
+# --- eq line: row-wide diffusion strip
+D 13768,10084:16925,10106
+N D 15000,10095 rdp2_cc_eq
+# --- its exit, as in rdp3's bands but in slice s0: a tab of the strip comes up at
+# x 13924-13946 and ends in a buried contact on a poly line that goes up and then west
+# along y 10000-10021 (under the first VSS rail and the bundle) to a pad with a contact
+# on bundle track L2 (x 13435)
+D 13924,10054:13946,10090
+B 13922,10052:13948,10074
+P 13923,10000:13947,10074
+P 13420,10001:13947,10020            # line west
+P 13420,9998:13452,10027             # pad
+C 13434,10012 s=26x26                # to track L2
+M 13434,9996 y10700 w=18             # L2 south: rdp3 draws it on from y 10700 as rdp3_n2s1
+@alias rdp2_cc_eq rdp3_n2s1
+# --- right end: lower VSS land that slice s7's T7 and series pair end on (ninth rail)
+D 16886,10398:16940,10475
+C 16903,10435 s=24x40
+
+# --- gap between RC and comparator C (y 10475-10564), per slice: q comes up from the
+# latch in poly (x 14879-14901 in s2) into the XOR; a poly bar at y 10520-10538 takes it
+# left to a pad with a contact on the T2 track (x 14673 in s2). No bar and no T2 in s1.
+P 14098,10500:14120,10600            # s0: q up
+P 13877,10520:14120,10538            #     bar
+P 13875,10514:13909,10542            #     pad
+C 13890,10529 s=26x26
+P 14488,10500:14510,10600            # s1: q up
+P 14879,10500:14901,10600            # s2: q up
+P 14658,10520:14901,10538            #     bar
+P 14656,10514:14690,10542            #     pad
+C 14671,10529 s=26x26
+P 15269,10500:15291,10600            # s3: q up
+P 15048,10520:15291,10538            #     bar
+P 15046,10514:15080,10542            #     pad
+C 15061,10529 s=26x26
+P 15659,10500:15681,10600            # s4: q up
+P 15438,10520:15681,10538            #     bar
+P 15436,10514:15470,10542            #     pad
+C 15451,10529 s=26x26
+P 16049,10500:16071,10600            # s5: q up
+P 15828,10520:16071,10538            #     bar
+P 15826,10514:15860,10542            #     pad
+C 15841,10529 s=26x26
+P 16440,10500:16462,10600            # s6: q up
+P 16219,10520:16462,10538            #     bar
+P 16217,10514:16251,10542            #     pad
+C 16232,10529 s=26x26
+P 16830,10500:16852,10600            # s7: q up
+P 16609,10520:16852,10538            #     bar
+P 16607,10514:16641,10542            #     pad
+C 16622,10529 s=26x26
+
+# =====================================================================================
+# Lines that run through the array, continued from rdp3 (which draws them below y 10700
+# and names them).
+# =====================================================================================
+# --- supply rails
+M 13783,9540 y10700 w=60
+M 14174,9540 y10700 w=60
+M 14565,9540 y10700 w=60
+M 14955,9540 y10700 w=60
+M 15345,9540 y10700 w=60
+M 15735,9540 y10700 w=60
+M 16125,9540 y10700 w=60
+M 16516,9540 y10700 w=60
+M 16906,9540 y10700 w=60
+M 13990,9540 y10700 w=56
+M 14381,9540 y10700 w=56
+M 14772,9540 y10700 w=56
+M 15162,9540 y10700 w=56
+M 15552,9540 y10700 w=56
+M 15942,9540 y10700 w=56
+M 16332,9540 y10700 w=56
+M 16723,9540 y10700 w=56
+# --- bus lines (rdp3_bus_sK). s0's ends at the top of its RC cell (y 10567, inside the
+# cell); the others run on up through comparators C and D without a contact.
+M 14236,9540 y10700 w=24
+M 14626,9540 y10700 w=24
+M 15016,9540 y10700 w=24
+M 15407,9540 y10700 w=24
+M 15797,9540 y10700 w=24
+M 16187,9540 y10700 w=24
+M 16577,9540 y10700 w=24
+# --- c lines (rdp3_c_sK): two contacts in each XOR cell. s0's ends above its upper
+# contact in comparator C (y 10220); the others end above their upper contact in
+# comparator D (y 9705). Nothing in this block drives them.
+M 13931,10220 y10700 w=22
+M 14321,9705 y10700 w=22
+M 14712,9705 y10700 w=22
+M 15102,9705 y10700 w=22
+M 15492,9705 y10700 w=22
+M 15882,9705 y10700 w=22
+M 16272,9705 y10700 w=22
+M 16663,9705 y10700 w=22
+# --- T2 tracks: carry q of RC from the bar under comparator C (contact y 10529) up
+# through it. s2..s7 end on a contact at y 10010 (gap between comparators D and C).
+M 14673,9992 y10546 w=22
+M 15063,9992 y10546 w=22
+M 15453,9992 y10546 w=22
+M 15843,9992 y10546 w=22
+M 16233,9992 y10546 w=22
+M 16624,9992 y10546 w=22
+# s0: the track runs on up past comparator D's height (s0 has no cell there) and ends in
+# a pad to its right with a contact at (13910,9708); from the pad a poly line goes north
+# (x 13911-13924) into the routing zone. This is q of RC s0.
+M 13891,9694 y10546 w=20
+M 13880,9694:13932,9738
+C 13910,9708 s=26x26
+P 13899,9686:13931,9724
+
+# =====================================================================================
+# Comparator D (y 9563-9954): the same cells again (band A moved up by 2213), seven
+# slices s1..s7; s0 has none. The load of its eq line is in slice s1.
+# =====================================================================================
+@inst rdp2_xor -390,-521 tag=cd_s1
+@inst rdp3_mpd1 0,-2212 tag=cd_s1
+@inst rdp2_xor 0,-521 tag=cd_s2
+@inst rdp3_mpd -1,-2213 tag=cd_s2
+@inst rdp2_xor 391,-521 tag=cd_s3
+@inst rdp3_mpd 390,-2213 tag=cd_s3
+@inst rdp2_xor 781,-522 tag=cd_s4
+@inst rdp3_mpd 780,-2213 tag=cd_s4
+@inst rdp2_xor 1171,-522 tag=cd_s5
+@inst rdp3_mpd 1170,-2213 tag=cd_s5
+@inst rdp2_xor 1562,-522 tag=cd_s6
+@inst rdp3_mpd 1560,-2213 tag=cd_s6
+@inst rdp2_xor 1952,-522 tag=cd_s7
+@inst rdp3_mpd 1951,-2213 tag=cd_s7
+# --- eq line: row-wide diffusion strip
+D 14158,9563:16925,9585
+N D 15000,9574 rdp2_cd_eq
+# --- its exit, in slice s1: a tab of the strip comes up at x 14312-14344 and ends in a
+# buried contact (box 14308-14347 x 9518-9560, read at 4.3x in three shots) on the east
+# end of a poly line that runs west along y 9523-9541 to x 13950 (slice s0), south to
+# y 9845, and west along y 9828-9845 under the first VSS rail and the bundle to a pad
+# with a contact on bundle track L0.
+D 14312,9522:14344,9566
+B 14310,9520:14346,9558
+P 13950,9523:14336,9541
+P 13950,9523:13963,9845
+P 13330,9828:13963,9845
+P 13330,9820:13368,9851              # pad
+C 13346,9837 s=26x26                 # to track L0
+M 13348,9822 y10700 w=18             # L0 south: rdp3 draws it on from y 10700 as rdp3_n0
+@alias rdp2_cd_eq rdp3_n0
+# --- right end: lower VSS land that slice s7's T7 and series pair end on (ninth rail)
+D 16886,9877:16940,9954
+C 16903,9914 s=24x40
+
+# --- gap between comparators D and C (y 9954-10084): the T2 track of slice s(K+1), K =
+# 1..6, ends on a contact at y 10010 on a pad; a poly bar at y 10001-10019 runs left
+# from the pad to under the q input of the XOR of slice sK and turns up into it. So
+# comparator D compares c of slice sK with RC's bit of slice s(K+1).
+P 14488,9975:14510,10019            # s1: q input down to the bar
+P 14488,10001:14683,10019            #     bar from the pad of slice s2
+P 14649,9997:14685,10024            #     pad
+C 14669,10010 s=26x26
+P 14878,9975:14900,10019            # s2: q input down to the bar
+P 14878,10001:15073,10019            #     bar from the pad of slice s3
+P 15039,9997:15075,10024            #     pad
+C 15059,10010 s=26x26
+P 15269,9975:15291,10019            # s3: q input down to the bar
+P 15269,10001:15463,10019            #     bar from the pad of slice s4
+P 15429,9997:15465,10024            #     pad
+C 15449,10010 s=26x26
+P 15659,9975:15681,10019            # s4: q input down to the bar
+P 15659,10001:15853,10019            #     bar from the pad of slice s5
+P 15819,9997:15855,10024            #     pad
+C 15839,10010 s=26x26
+P 16049,9975:16071,10019            # s5: q input down to the bar
+P 16049,10001:16243,10019            #     bar from the pad of slice s6
+P 16209,9997:16245,10024            #     pad
+C 16229,10010 s=26x26
+P 16440,9975:16462,10019            # s6: q input down to the bar
+P 16440,10001:16634,10019            #     bar from the pad of slice s7
+P 16600,9997:16636,10024            #     pad
+C 16620,10010 s=26x26
+# --- slice s7: its q input comes down the same way to a bar at y 10000-10020, but the
+# bar goes EAST under the ninth VSS rail and turns north at x 16946-16964. That poly
+# line runs north to y 9480, then west along y 9480-9494 across the whole array (under
+# every rail and track; seen continuous on strip views) to x 13911, and south
+# (x 13911-13924) to the pad of slice s0's T2 track at (13910,9708): it is q of RC s0.
+P 16830,9975:16852,10020
+P 16830,10000:16964,10020
+P 16946,9480:16964,10020
+P 13911,9480:16964,9494
+P 13911,9480:13924,9700
+
+# --- slice s7 only: thin metal line on the strap track (x 16838), over the q inputs of
+# the XORs of s7 without a contact (none seen at 2x in comparators C and D). It is the
+# line rdp3 calls rdp3_t16837: it runs into the strap of RC's s7 cell and on south.
+# Seen here from y 9440; by track scan the metal goes on north to y 8100.
+M 16838,9440 y10575 w=20
