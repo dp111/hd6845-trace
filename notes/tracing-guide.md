@@ -192,7 +192,13 @@ A 100,100:150,150 kind=clamp           # mark a transistor here as off in normal
 
 1. **Survey** your region at 0.5-1x in `metal` and `acid1b`. Find the rails, the rows of
    loads, the repeated units, where wires enter and leave. Write a short inventory in
-   your notes file before tracing.
+   your notes file before tracing. In the arrays, first run `findcell.py` with the
+   master rectangles of cells other blocks have already traced (restricted to your
+   region with `--region`, orientations `0,m0,180,m180`): the latch `rdp3_lat`
+   (14597 13010 14987 13280, in `trace/rdp3.txt`) and the static register bit
+   `cdp1_reg` (8745 3040 9225 3330, in `trace/cdp1.txt`) recur, some upside down, in
+   several rows of both datapaths. A row that matches can reuse the cell by
+   `@requires`, after checking how its edges differ.
 2. **Trace a piece** (one gate group or one cell): view at 2.5-3x with `quad.py`, write
    the shapes.
 3. **Overlay**: `quad.py` again (its last panel outlines your trace on the clean shot)
@@ -225,8 +231,9 @@ Most of the die is repeated cells. Trace a cell once.
   is blurrier than a single clean shot; use it for dirt, not for fine junctions. In a
   composite the `acid` layer shows poly even under metal, because the fringes average
   out.
-- `tools/rdp3_sharp.py` (unsharp mask; on a median composite it was one agent's most
-  useful view) and `tools/cdp1_sr.py` (read the docstrings). The latter makes a
+- `tools/rdp3_sharp.py` (unsharp mask; three agents found it on a median composite at
+  3-5x their most useful view), `tools/cdp2_pt.py` (a colour-and-speckle test for
+  whether a contact is present, which reversed one by-eye reading) and `tools/cdp1_sr.py` (read the docstrings). The latter makes a
   sub-pixel-aligned median of the copies of a cell at 3-6x. The agent that wrote it says it is what made a register
   cell readable where the plain composite was too blurred.
 - `--shift dx,dy` on view.py / quad.py shows another instance in the master's

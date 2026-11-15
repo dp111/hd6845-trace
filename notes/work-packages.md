@@ -21,13 +21,13 @@ agent has verified it), `partial` (reported, with work left: see its notes).
 | `mra` | 11700-13320 x 7200-17050 | mid-right vertical array (rows every 477 px) | partial (run 1): chain column x 11730-12200 in all 19 rows; run 2 running on x 12200-13320 |
 | `dbus` | 17050-17700 x 5300-17000, and the D0-D7 pad cells | data bus interface column; then finish the data pad cell (AMB-003) | partial: input buffers D0-D5 traced; gate groups, bus lines, pad cell left (continue as the same block) |
 
-| `cdp2` | 7600-10850 x 5700-8450 | central datapath | running |
+| `cdp2` | 7600-10850 x 5700-8450 | central datapath | partial (run 1): row A = five latch bits, row C = seven latch bits (same cell as the address register latch); rows B1/B2, D, channels 2, 3 left; run 2 running |
 | `cdp3` | 7600-10850 x 8450-11200 | central datapath | partial (run 1): wiring rows E, F and channels B, D, G traced (two rows of cells gated onto an 8-line bus); cell rows A, C, H, I not traced; run 2 running |
 | `cdp4` | 7600-10850 x 11200-14000 | central datapath, bottom rows | done except the upper half of its top latch row (y 11100-11490): a 4-way selector per slice with three latch rows (8, 8 and 6 bits); no counters or comparators |
 | `bc1` | 7000-9000 x 14050-16300 | bottom-centre logic, upper left part; receives the six data tracks and strobe leaving the bottom of `cdp4` | running |
 | `bd3` | 14100-15900 x 16550-17100 and onward | where the strobe and select tracks from `sel` go; source of the write strobe | done: strobe = NOT e_b (so each write strobe = select AND E); R12/R13 gated and buffered like R14/R15; all 16 tracks to the region's edge |
 | `bd1` | 13000-14100 x 14700-17100 | logic left of the select gates; the write strobes pass through it heading west | running |
-| `bd2` | 15850-17000 x 14700-17100 | gate that makes the address register load strobe (x 15880-16150, y 15230-15330), source of the write strobe entering `sel` at (15850,14825), rest of that logic | running |
+| `bd2` | 15850-17000 x 14700-17100 | bus control logic right of the select gates | partial (run 1): areg_load = NOT e_b (one inverter). **Disagrees with bd3 about the common strobe**: bd2 reads its driver's input as the output of a further gate (e_b in series with another signal, possibly a latch), bd3 as e_b itself. Run 2 running to settle it and go on to CS, RS, R/W |
 
 Measured on the first report: one agent run lasts about 20 minutes and about 60-80
 image views, and yields one or two traced cells plus survey notes. Blocks are
