@@ -1,7 +1,6 @@
-1664 nets, 2745 transistors, 0 errors, 1 warnings
+1655 nets, 2745 transistors, 0 errors, 0 warnings
 note   vss is traced as 103 separate pieces, joined by name
 note   vcc is traced as 76 separate pieces, joined by name
-warn   sliver channel (22 px2) at 12981,16460: poly/diffusion/buried-contact edges nearly coincide
 
 transistors
   t0    at   1702,  1770  W/L  381/25   -     gate ma2_pu       vss <-> ma2_pd
@@ -525,11 +524,11 @@ transistors
   t518  at   7570,  3675  W/L   70/36   load  gate tc1_l3_out   vcc <-> tc1_l3_out
   t519  at   7683,  3648  W/L   28/59   load  gate tc1_r4_out   vcc <-> tc1_r4_out
   t520  at   7808,  3678  W/L   43/22   -     gate tc1_r5_out   tc1_r4_out <-> vss
-  t521  at   7806,  3763  W/L  133/20   -     gate tc1_g        vss <-> n1542
-  t522  at   7806,  3808  W/L  133/19   -     gate tc1_l2_out   n1542 <-> tc1_r5_out
+  t521  at   7806,  3763  W/L  133/20   -     gate tc1_g        vss <-> n1533
+  t522  at   7806,  3808  W/L  133/19   -     gate tc1_l2_out   n1533 <-> tc1_r5_out
   t523  at   7677,  3858  W/L   40/42   load  gate tc1_r5_out   tc1_r5_out <-> vcc
-  t524  at   7806,  3893  W/L  133/16   -     gate tc1_i        tc1_r5_out <-> n1543
-  t525  at   7806,  3936  W/L  133/19   -     gate tc1_l3_out   n1543 <-> vss
+  t524  at   7806,  3893  W/L  133/16   -     gate tc1_i        tc1_r5_out <-> n1534
+  t525  at   7806,  3936  W/L  133/19   -     gate tc1_l3_out   n1534 <-> vss
   t526  at   7570,  3416  W/L   62/36   load  gate tc1_l2_out   vcc <-> tc1_l2_out
   t527  at   7562,  3194  W/L   27/59   load  gate tc1_l1_out   vcc <-> tc1_l1_out
   t528  at   7685,  3175  W/L   22/60   load  gate tc1_r1_out   tc1_r1_out <-> vcc
@@ -571,8 +570,8 @@ transistors
   t564  at  10705,  7702  W/L   53/22   -     gate cdp2_a_c_s7_n2 cdp2_a_c_s7_q <-> vss
   t565  at   8075,  7754  W/L   36/23   -     gate cdp2_c_ld    cdp2_c_s1_bus <-> cdp2_a_c_s1_a
   t566  at   8149,  9286  W/L   38/23   load  gate cdp3_bl_c1   vcc <-> cdp3_bl_c1
-  t567  at   7997,  9290  W/L  130/21   -     gate cdp3_k_b     cdp3_bl_c1 <-> n1544
-  t568  at   7997,  9338  W/L  130/20   -     gate cdp3_k_c     n1544 <-> vss
+  t567  at   7997,  9290  W/L  130/21   -     gate cdp3_k_b     cdp3_bl_c1 <-> n1535
+  t568  at   7997,  9338  W/L  130/20   -     gate cdp3_k_c     n1535 <-> vss
   t569  at   7907,  9940  W/L  189/30   -     gate cdp3_gate_e  vss <-> cdp3_n_c0
   t570  at   7908, 10199  W/L  194/28   -     gate cdp3_gate_f  cdp3_hq_c0 <-> cdp3_n_c0
   t571  at   7705, 10757  W/L   72/22   -     gate cdp3_h_wr    cdp3_bl_c0 <-> cdp3_h_c0_x
@@ -794,8 +793,8 @@ transistors
   t787  at   7619, 15104  W/L  251/26   -     gate bc1_ld_n     vss <-> bc1_ld_a
   t788  at   7619, 15322  W/L  251/26   -     gate bc1_ld_n     vss <-> cdp4_ld6
   t789  at   7573, 15246  W/L   54/44   load  gate cdp4_ld6     vcc <-> cdp4_ld6
-  t790  at   7668, 15476  W/L   62/19   -     gate bc1_ld_in1   bc1_ld_n <-> n1545
-  t791  at   7668, 15524  W/L   62/20   -     gate bc1_ld_in2   n1545 <-> vss
+  t790  at   7668, 15476  W/L   62/19   -     gate bc1_ld_in1   bc1_ld_n <-> n1536
+  t791  at   7668, 15524  W/L   62/20   -     gate bc1_ld_in2   n1536 <-> vss
   t792  at   7545, 15461  W/L   48/38   load  gate bc1_ld_n     vcc <-> bc1_ld_n
   t793  at   7921, 19294  W/L  133/42   load  gate cudisp_pd    vcc <-> cudisp_pd
   t794  at   7842, 19294  W/L  381/25   -     gate cudisp_pu    cudisp_pd <-> vss
@@ -833,10 +832,10 @@ transistors
   t826  at  10702,  3212  W/L   77/20   -     gate cdp1_a5_q1   vss <-> cdp1_a5_q
   t827  at   8462,  3160  W/L   55/27   -     gate cdp1_a0_x    vss <-> cdp1_a0_q1
   t828  at   8463,  3263  W/L   36/23   -     gate cdp1_a_wr    cdp1_a0_bl <-> cdp1_a0_x
-  t829  at   8968,  6984  W/L  133/23   -     gate cdp2_b_s3_p1 n1546 <-> cdp2_b_hl
-  t830  at   8968,  7027  W/L  133/26   -     gate cdp2_b_s3_y  n1546 <-> vss
-  t831  at   9119,  7091  W/L   48/18   -     gate cdp2_b_s3_ne vss <-> n1547
-  t832  at   9119,  7134  W/L   48/16   -     gate cdp2_b_s3_p1 n1547 <-> cdp2_b_s3_x
+  t829  at   8968,  6984  W/L  133/23   -     gate cdp2_b_s3_p1 n1537 <-> cdp2_b_hl
+  t830  at   8968,  7027  W/L  133/26   -     gate cdp2_b_s3_y  n1537 <-> vss
+  t831  at   9119,  7091  W/L   48/18   -     gate cdp2_b_s3_ne vss <-> n1538
+  t832  at   9119,  7134  W/L   48/16   -     gate cdp2_b_s3_p1 n1538 <-> cdp2_b_s3_x
   t833  at   9082,  7203  W/L   22/57   load  gate cdp2_b_s3_x  cdp2_b_s3_x <-> vcc
   t834  at   8925,  7230  W/L   32/58   load  gate cdp2_b_s3_o2 vcc <-> cdp2_b_s3_o2
   t835  at   8848,  7212  W/L   35/20   -     gate cdp2_b_cin   vss <-> cdp2_b_s3_o2
@@ -844,10 +843,10 @@ transistors
   t837  at   8986,  7334  W/L   20/57   load  gate cdp2_b_s3_y  vcc <-> cdp2_b_s3_y
   t838  at   9076,  7344  W/L   41/21   -     gate cdp2_trk_s3  cdp2_b_s3_y <-> vss
   t839  at   9163,  7344  W/L   43/20   -     gate cdp2_a_c_s3_q cdp2_b_s3_y <-> vss
-  t840  at   9358,  6984  W/L  133/23   -     gate cdp2_b_s4_p1 n1548 <-> cdp2_b_hl
-  t841  at   9358,  7027  W/L  133/26   -     gate cdp2_b_s4_y  n1548 <-> vss
-  t842  at   9509,  7091  W/L   48/18   -     gate cdp2_b_s4_ne vss <-> n1549
-  t843  at   9509,  7134  W/L   48/16   -     gate cdp2_b_s4_p1 n1549 <-> cdp2_b_s4_x
+  t840  at   9358,  6984  W/L  133/23   -     gate cdp2_b_s4_p1 n1539 <-> cdp2_b_hl
+  t841  at   9358,  7027  W/L  133/26   -     gate cdp2_b_s4_y  n1539 <-> vss
+  t842  at   9509,  7091  W/L   48/18   -     gate cdp2_b_s4_ne vss <-> n1540
+  t843  at   9509,  7134  W/L   48/16   -     gate cdp2_b_s4_p1 n1540 <-> cdp2_b_s4_x
   t844  at   9472,  7203  W/L   22/57   load  gate cdp2_b_s4_x  vcc <-> cdp2_b_s4_x
   t845  at   9315,  7230  W/L   32/58   load  gate cdp2_b_s4_o2 vcc <-> cdp2_b_s4_o2
   t846  at   9238,  7212  W/L   35/20   -     gate cdp2_b_s3_x  vss <-> cdp2_b_s4_o2
@@ -855,10 +854,10 @@ transistors
   t848  at   9376,  7334  W/L   20/57   load  gate cdp2_b_s4_y  vcc <-> cdp2_b_s4_y
   t849  at   9466,  7344  W/L   41/21   -     gate cdp2_trk_s4  cdp2_b_s4_y <-> vss
   t850  at   9553,  7344  W/L   43/20   -     gate cdp2_a_c_s4_q cdp2_b_s4_y <-> vss
-  t851  at   9748,  6984  W/L  133/23   -     gate cdp2_b_s5_p1 cdp2_b_hl <-> n1550
-  t852  at   9748,  7027  W/L  133/26   -     gate cdp2_b_s5_y  n1550 <-> vss
-  t853  at   9899,  7091  W/L   48/18   -     gate cdp2_b_s5_ne vss <-> n1551
-  t854  at   9899,  7134  W/L   48/16   -     gate cdp2_b_s5_p1 n1551 <-> cdp2_b_s5_x
+  t851  at   9748,  6984  W/L  133/23   -     gate cdp2_b_s5_p1 cdp2_b_hl <-> n1541
+  t852  at   9748,  7027  W/L  133/26   -     gate cdp2_b_s5_y  n1541 <-> vss
+  t853  at   9899,  7091  W/L   48/18   -     gate cdp2_b_s5_ne vss <-> n1542
+  t854  at   9899,  7134  W/L   48/16   -     gate cdp2_b_s5_p1 n1542 <-> cdp2_b_s5_x
   t855  at   9862,  7203  W/L   22/57   load  gate cdp2_b_s5_x  cdp2_b_s5_x <-> vcc
   t856  at   9705,  7230  W/L   32/58   load  gate cdp2_b_s5_o2 vcc <-> cdp2_b_s5_o2
   t857  at   9628,  7212  W/L   35/20   -     gate cdp2_b_s4_x  vss <-> cdp2_b_s5_o2
@@ -866,10 +865,10 @@ transistors
   t859  at   9766,  7334  W/L   20/57   load  gate cdp2_b_s5_y  vcc <-> cdp2_b_s5_y
   t860  at   9856,  7344  W/L   41/21   -     gate cdp2_trk_s5  cdp2_b_s5_y <-> vss
   t861  at   9943,  7344  W/L   43/20   -     gate cdp2_a_c_s5_q cdp2_b_s5_y <-> vss
-  t862  at  10138,  6984  W/L  133/23   -     gate cdp2_b_s6_p1 n1552 <-> cdp2_b_hl
-  t863  at  10138,  7027  W/L  133/26   -     gate cdp2_b_s6_y  n1552 <-> vss
-  t864  at  10289,  7091  W/L   48/18   -     gate cdp2_b_s6_ne vss <-> n1553
-  t865  at  10289,  7134  W/L   48/16   -     gate cdp2_b_s6_p1 n1553 <-> cdp2_b_s6_x
+  t862  at  10138,  6984  W/L  133/23   -     gate cdp2_b_s6_p1 n1543 <-> cdp2_b_hl
+  t863  at  10138,  7027  W/L  133/26   -     gate cdp2_b_s6_y  n1543 <-> vss
+  t864  at  10289,  7091  W/L   48/18   -     gate cdp2_b_s6_ne vss <-> n1544
+  t865  at  10289,  7134  W/L   48/16   -     gate cdp2_b_s6_p1 n1544 <-> cdp2_b_s6_x
   t866  at  10252,  7203  W/L   22/57   load  gate cdp2_b_s6_x  cdp2_b_s6_x <-> vcc
   t867  at  10095,  7230  W/L   32/58   load  gate cdp2_b_s6_o2 vcc <-> cdp2_b_s6_o2
   t868  at  10018,  7212  W/L   35/20   -     gate cdp2_b_s5_x  vss <-> cdp2_b_s6_o2
@@ -877,10 +876,10 @@ transistors
   t870  at  10156,  7334  W/L   20/57   load  gate cdp2_b_s6_y  vcc <-> cdp2_b_s6_y
   t871  at  10246,  7344  W/L   41/21   -     gate cdp2_trk_s6  cdp2_b_s6_y <-> vss
   t872  at  10333,  7344  W/L   43/20   -     gate cdp2_a_c_s6_q cdp2_b_s6_y <-> vss
-  t873  at  10528,  6984  W/L  133/23   -     gate cdp2_b_s7_p1 n1554 <-> cdp2_b_hl
-  t874  at  10528,  7027  W/L  133/26   -     gate cdp2_b_s7_y  n1554 <-> vss
-  t875  at  10679,  7091  W/L   48/18   -     gate cdp2_b_s7_ne vss <-> n1555
-  t876  at  10679,  7134  W/L   48/16   -     gate cdp2_b_s7_p1 cdp2_b_s7_x <-> n1555
+  t873  at  10528,  6984  W/L  133/23   -     gate cdp2_b_s7_p1 n1545 <-> cdp2_b_hl
+  t874  at  10528,  7027  W/L  133/26   -     gate cdp2_b_s7_y  n1545 <-> vss
+  t875  at  10679,  7091  W/L   48/18   -     gate cdp2_b_s7_ne vss <-> n1546
+  t876  at  10679,  7134  W/L   48/16   -     gate cdp2_b_s7_p1 cdp2_b_s7_x <-> n1546
   t877  at  10642,  7203  W/L   22/57   load  gate cdp2_b_s7_x  cdp2_b_s7_x <-> vcc
   t878  at  10485,  7230  W/L   32/58   load  gate cdp2_b_s7_o2 vcc <-> cdp2_b_s7_o2
   t879  at  10408,  7212  W/L   35/20   -     gate cdp2_b_s6_x  vss <-> cdp2_b_s7_o2
@@ -959,13 +958,13 @@ transistors
   t952  at   8359, 15261  W/L   50/22   -     gate bc1_s1       vss <-> bc1_s1_n
   t953  at   8474, 15297  W/L   24/52   load  gate bc1_s1_n     bc1_s1_n <-> vcc
   t954  at   8474, 15474  W/L   29/52   load  gate bc1_dec00_n  bc1_dec00_n <-> vcc
-  t955  at   8359, 15433  W/L   50/22   -     gate bc1_s0_n     n1556 <-> bc1_dec00_n
-  t956  at   8359, 15390  W/L   50/22   -     gate bc1_s1_n     vss <-> n1556
+  t955  at   8359, 15433  W/L   50/22   -     gate bc1_s0_n     n1547 <-> bc1_dec00_n
+  t956  at   8359, 15390  W/L   50/22   -     gate bc1_s1_n     vss <-> n1547
   t957  at   8474, 15644  W/L   29/52   load  gate bc1_dec10_n  bc1_dec10_n <-> vcc
-  t958  at   8359, 15603  W/L   50/22   -     gate bc1_s0_n     n1557 <-> bc1_dec10_n
-  t959  at   8359, 15560  W/L   50/22   -     gate bc1_s1       vss <-> n1557
-  t960  at   8359, 15781  W/L   50/22   -     gate bc1_s0       n1558 <-> bc1_dec01_n
-  t961  at   8359, 15735  W/L   50/22   -     gate bc1_s1_n     vss <-> n1558
+  t958  at   8359, 15603  W/L   50/22   -     gate bc1_s0_n     n1548 <-> bc1_dec10_n
+  t959  at   8359, 15560  W/L   50/22   -     gate bc1_s1       vss <-> n1548
+  t960  at   8359, 15781  W/L   50/22   -     gate bc1_s0       n1549 <-> bc1_dec01_n
+  t961  at   8359, 15735  W/L   50/22   -     gate bc1_s1_n     vss <-> n1549
   t962  at   8474, 15822  W/L   29/52   load  gate bc1_dec01_n  bc1_dec01_n <-> vcc
   t963  at   8462, 15918  W/L   33/76   load  gate bc1_g6_out   vcc <-> bc1_g6_out
   t964  at   8359, 15910  W/L   50/22   -     gate bc1_g6_in    vss <-> bc1_g6_out
@@ -986,20 +985,20 @@ transistors
   t979  at  10292,  3882  W/L   37/23   -     gate cdp1_c4_q    vss <-> cdp1_b4_n2
   t980  at  10463,  3866  W/L   50/27   -     gate cdp1_b5_b    vss <-> cdp1_b5_n2
   t981  at  10682,  3882  W/L   37/23   -     gate cdp1_b5_a    cdp1_b5_n2 <-> vss
-  t982  at  10702,  3734  W/L   69/22   -     gate cdp1_b5_a    n1559 <-> vss
-  t983  at  10657,  3734  W/L   69/22   -     gate cdp1_b5_b    cdp1_b5_ne <-> n1559
+  t982  at  10702,  3734  W/L   69/22   -     gate cdp1_b5_a    n1550 <-> vss
+  t983  at  10657,  3734  W/L   69/22   -     gate cdp1_b5_b    cdp1_b5_ne <-> n1550
   t984  at  10394,  3810  W/L   39/25   -     gate cdp1_b5_n2   cdp1_b5_ne <-> vss
-  t985  at  10312,  3734  W/L   69/22   -     gate cdp1_c4_q    n1560 <-> vss
-  t986  at  10267,  3734  W/L   69/22   -     gate cdp1_b4_b    cdp1_b4_ne <-> n1560
+  t985  at  10312,  3734  W/L   69/22   -     gate cdp1_c4_q    n1551 <-> vss
+  t986  at  10267,  3734  W/L   69/22   -     gate cdp1_b4_b    cdp1_b4_ne <-> n1551
   t987  at  10004,  3810  W/L   39/25   -     gate cdp1_b4_n2   cdp1_b4_ne <-> vss
-  t988  at   9922,  3734  W/L   69/22   -     gate cdp1_c3_q    n1561 <-> vss
-  t989  at   9877,  3734  W/L   69/22   -     gate cdp1_b3_b    cdp1_b3_ne <-> n1561
+  t988  at   9922,  3734  W/L   69/22   -     gate cdp1_c3_q    n1552 <-> vss
+  t989  at   9877,  3734  W/L   69/22   -     gate cdp1_b3_b    cdp1_b3_ne <-> n1552
   t990  at   9614,  3810  W/L   39/25   -     gate cdp1_b3_n2   cdp1_b3_ne <-> vss
-  t991  at   9532,  3734  W/L   69/22   -     gate cdp1_c2_q    n1562 <-> vss
-  t992  at   9487,  3734  W/L   69/22   -     gate cdp1_b2_b    cdp1_b2_ne <-> n1562
+  t991  at   9532,  3734  W/L   69/22   -     gate cdp1_c2_q    n1553 <-> vss
+  t992  at   9487,  3734  W/L   69/22   -     gate cdp1_b2_b    cdp1_b2_ne <-> n1553
   t993  at   9224,  3810  W/L   39/25   -     gate cdp1_b2_n2   cdp1_b2_ne <-> vss
-  t994  at   9142,  3734  W/L   69/22   -     gate cdp1_c1_q    n1563 <-> vss
-  t995  at   9097,  3734  W/L   69/22   -     gate cdp1_b1_b    cdp1_b1_ne <-> n1563
+  t994  at   9142,  3734  W/L   69/22   -     gate cdp1_c1_q    n1554 <-> vss
+  t995  at   9097,  3734  W/L   69/22   -     gate cdp1_b1_b    cdp1_b1_ne <-> n1554
   t996  at   8834,  3810  W/L   39/25   -     gate cdp1_b1_n2   cdp1_b1_ne <-> vss
   t997  at   8903,  3866  W/L   50/27   -     gate cdp1_b1_b    cdp1_b1_n2 <-> vss
   t998  at   9804,  3819  W/L   27/54   load  gate cdp1_b3_n2   vcc <-> cdp1_b3_n2
@@ -1057,20 +1056,20 @@ transistors
   t1050 at   8853,  6175  W/L   50/22   -     gate cdp2_a_s3_a  vss <-> cdp2_a_s3_n2
   t1051 at   8856,  6278  W/L   36/23   -     gate cdp2_a_ld    cdp2_a_s3_bus <-> cdp2_a_s3_a
   t1052 at   8863,  7431  W/L   32/14   -     gate cdp2_b_s3_y  cdp2_b_s3_ne <-> vss
-  t1053 at   9072,  7452  W/L   71/20   -     gate cdp2_trk_s3  n1564 <-> cdp2_b_s3_ne
-  t1054 at   9120,  7452  W/L   69/19   -     gate cdp2_a_c_s3_q vss <-> n1564
+  t1053 at   9072,  7452  W/L   71/20   -     gate cdp2_trk_s3  n1555 <-> cdp2_b_s3_ne
+  t1054 at   9120,  7452  W/L   69/19   -     gate cdp2_a_c_s3_q vss <-> n1555
   t1055 at   9253,  7431  W/L   32/14   -     gate cdp2_b_s4_y  cdp2_b_s4_ne <-> vss
-  t1056 at   9464,  7452  W/L   70/20   -     gate cdp2_trk_s4  n1565 <-> cdp2_b_s4_ne
-  t1057 at   9511,  7452  W/L   69/19   -     gate cdp2_a_c_s4_q n1565 <-> vss
+  t1056 at   9464,  7452  W/L   70/20   -     gate cdp2_trk_s4  n1556 <-> cdp2_b_s4_ne
+  t1057 at   9511,  7452  W/L   69/19   -     gate cdp2_a_c_s4_q n1556 <-> vss
   t1058 at   9643,  7431  W/L   32/14   -     gate cdp2_b_s5_y  cdp2_b_s5_ne <-> vss
-  t1059 at   9854,  7452  W/L   70/20   -     gate cdp2_trk_s5  cdp2_b_s5_ne <-> n1566
-  t1060 at   9901,  7452  W/L   69/19   -     gate cdp2_a_c_s5_q n1566 <-> vss
+  t1059 at   9854,  7452  W/L   70/20   -     gate cdp2_trk_s5  cdp2_b_s5_ne <-> n1557
+  t1060 at   9901,  7452  W/L   69/19   -     gate cdp2_a_c_s5_q n1557 <-> vss
   t1061 at  10033,  7431  W/L   32/14   -     gate cdp2_b_s6_y  cdp2_b_s6_ne <-> vss
-  t1062 at  10244,  7452  W/L   69/21   -     gate cdp2_trk_s6  cdp2_b_s6_ne <-> n1567
-  t1063 at  10292,  7452  W/L   69/19   -     gate cdp2_a_c_s6_q n1567 <-> vss
+  t1062 at  10244,  7452  W/L   69/21   -     gate cdp2_trk_s6  cdp2_b_s6_ne <-> n1558
+  t1063 at  10292,  7452  W/L   69/19   -     gate cdp2_a_c_s6_q n1558 <-> vss
   t1064 at  10423,  7431  W/L   32/14   -     gate cdp2_b_s7_y  cdp2_b_s7_ne <-> vss
-  t1065 at  10634,  7452  W/L   69/21   -     gate cdp2_trk_s7  cdp2_b_s7_ne <-> n1568
-  t1066 at  10682,  7452  W/L   69/19   -     gate cdp2_a_c_s7_q n1568 <-> vss
+  t1065 at  10634,  7452  W/L   69/21   -     gate cdp2_trk_s7  cdp2_b_s7_ne <-> n1559
+  t1066 at  10682,  7452  W/L   69/19   -     gate cdp2_a_c_s7_q n1559 <-> vss
   t1067 at   8998,  7596  W/L   15/83   hold  gate vss          cdp2_a_c_s3_a <-> cdp2_a_c_s3_q
   t1068 at   8855,  7754  W/L   36/23   -     gate cdp2_c_ld    cdp2_a_s3_bus <-> cdp2_a_c_s3_a
   t1069 at   8910,  9268  W/L   22/94   -     gate vss          cdp3_c_c3_q <-> cdp3_c_c3_x
@@ -1193,7 +1192,7 @@ transistors
   t1186 at  10433, 13028  W/L   68/22   -     gate cdp4_ld      cdp4_in_s7 <-> cdp4_lc_s7_a
   t1187 at  11250, 18825  W/L   50/24   -     gate ck_b         ck_g1 <-> vss
   t1188 at  11256, 18720  W/L   26/96   load  gate ck_g1        vcc <-> ck_g1
-  t1189 at  10468, 18941  W/L   59/32   clamp gate ck_out       vcc <-> n364
+  t1189 at  10468, 18941  W/L   59/32   clamp gate ck_out       vcc <-> n368
   t1190 at  10578, 19505  W/L  480/23   -     gate clk          ck_t <-> vss
   t1191 at  10508, 19505  W/L  480/23   -     gate clk          vss <-> ck_t
   t1192 at  10436, 19505  W/L  480/22   -     gate clk          vss <-> ck_t
@@ -1302,8 +1301,8 @@ transistors
   t1295 at  11964,  7400  W/L   85/39   load  gate mra_n1_r0    vcc <-> mra_n1_r0
   t1296 at  12065,  7383  W/L  109/22   -     gate mra_p3_r0    vss <-> mra_n1_r0
   t1297 at  12108,  7598  W/L   57/23   -     gate mra_x_r1     mra_m_r0 <-> mra_rb_r0
-  t1298 at  12108,  7540  W/L   57/21   -     gate mra_n2_r0    n1581 <-> mra_m_r0
-  t1299 at  12224,  7550  W/L   52/17   -     gate mra_g1_r0    n1581 <-> vss
+  t1298 at  12108,  7540  W/L   57/21   -     gate mra_n2_r0    n1572 <-> mra_m_r0
+  t1299 at  12224,  7550  W/L   52/17   -     gate mra_g1_r0    n1572 <-> vss
   t1300 at  11974,  7648  W/L   54/23   -     gate mra_x_r1     vss <-> mra_n2_r0
   t1301 at  11912,  7588  W/L   48/40   load  gate mra_n2_r0    mra_n2_r0 <-> vcc
   t1302 at  12239,  7664  W/L   53/24   -     gate mra_q_r0     vss <-> mra_g1_r0
@@ -1313,8 +1312,8 @@ transistors
   t1306 at  11964,  7876  W/L   85/39   load  gate mra_n1_r1    vcc <-> mra_n1_r1
   t1307 at  12065,  7860  W/L  109/22   -     gate mra_p3_r1    vss <-> mra_n1_r1
   t1308 at  12108,  8076  W/L   57/23   -     gate mra_x_r2     mra_m_r1 <-> mra_rb_r1
-  t1309 at  12108,  8016  W/L   57/21   -     gate mra_n2_r1    n1583 <-> mra_m_r1
-  t1310 at  12224,  8028  W/L   52/17   -     gate mra_g1_r1    n1583 <-> vss
+  t1309 at  12108,  8016  W/L   57/21   -     gate mra_n2_r1    n1574 <-> mra_m_r1
+  t1310 at  12224,  8028  W/L   52/17   -     gate mra_g1_r1    n1574 <-> vss
   t1311 at  11974,  8126  W/L   54/23   -     gate mra_x_r2     vss <-> mra_n2_r1
   t1312 at  11912,  8066  W/L   48/40   load  gate mra_n2_r1    mra_n2_r1 <-> vcc
   t1313 at  12239,  8140  W/L   53/24   -     gate mra_q_r1     vss <-> mra_g1_r1
@@ -1324,8 +1323,8 @@ transistors
   t1317 at  11964,  8354  W/L   85/39   load  gate mra_n1_r2    mra_n1_r2 <-> vcc
   t1318 at  12065,  8337  W/L  109/22   -     gate mra_p3_r2    vss <-> mra_n1_r2
   t1319 at  12108,  8552  W/L   57/23   -     gate mra_x_r3     mra_m_r2 <-> mra_rb_r2
-  t1320 at  12108,  8494  W/L   57/21   -     gate mra_n2_r2    n1585 <-> mra_m_r2
-  t1321 at  12224,  8504  W/L   52/17   -     gate mra_g1_r2    n1585 <-> vss
+  t1320 at  12108,  8494  W/L   57/21   -     gate mra_n2_r2    n1576 <-> mra_m_r2
+  t1321 at  12224,  8504  W/L   52/17   -     gate mra_g1_r2    n1576 <-> vss
   t1322 at  11974,  8602  W/L   54/23   -     gate mra_x_r3     vss <-> mra_n2_r2
   t1323 at  11912,  8542  W/L   48/40   load  gate mra_n2_r2    mra_n2_r2 <-> vcc
   t1324 at  12239,  8618  W/L   53/24   -     gate mra_q_r2     vss <-> mra_g1_r2
@@ -1335,8 +1334,8 @@ transistors
   t1328 at  11964,  8830  W/L   85/39   load  gate mra_n1_r3    vcc <-> mra_n1_r3
   t1329 at  12065,  8814  W/L  109/22   -     gate mra_p3_r3    vss <-> mra_n1_r3
   t1330 at  12108,  9030  W/L   57/23   -     gate mra_cin_r3   mra_m_r3 <-> mra_rb_r3
-  t1331 at  12108,  8970  W/L   57/21   -     gate mra_n2_r3    n1587 <-> mra_m_r3
-  t1332 at  12224,  8982  W/L   52/17   -     gate mra_g1_r3    n1587 <-> vss
+  t1331 at  12108,  8970  W/L   57/21   -     gate mra_n2_r3    n1578 <-> mra_m_r3
+  t1332 at  12224,  8982  W/L   52/17   -     gate mra_g1_r3    n1578 <-> vss
   t1333 at  11974,  9080  W/L   54/23   -     gate mra_cin_r3   vss <-> mra_n2_r3
   t1334 at  11912,  9020  W/L   48/40   load  gate mra_n2_r3    mra_n2_r3 <-> vcc
   t1335 at  12239,  9094  W/L   53/24   -     gate mra_q_r3     mra_g1_r3 <-> vss
@@ -1346,8 +1345,8 @@ transistors
   t1339 at  12065,  9552  W/L  109/22   -     gate mra_p3_r4    vss <-> mra_n1_r4
   t1340 at  11964,  9568  W/L   85/39   load  gate mra_n1_r4    mra_n1_r4 <-> vcc
   t1341 at  12108,  9768  W/L   57/23   -     gate mra_x_r5     mra_m_r4 <-> mra_rb_r4
-  t1342 at  12108,  9708  W/L   57/21   -     gate mra_n2_r4    n1589 <-> mra_m_r4
-  t1343 at  12224,  9720  W/L   52/17   -     gate mra_g1_r4    n1589 <-> vss
+  t1342 at  12108,  9708  W/L   57/21   -     gate mra_n2_r4    n1580 <-> mra_m_r4
+  t1343 at  12224,  9720  W/L   52/17   -     gate mra_g1_r4    n1580 <-> vss
   t1344 at  11974,  9818  W/L   54/23   -     gate mra_x_r5     vss <-> mra_n2_r4
   t1345 at  11912,  9758  W/L   48/40   load  gate mra_n2_r4    mra_n2_r4 <-> vcc
   t1346 at  12239,  9832  W/L   53/24   -     gate mra_q_r4     mra_g1_r4 <-> vss
@@ -1357,8 +1356,8 @@ transistors
   t1350 at  11964, 10046  W/L   85/39   load  gate mra_n1_r5    vcc <-> mra_n1_r5
   t1351 at  12065, 10029  W/L  109/22   -     gate mra_p3_r5    vss <-> mra_n1_r5
   t1352 at  12108, 10244  W/L   57/23   -     gate mra_x_r6     mra_m_r5 <-> mra_rb_r5
-  t1353 at  12108, 10186  W/L   57/21   -     gate mra_n2_r5    n1591 <-> mra_m_r5
-  t1354 at  12224, 10196  W/L   52/17   -     gate mra_g1_r5    n1591 <-> vss
+  t1353 at  12108, 10186  W/L   57/21   -     gate mra_n2_r5    n1582 <-> mra_m_r5
+  t1354 at  12224, 10196  W/L   52/17   -     gate mra_g1_r5    n1582 <-> vss
   t1355 at  11974, 10294  W/L   54/23   -     gate mra_x_r6     vss <-> mra_n2_r5
   t1356 at  11912, 10234  W/L   48/40   load  gate mra_n2_r5    mra_n2_r5 <-> vcc
   t1357 at  12239, 10310  W/L   53/24   -     gate mra_q_r5     mra_g1_r5 <-> vss
@@ -1368,8 +1367,8 @@ transistors
   t1361 at  11964, 10522  W/L   85/39   load  gate mra_n1_r6    mra_n1_r6 <-> vcc
   t1362 at  12065, 10506  W/L  109/22   -     gate mra_p3_r6    vss <-> mra_n1_r6
   t1363 at  12108, 10722  W/L   57/23   -     gate mra_gla      mra_m_r6 <-> mra_rb_r6
-  t1364 at  12108, 10662  W/L   57/21   -     gate mra_n2_r6    n1593 <-> mra_m_r6
-  t1365 at  12224, 10674  W/L   52/17   -     gate mra_g1_r6    n1593 <-> vss
+  t1364 at  12108, 10662  W/L   57/21   -     gate mra_n2_r6    n1584 <-> mra_m_r6
+  t1365 at  12224, 10674  W/L   52/17   -     gate mra_g1_r6    n1584 <-> vss
   t1366 at  11974, 10772  W/L   54/23   -     gate mra_gla      vss <-> mra_n2_r6
   t1367 at  11912, 10712  W/L   48/40   load  gate mra_n2_r6    mra_n2_r6 <-> vcc
   t1368 at  12239, 10786  W/L   53/24   -     gate mra_q_r6     vss <-> mra_g1_r6
@@ -1379,8 +1378,8 @@ transistors
   t1372 at  11964, 11086  W/L   85/39   load  gate mra_n1_r7    vcc <-> mra_n1_r7
   t1373 at  12065, 11069  W/L  109/22   -     gate mra_p3_r7    vss <-> mra_n1_r7
   t1374 at  12108, 11284  W/L   57/23   -     gate mra_x_r8     mra_m_r7 <-> mra_rb_r7
-  t1375 at  12108, 11226  W/L   57/21   -     gate mra_n2_r7    n1595 <-> mra_m_r7
-  t1376 at  12224, 11236  W/L   52/17   -     gate mra_g1_r7    n1595 <-> vss
+  t1375 at  12108, 11226  W/L   57/21   -     gate mra_n2_r7    n1586 <-> mra_m_r7
+  t1376 at  12224, 11236  W/L   52/17   -     gate mra_g1_r7    n1586 <-> vss
   t1377 at  11974, 11334  W/L   54/23   -     gate mra_x_r8     vss <-> mra_n2_r7
   t1378 at  11912, 11274  W/L   48/40   load  gate mra_n2_r7    mra_n2_r7 <-> vcc
   t1379 at  12239, 11350  W/L   53/24   -     gate mra_q_r7     vss <-> mra_g1_r7
@@ -1390,8 +1389,8 @@ transistors
   t1383 at  11966, 11564  W/L   85/39   load  gate mra_n1_r8    mra_n1_r8 <-> vcc
   t1384 at  12066, 11547  W/L  109/22   -     gate mra_p3_r8    vss <-> mra_n1_r8
   t1385 at  12108, 11762  W/L   57/23   -     gate mra_x_r9     mra_m_r8 <-> mra_rb_r8
-  t1386 at  12108, 11704  W/L   57/21   -     gate mra_n2_r8    n1597 <-> mra_m_r8
-  t1387 at  12225, 11714  W/L   52/17   -     gate mra_g1_r8    n1597 <-> vss
+  t1386 at  12108, 11704  W/L   57/21   -     gate mra_n2_r8    n1588 <-> mra_m_r8
+  t1387 at  12225, 11714  W/L   52/17   -     gate mra_g1_r8    n1588 <-> vss
   t1388 at  11976, 11812  W/L   54/23   -     gate mra_x_r9     vss <-> mra_n2_r8
   t1389 at  11914, 11752  W/L   48/40   load  gate mra_n2_r8    mra_n2_r8 <-> vcc
   t1390 at  12240, 11828  W/L   53/24   -     gate mra_q_r8     vss <-> mra_g1_r8
@@ -1401,8 +1400,8 @@ transistors
   t1394 at  11966, 12040  W/L   85/39   load  gate mra_n1_r9    mra_n1_r9 <-> vcc
   t1395 at  12066, 12024  W/L  109/22   -     gate mra_p3_r9    vss <-> mra_n1_r9
   t1396 at  12108, 12240  W/L   57/23   -     gate mra_x_r10    mra_m_r9 <-> mra_rb_r9
-  t1397 at  12108, 12180  W/L   57/21   -     gate mra_n2_r9    n1599 <-> mra_m_r9
-  t1398 at  12225, 12192  W/L   52/17   -     gate mra_g1_r9    n1599 <-> vss
+  t1397 at  12108, 12180  W/L   57/21   -     gate mra_n2_r9    n1590 <-> mra_m_r9
+  t1398 at  12225, 12192  W/L   52/17   -     gate mra_g1_r9    n1590 <-> vss
   t1399 at  11976, 12290  W/L   54/23   -     gate mra_x_r10    vss <-> mra_n2_r9
   t1400 at  11914, 12230  W/L   48/40   load  gate mra_n2_r9    mra_n2_r9 <-> vcc
   t1401 at  12240, 12304  W/L   53/24   -     gate mra_q_r9     vss <-> mra_g1_r9
@@ -1412,8 +1411,8 @@ transistors
   t1405 at  11966, 12518  W/L   85/39   load  gate mra_n1_r10   mra_n1_r10 <-> vcc
   t1406 at  12066, 12501  W/L  109/22   -     gate mra_p3_r10   vss <-> mra_n1_r10
   t1407 at  12108, 12716  W/L   57/23   -     gate mra_cin_r10  mra_m_r10 <-> mra_rb_r10
-  t1408 at  12108, 12658  W/L   57/21   -     gate mra_n2_r10   n1601 <-> mra_m_r10
-  t1409 at  12225, 12668  W/L   52/17   -     gate mra_g1_r10   n1601 <-> vss
+  t1408 at  12108, 12658  W/L   57/21   -     gate mra_n2_r10   n1592 <-> mra_m_r10
+  t1409 at  12225, 12668  W/L   52/17   -     gate mra_g1_r10   n1592 <-> vss
   t1410 at  11976, 12766  W/L   54/23   -     gate mra_cin_r10  vss <-> mra_n2_r10
   t1411 at  11914, 12706  W/L   48/40   load  gate mra_n2_r10   mra_n2_r10 <-> vcc
   t1412 at  12240, 12782  W/L   53/24   -     gate mra_q_r10    vss <-> mra_g1_r10
@@ -1423,8 +1422,8 @@ transistors
   t1416 at  11966, 13168  W/L   85/39   load  gate mra_n1_r11   mra_n1_r11 <-> vcc
   t1417 at  12066, 13152  W/L  109/22   -     gate mra_p3_r11   vss <-> mra_n1_r11
   t1418 at  12108, 13368  W/L   57/23   -     gate mra_x_r12    mra_m_r11 <-> mra_rb_r11
-  t1419 at  12108, 13308  W/L   57/21   -     gate mra_n2_r11   n1603 <-> mra_m_r11
-  t1420 at  12225, 13320  W/L   52/17   -     gate mra_g1_r11   n1603 <-> vss
+  t1419 at  12108, 13308  W/L   57/21   -     gate mra_n2_r11   n1594 <-> mra_m_r11
+  t1420 at  12225, 13320  W/L   52/17   -     gate mra_g1_r11   n1594 <-> vss
   t1421 at  11976, 13418  W/L   54/23   -     gate mra_x_r12    vss <-> mra_n2_r11
   t1422 at  11914, 13358  W/L   48/40   load  gate mra_n2_r11   mra_n2_r11 <-> vcc
   t1423 at  12240, 13432  W/L   53/24   -     gate mra_q_r11    vss <-> mra_g1_r11
@@ -1434,8 +1433,8 @@ transistors
   t1427 at  11966, 13646  W/L   85/39   load  gate mra_n1_r12   mra_n1_r12 <-> vcc
   t1428 at  12066, 13630  W/L  109/22   -     gate mra_p3_r12   vss <-> mra_n1_r12
   t1429 at  12108, 13846  W/L   57/23   -     gate mra_x_r13    mra_m_r12 <-> mra_rb_r12
-  t1430 at  12108, 13786  W/L   57/21   -     gate mra_n2_r12   n1605 <-> mra_m_r12
-  t1431 at  12225, 13798  W/L   52/17   -     gate mra_g1_r12   n1605 <-> vss
+  t1430 at  12108, 13786  W/L   57/21   -     gate mra_n2_r12   n1596 <-> mra_m_r12
+  t1431 at  12225, 13798  W/L   52/17   -     gate mra_g1_r12   n1596 <-> vss
   t1432 at  11976, 13896  W/L   54/23   -     gate mra_x_r13    vss <-> mra_n2_r12
   t1433 at  11914, 13836  W/L   48/40   load  gate mra_n2_r12   mra_n2_r12 <-> vcc
   t1434 at  12240, 13910  W/L   53/24   -     gate mra_q_r12    vss <-> mra_g1_r12
@@ -1445,8 +1444,8 @@ transistors
   t1438 at  11966, 14122  W/L   85/39   load  gate mra_n1_r13   mra_n1_r13 <-> vcc
   t1439 at  12066, 14106  W/L  109/22   -     gate mra_p3_r13   vss <-> mra_n1_r13
   t1440 at  12108, 14322  W/L   57/23   -     gate mra_x_r14    mra_m_r13 <-> mra_rb_r13
-  t1441 at  12108, 14262  W/L   57/21   -     gate mra_n2_r13   n1607 <-> mra_m_r13
-  t1442 at  12225, 14274  W/L   52/17   -     gate mra_g1_r13   n1607 <-> vss
+  t1441 at  12108, 14262  W/L   57/21   -     gate mra_n2_r13   n1598 <-> mra_m_r13
+  t1442 at  12225, 14274  W/L   52/17   -     gate mra_g1_r13   n1598 <-> vss
   t1443 at  11976, 14372  W/L   54/23   -     gate mra_x_r14    vss <-> mra_n2_r13
   t1444 at  11914, 14312  W/L   48/40   load  gate mra_n2_r13   mra_n2_r13 <-> vcc
   t1445 at  12240, 14386  W/L   53/24   -     gate mra_q_r13    vss <-> mra_g1_r13
@@ -1456,8 +1455,8 @@ transistors
   t1449 at  11966, 14600  W/L   85/39   load  gate mra_n1_r14   mra_n1_r14 <-> vcc
   t1450 at  12066, 14583  W/L  109/22   -     gate mra_p3_r14   vss <-> mra_n1_r14
   t1451 at  12108, 14798  W/L   57/23   -     gate mra_glb      mra_m_r14 <-> mra_rb_r14
-  t1452 at  12108, 14740  W/L   57/21   -     gate mra_n2_r14   n1609 <-> mra_m_r14
-  t1453 at  12225, 14750  W/L   52/17   -     gate mra_g1_r14   n1609 <-> vss
+  t1452 at  12108, 14740  W/L   57/21   -     gate mra_n2_r14   n1600 <-> mra_m_r14
+  t1453 at  12225, 14750  W/L   52/17   -     gate mra_g1_r14   n1600 <-> vss
   t1454 at  11976, 14848  W/L   54/23   -     gate mra_glb      vss <-> mra_n2_r14
   t1455 at  11914, 14788  W/L   48/40   load  gate mra_n2_r14   mra_n2_r14 <-> vcc
   t1456 at  12240, 14864  W/L   53/24   -     gate mra_q_r14    mra_g1_r14 <-> vss
@@ -1467,8 +1466,8 @@ transistors
   t1460 at  11966, 15142  W/L   85/39   load  gate mra_n1_r15   mra_n1_r15 <-> vcc
   t1461 at  12066, 15126  W/L  109/22   -     gate mra_p3_r15   vss <-> mra_n1_r15
   t1462 at  12108, 15342  W/L   57/23   -     gate mra_x_r16    mra_m_r15 <-> mra_rb_r15
-  t1463 at  12108, 15282  W/L   57/21   -     gate mra_n2_r15   n1611 <-> mra_m_r15
-  t1464 at  12225, 15294  W/L   52/17   -     gate mra_g1_r15   n1611 <-> vss
+  t1463 at  12108, 15282  W/L   57/21   -     gate mra_n2_r15   n1602 <-> mra_m_r15
+  t1464 at  12225, 15294  W/L   52/17   -     gate mra_g1_r15   n1602 <-> vss
   t1465 at  11976, 15392  W/L   54/23   -     gate mra_x_r16    vss <-> mra_n2_r15
   t1466 at  11914, 15332  W/L   48/40   load  gate mra_n2_r15   mra_n2_r15 <-> vcc
   t1467 at  12240, 15406  W/L   53/24   -     gate mra_q_r15    mra_g1_r15 <-> vss
@@ -1478,8 +1477,8 @@ transistors
   t1471 at  11966, 15620  W/L   85/39   load  gate mra_n1_r16   mra_n1_r16 <-> vcc
   t1472 at  12066, 15603  W/L  109/22   -     gate mra_p3_r16   vss <-> mra_n1_r16
   t1473 at  12108, 15818  W/L   57/23   -     gate mra_x_r17    mra_m_r16 <-> mra_rb_r16
-  t1474 at  12108, 15760  W/L   57/21   -     gate mra_n2_r16   n1613 <-> mra_m_r16
-  t1475 at  12225, 15770  W/L   52/17   -     gate mra_g1_r16   n1613 <-> vss
+  t1474 at  12108, 15760  W/L   57/21   -     gate mra_n2_r16   n1604 <-> mra_m_r16
+  t1475 at  12225, 15770  W/L   52/17   -     gate mra_g1_r16   n1604 <-> vss
   t1476 at  11976, 15868  W/L   54/23   -     gate mra_x_r17    vss <-> mra_n2_r16
   t1477 at  11914, 15808  W/L   48/40   load  gate mra_n2_r16   mra_n2_r16 <-> vcc
   t1478 at  12240, 15884  W/L   53/24   -     gate mra_q_r16    mra_g1_r16 <-> vss
@@ -1489,8 +1488,8 @@ transistors
   t1482 at  11966, 16096  W/L   85/39   load  gate mra_n1_r17   mra_n1_r17 <-> vcc
   t1483 at  12066, 16080  W/L  109/22   -     gate mra_p3_r17   vss <-> mra_n1_r17
   t1484 at  12108, 16296  W/L   57/23   -     gate mra_x_r18    mra_m_r17 <-> mra_rb_r17
-  t1485 at  12108, 16236  W/L   57/21   -     gate mra_n2_r17   n1615 <-> mra_m_r17
-  t1486 at  12225, 16248  W/L   52/17   -     gate mra_g1_r17   n1615 <-> vss
+  t1485 at  12108, 16236  W/L   57/21   -     gate mra_n2_r17   n1606 <-> mra_m_r17
+  t1486 at  12225, 16248  W/L   52/17   -     gate mra_g1_r17   n1606 <-> vss
   t1487 at  11976, 16346  W/L   54/23   -     gate mra_x_r18    vss <-> mra_n2_r17
   t1488 at  11914, 16286  W/L   48/40   load  gate mra_n2_r17   mra_n2_r17 <-> vcc
   t1489 at  12240, 16360  W/L   53/24   -     gate mra_q_r17    mra_g1_r17 <-> vss
@@ -1500,8 +1499,8 @@ transistors
   t1493 at  11966, 16574  W/L   85/39   load  gate mra_n1_r18   mra_n1_r18 <-> vcc
   t1494 at  12067, 16557  W/L  109/22   -     gate mra_p3_r18   vss <-> mra_n1_r18
   t1495 at  12110, 16772  W/L   57/23   -     gate mra_cin_r18  mra_m_r18 <-> mra_rb_r18
-  t1496 at  12110, 16714  W/L   57/21   -     gate mra_n2_r18   n1617 <-> mra_m_r18
-  t1497 at  12226, 16724  W/L   52/17   -     gate mra_g1_r18   n1617 <-> vss
+  t1496 at  12110, 16714  W/L   57/21   -     gate mra_n2_r18   n1608 <-> mra_m_r18
+  t1497 at  12226, 16724  W/L   52/17   -     gate mra_g1_r18   n1608 <-> vss
   t1498 at  11976, 16822  W/L   54/23   -     gate mra_cin_r18  vss <-> mra_n2_r18
   t1499 at  11914, 16762  W/L   48/40   load  gate mra_n2_r18   mra_n2_r18 <-> vcc
   t1500 at  12241, 16838  W/L   53/24   -     gate mra_q_r18    vss <-> mra_g1_r18
@@ -1803,8 +1802,8 @@ transistors
   t1796 at  15901,  8202  W/L   30/52   load  gate rdp3_rf_s5_n2 rdp3_rf_s5_n2 <-> vcc
   t1797 at  15990,  8242  W/L   28/49   load  gate rdp3_rf_s5_q rdp3_rf_s5_q <-> vcc
   t1798 at  16080,  8204  W/L   52/22   -     gate rdp3_rf_s5_n2 vss <-> rdp3_rf_s5_q
-  t1799 at  13841,  8254  W/L   34/28   -     gate rdp2_rf_ld   rdp3_rf_s0_a <-> rdp2_ubus_s0
-  t1800 at  13451,  8254  W/L   34/28   -     gate rdp2_rf_ld   rdp3_rf_sm1_a <-> rdp2_ubus_sm1
+  t1799 at  13841,  8254  W/L   34/28   -     gate sel_w6       rdp3_rf_s0_a <-> rdp2_ubus_s0
+  t1800 at  13451,  8254  W/L   34/28   -     gate sel_w6       rdp3_rf_sm1_a <-> rdp2_ubus_sm1
   t1801 at  13695,  8502  W/L   67/42   load  gate rdp2_ce_eq   vcc <-> rdp2_ce_eq
   t1802 at  14022,  8490  W/L  269/23   -     gate rdp2_ce_s0_x rdp2_ce_eq <-> vss
   t1803 at  14412,  8490  W/L  269/23   -     gate rdp2_ce_s1_x rdp2_ce_eq <-> vss
@@ -1814,8 +1813,8 @@ transistors
   t1807 at  15974,  8490  W/L  269/23   -     gate rdp2_ce_s5_x rdp2_ce_eq <-> vss
   t1808 at  13573,  8490  W/L  180/21   -     gate rdp2_ce_sm1_x vss <-> rdp2_ce_eq
   t1809 at  13822,  8712  W/L   40/23   -     gate rdp2_ce_s0_nor rdp2_ce_s0_x <-> vss
-  t1810 at  13741,  8638  W/L   72/24   -     gate rdp3_re_sm1_q vss <-> n1618
-  t1811 at  13694,  8638  W/L   72/25   -     gate rdp2_uc_sm1  rdp2_ce_sm1_x <-> n1618
+  t1810 at  13741,  8638  W/L   72/24   -     gate rdp3_re_sm1_q vss <-> n1609
+  t1811 at  13694,  8638  W/L   72/25   -     gate rdp2_uc_sm1  rdp2_ce_sm1_x <-> n1609
   t1812 at  13432,  8712  W/L   40/23   -     gate rdp2_ce_sm1_nor rdp2_ce_sm1_x <-> vss
   t1813 at  13500,  8772  W/L   41/24   -     gate rdp2_uc_sm1  rdp2_ce_sm1_nor <-> vss
   t1814 at  13718,  8785  W/L   36/22   -     gate rdp3_re_sm1_q vss <-> rdp2_ce_sm1_nor
@@ -1831,23 +1830,23 @@ transistors
   t1824 at  15670,  8785  W/L   36/22   -     gate rdp3_re_s4_q vss <-> rdp2_ce_s4_nor
   t1825 at  15842,  8772  W/L   41/24   -     gate rdp2_uc_s5   rdp2_ce_s5_nor <-> vss
   t1826 at  16060,  8785  W/L   36/22   -     gate rdp3_re_s5_q vss <-> rdp2_ce_s5_nor
-  t1827 at  16083,  8638  W/L   72/24   -     gate rdp3_re_s5_q n1619 <-> vss
-  t1828 at  16036,  8638  W/L   72/25   -     gate rdp2_uc_s5   rdp2_ce_s5_x <-> n1619
+  t1827 at  16083,  8638  W/L   72/24   -     gate rdp3_re_s5_q n1610 <-> vss
+  t1828 at  16036,  8638  W/L   72/25   -     gate rdp2_uc_s5   rdp2_ce_s5_x <-> n1610
   t1829 at  15774,  8712  W/L   40/23   -     gate rdp2_ce_s5_nor rdp2_ce_s5_x <-> vss
-  t1830 at  15693,  8638  W/L   72/24   -     gate rdp3_re_s4_q n1620 <-> vss
-  t1831 at  15646,  8638  W/L   72/25   -     gate rdp2_uc_s4   rdp2_ce_s4_x <-> n1620
+  t1830 at  15693,  8638  W/L   72/24   -     gate rdp3_re_s4_q n1611 <-> vss
+  t1831 at  15646,  8638  W/L   72/25   -     gate rdp2_uc_s4   rdp2_ce_s4_x <-> n1611
   t1832 at  15384,  8712  W/L   40/23   -     gate rdp2_ce_s4_nor vss <-> rdp2_ce_s4_x
-  t1833 at  15302,  8638  W/L   72/24   -     gate rdp3_re_s3_q n1621 <-> vss
-  t1834 at  15254,  8638  W/L   72/25   -     gate rdp2_uc_s3   rdp2_ce_s3_x <-> n1621
+  t1833 at  15302,  8638  W/L   72/24   -     gate rdp3_re_s3_q n1612 <-> vss
+  t1834 at  15254,  8638  W/L   72/25   -     gate rdp2_uc_s3   rdp2_ce_s3_x <-> n1612
   t1835 at  14993,  8712  W/L   40/23   -     gate rdp2_ce_s3_nor rdp2_ce_s3_x <-> vss
-  t1836 at  14912,  8638  W/L   72/24   -     gate rdp3_re_s2_q n1622 <-> vss
-  t1837 at  14864,  8638  W/L   72/25   -     gate rdp2_uc_s2   n1622 <-> rdp2_ce_s2_x
+  t1836 at  14912,  8638  W/L   72/24   -     gate rdp3_re_s2_q n1613 <-> vss
+  t1837 at  14864,  8638  W/L   72/25   -     gate rdp2_uc_s2   n1613 <-> rdp2_ce_s2_x
   t1838 at  14603,  8712  W/L   40/23   -     gate rdp2_ce_s2_nor rdp2_ce_s2_x <-> vss
-  t1839 at  14521,  8638  W/L   72/24   -     gate rdp3_re_s1_q n1623 <-> vss
-  t1840 at  14474,  8638  W/L   72/25   -     gate rdp2_uc_s1   rdp2_ce_s1_x <-> n1623
+  t1839 at  14521,  8638  W/L   72/24   -     gate rdp3_re_s1_q n1614 <-> vss
+  t1840 at  14474,  8638  W/L   72/25   -     gate rdp2_uc_s1   rdp2_ce_s1_x <-> n1614
   t1841 at  14212,  8712  W/L   40/23   -     gate rdp2_ce_s1_nor rdp2_ce_s1_x <-> vss
-  t1842 at  14131,  8638  W/L   72/24   -     gate rdp3_re_s0_q n1624 <-> vss
-  t1843 at  14084,  8638  W/L   72/25   -     gate rdp2_uc_s0   rdp2_ce_s0_x <-> n1624
+  t1842 at  14131,  8638  W/L   72/24   -     gate rdp3_re_s0_q n1615 <-> vss
+  t1843 at  14084,  8638  W/L   72/25   -     gate rdp2_uc_s0   rdp2_ce_s0_x <-> n1615
   t1844 at  14674,  8654  W/L   27/50   load  gate rdp2_ce_s2_x rdp2_ce_s2_x <-> vcc
   t1845 at  14792,  8720  W/L   31/58   load  gate rdp2_ce_s2_nor vcc <-> rdp2_ce_s2_nor
   t1846 at  13893,  8654  W/L   27/50   load  gate rdp2_ce_s0_x rdp2_ce_s0_x <-> vcc
@@ -1916,33 +1915,33 @@ transistors
   t1909 at  16060, 10454  W/L   36/22   -     gate rdp3_rc_s5_q vss <-> rdp2_cc_s5_nor
   t1910 at  16234, 10441  W/L   41/24   -     gate rdp3_c_s6    vss <-> rdp2_cc_s6_nor
   t1911 at  16451, 10454  W/L   36/22   -     gate rdp3_rc_s6_q vss <-> rdp2_cc_s6_nor
-  t1912 at  16624, 10442  W/L   41/24   -     gate rdp3_c_s7    vss <-> rdp2_cc_s7_nor
+  t1912 at  16624, 10442  W/L   41/24   -     gate mra_n1_r12   vss <-> rdp2_cc_s7_nor
   t1913 at  16841, 10455  W/L   36/22   -     gate rdp3_rc_s7_q vss <-> rdp2_cc_s7_nor
-  t1914 at  16864, 10308  W/L   72/24   -     gate rdp3_rc_s7_q n1625 <-> vss
-  t1915 at  16816, 10308  W/L   72/25   -     gate rdp3_c_s7    rdp2_cc_s7_x <-> n1625
+  t1914 at  16864, 10308  W/L   72/24   -     gate rdp3_rc_s7_q n1616 <-> vss
+  t1915 at  16816, 10308  W/L   72/25   -     gate mra_n1_r12   rdp2_cc_s7_x <-> n1616
   t1916 at  16555, 10382  W/L   40/23   -     gate rdp2_cc_s7_nor vss <-> rdp2_cc_s7_x
-  t1917 at  16474, 10307  W/L   72/24   -     gate rdp3_rc_s6_q n1626 <-> vss
-  t1918 at  16426, 10307  W/L   72/25   -     gate rdp3_c_s6    rdp2_cc_s6_x <-> n1626
+  t1917 at  16474, 10307  W/L   72/24   -     gate rdp3_rc_s6_q n1617 <-> vss
+  t1918 at  16426, 10307  W/L   72/25   -     gate rdp3_c_s6    rdp2_cc_s6_x <-> n1617
   t1919 at  16165, 10382  W/L   40/23   -     gate rdp2_cc_s6_nor rdp2_cc_s6_x <-> vss
-  t1920 at  16083, 10307  W/L   72/24   -     gate rdp3_rc_s5_q n1627 <-> vss
-  t1921 at  16036, 10307  W/L   72/25   -     gate rdp3_c_s5    rdp2_cc_s5_x <-> n1627
+  t1920 at  16083, 10307  W/L   72/24   -     gate rdp3_rc_s5_q n1618 <-> vss
+  t1921 at  16036, 10307  W/L   72/25   -     gate rdp3_c_s5    rdp2_cc_s5_x <-> n1618
   t1922 at  15774, 10382  W/L   40/23   -     gate rdp2_cc_s5_nor rdp2_cc_s5_x <-> vss
-  t1923 at  15693, 10307  W/L   72/24   -     gate rdp3_rc_s4_q n1628 <-> vss
-  t1924 at  15646, 10307  W/L   72/25   -     gate rdp3_c_s4    rdp2_cc_s4_x <-> n1628
+  t1923 at  15693, 10307  W/L   72/24   -     gate rdp3_rc_s4_q n1619 <-> vss
+  t1924 at  15646, 10307  W/L   72/25   -     gate rdp3_c_s4    rdp2_cc_s4_x <-> n1619
   t1925 at  15384, 10382  W/L   40/23   -     gate rdp2_cc_s4_nor rdp2_cc_s4_x <-> vss
-  t1926 at  15303, 10308  W/L   72/24   -     gate rdp3_rc_s3_q n1629 <-> vss
-  t1927 at  15256, 10308  W/L   72/25   -     gate rdp3_c_s3    rdp2_cc_s3_x <-> n1629
+  t1926 at  15303, 10308  W/L   72/24   -     gate rdp3_rc_s3_q n1620 <-> vss
+  t1927 at  15256, 10308  W/L   72/25   -     gate rdp3_c_s3    rdp2_cc_s3_x <-> n1620
   t1928 at  14994, 10382  W/L   40/23   -     gate rdp2_cc_s3_nor rdp2_cc_s3_x <-> vss
-  t1929 at  14912, 10308  W/L   72/24   -     gate rdp3_rc_s2_q n1630 <-> vss
-  t1930 at  14864, 10308  W/L   72/25   -     gate rdp3_c_s2    rdp2_cc_s2_x <-> n1630
+  t1929 at  14912, 10308  W/L   72/24   -     gate rdp3_rc_s2_q n1621 <-> vss
+  t1930 at  14864, 10308  W/L   72/25   -     gate rdp3_c_s2    rdp2_cc_s2_x <-> n1621
   t1931 at  14603, 10382  W/L   40/23   -     gate rdp2_cc_s2_nor rdp2_cc_s2_x <-> vss
-  t1932 at  14522, 10308  W/L   72/24   -     gate rdp3_rc_s1_q n1631 <-> vss
-  t1933 at  14474, 10308  W/L   72/25   -     gate rdp3_c_s1    n1631 <-> rdp2_cc_s1_x
+  t1932 at  14522, 10308  W/L   72/24   -     gate rdp3_rc_s1_q n1622 <-> vss
+  t1933 at  14474, 10308  W/L   72/25   -     gate rdp3_c_s1    n1622 <-> rdp2_cc_s1_x
   t1934 at  14213, 10382  W/L   40/23   -     gate rdp2_cc_s1_nor rdp2_cc_s1_x <-> vss
-  t1935 at  14132, 10307  W/L   72/24   -     gate rdp3_rc_s0_q n1632 <-> vss
-  t1936 at  14084, 10307  W/L   72/25   -     gate rdp3_c_s0    rdp2_cc_s0_x <-> n1632
+  t1935 at  14132, 10307  W/L   72/24   -     gate rdp3_rc_s0_q n1623 <-> vss
+  t1936 at  14084, 10307  W/L   72/25   -     gate mra_n1_r11   rdp2_cc_s0_x <-> n1623
   t1937 at  13823, 10382  W/L   40/23   -     gate rdp2_cc_s0_nor rdp2_cc_s0_x <-> vss
-  t1938 at  13892, 10441  W/L   41/24   -     gate rdp3_c_s0    rdp2_cc_s0_nor <-> vss
+  t1938 at  13892, 10441  W/L   41/24   -     gate mra_n1_r11   rdp2_cc_s0_nor <-> vss
   t1939 at  14284, 10324  W/L   27/50   load  gate rdp2_cc_s1_x rdp2_cc_s1_x <-> vcc
   t1940 at  14402, 10390  W/L   31/58   load  gate rdp2_cc_s1_nor vcc <-> rdp2_cc_s1_nor
   t1941 at  13894, 10322  W/L   27/50   load  gate rdp2_cc_s0_x rdp2_cc_s0_x <-> vcc
@@ -2003,7 +2002,7 @@ transistors
   t1996 at  16754, 11006  W/L  269/23   -     gate rdp3_cb_s7_x rdp3_cb_eq <-> vss
   t1997 at  14022, 11006  W/L  269/23   -     gate rdp3_cb_s0_x rdp3_cb_eq <-> vss
   t1998 at  13822, 11228  W/L   40/23   -     gate rdp3_cb_s0_nor rdp3_cb_s0_x <-> vss
-  t1999 at  13890, 11287  W/L   41/24   -     gate rdp3_c_s0    rdp3_cb_s0_nor <-> vss
+  t1999 at  13890, 11287  W/L   41/24   -     gate mra_n1_r11   rdp3_cb_s0_nor <-> vss
   t2000 at  14108, 11300  W/L   36/22   -     gate rdp3_rb_s0_q vss <-> rdp3_cb_s0_nor
   t2001 at  14282, 11287  W/L   41/24   -     gate rdp3_c_s1    vss <-> rdp3_cb_s1_nor
   t2002 at  14499, 11300  W/L   36/22   -     gate rdp3_rb_s1_q vss <-> rdp3_cb_s1_nor
@@ -2017,31 +2016,31 @@ transistors
   t2010 at  16060, 11300  W/L   36/22   -     gate rdp3_rb_s5_q vss <-> rdp3_cb_s5_nor
   t2011 at  16232, 11286  W/L   41/24   -     gate rdp3_c_s6    vss <-> rdp3_cb_s6_nor
   t2012 at  16450, 11299  W/L   36/22   -     gate rdp3_rb_s6_q vss <-> rdp3_cb_s6_nor
-  t2013 at  16624, 11287  W/L   41/24   -     gate rdp3_c_s7    rdp3_cb_s7_nor <-> vss
+  t2013 at  16624, 11287  W/L   41/24   -     gate mra_n1_r12   rdp3_cb_s7_nor <-> vss
   t2014 at  16841, 11300  W/L   36/22   -     gate rdp3_rb_s7_q vss <-> rdp3_cb_s7_nor
-  t2015 at  16864, 11153  W/L   72/24   -     gate rdp3_rb_s7_q n1633 <-> vss
-  t2016 at  16816, 11153  W/L   72/25   -     gate rdp3_c_s7    rdp3_cb_s7_x <-> n1633
+  t2015 at  16864, 11153  W/L   72/24   -     gate rdp3_rb_s7_q n1624 <-> vss
+  t2016 at  16816, 11153  W/L   72/25   -     gate mra_n1_r12   rdp3_cb_s7_x <-> n1624
   t2017 at  16555, 11228  W/L   40/23   -     gate rdp3_cb_s7_nor rdp3_cb_s7_x <-> vss
-  t2018 at  16473, 11152  W/L   72/24   -     gate rdp3_rb_s6_q n1634 <-> vss
-  t2019 at  16426, 11152  W/L   72/25   -     gate rdp3_c_s6    rdp3_cb_s6_x <-> n1634
+  t2018 at  16473, 11152  W/L   72/24   -     gate rdp3_rb_s6_q n1625 <-> vss
+  t2019 at  16426, 11152  W/L   72/25   -     gate rdp3_c_s6    rdp3_cb_s6_x <-> n1625
   t2020 at  16164, 11226  W/L   40/23   -     gate rdp3_cb_s6_nor rdp3_cb_s6_x <-> vss
-  t2021 at  16083, 11153  W/L   72/24   -     gate rdp3_rb_s5_q n1635 <-> vss
-  t2022 at  16036, 11153  W/L   72/25   -     gate rdp3_c_s5    rdp3_cb_s5_x <-> n1635
+  t2021 at  16083, 11153  W/L   72/24   -     gate rdp3_rb_s5_q n1626 <-> vss
+  t2022 at  16036, 11153  W/L   72/25   -     gate rdp3_c_s5    rdp3_cb_s5_x <-> n1626
   t2023 at  15774, 11228  W/L   40/23   -     gate rdp3_cb_s5_nor rdp3_cb_s5_x <-> vss
-  t2024 at  15693, 11152  W/L   72/24   -     gate rdp3_rb_s4_q n1636 <-> vss
-  t2025 at  15646, 11152  W/L   72/25   -     gate rdp3_c_s4    rdp3_cb_s4_x <-> n1636
+  t2024 at  15693, 11152  W/L   72/24   -     gate rdp3_rb_s4_q n1627 <-> vss
+  t2025 at  15646, 11152  W/L   72/25   -     gate rdp3_c_s4    rdp3_cb_s4_x <-> n1627
   t2026 at  15384, 11226  W/L   40/23   -     gate rdp3_cb_s4_nor vss <-> rdp3_cb_s4_x
-  t2027 at  15303, 11153  W/L   72/24   -     gate rdp3_rb_s3_q n1637 <-> vss
-  t2028 at  15256, 11153  W/L   72/25   -     gate rdp3_c_s3    rdp3_cb_s3_x <-> n1637
+  t2027 at  15303, 11153  W/L   72/24   -     gate rdp3_rb_s3_q n1628 <-> vss
+  t2028 at  15256, 11153  W/L   72/25   -     gate rdp3_c_s3    rdp3_cb_s3_x <-> n1628
   t2029 at  14994, 11228  W/L   40/23   -     gate rdp3_cb_s3_nor rdp3_cb_s3_x <-> vss
-  t2030 at  14913, 11153  W/L   72/24   -     gate rdp3_rb_s2_q n1638 <-> vss
-  t2031 at  14866, 11153  W/L   72/25   -     gate rdp3_c_s2    n1638 <-> rdp3_cb_s2_x
+  t2030 at  14913, 11153  W/L   72/24   -     gate rdp3_rb_s2_q n1629 <-> vss
+  t2031 at  14866, 11153  W/L   72/25   -     gate rdp3_c_s2    n1629 <-> rdp3_cb_s2_x
   t2032 at  14604, 11228  W/L   40/23   -     gate rdp3_cb_s2_nor rdp3_cb_s2_x <-> vss
-  t2033 at  14522, 11153  W/L   72/24   -     gate rdp3_rb_s1_q n1639 <-> vss
-  t2034 at  14474, 11153  W/L   72/25   -     gate rdp3_c_s1    rdp3_cb_s1_x <-> n1639
+  t2033 at  14522, 11153  W/L   72/24   -     gate rdp3_rb_s1_q n1630 <-> vss
+  t2034 at  14474, 11153  W/L   72/25   -     gate rdp3_c_s1    rdp3_cb_s1_x <-> n1630
   t2035 at  14213, 11228  W/L   40/23   -     gate rdp3_cb_s1_nor rdp3_cb_s1_x <-> vss
-  t2036 at  14131, 11153  W/L   72/24   -     gate rdp3_rb_s0_q n1640 <-> vss
-  t2037 at  14084, 11153  W/L   72/25   -     gate rdp3_c_s0    rdp3_cb_s0_x <-> n1640
+  t2036 at  14131, 11153  W/L   72/24   -     gate rdp3_rb_s0_q n1631 <-> vss
+  t2037 at  14084, 11153  W/L   72/25   -     gate mra_n1_r11   rdp3_cb_s0_x <-> n1631
   t2038 at  14284, 11168  W/L   27/50   load  gate rdp3_cb_s1_x rdp3_cb_s1_x <-> vcc
   t2039 at  14402, 11235  W/L   31/58   load  gate rdp3_cb_s1_nor vcc <-> rdp3_cb_s1_nor
   t2040 at  14010, 11235  W/L   31/58   load  gate rdp3_cb_s0_nor vcc <-> rdp3_cb_s0_nor
@@ -2101,7 +2100,7 @@ transistors
   t2094 at  15974, 11850  W/L  269/23   -     gate rdp3_ca_s5_x rdp3_ca_eq <-> vss
   t2095 at  16364, 11850  W/L  269/23   -     gate rdp3_ca_s6_x rdp3_ca_eq <-> vss
   t2096 at  16754, 11850  W/L  269/23   -     gate rdp3_ca_s7_x rdp3_ca_eq <-> vss
-  t2097 at  13890, 12133  W/L   41/24   -     gate rdp3_c_s0    rdp3_ca_s0_nor <-> vss
+  t2097 at  13890, 12133  W/L   41/24   -     gate mra_n1_r11   rdp3_ca_s0_nor <-> vss
   t2098 at  14108, 12146  W/L   36/22   -     gate rdp3_ra_s0_q vss <-> rdp3_ca_s0_nor
   t2099 at  14282, 12133  W/L   41/24   -     gate rdp3_c_s1    vss <-> rdp3_ca_s1_nor
   t2100 at  14499, 12146  W/L   36/22   -     gate rdp3_ra_s1_q rdp3_ca_s1_nor <-> vss
@@ -2115,31 +2114,31 @@ transistors
   t2108 at  16060, 12145  W/L   36/22   -     gate rdp3_ra_s5_q vss <-> rdp3_ca_s5_nor
   t2109 at  16232, 12132  W/L   41/24   -     gate rdp3_c_s6    vss <-> rdp3_ca_s6_nor
   t2110 at  16450, 12145  W/L   36/22   -     gate rdp3_ra_s6_q vss <-> rdp3_ca_s6_nor
-  t2111 at  16624, 12132  W/L   41/24   -     gate rdp3_c_s7    vss <-> rdp3_ca_s7_nor
+  t2111 at  16624, 12132  W/L   41/24   -     gate mra_n1_r12   vss <-> rdp3_ca_s7_nor
   t2112 at  16841, 12145  W/L   36/22   -     gate rdp3_ra_s7_q vss <-> rdp3_ca_s7_nor
-  t2113 at  16864, 11998  W/L   72/24   -     gate rdp3_ra_s7_q n1641 <-> vss
-  t2114 at  16816, 11998  W/L   72/25   -     gate rdp3_c_s7    rdp3_ca_s7_x <-> n1641
+  t2113 at  16864, 11998  W/L   72/24   -     gate rdp3_ra_s7_q n1632 <-> vss
+  t2114 at  16816, 11998  W/L   72/25   -     gate mra_n1_r12   rdp3_ca_s7_x <-> n1632
   t2115 at  16555, 12072  W/L   40/23   -     gate rdp3_ca_s7_nor rdp3_ca_s7_x <-> vss
-  t2116 at  16473, 11998  W/L   72/24   -     gate rdp3_ra_s6_q n1642 <-> vss
-  t2117 at  16426, 11998  W/L   72/25   -     gate rdp3_c_s6    rdp3_ca_s6_x <-> n1642
+  t2116 at  16473, 11998  W/L   72/24   -     gate rdp3_ra_s6_q n1633 <-> vss
+  t2117 at  16426, 11998  W/L   72/25   -     gate rdp3_c_s6    rdp3_ca_s6_x <-> n1633
   t2118 at  16164, 12072  W/L   40/23   -     gate rdp3_ca_s6_nor rdp3_ca_s6_x <-> vss
-  t2119 at  16083, 11998  W/L   72/24   -     gate rdp3_ra_s5_q n1643 <-> vss
-  t2120 at  16036, 11998  W/L   72/25   -     gate rdp3_c_s5    rdp3_ca_s5_x <-> n1643
+  t2119 at  16083, 11998  W/L   72/24   -     gate rdp3_ra_s5_q n1634 <-> vss
+  t2120 at  16036, 11998  W/L   72/25   -     gate rdp3_c_s5    rdp3_ca_s5_x <-> n1634
   t2121 at  15774, 12072  W/L   40/23   -     gate rdp3_ca_s5_nor rdp3_ca_s5_x <-> vss
-  t2122 at  15693, 11998  W/L   72/24   -     gate rdp3_ra_s4_q n1644 <-> vss
-  t2123 at  15646, 11998  W/L   72/25   -     gate rdp3_c_s4    rdp3_ca_s4_x <-> n1644
+  t2122 at  15693, 11998  W/L   72/24   -     gate rdp3_ra_s4_q n1635 <-> vss
+  t2123 at  15646, 11998  W/L   72/25   -     gate rdp3_c_s4    rdp3_ca_s4_x <-> n1635
   t2124 at  15384, 12072  W/L   40/23   -     gate rdp3_ca_s4_nor vss <-> rdp3_ca_s4_x
-  t2125 at  15303, 11999  W/L   72/24   -     gate rdp3_ra_s3_q n1645 <-> vss
-  t2126 at  15256, 11999  W/L   72/25   -     gate rdp3_c_s3    rdp3_ca_s3_x <-> n1645
+  t2125 at  15303, 11999  W/L   72/24   -     gate rdp3_ra_s3_q n1636 <-> vss
+  t2126 at  15256, 11999  W/L   72/25   -     gate rdp3_c_s3    rdp3_ca_s3_x <-> n1636
   t2127 at  14994, 12074  W/L   40/23   -     gate rdp3_ca_s3_nor rdp3_ca_s3_x <-> vss
-  t2128 at  14913, 11999  W/L   72/24   -     gate rdp3_ra_s2_q n1646 <-> vss
-  t2129 at  14866, 11999  W/L   72/25   -     gate rdp3_c_s2    rdp3_ca_s2_x <-> n1646
+  t2128 at  14913, 11999  W/L   72/24   -     gate rdp3_ra_s2_q n1637 <-> vss
+  t2129 at  14866, 11999  W/L   72/25   -     gate rdp3_c_s2    rdp3_ca_s2_x <-> n1637
   t2130 at  14604, 12074  W/L   40/23   -     gate rdp3_ca_s2_nor rdp3_ca_s2_x <-> vss
-  t2131 at  14522, 11999  W/L   72/24   -     gate rdp3_ra_s1_q n1647 <-> vss
-  t2132 at  14474, 11999  W/L   72/25   -     gate rdp3_c_s1    n1647 <-> rdp3_ca_s1_x
+  t2131 at  14522, 11999  W/L   72/24   -     gate rdp3_ra_s1_q n1638 <-> vss
+  t2132 at  14474, 11999  W/L   72/25   -     gate rdp3_c_s1    n1638 <-> rdp3_ca_s1_x
   t2133 at  14213, 12074  W/L   40/23   -     gate rdp3_ca_s1_nor rdp3_ca_s1_x <-> vss
-  t2134 at  14131, 11999  W/L   72/24   -     gate rdp3_ra_s0_q n1648 <-> vss
-  t2135 at  14084, 11999  W/L   72/25   -     gate rdp3_c_s0    rdp3_ca_s0_x <-> n1648
+  t2134 at  14131, 11999  W/L   72/24   -     gate rdp3_ra_s0_q n1639 <-> vss
+  t2135 at  14084, 11999  W/L   72/25   -     gate mra_n1_r11   rdp3_ca_s0_x <-> n1639
   t2136 at  13822, 12074  W/L   40/23   -     gate rdp3_ca_s0_nor rdp3_ca_s0_x <-> vss
   t2137 at  14284, 12014  W/L   27/50   load  gate rdp3_ca_s1_x rdp3_ca_s1_x <-> vcc
   t2138 at  14402, 12081  W/L   31/58   load  gate rdp3_ca_s1_nor vcc <-> rdp3_ca_s1_nor
@@ -2198,13 +2197,13 @@ transistors
   t2191 at  13850, 15612  W/L   46/21   -     gate bd1_q        bd1_n1 <-> vss
   t2192 at  13788, 15671  W/L   31/20   -     gate bd1_g        bd1_k <-> vss
   t2193 at  13965, 15579  W/L   28/54   load  gate bd1_n1       bd1_n1 <-> vcc
-  t2194 at  13825, 15540  W/L   72/20   -     gate bd1_xn2      n1649 <-> bd1_n1
-  t2195 at  13825, 15499  W/L   75/19   -     gate bd1_a        vss <-> n1649
+  t2194 at  13825, 15540  W/L   72/20   -     gate bd1_xn2      n1640 <-> bd1_n1
+  t2195 at  13825, 15499  W/L   75/19   -     gate bd1_a        vss <-> n1640
   t2196 at  13879, 15459  W/L   38/22   -     gate bd1_a        vss <-> bd1_an
   t2197 at  13964, 15462  W/L   31/56   load  gate bd1_an       bd1_an <-> vcc
   t2198 at  13938, 15796  W/L   38/24   -     gate bd1_n1       bd1_n2 <-> vss
-  t2199 at  13835, 15756  W/L   76/20   -     gate bd1_xn2      bd1_n2 <-> n1651
-  t2200 at  13835, 15800  W/L   76/19   -     gate bd1_an       n1651 <-> vss
+  t2199 at  13835, 15756  W/L   76/20   -     gate bd1_xn2      bd1_n2 <-> n1642
+  t2200 at  13835, 15800  W/L   76/19   -     gate bd1_an       n1642 <-> vss
   t2201 at  13794, 16232  W/L  188/26   -     gate bd1_g        vss <-> t_g0_in
   t2202 at  13972, 16230  W/L   68/37   load  gate t_g0_in      t_g0_in <-> vcc
   t2203 at  13809, 18436  W/L  266/27   -     gate t_g0_in      t_g0_out <-> vss
@@ -2220,7 +2219,7 @@ transistors
   t2213 at  14233,  1220  W/L  633/18   -     gate ra0_pd       ra0 <-> vss
   t2214 at  14157,  1192  W/L  690/16   -     gate ra0_pd       vss <-> ra0
   t2215 at  14376,  8093  W/L   22/82   hold  gate vss          rdp3_rf_s1_q <-> rdp3_rf_s1_a
-  t2216 at  14231,  8254  W/L   34/28   -     gate rdp2_rf_ld   rdp3_rf_s1_a <-> rdp2_ubus_s1
+  t2216 at  14231,  8254  W/L   34/28   -     gate sel_w6       rdp3_rf_s1_a <-> rdp2_ubus_s1
   t2217 at  14376,  8852  W/L   22/82   hold  gate vss          rdp3_re_s1_a <-> rdp3_re_s1_q
   t2218 at  14231,  9013  W/L   34/28   -     gate rdp2_re_ld   rdp3_re_s1_a <-> rdp2_ubus_s1
   t2219 at  14476,  9652  W/L   67/42   load  gate rdp2_cd_eq   rdp2_cd_eq <-> vcc
@@ -2243,28 +2242,28 @@ transistors
   t2236 at  16060,  9933  W/L   36/22   -     gate rdp3_rc_s6_q vss <-> rdp2_cd_s5_nor
   t2237 at  16234,  9920  W/L   41/24   -     gate rdp3_c_s6    vss <-> rdp2_cd_s6_nor
   t2238 at  16451,  9933  W/L   36/22   -     gate rdp3_rc_s7_q vss <-> rdp2_cd_s6_nor
-  t2239 at  16624,  9920  W/L   41/24   -     gate rdp3_c_s7    rdp2_cd_s7_nor <-> vss
+  t2239 at  16624,  9920  W/L   41/24   -     gate mra_n1_r12   rdp2_cd_s7_nor <-> vss
   t2240 at  16841,  9933  W/L   36/22   -     gate rdp3_rc_s0_q vss <-> rdp2_cd_s7_nor
-  t2241 at  16864,  9786  W/L   72/24   -     gate rdp3_rc_s0_q n1652 <-> vss
-  t2242 at  16816,  9786  W/L   72/25   -     gate rdp3_c_s7    rdp2_cd_s7_x <-> n1652
+  t2241 at  16864,  9786  W/L   72/24   -     gate rdp3_rc_s0_q n1643 <-> vss
+  t2242 at  16816,  9786  W/L   72/25   -     gate mra_n1_r12   rdp2_cd_s7_x <-> n1643
   t2243 at  16555,  9860  W/L   40/23   -     gate rdp2_cd_s7_nor rdp2_cd_s7_x <-> vss
-  t2244 at  16474,  9786  W/L   72/24   -     gate rdp3_rc_s7_q n1653 <-> vss
-  t2245 at  16426,  9786  W/L   72/25   -     gate rdp3_c_s6    rdp2_cd_s6_x <-> n1653
+  t2244 at  16474,  9786  W/L   72/24   -     gate rdp3_rc_s7_q n1644 <-> vss
+  t2245 at  16426,  9786  W/L   72/25   -     gate rdp3_c_s6    rdp2_cd_s6_x <-> n1644
   t2246 at  16165,  9860  W/L   40/23   -     gate rdp2_cd_s6_nor rdp2_cd_s6_x <-> vss
-  t2247 at  16083,  9786  W/L   72/24   -     gate rdp3_rc_s6_q n1654 <-> vss
-  t2248 at  16036,  9786  W/L   72/25   -     gate rdp3_c_s5    rdp2_cd_s5_x <-> n1654
+  t2247 at  16083,  9786  W/L   72/24   -     gate rdp3_rc_s6_q n1645 <-> vss
+  t2248 at  16036,  9786  W/L   72/25   -     gate rdp3_c_s5    rdp2_cd_s5_x <-> n1645
   t2249 at  15774,  9860  W/L   40/23   -     gate rdp2_cd_s5_nor rdp2_cd_s5_x <-> vss
-  t2250 at  15693,  9786  W/L   72/24   -     gate rdp3_rc_s5_q n1655 <-> vss
-  t2251 at  15646,  9786  W/L   72/25   -     gate rdp3_c_s4    rdp2_cd_s4_x <-> n1655
+  t2250 at  15693,  9786  W/L   72/24   -     gate rdp3_rc_s5_q n1646 <-> vss
+  t2251 at  15646,  9786  W/L   72/25   -     gate rdp3_c_s4    rdp2_cd_s4_x <-> n1646
   t2252 at  15384,  9860  W/L   40/23   -     gate rdp2_cd_s4_nor rdp2_cd_s4_x <-> vss
-  t2253 at  15303,  9787  W/L   72/24   -     gate rdp3_rc_s4_q n1656 <-> vss
-  t2254 at  15256,  9787  W/L   72/25   -     gate rdp3_c_s3    rdp2_cd_s3_x <-> n1656
+  t2253 at  15303,  9787  W/L   72/24   -     gate rdp3_rc_s4_q n1647 <-> vss
+  t2254 at  15256,  9787  W/L   72/25   -     gate rdp3_c_s3    rdp2_cd_s3_x <-> n1647
   t2255 at  14994,  9862  W/L   40/23   -     gate rdp2_cd_s3_nor rdp2_cd_s3_x <-> vss
-  t2256 at  14912,  9787  W/L   72/24   -     gate rdp3_rc_s3_q n1657 <-> vss
-  t2257 at  14864,  9787  W/L   72/25   -     gate rdp3_c_s2    n1657 <-> rdp2_cd_s2_x
+  t2256 at  14912,  9787  W/L   72/24   -     gate rdp3_rc_s3_q n1648 <-> vss
+  t2257 at  14864,  9787  W/L   72/25   -     gate rdp3_c_s2    n1648 <-> rdp2_cd_s2_x
   t2258 at  14603,  9862  W/L   40/23   -     gate rdp2_cd_s2_nor rdp2_cd_s2_x <-> vss
-  t2259 at  14522,  9787  W/L   72/24   -     gate rdp3_rc_s2_q n1658 <-> vss
-  t2260 at  14474,  9787  W/L   72/25   -     gate rdp3_c_s1    rdp2_cd_s1_x <-> n1658
+  t2259 at  14522,  9787  W/L   72/24   -     gate rdp3_rc_s2_q n1649 <-> vss
+  t2260 at  14474,  9787  W/L   72/25   -     gate rdp3_c_s1    rdp2_cd_s1_x <-> n1649
   t2261 at  14213,  9862  W/L   40/23   -     gate rdp2_cd_s1_nor rdp2_cd_s1_x <-> vss
   t2262 at  14284,  9802  W/L   27/50   load  gate rdp2_cd_s1_x rdp2_cd_s1_x <-> vcc
   t2263 at  14402,  9869  W/L   31/58   load  gate rdp2_cd_s1_nor vcc <-> rdp2_cd_s1_nor
@@ -2493,7 +2492,7 @@ transistors
   t2486 at  15008,  1776  W/L  134/55   load  gate ra0_pu       ra0_pu <-> vcc
   t2487 at  14746,  1776  W/L  133/42   load  gate ra0_pd       ra0_pd <-> vcc
   t2488 at  14767,  8093  W/L   22/82   hold  gate vss          rdp3_rf_s2_a <-> rdp3_rf_s2_q
-  t2489 at  14622,  8254  W/L   34/28   -     gate rdp2_rf_ld   rdp3_rf_s2_a <-> rdp2_ubus_s2
+  t2489 at  14622,  8254  W/L   34/28   -     gate sel_w6       rdp3_rf_s2_a <-> rdp2_ubus_s2
   t2490 at  14767,  8852  W/L   22/82   hold  gate vss          rdp3_re_s2_a <-> rdp3_re_s2_q
   t2491 at  14622,  9013  W/L   34/28   -     gate rdp2_re_ld   rdp3_re_s2_a <-> rdp2_ubus_s2
   t2492 at  14768, 10609  W/L   22/82   hold  gate vss          rdp3_rc_s2_q <-> rdp3_rc_s2_a
@@ -2505,7 +2504,7 @@ transistors
   t2498 at  14623, 13074  W/L   34/28   -     gate areg_load    rdp3_bus_s2 <-> rdp3_ar_s2_a
   t2499 at  14768, 13235  W/L   22/82   hold  gate vss          rdp3_ar_s2_a <-> ar1
   t2500 at  14694, 13618  W/L   44/55   load  gate rsel1        vcc <-> rsel1
-  t2501 at  15012,  8254  W/L   34/28   -     gate rdp2_rf_ld   rdp3_rf_s3_a <-> rdp2_ubus_s3
+  t2501 at  15012,  8254  W/L   34/28   -     gate sel_w6       rdp3_rf_s3_a <-> rdp2_ubus_s3
   t2502 at  15013,  9013  W/L   34/28   -     gate rdp2_re_ld   rdp3_re_s3_a <-> rdp2_ubus_s3
   t2503 at  15013, 10770  W/L   34/28   -     gate rdp3_rc_ld   rdp3_rc_s3_a <-> rdp3_bus_s3
   t2504 at  15013, 11527  W/L   34/28   -     gate rdp3_rb_ld   rdp3_rb_s3_a <-> rdp3_bus_s3
@@ -2520,7 +2519,7 @@ transistors
   t2513 at  14904, 19050  W/L  417/41   field gate rw_p         vss <-> rw_p
   t2514 at  15157,  8093  W/L   22/82   hold  gate vss          rdp3_rf_s3_a <-> rdp3_rf_s3_q
   t2515 at  15547,  8093  W/L   22/82   hold  gate vss          rdp3_rf_s4_a <-> rdp3_rf_s4_q
-  t2516 at  15402,  8254  W/L   34/28   -     gate rdp2_rf_ld   rdp3_rf_s4_a <-> rdp2_ubus_s4
+  t2516 at  15402,  8254  W/L   34/28   -     gate sel_w6       rdp3_rf_s4_a <-> rdp2_ubus_s4
   t2517 at  15158,  8852  W/L   22/82   hold  gate vss          rdp3_re_s3_a <-> rdp3_re_s3_q
   t2518 at  15548,  8852  W/L   22/82   hold  gate vss          rdp3_re_s4_a <-> rdp3_re_s4_q
   t2519 at  15403,  9013  W/L   34/28   -     gate rdp2_re_ld   rdp3_re_s4_a <-> rdp2_ubus_s4
@@ -2551,7 +2550,7 @@ transistors
   t2544 at  15946,  1274  W/L  743/18   -     gate ra1_pu       ra1 <-> vcc
   t2545 at  16030,  1274  W/L  743/16   -     gate ra1_pu       vcc <-> ra1
   t2546 at  16096,  1340  W/L  613/18   -     gate ra1_pu       vcc <-> ra1
-  t2547 at  15792,  8254  W/L   34/28   -     gate rdp2_rf_ld   rdp3_rf_s5_a <-> rdp2_ubus_s5
+  t2547 at  15792,  8254  W/L   34/28   -     gate sel_w6       rdp3_rf_s5_a <-> rdp2_ubus_s5
   t2548 at  15793,  9013  W/L   34/28   -     gate rdp2_re_ld   rdp3_re_s5_a <-> rdp2_ubus_s5
   t2549 at  15793, 10770  W/L   34/28   -     gate rdp3_rc_ld   rdp3_rc_s5_a <-> rdp3_bus_s5
   t2550 at  15793, 11527  W/L   34/28   -     gate rdp3_rb_ld   rdp3_rb_s5_a <-> rdp3_bus_s5
@@ -2579,13 +2578,13 @@ transistors
   t2572 at  15678, 15817  W/L  133/22   -     gate sel_bn14     vss <-> sel_b14
   t2573 at  15928, 15900  W/L   19/56   load  gate bd2_a        vcc <-> bd2_a
   t2574 at  16013, 15904  W/L   28/18   -     gate bd2_c        vss <-> bd2_a
-  t2575 at  16070, 15867  W/L   64/20   -     gate bd2_c        n1659 <-> vss
-  t2576 at  16070, 15821  W/L   64/20   -     gate e_b          bd2_qb <-> n1659
+  t2575 at  16070, 15867  W/L   64/20   -     gate bd2_c        n1650 <-> vss
+  t2576 at  16070, 15821  W/L   64/20   -     gate e_b          bd2_qb <-> n1650
   t2577 at  16060, 15734  W/L   49/25   -     gate bd2_n1       vss <-> bd2_qb
   t2578 at  15927, 15788  W/L   19/50   load  gate bd2_qb       bd2_qb <-> vcc
   t2579 at  15927, 15693  W/L   22/50   load  gate bd2_n1       bd2_n1 <-> vcc
-  t2580 at  16059, 15614  W/L   83/22   -     gate e_b          n1660 <-> bd2_n1
-  t2581 at  16059, 15566  W/L   88/22   -     gate bd2_a        vss <-> n1660
+  t2580 at  16059, 15614  W/L   83/22   -     gate e_b          n1651 <-> bd2_n1
+  t2581 at  16059, 15566  W/L   88/22   -     gate bd2_a        vss <-> n1651
   t2582 at  15960, 15572  W/L   36/29   -     gate bd2_qb       vss <-> bd2_n1
   t2583 at  15830, 15715  W/L   26/27   load  gate sel_bn14     vcc <-> sel_bn14
   t2584 at  15678, 15690  W/L  133/22   -     gate rsel14       sel_bn14 <-> vss
@@ -2653,10 +2652,10 @@ transistors
   t2646 at  16719, 12211  W/L   22/82   hold  gate vss          rdp3_ra_s7_a <-> rdp3_ra_s7_q
   t2647 at  16328, 12211  W/L   22/82   hold  gate vss          rdp3_ra_s6_a <-> rdp3_ra_s6_q
   t2648 at  16574, 12372  W/L   34/28   -     gate rdp3_ra_ld   rdp3_ra_s7_a <-> rdp3_bus_s7
-  t2649 at  16340, 15477  W/L   52/22   -     gate bd2_c        vss <-> n1661
-  t2650 at  16340, 15520  W/L   52/22   -     gate e_b          n1661 <-> bd2_nu
-  t2651 at  16331, 15779  W/L   38/18   -     gate bd2_m210     n1663 <-> vss
-  t2652 at  16331, 15735  W/L   38/18   -     gate e_b          bd2_al_n <-> n1663
+  t2649 at  16340, 15477  W/L   52/22   -     gate bd2_c        vss <-> n1652
+  t2650 at  16340, 15520  W/L   52/22   -     gate e_b          n1652 <-> bd2_nu
+  t2651 at  16331, 15779  W/L   38/18   -     gate bd2_m210     n1654 <-> vss
+  t2652 at  16331, 15735  W/L   38/18   -     gate e_b          bd2_al_n <-> n1654
   t2653 at  16331, 15647  W/L   38/18   -     gate bd2_x        vss <-> bd2_al_n
   t2654 at  16912, 18379  W/L  192/23   -     gate e_n          e_b <-> vss
   t2655 at  16984, 18420  W/L  203/25   -     gate e_n          vss <-> e_b
@@ -2751,14 +2750,14 @@ transistors
   t2744 at  17356, 19050  W/L  417/41   field gate cs_p         vss <-> cs_p
 
 gates
-  ma4_pu       = NOT ma4_drv_in
-  ma5_pu       = NOT ma5_drv_in
   ma2_pu       = NOT ma2_drv_in
+  ma3_pu       = NOT ma3_drv_in
+  ma4_pu       = NOT ma4_drv_in
   ma1_pu       = NOT ma1_drv_in
   ma2_pd       = NOT ma2_pu
-  ma3_pu       = NOT ma3_drv_in
   ma3_pd       = NOT ma3_pu
   ma4_pd       = NOT ma4_pu
+  ma5_pu       = NOT ma5_drv_in
   ma5_pd       = NOT ma5_pu
   ma6_pu       = NOT ma6_drv_in
   ma6_pd       = NOT ma6_pu
@@ -2832,13 +2831,13 @@ gates
   cdp3_hw_c0   = NOT cdp3_h_c0_q1
   cdp4_lr_s1_q = NOT cdp4_lr_s1_n2
   cdp4_lr_s0_q = NOT cdp4_lr_s0_n2
-  cdp4_b_s1    = NOT(cdp4_lr_s1_n2 | (cdp4_rst & cdp4_sel2) | (cdp4_sel1 & cdp4_sel2) | (cdp4_sel2 & cdp4_sel4))
   cdp4_b_s0    = NOT(cdp4_lr_s0_n2 | (cdp4_rst & cdp4_sel2) | (cdp4_sel1 & cdp4_sel2) | (cdp4_sel2 & cdp4_sel4))
-  cdp4_d_s0    = NOT(cdp4_lc_s0_n2 | (cdp4_rst & cdp4_sel3) | (cdp4_sel1 & cdp4_sel3) | (cdp4_sel3 & cdp4_sel4))
+  cdp4_b_s1    = NOT(cdp4_lr_s1_n2 | (cdp4_rst & cdp4_sel2) | (cdp4_sel1 & cdp4_sel2) | (cdp4_sel2 & cdp4_sel4))
   cdp4_d_s1    = NOT(cdp4_lc_s1_n2 | (cdp4_rst & cdp4_sel3) | (cdp4_sel1 & cdp4_sel3) | (cdp4_sel3 & cdp4_sel4))
-  cdp4_lc_s1_q = NOT cdp4_lc_s1_n2
-  cdp4_lc_s0_q = NOT cdp4_lc_s0_n2
+  cdp4_d_s0    = NOT(cdp4_lc_s0_n2 | (cdp4_rst & cdp4_sel3) | (cdp4_sel1 & cdp4_sel3) | (cdp4_sel3 & cdp4_sel4))
   cdp4_c_s2    = NOT(cdp4_ldr_s1_n2 | (cdp4_rst & cdp4_sel4))
+  cdp4_lc_s0_q = NOT cdp4_lc_s0_n2
+  cdp4_lc_s1_q = NOT cdp4_lc_s1_n2
   cdp4_ld6     = NOT bc1_ld_n
   cdp4_ldr_s1_q = NOT cdp4_ldr_s1_n2
   bc1_dec00_n  = NAND(bc1_s0_n, bc1_s1_n)
@@ -2860,21 +2859,24 @@ gates
   cdp2_a_c_s2_q = NOT cdp2_a_c_s2_n2
   cdp3_cw_c3   = NOT cdp3_c_c3_q1
   cdp3_cw_c2   = NOT cdp3_c_c2_q1
-  cdp3_cq_c2   = NOT cdp3_c_c2_q1
   cdp3_cq_c3   = NOT cdp3_c_c3_q1
-  cdp3_hq_c3   = NOT cdp3_h_c3_q1
+  cdp3_cq_c2   = NOT cdp3_c_c2_q1
   cdp3_hq_c2   = NOT cdp3_h_c2_q1
+  cdp3_hq_c3   = NOT cdp3_h_c3_q1
   cdp3_hw_c3   = NOT cdp3_h_c3_q1
   cdp3_hw_c2   = NOT cdp3_h_c2_q1
   cdp4_lr_s3_q = NOT cdp4_lr_s3_n2
   cdp4_lr_s2_q = NOT cdp4_lr_s2_n2
   cdp4_b_s2    = NOT(cdp4_lr_s2_n2 | (cdp4_rst & cdp4_sel2))
+  cdp4_b_s3    = NOT(cdp4_lr_s3_n2 | (cdp4_rst & cdp4_sel2))
   cdp4_d_s2    = NOT(cdp4_lc_s2_n2 | (cdp4_rst & cdp4_sel3))
+  cdp4_d_s3    = NOT(cdp4_lc_s3_n2 | (cdp4_rst & cdp4_sel3))
   cdp4_c_s3    = NOT(cdp4_ldr_s2_n2 | (cdp4_rst & cdp4_sel4))
   cdp4_lc_s2_q = NOT cdp4_lc_s2_n2
   cdp4_lc_s3_q = NOT cdp4_lc_s3_n2
-  cdp4_ldr_s2_q = NOT cdp4_ldr_s2_n2
+  cdp4_c_s4    = NOT(cdp4_ldr_s3_n2 | (cdp4_rst & cdp4_sel4))
   cdp4_ldr_s3_q = NOT cdp4_ldr_s3_n2
+  cdp4_ldr_s2_q = NOT cdp4_ldr_s2_n2
   cdp1_a2_q    = NOT cdp1_a2_q1
   cdp1_c2_q    = NOT cdp1_c2_q1
   cdp2_a_s4_q  = NOT cdp2_a_s4_n2
@@ -2886,11 +2888,8 @@ gates
   cdp3_hq_c4   = NOT cdp3_h_c4_q1
   cdp3_hw_c4   = NOT cdp3_h_c4_q1
   cdp4_lr_s4_q = NOT cdp4_lr_s4_n2
-  cdp4_b_s3    = NOT(cdp4_lr_s3_n2 | (cdp4_rst & cdp4_sel2))
   cdp4_b_s4    = NOT(cdp4_lr_s4_n2 | (cdp4_rst & cdp4_sel2))
-  cdp4_d_s3    = NOT(cdp4_lc_s3_n2 | (cdp4_rst & cdp4_sel3))
   cdp4_d_s4    = NOT(cdp4_lc_s4_n2 | (cdp4_rst & cdp4_sel3))
-  cdp4_c_s4    = NOT(cdp4_ldr_s3_n2 | (cdp4_rst & cdp4_sel4))
   cdp4_lc_s4_q = NOT cdp4_lc_s4_n2
   cdp4_c_s5    = NOT(cdp4_ldr_s4_n2 | (cdp4_rst & cdp4_sel4))
   cdp4_ldr_s4_q = NOT cdp4_ldr_s4_n2
@@ -2917,29 +2916,31 @@ gates
   cdp1_c4_q    = NOT cdp1_c4_q1
   cdp2_a_s6_q  = NOT cdp2_a_s6_n2
   cdp2_a_s7_q  = NOT cdp2_a_s7_n2
+  cdp2_b_s7_y  = NOR(cdp2_a_c_s7_q, cdp2_trk_s7)
   cdp2_b_s6_y  = NOR(cdp2_a_c_s6_q, cdp2_trk_s6)
   cdp2_b_s7_ne = NOT((cdp2_a_c_s7_q & cdp2_trk_s7) | cdp2_b_s7_y)
+  cdp2_a_c_s7_q = NOT cdp2_a_c_s7_n2
   cdp2_a_c_s6_q = NOT cdp2_a_c_s6_n2
   cdp3_cw_c7   = NOT cdp3_c_c7_q1
   cdp3_cw_c6   = NOT cdp3_c_c6_q1
   cdp3_cq_c6   = NOT cdp3_c_c6_q1
   cdp3_cq_c7   = NOT cdp3_c_c7_q1
-  cdp3_hq_c6   = NOT cdp3_h_c6_q1
   cdp3_hq_c7   = NOT cdp3_h_c7_q1
+  cdp3_hq_c6   = NOT cdp3_h_c6_q1
   cdp3_hw_c7   = NOT cdp3_h_c7_q1
   cdp3_hw_c6   = NOT cdp3_h_c6_q1
+  cdp4_lr_s7_q = NOT cdp4_lr_s7_n2
   cdp4_lr_s6_q = NOT cdp4_lr_s6_n2
   cdp4_b_s6    = NOT(cdp4_lr_s6_n2 | (cdp4_rst & cdp4_sel2))
   cdp4_d_s6    = NOT(cdp4_lc_s6_n2 | (cdp4_rst & cdp4_sel3))
   cdp4_c_s7    = NOT(cdp4_ldr_s6_n2 | (cdp4_rst & cdp4_sel4))
   cdp4_lc_s6_q = NOT cdp4_lc_s6_n2
+  cdp4_lc_s7_q = NOT cdp4_lc_s7_n2
   cdp4_ldr_s6_q = NOT cdp4_ldr_s6_n2
   ck_t         = NOT clk
   vsync_pu     = NOT vsync_drv_in
   vsync_pd     = NOT vsync_pu
-  cdp2_b_s7_y  = NOR(cdp2_a_c_s7_q, cdp2_trk_s7)
   mra_x_r0     = NOR(mra_g1_r0, mra_n2_r0)
-  cdp2_a_c_s7_q = NOT cdp2_a_c_s7_n2
   mra_x_r1     = NOR(mra_g1_r1, mra_n2_r1)
   mra_x_r2     = NOR(mra_g1_r2, mra_n2_r2)
   mra_x_r3     = NOR(mra_g1_r3, mra_n2_r3)
@@ -2948,13 +2949,11 @@ gates
   mra_x_r6     = NOR(mra_g1_r6, mra_n2_r6)
   mra_x_r7     = NOR(mra_g1_r7, mra_n2_r7)
   mra_x_r8     = NOR(mra_g1_r8, mra_n2_r8)
-  cdp4_lr_s7_q = NOT cdp4_lr_s7_n2
   cdp4_b_s7    = NOT(cdp4_lr_s7_n2 | (cdp4_rst & cdp4_sel2))
   mra_x_r9     = NOR(mra_g1_r9, mra_n2_r9)
   mra_x_r10    = NOR(mra_g1_r10, mra_n2_r10)
   cdp4_d_s7    = NOT(cdp4_lc_s7_n2 | (cdp4_rst & cdp4_sel3))
   mra_x_r11    = NOR(mra_g1_r11, mra_n2_r11)
-  cdp4_lc_s7_q = NOT cdp4_lc_s7_n2
   mra_x_r12    = NOR(mra_g1_r12, mra_n2_r12)
   mra_x_r13    = NOR(mra_g1_r13, mra_n2_r13)
   mra_x_r14    = NOR(mra_g1_r14, mra_n2_r14)
@@ -3027,106 +3026,119 @@ gates
   mra_nb_r16   = NOT mra_m_r16
   mra_nb_r17   = NOT mra_m_r17
   mra_nb_r18   = NOT mra_m_r18
+  mra_n1_r0    = NOT mra_p3_r0
+  mra_n1_r1    = NOT mra_p3_r1
+  mra_n1_r2    = NOT mra_p3_r2
+  mra_n1_r3    = NOT mra_p3_r3
   rdp3_rf_sm1_q = NOT rdp3_rf_sm1_n2
   rdp3_re_sm1_q = NOT rdp3_re_sm1_n2
+  rdp2_ce_eq   = NOR(rdp2_ce_s0_x, rdp2_ce_s1_x, rdp2_ce_s2_x, rdp2_ce_s3_x, rdp2_ce_s4_x, rdp2_ce_s5_x, rdp2_ce_sm1_x)
+  bd1_xn1      = NOT t_g0_in
   rdp2_cd_eq   = NOR(rdp2_cd_s1_x, rdp2_cd_s2_x, rdp2_cd_s3_x, rdp2_cd_s4_x, rdp2_cd_s5_x, rdp2_cd_s6_x, rdp2_cd_s7_x)
   rdp2_cc_eq   = NOR(rdp2_cc_s0_x, rdp2_cc_s1_x, rdp2_cc_s2_x, rdp2_cc_s3_x, rdp2_cc_s4_x, rdp2_cc_s5_x, rdp2_cc_s6_x, rdp2_cc_s7_x)
+  mra_n1_r7    = NOT mra_p3_r7
   rdp3_cb_eq   = NOR(rdp3_cb_s0_x, rdp3_cb_s1_x, rdp3_cb_s2_x, rdp3_cb_s3_x, rdp3_cb_s4_x, rdp3_cb_s5_x, rdp3_cb_s6_x, rdp3_cb_s7_x)
-  rdp3_ca_eq   = NOR(rdp3_ca_s0_x, rdp3_ca_s1_x, rdp3_ca_s2_x, rdp3_ca_s3_x, rdp3_ca_s4_x, rdp3_ca_s5_x, rdp3_ca_s6_x, rdp3_ca_s7_x)
+  sel_w5       = NOR(sel_n5, sel_stb_r)
+  sel_w3       = NOR(sel_n3, sel_stb_r)
+  mra_n1_r8    = NOT mra_p3_r8
+  sel_w7       = NOR(sel_n7, sel_stb_r)
+  mra_n1_r9    = NOT mra_p3_r9
+  mra_n1_r10   = NOT mra_p3_r10
   sel_w6       = NOR(sel_n6, sel_stb_r)
+  rdp3_ca_eq   = NOR(rdp3_ca_s0_x, rdp3_ca_s1_x, rdp3_ca_s2_x, rdp3_ca_s3_x, rdp3_ca_s4_x, rdp3_ca_s5_x, rdp3_ca_s6_x, rdp3_ca_s7_x)
   mra_n1_r15   = NOT mra_p3_r15
   sel_w2       = NOR(sel_n2, sel_stb_r)
   sel_w0       = NOR(sel_n0, sel_stb_r)
   sel_w4       = NOR(sel_n4, sel_stb_r)
-  bd1_xn1      = NOT t_g0_in
   mra_n1_r16   = NOT mra_p3_r16
-  sel_w5       = NOR(sel_n5, sel_stb_r)
   bd1_xn2      = NOT t_g0_in
-  sel_w3       = NOR(sel_n3, sel_stb_r)
-  sel_w7       = NOR(sel_n7, sel_stb_r)
   t_g0_in      = NOT bd1_g
   mra_n1_r18   = NOT mra_p3_r18
+  sel_w8       = NOR(sel_n8, sel_stb_r)
   ra0_pd       = NOT ra0_pu
   ra0_pu       = NOT ra0_drv_in
-  rdp3_rf_s1_q = NOT rdp3_rf_s1_n2
   rdp3_rf_s0_q = NOT rdp3_rf_s0_n2
+  rdp3_rf_s1_q = NOT rdp3_rf_s1_n2
   rdp3_re_s1_q = NOT rdp3_re_s1_n2
   rdp3_re_s0_q = NOT rdp3_re_s0_n2
   rdp3_rc_s0_q = NOT rdp3_rc_s0_n2
+  mra_n1_r11   = NOT mra_p3_r11
   rdp3_rc_s1_q = NOT rdp3_rc_s1_n2
-  rdp3_rb_s0_q = NOT rdp3_rb_s0_n2
   rdp3_rb_s1_q = NOT rdp3_rb_s1_n2
+  rdp3_rb_s0_q = NOT rdp3_rb_s0_n2
   rdp3_ra_s1_q = NOT rdp3_ra_s1_n2
   rdp3_ra_s0_q = NOT rdp3_ra_s0_n2
+  mra_n1_r12   = NOT mra_p3_r12
   ar0          = NOT rdp3_ar_s1_n2
-  rsel7        = NOR(ar0_n, ar1_n, ar2_n, ar3, ar4)
   rsel0        = NOR(ar0, ar1, ar2, ar3, ar4)
+  rsel2        = NOR(ar0, ar1_n, ar2, ar3, ar4)
   rsel6        = NOR(ar0, ar1_n, ar2_n, ar3, ar4)
   rsel4        = NOR(ar0, ar1, ar2_n, ar3, ar4)
-  rsel2        = NOR(ar0, ar1_n, ar2, ar3, ar4)
+  rsel7        = NOR(ar0_n, ar1_n, ar2_n, ar3, ar4)
   sel_w1       = NOR(sel_n1, sel_stb_r)
   bd1_an       = NOT bd1_a
   bd1_n1       = NOT((bd1_a & bd1_xn2) | bd1_q)
   sel_stb_r    = NOT bd2_n1
   bd3_n12      = NOT rsel12
-  sel_w8       = NOR(sel_n8, sel_stb_r)
   sel_w9       = NOR(sel_n9, sel_stb_r)
   sel_w11      = NOR(sel_n11, sel_stb_r)
   sel_w10      = NOR(sel_n10, sel_stb_r)
   clk_n        = NOT clk
-  rdp3_rf_s2_q = NOT rdp3_rf_s2_n2
   rdp3_rf_s3_q = NOT rdp3_rf_s3_n2
-  rdp3_re_s2_q = NOT rdp3_re_s2_n2
+  rdp3_rf_s2_q = NOT rdp3_rf_s2_n2
   rdp3_re_s3_q = NOT rdp3_re_s3_n2
-  rdp3_rc_s2_q = NOT rdp3_rc_s2_n2
-  rdp3_rc_s4_q = NOT rdp3_rc_s4_n2
+  rdp3_re_s2_q = NOT rdp3_re_s2_n2
   rdp3_rc_s3_q = NOT rdp3_rc_s3_n2
-  rdp3_rb_s3_q = NOT rdp3_rb_s3_n2
+  rdp3_rc_s4_q = NOT rdp3_rc_s4_n2
+  rdp3_rc_s2_q = NOT rdp3_rc_s2_n2
   rdp3_rb_s2_q = NOT rdp3_rb_s2_n2
+  rdp3_rb_s3_q = NOT rdp3_rb_s3_n2
   rdp3_ra_s3_q = NOT rdp3_ra_s3_n2
   rdp3_ra_s2_q = NOT rdp3_ra_s2_n2
   ar1          = NOT rdp3_ar_s2_n2
   ar2          = NOT rdp3_ar_s3_n2
   rsel12       = NOR(ar0, ar1, ar2_n, ar3_n, ar4)
-  rsel3        = NOR(ar0_n, ar1_n, ar2, ar3, ar4)
-  rsel11       = NOR(ar0_n, ar1_n, ar2, ar3_n, ar4)
-  rsel10       = NOR(ar0, ar1_n, ar2, ar3_n, ar4)
-  rsel5        = NOR(ar0_n, ar1, ar2_n, ar3, ar4)
-  rsel8        = NOR(ar0, ar1, ar2, ar3_n, ar4)
-  rsel9        = NOR(ar0_n, ar1, ar2, ar3_n, ar4)
-  rsel1        = NOR(ar0_n, ar1, ar2, ar3, ar4)
   rsel13       = NOR(ar0_n, ar1, ar2_n, ar3_n, ar4)
   rsel14       = NOR(ar0, ar1_n, ar2_n, ar3_n, ar4)
+  rsel11       = NOR(ar0_n, ar1_n, ar2, ar3_n, ar4)
+  rsel1        = NOR(ar0_n, ar1, ar2, ar3, ar4)
+  rsel10       = NOR(ar0, ar1_n, ar2, ar3_n, ar4)
+  rsel5        = NOR(ar0_n, ar1, ar2_n, ar3, ar4)
+  rsel3        = NOR(ar0_n, ar1_n, ar2, ar3, ar4)
+  rsel8        = NOR(ar0, ar1, ar2, ar3_n, ar4)
+  rsel9        = NOR(ar0_n, ar1, ar2, ar3_n, ar4)
   rsel15       = NOR(ar0_n, ar1_n, ar2_n, ar3_n, ar4)
   sel_b16      = NOT sel_bn16
   sel_b17      = NOT sel_bn17
   sel_w15      = NOR(sel_n15, sel_stb_r)
   sel_w14      = NOR(sel_n14, sel_stb_r)
+  sel_b15      = NOT sel_bn15
   sel_w12      = NOR(sel_n12, sel_stb_r)
   sel_w13      = NOR(sel_n13, sel_stb_r)
   rw_b         = NOT rw_a
   rw_c         = NOT rw_b
   ra1_pd       = NOT ra1_pu
   ra1_pu       = NOT ra1_drv_in
-  rdp3_rf_s5_q = NOT rdp3_rf_s5_n2
   rdp3_rf_s4_q = NOT rdp3_rf_s4_n2
-  rdp3_re_s4_q = NOT rdp3_re_s4_n2
+  rdp3_rf_s5_q = NOT rdp3_rf_s5_n2
   rdp3_re_s5_q = NOT rdp3_re_s5_n2
-  rdp3_rc_s6_q = NOT rdp3_rc_s6_n2
+  rdp3_re_s4_q = NOT rdp3_re_s4_n2
   rdp3_rc_s5_q = NOT rdp3_rc_s5_n2
+  rdp3_rc_s6_q = NOT rdp3_rc_s6_n2
   rdp3_rb_s4_q = NOT rdp3_rb_s4_n2
   rdp3_rb_s5_q = NOT rdp3_rb_s5_n2
-  rdp3_ra_s4_q = NOT rdp3_ra_s4_n2
   rdp3_ra_s5_q = NOT rdp3_ra_s5_n2
-  ar4          = NOT rdp3_ar_s5_n2
+  rdp3_ra_s4_q = NOT rdp3_ra_s4_n2
   ar3          = NOT rdp3_ar_s4_n2
-  rsel16       = NOR(ar0, ar1, ar2, ar3, ar4_n)
+  ar4          = NOT rdp3_ar_s5_n2
   rsel17       = NOR(ar0_n, ar1, ar2, ar3, ar4_n)
+  rsel16       = NOR(ar0, ar1, ar2, ar3, ar4_n)
+  areg_load    = NOT bd2_al_n
   bd2_n1       = NOT((bd2_a & e_b) | bd2_qb)
   bd2_c        = NOR(bd2_m255, cs_d, rw_d)
   bd2_qb       = NOT((bd2_c & e_b) | bd2_n1)
   bd2_a        = NOT bd2_c
-  sel_b15      = NOT sel_bn15
+  bd2_m210     = NOR(cs_d, rs_d, rw_d)
   sel_b14      = NOT sel_bn14
   e_b          = NOT e_n
   rs_d         = NOT rs_c
@@ -3145,8 +3157,6 @@ gates
   rdp3_rb_s7_q = NOT rdp3_rb_s7_n2
   rdp3_ra_s7_q = NOT rdp3_ra_s7_n2
   rdp3_ra_s6_q = NOT rdp3_ra_s6_n2
-  areg_load    = NOT bd2_al_n
-  bd2_m210     = NOR(cs_d, rs_d, rw_d)
   cs_d         = NOT cs_c
   e_n          = NOT e
   larr_a_s0    = NOT larr_cin_s0
@@ -3314,19 +3324,9 @@ gates
   cdp3_h_c7_q  = NOT cdp3_h_c7_q1
   cdp4_lr_s7_n2 = NOT cdp4_lr_s7_a
   cdp4_lc_s7_n2 = NOT cdp4_lc_s7_a
-  mra_n1_r0    = NOT mra_p3_r0
-  mra_n1_r1    = NOT mra_p3_r1
-  mra_n1_r2    = NOT mra_p3_r2
-  mra_n1_r3    = NOT mra_p3_r3
   mra_n1_r4    = NOT mra_p3_r4
   mra_n1_r5    = NOT mra_p3_r5
   mra_n1_r6    = NOT mra_p3_r6
-  mra_n1_r7    = NOT mra_p3_r7
-  mra_n1_r8    = NOT mra_p3_r8
-  mra_n1_r9    = NOT mra_p3_r9
-  mra_n1_r10   = NOT mra_p3_r10
-  mra_n1_r11   = NOT mra_p3_r11
-  mra_n1_r12   = NOT mra_p3_r12
   mra_n1_r13   = NOT mra_p3_r13
   mra_n1_r14   = NOT mra_p3_r14
   mra_n1_r17   = NOT mra_p3_r17
@@ -3393,118 +3393,111 @@ gates
   mra_d_r17    = NOT mra_p3_r17
   mra_d_r18    = NOT mra_p3_r18
   rdp3_rf_sm1_n2 = NOT rdp3_rf_sm1_a
-  rdp3_rf_s0_n2 = NOT rdp3_rf_s0_a
-  rdp2_ce_eq   = NOR(rdp2_ce_s0_x, rdp2_ce_s1_x, rdp2_ce_s2_x, rdp2_ce_s3_x, rdp2_ce_s4_x, rdp2_ce_s5_x, rdp2_ce_sm1_x)
   rdp2_ce_sm1_x = NOT(rdp2_ce_sm1_nor | (rdp2_uc_sm1 & rdp3_re_sm1_q))
   rdp2_ce_s0_x = NOT(rdp2_ce_s0_nor | (rdp2_uc_s0 & rdp3_re_s0_q))
-  rdp2_ce_s0_nor = NOR(rdp2_uc_s0, rdp3_re_s0_q)
   rdp2_ce_sm1_nor = NOR(rdp2_uc_sm1, rdp3_re_sm1_q)
+  rdp2_ce_s0_nor = NOR(rdp2_uc_s0, rdp3_re_s0_q)
   rdp3_re_sm1_n2 = NOT rdp3_re_sm1_a
-  rdp3_re_s0_n2 = NOT rdp3_re_s0_a
-  rdp2_cc_s0_x = NOT(rdp2_cc_s0_nor | (rdp3_c_s0 & rdp3_rc_s0_q))
-  rdp2_cc_s0_nor = NOR(rdp3_c_s0, rdp3_rc_s0_q)
-  rdp3_rc_s0_n2 = NOT rdp3_rc_s0_a
-  rdp3_cb_s0_x = NOT((rdp3_c_s0 & rdp3_rb_s0_q) | rdp3_cb_s0_nor)
-  rdp3_cb_s0_nor = NOR(rdp3_c_s0, rdp3_rb_s0_q)
-  rdp3_rb_s0_n2 = NOT rdp3_rb_s0_a
-  rdp3_ca_s0_x = NOT((rdp3_c_s0 & rdp3_ra_s0_q) | rdp3_ca_s0_nor)
-  rdp3_ca_s0_nor = NOR(rdp3_c_s0, rdp3_ra_s0_q)
-  rdp3_ra_s0_n2 = NOT rdp3_ra_s0_a
+  rdp2_cc_s0_x = NOT((mra_n1_r11 & rdp3_rc_s0_q) | rdp2_cc_s0_nor)
+  rdp2_cc_s0_nor = NOR(mra_n1_r11, rdp3_rc_s0_q)
+  rdp3_cb_s0_x = NOT((mra_n1_r11 & rdp3_rb_s0_q) | rdp3_cb_s0_nor)
+  rdp3_cb_s0_nor = NOR(mra_n1_r11, rdp3_rb_s0_q)
+  rdp3_ca_s0_x = NOT((mra_n1_r11 & rdp3_ra_s0_q) | rdp3_ca_s0_nor)
+  rdp3_ca_s0_nor = NOR(mra_n1_r11, rdp3_ra_s0_q)
+  rdp3_rf_s0_n2 = NOT rdp3_rf_s0_a
   rdp3_rf_s1_n2 = NOT rdp3_rf_s1_a
   rdp2_ce_s1_x = NOT(rdp2_ce_s1_nor | (rdp2_uc_s1 & rdp3_re_s1_q))
   rdp2_ce_s1_nor = NOR(rdp2_uc_s1, rdp3_re_s1_q)
+  rdp3_re_s0_n2 = NOT rdp3_re_s0_a
   rdp3_re_s1_n2 = NOT rdp3_re_s1_a
   rdp2_cd_s1_x = NOT(rdp2_cd_s1_nor | (rdp3_c_s1 & rdp3_rc_s2_q))
   rdp2_cd_s1_nor = NOR(rdp3_c_s1, rdp3_rc_s2_q)
   rdp2_cc_s1_x = NOT(rdp2_cc_s1_nor | (rdp3_c_s1 & rdp3_rc_s1_q))
   rdp2_cc_s1_nor = NOR(rdp3_c_s1, rdp3_rc_s1_q)
+  rdp3_rc_s0_n2 = NOT rdp3_rc_s0_a
   rdp3_rc_s1_n2 = NOT rdp3_rc_s1_a
   rdp3_cb_s1_x = NOT((rdp3_c_s1 & rdp3_rb_s1_q) | rdp3_cb_s1_nor)
   rdp3_cb_s1_nor = NOR(rdp3_c_s1, rdp3_rb_s1_q)
+  rdp3_rb_s0_n2 = NOT rdp3_rb_s0_a
   rdp3_rb_s1_n2 = NOT rdp3_rb_s1_a
   rdp3_ca_s1_x = NOT((rdp3_c_s1 & rdp3_ra_s1_q) | rdp3_ca_s1_nor)
   rdp3_ca_s1_nor = NOR(rdp3_c_s1, rdp3_ra_s1_q)
+  rdp3_ra_s0_n2 = NOT rdp3_ra_s0_a
   rdp3_ra_s1_n2 = NOT rdp3_ra_s1_a
   rdp3_ar_s1_n2 = NOT rdp3_ar_s1_a
   bd3_b12      = NOT bd3_n12
-  rdp3_rf_s2_n2 = NOT rdp3_rf_s2_a
   rdp2_ce_s2_x = NOT(rdp2_ce_s2_nor | (rdp2_uc_s2 & rdp3_re_s2_q))
   rdp2_ce_s2_nor = NOR(rdp2_uc_s2, rdp3_re_s2_q)
-  rdp3_re_s2_n2 = NOT rdp3_re_s2_a
   rdp2_cd_s2_x = NOT(rdp2_cd_s2_nor | (rdp3_c_s2 & rdp3_rc_s3_q))
   rdp2_cd_s2_nor = NOR(rdp3_c_s2, rdp3_rc_s3_q)
   rdp2_cc_s2_x = NOT(rdp2_cc_s2_nor | (rdp3_c_s2 & rdp3_rc_s2_q))
   rdp2_cc_s2_nor = NOR(rdp3_c_s2, rdp3_rc_s2_q)
-  rdp3_rc_s2_n2 = NOT rdp3_rc_s2_a
   rdp3_cb_s2_x = NOT((rdp3_c_s2 & rdp3_rb_s2_q) | rdp3_cb_s2_nor)
   rdp3_cb_s2_nor = NOR(rdp3_c_s2, rdp3_rb_s2_q)
-  rdp3_rb_s2_n2 = NOT rdp3_rb_s2_a
   rdp3_ca_s2_x = NOT((rdp3_c_s2 & rdp3_ra_s2_q) | rdp3_ca_s2_nor)
   rdp3_ca_s2_nor = NOR(rdp3_c_s2, rdp3_ra_s2_q)
-  rdp3_ra_s2_n2 = NOT rdp3_ra_s2_a
-  rdp3_ar_s2_n2 = NOT rdp3_ar_s2_a
   sel_n1       = NOT rsel1
   sel_n10      = NOT rsel10
-  sel_n5       = NOT rsel5
   sel_n2       = NOT rsel2
+  sel_n5       = NOT rsel5
   sel_n0       = NOT rsel0
   sel_n3       = NOT rsel3
-  sel_n8       = NOT rsel8
   sel_n4       = NOT rsel4
+  sel_n8       = NOT rsel8
   sel_n6       = NOT rsel6
   sel_n9       = NOT rsel9
-  sel_n11      = NOT rsel11
   sel_n7       = NOT rsel7
-  rw_a         = NOT rw
+  sel_n11      = NOT rsel11
+  rdp3_rf_s2_n2 = NOT rdp3_rf_s2_a
   rdp2_ce_s3_x = NOT(rdp2_ce_s3_nor | (rdp2_uc_s3 & rdp3_re_s3_q))
-  rdp2_ce_s3_nor = NOR(rdp2_uc_s3, rdp3_re_s3_q)
+  rdp3_re_s2_n2 = NOT rdp3_re_s2_a
   rdp2_cd_s3_x = NOT(rdp2_cd_s3_nor | (rdp3_c_s3 & rdp3_rc_s4_q))
-  rdp2_cd_s3_nor = NOR(rdp3_c_s3, rdp3_rc_s4_q)
   rdp2_cc_s3_x = NOT(rdp2_cc_s3_nor | (rdp3_c_s3 & rdp3_rc_s3_q))
-  rdp2_cc_s3_nor = NOR(rdp3_c_s3, rdp3_rc_s3_q)
+  rdp3_rc_s2_n2 = NOT rdp3_rc_s2_a
   rdp3_cb_s3_x = NOT((rdp3_c_s3 & rdp3_rb_s3_q) | rdp3_cb_s3_nor)
-  rdp3_cb_s3_nor = NOR(rdp3_c_s3, rdp3_rb_s3_q)
+  rdp3_rb_s2_n2 = NOT rdp3_rb_s2_a
   rdp3_ca_s3_x = NOT((rdp3_c_s3 & rdp3_ra_s3_q) | rdp3_ca_s3_nor)
-  rdp3_ca_s3_nor = NOR(rdp3_c_s3, rdp3_ra_s3_q)
+  rdp3_ra_s2_n2 = NOT rdp3_ra_s2_a
+  rdp3_ar_s2_n2 = NOT rdp3_ar_s2_a
   ar0_n        = NOT ar0
   ar1_n        = NOT ar1
   ar2_n        = NOT ar2
   ar3_n        = NOT ar3
   ar4_n        = NOT ar4
+  rw_a         = NOT rw
   rdp3_rf_s3_n2 = NOT rdp3_rf_s3_a
-  rdp3_rf_s4_n2 = NOT rdp3_rf_s4_a
   rdp2_ce_s4_x = NOT(rdp2_ce_s4_nor | (rdp2_uc_s4 & rdp3_re_s4_q))
   rdp2_ce_s4_nor = NOR(rdp2_uc_s4, rdp3_re_s4_q)
+  rdp2_ce_s3_nor = NOR(rdp2_uc_s3, rdp3_re_s3_q)
   rdp3_re_s3_n2 = NOT rdp3_re_s3_a
-  rdp3_re_s4_n2 = NOT rdp3_re_s4_a
   rdp2_cd_s4_x = NOT(rdp2_cd_s4_nor | (rdp3_c_s4 & rdp3_rc_s5_q))
   rdp2_cd_s4_nor = NOR(rdp3_c_s4, rdp3_rc_s5_q)
+  rdp2_cd_s3_nor = NOR(rdp3_c_s3, rdp3_rc_s4_q)
   rdp2_cc_s4_x = NOT(rdp2_cc_s4_nor | (rdp3_c_s4 & rdp3_rc_s4_q))
   rdp2_cc_s4_nor = NOR(rdp3_c_s4, rdp3_rc_s4_q)
+  rdp2_cc_s3_nor = NOR(rdp3_c_s3, rdp3_rc_s3_q)
   rdp3_rc_s3_n2 = NOT rdp3_rc_s3_a
-  rdp3_rc_s4_n2 = NOT rdp3_rc_s4_a
   rdp3_cb_s4_x = NOT((rdp3_c_s4 & rdp3_rb_s4_q) | rdp3_cb_s4_nor)
   rdp3_cb_s4_nor = NOR(rdp3_c_s4, rdp3_rb_s4_q)
+  rdp3_cb_s3_nor = NOR(rdp3_c_s3, rdp3_rb_s3_q)
   rdp3_rb_s3_n2 = NOT rdp3_rb_s3_a
-  rdp3_rb_s4_n2 = NOT rdp3_rb_s4_a
   rdp3_ca_s4_x = NOT((rdp3_c_s4 & rdp3_ra_s4_q) | rdp3_ca_s4_nor)
   rdp3_ca_s4_nor = NOR(rdp3_c_s4, rdp3_ra_s4_q)
+  rdp3_ca_s3_nor = NOR(rdp3_c_s3, rdp3_ra_s3_q)
   rdp3_ra_s3_n2 = NOT rdp3_ra_s3_a
-  rdp3_ra_s4_n2 = NOT rdp3_ra_s4_a
   rdp3_ar_s3_n2 = NOT rdp3_ar_s3_a
-  rdp3_ar_s4_n2 = NOT rdp3_ar_s4_a
   rs_a         = NOT rs
-  rs_b         = NOT rs_a
+  rdp3_rf_s4_n2 = NOT rdp3_rf_s4_a
   rdp2_ce_s5_x = NOT(rdp2_ce_s5_nor | (rdp2_uc_s5 & rdp3_re_s5_q))
-  rdp2_ce_s5_nor = NOR(rdp2_uc_s5, rdp3_re_s5_q)
+  rdp3_re_s4_n2 = NOT rdp3_re_s4_a
   rdp2_cd_s5_x = NOT(rdp2_cd_s5_nor | (rdp3_c_s5 & rdp3_rc_s6_q))
-  rdp2_cd_s5_nor = NOR(rdp3_c_s5, rdp3_rc_s6_q)
   rdp2_cc_s5_x = NOT(rdp2_cc_s5_nor | (rdp3_c_s5 & rdp3_rc_s5_q))
-  rdp2_cc_s5_nor = NOR(rdp3_c_s5, rdp3_rc_s5_q)
+  rdp3_rc_s4_n2 = NOT rdp3_rc_s4_a
   rdp3_cb_s5_x = NOT((rdp3_c_s5 & rdp3_rb_s5_q) | rdp3_cb_s5_nor)
-  rdp3_cb_s5_nor = NOR(rdp3_c_s5, rdp3_rb_s5_q)
+  rdp3_rb_s4_n2 = NOT rdp3_rb_s4_a
   rdp3_ca_s5_x = NOT((rdp3_c_s5 & rdp3_ra_s5_q) | rdp3_ca_s5_nor)
-  rdp3_ca_s5_nor = NOR(rdp3_c_s5, rdp3_ra_s5_q)
+  rdp3_ra_s4_n2 = NOT rdp3_ra_s4_a
+  rdp3_ar_s4_n2 = NOT rdp3_ar_s4_a
   sel_bn16     = NOT rsel16
   sel_bn17     = NOT rsel17
   sel_bn15     = NOT rsel15
@@ -3515,35 +3508,41 @@ gates
   sel_n13      = NOT rsel13
   sel_bn13     = NOT rsel13
   sel_b13      = NOT sel_bn13
+  rs_b         = NOT rs_a
   rs_c         = NOT rs_b
   rdp3_rf_s5_n2 = NOT rdp3_rf_s5_a
+  rdp2_ce_s5_nor = NOR(rdp2_uc_s5, rdp3_re_s5_q)
   rdp3_re_s5_n2 = NOT rdp3_re_s5_a
-  rdp2_cd_s6_x = NOT(rdp2_cd_s6_nor | (rdp3_c_s6 & rdp3_rc_s7_q))
-  rdp2_cc_s6_x = NOT(rdp2_cc_s6_nor | (rdp3_c_s6 & rdp3_rc_s6_q))
+  rdp2_cd_s5_nor = NOR(rdp3_c_s5, rdp3_rc_s6_q)
+  rdp2_cc_s5_nor = NOR(rdp3_c_s5, rdp3_rc_s5_q)
   rdp3_rc_s5_n2 = NOT rdp3_rc_s5_a
-  rdp3_cb_s6_x = NOT((rdp3_c_s6 & rdp3_rb_s6_q) | rdp3_cb_s6_nor)
+  rdp3_cb_s5_nor = NOR(rdp3_c_s5, rdp3_rb_s5_q)
   rdp3_rb_s5_n2 = NOT rdp3_rb_s5_a
-  rdp3_ca_s6_x = NOT((rdp3_c_s6 & rdp3_ra_s6_q) | rdp3_ca_s6_nor)
+  rdp3_ca_s5_nor = NOR(rdp3_c_s5, rdp3_ra_s5_q)
   rdp3_ra_s5_n2 = NOT rdp3_ra_s5_a
   rdp3_ar_s5_n2 = NOT rdp3_ar_s5_a
   cs_a         = NOT cs
   cs_b         = NOT cs_a
-  rdp2_cd_s7_x = NOT(rdp2_cd_s7_nor | (rdp3_c_s7 & rdp3_rc_s0_q))
+  rdp2_cd_s6_x = NOT(rdp2_cd_s6_nor | (rdp3_c_s6 & rdp3_rc_s7_q))
+  rdp2_cd_s7_x = NOT((mra_n1_r12 & rdp3_rc_s0_q) | rdp2_cd_s7_nor)
+  rdp2_cd_s7_nor = NOR(mra_n1_r12, rdp3_rc_s0_q)
   rdp2_cd_s6_nor = NOR(rdp3_c_s6, rdp3_rc_s7_q)
-  rdp2_cd_s7_nor = NOR(rdp3_c_s7, rdp3_rc_s0_q)
-  rdp2_cc_s7_x = NOT(rdp2_cc_s7_nor | (rdp3_c_s7 & rdp3_rc_s7_q))
+  rdp2_cc_s6_x = NOT(rdp2_cc_s6_nor | (rdp3_c_s6 & rdp3_rc_s6_q))
+  rdp2_cc_s7_x = NOT((mra_n1_r12 & rdp3_rc_s7_q) | rdp2_cc_s7_nor)
   rdp2_cc_s6_nor = NOR(rdp3_c_s6, rdp3_rc_s6_q)
-  rdp2_cc_s7_nor = NOR(rdp3_c_s7, rdp3_rc_s7_q)
+  rdp2_cc_s7_nor = NOR(mra_n1_r12, rdp3_rc_s7_q)
   rdp3_rc_s6_n2 = NOT rdp3_rc_s6_a
   rdp3_rc_s7_n2 = NOT rdp3_rc_s7_a
-  rdp3_cb_s7_x = NOT((rdp3_c_s7 & rdp3_rb_s7_q) | rdp3_cb_s7_nor)
+  rdp3_cb_s6_x = NOT((rdp3_c_s6 & rdp3_rb_s6_q) | rdp3_cb_s6_nor)
+  rdp3_cb_s7_x = NOT((mra_n1_r12 & rdp3_rb_s7_q) | rdp3_cb_s7_nor)
   rdp3_cb_s6_nor = NOR(rdp3_c_s6, rdp3_rb_s6_q)
-  rdp3_cb_s7_nor = NOR(rdp3_c_s7, rdp3_rb_s7_q)
+  rdp3_cb_s7_nor = NOR(mra_n1_r12, rdp3_rb_s7_q)
   rdp3_rb_s6_n2 = NOT rdp3_rb_s6_a
   rdp3_rb_s7_n2 = NOT rdp3_rb_s7_a
-  rdp3_ca_s7_x = NOT((rdp3_c_s7 & rdp3_ra_s7_q) | rdp3_ca_s7_nor)
+  rdp3_ca_s7_x = NOT((mra_n1_r12 & rdp3_ra_s7_q) | rdp3_ca_s7_nor)
+  rdp3_ca_s6_x = NOT((rdp3_c_s6 & rdp3_ra_s6_q) | rdp3_ca_s6_nor)
   rdp3_ca_s6_nor = NOR(rdp3_c_s6, rdp3_ra_s6_q)
-  rdp3_ca_s7_nor = NOR(rdp3_c_s7, rdp3_ra_s7_q)
+  rdp3_ca_s7_nor = NOR(mra_n1_r12, rdp3_ra_s7_q)
   rdp3_ra_s6_n2 = NOT rdp3_ra_s6_a
   rdp3_ra_s7_n2 = NOT rdp3_ra_s7_a
   cs_c         = NOT cs_b
@@ -3790,16 +3789,16 @@ not part of a static gate
   t802 at 8510,19877 gate cudisp_pd: vss <-> cudisp
   t803 at 8608,3112 gate vss: cdp1_a0_x <-> cdp1_a0_q
   t828 at 8463,3263 gate cdp1_a_wr: cdp1_a0_bl <-> cdp1_a0_x
-  t829 at 8968,6984 gate cdp2_b_s3_p1: n1546 <-> cdp2_b_hl
-  t830 at 8968,7027 gate cdp2_b_s3_y: n1546 <-> vss
-  t840 at 9358,6984 gate cdp2_b_s4_p1: n1548 <-> cdp2_b_hl
-  t841 at 9358,7027 gate cdp2_b_s4_y: n1548 <-> vss
-  t851 at 9748,6984 gate cdp2_b_s5_p1: cdp2_b_hl <-> n1550
-  t852 at 9748,7027 gate cdp2_b_s5_y: n1550 <-> vss
-  t862 at 10138,6984 gate cdp2_b_s6_p1: n1552 <-> cdp2_b_hl
-  t863 at 10138,7027 gate cdp2_b_s6_y: n1552 <-> vss
-  t873 at 10528,6984 gate cdp2_b_s7_p1: n1554 <-> cdp2_b_hl
-  t874 at 10528,7027 gate cdp2_b_s7_y: n1554 <-> vss
+  t829 at 8968,6984 gate cdp2_b_s3_p1: n1537 <-> cdp2_b_hl
+  t830 at 8968,7027 gate cdp2_b_s3_y: n1537 <-> vss
+  t840 at 9358,6984 gate cdp2_b_s4_p1: n1539 <-> cdp2_b_hl
+  t841 at 9358,7027 gate cdp2_b_s4_y: n1539 <-> vss
+  t851 at 9748,6984 gate cdp2_b_s5_p1: cdp2_b_hl <-> n1541
+  t852 at 9748,7027 gate cdp2_b_s5_y: n1541 <-> vss
+  t862 at 10138,6984 gate cdp2_b_s6_p1: n1543 <-> cdp2_b_hl
+  t863 at 10138,7027 gate cdp2_b_s6_y: n1543 <-> vss
+  t873 at 10528,6984 gate cdp2_b_s7_p1: n1545 <-> cdp2_b_hl
+  t874 at 10528,7027 gate cdp2_b_s7_y: n1545 <-> vss
   t885 at 8465,7754 gate cdp2_c_ld: cdp2_c_s2_bus <-> cdp2_a_c_s2_a
   t934 at 8520,9268 gate vss: cdp3_c_c2_q <-> cdp3_c_c2_x
   t935 at 8485,9487 gate cdp3_c_wr: cdp3_c_c2_x <-> cdp3_bl_c2
@@ -3920,62 +3919,62 @@ not part of a static gate
   t1262 at 11814,14134 gate mra_g1_r13: vss <-> mra_tab_r13
   t1266 at 11814,14611 gate mra_g1_r14: vss <-> mra_tab_r14
   t1297 at 12108,7598 gate mra_x_r1: mra_m_r0 <-> mra_rb_r0
-  t1298 at 12108,7540 gate mra_n2_r0: n1581 <-> mra_m_r0
-  t1299 at 12224,7550 gate mra_g1_r0: n1581 <-> vss
+  t1298 at 12108,7540 gate mra_n2_r0: n1572 <-> mra_m_r0
+  t1299 at 12224,7550 gate mra_g1_r0: n1572 <-> vss
   t1308 at 12108,8076 gate mra_x_r2: mra_m_r1 <-> mra_rb_r1
-  t1309 at 12108,8016 gate mra_n2_r1: n1583 <-> mra_m_r1
-  t1310 at 12224,8028 gate mra_g1_r1: n1583 <-> vss
+  t1309 at 12108,8016 gate mra_n2_r1: n1574 <-> mra_m_r1
+  t1310 at 12224,8028 gate mra_g1_r1: n1574 <-> vss
   t1319 at 12108,8552 gate mra_x_r3: mra_m_r2 <-> mra_rb_r2
-  t1320 at 12108,8494 gate mra_n2_r2: n1585 <-> mra_m_r2
-  t1321 at 12224,8504 gate mra_g1_r2: n1585 <-> vss
+  t1320 at 12108,8494 gate mra_n2_r2: n1576 <-> mra_m_r2
+  t1321 at 12224,8504 gate mra_g1_r2: n1576 <-> vss
   t1330 at 12108,9030 gate mra_cin_r3: mra_m_r3 <-> mra_rb_r3
-  t1331 at 12108,8970 gate mra_n2_r3: n1587 <-> mra_m_r3
-  t1332 at 12224,8982 gate mra_g1_r3: n1587 <-> vss
+  t1331 at 12108,8970 gate mra_n2_r3: n1578 <-> mra_m_r3
+  t1332 at 12224,8982 gate mra_g1_r3: n1578 <-> vss
   t1341 at 12108,9768 gate mra_x_r5: mra_m_r4 <-> mra_rb_r4
-  t1342 at 12108,9708 gate mra_n2_r4: n1589 <-> mra_m_r4
-  t1343 at 12224,9720 gate mra_g1_r4: n1589 <-> vss
+  t1342 at 12108,9708 gate mra_n2_r4: n1580 <-> mra_m_r4
+  t1343 at 12224,9720 gate mra_g1_r4: n1580 <-> vss
   t1352 at 12108,10244 gate mra_x_r6: mra_m_r5 <-> mra_rb_r5
-  t1353 at 12108,10186 gate mra_n2_r5: n1591 <-> mra_m_r5
-  t1354 at 12224,10196 gate mra_g1_r5: n1591 <-> vss
+  t1353 at 12108,10186 gate mra_n2_r5: n1582 <-> mra_m_r5
+  t1354 at 12224,10196 gate mra_g1_r5: n1582 <-> vss
   t1363 at 12108,10722 gate mra_gla: mra_m_r6 <-> mra_rb_r6
-  t1364 at 12108,10662 gate mra_n2_r6: n1593 <-> mra_m_r6
-  t1365 at 12224,10674 gate mra_g1_r6: n1593 <-> vss
+  t1364 at 12108,10662 gate mra_n2_r6: n1584 <-> mra_m_r6
+  t1365 at 12224,10674 gate mra_g1_r6: n1584 <-> vss
   t1374 at 12108,11284 gate mra_x_r8: mra_m_r7 <-> mra_rb_r7
-  t1375 at 12108,11226 gate mra_n2_r7: n1595 <-> mra_m_r7
-  t1376 at 12224,11236 gate mra_g1_r7: n1595 <-> vss
+  t1375 at 12108,11226 gate mra_n2_r7: n1586 <-> mra_m_r7
+  t1376 at 12224,11236 gate mra_g1_r7: n1586 <-> vss
   t1385 at 12108,11762 gate mra_x_r9: mra_m_r8 <-> mra_rb_r8
-  t1386 at 12108,11704 gate mra_n2_r8: n1597 <-> mra_m_r8
-  t1387 at 12225,11714 gate mra_g1_r8: n1597 <-> vss
+  t1386 at 12108,11704 gate mra_n2_r8: n1588 <-> mra_m_r8
+  t1387 at 12225,11714 gate mra_g1_r8: n1588 <-> vss
   t1396 at 12108,12240 gate mra_x_r10: mra_m_r9 <-> mra_rb_r9
-  t1397 at 12108,12180 gate mra_n2_r9: n1599 <-> mra_m_r9
-  t1398 at 12225,12192 gate mra_g1_r9: n1599 <-> vss
+  t1397 at 12108,12180 gate mra_n2_r9: n1590 <-> mra_m_r9
+  t1398 at 12225,12192 gate mra_g1_r9: n1590 <-> vss
   t1407 at 12108,12716 gate mra_cin_r10: mra_m_r10 <-> mra_rb_r10
-  t1408 at 12108,12658 gate mra_n2_r10: n1601 <-> mra_m_r10
-  t1409 at 12225,12668 gate mra_g1_r10: n1601 <-> vss
+  t1408 at 12108,12658 gate mra_n2_r10: n1592 <-> mra_m_r10
+  t1409 at 12225,12668 gate mra_g1_r10: n1592 <-> vss
   t1418 at 12108,13368 gate mra_x_r12: mra_m_r11 <-> mra_rb_r11
-  t1419 at 12108,13308 gate mra_n2_r11: n1603 <-> mra_m_r11
-  t1420 at 12225,13320 gate mra_g1_r11: n1603 <-> vss
+  t1419 at 12108,13308 gate mra_n2_r11: n1594 <-> mra_m_r11
+  t1420 at 12225,13320 gate mra_g1_r11: n1594 <-> vss
   t1429 at 12108,13846 gate mra_x_r13: mra_m_r12 <-> mra_rb_r12
-  t1430 at 12108,13786 gate mra_n2_r12: n1605 <-> mra_m_r12
-  t1431 at 12225,13798 gate mra_g1_r12: n1605 <-> vss
+  t1430 at 12108,13786 gate mra_n2_r12: n1596 <-> mra_m_r12
+  t1431 at 12225,13798 gate mra_g1_r12: n1596 <-> vss
   t1440 at 12108,14322 gate mra_x_r14: mra_m_r13 <-> mra_rb_r13
-  t1441 at 12108,14262 gate mra_n2_r13: n1607 <-> mra_m_r13
-  t1442 at 12225,14274 gate mra_g1_r13: n1607 <-> vss
+  t1441 at 12108,14262 gate mra_n2_r13: n1598 <-> mra_m_r13
+  t1442 at 12225,14274 gate mra_g1_r13: n1598 <-> vss
   t1451 at 12108,14798 gate mra_glb: mra_m_r14 <-> mra_rb_r14
-  t1452 at 12108,14740 gate mra_n2_r14: n1609 <-> mra_m_r14
-  t1453 at 12225,14750 gate mra_g1_r14: n1609 <-> vss
+  t1452 at 12108,14740 gate mra_n2_r14: n1600 <-> mra_m_r14
+  t1453 at 12225,14750 gate mra_g1_r14: n1600 <-> vss
   t1462 at 12108,15342 gate mra_x_r16: mra_m_r15 <-> mra_rb_r15
-  t1463 at 12108,15282 gate mra_n2_r15: n1611 <-> mra_m_r15
-  t1464 at 12225,15294 gate mra_g1_r15: n1611 <-> vss
+  t1463 at 12108,15282 gate mra_n2_r15: n1602 <-> mra_m_r15
+  t1464 at 12225,15294 gate mra_g1_r15: n1602 <-> vss
   t1473 at 12108,15818 gate mra_x_r17: mra_m_r16 <-> mra_rb_r16
-  t1474 at 12108,15760 gate mra_n2_r16: n1613 <-> mra_m_r16
-  t1475 at 12225,15770 gate mra_g1_r16: n1613 <-> vss
+  t1474 at 12108,15760 gate mra_n2_r16: n1604 <-> mra_m_r16
+  t1475 at 12225,15770 gate mra_g1_r16: n1604 <-> vss
   t1484 at 12108,16296 gate mra_x_r18: mra_m_r17 <-> mra_rb_r17
-  t1485 at 12108,16236 gate mra_n2_r17: n1615 <-> mra_m_r17
-  t1486 at 12225,16248 gate mra_g1_r17: n1615 <-> vss
+  t1485 at 12108,16236 gate mra_n2_r17: n1606 <-> mra_m_r17
+  t1486 at 12225,16248 gate mra_g1_r17: n1606 <-> vss
   t1495 at 12110,16772 gate mra_cin_r18: mra_m_r18 <-> mra_rb_r18
-  t1496 at 12110,16714 gate mra_n2_r18: n1617 <-> mra_m_r18
-  t1497 at 12226,16724 gate mra_g1_r18: n1617 <-> vss
+  t1496 at 12110,16714 gate mra_n2_r18: n1608 <-> mra_m_r18
+  t1497 at 12226,16724 gate mra_g1_r18: n1608 <-> vss
   t1506 at 12519,1220 gate hsync_pd: hsync <-> vss
   t1507 at 12594,1276 gate hsync_pd: hsync <-> vss
   t1508 at 12671,1276 gate hsync_pu: hsync <-> vcc
@@ -4039,8 +4038,8 @@ not part of a static gate
   t1750 at 12960,16606 gate ck_a: mra_q_r18 <-> mra_d_r18
   t1755 at 12580,16574 gate ck_b: mra_a_r18 <-> mra_na_r18
   t1756 at 12826,16608 gate mra_gab: mra_a_r18 <-> mra_b_r18
-  t1799 at 13841,8254 gate rdp2_rf_ld: rdp3_rf_s0_a <-> rdp2_ubus_s0
-  t1800 at 13451,8254 gate rdp2_rf_ld: rdp3_rf_sm1_a <-> rdp2_ubus_sm1
+  t1799 at 13841,8254 gate sel_w6: rdp3_rf_s0_a <-> rdp2_ubus_s0
+  t1800 at 13451,8254 gate sel_w6: rdp3_rf_sm1_a <-> rdp2_ubus_sm1
   t1888 at 13451,9013 gate rdp2_re_ld: rdp3_re_sm1_a <-> rdp2_ubus_sm1
   t1889 at 13841,9013 gate rdp2_re_ld: rdp3_re_s0_a <-> rdp2_ubus_s0
   t1988 at 13842,10770 gate rdp3_rc_ld: rdp3_rc_s0_a <-> rdp3_bus_s0
@@ -4048,33 +4047,33 @@ not part of a static gate
   t2186 at 13841,12373 gate rdp3_ra_ld: rdp3_ra_s0_a <-> rdp3_bus_s0
   t2192 at 13788,15671 gate bd1_g: bd1_k <-> vss
   t2198 at 13938,15796 gate bd1_n1: bd1_n2 <-> vss
-  t2199 at 13835,15756 gate bd1_xn2: bd1_n2 <-> n1651
-  t2200 at 13835,15800 gate bd1_an: n1651 <-> vss
+  t2199 at 13835,15756 gate bd1_xn2: bd1_n2 <-> n1642
+  t2200 at 13835,15800 gate bd1_an: n1642 <-> vss
   t2209 at 14385,1276 gate ra0_pu: vcc <-> ra0
   t2210 at 14469,1276 gate ra0_pu: vcc <-> ra0
   t2211 at 14535,1340 gate ra0_pu: vcc <-> ra0
   t2212 at 14308,1276 gate ra0_pd: ra0 <-> vss
   t2213 at 14233,1220 gate ra0_pd: ra0 <-> vss
   t2214 at 14157,1192 gate ra0_pd: vss <-> ra0
-  t2216 at 14231,8254 gate rdp2_rf_ld: rdp3_rf_s1_a <-> rdp2_ubus_s1
+  t2216 at 14231,8254 gate sel_w6: rdp3_rf_s1_a <-> rdp2_ubus_s1
   t2218 at 14231,9013 gate rdp2_re_ld: rdp3_re_s1_a <-> rdp2_ubus_s1
   t2277 at 14232,10770 gate rdp3_rc_ld: rdp3_rc_s1_a <-> rdp3_bus_s1
   t2279 at 14232,11527 gate rdp3_rb_ld: rdp3_rb_s1_a <-> rdp3_bus_s1
   t2281 at 14232,12373 gate rdp3_ra_ld: rdp3_ra_s1_a <-> rdp3_bus_s1
   t2282 at 14233,13074 gate areg_load: rdp3_bus_s1 <-> rdp3_ar_s1_a
-  t2489 at 14622,8254 gate rdp2_rf_ld: rdp3_rf_s2_a <-> rdp2_ubus_s2
+  t2489 at 14622,8254 gate sel_w6: rdp3_rf_s2_a <-> rdp2_ubus_s2
   t2491 at 14622,9013 gate rdp2_re_ld: rdp3_re_s2_a <-> rdp2_ubus_s2
   t2493 at 14623,10770 gate rdp3_rc_ld: rdp3_rc_s2_a <-> rdp3_bus_s2
   t2495 at 14623,11527 gate rdp3_rb_ld: rdp3_rb_s2_a <-> rdp3_bus_s2
   t2497 at 14623,12373 gate rdp3_ra_ld: rdp3_ra_s2_a <-> rdp3_bus_s2
   t2498 at 14623,13074 gate areg_load: rdp3_bus_s2 <-> rdp3_ar_s2_a
-  t2501 at 15012,8254 gate rdp2_rf_ld: rdp3_rf_s3_a <-> rdp2_ubus_s3
+  t2501 at 15012,8254 gate sel_w6: rdp3_rf_s3_a <-> rdp2_ubus_s3
   t2502 at 15013,9013 gate rdp2_re_ld: rdp3_re_s3_a <-> rdp2_ubus_s3
   t2503 at 15013,10770 gate rdp3_rc_ld: rdp3_rc_s3_a <-> rdp3_bus_s3
   t2504 at 15013,11527 gate rdp3_rb_ld: rdp3_rb_s3_a <-> rdp3_bus_s3
   t2505 at 15013,12373 gate rdp3_ra_ld: rdp3_ra_s3_a <-> rdp3_bus_s3
   t2506 at 15013,13074 gate areg_load: rdp3_bus_s3 <-> rdp3_ar_s3_a
-  t2516 at 15402,8254 gate rdp2_rf_ld: rdp3_rf_s4_a <-> rdp2_ubus_s4
+  t2516 at 15402,8254 gate sel_w6: rdp3_rf_s4_a <-> rdp2_ubus_s4
   t2519 at 15403,9013 gate rdp2_re_ld: rdp3_re_s4_a <-> rdp2_ubus_s4
   t2522 at 15403,10770 gate rdp3_rc_ld: rdp3_rc_s4_a <-> rdp3_bus_s4
   t2525 at 15403,11526 gate rdp3_rb_ld: rdp3_rb_s4_a <-> rdp3_bus_s4
@@ -4086,7 +4085,7 @@ not part of a static gate
   t2544 at 15946,1274 gate ra1_pu: ra1 <-> vcc
   t2545 at 16030,1274 gate ra1_pu: vcc <-> ra1
   t2546 at 16096,1340 gate ra1_pu: vcc <-> ra1
-  t2547 at 15792,8254 gate rdp2_rf_ld: rdp3_rf_s5_a <-> rdp2_ubus_s5
+  t2547 at 15792,8254 gate sel_w6: rdp3_rf_s5_a <-> rdp2_ubus_s5
   t2548 at 15793,9013 gate rdp2_re_ld: rdp3_re_s5_a <-> rdp2_ubus_s5
   t2549 at 15793,10770 gate rdp3_rc_ld: rdp3_rc_s5_a <-> rdp3_bus_s5
   t2550 at 15793,11527 gate rdp3_rb_ld: rdp3_rb_s5_a <-> rdp3_bus_s5
@@ -4099,10 +4098,10 @@ not part of a static gate
   t2642 at 16574,10770 gate rdp3_rc_ld: rdp3_rc_s7_a <-> rdp3_bus_s7
   t2645 at 16574,11527 gate rdp3_rb_ld: rdp3_rb_s7_a <-> rdp3_bus_s7
   t2648 at 16574,12372 gate rdp3_ra_ld: rdp3_ra_s7_a <-> rdp3_bus_s7
-  t2649 at 16340,15477 gate bd2_c: vss <-> n1661
-  t2650 at 16340,15520 gate e_b: n1661 <-> bd2_nu
-  t2651 at 16331,15779 gate bd2_m210: n1663 <-> vss
-  t2652 at 16331,15735 gate e_b: bd2_al_n <-> n1663
+  t2649 at 16340,15477 gate bd2_c: vss <-> n1652
+  t2650 at 16340,15520 gate e_b: n1652 <-> bd2_nu
+  t2651 at 16331,15779 gate bd2_m210: n1654 <-> vss
+  t2652 at 16331,15735 gate e_b: bd2_al_n <-> n1654
   t2653 at 16331,15647 gate bd2_x: vss <-> bd2_al_n
   t2662 at 17617,1220 gate ra2_pd: ra2 <-> vss
   t2663 at 17692,1274 gate ra2_pd: ra2 <-> vss

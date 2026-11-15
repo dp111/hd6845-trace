@@ -188,7 +188,8 @@ C 13131,15235
 M 13131,15222 y16426 w=20
 P 13115,16398:13147,16428
 C 13131,16413
-?P 13131,16413 y16451 x12970 w=20   # poly on into the mid-right array (trunks notes: y 16440-16462); not checked here
+P 13131,16413 y16451 x13040 w=20    # poly on into the mid-right array: it is the n1 line (master output) of counter row r18,
+                                    # which mra_col4 draws to x 13052 (coordinator, 2026-11-15: end moved from x 12970, where it ran over row r18's z strip)
 N M 13826,14700 bd1_k17
 
 # ================================================================ X's driver (y 16125-16280)

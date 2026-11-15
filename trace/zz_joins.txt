@@ -33,3 +33,16 @@
 @alias mra_n1_r15 bd1_k14
 @alias mra_n1_r16 bd1_k9
 @alias mra_n1_r18 bd1_k17
+
+# Joins closed by the wiring channel right of the counters (trace/mrach.txt, 2026-11-15). In each
+# case the two blocks' geometry now meets; the alias only says which name the net keeps.
+@alias sel_w6 rdp2_rf_ld                  # T0 south -> poly east at y 8299: rdp2's row RF is R6
+@alias bd1_xn1 rdp3_s0                    # T6 south; and on, by rdp3's pad, T1 and the band above row r0
+@alias rdp2_cd_eq bd1_k5                  # the "c = R0/2" match comes down T6/T5 to bd1's k5
+@alias mra_n1_r7 rdp3_n8                  # row counter outputs into rdp3's bundle (L8, L6, L5, L4 north)
+@alias mra_n1_r8 rdp3_n6
+@alias mra_n1_r9 rdp3_n5
+@alias mra_n1_r10 rdp3_n4
+@alias mra_n1_r11 rdp3_c_s0               # horizontal counter outputs = the c lines of the R0/R1/R2 comparators
+@alias mra_n1_r12 rdp3_c_s7
+

@@ -681,7 +681,7 @@ P 12925,10222:13020,10254
 
 # --- n1 on to the right (to the wiring channel)
 P 12760,9903:13010,9923
-P [ 13000,9903 13012,9903 13030,9924 13050,9924 13050,9945 13018,9945 13000,9923 ]
+P [ 13000,9903 13012,9903 13028,9917 13052,9917 13052,9938 13016,9938 13000,9923 ]
 
 # --- net z: the strip of mra_col3 jogs up under the vss rail and runs on at y 9932-9948 to a buried
 #     contact on a poly that leaves to the right at y 9955-9977
