@@ -10,19 +10,32 @@ Own tools:
   below was checked with it. Composites: `rdp3_w16` (x 14490-15010, y 11690-12445, the
   whole period of a slice: comparator cells and latch, median of 12 inner slices of both
   bands), `rdp3_p16` (narrower, all 16), `r0w` (the AR cells).
+- `tools/rdp3_boxstat.py`: mean colour of small boxes in all shots, by class, with R-G of
+  the clean shot: tells a metal contact on poly (olive, R-G -22..+7, bright in `metal1`)
+  from a buried contact or diffusion under metal (tan, R-G +30..+40).
+- `tools/rdp3_jogs.py`: for a bundle of vertical tracks, where metal crosses the gaps
+  between tracks (jogs) and where a track has no metal. `tools/sel_tracks.py` bridges
+  gaps up to 14 px and so reads two nets that share a track across a jog as one line.
+
+Slice tags and columns: s0..s7 from the left; sK has its VSS rail (left edge of the
+slice) at x 13783 + 390 K, i.e. s(K) = right-datapath column c(K-1); s0 lies left of c0.
 
 ## Status
 
 - Traced, placed and checked: the address register row AR (5 latches), the two 8-bit
-  register rows RA and RB (16 latches), and under each of them a full 8-bit equality
-  comparator (per slice an XOR of the register bit with a per-slice line `c`, and a
-  pull-down on a row-wide wired-NOR line with one load). 256 transistors, extracts
-  with no errors and no open nets.
-- Both load strobes traced to the edge of the region. RB's is `sel_w0` (followed to
-  sel's port): **RB is R0**. RA's comes from a gate in the logic column west of the
-  select gates (package bd1), not directly from `sel`: RA is not identified.
-- Not traced: where the two `eq` lines leave (not found), the routing zone, the
-  left-edge bundle, the gap zones between the bands.
+  register rows RA and RB (16 latches), under each a full 8-bit equality comparator
+  (per slice an XOR of the register bit with a per-slice line `c`, and a pull-down on a
+  row-wide wired-NOR line with one load), the exits of both equality lines, and the
+  left-edge bundle (every line to both ends inside the region). Extracts with no errors
+  and no open nets.
+- **Run 3 corrects run 2: RB is R2 and RA is R1; R0 is row RC (rdp2's), the row above.**
+  The bundle steps one track to the left at y 12300-12540, which the track scan could
+  not see. So `rdp3_cb_eq` is "c = R2" (horizontal sync position) and `rdp3_ca_eq` is
+  "c = R1" (horizontal displayed). The R0 comparator is rdp2's band C.
+- Both equality lines leave through a buried contact in slice s1 onto a poly line going
+  west to bundle track L3: `rdp3_cb_eq` then goes **north** (out of the region at
+  13478,10700), `rdp3_ca_eq` **south** (out at 13434,13480, bd1's track k8). Neither is
+  gated or latched inside the region.
 
 ## Inventory
 
@@ -43,20 +56,22 @@ comparator down, measured: block correlation 0.93-0.98):
 | y | What |
 |---|---|
 | 10561-10831 | register row RC (rdp2's; the region's top edge y 10700 cuts through it) |
-| 10831-10925 | gap: RC's strobe poly at y 10800-10830, otherwise not looked at |
+| 10831-10925 | gap: the poly line of `rdp3_cb_eq` at y 10846-10867 (from slice s1 west to the bundle); RC's strobe poly is at y 10800-10830 |
 | 10925-11056 | band B match pull-downs (`rdp3_mpd`), `rdp3_cb_eq` strip at y 10930-10952 |
 | 11056-11321 | band B XOR cells (`rdp3_xor`) |
-| 11321-11591 | **register row RB = R0** (`rdp3_lat` upside down), strobe poly y 11558-11586 |
-| 11591-11775 | gap: empty field except a poly line at y 11695-11712 from the west to slice s1 (the feed of `rdp3_c_s1`, see "c lines") and the rounded top ends of the T2 pieces at y 11738 |
+| 11321-11591 | **register row RB = R2** (`rdp3_lat` upside down), strobe poly y 11558-11586 |
+| 11591-11775 | gap: empty field except the poly line of `rdp3_ca_eq` at y 11693-11713 (from slice s1 west to the bundle) and the rounded top ends of the T2 pieces at y 11738 |
 | 11775-11905 | band A match pull-downs, `rdp3_ca_eq` strip at y 11776-11798 |
 | 11905-12167 | band A XOR cells |
-| 12167-12437 | **register row RA** (`rdp3_lat` upside down), strobe poly y 12404-12432 |
+| 12167-12437 | **register row RA = R1** (`rdp3_lat` upside down), strobe poly y 12404-12432 |
 | 12437-13000 | routing zone (read at low zoom by the first run, table below; not drawn) |
 | 13010-13280 | **row AR**: 5 latch cells under slices s1..s5 |
 | 13280-13500 | the five AR outputs, nested L-shaped lines going right |
 
 Left of the array, x 13348-13825: a bundle of 12 vertical metal tracks on a 43.4 px
-pitch, L0..L11 at x 13348 + 43.4 k. What is known of them is under Ports.
+pitch, L0..L11 at x 13348 + 43.4 k (bd1 calls the same tracks k6..k17 at y 14700).
+L10 and L11 exist only below the array (L10's place is the first VSS rail higher up).
+See "Left-edge bundle" under Logic.
 
 Rails: which is which was settled by the first run (both loads of every latch hang from
 the x 14772 + 390k rail, which also runs into the decode array's VCC bus). All new
@@ -106,24 +121,31 @@ q goes up in poly.
 
 - Strobe `rdp3_ra_ld`: row poly; right end free (ends at x 16925); at the left end it
   turns down at x 13782 under the first VSS rail to a pad with a contact at
-  (13823,12700); thin metal on bundle track L11 (x 13825) goes down from there.
+  (13823,12700); thin metal on bundle track L11 (x 13825) goes down from there and
+  leaves the region at y 13480.
 - Strobe `rdp3_rb_ld`: row poly; right end free; runs on west to a pad with a contact
-  at (13648,11571); metal on track L7 (x 13652) goes down, straight.
-- Which registers (followed outside the region by track scan `tools/sel_tracks.py` and
-  two views, `cache/scratch/rdp3/sel_west.png`, `sel_west2.png`):
-  - L7 is continuous metal from y 11566 to a contact at (13652,15000) on the poly bar
-    y 15001, which is `sel_w0` at sel's west port (14100,15001). **RB = R0.**
-  - L11 runs to y 14975, steps left to x 13784 and enters the gate column at
-    x 13700-13990, y 15100-16400 (contact seen at about 13776,15155). That logic is
-    untraced (bd1). So RA's strobe is made there. RA is compared with the same `c`
-    lines as R0 and has 8 bits; not identified further.
-  - For the record, the other west outputs of sel: `sel_w1` to L10 (contact 13782,14912;
-    L10's metal from there up ends at y 13994, the piece above, y 12807-13877, is
-    another net); `sel_w2` to L6 (contact 13608,14957), which runs up, steps onto L7's
-    track above RB's contact (y 11500-11520) and continues north into rdp2; `sel_w4` to
-    L4 (contact 13520,15040; metal up to y 12930); `sel_w6` (bar y 14867) passes under
-    the whole bundle westward. The west part of bar y 14909 (west of x 13712) is not
-    `sel_w1`: it starts on a contact at (13692,14912) on L8.
+  at (13648,11571); metal goes down on track L7 (x 13651), **jogs left at y 12357 onto
+  track L6 (x 13608)** and leaves the region on L6.
+- Which registers (run 3; the lower ends are bd1's table of tracks at y 14700, the
+  stretch y 13480-14700 between the two regions was checked with `tools/rdp3_jogs.py`
+  in both metal shots: no jog, and no break longer than a poly line passing under):
+  - `rdp3_rb_ld` arrives on L6 = bd1's k12 = `sel_w2` (contact 13609,14956).
+    **RB = R2** (horizontal sync position).
+  - `rdp3_ra_ld` goes down L11 to y 14000, **jogs left onto L10** (x 13782; seen,
+    `cache/scratch/rdp3/l11_jog.png`) = bd1's k16 = `sel_w1` (contact 13785,14913).
+    **RA = R1** (horizontal displayed). The metal on L11 below y 14050 is another net
+    (bd1's k17, which comes from a track at x 13868 by a jog at y 14050); the piece of
+    L10 above y 13893 is a third net (ends there on a contact to a poly line going west).
+  - `sel_w0` (bd1's k13, x 13652) comes up L7, **jogs right onto L8 at y 12400** and
+    ends on the contact (13690,10815) on the west end of the strobe poly of row RC, the
+    register row above RB, which is rdp2's. **RC = R0.** Drawn here as `rdp3_rc_ld`.
+  - The three rows from the top are therefore R0, R2, R1: the order of those three
+    select columns in the decode array.
+  - Run 2 had RB = R0 from a track scan of L7 "continuous from y 11566 to 15000". It is
+    not one line: at the jog two nets share the track 22 px apart, and
+    `tools/sel_tracks.py` bridges gaps up to 14 px on either side of a dark line.
+  - On chip 2 the `sel_w0` line has a 10 px dark gap at (13652,12708). Chip 1's metal is
+    unbroken there and nothing lies under it: dirt or a scratch on that die, not layout.
 
 ### Comparator (traced): `rdp3_xor`, `rdp3_mpd`, `rdp3_mpd1`
 
@@ -149,6 +171,28 @@ so x = c XOR q and `eq` is high when the register equals the eight `c` lines.
   14562,11870); outside the C the diffusion is the `eq` line, a strip y 11776-11798
   that runs through all eight slices (under the VSS rails) and ends dead under the
   first rail (x 13768) and under the ninth (x 16925).
+- **Exit of the `eq` line (run 3).** In slice s1 a tab of the strip comes up under the c
+  track (x 14314-14336) to a buried contact (box 14312-14338 x 11744-11766 in band A,
+  y 10898-10920 in band B) on the end of a poly line. The line runs up 50 px, then west
+  through the gap above the band (band A y 11693-11713, band B y 10846-10867), under
+  slice s0's lines and rails and under bundle tracks L4..L9 without contact, to a pad
+  with a metal contact on track L3: (13479,11703) and (13477,10857).
+  - The box is a buried contact and not a contact to the c track that passes over it
+    (run 2's reading, "feed of c_s1"). Measured with `tools/rdp3_boxstat.py`: inside the
+    box the clean shot is tan, R-G = +37 (band A) and +34 (band B), the same as the eq
+    strip under the same track (+38, +32); the 24 known metal contacts from the c tracks
+    to poly pads give -22..+7 (one +29) and are bright in the chip-1 metal shot
+    (180-212), the box is not (125-140, as the strip: 136-160). A column profile down
+    x 14322 shows poly (R-G +63..+99) down to the box and diffusion colour, not field,
+    from the box to the strip. Both bands show the same structure
+    (`cache/scratch/rdp3/eq_tab_c.png`, 6x, both bands side by side).
+  - A contact to the track would also tie c of slice s1 to both eq lines.
+  - `rdp3_cb_eq` goes **north** from (13477,10857) on L3 and leaves the region at
+    (13478,10700); by scan the metal runs on to about y 9960. `rdp3_ca_eq` goes **south**
+    from (13479,11703) on L3, jogs left at y 12530 onto L2 (x 13434) and leaves the
+    region at (13434,13480); that track is bd1's k8, which bd1 has not traced.
+  - Nothing gates or latches either line inside the region: wired NOR, one load, poly,
+    metal.
 - Slice s1 (`rdp3_mpd1`): the C is shorter (right arm at x 14352-14372) and the room is
   taken by the load of `eq`: VCC land with contact (14403,11862), strip east under a
   gate block (14455-14497 x 11812-11915), up at x 14502-14524 to the `eq` strip; the
@@ -160,8 +204,10 @@ so x = c XOR q and `eq` is high when the register equals the eight `c` lines.
   shot shows it warmer than the field above it. If it were field, nor = NOT c and
   x = c AND NOT q.
 
-Believed: the `c` lines are the bits of the horizontal character counter (R0 is
-compared with them) and `rdp3_cb_eq` is "counter = R0".
+Believed: the `c` lines are the bits of the horizontal character counter (R0, R2 and
+R1 are all compared with them, R0 in rdp2's band C). Then `rdp3_cb_eq` is "counter =
+R2", the start of horizontal sync, and `rdp3_ca_eq` is "counter = R1", the end of the
+displayed part of the line.
 
 ### Row AR (first run): 5 bits, the address register
 
@@ -187,6 +233,40 @@ Routing zone, read at 1.15x by the first run, not drawn and not re-checked:
 | s5 | contact (15797,12738), poly right at y 12743 to contact (16817,12743), metal down at x 16817 |
 | s6 | contact (16186,12698), poly right at y 12697 to contact (16860,12700), metal down at x 16860 |
 | s7 | contact (16580,12568), poly down and right at y 12655 to contact (16908,12653), metal down at x 16908 |
+
+### Left-edge bundle (traced, run 3)
+
+Thin metal, 18 wide, tracks L0..L11 at x 13348 + 43.4 k. Between y 12300 and 12540
+most lines step one track to the left going down, so a track number names a place, not
+a net. Each net, from north to south (all drawn; overlay `ov_bun1.png`):
+
+| Net | North end | Path | South end |
+|---|---|---|---|
+| `rdp3_n0` | L0 at y 10700 | straight down L0 to y 12789, steps left to x 13307 | leaves the region west/south at (13307,12850); the track at x 13307 above y 12745 is another line, which turns west there |
+| `rdp3_s0` | poly pad from the west, contact (13346,12829) | L0 | L0 at y 13480 (bd1's k6 = `bd1_xn1`) |
+| `rdp3_n1s4` | L1 at y 10700 | L1 to contact (13390,12438); poly link east y 12426-12454 under L2, L3; contact (13522,12440); L4 | L4 at y 13480 = bd1's k10 = **`sel_w4`** (so R4's write strobe goes north on L1) |
+| `rdp3_n2s1` | L2 at y 10700 | L2, jog left at y 12486, L1 | L1 at y 13480 (bd1's k7, untraced there) |
+| `rdp3_cb_eq` | L3 at y 10700 | L3 down to contact (13477,10857) | (poly east to comparator B) |
+| `rdp3_ca_eq` | (poly from comparator A) contact (13479,11703) | L3, jog left at y 12530, L2 | L2 at y 13480 (bd1's k8, untraced there) |
+| `rdp3_n4` | L4 at y 10700 | L4 to contact (13522,12375); poly west y 12387-12407 under L3..L0 | leaves west at (13330,12397) |
+| `rdp3_n5` | L5 at y 10700 | L5 to contact (13565,11920); poly west y 11910-11931 | leaves west at (13330,11920) |
+| `rdp3_n6` | L6 at y 10700 | L6 to contact (13608,11438); poly west y 11429-11452 | leaves west at (13330,11440) |
+| `rdp3_n7s9` | L7 at y 10700 | L7, jog left at y 11507, L6, jog left at y 12313, L5 to contact (13565,12826); poly link east y 12815-12837 under L6, L7, L8; contact (13736,12826); L9 | L9 at y 13480 (bd1's k15, untraced there) |
+| `rdp3_n8` | L8 at y 10700 | L8 to contact (13692,10745); poly west y 10737-10758, down between L1 and L2 (x 13413), west y 10954-10976 | leaves west at (13330,10965) |
+| `rdp3_rc_ld` | contact (13690,10815) on RC's strobe poly | L8, jog left at y 12400, L7 | L7 at y 13480 = bd1's k13 = **`sel_w0`** |
+| `rdp3_rb_ld` | contact (13648,11571) on RB's strobe poly | L7, jog left at y 12357, L6 | L6 at y 13480 = bd1's k12 = **`sel_w2`** |
+| `rdp3_ra_ld` | contact (13823,12700) on RA's strobe poly | L11 | L11 at y 13480; at y 14000 it jogs onto L10 = bd1's k16 = **`sel_w1`** |
+
+Lines that start in the routing zone and go south (their upper ends are in the next
+section): L3 from contact (13478,12916), L5 from (13565,12957), L8 from (13692,12870),
+L10 from (13780,12785).
+
+Four lines from the north turn west one after another (`rdp3_n8` at y 10965, `rdp3_n6`
+at 11440, `rdp3_n5` at 11920, `rdp3_n4` at 12397), towards the mid-right array. What
+they are is rdp2's to say.
+
+A poly line crosses the whole bundle along y 13406-13429 without a contact (not drawn
+yet: its east end is not followed).
 
 ### `c` lines: where they come from
 

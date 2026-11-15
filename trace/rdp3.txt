@@ -261,12 +261,14 @@ M 13825,12688 y13480 w=22
 N M 13825,13400 rdp3_ra_ld
 
 # --- RB load strobe: the row poly runs on west under the VSS rail to a pad with a contact
-# at (13648,11570); thin metal (track L7, x 13652) goes down from there, straight, and
-# leaves the region at y 13480.
+# at (13648,11570); thin metal goes down from there on track L7 (x 13651), jogs LEFT at
+# y 12357 onto track L6 (x 13608) and leaves the region at y 13480 on L6. (Run 2 took it
+# as straight down L7: tools/sel_tracks.py bridges the 22 px between the two nets that
+# share a track at a jog. L6 at the south edge is sel_w2, L7 is sel_w0.)
 P 13620,11558:13815,11586
 C 13648,11571 s=26x26
-M 13652,11558 y13480 w=22
-N M 13652,13400 rdp3_rb_ld
+M 13651,11558 y12357 x13608 y13480 w=18
+N M 13608,13400 rdp3_rb_ld
 
 
 # =====================================================================================
@@ -478,11 +480,102 @@ N M 16663,11650 rdp3_c_s7
 M 16838,10745 y12550 w=20
 N M 16838,11700 rdp3_t16837
 
-# --- poly line in the gap under RB (y 11695-11712): comes from the west (not followed
-# beyond x 13760), passes under slice s0's lines and rails without contact, and under
-# the c track of slice s1 turns down to a contact on that track (ring seen in the chip-1
-# metal shot at 4x, one view; slice s1's c track is the only one with no contact in the
-# routing zone below the array). Notes: "c lines".
-P 13760,11704 x14333 w=17
-P 14322,11695 y11766 w=23
-?C 14322,11750 s=24x24
+# =====================================================================================
+# Exits of the two equality lines (run 3). In slice s1 of each band a tab of the eq
+# strip comes up under the c track (x 14314-14336) and ends in a buried contact on the
+# end of a poly line that runs west through the gap above the band, under slice s0 and
+# under the left-edge bundle, to a pad with a metal contact on bundle track L3.
+# The box is a buried contact, not a contact to the c track above it (run 2 read it as
+# the feed of c_s1): its inside is tan like the strip (clean shot R-G +34/+37; the 24
+# metal contacts on the c tracks give -22..+7 and are bright in the chip-1 metal shot,
+# the box is not), the tab below it is diffusion colour, not field, and both bands have
+# the same structure. tools/rdp3_boxstat.py; views eq_tab_c.png, eqa_west.png, eqb_west.png.
+# =====================================================================================
+# --- band A (RA's comparator): poly y 11693-11713
+P 13460,11686:13498,11721            # pad
+C 13479,11703 s=26x26                # to track L3
+P 13460,11693:14337,11713            # line east
+P 14313,11693:14337,11766            # down under the c track of s1
+B 14312,11744:14338,11766
+D 14314,11746:14336,11782            # tab up from the eq strip
+N P 13800,11703 rdp3_ca_eq
+# --- band B (RB's comparator): poly y 10846-10867
+P 13458,10838:13497,10876            # pad
+C 13477,10857 s=26x26                # to track L3
+P 13458,10846:14337,10867            # line east
+P 14313,10846:14337,10920            # down under the c track of s1
+B 14312,10898:14338,10920
+D 14314,10900:14336,10936            # tab up from the eq strip
+N P 13800,10856 rdp3_cb_eq
+
+# =====================================================================================
+# Left-edge bundle (run 3): tracks L0..L11 at x 13348 + 43.4 k, thin metal 18 wide.
+# Around y 12300-12540 most lines step one track to the LEFT on the way down, so the
+# name of a track says nothing about the net: each line is drawn here as one path.
+# Views: bun_top.png, bun_rb.png, bun_jog.png, bun_a.png, bun_b.png, bun_l0.png, bun_c.png.
+# Jogs found with tools/rdp3_jogs.py and each one looked at.
+# =====================================================================================
+# --- rdp3_cb_eq: from its contact north on L3, leaves the region at y 10700
+M 13478,10870 y10700 w=18
+N M 13478,10720 rdp3_cb_eq
+# --- rdp3_ca_eq: from its contact south on L3, jog left at y 12530, on down L2
+M 13479,11690 y12530 x13434 y13480 w=18
+N M 13434,13400 rdp3_ca_eq
+# --- L0: from the north; at y 12789 it steps left to x 13307 (outside the region) and
+# goes on south there
+M 13348,10700 y12789 x13307 y12850 w=18
+N M 13348,11000 rdp3_n0
+# --- L0 below: starts on a contact on a poly pad that comes from the west
+P 13328,12815:13364,12843
+C 13346,12829 s=26x26
+M 13347,12816 y13480 w=18
+N M 13347,13400 rdp3_s0
+# --- L1 from the north ends on a contact; poly link east (under L2, L3) to a contact
+# on L4, which goes on south: this net is sel_w4 at the south edge
+M 13391,10700 y12448 w=18
+C 13390,12438 s=26x26
+P 13375,12426:13540,12454
+C 13522,12440 s=26x26
+M 13521,12428 y13480 w=18
+N M 13521,13400 rdp3_n1s4
+# --- L2 from the north, jog left at y 12486, on down L1
+M 13434,10700 y12486 x13391 y13480 w=18
+N M 13391,13400 rdp3_n2s1
+# --- L4 from the north ends on a contact; poly west along y 12397, out of the region
+M 13521,10700 y12386 w=18
+C 13522,12375 s=26x26
+P 13507,12360:13540,12407
+P 13330,12387:13540,12407
+N P 13335,12397 rdp3_n4
+# --- L5 from the north ends on a contact; poly west along y 11920, out of the region
+M 13565,10700 y11930 w=18
+C 13565,11920 s=26x26
+P 13330,11910:13582,11931
+N P 13335,11920 rdp3_n5
+# --- L6 from the north ends on a contact; poly west along y 11440, out of the region
+M 13608,10700 y11448 w=18
+C 13608,11438 s=26x26
+P 13330,11429:13626,11452
+N P 13335,11440 rdp3_n6
+# --- L7 from the north: jog left at y 11507 onto L6, jog left at y 12313 onto L5, ends
+# on a contact; poly link east (under L6, L7, L8) to a contact on L9, which goes south
+M 13651,10700 y11507 x13608 y12313 x13565 y12836 w=18
+C 13565,12826 s=26x26
+P 13550,12815:13752,12837
+C 13736,12826 s=26x26
+M 13738,12815 y13480 w=18
+N M 13738,13400 rdp3_n7s9
+# --- L8 from the north ends on a contact (13692,10745); poly west along y 10747, down
+# between L1 and L2 (x 13413), west along y 10965, out of the region
+M 13694,10700 y10756 w=18
+C 13692,10745 s=26x26
+P 13403,10737:13708,10758
+P 13403,10737:13424,10976
+P 13330,10954:13424,10976
+N P 13335,10965 rdp3_n8
+# --- RC's load strobe (row RC is rdp2's): pad and contact at (13690,10815), then south
+# on L8, jog left at y 12400, on down L7. L7 at the south edge is sel_w0: RC is R0.
+P 13677,10798:13760,10830            # west end of RC's strobe poly (the row is in rdp2)
+C 13690,10815 s=26x26
+M 13694,10803 y12400 x13651 y13480 w=18
+N M 13651,13400 rdp3_rc_ld
