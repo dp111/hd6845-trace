@@ -53,8 +53,11 @@ tools/t.sh BLOCK netlist.py
   shows the same rectangle at several offsets side by side, to compare repeats.
 - For following bundles of parallel wires, `tools/sel_tracks.py` and `tools/sel_cut.py`
   (written by the agent that traced the select logic; read their docstrings) report
-  where metal is present along a track or a cut. They missed one contact there, so
-  check what they say by overlay.
+  where metal is present along a track or a cut. **Do not trust them for
+  connectivity.** `sel_tracks.py` bridges gaps of about 20 px, so where a bundle steps
+  sideways it joins two different nets that share a track: that produced a wrong
+  register identification. It also reports breaks at contacts, blemishes and poly
+  crossings. `tools/rdp3_jogs.py` finds the jogs. Confirm every track by overlay.
 - X Y is the top-left corner, W H the size, in die pixels. The tool prints the path of
   the PNG; open it with the Read tool.
 - **Keep every image under about 1400 px a side or it is downscaled when read and the
