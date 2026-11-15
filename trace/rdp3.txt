@@ -20,7 +20,7 @@ C 14622,13035 s=30x30                # bus to the pass-transistor diffusion
 C 14757,13070 s=30x30                # VCC rail to the land the two loads hang from
 C 14825,13128 s=26x26                # strap to poly (load gate = n1)
 C 14835,13217 s=28x30                # strap to the output land
-?C 14886,13130 s=14x34               # track to n1 drain: seen as an outline only
+# (no contact on the 14886 strap: in slice s7 of the array a through line uses this track; notes AMB-3)
 
 # --- pass transistor T1: bus -> node a, gate = row strobe
 D 14602,13010:14648,13056            # bus contact land
@@ -74,15 +74,16 @@ D 14860,13218:14900,13243
 P 14874,13220:14899,13252            # (continued outside the cell)
 B 14872,13218:14901,13245
 
-# --- not understood: a narrow diffusion-coloured stripe and a poly stripe side by side
-# between the feedback land and the output land, under the VCC rail. See notes, AMB-1.
-?D 14722,13208:14809,13220
-P 14730,13226:14809,13245
-N P 14770,13235 rdp3_{}_x2
-
-# --- poly band along the cell bottom, tied to the VSS rail
-P 14550,13251:14809,13272
-C 14562,13256 s=24x22
+# --- hold device (notes, AMB-1): the band along the cell bottom is tied to the VSS rail and
+# widens, under the VCC rail, into a block over a diffusion strip that joins the feedback
+# land (node a) to the output land (q). The two dark lines across the block (y 13223 and
+# 13246) are the edges of that strip. Gate at VSS: only a depletion device makes sense
+# (weak q -> a feedback that the bus overpowers); the implant itself cannot be seen.
+?D 14720,13224:14824,13246           # strip under the block, land to land
+P 14727,13206:14809,13255            # block: 13206-13223 and 13246-13251 are its overhangs
+A 14727,13224:14809,13246 kind=hold
+P 14550,13251:14809,13272            # band along the cell bottom
+C 14562,13256 s=24x22                # band to the VSS rail
 @end
 
 # Row AR. Slices are numbered as in the array above (s0 = leftmost array slice, x 13780):
@@ -213,3 +214,266 @@ N M 14625,12600 rdp3_bus_s2
 N M 15015,12600 rdp3_bus_s3
 N M 15405,12600 rdp3_bus_s4
 N M 15795,12600 rdp3_bus_s5
+
+# =====================================================================================
+# Register rows RA (y 12167-12437) and RB (y 11321-11591): the latch cell upside down,
+# eight per row. Every instance compared with the median of all sixteen
+# (tools/rdp3_cmp.py) and overlaid; the cell itself is identical to the AR cell.
+# In these rows the bus line and the x 14712 track run on through the cell; the x 14886
+# strap is as long as the cell (metal runs y 12174-12430 / 11328-11586).
+# =====================================================================================
+@inst rdp3_lat -782,-853 mx=14790 rot=180 o=14790,13150 tag=ra_s0
+@inst rdp3_lat -391,-853 mx=14790 rot=180 o=14790,13150 tag=ra_s1
+@inst rdp3_lat 0,-853 mx=14790 rot=180 o=14790,13150 tag=ra_s2
+@inst rdp3_lat 390,-853 mx=14790 rot=180 o=14790,13150 tag=ra_s3
+@inst rdp3_lat 780,-854 mx=14790 rot=180 o=14790,13150 tag=ra_s4
+@inst rdp3_lat 1170,-854 mx=14790 rot=180 o=14790,13150 tag=ra_s5
+@inst rdp3_lat 1560,-854 mx=14790 rot=180 o=14790,13150 tag=ra_s6
+@inst rdp3_lat 1951,-854 mx=14790 rot=180 o=14790,13150 tag=ra_s7
+@inst rdp3_lat -782,-1699 mx=14790 rot=180 o=14790,13150 tag=rb_s0
+@inst rdp3_lat -391,-1699 mx=14790 rot=180 o=14790,13150 tag=rb_s1
+@inst rdp3_lat 0,-1699 mx=14790 rot=180 o=14790,13150 tag=rb_s2
+@inst rdp3_lat 390,-1699 mx=14790 rot=180 o=14790,13150 tag=rb_s3
+@inst rdp3_lat 780,-1700 mx=14790 rot=180 o=14790,13150 tag=rb_s4
+@inst rdp3_lat 1170,-1699 mx=14790 rot=180 o=14790,13150 tag=rb_s5
+@inst rdp3_lat 1560,-1700 mx=14790 rot=180 o=14790,13150 tag=rb_s6
+@inst rdp3_lat 1951,-1699 mx=14790 rot=180 o=14790,13150 tag=rb_s7
+N P 14850,12418 rdp3_ra_ld
+N P 14850,11572 rdp3_rb_ld
+
+# --- right end of each row: VSS land and contact for s7's second pull-down, under the
+# ninth VSS rail (x 16906)
+D 16878,12262:16926,12322
+D 16878,12318:16905,12347
+C 16898,12290 s=30x40
+D 16878,11416:16926,11476
+D 16878,11472:16905,11501
+C 16898,11444 s=30x40
+
+# --- RA load strobe: from the left leg of s0's loop the poly turns down under the VSS
+# rail, ends on a pad with a contact at (13823,12700); thin metal (track L11 of the
+# left-edge bundle, x 13825) goes down from there and leaves the region at y 13480.
+P 13770,12404:13815,12432
+P 13770,12404:13794,12714
+P 13770,12688:13845,12714
+C 13823,12700 s=26x26
+M 13825,12688 y13480 w=22
+N M 13825,13400 rdp3_ra_ld
+
+# --- RB load strobe: the row poly runs on west under the VSS rail to a pad with a contact
+# at (13648,11570); thin metal (track L7, x 13652) goes down from there, straight, and
+# leaves the region at y 13480.
+P 13620,11558:13815,11586
+C 13648,11571 s=26x26
+M 13652,11558 y13480 w=22
+N M 13652,13400 rdp3_rb_ld
+
+
+# =====================================================================================
+# Comparator sub-rows above each register row (band A above RA: y 11775-12167; band B
+# above RB: 846 higher). Traced on the median of twelve inner slices (composite rdp3_w16).
+# Per slice: an XOR of the register bit q (poly up from the latch) and the line c on the
+# x 14712 track, and a pull-down on a row-wide diffusion line (wired NOR, "eq").
+#   nor = NOR(c, q)             load L3, pull-downs T6 (c) and T7 (q)
+#   x   = NOT(nor + c.q)        load L4, pull-down T5 (nor), series pair G1 (c), G2 (q)
+#   eq  pulled low by x          (rdp3_mpd)
+# =====================================================================================
+@cell rdp3_xor tag=ca_s2
+# --- node x (XOR output): band under the bus, strip down its left side, strip to the right
+D 14584,11937:14694,11961            # band
+D 14584,11937:14624,12100            # left strip, on down through the T5 gate to the VSS land
+D 14682,11937:14694,11978            # right end of the band, down to
+D 14682,11963:14852,11978            #   the strip that runs right under the VCC rail
+D 14826,11963:14952,12035            # band under the series pair G1, G2 and on to the VSS strip
+D 14930,11963:14952,12100            # VSS strip down to the next slice's VSS land
+D 14624,11913:14644,11942            # tab up to the buried contact of the pull-down gate
+N D 14600,11950 rdp3_{}_x
+# --- load L4 of x: strip from the VCC land leftwards under the gate block
+D 14618,12001:14712,12028
+P 14650,11983:14700,12038            # gate block (overhangs the strip above and below)
+P [ 14600,11968 14670,11968 14676,11983 14700,11983 14700,11996 14600,11996 ]   # bar to its tie
+B 14598,11966:14627,11998            # tie to x
+D 14706,12000:14808,12036            # VCC land
+D 14756,12000:14808,12046
+C 14782,12020 s=30x30                # VCC rail to the land
+# --- T5: nor pulls x down. Gate = bar of the L3 block
+D 14545,12090:14626,12167            # VSS land (lower)
+C 14562,12127 s=24x40
+P 14569,12062:14752,12085            # bar: gate of T5, runs right into the L3 gate block
+# --- load L3 of nor: strip from the VCC land down under the gate block
+D 14777,12040:14808,12165
+P 14748,12052:14833,12110            # gate block
+P 14826,12084:14860,12110            # tab into the tie
+D 14838,12086:14873,12140            # diffusion under the tie, down to the nor node
+B 14832,12082:14862,12114
+D 14652,12150:14810,12165            # nor: band to the left, to T6
+?D 14808,12128:14945,12164           # nor: to the right, under the q poly (T7), to the next VSS land
+N D 14790,12140 rdp3_{}_nor
+# --- T6: c pulls nor down. Gate = poly from the lower contact on the c track
+D 14620,12090:14693,12116            # VSS arm from the land
+D 14652,12090:14693,12165            # down through the gate to the nor band
+P 14640,12121:14699,12145            # gate
+P 14697,12105:14736,12145            # pad
+C 14715,12121 s=26x26                # c track to the pad
+# --- series pair: G1 gate = c (poly from the upper contact on the c track), G2 gate = q
+P 14706,11922:14740,11950            # pad
+C 14720,11936 s=26x26                # c track to the pad
+P 14706,11926:14878,11950            # along, under the VCC rail
+P 14853,11926:14878,12042            # G1
+P 14901,11945:14925,12104            # G2: upper part of the q poly
+P 14879,12088:14925,12104            # jog
+P 14879,12095:14901,12200            # q poly up from the latch's output buried contact
+# --- metal piece with no contact found (notes): runs y 11738-12200
+M 14673,11738 y12200 w=22
+@end
+
+# match pull-down, slices s0, s2..s7
+@cell rdp3_mpd tag=ca_s2
+P 14580,11810:14816,11832            # gate, top arm
+P 14791,11810:14816,11898            #   right arm
+P 14620,11876:14816,11898            #   bottom arm (over the edge of the inner diffusion)
+P 14622,11890:14646,11927            #   down to the tie on the x tab
+B 14620,11911:14648,11930
+D 14584,11776:14838,11871            # eq above the top arm and right of the right arm; VSS inside
+D 14545,11848:14602,11900            # VSS land (upper)
+C 14562,11870 s=30x34
+@end
+
+# match pull-down of slice s1: shorter, the load of the eq line takes the room
+@cell rdp3_mpd1 tag=ca_s1
+P 14189,11810:14372,11832
+P 14352,11810:14372,11898
+P 14229,11876:14372,11898
+P 14231,11890:14255,11927
+B 14229,11911:14257,11930
+D 14193,11776:14356,11871
+D 14154,11848:14211,11900
+C 14171,11870 s=30x34
+# load of the eq line
+D 14388,11830:14434,11897            # VCC land
+C 14403,11862 s=30x36
+D 14430,11830:14518,11897            # strip to the right under the gate block
+P 14455,11812:14497,11915            # gate block
+D 14502,11786:14524,11850            # up to the eq strip
+P 14475,11780:14497,11815            # neck up to the tie on the eq strip
+B 14473,11774:14499,11803
+@end
+@inst rdp3_xor -782,0 tag=ca_s0
+@inst rdp3_mpd -782,0 tag=ca_s0
+@inst rdp3_xor -391,0 tag=ca_s1
+@inst rdp3_xor 390,0 tag=ca_s3
+@inst rdp3_mpd 390,0 tag=ca_s3
+@inst rdp3_xor 780,-1 tag=ca_s4
+@inst rdp3_mpd 780,-1 tag=ca_s4
+@inst rdp3_xor 1170,-1 tag=ca_s5
+@inst rdp3_mpd 1170,-1 tag=ca_s5
+@inst rdp3_xor 1560,-1 tag=ca_s6
+@inst rdp3_mpd 1560,-1 tag=ca_s6
+@inst rdp3_xor 1951,-1 tag=ca_s7
+@inst rdp3_mpd 1951,-1 tag=ca_s7
+@inst rdp3_xor -782,-846 tag=cb_s0
+@inst rdp3_mpd -782,-846 tag=cb_s0
+@inst rdp3_xor -391,-846 tag=cb_s1
+@inst rdp3_mpd1 0,-846 tag=cb_s1
+@inst rdp3_xor 0,-846 tag=cb_s2
+@inst rdp3_mpd 0,-846 tag=cb_s2
+@inst rdp3_xor 390,-846 tag=cb_s3
+@inst rdp3_mpd 390,-846 tag=cb_s3
+@inst rdp3_xor 780,-847 tag=cb_s4
+@inst rdp3_mpd 780,-847 tag=cb_s4
+@inst rdp3_xor 1170,-846 tag=cb_s5
+@inst rdp3_mpd 1170,-846 tag=cb_s5
+@inst rdp3_xor 1560,-847 tag=cb_s6
+@inst rdp3_mpd 1560,-847 tag=cb_s6
+@inst rdp3_xor 1951,-846 tag=cb_s7
+@inst rdp3_mpd 1951,-846 tag=cb_s7
+
+# --- eq lines: row-wide diffusion strips, dead ends under the first and the ninth VSS rail
+D 13768,11776:16925,11798
+N D 15000,11787 rdp3_ca_eq
+D 13768,10930:16925,10952
+N D 15000,10941 rdp3_cb_eq
+# --- right end: lower VSS land that slice s7's T7 and series pair end on (ninth rail)
+D 16886,12090:16940,12167
+C 16903,12127 s=24x40
+D 16886,11244:16940,11321
+C 16903,11281 s=24x40
+
+# =====================================================================================
+# Lines that run through the whole array (y 10700 = top edge of the region, inside the
+# next register row up, which belongs to rdp2).
+# =====================================================================================
+# --- supply rails, straight wide metal (seen continuous in every view of the array)
+M 13783,10700 y12445 w=60
+N M 13783,11650 vss
+M 14174,10700 y12445 w=60
+N M 14174,11650 vss
+M 14565,10700 y12445 w=60
+N M 14565,11650 vss
+M 14955,10700 y12445 w=60
+N M 14955,11650 vss
+M 15345,10700 y12445 w=60
+N M 15345,11650 vss
+M 15735,10700 y12445 w=60
+N M 15735,11650 vss
+M 16125,10700 y12445 w=60
+N M 16125,11650 vss
+M 16516,10700 y12445 w=60
+N M 16516,11650 vss
+M 16906,10700 y12445 w=60
+N M 16906,11650 vss
+M 13990,10700 y12445 w=56
+N M 13990,11650 vcc
+M 14381,10700 y12445 w=56
+N M 14381,11650 vcc
+M 14772,10700 y12445 w=56
+N M 14772,11650 vcc
+M 15162,10700 y12445 w=56
+N M 15162,11650 vcc
+M 15552,10700 y12445 w=56
+N M 15552,11650 vcc
+M 15942,10700 y12445 w=56
+N M 15942,11650 vcc
+M 16332,10700 y12445 w=56
+N M 16332,11650 vcc
+M 16723,10700 y12445 w=56
+N M 16723,11650 vcc
+# --- per-slice bus lines (data): contact in every latch cell, nothing else on them here
+M 13845,10700 y12445 w=24
+N M 13845,11650 rdp3_bus_s0
+M 14236,10700 y12445 w=24
+N M 14236,11650 rdp3_bus_s1
+M 14626,10700 y12445 w=24
+N M 14626,11650 rdp3_bus_s2
+M 15016,10700 y12445 w=24
+N M 15016,11650 rdp3_bus_s3
+M 15407,10700 y12445 w=24
+N M 15407,11650 rdp3_bus_s4
+M 15797,10700 y12445 w=24
+N M 15797,11650 rdp3_bus_s5
+M 16187,10700 y12445 w=24
+N M 16187,11650 rdp3_bus_s6
+M 16577,10700 y12445 w=24
+N M 16577,11650 rdp3_bus_s7
+# --- per-slice c lines (x 14712 track): two contacts in every comparator cell, none in
+# the latch cells. They run on down into the routing zone (not drawn below y 12445).
+M 13931,10700 y12445 w=22
+N M 13931,11650 rdp3_c_s0
+M 14321,10700 y12445 w=22
+N M 14321,11650 rdp3_c_s1
+M 14712,10700 y12445 w=22
+N M 14712,11650 rdp3_c_s2
+M 15102,10700 y12445 w=22
+N M 15102,11650 rdp3_c_s3
+M 15492,10700 y12445 w=22
+N M 15492,11650 rdp3_c_s4
+M 15882,10700 y12445 w=22
+N M 15882,11650 rdp3_c_s5
+M 16272,10700 y12445 w=22
+N M 16272,11650 rdp3_c_s6
+M 16663,10700 y12445 w=22
+N M 16663,11650 rdp3_c_s7
+# --- slice s7 only: the strap track of the latch cells is one through line here
+# (metal seen from y 11483 to 12282 across band A; upper part by track scan only).
+M 16838,10745 y12550 w=20
+N M 16838,11700 rdp3_t16837
