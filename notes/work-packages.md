@@ -13,7 +13,7 @@ were resumed when it reset. By the user's instruction no further agents are star
 after this round: once these eleven have reported, the remaining packages below are
 worked serially by the coordinating session, in priority order.
 
-Running in this last round: `bd2` (run 2), `cdp1` (run 2), `bc1`, `rdp3` (run 3),
+All eleven reported by 2026-11-15 night; statuses below are final for the round. They were: `bd2` (run 2), `cdp1` (run 2), `bc1`, `rdp3` (run 3),
 `mra` (run 3), `larr` (run 2), `cdp3` (run 2), `rdp2`, `cdp2` (run 2), `tc1` (run 2),
 `bd1` (run 2).
 
@@ -37,7 +37,7 @@ Running in this last round: `bd2` (run 2), `cdp1` (run 2), `bc1`, `rdp3` (run 3)
 | `bc1` | 7000-9000 x 14050-16300 | bottom-centre logic, upper left part | partial (run 1; 22 transistors): the strobe driver of cdp4's 6-bit latch row (a 2-input NAND and two strong inverters, with a twin output going back up), a 2-bit decoder with gates for 00, 10 and 01 only, and the six data lines into that latch row (two joined, four drawn part way). Left: the group at x 7190-7860, y 15570-16300 that makes the NAND's two inputs (looks like cross-coupled gates), column B right of x 8560, column A below y 16000, the 13-line bus |
 | `bd3` | 14100-15900 x 16550-17100 and onward | where the strobe and select tracks from `sel` go; source of the write strobe | done: strobe = NOT e_b (so each write strobe = select AND E); R12/R13 gated and buffered like R14/R15; all 16 tracks to the region's edge |
 | `bd1` | 13000-14100 x 14700-17100 | strobe channel of 18 vertical tracks plus one gate column at x 13700-14080 | partial (runs 1, 2; about 36 transistors of its own): strobes R0-R7 to the north edge; driver of line X and two big inverters of it; in the gate column y 15385-15850 an inverter and a latch gated by NOT X (upper half complete, lower half's load and the feedback link not traced). Left: gate column y 15850-16125 and 16280-16900 (everything ck_out feeds), tracks k7 and k8 (which carry the R0 and R1 match lines from rdp3) beyond their first jog; expect about 5 images per gate at 4-6x |
-| `bd2` | 15850-17000 x 14700-17100 | bus control logic right of the select gates | partial (run 1): areg_load = NOT e_b (one inverter). **Disagrees with bd3 about the common strobe**: bd2 reads its driver's input as the output of a further gate (e_b in series with another signal, possibly a latch), bd3 as e_b itself. Run 2 running to settle it and go on to CS, RS, R/W |
+| `bd2` | 15850-17000 x 14700-17100 | bus control logic right of the select gates | partial (runs 1, 2): the common strobe is the output of a D latch open while E is high, set by NOR(rw_d, NOT rs_d (believed), cs_d); the address register load strobe is gated by E AND NOR(rw_d, rs_d, cs_d) OR an unknown x. bd3's 'NOT e_b' reading refuted by measurement. Left: source of x, three loads, the column below y 16680, the right-hand column |
 
 Measured on the first report: one agent run lasts about 20 minutes and about 60-80
 image views, and yields one or two traced cells plus survey notes. Blocks are

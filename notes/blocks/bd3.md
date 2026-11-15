@@ -1,5 +1,12 @@
 # Below the register-select gates (`bd3`, x 14100-15900, y 16550-17100 and along the wires)
 
+> **Correction (coordinator, 2026-11-15).** This block's finding "strobe = NOT `e_b`, so each
+> write strobe is select AND E" is wrong. The bd2 block showed by measurement that the
+> metal line this run followed from the strobe driver's gate down to `e_b` is broken at
+> y 15443-15470. The driver's input is the output of a latch that is open while E is high
+> and set by "write, chip selected, RS high" (see `notes/blocks/bd2.md`). Everything else
+> below stands.
+
 ## Status
 
 - Traced and extracted (trace/bd3.txt, `@requires sel`, 0 errors, no open nets): the

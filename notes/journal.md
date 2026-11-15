@@ -207,3 +207,79 @@ Next
 - M2: row drivers of the decode array and the address register; the cells above the
   array; where the 18 select lines go; then the bus interface that produces the two
   lines into each data pad cell, and back to AMB-003.
+
+## 2026-11-15 (night)  Parallel round
+
+Twenty-six agent runs on seventeen blocks, each working from `notes/tracing-guide.md`
+on its own files. The round ended when the usage limit was reached; the last eleven
+runs were resumed after it reset and all reported. By the user's instruction, work
+is serial again from here.
+
+All blocks together: 2,593 transistors, no rule errors, no warnings (443 before the
+round). Cross-block joins are in `trace/zz_joins.txt`.
+
+Established by tracing
+- Register decode rows come straight from a 5-bit address register (five transparent
+  latches above the decode array); five inverters right of the array make the
+  complement rows.
+- Register strobes: `sel_wN` = (register N selected) AND NOT `sel_stb_r` for R0-R15;
+  R12-R17 also have a buffered select (believed read enables); R16/R17 have no strobe.
+- `sel_stb_r` is the output of a latch, open while E is high:
+  `c = NOR(rw_d, m255, cs_d)` with m255 believed NOT rs_d, `n1 = NOT(qb OR (E AND NOT c))`,
+  `qb = NOT(n1 OR (E AND c))`, `sel_stb_r = NOT n1`. Nothing traced closes the strobe
+  when E falls. The address register's load strobe is
+  NOT(NOT(x OR (E AND NOR(rw_d, rs_d, cs_d)))), x unknown.
+- Horizontal registers in the right datapath, identified by following their strobes:
+  R0, R1, R2 (8 bits each) and R4 (7 bits), each with an equality comparator
+  (true XOR per bit, wired-NOR line) against per-slice `c` lines. R0 has a second
+  comparator against R0 shifted one place (R0/2), 7 bits. No `c` line is driven in
+  the right datapath: all leave at its lower left.
+- Central datapath: static register rows (6, 5, 6, 8 bits, the last two readable onto
+  an 8-line bus), two 5-bit comparators (one plain equality with one bit's register
+  input replaced by a three-term function from the logic beside it; one with a ripple
+  chain between slices), a 4-way selector with three latch rows. No counter found.
+- Left array: the 14-bit memory address counter (incrementer with carry groups of
+  7, 3, 4; dynamic node taking the incremented value or a load value; static stored
+  bit; clear device). Reload path and bit numbering not yet traced.
+- Mid-right array: 19 rows in groups of 4, 3, 4, 4, 4; an AND chain over a per-row
+  node q with group look-ahead, toggle-like logic, a stage clocked by `ck_a` and
+  `ck_b`; right-hand columns not traced.
+- Global wiring: `ck_out`, `ck_a`, `ck_b`, E, R/W, RS, CS, RES, LPSTB mapped to their
+  first entries. The clock block's `ck_src` is not `ck_a`: it is the inverse of a
+  core signal X, whose driver is an inverter in the gate column left of the select
+  logic; X also gates a latch there.
+
+Corrections made during the round (each was a wrong statement at the time)
+- `ck_src` = `ck_a` (mine, from a 1.1x view): no such link.
+- "strobe = NOT E" (one agent): the line it followed is broken; settled by a second
+  agent's measurement.
+- "this row is R0" (one agent): a track-scanning tool bridged a jog; two later runs
+  agree it is R2.
+- Several briefs of mine guessed structure wrongly (address register position, data
+  bus units per pad, "logic" that was a routing channel, eight slices everywhere).
+
+What worked
+- One file prefix per block, `TRACE=` isolation, a locked commit script, and a ports
+  table per block. Joins show up as multi-name errors in the combined extraction and
+  are resolved in one coordinator file.
+- Independent re-derivation: both wrong identifications above were caught because a
+  second agent reached the same wires from another side.
+- Measurement over impression: colour profiles for junctions, grain for metal breaks.
+
+What did not
+- Yield per run: 60-80 images buys one or two cells in an array (100-250 transistors
+  with repetition) or about 25 transistors of random logic.
+- Track-scanning tools are not safe for connectivity (bridges at jogs, false breaks).
+- The clean shot's colours are local; three blocks needed their own legend.
+
+Next (serial, in this order)
+1. Mid-right array, x 12770-13040 and its wiring channel: is q the stored bit of a
+   counter, and do its 19 outputs become the `c` lines the horizontal and vertical
+   comparators use? (Groups 4+3, 4+4, 4 would fit a 7-bit, an 8-bit and a 4-bit
+   counter; that is a hypothesis.)
+2. Where the R0, R1, R2, R4 match lines go (tracks k7, k8 of the strobe channel and
+   onward): the horizontal control logic.
+3. The lower half of the top-centre logic (source of the three signals that modify
+   one comparator bit), and the cross-coupled group below the central datapath.
+4. Memory address counter: reload path and bit numbering.
+5. Remaining rows of both datapaths; data bus; pad ring; then simulation (M5).

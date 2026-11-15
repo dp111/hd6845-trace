@@ -1,5 +1,11 @@
 # areg: address lines into the decode array, and the logic right of the array
 
+> **Correction (coordinator, 2026-11-15).** The load strobe `areg_load` is not simply
+> NOT `e_b`. The bd2 block traced its driver: `areg_load = NOT bd2_al_n`, with
+> `bd2_al_n = NOT(bd2_x OR (e_b AND bd2_m210))` and `bd2_m210 = NOR(rw_d, rs_d, cs_d)`
+> (see `notes/blocks/bd2.md`). The same block found this file's reading of the poly
+> from (16252,14862) wrong: it ends on a buried contact.
+
 Region x 15800-16950, y 12900-14700. Trace: `trace/areg.txt` (`@requires decode`).
 Extracts with 0 errors, 0 warnings, no unnamed open nets.
 
