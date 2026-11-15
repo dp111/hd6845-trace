@@ -76,7 +76,12 @@ M 4226,2745 y2785 w=22
 M 3150,4705 y5428 w=20
 C 3150,4719
 C 3150,5412
-P 3075,5400:3165,5422                 # poly west from the bottom contact (not followed)
+P 2575,5400:3165,5422                 # poly west from the bottom contact, across the whole cluster below its gates, to a
+P 2548,5395:2590,5427                 # pad with a contact (2565,5410); metal west along y 5400-5422, north at x 2400-2422 to
+C 2565,5410                           # a contact (2412,5196); poly east into the west column: the output of in2's gate (below)
+M 2580,5411 x2412 y5182 w=22
+P 2394,5180:2432,5212
+C 2412,5196
 P 3130,5395:3170,5428
 # in3: bus line A, piece y 4790-5212, contacts (3108,4805), (3108,5068), (3108,5197)
 M 3108,4790 y5212 w=22
@@ -88,7 +93,7 @@ P 3090,5180:3126,5214
 # m2 = NOR(in2, in3): a small gate on a diffusion column just east of the VSS rail
 # (x 3030-3063), between two boxes of the rail. Its output node, between the two gates, has a
 # buried contact to a poly that runs east, north under bus line C and back west to a gate
-# (E0) on the same column further up. No load found on it yet.
+# (E0) on the same column further up. Its load is west of the rail (below).
 D 2975,4653:3012,4707                 # rail box 1, contact to VSS
 C 2988,4680 s=22x40
 D 3005,4690:3063,4707
@@ -133,21 +138,92 @@ N P 3200,5157 tla_e3
 P 3012,5240 x3180 w=20
 P 3172,5222:3212,5253
 C 3192,5237
-M 3193,5215 y5260 w=20                # bus line C over the contact (its extent: not yet read)
+# bus line C, middle piece: top end on a contact (3197,3958) (a poly arrives there from the
+# west along y 3928-3948); a separate upper piece ends 50 px higher on its own contact
+# (3197,3892). Continuous from there down (checked at 5.5x where the profile showed gaps),
+# contacts (3192,5237) and (3192,5325), then east as a horizontal metal along y 5667-5688.
+M 3196,3944 y5677 x3400 w=20
+C 3197,3958
+P 3176,3944:3216,3976
+C 3192,5325
+P 3172,5308:3212,5341
+# from the lower contact a poly runs west along y 5312-5332, below the cluster, to a pad with
+# a contact (2565,5321); metal west and north at x 2485-2510 to gate w3 of in2's gate.
+P 2575,5322 x3180 w=20
+P 2548,5306:2590,5338
+C 2565,5321
 N P 3120,5240 tla_e4
 # output: buried contact, poly east to the pad of bus line A
 B 3042,5181:3068,5214
 P 3045,5186:3095,5208
-# load: strip under the VSS rail to a box under the thin metal, on under a poly plate
-# x 2842-2897 (W/L 28/55) to the VCC box under R2 (contact (2805,5212)). The plate reaches
-# down to y 5265; its tie to the node at its lower right corner is drawn uncertain.
+# load: strip under the VSS rail to a box under the thin metal x 2903-2923 (which passes over
+# without a contact), on under a poly plate x 2842-2897 (W/L 28/55) to the VCC box under R2
+# (contact (2805,5212)). The plate reaches down to y 5265; a tab at its lower right corner is
+# tied by a buried contact to a tail of the box (the round blob at (2920,5250), which looks
+# like a metal contact in the metal shot but is not: the two loads above have the same blob
+# and the metal runs on past all three).
 D 2925,5186:3048,5208
-D 2898,5188:2930,5262
-C 2915,5250
-D 2835,5188:2932,5216
+D 2898,5188:2932,5220
+D 2913,5216:2929,5262
+D 2835,5188:2905,5216
 D 2778,5193:2842,5237
 C 2805,5212
 P 2842,5168:2897,5265
-?P 2890,5238:2908,5262
-?B 2893,5234:2912,5264
-M 2913,4590 y5266 w=20                # thin metal: carries in3 north from the contact (taps not yet read)
+P 2890,5240:2926,5262
+B 2908,5237:2932,5264
+M 2913,4590 y5400 w=20                # thin metal: passes over the three load boxes (ends and contacts not yet read)
+N M 2913,5000 tla_thin
+
+# ---- load of m2: the same construction one unit up. Strip west under the VSS rail
+# (y 4755-4772) to a box under the thin metal, strip under the plate x 2842-2897 (y 4742-4832)
+# to the VCC box (contact (2812,4790)); tail and buried contact at (2920,4817).
+D 2925,4755:3048,4772
+D 2898,4757:2932,4793
+D 2913,4790:2929,4828
+D 2835,4765:2905,4793
+D 2778,4763:2842,4802
+C 2812,4790
+P 2842,4742:2897,4832
+P 2890,4806:2926,4828
+B 2908,4804:2932,4830
+
+# ====================================================================
+# West side of the cluster: mirror image of the east side. R1, x 2600-2650, is a second VSS
+# rail; small NORs sit on a column just west of it (x 2550-2592), their loads lie between R1
+# and the VCC rail R2 under a second thin metal (x 2688-2708).
+M 2625,4590 y5330 w=50
+N M 2625,4800 vss
+M 2698,4940 y5330 w=20                # thin metal W: passes over the load boxes (ends not yet read)
+N M 2698,5100 tla_thinw
+
+# ---- in2 = NOR(w2, e4)
+D 2598,5080:2652,5142                 # rail box, VSS contact
+C 2622,5110 s=24x40
+D 2598,5258:2652,5297                 # rail box, VSS contact
+C 2625,5278
+D 2550,5120:2605,5140
+D 2550,5120:2592,5282
+D 2550,5262:2605,5282
+# gate w2: poly y 5142-5164 from the west bus (not followed)
+P 2420,5142:2598,5164
+N P 2470,5153 tla_w2
+# gate w3 = e4: poly y 5230-5250 from a pad with a contact (2497,5238) under a metal x 2485-2510
+# that comes round from bus line C (above)
+P 2490,5230:2598,5250
+P 2478,5222:2516,5254
+C 2497,5238
+M 2580,5321 x2497 y5224 w=22
+# output: buried contact on the node, poly west to the pad under the metal that goes round
+# to the poly y 5400-5422 and so to bus line B
+B 2548,5182:2578,5214
+P 2420,5187:2575,5207
+# load: strip east under R1 (y 5193-5207) to a box under thin metal W, strip under the plate
+# x 2722-2775 to the VCC box under R2 (the same box that feeds in3's load from its other
+# side); tail and buried contact at (2695,5250)
+D 2570,5193:2700,5207
+D 2676,5196:2714,5218
+D 2692,5214:2708,5260
+D 2706,5197:2782,5214
+P 2722,5176:2775,5264
+P 2690,5240:2730,5262
+B 2684,5237:2708,5262
