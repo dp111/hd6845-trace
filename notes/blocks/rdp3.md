@@ -47,7 +47,7 @@ comparator down, measured: block correlation 0.93-0.98):
 | 10925-11056 | band B match pull-downs (`rdp3_mpd`), `rdp3_cb_eq` strip at y 10930-10952 |
 | 11056-11321 | band B XOR cells (`rdp3_xor`) |
 | 11321-11591 | **register row RB = R0** (`rdp3_lat` upside down), strobe poly y 11558-11586 |
-| 11591-11775 | gap: empty field except a row-wide poly line at y 11692-11712 (not followed) and the rounded top ends of the T2 pieces at y 11738 |
+| 11591-11775 | gap: empty field except a poly line at y 11695-11712 from the west to slice s1 (the feed of `rdp3_c_s1`, see "c lines") and the rounded top ends of the T2 pieces at y 11738 |
 | 11775-11905 | band A match pull-downs, `rdp3_ca_eq` strip at y 11776-11798 |
 | 11905-12167 | band A XOR cells |
 | 12167-12437 | **register row RA** (`rdp3_lat` upside down), strobe poly y 12404-12432 |
@@ -86,9 +86,9 @@ a  <-> q        hold device, gate tied to VSS, 22/82 (see below)
   widens under the VCC rail into a block, AR 14727-14809 x 13206-13272. Two thin dark
   lines cross the block at y 13223 and 13246: what the first run saw as three stripes
   S1/S2/S3 is one piece of poly with the edges of a diffusion strip showing through
-  (the gaps between the "stripes" are 3-5 px, far below any spacing rule, and in the
-  5 px slot between the c track and the VCC rail the poly is seen continuous from S3
-  into S2). The strip runs from the feedback land (node a, buried contact) to the
+  (the gaps between the "stripes" are 3-5 px, far below any spacing rule; in the slot
+  between the c track and the VCC rail, where the poly shows in open colours, S3 and S2
+  look joined, which agrees but is not decisive on its own). The strip runs from the feedback land (node a, buried contact) to the
   output land (q). So: a transistor a <-> q, W/L about 22/82, gate at VSS. An
   enhancement device would never conduct, so it is believed to be depletion mode: a weak
   feedback that holds the latch and that the bus overpowers during a write. The strip is
@@ -188,12 +188,21 @@ Routing zone, read at 1.15x by the first run, not drawn and not re-checked:
 | s6 | contact (16186,12698), poly right at y 12697 to contact (16860,12700), metal down at x 16860 |
 | s7 | contact (16580,12568), poly down and right at y 12655 to contact (16908,12653), metal down at x 16908 |
 
-### `c` lines below the array (first run's "M-tracks", read at 1.15x, not drawn)
+### `c` lines: where they come from
+
+Slice s1 (traced, contact uncertain): a poly line comes from the west along y 11695-11712
+in the gap under RB, passes under slice s0's lines and rails (no contact seen at 2.7x), turns down
+under s1's c track at x 14310-14333 and ends on a contact to the track at (14322,11750)
+(ring in the chip-1 metal shot, pale pad in the clean shot, one view at 4x:
+`cache/scratch/rdp3/line_end_ov.png`; `rdp3_cmp` flags exactly this spot as differing
+from the other slices). West of x 13760 it is not followed.
+
+The other slices, below the array (first run's "M-tracks", read at 1.15x, not drawn):
 
 | Slice | Contact | Poly line | Left end |
 |---|---|---|---|
 | s0 | (13930,12565) | not followed | |
-| s1 | none: runs straight down through the AR cell at x 14322 and on below it | | |
+| s1 | none in the routing zone (fed from the gap under RB, above); the track also runs straight down through the AR cell at x 14322 and on below it | | |
 | s2 | (14703,12960) | y 12958 | beyond x 13700 |
 | s3 | (15105,12915) | y 12915 | beyond x 13700 |
 | s4 | (15497,12870) | y 12872 | beyond x 13700 |
@@ -225,7 +234,7 @@ traced.
 | `vcc` | metal | x 13990 + 390k (8) at y 10700; x 14382..15942 at y 13520 | - | rails |
 | `vss` | metal | x 13783 + 390k (9) at y 10700; 16125,13320 downward | - | rails |
 | (not drawn) | metal | x 16808 (poly), 16817, 16860, 16908 going down at about y 12850 | ? | bus s0, s5, s6, s7 leaving bottom right |
-| (not drawn) | poly | row-wide line y 11692-11712 in the gap under RB | ? | not followed |
+| `rdp3_c_s1` | poly | 13760,11704 going west | in (assumed) | feed of slice s1's c line |
 
 ## Ambiguities
 
@@ -269,5 +278,6 @@ traced.
 - Routing zone y 12437-13000 (tables above), the bus lines s0, s6, s7 and all c lines
   below y 12445.
 - Left-edge bundle x 13348-13825: only the two strobe tracks are drawn.
-- Gap zones y 10831-10925 and y 11591-11775 (one row-wide poly line at y 11692-11712).
+- Gap zone y 10831-10925 (under RC): not looked at beyond one 1.2x view. The poly line of
+  `rdp3_c_s1` west of x 13760.
 - The through line x 16838: both ends.
