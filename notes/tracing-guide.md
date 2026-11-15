@@ -119,7 +119,7 @@ was above it. Full notes with coordinates of examples: `notes/layers.md`.
 | Poly | orange-brown, visible only where no metal covers it | orange, granular | salmon, sharp red outline | dark red-brown, textured |
 | Diffusion | plain, dark outline | plain tan, dark outline | flat tan, dark outline | green near the die edge, **pink near the centre** |
 | Field | plain | greenish | pink | khaki / olive |
-| Metal contact | ring in the metal | pitted box | dark specks on diffusion; on poly a paler patch | - |
+| Metal contact | ring in the metal | pitted box | dark specks on diffusion; on poly a paler patch; measures greenish against its surroundings (a test that caught two false contacts) | - |
 | Buried contact | small heavy-outlined box | same | same | same |
 
 Traps, all of them real:
