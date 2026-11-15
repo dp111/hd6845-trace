@@ -473,3 +473,53 @@ standing rule needs the user's word.
 2. The rest as listed in the previous entry (what `a` is; re-read R8/R9; `amr`; the bus
    field between datapath and counters).
 
+## 2026-11-16 (night) The step logic, three levels deep
+
+Serial, block `tla`. Full extraction after this entry: see the ship line. User: "carry on
+serially for now please. The NOR gates are intriguing and I would love to know what they
+are doing."
+
+**What was established** (all extracted, `notes/blocks/tla.md`)
+
+- step = in1 OR (NOT e4 AND ((x1 AND NOT a2) OR NOT e3)), from seven gates:
+  b = NOR(in1, in2, in3); in2 = NOR(w2, e4); in3 = NOR(e3, e4); w2 = NOT c1;
+  c1 = NOR(a2, b1); b1 = NOR(x1, a2); and m2 = NOR(in2, in3), the complement of the
+  bracket, which feeds further logic in the same column.
+- The cluster is two mirrored columns of small NORs either side of a VCC rail, each NOR on
+  a diffusion column beside a VSS rail with its load between the rails. It runs from
+  y 2940 to 5330.
+- `e4` is a global: 7,000 px followed, from the cluster to the left bus field at x 6559,
+  still going south. Every contact on it so far is a gate.
+- `e3`, `a2`, `x1` all come from the east (y 2728, 3761, 3547); `in1` from the bus field
+  at x 4279.
+
+**Not established**: what any of the five inputs is. The reading "end-of-line strobe and
+scan-line comparisons" is a guess from the formula's shape.
+
+**Corrections**
+
+- The round blob at each load's lower corner is the load gate's buried-contact tie, not a
+  metal contact to the thin metal (I had drawn in3's node onto the thin metal).
+- Bus line A's pieces A1 and A2 are 35 px apart end to end, with the gate poly visible
+  between their pads: settled at 6.5x in both chips. Had they been one piece, c1's output
+  would have been tied to its own input.
+
+**Tools**
+
+- `tools/tla_tracks.py`: where a track has metal; `tools/tla_contacts.py`: contact
+  candidates on a track from the clean shot's colour. Both only say where to look.
+  The contact finder missed A2's third contact (3103,3762) on the first pass because the
+  line's x drifts 8 px along its length: profile at the measured x of each stretch.
+- `strips.py --layer class`: 3,000 px of a bus in one image, pieces, crossings and contacts
+  all visible.
+- A net with gates on it and no driver means a contact is still missing: it found A2's.
+
+**Open, in the order I would take them**
+
+1. `e4`'s source: on south down the left bus field (x 6559 from y 8850); and from the
+   other side the R0 match line on bd1's k7/k8 (re-read item R1 covers that channel).
+2. The rest of this cluster: y 3400-4590 east, the west side above y 4940, b1's load.
+3. `in1` (bus field x 4140-4420, then the middle or right gate column), `e3`, `a2`, `x1`
+   to the east.
+4. As before: what `a` (`bd1_xn1`) is; re-read R8/R9; `amr`; the bus fields.
+

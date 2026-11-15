@@ -299,13 +299,20 @@ M 3108,2972 y3128 w=22                # bus line A, piece A1
 P 3012,3066:3140,3082
 P 3132,3052:3170,3084
 C 3150,3067
-M 3152,3053 y3140 w=22                # B1 (runs on south; drawn as far as seen in this tile)
+M 3152,3053 y3606 w=22                # bus line B, piece B1: y 3053-3606, contacts (3150,3067) and (3150,3590)
 N P 3070,3074 tla_b1
 # gate a2: poly y 3148-3166 from the top contact (3108,3180) of bus line A's piece A2
 P 3012,3148:3098,3166
 P 3090,3160:3128,3196
 C 3108,3180
-M 3108,3166 y3260 w=22                # A2 (runs on south)
+M 3106,3166 y3778 w=24                # bus line A, piece A2: y 3166-3778, three contacts: (3108,3180) gate a2 of c1,
+                                      # (3100,3632) lower gate of b1's unit, (3103,3762) a poly that leaves EAST along
+                                      # y 3752-3770 (not followed): a2 comes from the east. The track is interrupted
+                                      # between A1's bottom contact and A2's top one (6.5x, both chips: no metal over
+                                      # the gate poly between the two pads).
+P 3090,3745:3130,3778
+C 3103,3762
+P 3125,3752:3400,3770
 N P 3060,3157 tla_a2
 # load
 D 2925,3105:3048,3124
@@ -317,3 +324,29 @@ C 2805,3110 s=24x44
 P 2842,3090:2897,3183
 P 2890,3158:2926,3180
 B 2908,3155:2932,3182
+
+# ====================================================================
+# b1 = NOR(x1, a2): east unit at y 3515-3660 (in3's unit moved up 1607 px). Output by the
+# buried contact and a poly east to B1's bottom contact (3150,3590).
+D 3030,3478:3063,3662
+?D 2968,3470:3035,3528                # VSS box under the rail and its join to the column's top (join seen only as a
+C 2990,3500 s=30x34                   # heavy line at the rail's edge: assumed, as in the other units)
+D 2966,3655:3014,3725                 # VSS box below
+C 2985,3690 s=24x40
+D 3000,3648:3063,3662
+# gate x1: poly y 3538-3556, which comes from the east across the whole bus without a contact
+P 3012,3538:3400,3556
+N P 3300,3547 tla_x1
+# gate a2: poly y 3628-3648 from A2's middle contact
+P 3012,3628:3095,3648
+P 3085,3616:3125,3650
+C 3100,3632
+# output
+B 3042,3574:3068,3607
+P 3045,3580:3140,3600
+P 3132,3575:3170,3606
+C 3150,3590
+# load: NOT the standard one. West of the rail at this height there is a metal strap
+# x 2852-2890 between contacts (2868,3488) and (2868,3640), a vertical poly under the rail's
+# west edge (x 2947-2967, y 3445-3545) and gates across a diffusion under thin metal E.
+# Not read: the load of b1 and whatever else hangs on it are not drawn.

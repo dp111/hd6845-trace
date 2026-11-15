@@ -4,28 +4,42 @@ Serial work, started 2026-11-16. Trace: `trace/tla.txt`. Views: `cache/scratch/t
 
 ## Status
 
-Four gates traced and extracted (13 transistors); the rest of the cluster is surveyed only.
+Seven gates traced and extracted (20 transistors, no errors); the rest of the cluster is
+surveyed only. The cluster runs from y 2940 to y 5330.
 
 ```
-wl_b    = NOR(in1, in2, in3)     the row counter's step signal (active low); load 29/30
-in2     = NOR(w2, e4)            west column; load 17/53
-in3     = NOR(e3, e4)            east column; load 29/54
-tla_m2  = NOR(in2, in3)          east column; load 29/53; feeds gate E0 further up the column
+wl_b    = NOR(in1, in2, in3)     the row counter's step signal (active low)     (2975,5035)
+in2     = NOR(w2, e4)            west column                                     (2571,5197)
+in3     = NOR(e3, e4)            east column                                     (3046,5197)
+w2      = NOT c1                 pull-down under rail R1 itself                  (2625,5066)
+c1      = NOR(a2, b1)            east column, top of the cluster                 (3046,3115)
+b1      = NOR(x1, a2)            east column; its load is not the usual one, not drawn  (3046,3590)
+tla_m2  = NOR(in2, in3)          east column; feeds gate E0 further up           (3046,4765)
 ```
 
-Put together: **step = in1 OR (NOT e4 AND NOT (w2 AND e3))**, and
-`m2 = e4 OR (w2 AND e3)` is its complement apart from `in1`. So `e4` is a gate on the
-whole thing: while it is high, only `in1` can step the row counter; while it is low the
-counter steps unless `w2` and `e3` are both high.
+Put together (c1 = x1 AND NOT a2):
 
-What the four inputs are is **not known yet**. Where each has been followed to:
+**step = in1 OR ( NOT e4 AND ( (x1 AND NOT a2) OR NOT e3 ) )**
+
+and `m2 = NOT(in2 OR in3)` is the complement of the bracketed part. So `e4` gates
+everything except `in1`: while `e4` is high only `in1` can step the row counter; while it
+is low the counter steps if `e3` is low, or if `x1` is high and `a2` low.
+
+What the five inputs **are** is not known. None has reached a named signal yet:
 
 | Signal | Followed to |
 |---|---|
-| `e4` | 7,000 px: bus line C (x 3196, y 3944-5677), east along y 5677, south at x 3527, contact (3565,5848), poly east along y 5847 to x 5285, south to y 6850, diagonally to (5560,7122), east to a contact (6140,7124), metal east along y 7084, south at x 6769, contact (6730,8275), poly under six horizontal metals, contact (6730,8580), metal diagonally south-west and **south down the left bus field at x 6548-6570** (seen to y 13000; that field's crossings at y 9560-9780, 10340-10660 and 11860-12080 not read). All drawn to y 8680 |
-| `in1` | bus line G (x 3369, y 2754-4952), top contact (3368,2768), poly east along y 2768 to a contact (4225,2765) on a vertical metal of the bus field x 4140-4420 |
-| `e3` | bus line E, upper piece, bottom contact (3283,5152); comes from the north |
-| `w2` | poly y 5142-5164 from the west bus (x 2420 and beyond) |
+| `e4` | 7,000 px: bus line C middle piece (x 3196, y 3944-5677; three gate contacts on it: (3197,3958), (3192,5237), (3192,5325)), east along y 5677, south at x 3527, contact (3565,5848), poly east along y 5847 to x 5285, south to y 6850, diagonally to (5560,7122), east to a contact (6140,7124), metal east along y 7084, south at x 6769, contact (6730,8275), poly under six horizontal metals, contact (6730,8580), metal diagonally south-west and **south down the left bus field at x 6548-6570** (seen to y 13000, where the bundle steps east; that field's crossings at y 9560-9780, 10340-10660, 11860-12080 not read). Drawn to y 8680. Every contact found on it so far is a gate: its driver is at the far end |
+| `e3` | bus line E, one piece y 2710-5166 with three contacts: (3283,5152) gate of in3; (3283,3852) a second gate (below); top (3283,2725), from which a poly runs east along y 2715-2735 to a pad (4270,2725) and a metal runs on **east along y 2718-2738** (pieces seen to x 5366; the three metals at y 2640, 2683 and 2728 run east in pieces, with cross-unders at the rails, as far as x 11700-12050, but tc1's notes show that pieces on one y are different nets) |
+| `a2` | bus line A piece A2 (y 3166-3778): contacts (3108,3180) gate of c1, (3100,3632) gate of b1, (3103,3762) a poly that leaves **east along y 3752-3770** |
+| `x1` | poly y 3538-3556 from the **east**, across the whole bus without a contact |
+| `in1` | bus line G (x 3369, y 2754-4952), top contact (3368,2768), poly east along y 2768 to a contact (4225,2765), metal east and **south at x 4268-4290** (profile: unbroken to about y 4072; contact candidates at y 3898 and y 4090): into the middle or right gate column |
+
+Seen at 2.5x, not drawn: a unit at y 3895 on the east column whose gates are bus line E
+(y 3843-3862) and bus line C's middle piece (y 3928-3950), i.e. a second NOR(e3, e4); its
+output goes by a poly east (y 3882-3900) to the bottom contact (3192,3892) of C's upper
+piece (y 3450-3910), whose top contact (3190,3460) feeds the lower gate of the unit at
+y 3420.
 
 ## How the row counter's step signal gets here
 
@@ -141,13 +155,23 @@ diagonal fan, and the left bus field x 6300-6900 that runs the height of the die
 such as `e4` are global: they have a dozen taps. Following one at a time costs a handful
 of views per hop. The region has to be traced whole, cluster by cluster and bus by bus.
 
-The cluster sits directly above the left array (`larr`: the MA counter and nine upper
-rows of another type). My guess, not shown by anything yet: those nine rows hold the
-scan line counter and this cluster is the vertical control. If so the step gate's inputs
-would be scan-line matches and an end-of-line strobe.
+My guess, **not shown by anything yet**: this is the vertical control. In a 6845 the
+character row counter steps at the end of a scan line when the scan line counter has
+reached R9. The formula has that shape if `e4` is an end-of-line timing strobe (active
+low), `e3` or `x1`/`a2` are scan-line comparisons, and `in1` is a separate cause. The way
+to prove or refute it is to reach a named signal: the R0 match line from the right
+datapath (bd1's tracks k7/k8, not followed past their first jog) is the best candidate
+for `e4`, and it would arrive up the left bus field, which is where `e4` comes from.
 
 ## Not done
 
-Everything else in the cluster (R1's columns, the loads L1-L3 and L_b, L_c between R2 and
-R3, the thin metal x 2903-2923 and its taps, the column above E0), the bus pieces' other
-ends, and the clusters above and below.
+- The inputs' sources (table in Status). Next: `e4` south down the left bus field, and
+  from the other side the R0 match line from bd1's k7/k8.
+- The unit at y 3895 (seen), the unit at y 3420, the dense part west of the rail at
+  y 3400-3660 (a strap x 2852-2890 between contacts (2868,3488) and (2868,3640), a vertical
+  poly under the rail's west edge x 2947-2967, gates across a diffusion under thin metal E):
+  b1's load is in there.
+- y 3700-4590 on the east side and the whole west side above y 4940 (R1's columns).
+- The thin metals' ends and contacts; how rail R2 (VCC, top end y 3018) is fed.
+- Bus pieces not yet drawn: B2 (from (3150,3810) south), C upper, D, F, and everything
+  north of y 2940.

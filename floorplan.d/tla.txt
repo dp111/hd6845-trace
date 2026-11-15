@@ -1,5 +1,5 @@
 # tla: top-left logic, cluster where the row counter's step is made
-2440,4590:3090,5330   ?logic  step gate cluster | random logic between three rails. Traced so far: the row counter's step b = NOR(in1, in2, in3), in3 = NOR(e3, e4), and a NOR of in2 and in3. Rest not traced
-3090,2400:3400,6400   ?route  vertical bus of the top-left logic | seven metal positions, in pieces, joining the gate clusters at x 2450-3090 to each other and to poly lines going east. Three pieces drawn
+2440,2940:3090,5330   ?logic  step gate cluster | two mirrored columns of small NOR gates between VSS, VCC, VSS rails. Traced: the row counter's step = in1 OR (NOT e4 AND ((x1 AND NOT a2) OR NOT e3)), seven gates. About twenty more gates not traced
+3090,2400:3400,6400   ?route  vertical bus of the top-left logic | seven metal positions, in pieces, joining the gate clusters at x 2450-3090 to each other and to poly lines going east. Eight pieces drawn
 3400,2620:4250,2900   ?route  poly lines along the top of the top-left logic | seven horizontal lines from the vertical bus east to a second bus field at x 4140-4420; one drawn (first input of the step gate)
 3400,5480:5860,5700   ?route  second crossing field | horizontal poly lines over vertical metals; the step signal b crosses it on the poly y 5585

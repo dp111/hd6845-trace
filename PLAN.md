@@ -13,15 +13,15 @@ Goal: recover the complete internal logic of the Hitachi HD6845S CRTC (die marki
 
 Status (2026-11-16): M0 done. M1 done except the data pad cell and pad-ring
 wiring. M2 largely done (strobe latch and decode traced; data bus interface partly).
-M3 well under way: 2,778 transistors traced in twenty-one blocks. The mid-right array is
+M3 well under way: 2,789 transistors traced in twenty-one blocks. The mid-right array is
 identified as the counters (horizontal 8 bits, character row 7 bits, one of 4 bits) and
 their outputs are joined by geometry to the R0, R1, R2 comparators. M4 started: the row
 counter's clock generator is traced (two non-overlapping clocks from one step pulse
 p = NOR(a, b)); a is the core signal that also stops ck_b; b has been followed 9,000 px to
-its gate in the top-left logic, b = NOR(in1, in2, NOR(e3, e4)), whose inputs come from the
-bus fields there. The top-left logic (gate clusters joined by bus fields) is the next
-target and has to be traced whole. A "Re-read list" of earlier work to be checked again is
-kept in `notes/work-packages.md`.
+a gate cluster in the top-left logic, where seven gates give
+step = in1 OR (NOT e4 AND ((x1 AND NOT a2) OR NOT e3)). The five inputs come from the bus
+fields and are not identified yet; that cluster and its buses are the current target. A
+"Re-read list" of earlier work to be checked again is kept in `notes/work-packages.md`.
 
 ## 1. What reconnaissance established
 
