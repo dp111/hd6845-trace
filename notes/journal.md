@@ -876,7 +876,7 @@ to the central datapath (`trace/wrs.txt`, `notes/blocks/wrs.md`). The extraction
 So the 7-bit row is R10 (five raster bits and two cursor mode bits), and **R9's
 comparator is found**: `cdp1`'s row B, traced weeks ago without a name. One of its five
 bits does not take the register bit but the output of the island `tc1`, switched by
-`tc1_b`: the place where interlace changes the R9 compare. Its compare value comes from
+`ras_shift`: the place where interlace changes the R9 compare. Its compare value comes from
 the RA pad drivers' input lines (followed, not drawn), not from the lines R10 uses.
 
 **Method**
@@ -887,7 +887,7 @@ the RA pad drivers' input lines (followed, not drawn), not from the lines R10 us
 
 **Open, in the order I would take them**
 
-1. R9's five compare-value lines to their sources; `tc1_b`, `tc1_g`, `tc1_i`.
+1. R9's five compare-value lines to their sources; `ras_shift`, `tc1_g`, `ras_o0_alt1`.
 2. The `ral` cell (twenty copies) and its strobe.
 3. `bd2`: `wr_data_e_n`'s destination.
 4. The selector's gate lines; `rax`'s load; then as before.
@@ -906,9 +906,29 @@ nobody traced is not evidence of anything.
 
 **Open, in the order I would take them**
 
-1. `tc1_b`, `tc1_g`, `tc1_i`: the three inputs that switch bit 0 of the R9 compare.
+1. `ras_shift`, `tc1_g`, `ras_o0_alt1`: the three inputs that switch bit 0 of the R9 compare.
 2. The `ral` cell (twenty copies) and its strobe: it sits between R10's and R9's view of
    the row address.
 3. `bd2`: `wr_data_e_n`'s destination. Then the selector's gate lines, the loads of `rax`
    and of the R9 units, RA2-RA4's lines.
+
+**Same day: the selector's controls are the island's outputs.** The five polys that leave
+the nine-gate island `tc1` southwards are the selector's two gate lines, the gates of bit
+0's two extra pass transistors and one of bit 0's alternative sources (`trace/ras.txt`,
+last section; five joins in the extraction, 2,019 nets). The island's letters got the
+selector's names. Result: `ras_straight` = NOT `ras_shift`; in shift mode R9's bit 0
+selects which of two signals is put on row address bit 0 (`ras_o0_sel1` = shift AND bit,
+`ras_o0_sel2` = shift AND NOT bit), and the R9 comparator's bit 0 is switched to the
+inverse of the same signal. `notes/blocks/ras.md`.
+
+Mistake found on the way: `ras_o0_sel1`'s metal had been drawn along a bus line the
+follower jumped to (24 px gap). Tracing guide and R11 extended.
+
+**Open, in the order I would take them**
+
+1. The driver of `ras_shift`, and `ras_o0_alt1`, `ras_o0_alt2`, `tc1_g` to their sources:
+   the interlace mode and the field signal.
+2. The `ral` cell (twenty copies) and its strobe; the loads of `rax` and of the R9 units
+   (they fix the polarity of the bit-0 compare).
+3. `bd2`: `wr_data_e_n`'s destination.
 

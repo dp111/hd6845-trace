@@ -155,10 +155,10 @@ Eleven pass transistors between the scan line counter and five output nodes.
 | Name | What it is |
 |---|---|
 | `ras_o#` | output bit # of the selector (# = 0-4). Expected to be the row address that goes to pin RA#; not yet followed to the pad |
-| `ras_straight` | gate line (left poly band) of the five pass transistors `sl`# to `ras_o`#. Driver not traced |
-| `ras_shift` | gate line (right poly band) of the four pass transistors `sl`# to `ras_o`(#+1). Driver not traced |
-| `ras_o0_alt1`, `ras_o0_alt2` | the two other sources of `ras_o0` (metal from the west along y 5066; metal from the north along x 7207). Not traced back |
-| `ras_o0_sel1`, `ras_o0_sel2` | gates of the pass transistors from `ras_o0_alt1` and `ras_o0_alt2` to `ras_o0`. Not traced back |
+| `ras_straight` | NOT `ras_shift` (made in the island `tc1`): gate line (left poly band) of the five pass transistors `sl`# to `ras_o`# |
+| `ras_shift` | the mode line: gate line (right poly band) of the four pass transistors `sl`# to `ras_o`(#+1), and input of the island `tc1`. Believed high in interlace sync and video; its driver (somewhere above the island: `notes/blocks/tc1.md`) is not traced |
+| `ras_o0_alt1`, `ras_o0_alt2` | the two sources of `ras_o0` when `ras_shift` is high: `alt1` when R9's bit 0 is set, `alt2` when it is clear. `alt1` also enters the island (it was that block's input i). Neither is traced to its driver: `alt1`'s net has no other end drawn; `alt2` ends on a pad (6922,4787) with a poly going west |
+| `ras_o0_sel1`, `ras_o0_sel2` | made in the island `tc1`: `sel1` = `ras_shift` AND R9 bit 0, `sel2` = `ras_shift` AND NOT R9 bit 0. Gates of the pass transistors from `ras_o0_alt1` and `ras_o0_alt2` to `ras_o0`, and of the island's own AND-OR |
 | `rax_o#` | output of the unit that takes selector output `ras_o`# (# = 0-4): pulled to VSS by a transistor gated by `ras_o`#; with the unit's load, not traced, NOT `ras_o`# (AMB-011), the complement of the row address. Each runs from its unit's pad at x 7836 through the nest of metals, along a line of the central datapath's channel 1 (the comparator's through track: `cdp2_trk_s7` is `rax_o0` ... `cdp2_trk_s4` is `rax_o3`), north along x 10981-11154, under the supply metal at y 4331-4500 and east to the logic in front of the RA pad drivers (`notes/blocks/rab.md`) |
 
 ## Row counter clock generator and step
@@ -298,8 +298,8 @@ Row tags `s0` ... `s13` are rows from the top; which MA bit each is has not been
 
 | Name | What it is |
 |---|---|
-| `tc1_l#_out`, `tc1_r#_out` | outputs of the left and right gate columns of the nine-gate island |
-| `tc1_b`, `tc1_g`, `tc1_i`, `tc1_w#`, `tc1_x#` | its inputs and channel lines |
+| `tc1_l4_out`, `tc1_r#_out` | the island's remaining internal outputs: `tc1_r1_out` = NOT R9 bit 0; `tc1_r2_out` = NOR(R9 bit 0, `ras_shift`); `tc1_r5_out` = NOT((`ras_o0_alt1` AND `ras_o0_sel1`) OR (`tc1_g` AND `ras_o0_sel2`)), `tc1_r4_out` its inverse; `tc1_l4_out` = NOR(`ras_o0_sel2`, `tc1_w1`), leaves west |
+| `tc1_g`, `tc1_w#`, `tc1_x#` | the island's other inputs and channel lines. `tc1_g` is used where the selector uses `ras_o0_alt2`; whether they are one net is not traced (`tc1_g` goes to a pad (6985,4958) and on south in poly) |
 | `tc1_ns#` | north-south lines ns1-ns6 east of the island |
 | `bc1_s#`, `bc1_s#_n` | the two bus lines the 2-bit decoder decodes, and their inverses |
 | `bc1_dec#_n` | decoder outputs, active low (00, 10, 01) |
@@ -836,3 +836,8 @@ datapath s1...s7, s0 became b0...b6, b7.
 | cdp1_c_wr | wr_r9 | |
 | cdp2_a_ld | wr_r11 | |
 | cdp2_c_ld | wr_r10 | |
+| tc1_b | ras_shift | |
+| tc1_l2_out | ras_o0_sel2 | |
+| tc1_l1_out | ras_straight | |
+| tc1_l3_out | ras_o0_sel1 | |
+| tc1_i | ras_o0_alt1 | |

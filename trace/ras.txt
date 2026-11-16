@@ -66,13 +66,14 @@ P 7240,5770:7412,5795
 P 7425,5235 y5800 w=15                # the band, x 7418-7432; goes on north-east from its top (not drawn)
 N P 7425,5330 ras_shift
 # the two extra strips of output 0
-P 7160,4945:7440,4970                 # S1: from the north along x 7427 (not followed)
+P 7185,4945:7440,4970                 # S1: gate from the north along x 7427 (the island's NOR, see the end of this file)
 P 7415,4875:7440,4950
 N P 7427,4900 ras_o0_sel2
-P 7165,5078:7390,5100                 # S2: ends on a pad (7425,5090), metal from the north
+P 7168,5078:7390,5100                 # S2: ends on a pad (7425,5090), metal from the north
 P 7385,5073:7447,5107
 C 7425,5090
-M 7425,5090 x7467 y4746 x7657 y4673 x7860 w=13    # follower; its end (7860,4678) not looked at
+M 7425,5090 x7467 y4776 w=13          # ends on a pad (7467,4782). (First drawn on along a bus line y 4746 that the
+                                      # follower jumped to across a 24 px gap: wrong, profile 2026-11-20.)
 N M 7467,4900 ras_o0_sel1
 
 # --- diffusion: one rectangle through each strip
@@ -207,4 +208,45 @@ P 8250,5800 x8415 y5870 x8490 w=18    # to line 5870
 P 8250,5848 x8377 y5913 x8490 w=18    # to line 5913
 P 8250,5890 x8338 y5956 x8490 w=18    # to line 5956
 P 8250,5935 x8295 y6000 x8490 w=18    # to line 6000
+
+# ===== where the selector's control lines come from: the nine-gate island trace/tc1.txt =====
+# (2026-11-20; views cache/scratch/rax/tcs_a.png, tcs_m.png, tcs2.png, tcs4.png, tcg.png, tcg2.png, tcb.png)
+# Five polys and one metal leave the island south at y 4450 and cross under six horizontal bus
+# metals (y 4520-4745, not drawn, no contacts).
+@requires tc1
+# S1's gate: the island's poly x 7422-7438 straight down to the strip
+P 7422,4440:7438,4880
+# S2's gate: the island's poly x 7465-7481 down to a pad (7467,4782) at the top of the metal x 7467
+P 7465,4440:7481,4792
+P 7450,4766:7484,4800
+C 7467,4782
+# the shift band: the island's poly x 7503-7522 down to a pad (7512,4835), metal south to a pad
+# (7505,5086), poly south and south-west on a diagonal to the top of the right band
+P 7503,4440:7522,4845
+P 7495,4818:7529,4852
+C 7512,4835
+M 7507,4835 y5088 w=13
+P 7488,5068:7522,5104
+C 7505,5086
+P 7505,5086 7505,5158 7428,5237 w=16
+# the straight band: north from its top along x 7146, a diagonal, north along x 7232 to a pad
+# (7232,4478) at the foot of the island's metal x 7222-7240
+P 7161,5145 7148,5122 7146,4772 7232,4668 7232,4478 w=16
+P 7215,4461:7249,4495
+C 7232,4478
+M 7231,4440 y4484 w=18
+# bit 0's first alternative source (through S2): the island's poly x 7179-7196 south, a diagonal,
+# south along x 7102 to the pad (7078,5303) at the end of the metal that comes from S2's contact box
+P 7187,4440 7187,4622 7102,4722 7102,5040 w=16
+?P 7102,5040 7102,5296 7083,5303 w=16   # lower part: the two shots place it 12 px apart; its end on the pad from one 2.6x view
+P 7061,5286:7095,5320
+C 7078,5303
+# the island's input g: poly x 7134-7153 south, a diagonal, south along x 7050 to a pad (7050,4830);
+# metal south and west to a pad (6985,4958); poly south from there (NOT DRAWN)
+P 7144,4440 7144,4592 7050,4690 7050,4830 w=16
+P 7033,4812:7067,4848
+C 7050,4830
+M 7055,4832 y4962 x6985 w=10
+P 6968,4941:7002,4975
+C 6985,4958
 

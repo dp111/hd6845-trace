@@ -212,6 +212,9 @@ Traps, all of them real:
    (c) a "T" whose stub ends flush with the edge of the crossing line is a corner.
    Found 2026-11-19 at (7577,5262), after two commits said two nets were one.
    `tools/padjoin.py` lists the contacts where the trace has this shape.
+   The follower's default `--gap 24` is itself enough to jump from a pad to a line that
+   passes 24 px away (found 2026-11-20 at (7467,4782)): where its output turns a corner
+   within 30 px of a pad or contact candidate, check the corner with a brightness profile.
 
 **When a trap turns out to affect work already done**, add the affected blocks to the
 "Re-read list" in `notes/work-packages.md` in the same commit that records the finding.

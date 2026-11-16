@@ -234,7 +234,7 @@ and 10612-10652 west under every rail and bit line (no contact: colour test at e
 crossing) to x 8285, where they meet the two polys that `trace/tc1.txt` draws to
 x 8290: **`cdp1_b5_a` is tc1's `tc1_f` and `cdp1_c5_q` is tc1's `tc1_a`**. tc1's island
 gives (its notes): `f = a.NOT b + b.NOT a.NOT g + a.b.NOT i`. So the fifth comparator bit
-sees row C's fifth bit itself when `tc1_b` is low, and a modified bit when it is high.
+sees row C's fifth bit itself when `ras_shift` is low, and a modified bit when it is high.
 
 ### Bit lines and the big channel, y 4530-5150 (traced)
 

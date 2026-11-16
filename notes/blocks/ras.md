@@ -141,12 +141,46 @@ Also seen: a sixth pad at (7832,5522) with a poly east and a metal south along x
 (not drawn); two more pads at the channel's west end, (7748,5672) and (7790,5718), with
 metals south to y 6070 and y 6158 (not drawn).
 
+## Where the control lines come from (2026-11-20; drawn, extracted)
+
+Views `cache/scratch/rax/tcs_a.png`, `tcs_m.png`, `tcs2.png`, `tcs4.png`, `tcg.png`,
+`tcg2.png`, `tcb.png`. All four gate lines of the selector and one of bit 0's two
+alternative sources come from the nine-gate island north of it (`trace/tc1.txt`, traced
+weeks ago with letters for names), 430-800 px away, as polys under six bus metals. With
+the joins drawn the extraction makes each pair one net; the island's nets took the
+selector's names. With q = R9's bit 0 (`cdp1_c5_q`):
+
+    ras_straight = NOT ras_shift
+    ras_o0_sel1  = ras_shift AND q            passes ras_o0_alt1 to ras_o0
+    ras_o0_sel2  = ras_shift AND NOT q        passes ras_o0_alt2 to ras_o0
+    cdp1_b5_a    = q                          when ras_shift is low
+                 = NOT ras_o0_alt1            when ras_shift is high and q = 1
+                 = NOT tc1_g                  when ras_shift is high and q = 0
+
+So with `ras_shift` low the row address is the scan line counter and R9 is compared
+with it bit for bit. With `ras_shift` high the counter goes out shifted up one bit, **R9's
+bit 0 is not compared as a number: it chooses which of two signals becomes bit 0 of the
+row address**, and the comparator's bit 0 is fed from the same signal that was chosen
+(for q = 1 literally the same net, inverted; for q = 0 from `tc1_g`, which is not shown to
+be `ras_o0_alt2`). The comparator's other side of that bit is the RA0 pin's level
+(`ra0_cmp`), so bit 0 compares the signal now with the same signal as it has come through
+the output stage; what that amounts to depends on the polarity and timing of the stages
+between (`rax`, `ral`), which are not fully traced.
+
+Not traced: what drives `ras_shift` (R8's interlace bits are the candidates: the island's
+notes follow the net north to a metal at x 8088-8105), `ras_o0_alt1`, `ras_o0_alt2`,
+`tc1_g`.
+
+A mistake corrected here: the metal of `ras_o0_sel1` was drawn on from its pad
+(7467,4782) along a bus line (y 4746, to x 7860) that `tools/follow.py` reached across
+a 24 px gap. A brightness profile along x 7467 in both metal shots shows no metal between
+the pad and the bus line. The same class of error as trap 16; the bus line is not drawn.
+
 ## Not done
 
 1. The five units at x 7860-8100, y 4730-5460 (`rax`): what each does with its output
    bit, and what leaves them towards the RA pad drivers (the lines found at the pad end
    are listed in `notes/blocks/trunks.md`).
-2. `ras_straight` and `ras_shift` to their drivers: the left band bends west at its top
-   (y 5140); the right band goes on north-east from (7425,5235).
-3. `ras_o0_alt1`, `ras_o0_alt2`, `ras_o0_sel1`, `ras_o0_sel2` to their sources.
+2. The driver of `ras_shift`.
+3. `ras_o0_alt1`, `ras_o0_alt2`, `tc1_g` to their sources.
 4. What is under the pad (7577,5262).

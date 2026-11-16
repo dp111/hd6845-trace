@@ -16,7 +16,7 @@ M 7622,3105 y4250 w=50             # centre rail, down into the VCC bus
 N M 7622,3120 vcc
 M 7795,3000 y4000 w=48             # right rail
 N M 7795,3010 vss
-M 7420,2975:7820,3040              # strap joining the left and right rails; the poly lines of tc1_b and tc1_a run west under it
+M 7420,2975:7820,3040              # strap joining the left and right rails; the poly lines of ras_shift and tc1_a run west under it
 
 # =====================================================================================
 # Right half, top: R1 (inverter) and R2 (2-input NOR)
@@ -102,7 +102,7 @@ P 7959,3452:8024,3472
 P 8004,3452:8024,3566
 C 8009,3549 s=24x24
 M 8012,3538 y3725 x8100 w=19       # down, then right; continues (not yet followed)
-N M 7967,3100 tc1_b
+N M 7967,3100 ras_shift
 
 # =====================================================================================
 # Right half, middle and bottom: R3 (NOR), R4 (inverter), R5 (AND-OR-invert)
@@ -188,7 +188,7 @@ C 7968,3808 s=24x24
 M 7968,3798 y4082 w=21             # down to track T2
 C 8010,3894 s=24x24
 M 8010,3884 y4128 w=20             # down to track T3
-N M 8010,4050 tc1_i
+N M 8010,4050 ras_o0_alt1
 
 # =====================================================================================
 # Left half of the island: L1 (inverter), L2 and L3 (2-input NOR drivers), L4 (NOR).
@@ -225,7 +225,7 @@ C 7228,3181 s=24x24
 M 7230,3170 y4450 w=20             # W2 lower: contacts L2's band b and L3's band d, continues south past y 4450 (no contact seen on the way)
 C 7230,3482 7230,3740 s=24x24
 B 7354,3164:7396,3199
-N M 7230,4440 tc1_l1_out
+N M 7230,4440 ras_straight
 
 # ---- L2: 2-input NOR, wide transistors, strong load. Each input band crosses the rail
 #      column and then wraps round the drain region as an L.
@@ -250,7 +250,7 @@ M 7274,3427 y4070 x7346 w=19       # W3 lower: contacts L4's band e, then east a
 C 7336,4070 s=24x24
 C 7273,3852 s=24x24
 B 7358,3420:7396,3452
-N P 7395,4071 tc1_l2_out
+N P 7395,4071 ras_o0_sel2
 
 # ---- L3: the same again, 258 px lower
 P 7303,3642:7518,3663              # band c, from contact (7316,3638) on W4 upper
@@ -272,7 +272,7 @@ P 7303,3687:7336,3716
 C 7316,3700 s=24x24
 M 7316,3690 y4026 x7392 w=20       # W4 lower: down, then east along y 4014-4037 to a contact at about (7380,4027) (edge of the view; what is under it not seen)
 B 7356,3684:7396,3717
-N M 7385,4026 tc1_l3_out
+N M 7385,4026 ras_o0_sel1
 
 # ---- L4: 2-input NOR (mirror image of R2: pull-downs in a column west of the rail)
 D 7368,3828:7410,3972              # column: VSS / e / out / f / VSS
@@ -360,7 +360,7 @@ M 8116,4245:8165,4450              # ... and south into tc2
 M 7420,4288:7995,4335              # VSS bus: from the foot of the left rail east
 M 7943,4330:7990,4450              # ... and south into tc2
 
-# ---- tc1_l3_out to the datapath: poly from the pad at (7922,4027) south, east, then
+# ---- ras_o0_sel1 to the datapath: poly from the pad at (7922,4027) south, east, then
 #      diagonally under the VCC bus's corner, then east along y 4212-4228
 P 7919,4030:7937,4097
 P 7919,4080:7995,4097
@@ -384,19 +384,19 @@ P 7134,4385:7332,4403              # west under W3, W2 (no contacts),
 P 7134,4385:7153,4450              # ... turning south at x 7134-7153: leaves south (tc2)
 P 7300,4381:7334,4408
 
-# ---- tap of tc1_l2_out: contact (7511,4242), poly south under the VSS bus, west, south
+# ---- tap of ras_o0_sel2: contact (7511,4242), poly south under the VSS bus, west, south
 C 7511,4242 s=24x24
 P 7499,4228:7523,4337
 P 7422,4320:7523,4337
 P 7422,4320:7438,4450              # leaves south (tc2)
-# ---- tap of tc1_l3_out: contact (7556,4206), poly south under both buses, west, south
+# ---- tap of ras_o0_sel1: contact (7556,4206), poly south under both buses, west, south
 C 7556,4206 s=24x24
 P 7544,4192:7570,4222
 P 7551,4200:7568,4382
 P 7465,4363:7568,4382
 P 7465,4363:7481,4450              # leaves south (tc2)
 
-# ---- tc1_b: from the corner at (8100,3725) south at x 8088-8105 to contact (8139,4090),
+# ---- ras_shift: from the corner at (8100,3725) south at x 8088-8105 to contact (8139,4090),
 #      poly east under ns3 and ns4 to contact (8313,4090), metal south and west to
 #      contact (8247,4417), poly west to contact (7859,4417), metal west to contact
 #      (7511,4417), poly south.
