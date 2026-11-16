@@ -46,7 +46,7 @@ under the metal x 7300-7322. Read with `tools/classmap.py --open`.
   that goes north; `wl_i2_in` (poly y 7486-7508) ends at a contact (11022,7503) under a
   metal x 11010-11032 that goes **south**, stepping one pitch east at y 7600-7650, at
   y 8580-8640 and again at y 9280-9320, and on down the bus field.
-- The load strobe of cdp2's row C (`cdp2_c_ld`, poly y 7790-7808) ends at a contact
+- The load strobe of cdp2's row C (`wr_r10`, poly y 7790-7808) ends at a contact
   (10893,7797) under the top of a metal x 10880-10905 that goes south.
 - Band H4 (`cnt_gab`) runs on west of x 11040 along y 7200-7222: not followed.
 
