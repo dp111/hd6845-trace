@@ -136,6 +136,8 @@ For `<bit>` read `hc#`, `rc#` or `c4b#`. Each bit is a master-slave pair
 | `rcs_u#` | output of a unit of the step logic cluster that has no better name yet, by the y of its buried contact (`rcs_u3288` = NOR(`rcs_g3245`, `rcs_bd3330`); `rcs_u3425` = NOT `rcs_bc3460`, its load and destination not traced) |
 | `rcs_g#` | an input of the cluster that arrives on a poly line from outside, by the y of that line |
 | `rcs_ba#`, `rcs_bb#`, `rcs_bc#`, `rcs_bd#`, `rcs_be#`, `rcs_bf#`, `rcs_bg#` | a piece of bus line A-G beside the cluster whose driver is not yet known, by the y of its top end |
+| `rcs_mu`, `rcs_mv` | the two inputs of the NOR that makes `rcs_in1` (middle cluster): bus pieces of the second bus field (x 4192), from the north and to the south |
+| `rcs_mn#` | output of a unit of the middle cluster, by the y of its output (`rcs_mn3852` = NOR(?, `rcs_in1`)) |
 | `rcs_thin_e`, `rcs_thin_w` | two thin metals down the cluster, over the loads; what they join is not read |
 | `wl_i#_in`, `wl_i#_out` | input and output of the unidentified inverter I2 west of the counters |
 | `wl_h#` | horizontal poly bands H0 and H1 above the counters; not identified |

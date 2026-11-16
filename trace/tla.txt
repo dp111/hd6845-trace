@@ -71,7 +71,7 @@ C 3368,2768
 P 3375,2768 x4212 w=20
 P 4205,2749:4245,2782
 C 4225,2765
-M 4226,2745 y2785 w=22
+M 4212,2765 x4279 y4073 x4130 w=20   # in1's metal: east, down the second bus field at x 4268-4290, west at y 4062-4084
 # in2: bus line B, piece y 4705-5428, contacts (3150,4719), (3148,4976), (3150,5412)
 M 3150,4705 y5428 w=20
 C 3150,4719
@@ -461,3 +461,67 @@ C 2805,3887 s=24x44
 P 2842,3867:2897,3960
 P 2890,3935:2926,3957
 B 2908,3932:2932,3959
+
+# ====================================================================
+# Middle cluster (x 3450-4110): the same construction as the first, 1042 px east. Rails:
+# VCC x 3824-3868, thin metal x 3948-3962, VSS x 3992-4041; units on a diffusion column just
+# east of the VSS rail (x 4052-4110), their loads between the rails.
+M 4017,3700 y4250 w=50               # VSS rail (extent: drawn locally only)
+N M 4017,4000 vss
+M 3846,3700 y4250 w=44               # VCC rail (drawn locally only)
+N M 3846,4000 vcc
+
+# ---- rcs_in1 = NOR(rcs_mu, rcs_mv): east column, node y 3952-4098
+D 3995,3885:4045,3935                 # VSS box under the rail, with an arm east along y 3905-3925
+C 4018,3910 s=30x34
+D 4040,3905:4110,3925
+D 4052,3920:4110,3960                 # column under gate mu
+D 4052,3955:4090,4135                 # the node, and on down under gate mv
+B 4076,4056:4114,4094
+D 4082,4060:4112,4092
+P 4085,4062:4135,4082                 # output poly to the pad of in1's metal
+P 4125,4055:4165,4087
+C 4143,4070
+# gate mu: poly y 3930-3950 from the bottom contact (4188,3938) of a bus piece that comes
+# down x 4183-4200 from y 3416 (follow.py; its top end not looked at)
+P 4045,3930:4180,3950
+P 4172,3922:4208,3955
+C 4188,3938
+M 4192,3952 y3416 w=20
+N M 4192,3700 rcs_mu
+# gate mv: poly y 4102-4124 from the top contact (4195,4112) of a bus piece that runs down
+# x 4183-4205 to y 4748 (follow.py; bottom end not looked at). The poly runs on west under
+# the VSS rail to x 3995 and is bright there: it also gates something under the rail (not read).
+P 3995,4102:4182,4124
+P 4175,4096:4212,4130
+C 4195,4112
+M 4192,4098 y4748 w=20
+N M 4192,4400 rcs_mv
+?D 4005,4130:4092,4165                # VSS land below gate mv (its contact to the rail not looked at)
+?C 4018,4148
+# load: strip from the VCC box (contact (3840,4100)) under the plate x 3885-3935 (W/L 26/50),
+# on east under the thin metal and the VSS rail to the node. Tie of the plate to the node:
+# a tail under the thin metal and a buried contact with the plate's tab (as in the first
+# cluster; drawn uncertain here)
+D 3828,4072:3870,4130
+C 3840,4100 s=24x30
+D 3865,4070:4056,4096
+P 3885,4050:3930,4145
+D 3934,4092:3950,4142
+?P 3926,4120:3952,4142
+?B 3930,4116:3953,4144
+
+# ---- unit above it: rcs_mn3852 = NOR(?, rcs_in1). Node y 3836-3880 above gate in1; its
+# other gate (above the node) is not read yet. Output by a buried contact and a poly east to
+# the bottom contact (4225,3852) of a bus piece that goes up x 4222-4245 to y 2852.
+D 4052,3838:4110,3910
+B 4076,3836:4112,3870
+P 4085,3842:4215,3860
+P 4207,3836:4245,3868
+C 4225,3852
+M 4233,3866 y2852 w=20
+N M 4233,3300 rcs_mn3852
+# gate in1: poly y 3883-3902 from a second contact (4270,3893) on in1's metal
+P 4045,3883:4260,3902
+P 4252,3876:4290,3910
+C 4270,3893
