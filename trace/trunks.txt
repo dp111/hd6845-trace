@@ -280,3 +280,13 @@ C 11288,17517
 P 11270,17502:11308,17534
 P 11298,17518 11102,17518 10980,17640 w=18
 N M 12400,17692 inh_lat
+
+# ====================================================================
+# ck_out, the left-edge trunk above y 18300: tools/follow.py from (2500,7960) south follows one
+# metal 17,238 px, down the left edge, along the bottom (y 18952, jog to y 19038 between
+# x 4614 and 5324) to x 8580, i.e. to the contact (8567,18946) of branch (B) above. So the
+# trunk climbs the whole left edge to the pad (2500,7907) of the inverter that makes clk_tl
+# (trace/tla.txt) and goes on from there to the foot of the top-left logic.
+# Contact candidates along it about every 608 px (y 8360, 8965, 9573, 10181, 10831, 11440 ...):
+# its taps into the left column of the left array, not looked at.
+M 2504,18310 2500,7990 w=18

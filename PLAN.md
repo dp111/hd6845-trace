@@ -18,8 +18,9 @@ identified as the counters (horizontal 8 bits, character row 7 bits, one of 4 bi
 their outputs are joined by geometry to the R0, R1, R2 comparators. M4 started: the row
 counter's clock generator is traced (two non-overlapping clocks from one step pulse
 `rc_step` = NOR(`inh_rc`, `rc_stepreq_n`)); the step request is made in the top-left
-logic: step = in1 OR (NOT e4 AND NOT (e3 AND a2)), with the condition also latched on a
-strobe that comes from beside the upper rows of the left array. The inputs are not
+logic: step = in1 OR (NOT e4 AND NOT (e3 AND a2)), with the condition also latched while
+CLK is high (`clk_tl` = NOT `ck_out`, made by an inverter beside the upper rows of the left
+array, at the top of the main clock's left-edge trunk). The inputs are not
 identified yet. The vertical logic is three gate clusters (x 2450-5050, y 2950-5450) plus
 those upper rows; it is the current target. A "Re-read list" of earlier work to be
 checked again is kept in `notes/work-packages.md`.

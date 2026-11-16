@@ -8,6 +8,6 @@
 3440,3040:4120,5500   ?logic  middle cluster of the vertical control | same construction as the step logic cluster, 1042 px east: small NOR gates on a column beside a VSS rail. Three gates traced (the one that makes in1 of the step gate, an inverter, and a NOR that takes in1)
 4120,2600:4430,5500   ?route  second bus field | seven vertical metal positions, in pieces, between the middle and right clusters; five pieces drawn
 4640,2950:5060,5450   ?logic  right cluster of the vertical control | not traced; one input of the step logic comes from here on a poly at y 3805
-2440,5370:3270,5640   route   poly lines under the foot of the step logic cluster | six horizontal poly lines joining the bus lines west and east of the cluster; one carries the strobe rcs_stb west
-2480,7790:2850,8000   logic   strobe inverter | rcs_stb = NOT rcs_stb_n: the strobe that samples the row counter's step condition, made here in the left column beside the upper rows of the left array and run back north to the step logic
-2440,5650:3090,6330   ?logic  small cluster below the step logic | not traced; the strobe's source signal rcs_stb_n comes from here
+2440,5370:3270,5640   route   poly lines under the foot of the step logic cluster | six horizontal poly lines joining the bus lines west and east of the cluster; one carries the strobe clk_tl west
+2480,7790:2850,8000   logic   clock inverter for the top-left logic | clk_tl = NOT ck_out (CLK polarity): made here, where the main clock's left-edge trunk ends, and run back north; it samples the row counter's step condition
+2440,5650:3090,6330   ?logic  small cluster below the step logic | not traced; ck_out reaches it from the left-edge trunk

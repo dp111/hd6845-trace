@@ -1,5 +1,5 @@
 # Trunk routes worth showing on the floor plan (thin boxes along the main runs).
-2480,6000:2530,18970      route  ck_out left-edge trunk | NOT CLK up the left edge of the left array (x 2504); followed closely only below y 18300
+2480,7900:2530,18970      route  ck_out left-edge trunk | NOT CLK up the left edge of the left array (x 2500-2504), one metal from the bottom trunk to the pad (2500,7907) of the inverter that makes clk_tl; taps about every 608 px not looked at
 2480,18925:8580,19050     route  ck_out bottom trunk | NOT CLK along the bottom of the core (y 18947), from the clock block to the bottom-left corner
 9300,18900:10460,19270    route  ck_out feed to bottom-centre logic | two wide poly links and a metal line carry NOT CLK to the ring at 10300-10450 x 18340-18485
 13690,15920:13740,16725   route  ck_out rail | NOT CLK at the left edge of the logic below the decode array, fed by a wide poly from x 13131

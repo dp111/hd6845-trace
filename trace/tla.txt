@@ -578,7 +578,7 @@ M 4148,3320 y3596 w=20                # bus piece x 4138-4160, y 3320-3596 (foll
 N M 4148,3500 rcs_bq3335
 
 # ====================================================================
-# AOI unit of the first cluster, y 4045-4320: rcs_n4200 = NOT( rcs_cond . rcs_stb + rcs_g4240 ).
+# AOI unit of the first cluster, y 4045-4320: rcs_n4200 = NOT( rcs_cond . clk_tl + rcs_g4240 ).
 # Here the diffusion is one wide area under the VSS rail AND under a second metal beside it
 # (x 3025-3060, a signal line that only passes over). From the top: VSS box (contact
 # (2985,4070)), gate g1, gate g2 (in series), node N, gate g3, VSS (contact (2985,4292)).
@@ -600,7 +600,7 @@ P 2985,4150:3140,4175
 P 3132,4142:3172,4180
 C 3150,4160
 M 3152,3807 y4566 w=20
-N M 3152,4300 rcs_stb
+N M 3152,4300 clk_tl
 # g3: one long poly y 4230-4250 from the east, across the whole bus without a contact
 P 2945,4230:3400,4250
 N P 3300,4240 rcs_g4240
@@ -633,9 +633,9 @@ N M 3042,4300 rcs_cond_lat
 #   rcs_cond = NOT rcs_cond_n: node y 4558-4622, pull-down E0 (gate rcs_cond_n) to the VSS box below,
 #     standard load west of the rail, buried contact to band 2, whose pad (contact (3105,4590))
 #     is the bottom end of bus line A's piece A3.
-#   pass transistor (band 1, gate rcs_stb) from that node up to the column's top end, which
+#   pass transistor (band 1, gate clk_tl) from that node up to the column's top end, which
 #     is tied by a buried contact to the poly pad (contact (3045,4485)) at the bottom of the
-#     metal rcs_cond_lat. So rcs_cond_lat takes rcs_cond while rcs_stb is high: a dynamic latch.
+#     metal rcs_cond_lat. So rcs_cond_lat takes rcs_cond while clk_tl is high: a dynamic latch.
 #     The buried contact is drawn uncertain: see AMB-009 (the other reading ties the column top
 #     to the VSS box under the rail, which makes the AOI unit above degenerate).
 D 3028,4512:3063,4610
@@ -662,7 +662,7 @@ P 2842,4567:2897,4657
 P 2890,4631:2926,4653
 B 2908,4629:2932,4655
 
-# rcs_stb continues: from bus line B's bottom pad a poly runs east (y 4535-4558) to a pad
+# clk_tl continues: from bus line B's bottom pad a poly runs east (y 4535-4558) to a pad
 # with a contact (3228,4548) at the top of a piece of bus line D, which runs down to a contact
 # (3240,5587); from that pad a poly leaves WEST along y 5576-5598 (seen to x 3175): towards
 # the small cluster below this one (y 5450-6300). Every contact on the net so far is a gate
@@ -686,7 +686,7 @@ C 2456,7822
 P 2450,7835 y7865 x2578 w=24
 
 # ====================================================================
-# The driver of rcs_stb: an inverter in the left column beside upper row 2 of the left
+# The driver of clk_tl: an inverter in the left column beside upper row 2 of the left
 # array. The column continues the first cluster's west side: VSS rail x 2600-2652, VCC rail
 # x 2780-2832 (named by structure: the pull-down goes to one, the load to the other).
 # A "rail gate" like rcs_w2's: the node is the diffusion under the VSS rail above the gate
@@ -722,4 +722,4 @@ P 2726,5826:2764,5862                # a gate of a unit of the small cluster, no
 C 2745,5842                          # (2745,5842) under a thin vertical metal x 2728-2760 (not followed)
 M 2744,5822 y5868 w=28
 M 2500,7895 y8000 w=22
-N M 2370,7000 rcs_stb_n
+N M 2370,7000 ck_out

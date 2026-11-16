@@ -490,7 +490,7 @@ y 6950-7350. Not followed beyond the pads except `rcs_e4`.
   datapath's bundle (y 13480) and the strobe channel's tracks k7 and k8 (y 14690):
   `tools/follow.py` from (13391,14750) north runs to (13431,10010) (the R0 comparator's
   exit) and from (13434,14750) north to (13476,11701) (the R1 comparator's exit). Drawn in
-  `trace/trunks.txt`; the labels that were `h_eq_r0_u`, `h_eq_r1_u` are now on the real nets.
+  `trace/trunks.txt`; the labels (former names `h_eq_r0_u`, `h_eq_r1_u`) are now on the real nets.
 - **`h_eq_r1` beyond the strobe channel**: track k8's metal (x 13478) turns south-west at
   y 16776, runs down x 13345-13352 to a contact (13345,17645); poly west along y 17647
   under the wide VCC rail to a contact (12805,17647); metal west to x 11851, north to
@@ -508,4 +508,21 @@ y 6950-7350. Not followed beyond the pads except `rcs_e4`.
 
 The R1 match (end of the displayed part of a line) going to the bottom-centre logic fits
 the DISPTMG pad being at the bottom edge; that logic is not traced.
+
+## `ck_out`: the left-edge trunk to its top (2026-11-17)
+
+The bottom trunk (branch (B) of `ck_out`, from the contact (8567,18946)) had been followed
+at 1x up the left edge to y 18300. `tools/follow.py`, started at the other end, follows
+one metal from (2500,7960) down the left edge (x 2500-2504) and along the bottom to
+x 8580: 17,238 px, the same line. Drawn in `trace/trunks.txt`.
+
+- At its top the trunk ends on the pad (2500,7907) of an inverter in the left column of
+  the left array (beside upper row 2): `clk_tl` = NOT `ck_out`, the clock of the top-left
+  logic (`notes/blocks/tla.md`).
+- From the pad it also goes on: west and north on a metal at x 2360-2380 to a contact
+  (2365,5847) at the foot of the top-left clusters, then in poly east across a gate under
+  the VSS rail at (2620,5849) to a contact (2745,5842). Not followed further.
+- Along the left edge the follower lists contact candidates about every 608 px
+  (y 8360, 8965, 9573, 10181, 10831, 11440, 12142 ...): the trunk's taps into the left
+  column cells of the left array. Not looked at.
 

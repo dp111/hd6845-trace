@@ -68,6 +68,7 @@ at s0). Upper array (R4, R6): bit order not established, names keep the slice (`
 | `ck_b` | phase high only while CLK is high. Master clock of the horizontal and 4-bit counters. Held low while `inh_ck` is high |
 | `ck_a_u` | the line that gates the second pull-down of the horizontal counter's `_nx_g` nodes: followed in poly to the `ck_a` bus line of the clock block; join not drawn |
 | `ck_out` | NOT CLK from the big three-stage buffer: the main internal clock, distributed along the bottom and left edges |
+| `clk_tl` | NOT `ck_out`, i.e. CLK polarity, for the top-left logic: made by an inverter at (2626,7908) in the left column beside upper row 2 of the left array, where the left-edge trunk of `ck_out` arrives, and run back north (thin metal x 2457, poly y 5587, bus lines D and B). In the step logic it samples `rcs_cond` into `rcs_cond_lat`, enables the first term of `rcs_n4200`, and gates units at y 3765 and y 4410 |
 | `ck_a_pu`, `ck_b_pu` | gates of the source-follower pull-ups of the two phase drivers |
 | `ck_g#` | outputs of the clock gate row: `ck_g1`, `ck_g2` = `ck_b` delayed by one and two inverters, `ck_g3`, `ck_g4` = the same for `ck_a` |
 | `ck_clkn` | NOT `clk_b` inside the phase generator |
@@ -133,13 +134,11 @@ For `<bit>` read `hc#`, `rc#` or `c4b#`. Each bit is a master-slave pair
 | `rcs_w2`, `rcs_c1`, `rcs_b1` | `rcs_w2` = NOT `rcs_c1`; `rcs_c1` = NOR(`rcs_a2`, `rcs_b1`); `rcs_b1` = NOR(`rcs_x1`, `rcs_a2`, `rcs_u3425`) |
 | `rcs_cond_n` | NOR(`rcs_in2`, `rcs_in3`) = `rcs_e4` OR (`rcs_e3` AND `rcs_a2`): the step condition inverted (called m2 in the block notes) |
 | `rcs_cond` | NOT `rcs_cond_n`: the row counter's step condition apart from `rcs_in1`. On bus line A's piece A3; first gate of the series pair in `rcs_n4200` |
-| `rcs_cond_lat` | `rcs_cond` sampled through a pass transistor while `rcs_stb` is high (a dynamic latch on a metal and two poly pads); its poly goes west under the rail at y 4010-4030, not followed |
+| `rcs_cond_lat` | `rcs_cond` sampled through a pass transistor while `clk_tl` is high (a dynamic latch on a metal and two poly pads); its poly goes west under the rail at y 4010-4030, not followed |
 | `rcs_e3`, `rcs_e4`, `rcs_a2`, `rcs_x1` | inputs of the step logic, **not identified**. `rcs_e4` gates everything except `rcs_in1`; it is a long control line (17,000 px, five gate loads, driver not found) that runs beside `res_b` and `lpstb_b` |
 | `rcs_u#` | output of a unit of the step logic cluster that has no better name yet, by the y of its buried contact (`rcs_u3288` = NOR(`rcs_g3245`, `rcs_bd3330`); `rcs_u3425` = NOT `rcs_bc3460` = `rcs_e3` OR `rcs_e4`, third input of `rcs_b1`) |
-| `rcs_n#` | output of an AND-OR-INVERT unit of the first cluster (`rcs_n4200` = NOT(`rcs_cond` AND `rcs_stb` OR `rcs_g4240`)); leaves on a metal strap x 2845-2885 |
+| `rcs_n#` | output of an AND-OR-INVERT unit of the first cluster (`rcs_n4200` = NOT(`rcs_cond` AND `clk_tl` OR `rcs_g4240`)); leaves on a metal strap x 2845-2885 |
 | `rcs_g#` | an input of the cluster that arrives on a poly line from outside, by the y of that line |
-| `rcs_stb` | a strobe of the step logic: samples `rcs_cond` into `rcs_cond_lat` and enables the first term of `rcs_n4200`; also gates units at y 3765 and y 4410 of the first cluster. `rcs_stb` = NOT `rcs_stb_n`, from an inverter at (2626,7908) in the left column beside upper row 2 of the left array; it returns 2,240 px north on a thin metal at x 2457, then along the poly y 5587 and bus lines D and B |
-| `rcs_stb_n` | input of that inverter: from a contact (2365,5847) below the first cluster (its poly runs east into the small cluster at y 5650-6300, not traced), down a metal at x 2370 to the inverter, and on south at x 2500 (not followed). Clock-like: it is distributed down the left column |
 | `rcs_ba#`, `rcs_bb#`, `rcs_bc#`, `rcs_bd#`, `rcs_be#`, `rcs_bf#`, `rcs_bg#` | a piece of bus line A-G beside the first cluster (x 3090-3380) whose driver is not yet known, by the y of its top end |
 | `rcs_bp#`, `rcs_bq#`, `rcs_br#`, `rcs_bs#`, `rcs_bt#`, `rcs_bu#`, `rcs_bv#` | the same for the second bus field (x 4140-4420; tracks P-V at x 4148, 4192, 4235, 4279, 4322, 4365, 4409) |
 | `rcs_mu`, `rcs_mv` | the two inputs of the NOR that makes `rcs_in1` (middle cluster): bus pieces of the second bus field (x 4192). `rcs_mu` = NOT `rcs_bq3335` (an inverter at y 3413); `rcs_mv` comes from a poly that leaves the bus field east and south at (4283,4745) |
@@ -465,3 +464,5 @@ datapath s1...s7, s0 became b0...b6, b7.
 | rcs_cm4028 | rcs_cond_lat | |
 | rcs_m2 | rcs_cond_n | |
 | rcs_bb3807 | rcs_stb | |
+| rcs_stb_n | ck_out | |
+| rcs_stb | clk_tl | |
