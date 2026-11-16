@@ -370,10 +370,40 @@ B 3042,3574:3068,3607
 P 3045,3580:3140,3600
 P 3132,3575:3170,3606
 C 3150,3590
-# load: NOT the standard one. West of the rail at this height there is a metal strap
-# x 2852-2890 between contacts (2868,3488) and (2868,3640), a vertical poly under the rail's
-# west edge (x 2947-2967, y 3445-3545) and gates across a diffusion under thin metal E.
-# Not read: the load of b1 and whatever else hangs on it are not drawn.
+# West of the rail (read 2026-11-17 at 5.5x and 9x, with class runs down x 2912-2928):
+# b1's node strip runs west under the rail to its box under thin metal E, and that box has a
+# THIRD pull-down: the poly arm of the pad (2865,3640) crosses it at y 3617-3638 (bright:
+# over a channel; diffusion on both sides) and the part below links east to the VSS box.
+# The pad is the bottom end of a metal strap whose top end is the load gate of the inverter
+# rcs_u3425. So rcs_b1 = NOR(rcs_x1, rcs_a2, rcs_u3425).
+D 2935,3575:3048,3600                 # b1's strip under the rail
+D 2900,3562:2940,3668                 # box under thin E: b1 above the gate, VSS side below
+D 2935,3643:2970,3668                 # link to the VSS box under the rail
+P 2848,3615:2896,3656                 # the strap's bottom pad, contact (2865,3640)
+C 2865,3640
+P 2888,3617:2962,3638                 # its arm: the gate; ends rounded at x 2962
+# b1's load: VCC box (contact (2805,3570)), strip under plate B (W/L 28/50); the plate's pad is
+# above it (y 3528-3555) with an arm tied to the top of b1's box by a buried contact
+D 2785,3540:2842,3612
+C 2805,3570 s=24x30
+D 2836,3562:2905,3590
+P 2845,3528:2895,3597
+P 2888,3531:2942,3553
+B 2903,3527:2946,3558
+D 2903,3528:2940,3566
+# rcs_u3425's load and the strap: VCC box (contact (2805,3440)), strip under plate A to the
+# column under thin E (x 2900-2940, which ends at y 3500: field below it), and that column is
+# the west end of the inverter's node strip. Plate A and the pad below it are one poly, tied
+# to the column by a buried contact (so the load gate is the node) and contacted by the strap.
+D 2785,3400:2842,3470
+C 2805,3440 s=24x30
+D 2836,3422:2946,3446
+D 2900,3420:2940,3500
+P 2845,3415:2895,3502
+C 2865,3488
+P 2888,3478:2926,3498
+B 2893,3474:2928,3501
+M 2868,3474 y3656 w=36                # the strap (x 2850-2886)
 
 # ====================================================================
 # East column, unit at y 3288: rcs_u3288 = NOR(rcs_g3245, rcs_bd3330). Standard unit (as

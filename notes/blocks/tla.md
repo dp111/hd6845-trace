@@ -10,28 +10,39 @@ signals `rcs_in1` ... `rcs_m2` (`rcs_` = row counter step logic), and the step s
 
 ## Status
 
-Thirteen gates traced and extracted (34 transistors, no errors); the rest of the cluster is
-surveyed only. The cluster runs from y 2940 to y 5330.
+Seventeen gates traced and extracted (48 transistors, no errors) in the first and middle
+clusters; the rest is surveyed only. The first cluster runs from y 2940 to y 5330.
 
 ```
-rc_stepreq_n    = NOR(in1, in2, in3)     the row counter's step signal (active low)     (2975,5035)
-in2     = NOR(w2, e4)            west column                                     (2571,5197)
-in3     = NOR(e3, e4)            east column                                     (3046,5197)
-w2      = NOT c1                 pull-down under rail R1 itself                  (2625,5066)
-c1      = NOR(a2, b1)            east column, top of the cluster                 (3046,3115)
-b1      = NOR(x1, a2)            east column; its load is not the usual one, not drawn  (3046,3590)
-rcs_m2  = NOR(in2, in3)          east column; feeds gate E0 further up           (3046,4765)
+rc_stepreq_n = NOR(in1, in2, in3)        the row counter's step request (active low)   (2975,5035)
+in2        = NOR(w2, e4)                 west column                                   (2571,5197)
+in3        = NOR(e3, e4)                 east column                                   (3046,5197)
+w2         = NOT c1                      pull-down under rail R1 itself                (2625,5066)
+c1         = NOR(a2, b1)                 east column, top of the cluster               (3046,3115)
+b1         = NOR(x1, a2, rcs_u3425)      east column; third pull-down west of the rail (3046,3590), (2920,3628)
+rcs_u3425  = NOT rcs_bc3460              inverter; its output goes by a strap to b1's third gate
+rcs_bc3460 = NOR(e3, e4)                 a second copy of in3's function               (3046,3892)
+rcs_m2     = NOR(in2, in3)               feeds gate E0 further up                      (3046,4765)
+rcs_u3288  = NOR(rcs_g3245, rcs_bd3330)                                                (3046,3288)
+rcs_n4200  = NOT(rcs_ba4100 AND rcs_bb3807 OR rcs_g4240)   AND-OR-INVERT under the rail (3008,4200)
+in1        = NOR(rcs_mu, rcs_mv)         middle cluster                                (4081,4072)
+rcs_mu     = NOT rcs_bq3335              middle cluster, inverter                      (4050,3374)
+rcs_mn3852 = NOR(?, in1)                 middle cluster; second gate not read
 ```
 
-Put together (c1 = x1 AND NOT a2):
+Put together (b1 = NOT x1 AND NOT a2 AND NOT e3 AND NOT e4, so c1 = NOT a2 AND (x1 OR e3 OR e4)):
 
-**step = in1 OR ( NOT e4 AND ( (x1 AND NOT a2) OR NOT e3 ) )**
+**step = in1 OR ( NOT e4 AND NOT (e3 AND a2) )**
 
-and `m2 = NOT(in2 OR in3)` is the complement of the bracketed part. So `e4` gates
-everything except `in1`: while `e4` is high only `in1` can step the row counter; while it
-is low the counter steps if `e3` is low, or if `x1` is high and `a2` low.
+and `m2` = e4 OR (e3 AND a2) is the complement of the bracket. `x1` cancels out of the step
+(it still matters for `c1`, which also leaves the cluster westwards on the poly y 2985).
+So: while `e4` is high only `in1` can step the row counter; while `e4` is low the counter
+steps unless `e3` and `a2` are both high.
 
-What the five inputs **are** is not known. None has reached a named signal yet:
+(Before the third pull-down of `b1` was found, on 2026-11-16, the formula read
+`in1 OR (NOT e4 AND ((x1 AND NOT a2) OR NOT e3))`. That is superseded.)
+
+What the inputs **are** is not known. None has reached a named signal yet:
 
 | Signal | Followed to |
 |---|---|
@@ -202,17 +213,21 @@ a pad on the 4,000 px of metal in the left bus field that the profile tools did 
   buried contacts (if those were metal contacts, the outputs of several different gates
   would be shorted together). So where thin E really makes contact is still not found;
   `tools/tla_contacts.py` is no help on it (it passes over tan diffusion boxes all the way).
-- **The dense part west of the rail, x 2835-2975, y 3395-3665.** Seen: the load plate of
-  the y 3425 inverter (2845-2895, 3420-3465); below it a poly pad with a metal contact
-  (2868,3488); a metal strap x 2852-2890 from there to a second poly pad with a contact
-  (2868,3640); a diffusion column under thin E (2900-2935, 3405-3545) crossed by a poly at
-  y 3495-3510; a vertical poly under the rail's west edge (2945-2965, 3455-3545); `b1`'s
-  node strip (y 3575-3600) running west into a second piece of diffusion under thin E
-  (2905-2935, 3555-3600). So `b1`'s node and the inverter's node both end in diffusion
-  crossed by gates: there are pass transistors or extra pull-downs here that the extracted
-  equations for `b1` and `c1` do not include yet. Views: `W1.png`, `W1m.png`, `Y1a.png`,
-  `Y1o.png`, `Y2.png` in the scratch folder. **Until this is traced, `b1 = NOR(x1, a2)` is
-  the pull-down side only.**
+- **The dense part west of the rail, x 2835-2975, y 3395-3665: resolved 2026-11-17.** It is
+  two loads and a strap. The inverter `rcs_u3425`'s node strip runs west under the rail to a
+  diffusion column under thin E (x 2900-2940, ending at y 3500); its load plate
+  (x 2845-2895) continues downwards as a pad with a metal contact (2865,3488) and a
+  buried-contact tie to that column. A **metal strap** (x 2850-2886) takes the node from
+  that contact down, over `b1`'s load plate, to a second pad (contact (2865,3640)) whose
+  poly arm crosses `b1`'s box under thin E at y 3617-3638 **as a gate** (9x: bright over a
+  channel, diffusion on both sides, and the part below links east to the VSS box). So
+  `b1` has three pull-downs. How the two crossings were told apart: class runs down
+  x 2912-2928 show plain diffusion with a box at its edge at the top crossing (a tie) and
+  a bright band right across the diffusion at the bottom one (a gate).
+- **Two kinds of non-standard unit** in this cluster, both now traced once: the strap
+  (an output carried over a neighbouring load to a gate), and the AND-OR-INVERT unit
+  whose diffusion is one wide area under the VSS rail and under a signal metal beside it
+  (`rcs_n4200`, y 4045-4320), with series gates.
 
 ## Reading aids for this region
 
