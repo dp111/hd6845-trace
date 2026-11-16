@@ -4,13 +4,13 @@ Serial work, started 2026-11-16. Trace: `trace/tla.txt`. Views: `cache/scratch/t
 
 ## Names
 
-In this note `in1`, `in2`, `in3`, `e3`, `e4`, `w2`, `c1`, `a2`, `b1`, `x1`, `m2` are the
-signals `rcs_in1` ... `rcs_cond_n` (`rcs_` = row counter step logic), and the step signal is
-`rc_stepreq_n`. Bus line letters (A-G) and unit names are places, not signals.
+In this note `in1`, `in2`, `in3`, `e3`, `e4`, `w2`, `c1`, `a2`, `b1`, `x1` are the signals
+`rcs_in1` ... `rcs_x1` (`rcs_` = row counter step logic), `m2` is `rcs_cond_n`, and the
+step signal is `rc_stepreq_n`. Bus line letters (A-G) and unit names are places, not signals.
 
 ## Status
 
-Seventeen gates traced and extracted (48 transistors, no errors) in the first and middle
+Eighteen gates and one latch traced and extracted (52 transistors, no errors) in the first and middle
 clusters; the rest is surveyed only. The first cluster runs from y 2940 to y 5330.
 
 ```
@@ -22,7 +22,9 @@ c1         = NOR(a2, b1)                 east column, top of the cluster        
 b1         = NOR(x1, a2, rcs_u3425)      east column; third pull-down west of the rail (3046,3590), (2920,3628)
 rcs_u3425  = NOT rcs_bc3460              inverter; its output goes by a strap to b1's third gate
 rcs_bc3460 = NOR(e3, e4)                 a second copy of in3's function               (3046,3892)
-rcs_cond_n     = NOR(in2, in3)               feeds gate E0 further up                      (3046,4765)
+rcs_cond_n = NOR(in2, in3)               "m2": the step condition inverted              (3046,4765)
+rcs_cond   = NOT rcs_cond_n              inverter on the column above; on bus piece A3   (3046,4636)
+rcs_cond_lat <- rcs_cond while rcs_bb3807  pass transistor latch (AMB-009)                (3046,4546)
 rcs_u3288  = NOR(rcs_g3245, rcs_bd3330)                                                (3046,3288)
 rcs_n4200  = NOT(rcs_cond AND rcs_bb3807 OR rcs_g4240)   AND-OR-INVERT under the rail (3008,4200)
 in1        = NOR(rcs_mu, rcs_mv)         middle cluster                                (4081,4072)
@@ -83,6 +85,22 @@ rcs_mn3852 = NOR(?, in1)              the unit above in1's: in1 is one of its ga
 south at (4283,4745); `rcs_bq3335` is a bus piece (x 4148, y 3320-3596). `e3`'s metal goes
 east along y 2728 to x 4496, south to a contact (4490,3805), and on east in poly along
 y 3805: towards the **right cluster** (x 4650-5050).
+
+**What the step condition feeds (2026-11-17, extracted; one junction is AMB-009).**
+
+```
+rcs_cond     = NOT rcs_cond_n           = NOT e4 AND NOT (e3 AND a2): the bracket of the step formula
+rcs_cond_lat <- rcs_cond while rcs_bb3807 is high      pass transistor: a dynamic latch
+rcs_n4200    = NOT( rcs_cond AND rcs_bb3807  OR  rcs_g4240 )
+```
+
+`rcs_bb3807` (bus line B, y 3807-4552, at least four contacts) therefore behaves as a
+clock or strobe: it samples the step condition into a latch and, in the same phase, lets
+it through the AND-OR-INVERT gate. So the row counter's step is not only combinational:
+the condition is also remembered. Where `rcs_bb3807`, `rcs_cond_lat` and `rcs_n4200` go
+is the next thing to trace in this cluster. The column was read from the chip-2 shots at
+7x: where no metal lies over it, they show the poly bands and the diffusion edges (as
+lines across the bands) far more clearly than the clean shot.
 
 So the step logic is spread over all three clusters. They are one block of about 75 small
 gates and three bus fields, and they are being traced unit by unit from here on (no more
