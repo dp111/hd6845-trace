@@ -63,6 +63,9 @@ tools/t.sh BLOCK netlist.py
   line where there is none. On a long run, sample it: `--max N` in stages (`--max 800`,
   `900`, ...) prints where the line is after N px, which places each step to about 10 px.
   Keep `--gap` at its default: `--gap 50` joined a pad to a rail 40 px away.
+- `tools/tla_tracks.py` along a thin metal that horizontal polys cross is **not evidence**
+  for the metal: it reports the bright poly crossings as runs and, with a bridging gap,
+  joins them into a line that may not exist (or is right by luck). Use the metal shots.
   Use it for every long run; then look at its end, at each staircase it went through and
   at each "wide" stretch (traps 13-15). `tla_tracks.py` profiles a straight track for
   breaks; `tla_contacts.py` lists contact candidates on one; `strips.py --layer class`

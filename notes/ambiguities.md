@@ -314,3 +314,12 @@ the lower arm and the strip, and a dark line cannot show whether two regions mee
 item 1 stands as "a diffusion strip runs between the two arms; that it joins them is
 assumed".
 
+## AMB-016: two buried contacts in the gate column's top stretch (2026-11-27)
+
+`notes/blocks/tcw.md`, "Stretch A". (1) Pair 1's output arm to the poly of the pad
+(6355,2830): makes the output the bus net `tcw_m6362a`. (2) Pair 2's output arm to the
+C-shaped poly: makes `tcw_o2993` the first gate of pair 3. In both the class map shows
+an arm of open diffusion reaching west from the node to where a poly ends; the contact
+itself is not resolved (`?B`). **Adopted.** `tools/unsure.py` lists the first (two
+labels); the second has one label and is not seen by it.
+

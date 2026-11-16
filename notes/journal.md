@@ -1080,3 +1080,25 @@ the opposite way round from the clean shot's open-area legend (diffusion green).
 patch means field in one and diffusion in the other; name the shot whenever a colour is
 used as evidence.
 
+## 2026-11-27: the gate column's top stretch drawn; a wrong doubt and a wrong profile
+
+`trace/tcw.txt`: 2,047 nets, 3,429 transistors, no errors. The top stretch (six gates in
+three pairs) is drawn with its pads, polys and bus metals; the overlay sits on every pad
+ring. The first column of `tcw` now has sixteen of its seventeen gates in the trace.
+
+- The bus metal `tcw_m6404` gates four pull-downs of the column: a common enable.
+- The top pair's output is the bus net that gates stretch B's big gate (AMB-016).
+- What I held this stretch back for yesterday (two NANDs feeding each other) came from
+  assuming a poly reached a node; the class map shows 30 px of field between. Not drawn.
+
+Method: `tools/tla_tracks.py` along a thin metal that horizontal polys cross reports
+the crossings and misses the metal (unbridged) or invents continuity (bridged). For a
+bus, look at the metal shots; the profile is not evidence either way.
+
+**Open, in the order I would take them**
+
+1. East of the rail for the whole column (loads, output arms), now that every node on
+   the rail is named: start with pair 3's middle node and stretch B's big gate.
+2. The sources of `tcw_m6404`, `tcw_m6320`, `tcw_m6278`, `tcw_m6232` (their far ends).
+3. The second column; then the standing list (R8, `ras_o0_alt2`, `r9m`, `ral`, `bd2`).
+

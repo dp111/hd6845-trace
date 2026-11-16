@@ -88,21 +88,24 @@ C 6226,3526
 P 6222,3520:6572,3540                 # gate at y 3520-3540
 # --- the bus metals, from tools/tla_tracks.py (runs with gaps under 34 px bridged). Their ends and
 # any other taps along them have NOT been looked at: uncertain as nets.
-?M 6232,2875 y3852 w=12
+M 6232,2875 y3620 w=12
+?M 6232,3620 y3852 w=12
 N M 6232,3700 tcw_m6232
-?M 6320,2814 y3662 w=12
+M 6316,2787 y3662 w=12
 N M 6320,3500 tcw_m6320
 P 6298,3638:6334,3672                 # its lower pad (6315,3655); poly on west along y 3655 (not followed)
 C 6315,3655
 P 6315,3655 x6205 w=18
-?M 6372,3198 y3360 w=20
-N M 6372,3300 tcw_m6362a
+M 6360,2830 y3360 w=14
+M 6353,3344:6392,3368
+N M 6360,3300 tcw_m6362a
 ?M 6375,3437 y3570 w=20
 N M 6375,3500 tcw_m6362b
 P 6368,3550:6402,3584                 # its lower pad (6385,3567); poly east towards stack 3's output (join not read)
 C 6385,3567
 P 6385,3567 x6440 w=18
-?M 6404,2749 y3709 w=12
+M 6404,2745 y3620 w=12
+?M 6404,3620 y3709 w=12
 N M 6404,3600 tcw_m6404
 
 # ===== stretch B, east side (2026-11-26): what could be read with all five shots =====
@@ -131,3 +134,69 @@ D 6470,3546:6510,3566
 P 6436,3558:6484,3576
 ?B 6464,3550:6486,3578
 @alias tcw_o3550 tcw_m6362b
+
+# ===== stretch A, y 2690-3220: six gates in three pairs (2026-11-27; PARTIAL) =====
+# Views cache/scratch/rax/bus2.png (clean), bus2m.png (both metal shots: the bus metals and their
+# pad rings), railA.png, A_cm.png (class maps at 4x); gate positions from tools/railprof.py.
+# Outputs' loads and what lies east of the rail are NOT TRACED.
+#   tcw_m6362a (alias tcw_o2823): low through tcw_m6404 AND tcw_m6320            (pair 1)
+#   tcw_o2993                   : low through tcw_m6404 AND tcw_m6278            (pair 2)
+#   pair 3: rail contact | gate tcw_o2993 | tcw_o3115 | gate tcw_m6404 | tcw_o3180
+#           (which of the two nodes is the output is not settled: see the notes)
+M 6532,2690 y3200 w=50
+# pair 1: rail contact | gate | node | gate | output, with an arm west
+D 6500,2695:6550,2835
+C 6522,2712
+D 6445,2810:6505,2845
+N D 6520,2823 tcw_o2823
+@alias tcw_m6362a tcw_o2823
+P 6338,2813:6372,2847                 # pad (6355,2830) at the top end of the bus metal x 6360
+C 6355,2830
+P 6355,2822:6452,2840                 # its poly east to the arm
+?B 6440,2816:6464,2846
+# pair 2: rail contact (its box) | gate | node | gate | output, with an arm west
+D 6505,2862:6570,2905
+C 6535,2872
+D 6503,2862:6545,3008
+D 6505,2978:6565,3008
+D 6462,2983:6510,3010
+N D 6535,2993 tcw_o2993
+# the C-shaped poly from that arm down to the first gate of pair 3
+P 6468,3003 6393,3003 6393,3090 6535,3090 w=18
+?B 6452,2990:6474,3014
+# pair 3
+D 6490,3035:6555,3078
+C 6520,3052
+D 6490,3035:6532,3200
+D 6530,3105:6572,3125                 # the middle node's arm east (it goes on down the rail's east side: not traced)
+N D 6510,3115 tcw_o3115
+N D 6510,3180 tcw_o3180
+# --- gate polys and pads
+P 6386,2728:6420,2762                 # pad (6403,2745): top end of the bus metal x 6404
+C 6403,2745
+P 6403,2740:6550,2760
+P 6293,2770:6327,2804                 # pad (6310,2787): top end of the bus metal x 6316
+C 6310,2787
+P 6310,2786:6550,2806
+P 6383,2898:6417,2932                 # pad (6400,2915) on x 6404
+C 6400,2915
+P 6400,2910:6545,2930
+P 6255,2941:6289,2975                 # pad (6272,2958) on the bus metal x 6276
+C 6272,2958
+P 6272,2957:6545,2975
+P 6383,3118:6417,3152                 # pad (6400,3135) on x 6404
+C 6400,3135
+P 6400,3130:6535,3150
+# --- the bus metal x 6276: runs through the whole stretch (top and bottom not followed); second pad
+# (6272,3178) with a poly east along y 3180 whose end, short of the rail, is not resolved
+M 6276,2700 y3225 w=12
+N M 6276,3050 tcw_m6278
+P 6255,3161:6289,3195
+C 6272,3178
+P 6272,3172:6462,3190
+# --- the top end of tcw_m6232: pad (6230,2875) with a poly east along y 2877 to the rail's west edge
+# (what it does there is not resolved)
+P 6212,2858:6248,2892
+C 6230,2875
+P 6230,2868:6497,2886
+

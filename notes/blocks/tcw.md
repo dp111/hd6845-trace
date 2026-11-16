@@ -161,47 +161,56 @@ stack 1's top node (it may be how that node is connected: not read); a vertical 
 x 6640-6665 from y 3220 to y 3375 and another x 6600-6625, y 3320-3400. The load of
 `tcw_o3326` is among these and is not identified.
 
-### Stretch A, y 2690-3220: read, **not drawn** (2026-11-26)
+### Stretch A, y 2690-3220: six gates in three pairs (2026-11-27; drawn, partial)
 
-Views `bus2.png` (pads and gate polys west of the column, clean shot at 2.3x), `railA.png`
-(the rail in both metal shots and the clean shot at 2.4x); gate positions from
-`tools/railprof.py`.
+Views `bus2.png` (clean), `bus2m.png` (both metal shots: the bus metals and their pad
+rings), `railA.png`, `A_cm.png` (class maps at 4x); gate positions from
+`tools/railprof.py`; overlay check `A_chk.png` (it sits on all eight pad rings, the five
+bus metals and the three rail contacts). Six more transistors. From the extraction:
 
-Six gates in three series pairs. What the two views show:
+    pair 1:  tcw_m6362a  low through tcw_m6404 AND tcw_m6320
+    pair 2:  tcw_o2993   low through tcw_m6404 AND tcw_m6278
+    pair 3:  rail | gate tcw_o2993 | tcw_o3115 | gate tcw_m6404 | tcw_o3180
 
-| Gate (y under the rail) | Its poly comes from |
-|---|---|
-| 2740-2765 | pad (6405,2745) on the bus metal x 6404 |
-| 2791-2812 | pad (6310,2787) at the top end of the bus metal x 6320 (`tcw_m6320`) |
-| 2913-2934 | pad (6405,2915) on x 6404 |
-| 2957-2978 | pad (6265,2958) on the bus metal x 6278 |
-| 3086-3109 | a C-shaped poly from a structure at (6440-6500, 2985-3020) west of the rail, down x 6385-6405 and back east along y 3090: an internal connection |
-| 3140-3164 | pad (6405,3135) on x 6404 |
+| Gate (y under the rail) | Pad | Bus metal |
+|---|---|---|
+| 2740-2760 | (6403,2745) | `tcw_m6404` (top end) |
+| 2786-2806 | (6310,2787) | `tcw_m6320` (top end) |
+| 2910-2930 | (6400,2915) | `tcw_m6404` |
+| 2957-2975 | (6272,2958) | `tcw_m6278` |
+| 3081-3099 | none: a C-shaped poly from pair 2's output arm | (`tcw_o2993`) |
+| 3130-3150 | (6400,3135) | `tcw_m6404` |
 
-- **Rail contacts**: rings in both metal shots at (6533,2870) and (6527,3055), each in a
-  box that the clean shot outlines; in each of the two long diffusion runs the profile
-  reported (2813-2912, 2979-3085) a dark line separates an upper part (next to the pair
-  above) from the box with the contact. Probable further contacts at (6522,2712) and
-  (6512,3185), not clear.
-- **Outputs**: the pad (6360,2832) at the top end of the bus metal x 6362 has a poly that
-  ends in a buried-contact-like loop at (6445-6480, 2815-2850), beside the upper part of
-  the first long run. If the x 6362 metal is one piece from there to the pad (6378,3355)
-  (the track profile has a 37 px gap at y 3161-3198 where a poly crosses), then
-  `tcw_m6362a` is the output of the first pair: NAND of the nets on x 6404 and x 6320.
-  The pad (6265,3180) at the bottom end of the x 6278 metal has a poly east along y 3180
-  to the west side of the last diffusion run (3165-3215); the pad (6225,2877) at the top
-  end of `tcw_m6232` has a poly east along y 2877 to the rail at the height of the first
-  contact box.
-- **One bus net feeds four gates**: by the track profile the metal x 6404 is one piece
-  from y 2749 to y 3709, so the gates at 2740, 2913, 3140 and (stretch B) 3407 would all
-  be `tcw_m6404`. That depends on three contact rings having been bridged as gaps under
-  34 px; not checked on a view.
+- **`tcw_m6404` is one metal** from its top pad (6403,2745) through the pads (6400,2915)
+  and (6400,3135) to (6408,3393): seen continuous in both metal shots, a ring at each pad.
+  It gates four pull-downs of the column: a common enable or clock.
+- **Pair 1's output is `tcw_m6362a`**: the output node has an arm west (class map: open
+  diffusion at (6445-6500, 2810-2845)) to the end of the poly from the pad (6355,2830),
+  the top end of that bus metal, which runs unbroken (metal shots) down to the pad
+  (6378,3355) and the third gate of stretch B's big gate. Buried contact `?`.
+- **Pair 2's output feeds pair 3's first gate** through the C-shaped poly (arm west of the
+  node at (6462-6510, 2983-3010), buried contact `?`).
+- Rail contacts: (6522,2712) above pair 1; (6535,2872) and (6520,3052), each in a box cut
+  off from the output above it by a line of field.
 
-I did not draw this stretch: which end of each pair is the output rests on the two
-unclear contacts, and with the readings above taken at face value the second and third
-pairs come out as two NANDs feeding each other with the same enable on both, which is
-not a circuit anyone would build. Something in the pad-to-gate assignment or in the
-"one piece" reading of a bus metal is wrong, and it has to be found before drawing.
+Corrections to what I wrote on 2026-11-26, when I held this stretch back:
+
+- "One piece feeding four gates" was right; I doubted it for the wrong reason.
+- The "two NANDs feeding each other" reading is **not** established and is not drawn.
+  The class map shows the poly from the pad (6272,3178) (`tcw_m6278`, along y 3180)
+  stopping at x 6460, 30 px of field short of pair 3's last node; and pair 3's middle node
+  (`tcw_o3115`) has an arm east that goes on down the rail's east side. So pair 3 may be
+  a two-input NOR with its output in the middle (if the last node is on the rail: pit
+  marks at about (6520,3190), no clear ring) or a series pair with its output at the
+  bottom. Both nodes are labelled; neither is called the output.
+- The first track profile of the bus (2026-11-25) bridged gaps under 34 px. Unbridged, the
+  x 6404 track shows only short bright runs, at the heights of the horizontal polys: the
+  profile sees poly crossings as "metal" and misses the metal itself where a poly lies
+  under it. The metal shots are the evidence for the bus metals, not that profile.
+
+Not resolved in this stretch: where `tcw_m6278`'s poly along y 3180 ends; what the poly
+from `tcw_m6232`'s top pad (6230,2875) does at the rail's west edge (it arrives at the
+height of the first contact box); the loads; everything east of the rail.
 
 ## Not done
 
