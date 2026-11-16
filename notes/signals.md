@@ -51,6 +51,15 @@ at s0). Upper array (R4, R6, R7, R5 and their comparators): the slices that the 
 counter's lines at R5's comparator, `notes/blocks/rdp1.md`). R3's four slices (t0-t3 in
 the first notes) are bits 0-3 of that nibble.
 
+Central datapath (registers identified by their write strobes, `notes/blocks/wrs.md`):
+
+| Rows | Register | Slices |
+|---|---|---|
+| `cdp1` row A | R8 (6 bits) | columns c2-c7; which bit is which is not assigned |
+| `cdp1` row C, comparator row B | R9 (5 bits) | slices 1-5 = columns c3-c7; slice 5 believed bit 0 |
+| `cdp2` row A | R11 (5 bits) | s3-s7 |
+| `cdp2` row C, comparator rows B | R10 (7 bits) | s1-s7; s3-s7 compared, s7 = bit 0 ... s3 = bit 4 (from the `rax_o#` lines); s1, s2 the two mode bits |
+
 ## Supplies, pins and pad circuits
 
 | Name | What it is |
@@ -235,14 +244,14 @@ None of these rows has a register number yet, so all names are by place. Columns
 | Name | What it is |
 |---|---|
 | `cdp1_a#_*`, `cdp1_c#_*` | cdp1 rows A and C, static register bit in column #: `_x` storage node (bit line while the write line is high), `_q1` its inverse, `_q` output, `_bl` bit line, `_m#` metal straps of the cell |
-| `cdp1_a_wr`, `cdp1_c_wr` | write lines of rows A and C |
+| `wr_r8`, `wr_r9` | the write strobes of R8 and R9, which are the write lines of rows A and C: **row A is R8, row C is R9** (`notes/blocks/wrs.md`) |
 | `cdp1_b#_a`, `cdp1_b#_b` | cdp1 row B comparator, slice #: its two inputs |
 | `cdp1_b#_n2`, `cdp1_b#_ne` | NOR(a, b) and a XOR b |
-| `cdp1_b_eq` | NOR of the five `_ne`: high when the two 5-bit values are equal |
+| `cdp1_b_eq` | NOR of the five `_ne`: high when R9 equals the 5-bit value on the `_b` lines (in slice 5 the register bit is replaced by `cdp1_b5_a`, made by `tc1`) |
 | `cdp1_l#`, `cdp1_lw#` | horizontal lines of the data bus channel, named by their y; and two write-line links |
 | `cdp2_a_s#_*` | cdp2 row A (5-bit latch), slice #: `_a` storage node, `_n2` inverse, `_q` output, `_bus` bit line |
 | `cdp2_a_c_s#_*` | cdp2 row C (7-bit latch), the same nodes |
-| `cdp2_a_ld`, `cdp2_c_ld` | load strobes of rows A and C |
+| `wr_r11`, `wr_r10` | the write strobes of R11 and R10, which are the load strobes of rows A and C: **row A is R11, row C is R10** (`notes/blocks/wrs.md`) |
 | `cdp2_a_s#`, `cdp2_c_s#`, `cdp2_c_s#_bus` | per-slice lines and bit lines of those rows |
 | `cdp2_b_s#`, `cdp2_b_s#_*` | cdp2 row B comparator with a ripple chain, slice #: `_y` = NOR(q, t), `_ne` = q XOR t, `_x` chain output of the slice, `_o2` inverse of the previous slice's chain output, `_p1` internal node |
 | `cdp2_b_cin`, `cdp2_b_hl` | chain input of that comparator; and a row-long line pulled low per bit |
@@ -821,3 +830,7 @@ datapath s1...s7, s0 became b0...b6, b7.
 | ch1w_5848 | cdp2_trk_s5 | |
 | ch1w_5800 | cdp2_trk_s4 | |
 | ch1w_5758 | rax_o4 | |
+| cdp1_a_wr | wr_r8 | |
+| cdp1_c_wr | wr_r9 | |
+| cdp2_a_ld | wr_r11 | |
+| cdp2_c_ld | wr_r10 | |

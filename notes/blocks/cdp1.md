@@ -97,7 +97,7 @@ the diffusion under m6 at 9104-9130.
   would look like (three shared, three not), which is R8's pattern; with the width of six
   it is the reason for the R8 belief. Not proven: the bus lines are not followed to the
   data pads, and the write line is not followed to a strobe.
-- `cdp1_a_wr`: one poly line that meanders through the cells; its west end is the leg
+- `wr_r8`: one poly line that meanders through the cells; its west end is the leg
   of cell a0 (8395-8445 x 3250-3322, nothing connected there); east of the block it
   ends on a contact at (10890,3308) to a metal line that runs south at x 10894 and
   shifts to x 10937 at y 4420-4440 (seen and scanned; outside the block).
@@ -109,7 +109,7 @@ the diffusion under m6 at 9104-9130.
   of that slice's XOR. c5's `q` goes up at x 10634 past row B to the lower poly line under
   row A and west out of the block (to tc1's island, which returns the bit for slice 5's
   XOR: see row B).
-- `cdp1_c_wr`: the same kind of meander, y 4494-4516. West end: the leg of cell c1 under
+- `wr_r9`: the same kind of meander, y 4494-4516. West end: the leg of cell c1 under
   slice 1's VSS rail (x 8780), nothing connected. East of the block it ends on a contact
   at (10893,4505) to a metal line going south at x 10894 (below where row A's line has
   left that track).
@@ -289,8 +289,8 @@ have to be followed east.
 | `cdp1_a3_q` | P | 9872,2950 (pad with metal contact at 9865,2940 just above) | out | row A bit, slice 3 |
 | `cdp1_a4_q` | M | 10275,2950 going up | out | row A bit, slice 4 |
 | `cdp1_a5_q` | P | 10665,2950 (pad with metal contact at 10655,2940 just above) | out | row A bit, slice 5 |
-| `cdp1_a_wr` | P | 10850,3311 going east; contact (10890,3308) to metal south at x 10894, shifting to x 10937 at y 4420-4440; that line is at x 10937 at y 5700 | in | row A write line. Not followed to its strobe |
-| `cdp1_c_wr` | P | 10850,4505 going east; contact (10893,4505) to metal south at x 10894; at x 10894 at y 5700 | in | row C write line. Not followed to its strobe |
+| `wr_r8` | P | 10850,3311 going east; contact (10890,3308) to metal south at x 10894, shifting to x 10937 at y 4420-4440; that line is at x 10937 at y 5700 | in | row A write line. Not followed to its strobe |
+| `wr_r9` | P | 10850,4505 going east; contact (10893,4505) to metal south at x 10894; at x 10894 at y 5700 | in | row C write line. Not followed to its strobe |
 | `cdp1_b5_a` | P | 8285,3351 (drawn to there to meet `trace/tc1.txt`) | in | = `tc1_f`. A input of slice 5's XOR |
 | `cdp1_c5_q` | P | 8285,3396 (likewise) | out | = `tc1_a`. Row C's fifth bit |
 | `cdp1_bK_b` (K = 1..5) | P | 10850, y 4176, 4132, 4089, 4046, 4003 | in | the compare value, one bit per line; K = 5 is the top line |
@@ -409,7 +409,7 @@ have to be followed east.
   - cdp2 reports that its row A's outputs come up to contacts at (9118+390k,5740) and
     that its bus lines are these bit lines.
 - The logic in the slice-0 position and under slice 1's left edge (see Inventory).
-- **The write strobes.** `cdp1_a_wr` and `cdp1_c_wr` leave on two metal lines going south
+- **The write strobes.** `wr_r8` and `wr_r9` leave on two metal lines going south
   just east of the block (x 10937 and x 10894 at y 5700). `sel_tracks.py` shows both
   unbroken to y 6209 / 6255, where a group of lines (x 10894, 10937, 10981) shifts
   track one after another (again near y 7690 and 8700). Following them means following
@@ -447,3 +447,11 @@ have to be followed east.
 - Contact test used throughout: a metal contact is a greenish patch in the clean shot
   (R about equal to G, B under 100: 160/165/93, 143/135/80), plain poly under metal is
   216/160/115, a buried contact under metal 172/139/115.
+
+## Which registers these are (2026-11-20)
+
+By their write lines, followed to the strobe tracks and joined in the extraction
+(`notes/blocks/wrs.md`): **row A is R8, row C is R9**, and row B is R9's equality
+comparator. The five compare-value lines of channel B/C leave east along y 4003-4176 and
+were followed 3,300 px east to the RA pad drivers' input lines (not drawn).
+

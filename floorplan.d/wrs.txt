@@ -1,0 +1,5 @@
+# wrs: the write strobes of R8-R11 to their register rows
+10870,3290:11130,10240   route   write strobes R8-R11, north | four nested metals up the central datapath's east edge, one ending on each register row's strobe
+10980,10160:11560,10680  route   write strobes R8-R11, diagonal | the four lines on a 45-degree diagonal
+11400,10600:11650,17270  route   write strobes R8-R11, south | four metals down to the bottom bus
+11500,17110:14100,17275  route   write strobes R8-R11, bottom | along y 17128-17258, under the vertical trunks in poly, to the strobe tracks

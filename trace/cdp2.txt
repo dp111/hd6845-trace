@@ -153,7 +153,7 @@ N M 9246,6000 cdp2_a_s4_bus
 N M 9636,6000 cdp2_a_s5_bus
 N M 10026,6000 cdp2_a_s6_bus
 N M 10416,6000 cdp2_a_s7_bus
-N P 9450,6324 cdp2_a_ld
+N P 9450,6324 wr_r11
 
 # =====================================================================================
 # Channel 1 (y 5720-6060): how row A's outputs leave. Every crossing of a track with a
@@ -306,7 +306,7 @@ N M 9246,7600 cdp2_c_s4_bus
 N M 9636,7600 cdp2_c_s5_bus
 N M 10027,7600 cdp2_c_s6_bus
 N M 10417,7600 cdp2_c_s7_bus
-N P 9450,7800 cdp2_c_ld
+N P 9450,7800 wr_r10
 
 # --- row C, tops of s1 and s2 (different from s3..s7): the outputs leave to the left on
 # two poly lines; no crossing on the way has a contact (tested).

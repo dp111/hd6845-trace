@@ -197,8 +197,8 @@ M 10672,4235 y4257 w=22
 
 # The write line of each row: one poly line that meanders through the cells (leg up,
 # gate strip, elbow down, on to the next slice). Named where it passes under a VCC rail.
-N P 9010,3311 cdp1_a_wr
-N P 9010,4505 cdp1_c_wr
+N P 9010,3311 wr_r8
+N P 9010,4505 wr_r9
 
 # ---------------------------------------------------------------------------------
 # Row B, upper half: a diffusion line along the whole row (y 3505-3542), pulled to VSS

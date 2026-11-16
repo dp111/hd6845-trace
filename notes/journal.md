@@ -865,3 +865,30 @@ strap between two poly pads, destination not read.
 5. As before: `lc_step`; `sl_eq_r5`; `inh_src`'s three ends; `rdp2`'s routing zone; R3's
    high nibble and `c4l`; `e4`.
 
+## 2026-11-20: R8, R9, R10, R11 identified by their write strobes
+
+The user doubted that the 7-bit row with the comparator is R10. Settled by tracing
+instead of by elimination: the four strobe tracks T3-T6 followed 11,000-14,000 px each
+to the central datapath (`trace/wrs.txt`, `notes/blocks/wrs.md`). The extraction joins
+`wr_r8` to `cdp1` row A (6 bits), `wr_r9` to `cdp1` row C (5), `wr_r11` to `cdp2` row A
+(5), `wr_r10` to `cdp2` row C (7). 2,021 nets, 3,380 transistors, no errors.
+
+So the 7-bit row is R10 (five raster bits and two cursor mode bits), and **R9's
+comparator is found**: `cdp1`'s row B, traced weeks ago without a name. One of its five
+bits does not take the register bit but the output of the island `tc1`, switched by
+`tc1_b`: the place where interlace changes the R9 compare. Its compare value comes from
+the RA pad drivers' input lines (followed, not drawn), not from the lines R10 uses.
+
+**Method**
+
+- An identification "by elimination" is a guess. Where a register row's strobe can be
+  followed to a decoder line, do that first: here it took four follower runs.
+- `tools/follow.py` does not report diagonals (tracing guide, tools).
+
+**Open, in the order I would take them**
+
+1. R9's five compare-value lines to their sources; `tc1_b`, `tc1_g`, `tc1_i`.
+2. The `ral` cell (twenty copies) and its strobe.
+3. `bd2`: `wr_data_e_n`'s destination.
+4. The selector's gate lines; `rax`'s load; then as before.
+

@@ -74,7 +74,7 @@ the most significant of the five compared bits, s7 the least.**
 | 5720-6060 | channel 1: horizontal poly lines at y 5826, 5870, 5913, 5956, 6000 (long), 6042 and 5783 (short), pads at y 5740; they feed the through tracks; row A's q tracks cross them | - | traced between x 8480 and 10850 |
 | 6020-6345 | **row A: five static latch bits** `cdp2_lat` | s3..s7 (x 8790-10745) | traced |
 | 6000-6310, x 7700-8300 | random logic left of row A | - | not traced |
-| 6314-6334 | row A's load strobe `cdp2_a_ld` (poly, loops through every cell) | - | traced inside the row; ends not followed |
+| 6314-6334 | row A's load strobe `wr_r11` (poly, loops through every cell) | - | traced inside the row; ends not followed |
 | 6350-6900 | channel 2: 13 horizontal poly lines, pitch 43.3, at y 6366, 6410, 6456, 6498, 6542, 6584, 6626, 6672, 6714, 6756, 6802, 6844, 6888. Per-slice metal lines and rails cross over them | - | not traced |
 | 6940-7480 | **rows B1/B2: 5-bit comparator**, cell `cdp2_cmp` (row C's register against the through tracks) | s3..s7 | traced |
 | 6948-6966 | `cdp2_b_hl`: diffusion line along rows B, x 8705-10762 | - | traced; its metal exit at the left followed to y 7400 |
@@ -97,7 +97,7 @@ that cell onto this one within a few px. Each feature was nevertheless placed fr
 row's photos. Six transistors:
 
 ```
-a   <- bus    pass transistor T1 (36/23 at 9246,6278), gate cdp2_a_ld
+a   <- bus    pass transistor T1 (36/23 at 9246,6278), gate wr_r11
 n2  = NOT a   pull-down T2 50/22 at 9243,6175; load 16/51 at 9345,6224
 q   = NOT n2  pull-down T1' 53/22 at 9534,6226; load 28/54 at 9445,6266
 a  <-> q      hold device 15/83 at 9390,6120, gate tied to VSS
@@ -108,7 +108,7 @@ a  <-> q      hold device 15/83 at 9390,6120, gate tied to VSS
   the strobe gate and ends on a buried contact (9226-9264 x 6208-6230) to the poly that
   runs up under the bus line (gate of T2, node a) and on to the right (y 6119-6139) to a
   second buried contact on the feedback land (9300-9346 x 6110-6138).
-- **Strobe** `cdp2_a_ld`: one poly line, y 6314-6334, through the whole row. In each cell
+- **Strobe** `wr_r11`: one poly line, y 6314-6334, through the whole row. In each cell
   it turns up at x 9196-9219, crosses the strip at y 6266-6289 (T1's gate) and comes
   down at x 9298-9320, so the bus contact sits inside the loop. All five bits load
   together when it is high. The line runs on to the right past s7 (seen to x 10884 at
@@ -201,7 +201,7 @@ Tested in all seven slices (contact test): track b's contact to the n2 land, the
 contact of track c on the q drain, the band's contact to the VSS rail are there; track
 c's lower end over the strobe line has no contact.
 
-- Strobe `cdp2_c_ld`: poly line y 7790-7810, loops through the seven cells as in row A.
+- Strobe `wr_r10`: poly line y 7790-7810, loops through the seven cells as in row A.
   By colour it runs from about x 7650 to past x 10885. Ends not traced.
 - Top of the cell, s3..s7 (identical, cellcheck 0-6 %; from a 7-instance composite
   `--comp cdp2_ctop`): the **output q leaves upward in poly** (x 9502-9520, no metal, no
@@ -228,7 +228,7 @@ c's lower end over the strobe line has no contact.
 Believed: a 7-bit register of which two bits (s1, s2) are used to the left of the array
 and five (s3..s7) are compared in rows B with the 5-bit value on the through tracks.
 That 5 + 2 split fits **R10** (cursor start raster in bits 0-4, blink mode in bits 5-6)
-better than R4, R6 or R7. A guess from widths only: the strobe `cdp2_c_ld` has not been
+better than R4, R6 or R7. A guess from widths only: the strobe `wr_r10` has not been
 followed to a select line.
 
 ### Channel 2 (surveyed, tested; line 6888 traced)
@@ -364,8 +364,8 @@ How the nets are made (coordinates of the master):
 | `cdp2_b_hl` | metal | x 8725, y 7400 (ends there on a diffusion in the logic left of rows B; not traced) | out | comparator's wired line: low when (believed) enable and N > register |
 | `cdp2_b_cin` | poly | y 7252, x 8650 (comes from the left; not followed) | in | chain input of the comparator (believed: enable, active low) |
 | `cdp2_b_s7_x` | metal | x 8685, y 7300 (seen to there; goes on down into the logic left of rows B). Route: poly up at x 10811, west along channel 2's line y 6888 across the whole array, down at x 8672-8692, contact (8683,7018) | out | chain output: low when (believed) enable and N == register |
-| `cdp2_c_ld` | poly | y 7800, x 10850 (east edge). Ends 46 px beyond on a contact (10894,7801) to a metal line that goes south at x 10894 (metal unbroken to y 9400 at least by profile). West end: poly colour to about x 7650, not examined | in | load strobe of row C |
-| `cdp2_a_ld` | poly | y 6324, x 10850 (east edge). Ends on a contact (10896,6325) to a metal line going south at x 10896 as far as y 7715, where it must step east (to about x 10940: the same staircase cdp1 and cdp3 report) to pass row C's contact. West end: s3's cell (x 8780); the poly seen at x 8518-8690 on the same y is a separate piece (field between, x 8704-8764) | in | load strobe of row A |
+| `wr_r10` | poly | y 7800, x 10850 (east edge). Ends 46 px beyond on a contact (10894,7801) to a metal line that goes south at x 10894 (metal unbroken to y 9400 at least by profile). West end: poly colour to about x 7650, not examined | in | load strobe of row C |
+| `wr_r11` | poly | y 6324, x 10850 (east edge). Ends on a contact (10896,6325) to a metal line going south at x 10896 as far as y 7715, where it must step east (to about x 10940: the same staircase cdp1 and cdp3 report) to pass row C's contact. West end: s3's cell (x 8780); the poly seen at x 8518-8690 on the same y is a separate piece (field between, x 8704-8764) | in | load strobe of row A |
 | `vss` | metal | x 8794, 9184, 9574, 9964, 10354, 10744 (46 wide) at y 5960 and y 7830; x 8013, 8403 at y 7425 and 7830 | - | rails, run on both ways |
 | `vcc` | metal | x 9010 + 390k (50 wide) at y 5960; x 8997 + 390k (54 wide) at y 7830; x 8229, 8619 at y 7425 | - | rails, run on both ways |
 | channel 2 lines | poly | y 6366, 6410, 6456, 6498, 6542, 6584, 6626, 6672, 6756, 6802, 6844 at x 7600 and x 10850 (poly colour across the whole width by `cdp2_lines.py`; not drawn, not checked by eye outside s3..s7) | ? | pass over the array without contact in s3..s7; line 6714 is cut into pieces with contact pads at (8145,6705), (8315,6703), (8708,6703) |
@@ -501,4 +501,11 @@ that s3 does not tie to. East of this block each ends on a pad (x 10975-11150) a
 in metal to the logic in front of the RA pad drivers. So row B compares row C's register
 with the row address (after the selector; polarity set by the units, not traced), and the
 "through tracks" are driven from the west, not by row A.
+
+## Which registers these are (2026-11-20)
+
+By their load strobes, followed to the strobe tracks and joined in the extraction
+(`notes/blocks/wrs.md`): **row A is R11, row C is R10.** The "guess from widths only"
+above is now a traced result, subject only to the decoder's numbering of its select
+lines. Row B therefore compares R10's five low bits with the row address lines `rax_o#`.
 

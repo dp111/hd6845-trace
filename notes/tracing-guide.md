@@ -54,6 +54,11 @@ tools/t.sh BLOCK netlist.py
 - `tools/t.sh BLOCK follow.py X Y N|S|E|W [--trace]` follows ONE metal line from a point on
   it (2 px steps, both chips' metal shots, corners and diagonals) and prints corners,
   wide stretches, contact candidates and the end, or the piece as a trace-file `M` line.
+  It follows diagonals but does **not report them as corners**: a 44 px diagonal step or a
+  400 px diagonal run leaves no line in its output, and its `M` line then draws a straight
+  line where there is none. On a long run, sample it: `--max N` in stages (`--max 800`,
+  `900`, ...) prints where the line is after N px, which places each step to about 10 px.
+  Keep `--gap` at its default: `--gap 50` joined a pad to a rail 40 px away.
   Use it for every long run; then look at its end, at each staircase it went through and
   at each "wide" stretch (traps 13-15). `tla_tracks.py` profiles a straight track for
   breaks; `tla_contacts.py` lists contact candidates on one; `strips.py --layer class`
