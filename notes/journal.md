@@ -1001,3 +1001,9 @@ top piece ends at the bottom edge of `rc0`'s row), `fld_y_b`, `fld_a_in`, `ras_o
 2. R9's match (`r9m`): draw it, settle AMB-013 through the bundle's first line.
 3. The `ral` cell and its strobe; loads of `rax` and of the R9 units; `bd2` (R12).
 
+**Same day, later.** A third gate below R8's row: `tc1_x1` = NOT `ras_o0_sel1`
+(`trace/shm.txt`), a line the island's notes had as "only passes through". It goes on
+into the west part of `fld`'s upper group, which is therefore the next piece: it sits
+between `tc1_x1` and the still unsourced `fld_a_in`, `fld_y_b`, `ras_o0_alt2`. I did not
+join `tc1_x1` to `fld_a_in` although the first view suggested it: they are two lines.
+

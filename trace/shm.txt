@@ -81,3 +81,24 @@ P 9836,2857 x10022 w=18
 P 10005,2840:10039,2874
 C 10022,2857
 M 10022,2857 x10282 y3030 w=13
+
+# ===== a third gate in the same column, 175 px below the inverter (y 4165-4280) =====
+# The same inverter layout (cache/scratch/rax/g3.png, x1e.png): VSS contact (8432,4185), gate
+# poly y 4212-4232 = the island's line ras_o0_sel1 arriving from the west, output band
+# y 4238-4270 east to a load and the VCC contact (8618,4240), west through a buried contact to
+# the poly tc1_x1 (trace/tc1.txt draws both polys to x 8350).
+#   tc1_x1 = NOT ras_o0_sel1
+D 8405,4165:8472,4207
+C 8432,4185
+D 8405,4203:8490,4270
+D 8405,4238:8650,4270
+P 8340,4212:8490,4232
+P 8535,4225:8585,4278
+P 8515,4237:8540,4268
+?B 8512,4233:8542,4272
+C 8618,4240
+D 8370,4240:8410,4270
+?B 8365,4243:8400,4272
+P 8340,4255:8398,4275
+M 8440,4130 y4300 w=50
+M 8622,4130 y4300 w=55

@@ -124,6 +124,27 @@ look at the row in three shots (`la_r10.png`) does not show a pad on the metal.
 - `cnt_la_a_n` south of (6882,6220), `rc0_n` south of (6930,6220), `fld_y_b` west of
   (6560,6085), `fld_b_in`'s line west of (6560,5345), `fld_a_in`'s line (y 4910) west.
 
+## Read on the way, not drawn (2026-11-22)
+
+Views `yb1.png`, `yb2.png`, `yb3.png`, `rf.png`, `rfR_c.png`, `rfW_c.png`, `four_a.png`,
+`pad4478.png`.
+
+- `fld_y_b`: from the pad (6660,6085) a poly west to x 6558, north to a pad (6535,5848);
+  metal north along x 6536 to y 5482, west, north along x 6404 to y 4869 (follower); its
+  top end at about (6405,4870) not looked at.
+- `tc1_x1` (= NOT `ras_o0_sel1`, `notes/blocks/shm.md`) arrives in the routing field as
+  the poly x 7015 from the north, turns west at y 4865 and ends on a pad (6490,4893);
+  metal from there to the pad (6447,5045) with a poly foot beside the VCC box
+  (6540,5095): an input of the untraced west part of the upper group.
+- `fld_a_in`'s line (y 4910) continues west past x 6600 (a small jog to y 4935) to a pad
+  at about (6300,4930). **It is not `tc1_x1`**: the two lines run 45 px apart for
+  400 px. (If they were one net the island's second AND term would be dead; that
+  absurdity was the reason to look twice before joining them.)
+- So the upper group's west part (x 6380-6700, y 5000-5290: two loads, a buried-contact
+  box between them, gates under the thin metals) takes at least `tc1_x1` and makes
+  something on the way to `fld_a_in`, `fld_y_b` or `ras_o0_alt2`. It is the next thing
+  to trace here.
+
 ## Not done
 
 Everything under "Followed, not drawn"; the routing field y 4720-4990 (seven horizontal

@@ -37,6 +37,22 @@ Ten transistors with the island's two that it already had on the net; five are n
 here. The four buried contacts are marked `?` (placed from the heavy dark boxes at the
 poly ends); everything else is plain in the clean shot at 2.7-2.9x.
 
+## A third gate in the same column (2026-11-22)
+
+175 px below the inverter, same layout (`g3.png`, `x1e.png`): VSS contact (8432,4185),
+gate poly y 4212-4232, output band y 4238-4270 with its load and the VCC contact
+(8618,4240). Its gate is the island's line `ras_o0_sel1`, which `trace/tc1.txt` had drawn
+"to the datapath"; its output goes through a buried contact (`?`) to the poly that the
+island's notes call `tc1_x1` ("a line that only passes through"). From the extraction:
+
+    tc1_x1 = NOT ras_o0_sel1        = NOT(ras_shift AND R9 bit 0)
+
+`tc1_x1` runs back west past the island, down the metal x 7058 to a pad (7055,4478), and
+on south as the fourth of the diagonal polys above the selector (x 7015 at y 4640-4800),
+then west along y 4865 to a pad (6490,4893) whose metal goes to the pad (6447,5045) in the
+untraced west part of `fld`'s upper group. Followed on views, **not drawn** beyond the
+pad (7055,4478).
+
 ## The two inputs
 
 The metals ns5 (x 8270) and ns6 (x 8314) of `trace/tc1.txt` come from two of five
