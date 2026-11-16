@@ -145,6 +145,34 @@ Views `yb1.png`, `yb2.png`, `yb3.png`, `rf.png`, `rfR_c.png`, `rfW_c.png`, `four
   something on the way to `fld_a_in`, `fld_y_b` or `ras_o0_alt2`. It is the next thing
   to trace here.
 
+## The upper group's west part: first reading, not drawn (2026-11-22)
+
+Views `fw1.png`, `fw2.png` (chip-2 stripped shot at 4x), `nor_cm.png` (class map with
+`--open`), `nor_c.png`. **A reading from one class map and two views; nothing of it is in
+the trace.**
+
+- The wide rail x 6520-6580 has two diffusion boxes with contact pits under it,
+  (6548,5097) and (6548,5257). By the alternation of the rails here (x 6725 carries the
+  inverters' loads, x 6902 their pull-downs) this rail is VSS and the boxes are sources.
+- West of the rail, between the boxes, two poly blobs (6480-6505, 5120-5140) and
+  (6480-6505, 5210-5230) lie on what the class map gives as open diffusion running
+  north-south at x 6480-6520; between them a small box (6480-6520, 5160-5195).
+  Reading: two pull-downs with a common output node between them: a 2-input NOR.
+- Its inputs: the upper blob is the foot of the poly from the pad (6447,5045), which is
+  `tc1_x1`; the lower blob is the foot of a poly that comes up x 6425-6445 from the
+  south (below y 5290, not followed; the gate line of the lower inverter, `fld_b_in`,
+  passes there along y 5345).
+- Its output: a poly along y 5172-5188 leaves the box both ways: east under the rail to a
+  block (6648-6680, 5172-5195) that the class map gives as poly over a channel (the load,
+  under the thin metal x 6660, towards the VCC box at x 6705-6755), and west along
+  y 5175 past x 6400 (a poly along y 5170 is seen further west turning north at x 6260
+  and west along y 5040).
+
+If that reading holds the block makes NOR(`tc1_x1`, something) and sends it west, away
+from the selector: it would not be the source of `fld_a_in`, `fld_y_b` or `ras_o0_alt2`
+after all. Those three then come from further west or north (pads at x 6300-6500,
+y 4780-4930), where the field of vertical polys x 6050-6400 passes.
+
 ## Not done
 
 Everything under "Followed, not drawn"; the routing field y 4720-4990 (seven horizontal
