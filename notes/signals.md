@@ -300,7 +300,9 @@ Row tags `s0` ... `s13` are rows from the top; which MA bit each is has not been
 |---|---|
 | `tc1_l4_out`, `tc1_r#_out` | the island's remaining internal outputs: `tc1_r1_out` = NOT R9 bit 0; `tc1_r2_out` = NOR(R9 bit 0, `ras_shift`); `tc1_r5_out` = NOT((`tc1_i` AND `ras_o0_sel1`) OR (`tc1_g` AND `ras_o0_sel2`)), `tc1_r4_out` its inverse; `tc1_l4_out` = NOR(`ras_o0_sel2`, `tc1_w1`), leaves west |
 | `tc1_g`, `tc1_i`, `tc1_w#`, `tc1_x#` | the island's other inputs and channel lines. `tc1_g` and `tc1_i` are used where the selector uses `ras_o0_alt2` and `ras_o0_alt1`; each is the output of a small inverter west of the selector (`notes/blocks/fld.md`), and they are **not** shown to be the selector's two nets |
-| `fld_a_in`, `fld_b_in` | gates of the two inverters whose outputs are `tc1_g` and `tc1_i` (`notes/blocks/fld.md`): a poly along y 4910 from the west, and a poly along y 5345 from the west through the pads (7032,5345) and (7030,5215). Sources not traced |
+| `fld_a_in`, `fld_b_in` | gates of the two inverters whose outputs are `tc1_g` and `tc1_i` (`notes/blocks/fld.md`). `fld_a_in`: a poly along y 4910 from the west, source not traced. `fld_b_in` = `fld_x_a` XOR `tc1_g` (output of the first XOR cell) |
+| `fld_x_a`, `fld_y_a`, `fld_y_b` | inputs of the two XOR cells west of the selector (x = first cell, y = second; `_a` the poly input, `_b` the metal input; the first cell's `_b` is `tc1_g`). `ras_o0_alt1` = `fld_y_a` XOR `fld_y_b`. Sources not traced |
+| `cdp1_fx_n2`, `cdp1_fy_n2`, `cdp1_fx_b`, `cdp1_fy_b` | names that the comparator cell's template gives the two copies west of the selector: `_n2` the cell's internal NOR of its inputs; `cdp1_fx_b` is an alias of `tc1_g`, `cdp1_fy_b` of `fld_y_b` |
 | `tc1_ns#` | north-south lines ns1-ns6 east of the island |
 | `bc1_s#`, `bc1_s#_n` | the two bus lines the 2-bit decoder decodes, and their inverses |
 | `bc1_dec#_n` | decoder outputs, active low (00, 10, 01) |

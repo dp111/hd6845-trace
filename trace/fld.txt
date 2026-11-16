@@ -56,3 +56,80 @@ M 7030,5215 y5340 w=14                # south to a pad at about (7032,5345) (NOT
 D 6962,5172:6992,5192
 B 6965,5162:7000,5196                 # the island's input poly (trace/ras.txt) arrives here from the east
 N P 6950,5216 fld_b_in
+
+# ===== the lower gate group (x 6580-6990, y 5410-5760): a copy of the comparator's XOR cell =====
+# tools/findcell.py: the group matches trace/cdp1.txt's row B slices with scores 0.88-0.91.
+@requires cdp1
+@inst cdp1_xor -2581,1758 tag=fx
+@alias tc1_g cdp1_fx_b
+# Its rails (west VSS, VCC, east VSS) and the VSS diffusion on the east side that the next slice
+# provides in the comparator rows (contact (7005,5615), ring in the metal shot)
+M 6600,5400 y6110 w=50
+N M 6600,5500 vss
+M 6820,5400 y5690 w=40
+M 6820,5760 y6040 w=40                # (the rail widens east between the two cells: not drawn)
+N M 6820,5900 vcc
+N M 6820,5450 vcc
+M 7003,5400 y6110 w=50
+N M 7003,5500 vss
+D 6967,5458:7030,5660
+D 6949,5622:6990,5658
+C 7005,5615
+# input B is tc1_g: from the pad (6985,4958) a poly west along y 4958 to a pad (6660,4958), metal
+# south along x 6665, a diagonal, south along x 6753 onto the cell's upper pad (follower; fldD.png)
+P 6985,4958 x6660 w=18
+P 6643,4941:6677,4975
+C 6660,4958
+M 6665,4954 6665,5300 6735,5368 6753,5368 6753,5430 w=13
+# input A: the cell's poly ends on a pad (6925,5718); metal west and south along x 6885 to y 6070
+# (follower; its end not looked at)
+P 6908,5701:6942,5735
+C 6925,5718
+M 6925,5720 x6885 y6070 w=11
+N M 6885,5900 fld_x_a
+# output: the cell's diffusion "ne" at (6623-6689, 5436-5456). In the comparator a buried contact
+# there takes it to the NOR's gate; here a poly comes down x 6665 to that spot from the line along
+# y 5345, which is the gate line of the lower inverter above (fld_b_in). The buried contact itself
+# is not resolved in any shot: ASSUMPTION (trap 17).
+P 7015,5328:7049,5362
+C 7032,5345
+P 7032,5345 x6560 w=18                # goes on west (NOT DRAWN further)
+P 6665,5345 y5452 w=16
+?B 6652,5434:6680,5458
+
+# ras_o0_alt1 passes through here: from its poly's west end at a pad (6615,5303) a metal on a
+# diagonal and south along x 6663, over the cell without a contact, to a pad (6662,5712)
+P 7078,5303 x6615 w=18
+P 6598,5286:6632,5320
+C 6615,5303
+M 6615,5303 6625,5320 6662,5362 6663,5714 w=10
+?P 6645,5695:6679,5729                # what is under this pad was not looked at
+C 6662,5712
+
+# ===== a second copy of the XOR cell, 347 px below the first (x 6580-6990, y 5757-6100) =====
+@inst cdp1_xor -2581,2105 tag=fy
+@alias fld_y_b cdp1_fy_b
+# its east VSS diffusion and contact (7005,5962)
+D 6967,5805:7030,6007
+D 6949,5969:6990,6005
+C 7005,5962
+# input B: the cell's metal goes on south to y 6085 and west to a pad (6660,6085); poly west along
+# y 6085 (NOT DRAWN beyond x 6560)
+M 6754,6085 x6655 w=14
+P 6643,6068:6677,6102
+C 6660,6085
+P 6660,6085 x6560 w=18
+N P 6600,6085 fld_y_b
+# input A: the cell's poly goes on south along x 6930 (NOT DRAWN beyond y 6220)
+P 6930,6060 y6220 w=18
+N P 6930,6150 fld_y_a
+# the first cell's input A (fld_x_a): its metal ends on a pad (6880,6062); poly south along x 6882
+# (NOT DRAWN beyond y 6220)
+P 6863,6045:6897,6079
+C 6880,6062
+P 6882,6062 y6220 w=18
+# output: as in the first cell, a poly comes down onto the cell's "ne" diffusion, here from the
+# pad (6662,5712) of ras_o0_alt1's metal. Buried contact not resolved: ASSUMPTION (trap 17).
+P 6662,5712 y5800 w=16
+?B 6652,5781:6680,5805
+

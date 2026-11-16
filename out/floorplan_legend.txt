@@ -74,7 +74,7 @@
 -	route	poly lines under the foot of the step logic cluster	2440,5370:3270,5640	six horizontal poly lines joining the bus lines west and east of the cluster; one carries the strobe clk_tl west
 -	?logic	small cluster below the step logic	2440,5650:3090,6330	not traced; ck_out reaches it from the left-edge trunk
 -	?route	second crossing field	3400,5480:5860,5700	horizontal poly lines over vertical metals; the step signal b crosses it on the poly y 5585
--	?logic	field logic, lower group (untraced)	6540,5400:6920,5780	about ten gates; ras_o0_alt1 and the upper inverter's output have pads in it
+-	logic	bit-0 XOR cells	6560,5400:7040,6110	two copies of the comparator's XOR cell: one makes the R9 comparator's bit-0 input, the other the row address bit-0 source
 -	route	channel 1, west end	7640,5730:8490,6020	five poly lines stepping down onto the comparator through-track lines of the central datapath
 -	route	comparator operand lines	8480,5720:10850,6020	five long poly lines carry a 5-bit value to the through tracks of the slices, which take it up to the rows above and down to the comparator below; the q tracks of the latch row cross them
 -	array	R5 comparator (5 bit)	13360,5710:15370,6090	scan line counter sl0-sl4 against R5 (vertical total adjust); result sl_eq_r5 leaves north
