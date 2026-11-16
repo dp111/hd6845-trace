@@ -303,7 +303,9 @@ Row tags `s0` ... `s13` are rows from the top; which MA bit each is has not been
 | `tc1_x1` | NOT `ras_o0_sel1` (an inverter below R8's row, `notes/blocks/shm.md`); runs west past the island and into the logic west of the selector (`notes/blocks/fld.md`), not drawn beyond the pad (7055,4478) |
 | `fld_a_in`, `fld_b_in` | gates of the two inverters whose outputs are `tc1_g` and `tc1_i` (`notes/blocks/fld.md`). `fld_a_in` is pulled low through `tcw_a` AND `tcw_b` in the gate group west of the island (NAND with its untraced load, AMB-014). `fld_b_in` = `cnt_la_a_n` XOR `tc1_g` (output of the first XOR cell) |
 | `fld_y_b` | the metal input of the second XOR cell west of the selector: `ras_o0_alt1` = `rc0_n` XOR `fld_y_b`. Pulled low through `tcw_c` in the gate group west of the island (NOT `tcw_c` with its untraced load, AMB-014) |
-| `tcw_a`, `tcw_b`, `tcw_c` | the three gate inputs of the group at x 6380-6700, y 3880-4220 (top-centre west), named by place: pads (6400,4005), (6455,4045), (6318,4135), each with a thin metal from the north. Sources not traced |
+| `tcw_a`, `tcw_b`, `tcw_c` | the three gate inputs of the group at x 6380-6700, y 3880-4220 (top-centre west), named by place: pads (6400,4005), (6455,4045), (6318,4135), each with a thin metal from the north. `tcw_a` and `tcw_c` are also gates of the AND-OR-invert above the group (pads (6400,3788), (6318,3740)). Sources not traced |
+| `tcw_o3820` | output of the AND-OR-invert at y 3690-3905 of the column west of the island: NOT(`tcw_x3855` OR (`tcw_a` AND `tcw_c`)). Leaves on a pad (6648,3785) and a thin metal to a pad (6640,3985); destination not traced (`notes/blocks/tcw.md`) |
+| `tcw_x3855` | third gate input of that AND-OR-invert, named by place (gate at y 3855); not followed |
 | `cdp1_fx_n2`, `cdp1_fy_n2`, `cdp1_fx_b`, `cdp1_fy_b` | names that the comparator cell's template gives the two copies west of the selector: `_n2` the cell's internal NOR of its inputs; `cdp1_fx_b` is an alias of `tc1_g`, `cdp1_fy_b` of `fld_y_b` |
 | `tc1_ns#` | north-south lines ns1-ns6 east of the island |
 | `bc1_s#`, `bc1_s#_n` | the two bus lines the 2-bit decoder decodes, and their inverses |

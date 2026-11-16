@@ -1,0 +1,3 @@
+# tcw: the gate column west of the island
+6380,3660:6760,3930    logic   AND-OR-invert (bit-0 logic) | NOT(x OR (a AND c)) of the inputs that also gate the bit-0 source lines below; output leaves south on a thin metal
+?6380,2500:6760,3660   logic   gate column west of the island (untraced) | about fifteen gates under one ground rail; expected to hold the field flip-flop

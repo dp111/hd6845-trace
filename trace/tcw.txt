@@ -1,0 +1,47 @@
+# tcw: the gate column west of the island tc1 (x 6380-6760, y 2500-4450). Notes: notes/blocks/tcw.md.
+# PARTIAL: one gate so far (the AND-OR-invert at y 3690-3905). The gates stand under the rail
+# x 6505-6560 (taken as VSS: AMB-014) with their loads towards the rail x 6690-6740 (taken as VCC).
+# The group at y 3940-4200 (three pull-downs) is in trace/fld.txt.
+@block tcw
+@requires fld
+@w M=12 P=18
+@s 26x26
+
+M 6532,3660 y3870 w=50
+N M 6532,3680 vss
+M 6715,3660 y3900 w=50
+N M 6715,3680 vcc
+
+# ===== AND-OR-invert, y 3690-3905 (views cache/scratch/rax/t1a.png, t1m.png, t1cm.png, t1load.png) =====
+#   tcw_o3820 = NOT( tcw_x3855 OR (tcw_a AND tcw_c) )
+# diffusion column under the rail: rail contact | gate tcw_c | node | gate tcw_a | OUT | gate x | rail contact
+D 6500,3695:6545,3925
+C 6512,3708
+D 6500,3870:6560,3925
+C 6535,3905
+# gate 1: tcw_c, from the pad (6318,3740) at the top of the metal x 6319
+P 6300,3723:6336,3757
+C 6318,3740
+P 6318,3732:6550,3750
+# gate 2: tcw_a, from the pad (6400,3788) at the top of the metal x 6403
+P 6383,3771:6418,3805
+C 6400,3788
+P 6400,3777:6550,3795
+# gate 3: a poly from the east (it widens south-east of the rail at (6570-6625, 3850-3900): NOT FOLLOWED)
+P 6492,3845:6600,3863
+N P 6590,3854 tcw_x3855
+# OUT: the node between gates 2 and 3, with an arm east to the load
+D 6540,3808:6700,3836
+P 6628,3768:6668,3838                 # one poly: the load gate (y 3808-3836) and, above it, a pad
+C 6648,3785
+P 6590,3768:6632,3790                 # the pad's tail west ...
+P 6590,3786:6620,3818                 # ... and down onto the arm
+?B 6586,3796:6622,3838
+D 6680,3700:6722,3900                 # diffusion under the VCC rail
+C 6705,3822
+N D 6520,3822 tcw_o3820
+# from the pad a thin metal south along x 6645 to a pad (6640,3985) (follower); what that pad feeds
+# is NOT TRACED
+M 6648,3785 y3990 w=11
+?P 6623,3968:6657,4002
+C 6640,3985

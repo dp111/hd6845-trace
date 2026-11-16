@@ -1027,3 +1027,21 @@ Method: before joining the line along y 4937/4915 I looked at its unclear 80 px 
 2. R8 in row r10 (`cnt_la_a`); `ras_o0_alt2`.
 3. R9's match (`r9m`, AMB-013); the `ral` cell; `bd2` (R12).
 
+## 2026-11-24: first gate of the column west of the island
+
+`trace/tcw.txt`, `notes/blocks/tcw.md`. 2,033 nets, 3,417 transistors, no errors.
+
+- `tools/findcell.py` with six known cells: nothing in the column but weak matches of
+  `fld`'s inverter. It is hand work.
+- The row above the bit-0 source gates is an AND-OR-invert:
+  `tcw_o3820` = NOT(`tcw_x3855` OR (`tcw_a` AND `tcw_c`)). `tcw_a` and `tcw_c` are shared
+  with the group below, so the same two signals gate both the bit-0 source lines and
+  this gate; neither is driven in the part traced.
+- The class map with `--open` is not usable east of the rail at y 3940-4200 as it stands
+  (uncalibrated there); the loads of the bit-0 source gates stay untraced.
+
+**Open, in the order I would take them**
+
+1. `tcw`: calibrate the class map, then the column in tiles from y 3690 up.
+2. R8 (`cnt_la_a`), `ras_o0_alt2`; `r9m` (AMB-013); the `ral` cell; `bd2` (R12).
+
