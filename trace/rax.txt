@@ -1,0 +1,36 @@
+# rax: the five units east of the row address selector (x 7860-8100, y 4700-5470), one per
+# selector output. Notes: notes/blocks/rax.md. PARTIAL: only the pull-down and the output's exit
+# west are drawn. The load and the right-hand part of the unit (x 8000-8110) are NOT TRACED.
+# Reading adopted (AMB-011): each unit is an inverter, rax_o# = NOT ras_o#.
+#   - the selector output's poly (trace/ras.txt, drawn there to x 7960) crosses a diffusion that
+#     runs from x 7890 to 8000 under the thin metal x 7902 and the wide VSS rail x 7930-7985;
+#   - above the poly the diffusion is VSS (contact to the rail 40 px above the poly);
+#   - below it is the output band, whose west end (a box under the thin metal) takes the poly of
+#     the unit's second pad (x 7836) through a buried contact.
+# Master: the unit of ras_o3 (poly y 5262). The other four are copies (rowstrips rows_*.png).
+@block rax
+@requires ras
+@w M=12 P=18
+@s 26x26
+
+@cell rax_inv tag=3
+P 7940,5251:8002,5273                 # the selector output's poly, from where ras.txt stops to past the diffusion
+D 7890,5235:8000,5300                 # diffusion through the poly: VSS above, output band below
+D 7937,5205:7990,5240                 # VSS box above, under the rail
+C 7958,5222
+D 7888,5290:7916,5314                 # the output band's box under the thin metal x 7902 (no contact to that metal: AMB-011)
+D 8000,5278:8048,5300                 # the band goes on east to x 8048 (towards the load: not traced)
+P 7840,5294:7896,5312                 # the second pad's poly, east end
+?B 7880,5291:7898,5315                # buried contact onto the box (read from the heavy dark box at the poly's end)
+N D 7960,5288 rax_o{}
+@end
+@inst rax_inv 0,-497 tag=0
+@inst rax_inv 0,-369 tag=1
+@inst rax_inv 0,-129 tag=2
+@inst rax_inv 0,130 tag=4
+
+# the wide rail: VSS. It comes up to y 4345 and, at y 5600-5650, steps 45 px east to become the
+# rail x 7995-8040 of the central datapath's first column (labelled vss there).
+M 7958,4350 y5645 w=54
+M 7945,5600:8035,5650
+N M 7958,5000 vss

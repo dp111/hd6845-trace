@@ -1,0 +1,2 @@
+# rax: the five units east of the row address selector
+7860,4700:8110,5470    logic   row address inverters | five units, one per selector output: pull-down traced, load not; outputs go to the cursor comparator and towards the RA pins

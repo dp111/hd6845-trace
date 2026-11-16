@@ -230,3 +230,14 @@ of S1 would be one net and the device a diode from `ras_o0_alt2` to `ras_o0`. Se
 tracing `ras_o0_sel2` north and `ras_o0_alt2` north-west: if they turn out to be one net
 anyway, the question is moot.
 
+## AMB-011: the units east of the row address selector are taken to be inverters (2026-11-19)
+
+`notes/blocks/rax.md`, "Assumptions". Drawn: one pull-down per unit, gate = selector
+output, from VSS to the node that leaves on the unit's second pad (`rax_o#`). Not
+traced: the load. Four readings carry the conclusion `rax_o#` = NOT `ras_o#`: one
+diffusion under two metals with an unreadable gap between; no contact where the thin
+metal x 7902 crosses the output's box; a buried contact at the pad poly's end; a load
+somewhere east. **Adopted** because the result is the complement that the central
+datapath's comparator needs, found independently. Settle by tracing the unit's east
+half and the thin metal's two end pads.
+

@@ -150,7 +150,7 @@ Eleven pass transistors between the scan line counter and five output nodes.
 | `ras_shift` | gate line (right poly band) of the four pass transistors `sl`# to `ras_o`(#+1). Driver not traced |
 | `ras_o0_alt1`, `ras_o0_alt2` | the two other sources of `ras_o0` (metal from the west along y 5066; metal from the north along x 7207). Not traced back |
 | `ras_o0_sel1`, `ras_o0_sel2` | gates of the pass transistors from `ras_o0_alt1` and `ras_o0_alt2` to `ras_o0`. Not traced back |
-| `rax_o#` | output line of the unit that takes selector output `ras_o`# (# = 0-4; the units, `rax`, are not traced: probably inverters, which would make these the complement of the row address). Each runs from its unit's pad at x 7836 through the nest of metals, along a line of the central datapath's channel 1 (the comparator's through track: `cdp2_trk_s7` is `rax_o0` ... `cdp2_trk_s4` is `rax_o3`), north along x 10981-11154, under the supply metal at y 4331-4500 and east to the logic in front of the RA pad drivers (`notes/blocks/rab.md`) |
+| `rax_o#` | output of the unit that takes selector output `ras_o`# (# = 0-4): pulled to VSS by a transistor gated by `ras_o`#; with the unit's load, not traced, NOT `ras_o`# (AMB-011), the complement of the row address. Each runs from its unit's pad at x 7836 through the nest of metals, along a line of the central datapath's channel 1 (the comparator's through track: `cdp2_trk_s7` is `rax_o0` ... `cdp2_trk_s4` is `rax_o3`), north along x 10981-11154, under the supply metal at y 4331-4500 and east to the logic in front of the RA pad drivers (`notes/blocks/rab.md`) |
 
 ## Row counter clock generator and step
 
