@@ -136,6 +136,31 @@ The bus metals' extents are from `tools/tla_tracks.py` (gaps under 34 px bridged
 are marked uncertain: a gap of 46-48 px in two of them was read as the ring of a contact
 in mid-run, which the overlay supports, but their far ends and other taps are not seen.
 
+### Stretch B, east side (2026-11-26; drawn as uncertain items, AMB-015)
+
+Tried with the two shots not used before here (`eastB_m.png`: both metal shots at 3.6x;
+`strapB.png`: the chip-1 fringed and the chip-2 stripped shot at 5.4x). They added three
+things; each is in the trace with a `?` and in AMB-015:
+
+- The output arms of stacks 1 and 2 are joined by a diffusion strip along x 6588-6612, so
+  the two stacks are one gate with the rail contact in its middle.
+- Stack 3 is a complete inverter: `tcw_o3550` = NOT `tcw_m6232` (extracted), load under the
+  block (6625-6680, 3540-3570), supply contact (6700,3545).
+- Its output goes west through a buried contact onto the poly of the pad (6385,3567), up
+  the bus metal `tcw_m6362b` and round to the middle gate of stack 1.
+
+So, as extracted:
+
+    tcw_o3550 = NOT tcw_m6232
+    tcw_o3326 : low through tcw_m6362a, or through tcw_m6404, or through
+                (tcw_o3550 AND tcw_m6320) to the top node of stack 1 (connection not found)
+
+Also seen, not drawn: a supply contact ring at (6705,3375) (the box (6690-6730,
+3345-3405)); a small contact with its own island of metal at (6612,3270), 30 px east of
+stack 1's top node (it may be how that node is connected: not read); a vertical poly
+x 6640-6665 from y 3220 to y 3375 and another x 6600-6625, y 3320-3400. The load of
+`tcw_o3326` is among these and is not identified.
+
 ## Not done
 
 Everything else in the column (y 2500-3690 and y 4200-4450); the loads of the group at

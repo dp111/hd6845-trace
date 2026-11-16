@@ -282,3 +282,26 @@ at y 3905; that the dark spot (6548,4188) is not a contact (if it were, `fld_y_b
 would sit on the rail). **Adopted** as drawn: `fld_a_in` = NAND(`tcw_a`, `tcw_b`),
 `fld_y_b` = NOT `tcw_c`. Settle when the region west of the island is traced as a block.
 
+## AMB-015: three joins on the east side of the gate column's middle stretch (2026-11-26)
+
+`notes/blocks/tcw.md`, "Stretch B, east side". All three are in the trace as `?` items:
+
+1. **The two output nodes at y 3326 and y 3437 are one** (`tcw_o3326`, alias
+   `tcw_o3437`): a 24 px strip x 6588-6612 between their arms. Evidence: an outlined band
+   there in both metal shots; in the chip-2 stripped shot it is plain tan (that shot's
+   diffusion colour) while the two gate-poly ends beside it are orange; in the chip-1
+   fringed shot khaki. Against: the clean shot's class map gives the neighbouring strip
+   (x 6582-6598) as field with a line of poly on its west side, which would instead join
+   the two gates' east ends (and with them two bus metals); the two readings differ by
+   one strip's width, at the resolution limit.
+2. **The inverter at y 3519 has a load** whose gate (block (6625-6680, 3540-3570)) is tied
+   to the output at its west end. The block and the arm under it are plain; the tie is
+   placed by analogy with the gate above.
+3. **Its output leaves on the bus metal `tcw_m6362b`**: the node's west end meets the end
+   of the poly from the pad (6385,3567). Both ends are seen (class map); the buried
+   contact is not.
+
+**Adopted as drawn.** With them: `tcw_o3550` = NOT `tcw_m6232`, and it is the middle gate
+of the first stack. Settle 1 with a profile across the strip in the chip-2 shots at
+several y, and by finding the load of `tcw_o3326` (one load or two decides it).
+

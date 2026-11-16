@@ -104,3 +104,30 @@ C 6385,3567
 P 6385,3567 x6440 w=18
 ?M 6404,2749 y3709 w=12
 N M 6404,3600 tcw_m6404
+
+# ===== stretch B, east side (2026-11-26): what could be read with all five shots =====
+# Views cache/scratch/rax/eastB_m.png (both metal shots), strapB.png (chip-1 fringed and chip-2
+# stripped shots at 5.4x), eastB.png, t3cm.png, t4cm.png.
+# (1) The two output arms at y 3326 and y 3437 are joined by a vertical strip x 6588-6612: an
+# outlined band in both metal shots, plain tan (the chip-2 stripped shot's diffusion colour, where
+# the poly ends beside it are orange) and khaki in chip 1. So stacks 1 and 2 are one gate with the
+# rail contact in the middle. UNCERTAIN (colour of a 24 px strip): AMB-015.
+?D 6588,3320:6612,3447
+@alias tcw_o3326 tcw_o3437
+# (2) Stack 3 (the inverter): its output arm runs east under a poly block (6625-6680, 3540-3570) to
+# the diffusion under the supply rail (pit at (6700,3545)): the load. The tie of the block to the
+# arm is not resolved: placed at the block's west end as in the gate above it. AMB-015.
+D 6620,3545:6700,3562
+P 6625,3540:6680,3570
+P 6608,3543:6630,3566
+?B 6606,3541:6628,3568
+D 6688,3500:6722,3585
+C 6700,3545
+M 6715,3440 y3660 w=50
+# (3) The output's way out: the node's west end reaches out from under the rail (class map: open
+# diffusion at (6475-6505, 3545-3565)) to the end of the poly that comes from the pad (6385,3567)
+# of the bus metal tcw_m6362b. Buried contact not resolved. AMB-015.
+D 6470,3546:6510,3566
+P 6436,3558:6484,3576
+?B 6464,3550:6486,3578
+@alias tcw_o3550 tcw_m6362b

@@ -1066,3 +1066,17 @@ That is three images for five transistors, against six or more by views alone.
    then stretch A (six gates) and E; then the second column.
 2. As before: R8, `ras_o0_alt2`, `r9m` (AMB-013), `ral`, `bd2` (R12).
 
+## 2026-11-26: the east side of the column's middle stretch, with all five shots
+
+The two shots not used there before (chip 1's metal shot and its fringed stripped shot)
+gave three joins, all drawn as uncertain items (AMB-015): the two upper stacks are one
+gate; the inverter below them has its load; its output goes back up a bus metal to the
+middle gate of the first stack. Extracted: `tcw_o3550` = NOT `tcw_m6232`; `tcw_o3326` low
+through `tcw_m6362a`, `tcw_m6404`, or `tcw_o3550` AND `tcw_m6320`. 2,041 nets, 3,423
+transistors. Not found: the top node's connection, the load of `tcw_o3326`, where it goes.
+
+Method: the chip-2 stripped shot's legend (diffusion tan, field greener, poly orange) is
+the opposite way round from the clean shot's open-area legend (diffusion green). A green
+patch means field in one and diffusion in the other; name the shot whenever a colour is
+used as evidence.
+
