@@ -45,3 +45,62 @@ N D 6520,3822 tcw_o3820
 M 6648,3785 y3990 w=11
 ?P 6623,3968:6657,4002
 C 6640,3985
+
+# ===== stretch B, y 3230-3620: three pull-down stacks and their inputs (PARTIAL) =====
+# Views cache/scratch/rax/t4cm.png, t3cm.png (class maps), bus1.png (the bus and the gate polys at
+# 2.4x); stack positions from tools/railprof.py. Outputs and loads NOT TRACED: the three output
+# nodes are drawn with their arms east only.
+#   tcw_o3326 : low through tcw_m6362a, or through tcw_m6320 AND tcw_m6362b in series to the top
+#               node (y 3232-3250), whose own connection is not found
+#   tcw_o3437 : low through tcw_m6404
+#   tcw_o3550 : low through tcw_m6232
+M 6532,3200 y3660 w=50
+# stack 1: top node | gate | node | gate | OUT | gate | rail contact (two pits)
+D 6503,3232:6560,3400
+C 6535,3380
+D 6555,3320:6590,3336                 # OUT's arm east
+N D 6530,3327 tcw_o3326
+# stack 2 (shares the rail contact): gate | OUT
+D 6505,3362:6555,3447
+D 6550,3432:6590,3447
+N D 6530,3440 tcw_o3437
+# stack 3: rail contact | gate | OUT
+D 6508,3472:6562,3562
+C 6527,3490
+D 6555,3545:6625,3562
+N D 6530,3552 tcw_o3550
+
+# --- the gate polys, each from a pad on one of the thin bus metals west of the column
+P 6298,3246:6334,3280                 # pad (6315,3263)
+C 6315,3263
+P 6315,3254:6585,3272                 # gate at y 3251-3272
+P 6585,3304 6289,3304 6289,3437 6385,3437 w=18   # gate at y 3294-3314; west, south, east to a pad
+P 6368,3423:6402,3457                 # pad (6385,3440)
+C 6385,3440
+P 6361,3338:6395,3372                 # pad (6378,3355)
+C 6378,3355
+P 6378,3340:6562,3358                 # gate at y 3338-3360
+P 6391,3376:6425,3410                 # pad (6408,3393)
+C 6408,3393
+P 6408,3393 6470,3393 6500,3417 6572,3417 w=20   # gate at y 3407-3427
+P 6205,3508:6241,3542                 # pad (6222,3526)
+C 6226,3526
+P 6222,3520:6572,3540                 # gate at y 3520-3540
+# --- the bus metals, from tools/tla_tracks.py (runs with gaps under 34 px bridged). Their ends and
+# any other taps along them have NOT been looked at: uncertain as nets.
+?M 6232,2875 y3852 w=12
+N M 6232,3700 tcw_m6232
+?M 6320,2814 y3662 w=12
+N M 6320,3500 tcw_m6320
+P 6298,3638:6334,3672                 # its lower pad (6315,3655); poly on west along y 3655 (not followed)
+C 6315,3655
+P 6315,3655 x6205 w=18
+?M 6372,3198 y3360 w=20
+N M 6372,3300 tcw_m6362a
+?M 6375,3437 y3570 w=20
+N M 6375,3500 tcw_m6362b
+P 6368,3550:6402,3584                 # its lower pad (6385,3567); poly east towards stack 3's output (join not read)
+C 6385,3567
+P 6385,3567 x6440 w=18
+?M 6404,2749 y3709 w=12
+N M 6404,3600 tcw_m6404

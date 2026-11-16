@@ -1045,3 +1045,24 @@ Method: before joining the line along y 4937/4915 I looked at its unclear 80 px 
 1. `tcw`: calibrate the class map, then the column in tiles from y 3690 up.
 2. R8 (`cnt_la_a`), `ras_o0_alt2`; `r9m` (AMB-013); the `ral` cell; `bd2` (R12).
 
+## 2026-11-25: the gate column as text; its middle stretch drawn
+
+- `tools/railprof.py` prints what lies under a rail from the clean shot's protected
+  colours. For the ground rail of `tcw` it lists seventeen gates in five stretches of
+  diffusion in one call, and finds the six already traced within 6 px. Contacts it does
+  not find (two blob detectors tried, neither reliable).
+- With it, a track profile of the six bus metals and one 2.4x view, the stretch
+  y 3230-3620 is drawn as three pull-down stacks with their gate polys, pads and bus
+  metals (`trace/tcw.txt`): 2,043 nets, 3,422 transistors, no errors. Outputs and loads
+  are not traced, and the bus metals are marked uncertain.
+
+Method: text first (rail profile, track profile), then one view per stretch to place
+pads and polys, then an overlay on the metal shot to check pad rings and rail contacts.
+That is three images for five transistors, against six or more by views alone.
+
+**Open, in the order I would take them**
+
+1. `tcw`: outputs and loads of the middle stretch (the arms east and the pads there);
+   then stretch A (six gates) and E; then the second column.
+2. As before: R8, `ras_o0_alt2`, `r9m` (AMB-013), `ral`, `bd2` (R12).
+

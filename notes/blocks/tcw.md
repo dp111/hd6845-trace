@@ -1,6 +1,6 @@
 # tcw: the gate column west of the island (x 6380-6760, y 2500-4450)
 
-Serial work, 2026-11-24. Trace: `trace/tcw.txt` (**one gate**); the three pull-downs at
+Serial work, 2026-11-24/25. Trace: `trace/tcw.txt` (one full gate and three pull-down stacks); the three pull-downs at
 y 3940-4200 are in `trace/fld.txt`. Views in `cache/scratch/rax/`: `tcw_s.png` (survey of
 the whole column at 1.03x), `t1a.png`, `t1m.png`, `t1cm.png` (class map), `t1load.png`
 (the gate at y 3690-3905), `t2cm.png`, `w3a.png`, `w3c.png`, `w3m.png`, `w4.png`,
@@ -105,6 +105,36 @@ West of the column a bus of thin vertical metals (x 6232, 6276, 6319, 6360, 6403
 brings the inputs: each gate's poly runs west to a pad on one of them. A net can have
 pads at several rows (`tcw_a`, `tcw_c` do), so the bus metals have to be followed pad by
 pad; a metal at one x is several nets along its length.
+
+### Stretch B, y 3230-3620: three pull-down stacks with their inputs (drawn, partial)
+
+Views `t4cm.png`, `t3cm.png`, `bus1.png`; overlay check `busB_chk.png`. Five more
+transistors. From the extraction:
+
+    tcw_o3326 : to the rail through tcw_m6362a; and through tcw_m6362b, then tcw_m6320, to
+                the top node of the stack (y 3232-3250), whose connection is not found
+    tcw_o3437 : to the rail through tcw_m6404
+    tcw_o3550 : to the rail through tcw_m6232
+
+Each gate poly runs west to a pad on one of the bus metals (pads at (6315,3263),
+(6378,3355), (6408,3393), (6222,3526); the second gate's poly goes round by x 6289 to a
+pad (6385,3440)). The overlay sits on every pad ring, both rail contacts and the four
+bus metals of this stretch.
+
+Read but not drawn as joins:
+
+- `tcw_m6362b` has a lower pad (6385,3567) whose poly goes east to the foot of the third
+  stack's output (`tcw_o3550`): probably that output's way out (then the second gate of
+  the first stack is NOT `tcw_m6232`). The join itself is not read.
+- `tcw_m6320` has a lower pad (6315,3655) with a poly going west along y 3655.
+- If the first stack's top node is on ground, `tcw_o3326` = NOT(`tcw_m6362a` OR
+  (`tcw_m6320` AND `tcw_m6362b`)), the same shape as `tcw_o3820`.
+- **A ring in the metal shot at (6539,3266)**, on the rail over the first gate of the
+  first stack, where the clean shot shows a gate and no pit. Not explained.
+
+The bus metals' extents are from `tools/tla_tracks.py` (gaps under 34 px bridged) and
+are marked uncertain: a gap of 46-48 px in two of them was read as the ring of a contact
+in mid-run, which the overlay supports, but their far ends and other taps are not seen.
 
 ## Not done
 
