@@ -661,3 +661,16 @@ C 2812,4615
 P 2842,4567:2897,4657
 P 2890,4631:2926,4653
 B 2908,4629:2932,4655
+
+# rcs_bb3807 continues: from bus line B's bottom pad a poly runs east (y 4535-4558) to a pad
+# with a contact (3228,4548) at the top of a piece of bus line D, which runs down to a contact
+# (3240,5587); from that pad a poly leaves WEST along y 5576-5598 (seen to x 3175): towards
+# the small cluster below this one (y 5450-6300). Every contact on the net so far is a gate
+# (units at y 3765, 4160, 4410, and the pass transistor at y 4546): its driver is down there.
+P 3165,4535:3215,4558
+P 3208,4530:3250,4566
+C 3228,4548
+M 3239,4534 y5600 w=20
+P 3222,5570:3262,5604
+C 3240,5587
+P 3170,5576:3230,5598

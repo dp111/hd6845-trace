@@ -98,7 +98,11 @@ rcs_n4200    = NOT( rcs_cond AND rcs_bb3807  OR  rcs_g4240 )
 clock or strobe: it samples the step condition into a latch and, in the same phase, lets
 it through the AND-OR-INVERT gate. So the row counter's step is not only combinational:
 the condition is also remembered. Where `rcs_bb3807`, `rcs_cond_lat` and `rcs_n4200` go
-is the next thing to trace in this cluster. The column was read from the chip-2 shots at
+is the next thing to trace in this cluster. `rcs_bb3807` has been followed: four gate
+contacts on bus line B (y 3810: a unit at y 3765 not yet drawn; y 4160; y 4410: the unit at
+y 4320-4535 not yet drawn; y 4548), then by a poly east onto a piece of bus line D down to
+(3240,5587), where a poly leaves west towards the small cluster below (y 5450-6300): its
+driver is there. The column was read from the chip-2 shots at
 7x: where no metal lies over it, they show the poly bands and the diffusion edges (as
 lines across the bands) far more clearly than the clean shot.
 
