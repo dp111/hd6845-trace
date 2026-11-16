@@ -73,6 +73,10 @@ The user asked for parallel agents and for the session to work unsupervised unti
 weekly usage limit is reached, committing and pushing each new traced piece and
 keeping the floor plan up to date.
 
+**Confirmed 2026-11-17 (user, before leaving a session to run unsupervised):** "while
+unsupervised, just work serially, rather than trying to do things with multiple agents in
+parallel".
+
 **Update, 2026-11-15 evening (user instruction after the usage limit was hit):** the
 eleven agents that were interrupted were resumed to finish their runs. When they
 have all reported, **go back to serial work: do not start new agents** unless the
