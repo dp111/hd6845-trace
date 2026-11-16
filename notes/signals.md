@@ -133,6 +133,9 @@ For `<bit>` read `hc#`, `rc#` or `c4b#`. Each bit is a master-slave pair
 | `rcs_w2`, `rcs_c1`, `rcs_b1` | `rcs_w2` = NOT `rcs_c1`; `rcs_c1` = NOR(`rcs_a2`, `rcs_b1`); `rcs_b1` = NOR(`rcs_x1`, `rcs_a2`) |
 | `rcs_m2` | NOR(`rcs_in2`, `rcs_in3`); feeds a gate further up the same column |
 | `rcs_e3`, `rcs_e4`, `rcs_a2`, `rcs_x1` | inputs of the step logic, **not identified**. `rcs_e4` gates everything except `rcs_in1`; it is a long control line (17,000 px, five gate loads, driver not found) that runs beside `res_b` and `lpstb_b` |
+| `rcs_u#` | output of a unit of the step logic cluster that has no better name yet, by the y of its buried contact (`rcs_u3288` = NOR(`rcs_g3245`, `rcs_bd3330`); `rcs_u3425` = NOT `rcs_bc3460`, its load and destination not traced) |
+| `rcs_g#` | an input of the cluster that arrives on a poly line from outside, by the y of that line |
+| `rcs_ba#`, `rcs_bb#`, `rcs_bc#`, `rcs_bd#`, `rcs_be#`, `rcs_bf#`, `rcs_bg#` | a piece of bus line A-G beside the cluster whose driver is not yet known, by the y of its top end |
 | `rcs_thin_e`, `rcs_thin_w` | two thin metals down the cluster, over the loads; what they join is not read |
 | `wl_i#_in`, `wl_i#_out` | input and output of the unidentified inverter I2 west of the counters |
 | `wl_h#` | horizontal poly bands H0 and H1 above the counters; not identified |

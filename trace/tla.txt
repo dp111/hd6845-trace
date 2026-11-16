@@ -132,7 +132,13 @@ D 3000,5252:3063,5266
 P 3012,5157 x3270 w=20
 P 3265,5137:3302,5170
 C 3283,5152
-M 3283,5060 y5166 w=22
+M 3283,2710 y5166 w=22               # bus line E: one piece y 2722-5158 (follow.py), three contacts
+P 3265,2708:3302,2742
+C 3283,2725
+P 3290,2725 x4258 w=20               # from its top contact a poly east along y 2715-2735, one of the seven lines along
+P 4250,2708:4290,2742                # the top of the logic, to a pad with a contact (4270,2725) under a metal that
+C 4270,2725                          # goes on east along y 2718-2738 (not followed)
+M 4256,2728 x4330 w=20
 N P 3200,5157 rcs_e3
 # gate E4: poly y 5230-5250 from a pad with a contact (3192,5237) on bus line C
 P 3012,5240 x3180 w=20
@@ -368,3 +374,90 @@ C 3150,3590
 # x 2852-2890 between contacts (2868,3488) and (2868,3640), a vertical poly under the rail's
 # west edge (x 2947-2967, y 3445-3545) and gates across a diffusion under thin metal E.
 # Not read: the load of b1 and whatever else hangs on it are not drawn.
+
+# ====================================================================
+# East column, unit at y 3288: rcs_u3288 = NOR(rcs_g3245, rcs_bd3330). Standard unit (as
+# rcs_c1's, 173 px lower). Output by the buried contact and a poly east to the bottom contact
+# (3192,3288) of bus line C's top piece, which runs north to y 2728 and west along
+# y 2718-2738 to about x 2822 (its west end: not looked at).
+D 3005,3218:3063,3236                 # arm from the VSS box above (2966-3014, 3172-3234)
+D 3030,3218:3063,3372
+D 2955,3350:3002,3395                 # VSS box below
+C 2978,3372 s=30x30
+D 2995,3350:3063,3372
+# gate 1: poly y 3237-3255 from the east, across the whole bus without a contact
+P 3012,3237:3400,3255
+N P 3300,3246 rcs_g3245
+# gate 2: poly y 3320-3340 from the top contact (3237,3328) of a piece of bus line D that
+# runs down to y 4380 (follow.py; its bottom contact at about (3239,4376) not looked at)
+P 3012,3320:3225,3340
+P 3218,3312:3256,3345
+C 3237,3328
+M 3239,3314 y4390 w=20
+N M 3239,3800 rcs_bd3330
+# output
+B 3042,3272:3068,3306
+P 3045,3278:3180,3298
+P 3172,3270:3214,3306
+C 3192,3288
+M 3196,3302 y2728 x2822 w=20
+N M 3196,3000 rcs_u3288
+# load (the standard one)
+D 2925,3278:3048,3297
+D 2898,3278:2932,3311
+D 2913,3307:2929,3353
+D 2835,3278:2905,3305
+D 2785,3265:2840,3320
+C 2805,3295 s=24x36
+P 2842,3263:2897,3356
+P 2890,3331:2926,3353
+B 2908,3328:2932,3355
+
+# East column, unit at y 3425: an inverter. Node at the buried contact box (3045-3070,
+# 3415-3440); one pull-down below it, gated by the poly y 3452-3470 from the top contact
+# (3192,3462) of bus line C's upper piece (y 3446-3906), to the VSS land it shares with
+# rcs_b1's unit. Nothing above the node (field). The node's strip goes west under the rail
+# (y 3412-3445) into the dense part west of the rail, which is NOT traced: this unit's
+# load, where its output goes, and rcs_b1's load are all in there.
+D 3030,3402:3063,3482
+P 3012,3452:3180,3470
+P 3172,3445:3214,3478
+C 3192,3462
+M 3196,3446 y3906 w=20
+N M 3196,3700 rcs_bc3460
+D 2940,3412:3048,3445
+# (a buried contact box is seen at 3045-3070, 3415-3440 with a poly ring round it; which poly
+#  it joins the node to is not established, so it is not drawn)
+N D 2990,3428 rcs_u3425
+
+# East column, unit at y 3892: a second NOR(rcs_e3, rcs_e4) (the first is rcs_in3). Its
+# output goes by a poly east to the bottom contact (3192,3892) of bus line C's upper piece,
+# i.e. it is rcs_bc3460, the gate of the inverter at y 3425: rcs_u3425 = rcs_e3 OR rcs_e4.
+D 2955,3795:3002,3835                 # VSS box above
+C 2978,3815 s=28x28
+D 2995,3818:3063,3836
+D 3030,3818:3063,3972
+D 2960,3952:3005,3998                 # VSS box below
+C 2985,3978 s=26x30
+D 2998,3955:3063,3972
+# gate rcs_e3: poly y 3843-3862 from the contact (3283,3852) on bus line E
+P 3012,3843:3270,3862
+P 3265,3836:3302,3870
+C 3283,3852
+# gate rcs_e4: poly y 3930-3950 from the pad of bus line C's middle piece (top contact (3197,3958))
+P 3012,3930:3200,3950
+# output
+B 3042,3878:3068,3910
+P 3045,3882:3180,3902
+P 3172,3876:3214,3910
+C 3192,3892
+# load (the standard one)
+D 2925,3882:3048,3901
+D 2898,3882:2932,3915
+D 2913,3911:2929,3957
+D 2835,3882:2905,3909
+D 2785,3849:2840,3927
+C 2805,3887 s=24x44
+P 2842,3867:2897,3960
+P 2890,3935:2926,3957
+B 2908,3932:2932,3959

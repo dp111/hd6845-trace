@@ -10,7 +10,7 @@ signals `rcs_in1` ... `rcs_m2` (`rcs_` = row counter step logic), and the step s
 
 ## Status
 
-Seven gates traced and extracted (20 transistors, no errors); the rest of the cluster is
+Ten gates traced and extracted (28 transistors, no errors); the rest of the cluster is
 surveyed only. The cluster runs from y 2940 to y 5330.
 
 ```
@@ -41,11 +41,20 @@ What the five inputs **are** is not known. None has reached a named signal yet:
 | `x1` | poly y 3538-3556 from the **east**, across the whole bus without a contact |
 | `in1` | bus line G (x 3369, y 2754-4952), top contact (3368,2768), poly east along y 2768 to a contact (4225,2765), metal east and **south at x 4268-4290** (profile: unbroken to about y 4072; contact candidates at y 3898 and y 4090): into the middle or right gate column |
 
-Seen at 2.5x, not drawn: a unit at y 3895 on the east column whose gates are bus line E
-(y 3843-3862) and bus line C's middle piece (y 3928-3950), i.e. a second NOR(e3, e4); its
-output goes by a poly east (y 3882-3900) to the bottom contact (3192,3892) of C's upper
-piece (y 3450-3910), whose top contact (3190,3460) feeds the lower gate of the unit at
-y 3420.
+More of the east column (added 2026-11-17, extracted):
+
+```
+rcs_bc3460 = NOR(e3, e4)          unit at y 3892: a second copy of in3's function; its output
+                                  goes up bus line C's upper piece to the unit at y 3425
+rcs_u3425  = NOT rcs_bc3460       = e3 OR e4. An inverter: one pull-down, nothing above the node.
+                                  Its load and its destination are in the dense part west of the rail
+rcs_u3288  = NOR(rcs_g3245, rcs_bd3330)   unit at y 3288. Output up bus line C's top piece and west
+                                  along y 2728 to about x 2822 (not looked at). rcs_g3245 comes from
+                                  the east; rcs_bd3330 is a piece of bus line D (y 3330-4380)
+```
+
+Bus pieces now drawn: A1, A2, B (two pieces), C (top, upper, middle), D (y 3330-4380),
+E (one piece y 2722-5158, three contacts), G upper.
 
 ## How the row counter's step signal gets here
 
@@ -162,6 +171,27 @@ drawn end to end and it is **not identified**. What was learnt on the way:
 Where its driver can still be: on one of the poly stretches as a branch I did not see
 (the diagonal fan and y 7122, x 5560-6128, were only read at 1.1x), or at a contact with
 a pad on the 4,000 px of metal in the left bus field that the profile tools did not flag.
+
+## The thin metals and the dense part (open, 2026-11-17)
+
+- **Thin metal E (x 2903-2923)** shows dark stretches of 40-60 px wherever it passes a
+  load's tie (the buried contact between the load plate's tab and the tail of the node's
+  box), at y 3164, 3337, 3530, 3620, 3820, 4202, 4313, 4640, 4813, 4935, 5011, 5246. Neither
+  metal shot shows bright metal there. Read as: the metal is continuous and dips over the
+  buried contacts (if those were metal contacts, the outputs of several different gates
+  would be shorted together). So where thin E really makes contact is still not found;
+  `tools/tla_contacts.py` is no help on it (it passes over tan diffusion boxes all the way).
+- **The dense part west of the rail, x 2835-2975, y 3395-3665.** Seen: the load plate of
+  the y 3425 inverter (2845-2895, 3420-3465); below it a poly pad with a metal contact
+  (2868,3488); a metal strap x 2852-2890 from there to a second poly pad with a contact
+  (2868,3640); a diffusion column under thin E (2900-2935, 3405-3545) crossed by a poly at
+  y 3495-3510; a vertical poly under the rail's west edge (2945-2965, 3455-3545); `b1`'s
+  node strip (y 3575-3600) running west into a second piece of diffusion under thin E
+  (2905-2935, 3555-3600). So `b1`'s node and the inverter's node both end in diffusion
+  crossed by gates: there are pass transistors or extra pull-downs here that the extracted
+  equations for `b1` and `c1` do not include yet. Views: `W1.png`, `W1m.png`, `Y1a.png`,
+  `Y1o.png`, `Y2.png` in the scratch folder. **Until this is traced, `b1 = NOR(x1, a2)` is
+  the pull-down side only.**
 
 ## Reading aids for this region
 
