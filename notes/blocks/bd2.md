@@ -493,6 +493,17 @@ Seen east of the ground rail (x 16370-16490), none of it drawn:
   node goes to whatever the second pad feeds, in the lower part of this gate group
   (y 15700-15860: a loop at (16395-16420,15700-15740), a band along y 15750-15775).
 
-Next step: this group at 3x in the clean shot with a class map, device by device,
-x 16370-16490, y 15440-15860; then the right-hand column x 16480-16800.
+Class maps at 4x (`bd2cm1.png`, `bd2cm2.png`, same day): both pads are **poly** pads.
+The upper one is the south end of a poly that comes down x 16452-16470 from the east
+part of the block at y 15475-15495; a dark line crosses the block at x 16447 (a
+diffusion edge under it: where its channel begins). So the block with its tail is one
+poly: the load's gate. By the rule that a load's gate is tied to its own node, the strap
+carries `wr_data_e_n` to the lower pad; the tie itself (the buried contact at the block's
+west end) was not resolved. From the lower pad the poly goes west along y 15742-15755 to
+about x 16395 and turns; where it ends is not read. An orange block (poly over a channel)
+lies under the strap at x 16445-16482, y 15690-15710.
+
+Next step: the lower half of this group (x 16370-16490, y 15650-15860) at 3x, clean
+shot and chip-2 stripped shot side by side, following the poly from the lower pad; then
+the right-hand column x 16480-16800.
 
