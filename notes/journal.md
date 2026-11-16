@@ -832,3 +832,17 @@ What made me look again: the result did not fit (output 3 on the slice that shou
 bit 0), and the unit's second pad looked like an output. A result that breaks a regular
 pattern is a reason to re-test the join that produced it before writing it up.
 
+**Same day, later: the row address lines to the RA logic.** The five lines that feed the
+central datapath's comparator (`rax_o0`-`rax_o4`) do not stop there: each goes on east of
+the comparator, north 1,500 px, under a supply metal, east 2,000 px along the top of the
+right-hand arrays and into a band of logic at x 13990-15500, y 4300-4520, out of which
+the RA pad drivers' inputs come (`trace/rab.txt`, `notes/blocks/rab.md`). So the path of
+a row address bit is: scan line counter, selector (`ras`), unit (`rax`), then both the
+cursor-style comparator and, through one more band of logic (`ral`), the pin. Two blocks
+on that path are untraced (`rax`, `ral`).
+
+Mistakes of earlier blocks found on the way and corrected: `cdp2`'s line 6000 does not
+end at x 10518. Method note: `tools/follow.py --gap 50` bridges real gaps (it joined a
+pad at (7900,4372) to a rail 40 px away); keep the default 24 and look at every reported
+corner near a rail.
+

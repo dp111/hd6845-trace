@@ -166,9 +166,9 @@ P 8480,5826 x10850 w=20
 P 8480,5870 x10850 w=20
 P 8480,5913 x10850 w=20
 P 8480,5956 x10850 w=20
-P 8480,6000 x10518 w=20              # ends just right of s7's track b
+P 8480,6000 x10518 w=20              # NOT its end: it goes on east to a pad (10975,6000), trace/rab.txt
 P 8320,6042 x8962 w=20               # short line: s3's track b to a contact at x 8335
-N P 8490,5826 ch1w_5758
+N P 8490,5826 rax_o4
 
 # --- track b (n2) of each slice: up from the cell, one contact to "its" line
 M 9336,5858 y5990 w=22               # s4: starts at its contact to line 5870

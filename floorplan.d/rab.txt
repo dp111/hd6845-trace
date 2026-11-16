@@ -1,0 +1,5 @@
+# rab: the five row address lines from the central datapath to the RA logic
+10940,4300:11200,6020    route   row address lines, north | rax_o0-4 from the east ends of the comparator lines north to the cross-under
+11080,4300:11720,4520    route   row address cross-under | five poly lines under the wide supply metal
+11720,4310:13860,4520    route   row address lines, east | five metals along the top of the right-hand arrays to a nested corner
+13620,4480:15450,4740    route   row address lines, ends | y 4505-4722: each ends on a pad into the logic above, or goes on east

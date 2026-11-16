@@ -182,7 +182,7 @@ the metal shot.
   band runs right to x 9086 and (seen at 1.4x) turns up across y 5700. Below the line
   e runs on as a stub to y 6115, where it ends over field just above the node-a poly of
   s3's latch: pink field colour under the end, no green speckle, metal ends 4 px short
-  of the poly band in both metal shots. Named `ch1w_5758`.
+  of the poly band in both metal shots. Named `rax_o4`.
 - The bus lines cross channel 1 without any contact and leave the region upward.
 
 Believed: a 5-bit register written from five bus lines when its strobe is high; its
@@ -355,9 +355,9 @@ How the nets are made (coordinates of the master):
 | `cdp2_trk_s4` | poly | line y 5870: x 8480 (continues left) and x 10850 (continues right) | ? | the long line of the track |
 | `cdp2_trk_s5` | poly | line y 5913: x 8480 and x 10850 | ? | |
 | `cdp2_trk_s6` | poly | line y 5956: x 8480 and x 10850 | ? | |
-| `cdp2_trk_s7` | poly | line y 6000: x 8480 (ends at x 10518) | ? | |
+| `cdp2_trk_s7` | poly | line y 6000: x 8480 west to the row address units, east past x 10518 (first read as its end: wrong) to a pad (10975,6000) | `rax_o0`, `notes/blocks/rab.md` | |
 | `cdp2_trk_s1` | metal | x 8165, y 7395 going up | ? | through track of row C's s1 |
-| `ch1w_5758` | poly | line y 5826: x 8480 and x 10850; band at y 5730 to x 9086, then up across y 5700 at x 9080 (`?`) | unknown | not connected to row A |
+| `rax_o4` | poly | line y 5826: x 8480 and x 10850; band at y 5730 to x 9086, then up across y 5700 at x 9080 (`?`) | unknown | not connected to row A |
 | `cdp2_a_c_s2_q` | poly | line L1, x 7990, y 7472, going left | out | output of row C's s2 |
 | `cdp2_a_c_s1_q` | poly | line L2, x 7990, y 7513, going left | out | output of row C's s1 |
 | `cdp2_a_c_s1_q` | metal | x 8338, y 7395, going up | out | same net in metal (if track c is contacted to q, Ambiguities 7) |
@@ -491,4 +491,14 @@ The lines at y 6498, 6542, 6584, 6626 and 6672 are the outputs `sl3`, `sl2`, `sl
 `sl4`, `sl0` of the 5-bit counter in the left array's upper rows, followed from the
 west (`notes/blocks/urch.md`). They pass through this block unused and go on east to the
 upper right datapath. Not drawn here yet.
+
+## Where the long lines of channel 1 come from and go to (2026-11-19)
+
+Traced from outside this block (`notes/blocks/ras.md`, `notes/blocks/rab.md`): the lines
+at y 6000, 5956, 5913, 5870, 5826 are the outputs `rax_o0` ... `rax_o4` of the five units
+that take the row address selector's outputs, bit 0 on slice s7 up to bit 4 on the line
+that s3 does not tie to. East of this block each ends on a pad (x 10975-11150) and goes on
+in metal to the logic in front of the RA pad drivers. So row B compares row C's register
+with the row address (after the selector; polarity set by the units, not traced), and the
+"through tracks" are driven from the west, not by row A.
 

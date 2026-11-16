@@ -117,7 +117,7 @@ that block's 5-bit comparator:
 | `ras_o1` | 7836,4945 | 7660,5890 | 5956 | `cdp2_trk_s6` |
 | `ras_o2` | 7836,5172 | 7705,5848 | 5913 | `cdp2_trk_s5` |
 | `ras_o3` | 7836,5300 | 7660,5800 | 5870 | `cdp2_trk_s4` |
-| `ras_o4` | 7832,5437 | 7705,5758 | 5826 | `ch1w_5758` (in `cdp2`, slice s3 is wired differently: its notes) |
+| `ras_o4` | 7832,5437 | 7705,5758 | 5826 | `rax_o4` (in `cdp2`, slice s3 is wired differently: its notes) |
 
 So the comparator of the central datapath's rows B (against the register of row C) is
 fed, bit for bit, from the five units that take the selector's outputs: slice s7 is bit

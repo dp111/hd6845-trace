@@ -163,7 +163,7 @@ M 7840,4806 x7792 y5098 x7751 y5168 x7706 y5264 x7620 y5460 x7532 y5937 x7710 w=
 P 7690,5918:7724,5952
 C 7707,5935
 P 7707,5935 x8250 w=18
-N M 7620,5350 cdp2_trk_s7
+N M 7620,5350 rax_o0
 # from a pad (7836,4945): staircase south-west to the pad (7660,5890)
 ?P 7819,4928:7853,4962
 C 7836,4945
@@ -171,7 +171,7 @@ M 7836,4945 y5134 x7792 y5218 x7751 y5308 x7664 y5503 x7576 y5894 x7664 w=13
 P 7643,5873:7677,5907
 C 7660,5890
 P 7660,5890 x8250 w=18
-N M 7576,5700 cdp2_trk_s6
+N M 7576,5700 rax_o1
 # from a pad (7836,5172): staircase south-west to the pad (7705,5848)
 ?P 7819,5155:7853,5189
 C 7836,5172
@@ -179,7 +179,7 @@ M 7836,5172 y5263 x7792 y5352 x7706 y5549 x7622 y5850 x7708 w=13
 P 7688,5831:7722,5865
 C 7705,5848
 P 7705,5848 x8250 w=18
-N M 7622,5700 cdp2_trk_s5
+N M 7622,5700 rax_o2
 # the pad (7660,5800): metal north along x 7662, east along y 5588, north along x 7750, east
 # along y 5393 (on top of ras_o4's poly), north to the pad (7836,5300)
 P 7643,5783:7677,5817
@@ -188,7 +188,7 @@ M 7662,5800 y5588 x7750 y5393 x7836 y5300 w=12
 ?P 7819,5283:7853,5317
 C 7836,5300
 P 7660,5800 x8250 w=18
-N M 7662,5700 cdp2_trk_s4
+N M 7662,5700 rax_o3
 # the pad (7705,5758): metal north along x 7705, east along y 5634, north along x 7792, east
 # along y 5437 to the pad (7832,5437)
 P 7688,5741:7722,5775
@@ -197,7 +197,7 @@ M 7705,5758 y5634 x7792 y5437 x7836 w=12
 ?P 7815,5420:7849,5454
 C 7832,5437
 P 7705,5758 x8250 w=18
-N M 7705,5700 ch1w_5758
+N M 7705,5700 rax_o4
 
 # --- the five channel lines east of x 8250: nested steps down onto the long lines of the central
 # datapath's channel 1 (trace/cdp2.txt, from x 8480). Clean shot at 2.9x (join_a.png).

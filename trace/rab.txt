@@ -1,0 +1,87 @@
+# rab: the five lines from the units east of the row address selector (trace/ras.txt, "rax"),
+# east of the central datapath's comparator: north along its east side, under a wide supply
+# metal, east along the top of the right-hand arrays to a nested corner at x 13644-13822 and on
+# towards the RA pad drivers. Notes: notes/blocks/rab.md.
+# rax_o0..rax_o4 are the lines of bits 0..4. West of here they are the long lines of the central
+# datapath's channel 1 (y 6000, 5956, 5913, 5870, 5826) and its comparator's through tracks.
+@block rab
+@requires cdp2
+@requires ras
+@w M=12 P=18
+@s 26x26
+@alias rax_o0 cdp2_trk_s7
+@alias rax_o1 cdp2_trk_s6
+@alias rax_o2 cdp2_trk_s5
+@alias rax_o3 cdp2_trk_s4
+
+# --- east ends of the channel lines: a staircase of pads (clean shot at 2x, ch1e_a.png).
+# trace/cdp2.txt drew line 6000 only to x 10518 ("ends"): it goes on (l6000.png).
+P 10510,6000 x10975 w=20
+P 10958,5983:10992,6017
+C 10975,6000
+P 10840,5956 x11015 w=20
+P 10998,5938:11032,5972
+C 11015,5955
+P 10840,5913 x11060 w=20
+P 11043,5895:11077,5929
+C 11060,5912
+P 10840,5870 x11105 w=20
+P 11088,5848:11122,5882
+C 11105,5865
+P 10840,5826 x11150 w=20
+P 11133,5805:11167,5839
+C 11150,5822
+
+# --- metal north (tools/follow.py), to five pads at y 4331-4500
+M 10981,6006 y4332 x11165 w=12
+M 11022,5961 y4375 x11112 w=12
+M 11065,5918 y4416 x11166 w=12
+M 11108,5871 y4457 w=12
+M 11154,5828 y4500 w=12
+N M 10981,5200 rax_o0
+N M 11022,5200 rax_o1
+N M 11065,5200 rax_o2
+N M 11108,5200 rax_o3
+N M 11154,5200 rax_o4
+
+# --- cross-under beneath the wide supply metal x 11280-11600 (rae.png)
+P 11140,4314:11174,4348
+C 11157,4331
+P 11157,4331 x11650 w=18
+P 11633,4314:11667,4348
+C 11650,4331
+P 11088,4357:11122,4391
+C 11105,4374
+P 11105,4374 x11695 w=18
+P 11678,4357:11712,4391
+C 11695,4374
+P 11143,4399:11177,4433
+C 11160,4416
+P 11160,4416 x11650 w=18
+P 11633,4399:11667,4433
+C 11650,4416
+P 11088,4440:11122,4474
+C 11105,4457
+P 11105,4457 x11695 w=18
+P 11678,4440:11712,4474
+C 11695,4457
+P 11143,4483:11177,4517
+C 11160,4500
+P 11160,4500 x11650 w=18
+P 11633,4483:11667,4517
+C 11650,4500
+
+# --- metal east, nested corner south at x 13644-13822, east again (follower; ram1.png)
+M 11645,4332 x13822 y4505 w=12        # bit 0: ends on a pad (13815,4500)
+P 13798,4483:13832,4517
+C 13815,4500
+P 13815,4500 x14000 w=18              # poly east into the logic at x 14000 (NOT DRAWN further)
+M 11690,4376 x13780 y4592 x14436 w=12 # bit 1: ends on a pad (14430,4590)
+P 14413,4573:14447,4607
+C 14430,4590
+P 14430,4590 y4500 w=18               # poly north into the logic above (NOT DRAWN further)
+M 11645,4419 x13736 y4636 x14870 w=12 # bit 2: end at x 14870 not looked at
+M 11690,4456 x13692 y4678 x15430 w=12 # bit 3: ends on a pad (15425,4675); poly north (not drawn)
+P 15408,4658:15442,4692
+C 15425,4675
+M 11645,4501 x13644 y4722 x15250 w=12 # bit 4: goes on east (not followed)

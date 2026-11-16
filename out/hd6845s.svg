@@ -9834,6 +9834,36 @@
 <path d="M1893.0,3434.0 L1893.0,3476.0 L1618.0,3476.0 L1618.0,3434.0Z"><title>trace/pads_out.txt:93</title></path>
 <path d="M1950.0,3170.0 L1950.0,3202.0 L1890.0,3202.0 L1890.0,3170.0Z"><title>trace/pads_out.txt:94</title></path>
 <path d="M1950.0,3440.0 L1950.0,3472.0 L1890.0,3472.0 L1890.0,3440.0Z"><title>trace/pads_out.txt:95</title></path>
+<path d="M10975.0,6010.0 L10975.0,5990.0 L10510.0,5990.0 L10510.0,6010.0Z"><title>trace/rab.txt:19</title></path>
+<path d="M10992.0,5983.0 L10992.0,6017.0 L10958.0,6017.0 L10958.0,5983.0Z"><title>trace/rab.txt:20</title></path>
+<path d="M11015.0,5966.0 L11015.0,5946.0 L10840.0,5946.0 L10840.0,5966.0Z"><title>trace/rab.txt:22</title></path>
+<path d="M11032.0,5938.0 L11032.0,5972.0 L10998.0,5972.0 L10998.0,5938.0Z"><title>trace/rab.txt:23</title></path>
+<path d="M11060.0,5923.0 L11060.0,5903.0 L10840.0,5903.0 L10840.0,5923.0Z"><title>trace/rab.txt:25</title></path>
+<path d="M11077.0,5895.0 L11077.0,5929.0 L11043.0,5929.0 L11043.0,5895.0Z"><title>trace/rab.txt:26</title></path>
+<path d="M11105.0,5880.0 L11105.0,5860.0 L10840.0,5860.0 L10840.0,5880.0Z"><title>trace/rab.txt:28</title></path>
+<path d="M11122.0,5848.0 L11122.0,5882.0 L11088.0,5882.0 L11088.0,5848.0Z"><title>trace/rab.txt:29</title></path>
+<path d="M11150.0,5836.0 L11150.0,5816.0 L10840.0,5816.0 L10840.0,5836.0Z"><title>trace/rab.txt:31</title></path>
+<path d="M11167.0,5805.0 L11167.0,5839.0 L11133.0,5839.0 L11133.0,5805.0Z"><title>trace/rab.txt:32</title></path>
+<path d="M11174.0,4314.0 L11174.0,4348.0 L11140.0,4348.0 L11140.0,4314.0Z"><title>trace/rab.txt:48</title></path>
+<path d="M11650.0,4340.0 L11650.0,4322.0 L11157.0,4322.0 L11157.0,4340.0Z"><title>trace/rab.txt:50</title></path>
+<path d="M11667.0,4314.0 L11667.0,4348.0 L11633.0,4348.0 L11633.0,4314.0Z"><title>trace/rab.txt:51</title></path>
+<path d="M11122.0,4357.0 L11122.0,4391.0 L11088.0,4391.0 L11088.0,4357.0Z"><title>trace/rab.txt:53</title></path>
+<path d="M11695.0,4383.0 L11695.0,4365.0 L11105.0,4365.0 L11105.0,4383.0Z"><title>trace/rab.txt:55</title></path>
+<path d="M11712.0,4357.0 L11712.0,4391.0 L11678.0,4391.0 L11678.0,4357.0Z"><title>trace/rab.txt:56</title></path>
+<path d="M11177.0,4399.0 L11177.0,4433.0 L11143.0,4433.0 L11143.0,4399.0Z"><title>trace/rab.txt:58</title></path>
+<path d="M11650.0,4425.0 L11650.0,4407.0 L11160.0,4407.0 L11160.0,4425.0Z"><title>trace/rab.txt:60</title></path>
+<path d="M11667.0,4399.0 L11667.0,4433.0 L11633.0,4433.0 L11633.0,4399.0Z"><title>trace/rab.txt:61</title></path>
+<path d="M11122.0,4440.0 L11122.0,4474.0 L11088.0,4474.0 L11088.0,4440.0Z"><title>trace/rab.txt:63</title></path>
+<path d="M11695.0,4466.0 L11695.0,4448.0 L11105.0,4448.0 L11105.0,4466.0Z"><title>trace/rab.txt:65</title></path>
+<path d="M11712.0,4440.0 L11712.0,4474.0 L11678.0,4474.0 L11678.0,4440.0Z"><title>trace/rab.txt:66</title></path>
+<path d="M11177.0,4483.0 L11177.0,4517.0 L11143.0,4517.0 L11143.0,4483.0Z"><title>trace/rab.txt:68</title></path>
+<path d="M11650.0,4509.0 L11650.0,4491.0 L11160.0,4491.0 L11160.0,4509.0Z"><title>trace/rab.txt:70</title></path>
+<path d="M11667.0,4483.0 L11667.0,4517.0 L11633.0,4517.0 L11633.0,4483.0Z"><title>trace/rab.txt:71</title></path>
+<path d="M13832.0,4483.0 L13832.0,4517.0 L13798.0,4517.0 L13798.0,4483.0Z"><title>trace/rab.txt:76</title></path>
+<path d="M14000.0,4509.0 L14000.0,4491.0 L13815.0,4491.0 L13815.0,4509.0Z"><title>trace/rab.txt:78</title></path>
+<path d="M14447.0,4573.0 L14447.0,4607.0 L14413.0,4607.0 L14413.0,4573.0Z"><title>trace/rab.txt:80</title></path>
+<path d="M14439.0,4500.0 L14421.0,4500.0 L14421.0,4590.0 L14439.0,4590.0Z"><title>trace/rab.txt:82</title></path>
+<path d="M15442.0,4658.0 L15442.0,4692.0 L15408.0,4692.0 L15408.0,4658.0Z"><title>trace/rab.txt:85</title></path>
 <path d="M7137.0,6656.0 L7137.0,6690.0 L7103.0,6690.0 L7103.0,6656.0Z"><title>trace/ras.txt:16</title></path>
 <path d="M7129.0,6065.0 L7111.0,6065.0 L7111.0,6673.0 L7129.0,6673.0Z"><title>trace/ras.txt:18</title></path>
 <path d="M7137.0,6048.0 L7137.0,6082.0 L7103.0,6082.0 L7103.0,6048.0Z"><title>trace/ras.txt:19</title></path>
@@ -19225,6 +19255,16 @@
 <path d="M1947.0,3440.0 L1947.0,3862.0 L1915.0,3862.0 L1915.0,3440.0Z"><title>trace/pads_out.txt:102</title></path>
 <path d="M1287.0,2751.0 L1287.0,3270.0 L768.0,3270.0 L768.0,2751.0Z"><title>trace/pads_out.txt:144</title></path>
 <path d="M960.0,3270.0 L960.0,3467.0 L770.0,3467.0 L770.0,3270.0Z"><title>trace/pads_out.txt:145</title></path>
+<path d="M10987.0,4338.0 L11165.0,4338.0 L11165.0,4326.0 L10975.0,4326.0 L10975.0,6006.0 L10987.0,6006.0Z"><title>trace/rab.txt:36</title></path>
+<path d="M11028.0,4381.0 L11112.0,4381.0 L11112.0,4369.0 L11016.0,4369.0 L11016.0,5961.0 L11028.0,5961.0Z"><title>trace/rab.txt:37</title></path>
+<path d="M11071.0,4422.0 L11166.0,4422.0 L11166.0,4410.0 L11059.0,4410.0 L11059.0,5918.0 L11071.0,5918.0Z"><title>trace/rab.txt:38</title></path>
+<path d="M11114.0,4457.0 L11102.0,4457.0 L11102.0,5871.0 L11114.0,5871.0Z"><title>trace/rab.txt:39</title></path>
+<path d="M11160.0,4500.0 L11148.0,4500.0 L11148.0,5828.0 L11160.0,5828.0Z"><title>trace/rab.txt:40</title></path>
+<path d="M13816.0,4338.0 L13816.0,4505.0 L13828.0,4505.0 L13828.0,4326.0 L11645.0,4326.0 L11645.0,4338.0Z"><title>trace/rab.txt:75</title></path>
+<path d="M13774.0,4382.0 L13774.0,4598.0 L14436.0,4598.0 L14436.0,4586.0 L13786.0,4586.0 L13786.0,4370.0 L11690.0,4370.0 L11690.0,4382.0Z"><title>trace/rab.txt:79</title></path>
+<path d="M13730.0,4425.0 L13730.0,4642.0 L14870.0,4642.0 L14870.0,4630.0 L13742.0,4630.0 L13742.0,4413.0 L11645.0,4413.0 L11645.0,4425.0Z"><title>trace/rab.txt:83</title></path>
+<path d="M13686.0,4462.0 L13686.0,4684.0 L15430.0,4684.0 L15430.0,4672.0 L13698.0,4672.0 L13698.0,4450.0 L11690.0,4450.0 L11690.0,4462.0Z"><title>trace/rab.txt:84</title></path>
+<path d="M13638.0,4507.0 L13638.0,4728.0 L15250.0,4728.0 L15250.0,4716.0 L13650.0,4716.0 L13650.0,4495.0 L11645.0,4495.0 L11645.0,4507.0Z"><title>trace/rab.txt:87</title></path>
 <path d="M7126.5,5224.5 L7250.0,5224.5 L7250.0,5211.5 L7113.5,5211.5 L7113.5,6072.0 L7126.5,6072.0Z"><title>trace/ras.txt:21</title></path>
 <path d="M7170.5,5396.5 L7250.0,5396.5 L7250.0,5383.5 L7157.5,5383.5 L7157.5,6030.0 L7170.5,6030.0Z"><title>trace/ras.txt:27</title></path>
 <path d="M7214.5,5570.5 L7262.0,5570.5 L7262.0,5557.5 L7201.5,5557.5 L7201.5,6072.0 L7214.5,6072.0Z"><title>trace/ras.txt:33</title></path>
@@ -22767,6 +22807,24 @@
 <path d="M1945.0,3173.0 L1945.0,3199.0 L1917.0,3199.0 L1917.0,3173.0Z"><title>trace/pads_out.txt:98</title></path>
 <path d="M1945.0,3359.0 L1945.0,3385.0 L1917.0,3385.0 L1917.0,3359.0Z"><title>trace/pads_out.txt:98</title></path>
 <path d="M1945.0,3444.0 L1945.0,3470.0 L1917.0,3470.0 L1917.0,3444.0Z"><title>trace/pads_out.txt:98</title></path>
+<path d="M10988.0,5987.0 L10988.0,6013.0 L10962.0,6013.0 L10962.0,5987.0Z"><title>trace/rab.txt:21</title></path>
+<path d="M11028.0,5942.0 L11028.0,5968.0 L11002.0,5968.0 L11002.0,5942.0Z"><title>trace/rab.txt:24</title></path>
+<path d="M11073.0,5899.0 L11073.0,5925.0 L11047.0,5925.0 L11047.0,5899.0Z"><title>trace/rab.txt:27</title></path>
+<path d="M11118.0,5852.0 L11118.0,5878.0 L11092.0,5878.0 L11092.0,5852.0Z"><title>trace/rab.txt:30</title></path>
+<path d="M11163.0,5809.0 L11163.0,5835.0 L11137.0,5835.0 L11137.0,5809.0Z"><title>trace/rab.txt:33</title></path>
+<path d="M11170.0,4318.0 L11170.0,4344.0 L11144.0,4344.0 L11144.0,4318.0Z"><title>trace/rab.txt:49</title></path>
+<path d="M11663.0,4318.0 L11663.0,4344.0 L11637.0,4344.0 L11637.0,4318.0Z"><title>trace/rab.txt:52</title></path>
+<path d="M11118.0,4361.0 L11118.0,4387.0 L11092.0,4387.0 L11092.0,4361.0Z"><title>trace/rab.txt:54</title></path>
+<path d="M11708.0,4361.0 L11708.0,4387.0 L11682.0,4387.0 L11682.0,4361.0Z"><title>trace/rab.txt:57</title></path>
+<path d="M11173.0,4403.0 L11173.0,4429.0 L11147.0,4429.0 L11147.0,4403.0Z"><title>trace/rab.txt:59</title></path>
+<path d="M11663.0,4403.0 L11663.0,4429.0 L11637.0,4429.0 L11637.0,4403.0Z"><title>trace/rab.txt:62</title></path>
+<path d="M11118.0,4444.0 L11118.0,4470.0 L11092.0,4470.0 L11092.0,4444.0Z"><title>trace/rab.txt:64</title></path>
+<path d="M11708.0,4444.0 L11708.0,4470.0 L11682.0,4470.0 L11682.0,4444.0Z"><title>trace/rab.txt:67</title></path>
+<path d="M11173.0,4487.0 L11173.0,4513.0 L11147.0,4513.0 L11147.0,4487.0Z"><title>trace/rab.txt:69</title></path>
+<path d="M11663.0,4487.0 L11663.0,4513.0 L11637.0,4513.0 L11637.0,4487.0Z"><title>trace/rab.txt:72</title></path>
+<path d="M13828.0,4487.0 L13828.0,4513.0 L13802.0,4513.0 L13802.0,4487.0Z"><title>trace/rab.txt:77</title></path>
+<path d="M14443.0,4577.0 L14443.0,4603.0 L14417.0,4603.0 L14417.0,4577.0Z"><title>trace/rab.txt:81</title></path>
+<path d="M15438.0,4662.0 L15438.0,4688.0 L15412.0,4688.0 L15412.0,4662.0Z"><title>trace/rab.txt:86</title></path>
 <path d="M7133.0,6660.0 L7133.0,6686.0 L7107.0,6686.0 L7107.0,6660.0Z"><title>trace/ras.txt:17</title></path>
 <path d="M7133.0,6052.0 L7133.0,6078.0 L7107.0,6078.0 L7107.0,6052.0Z"><title>trace/ras.txt:20</title></path>
 <path d="M7177.0,6573.0 L7177.0,6599.0 L7151.0,6599.0 L7151.0,6573.0Z"><title>trace/ras.txt:23</title></path>
@@ -28542,7 +28600,7 @@
 <circle cx="10026" cy="6000" r="3" fill="#fff" stroke="#000"/><text x="10032" y="6005" font-family="monospace" font-size="14" fill="#fff" stroke="#000" stroke-width="2.5" paint-order="stroke">cdp2_a_s6_bus</text>
 <circle cx="10416" cy="6000" r="3" fill="#fff" stroke="#000"/><text x="10422" y="6005" font-family="monospace" font-size="14" fill="#fff" stroke="#000" stroke-width="2.5" paint-order="stroke">cdp2_a_s7_bus</text>
 <circle cx="9450" cy="6324" r="3" fill="#fff" stroke="#000"/><text x="9456" y="6329" font-family="monospace" font-size="14" fill="#fff" stroke="#000" stroke-width="2.5" paint-order="stroke">cdp2_a_ld</text>
-<circle cx="8490" cy="5826" r="3" fill="#fff" stroke="#000"/><text x="8496" y="5831" font-family="monospace" font-size="14" fill="#fff" stroke="#000" stroke-width="2.5" paint-order="stroke">ch1w_5758</text>
+<circle cx="8490" cy="5826" r="3" fill="#fff" stroke="#000"/><text x="8496" y="5831" font-family="monospace" font-size="14" fill="#fff" stroke="#000" stroke-width="2.5" paint-order="stroke">rax_o4</text>
 <circle cx="8013" cy="7435" r="3" fill="#fff" stroke="#000"/><text x="8019" y="7440" font-family="monospace" font-size="14" fill="#fff" stroke="#000" stroke-width="2.5" paint-order="stroke">vss</text>
 <circle cx="8403" cy="7435" r="3" fill="#fff" stroke="#000"/><text x="8409" y="7440" font-family="monospace" font-size="14" fill="#fff" stroke="#000" stroke-width="2.5" paint-order="stroke">vss</text>
 <circle cx="8793" cy="7435" r="3" fill="#fff" stroke="#000"/><text x="8799" y="7440" font-family="monospace" font-size="14" fill="#fff" stroke="#000" stroke-width="2.5" paint-order="stroke">vss</text>
@@ -28575,16 +28633,16 @@
 <circle cx="8942" cy="6500" r="3" fill="#fff" stroke="#000"/><text x="8948" y="6505" font-family="monospace" font-size="14" fill="#fff" stroke="#000" stroke-width="2.5" paint-order="stroke">cdp2_trk_s3</text>
 <circle cx="9000" cy="6500" r="3" fill="#fff" stroke="#000"/><text x="9006" y="6505" font-family="monospace" font-size="14" fill="#fff" stroke="#000" stroke-width="2.5" paint-order="stroke">vcc</text>
 <circle cx="9184" cy="6500" r="3" fill="#fff" stroke="#000"/><text x="9190" y="6505" font-family="monospace" font-size="14" fill="#fff" stroke="#000" stroke-width="2.5" paint-order="stroke">vss</text>
-<circle cx="9332" cy="6500" r="3" fill="#fff" stroke="#000"/><text x="9338" y="6505" font-family="monospace" font-size="14" fill="#fff" stroke="#000" stroke-width="2.5" paint-order="stroke">cdp2_trk_s4</text>
+<circle cx="9332" cy="6500" r="3" fill="#fff" stroke="#000"/><text x="9338" y="6505" font-family="monospace" font-size="14" fill="#fff" stroke="#000" stroke-width="2.5" paint-order="stroke">rax_o3</text>
 <circle cx="9390" cy="6500" r="3" fill="#fff" stroke="#000"/><text x="9396" y="6505" font-family="monospace" font-size="14" fill="#fff" stroke="#000" stroke-width="2.5" paint-order="stroke">vcc</text>
 <circle cx="9574" cy="6500" r="3" fill="#fff" stroke="#000"/><text x="9580" y="6505" font-family="monospace" font-size="14" fill="#fff" stroke="#000" stroke-width="2.5" paint-order="stroke">vss</text>
-<circle cx="9722" cy="6500" r="3" fill="#fff" stroke="#000"/><text x="9728" y="6505" font-family="monospace" font-size="14" fill="#fff" stroke="#000" stroke-width="2.5" paint-order="stroke">cdp2_trk_s5</text>
+<circle cx="9722" cy="6500" r="3" fill="#fff" stroke="#000"/><text x="9728" y="6505" font-family="monospace" font-size="14" fill="#fff" stroke="#000" stroke-width="2.5" paint-order="stroke">rax_o2</text>
 <circle cx="9780" cy="6500" r="3" fill="#fff" stroke="#000"/><text x="9786" y="6505" font-family="monospace" font-size="14" fill="#fff" stroke="#000" stroke-width="2.5" paint-order="stroke">vcc</text>
 <circle cx="9964" cy="6500" r="3" fill="#fff" stroke="#000"/><text x="9970" y="6505" font-family="monospace" font-size="14" fill="#fff" stroke="#000" stroke-width="2.5" paint-order="stroke">vss</text>
-<circle cx="10112" cy="6500" r="3" fill="#fff" stroke="#000"/><text x="10118" y="6505" font-family="monospace" font-size="14" fill="#fff" stroke="#000" stroke-width="2.5" paint-order="stroke">cdp2_trk_s6</text>
+<circle cx="10112" cy="6500" r="3" fill="#fff" stroke="#000"/><text x="10118" y="6505" font-family="monospace" font-size="14" fill="#fff" stroke="#000" stroke-width="2.5" paint-order="stroke">rax_o1</text>
 <circle cx="10170" cy="6500" r="3" fill="#fff" stroke="#000"/><text x="10176" y="6505" font-family="monospace" font-size="14" fill="#fff" stroke="#000" stroke-width="2.5" paint-order="stroke">vcc</text>
 <circle cx="10354" cy="6500" r="3" fill="#fff" stroke="#000"/><text x="10360" y="6505" font-family="monospace" font-size="14" fill="#fff" stroke="#000" stroke-width="2.5" paint-order="stroke">vss</text>
-<circle cx="10502" cy="6500" r="3" fill="#fff" stroke="#000"/><text x="10508" y="6505" font-family="monospace" font-size="14" fill="#fff" stroke="#000" stroke-width="2.5" paint-order="stroke">cdp2_trk_s7</text>
+<circle cx="10502" cy="6500" r="3" fill="#fff" stroke="#000"/><text x="10508" y="6505" font-family="monospace" font-size="14" fill="#fff" stroke="#000" stroke-width="2.5" paint-order="stroke">rax_o0</text>
 <circle cx="10560" cy="6500" r="3" fill="#fff" stroke="#000"/><text x="10566" y="6505" font-family="monospace" font-size="14" fill="#fff" stroke="#000" stroke-width="2.5" paint-order="stroke">vcc</text>
 <circle cx="10744" cy="6500" r="3" fill="#fff" stroke="#000"/><text x="10750" y="6505" font-family="monospace" font-size="14" fill="#fff" stroke="#000" stroke-width="2.5" paint-order="stroke">vss</text>
 <circle cx="9300" cy="6957" r="3" fill="#fff" stroke="#000"/><text x="9306" y="6962" font-family="monospace" font-size="14" fill="#fff" stroke="#000" stroke-width="2.5" paint-order="stroke">cdp2_b_hl</text>
@@ -28929,6 +28987,11 @@
 <circle cx="560" cy="4100" r="3" fill="#fff" stroke="#000"/><text x="566" y="4105" font-family="monospace" font-size="14" fill="#fff" stroke="#000" stroke-width="2.5" paint-order="stroke">vss</text>
 <circle cx="600" cy="3530" r="3" fill="#fff" stroke="#000"/><text x="606" y="3535" font-family="monospace" font-size="14" fill="#fff" stroke="#000" stroke-width="2.5" paint-order="stroke">vss</text>
 <circle cx="1740" cy="3300" r="3" fill="#fff" stroke="#000"/><text x="1746" y="3305" font-family="monospace" font-size="14" fill="#fff" stroke="#000" stroke-width="2.5" paint-order="stroke">vcc</text>
+<circle cx="10981" cy="5200" r="3" fill="#fff" stroke="#000"/><text x="10987" y="5205" font-family="monospace" font-size="14" fill="#fff" stroke="#000" stroke-width="2.5" paint-order="stroke">rax_o0</text>
+<circle cx="11022" cy="5200" r="3" fill="#fff" stroke="#000"/><text x="11028" y="5205" font-family="monospace" font-size="14" fill="#fff" stroke="#000" stroke-width="2.5" paint-order="stroke">rax_o1</text>
+<circle cx="11065" cy="5200" r="3" fill="#fff" stroke="#000"/><text x="11071" y="5205" font-family="monospace" font-size="14" fill="#fff" stroke="#000" stroke-width="2.5" paint-order="stroke">rax_o2</text>
+<circle cx="11108" cy="5200" r="3" fill="#fff" stroke="#000"/><text x="11114" y="5205" font-family="monospace" font-size="14" fill="#fff" stroke="#000" stroke-width="2.5" paint-order="stroke">rax_o3</text>
+<circle cx="11154" cy="5200" r="3" fill="#fff" stroke="#000"/><text x="11160" y="5205" font-family="monospace" font-size="14" fill="#fff" stroke="#000" stroke-width="2.5" paint-order="stroke">rax_o4</text>
 <circle cx="7161" cy="5250" r="3" fill="#fff" stroke="#000"/><text x="7167" y="5255" font-family="monospace" font-size="14" fill="#fff" stroke="#000" stroke-width="2.5" paint-order="stroke">ras_straight</text>
 <circle cx="7425" cy="5330" r="3" fill="#fff" stroke="#000"/><text x="7431" y="5335" font-family="monospace" font-size="14" fill="#fff" stroke="#000" stroke-width="2.5" paint-order="stroke">ras_shift</text>
 <circle cx="7427" cy="4900" r="3" fill="#fff" stroke="#000"/><text x="7433" y="4905" font-family="monospace" font-size="14" fill="#fff" stroke="#000" stroke-width="2.5" paint-order="stroke">ras_o0_sel2</text>
@@ -28940,11 +29003,11 @@
 <circle cx="7450" cy="5305" r="3" fill="#fff" stroke="#000"/><text x="7456" y="5310" font-family="monospace" font-size="14" fill="#fff" stroke="#000" stroke-width="2.5" paint-order="stroke">ras_o2</text>
 <circle cx="7500" cy="5350" r="3" fill="#fff" stroke="#000"/><text x="7506" y="5355" font-family="monospace" font-size="14" fill="#fff" stroke="#000" stroke-width="2.5" paint-order="stroke">ras_o3</text>
 <circle cx="7452" cy="5700" r="3" fill="#fff" stroke="#000"/><text x="7458" y="5705" font-family="monospace" font-size="14" fill="#fff" stroke="#000" stroke-width="2.5" paint-order="stroke">ras_o4</text>
-<circle cx="7620" cy="5350" r="3" fill="#fff" stroke="#000"/><text x="7626" y="5355" font-family="monospace" font-size="14" fill="#fff" stroke="#000" stroke-width="2.5" paint-order="stroke">cdp2_trk_s7</text>
-<circle cx="7576" cy="5700" r="3" fill="#fff" stroke="#000"/><text x="7582" y="5705" font-family="monospace" font-size="14" fill="#fff" stroke="#000" stroke-width="2.5" paint-order="stroke">cdp2_trk_s6</text>
-<circle cx="7622" cy="5700" r="3" fill="#fff" stroke="#000"/><text x="7628" y="5705" font-family="monospace" font-size="14" fill="#fff" stroke="#000" stroke-width="2.5" paint-order="stroke">cdp2_trk_s5</text>
-<circle cx="7662" cy="5700" r="3" fill="#fff" stroke="#000"/><text x="7668" y="5705" font-family="monospace" font-size="14" fill="#fff" stroke="#000" stroke-width="2.5" paint-order="stroke">cdp2_trk_s4</text>
-<circle cx="7705" cy="5700" r="3" fill="#fff" stroke="#000"/><text x="7711" y="5705" font-family="monospace" font-size="14" fill="#fff" stroke="#000" stroke-width="2.5" paint-order="stroke">ch1w_5758</text>
+<circle cx="7620" cy="5350" r="3" fill="#fff" stroke="#000"/><text x="7626" y="5355" font-family="monospace" font-size="14" fill="#fff" stroke="#000" stroke-width="2.5" paint-order="stroke">rax_o0</text>
+<circle cx="7576" cy="5700" r="3" fill="#fff" stroke="#000"/><text x="7582" y="5705" font-family="monospace" font-size="14" fill="#fff" stroke="#000" stroke-width="2.5" paint-order="stroke">rax_o1</text>
+<circle cx="7622" cy="5700" r="3" fill="#fff" stroke="#000"/><text x="7628" y="5705" font-family="monospace" font-size="14" fill="#fff" stroke="#000" stroke-width="2.5" paint-order="stroke">rax_o2</text>
+<circle cx="7662" cy="5700" r="3" fill="#fff" stroke="#000"/><text x="7668" y="5705" font-family="monospace" font-size="14" fill="#fff" stroke="#000" stroke-width="2.5" paint-order="stroke">rax_o3</text>
+<circle cx="7705" cy="5700" r="3" fill="#fff" stroke="#000"/><text x="7711" y="5705" font-family="monospace" font-size="14" fill="#fff" stroke="#000" stroke-width="2.5" paint-order="stroke">rax_o4</text>
 <circle cx="13393" cy="7600" r="3" fill="#fff" stroke="#000"/><text x="13399" y="7605" font-family="monospace" font-size="14" fill="#fff" stroke="#000" stroke-width="2.5" paint-order="stroke">vss</text>
 <circle cx="13600" cy="7600" r="3" fill="#fff" stroke="#000"/><text x="13606" y="7605" font-family="monospace" font-size="14" fill="#fff" stroke="#000" stroke-width="2.5" paint-order="stroke">vcc</text>
 <circle cx="15000" cy="7667" r="3" fill="#fff" stroke="#000"/><text x="15006" y="7672" font-family="monospace" font-size="14" fill="#fff" stroke="#000" stroke-width="2.5" paint-order="stroke">uc_eq_r6</text>
@@ -32086,7 +32149,7 @@
 <text x="9238" y="7212" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t1333<title>gate cdp2_b_s3_x: cdp2_b_s4_o2 - vss</title></text>
 <text x="9284" y="7303" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t1334<title>gate cdp2_b_s4_ne: vcc - cdp2_b_s4_ne</title></text>
 <text x="9376" y="7334" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t1335<title>gate cdp2_b_s4_y: vcc - cdp2_b_s4_y</title></text>
-<text x="9466" y="7344" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t1336<title>gate cdp2_trk_s4: cdp2_b_s4_y - vss</title></text>
+<text x="9466" y="7344" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t1336<title>gate rax_o3: cdp2_b_s4_y - vss</title></text>
 <text x="9553" y="7344" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t1337<title>gate cdp2_a_c_s4_q: cdp2_b_s4_y - vss</title></text>
 <text x="9748" y="6984" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t1338<title>gate cdp2_b_s5_p1: cdp2_b_hl - n1896</title></text>
 <text x="9748" y="7027" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t1339<title>gate cdp2_b_s5_y: n1896 - vss</title></text>
@@ -32097,7 +32160,7 @@
 <text x="9628" y="7212" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t1344<title>gate cdp2_b_s4_x: vss - cdp2_b_s5_o2</title></text>
 <text x="9674" y="7303" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t1345<title>gate cdp2_b_s5_ne: vcc - cdp2_b_s5_ne</title></text>
 <text x="9766" y="7334" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t1346<title>gate cdp2_b_s5_y: vcc - cdp2_b_s5_y</title></text>
-<text x="9856" y="7344" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t1347<title>gate cdp2_trk_s5: vss - cdp2_b_s5_y</title></text>
+<text x="9856" y="7344" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t1347<title>gate rax_o2: vss - cdp2_b_s5_y</title></text>
 <text x="9943" y="7344" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t1348<title>gate cdp2_a_c_s5_q: vss - cdp2_b_s5_y</title></text>
 <text x="10138" y="6984" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t1349<title>gate cdp2_b_s6_p1: cdp2_b_hl - n1898</title></text>
 <text x="10138" y="7027" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t1350<title>gate cdp2_b_s6_y: n1898 - vss</title></text>
@@ -32108,7 +32171,7 @@
 <text x="10018" y="7212" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t1355<title>gate cdp2_b_s5_x: vss - cdp2_b_s6_o2</title></text>
 <text x="10064" y="7303" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t1356<title>gate cdp2_b_s6_ne: vcc - cdp2_b_s6_ne</title></text>
 <text x="10156" y="7334" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t1357<title>gate cdp2_b_s6_y: vcc - cdp2_b_s6_y</title></text>
-<text x="10246" y="7344" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t1358<title>gate cdp2_trk_s6: cdp2_b_s6_y - vss</title></text>
+<text x="10246" y="7344" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t1358<title>gate rax_o1: cdp2_b_s6_y - vss</title></text>
 <text x="10333" y="7344" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t1359<title>gate cdp2_a_c_s6_q: cdp2_b_s6_y - vss</title></text>
 <text x="10528" y="6984" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t1360<title>gate cdp2_b_s7_p1: cdp2_b_hl - n1900</title></text>
 <text x="10528" y="7027" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t1361<title>gate cdp2_b_s7_y: vss - n1900</title></text>
@@ -32119,22 +32182,22 @@
 <text x="10408" y="7212" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t1366<title>gate cdp2_b_s6_x: cdp2_b_s7_o2 - vss</title></text>
 <text x="10454" y="7303" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t1367<title>gate cdp2_b_s7_ne: vcc - cdp2_b_s7_ne</title></text>
 <text x="10546" y="7334" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t1368<title>gate cdp2_b_s7_y: vcc - cdp2_b_s7_y</title></text>
-<text x="10636" y="7344" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t1369<title>gate cdp2_trk_s7: cdp2_b_s7_y - vss</title></text>
+<text x="10636" y="7344" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t1369<title>gate rax_o0: cdp2_b_s7_y - vss</title></text>
 <text x="10723" y="7344" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t1370<title>gate cdp2_a_c_s7_q: cdp2_b_s7_y - vss</title></text>
 <text x="8863" y="7431" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t1371<title>gate cdp2_b_s3_y: vss - cdp2_b_s3_ne</title></text>
 <text x="9072" y="7452" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t1372<title>gate cdp2_trk_s3: cdp2_b_s3_ne - n1902</title></text>
 <text x="9120" y="7452" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t1373<title>gate cdp2_a_c_s3_q: vss - n1902</title></text>
 <text x="9253" y="7431" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t1374<title>gate cdp2_b_s4_y: vss - cdp2_b_s4_ne</title></text>
-<text x="9464" y="7452" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t1375<title>gate cdp2_trk_s4: n1903 - cdp2_b_s4_ne</title></text>
+<text x="9464" y="7452" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t1375<title>gate rax_o3: n1903 - cdp2_b_s4_ne</title></text>
 <text x="9511" y="7452" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t1376<title>gate cdp2_a_c_s4_q: n1903 - vss</title></text>
 <text x="9643" y="7431" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t1377<title>gate cdp2_b_s5_y: cdp2_b_s5_ne - vss</title></text>
-<text x="9854" y="7452" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t1378<title>gate cdp2_trk_s5: cdp2_b_s5_ne - n1904</title></text>
+<text x="9854" y="7452" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t1378<title>gate rax_o2: cdp2_b_s5_ne - n1904</title></text>
 <text x="9901" y="7452" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t1379<title>gate cdp2_a_c_s5_q: n1904 - vss</title></text>
 <text x="10033" y="7431" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t1380<title>gate cdp2_b_s6_y: cdp2_b_s6_ne - vss</title></text>
-<text x="10244" y="7452" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t1381<title>gate cdp2_trk_s6: cdp2_b_s6_ne - n1905</title></text>
+<text x="10244" y="7452" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t1381<title>gate rax_o1: cdp2_b_s6_ne - n1905</title></text>
 <text x="10292" y="7452" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t1382<title>gate cdp2_a_c_s6_q: n1905 - vss</title></text>
 <text x="10423" y="7431" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t1383<title>gate cdp2_b_s7_y: cdp2_b_s7_ne - vss</title></text>
-<text x="10634" y="7452" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t1384<title>gate cdp2_trk_s7: cdp2_b_s7_ne - n1906</title></text>
+<text x="10634" y="7452" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t1384<title>gate rax_o0: cdp2_b_s7_ne - n1906</title></text>
 <text x="10682" y="7452" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t1385<title>gate cdp2_a_c_s7_q: n1906 - vss</title></text>
 <text x="8608" y="7596" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t1386<title>gate vss: cdp2_a_c_s2_a - cdp2_a_c_s2_q</title></text>
 <text x="8998" y="7596" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t1387<title>gate vss: cdp2_a_c_s3_a - cdp2_a_c_s3_q</title></text>
@@ -32287,7 +32350,7 @@
 <text x="11379" y="18825" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t1534<title>gate ck_g1: ck_g2 - vss</title></text>
 <text x="11256" y="18720" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t1535<title>gate ck_g1: vcc - ck_g1</title></text>
 <text x="11250" y="18825" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t1536<title>gate ck_b: ck_g1 - vss</title></text>
-<text x="10468" y="18941" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t1537<title>gate ck_out: vcc - n516</title></text>
+<text x="10468" y="18941" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t1537<title>gate ck_out: vcc - n518</title></text>
 <text x="11270" y="19458" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t1538<title>gate ck_g2: ck_a_pu - vss</title></text>
 <text x="11176" y="19609" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t1539<title>gate ck_g2: ck_a - vss</title></text>
 <text x="10992" y="19374" font-family="monospace" font-size="10" text-anchor="middle" fill="#ff0" stroke="#000" stroke-width="2" paint-order="stroke">t1540<title>gate ck_a_pu: vcc - ck_a</title></text>
@@ -34423,12 +34486,18 @@
 <text x="8766" y="4077" font-family="sans-serif" font-size="79" fill="#ffffff" stroke="#000000" stroke-width="8" paint-order="stroke">compare value (5 lines)</text>
 <rect x="14070" y="14850" width="260" height="1870" fill="#969696" fill-opacity="0.10" stroke="#969696" stroke-width="10"><title>left bundle: rsel7 rsel6 rsel4 rsel0 rsel2 down to their gates; strobes of R1 R2 R0 R4 R6 back up and out to the west in poly</title></rect>
 <text x="14086" y="14894" font-family="sans-serif" font-size="36" fill="#ffffff" stroke="#000000" stroke-width="4" paint-order="stroke">left bundle</text>
+<rect x="13620" y="4480" width="1830" height="260" fill="#969696" fill-opacity="0.10" stroke="#969696" stroke-width="10"><title>row address lines, ends: y 4505-4722: each ends on a pad into the logic above, or goes on east</title></rect>
+<text x="13636" y="4574" font-family="sans-serif" font-size="86" fill="#ffffff" stroke="#000000" stroke-width="9" paint-order="stroke">row address lines, ends</text>
 <rect x="7650" y="12800" width="3130" height="150" fill="#00dcff" fill-opacity="0.10" stroke="#00dcff" stroke-width="10"><title>selector output pull-down: per slice a transistor from n to VSS gated by one line (rst) from the left</title></rect>
 <text x="7666" y="12858" font-family="sans-serif" font-size="50" fill="#ffffff" stroke="#000000" stroke-width="5" paint-order="stroke">selector output pull-down</text>
 <rect x="14100" y="14636" width="1750" height="264" fill="#969696" fill-opacity="0.10" stroke="#969696" stroke-width="10"><title>select lines leave the decode array: each rselN crosses under the VSS rail in poly and continues on a metal line (or in poly) to its gate</title></rect>
 <text x="14116" y="14729" font-family="sans-serif" font-size="85" fill="#ffffff" stroke="#000000" stroke-width="8" paint-order="stroke">select lines leave the decode array</text>
 <rect x="5280" y="6850" width="890" height="510" fill="#969696" fill-opacity="0.10" stroke="#969696" stroke-width="10" stroke-dasharray="60 40"><title>diagonal fan: the five lines of the poly bus turn south-east and then east to pads at x 6130-6165, where horizontal metals take them on</title></rect>
 <text x="5296" y="6964" font-family="sans-serif" font-size="106" fill="#ffffff" stroke="#000000" stroke-width="11" paint-order="stroke">diagonal fan ?</text>
+<rect x="11720" y="4310" width="2140" height="210" fill="#969696" fill-opacity="0.10" stroke="#969696" stroke-width="10"><title>row address lines, east: five metals along the top of the right-hand arrays to a nested corner</title></rect>
+<text x="11736" y="4387" font-family="sans-serif" font-size="69" fill="#ffffff" stroke="#000000" stroke-width="7" paint-order="stroke">row address lines, east</text>
+<rect x="10940" y="4300" width="260" height="1720" fill="#969696" fill-opacity="0.10" stroke="#969696" stroke-width="10"><title>row address lines, north: rax_o0-4 from the east ends of the comparator lines north to the cross-under</title></rect>
+<text x="10956" y="4325" font-family="sans-serif" font-size="17" fill="#ffffff" stroke="#000000" stroke-width="2" paint-order="stroke">row address lines, north</text>
 <rect x="7500" y="4720" width="360" height="1240" fill="#969696" fill-opacity="0.10" stroke="#969696" stroke-width="10"><title>selector outputs: the five outputs east in poly to their units; nest of metals from the units to the central datapath channel 1 lines (comparator inputs)</title></rect>
 <text x="7516" y="4764" font-family="sans-serif" font-size="36" fill="#ffffff" stroke="#000000" stroke-width="4" paint-order="stroke">selector outputs</text>
 <rect x="2440" y="5650" width="650" height="680" fill="#ff5050" fill-opacity="0.10" stroke="#ff5050" stroke-width="10" stroke-dasharray="60 40"><title>small cluster below the step logic: not traced; ck_out reaches it from the left-edge trunk</title></rect>
@@ -34555,6 +34624,8 @@
 <text x="7186" y="2997" font-family="sans-serif" font-size="14" fill="#ffffff" stroke="#000000" stroke-width="2" paint-order="stroke">channel lines W1-W4</text>
 <rect x="7520" y="14950" width="340" height="450" fill="#ff5050" fill-opacity="0.10" stroke="#ff5050" stroke-width="10"><title>latch strobe drivers: two strong inverters with one input: one drives cdp4_ld6 (strobe of the 6-bit latch row D), the other a twin line going up at x 7448</title></rect>
 <text x="7536" y="14985" font-family="sans-serif" font-size="27" fill="#ffffff" stroke="#000000" stroke-width="3" paint-order="stroke">latch strobe drivers</text>
+<rect x="11080" y="4300" width="640" height="220" fill="#969696" fill-opacity="0.10" stroke="#969696" stroke-width="10"><title>row address cross-under: five poly lines under the wide supply metal</title></rect>
+<text x="11096" y="4354" font-family="sans-serif" font-size="46" fill="#ffffff" stroke="#000000" stroke-width="5" paint-order="stroke">row address cross-under</text>
 <rect x="3560" y="6340" width="700" height="200" fill="#969696" fill-opacity="0.10" stroke="#969696" stroke-width="10"><title>clock lines into the left array's counters: four poly lines from the west: master clock (y 6500), slave clock (y 6455), the 5-bit counter's L3 (y 6410), one more</title></rect>
 <text x="3576" y="6376" font-family="sans-serif" font-size="28" fill="#ffffff" stroke="#000000" stroke-width="3" paint-order="stroke">clock lines into the left array's counters</text>
 <rect x="11040" y="7020" width="660" height="210" fill="#969696" fill-opacity="0.10" stroke="#969696" stroke-width="10"><title>bands above the counters: four horizontal poly lines that go on east over the top of the mid-right array: H3 is inh_rc, H4 feeds the counters' line x 12902</title></rect>

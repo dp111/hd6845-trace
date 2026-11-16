@@ -1339,7 +1339,7 @@ transistors
   t1333 at   9238,  7212  W/L   35/20   -     gate cdp2_b_s3_x  cdp2_b_s4_o2 <-> vss
   t1334 at   9284,  7303  W/L   30/43   load  gate cdp2_b_s4_ne vcc <-> cdp2_b_s4_ne
   t1335 at   9376,  7334  W/L   20/57   load  gate cdp2_b_s4_y  vcc <-> cdp2_b_s4_y
-  t1336 at   9466,  7344  W/L   41/21   -     gate cdp2_trk_s4  cdp2_b_s4_y <-> vss
+  t1336 at   9466,  7344  W/L   41/21   -     gate rax_o3       cdp2_b_s4_y <-> vss
   t1337 at   9553,  7344  W/L   43/20   -     gate cdp2_a_c_s4_q cdp2_b_s4_y <-> vss
   t1338 at   9748,  6984  W/L  133/23   -     gate cdp2_b_s5_p1 cdp2_b_hl <-> n1896
   t1339 at   9748,  7027  W/L  133/26   -     gate cdp2_b_s5_y  n1896 <-> vss
@@ -1350,7 +1350,7 @@ transistors
   t1344 at   9628,  7212  W/L   35/20   -     gate cdp2_b_s4_x  vss <-> cdp2_b_s5_o2
   t1345 at   9674,  7303  W/L   30/43   load  gate cdp2_b_s5_ne vcc <-> cdp2_b_s5_ne
   t1346 at   9766,  7334  W/L   20/57   load  gate cdp2_b_s5_y  vcc <-> cdp2_b_s5_y
-  t1347 at   9856,  7344  W/L   41/21   -     gate cdp2_trk_s5  vss <-> cdp2_b_s5_y
+  t1347 at   9856,  7344  W/L   41/21   -     gate rax_o2       vss <-> cdp2_b_s5_y
   t1348 at   9943,  7344  W/L   43/20   -     gate cdp2_a_c_s5_q vss <-> cdp2_b_s5_y
   t1349 at  10138,  6984  W/L  133/23   -     gate cdp2_b_s6_p1 cdp2_b_hl <-> n1898
   t1350 at  10138,  7027  W/L  133/26   -     gate cdp2_b_s6_y  n1898 <-> vss
@@ -1361,7 +1361,7 @@ transistors
   t1355 at  10018,  7212  W/L   35/20   -     gate cdp2_b_s5_x  vss <-> cdp2_b_s6_o2
   t1356 at  10064,  7303  W/L   30/43   load  gate cdp2_b_s6_ne vcc <-> cdp2_b_s6_ne
   t1357 at  10156,  7334  W/L   20/57   load  gate cdp2_b_s6_y  vcc <-> cdp2_b_s6_y
-  t1358 at  10246,  7344  W/L   41/21   -     gate cdp2_trk_s6  cdp2_b_s6_y <-> vss
+  t1358 at  10246,  7344  W/L   41/21   -     gate rax_o1       cdp2_b_s6_y <-> vss
   t1359 at  10333,  7344  W/L   43/20   -     gate cdp2_a_c_s6_q cdp2_b_s6_y <-> vss
   t1360 at  10528,  6984  W/L  133/23   -     gate cdp2_b_s7_p1 cdp2_b_hl <-> n1900
   t1361 at  10528,  7027  W/L  133/26   -     gate cdp2_b_s7_y  vss <-> n1900
@@ -1372,22 +1372,22 @@ transistors
   t1366 at  10408,  7212  W/L   35/20   -     gate cdp2_b_s6_x  cdp2_b_s7_o2 <-> vss
   t1367 at  10454,  7303  W/L   30/43   load  gate cdp2_b_s7_ne vcc <-> cdp2_b_s7_ne
   t1368 at  10546,  7334  W/L   20/57   load  gate cdp2_b_s7_y  vcc <-> cdp2_b_s7_y
-  t1369 at  10636,  7344  W/L   41/21   -     gate cdp2_trk_s7  cdp2_b_s7_y <-> vss
+  t1369 at  10636,  7344  W/L   41/21   -     gate rax_o0       cdp2_b_s7_y <-> vss
   t1370 at  10723,  7344  W/L   43/20   -     gate cdp2_a_c_s7_q cdp2_b_s7_y <-> vss
   t1371 at   8863,  7431  W/L   32/14   -     gate cdp2_b_s3_y  vss <-> cdp2_b_s3_ne
   t1372 at   9072,  7452  W/L   71/20   -     gate cdp2_trk_s3  cdp2_b_s3_ne <-> n1902
   t1373 at   9120,  7452  W/L   69/19   -     gate cdp2_a_c_s3_q vss <-> n1902
   t1374 at   9253,  7431  W/L   32/14   -     gate cdp2_b_s4_y  vss <-> cdp2_b_s4_ne
-  t1375 at   9464,  7452  W/L   70/20   -     gate cdp2_trk_s4  n1903 <-> cdp2_b_s4_ne
+  t1375 at   9464,  7452  W/L   70/20   -     gate rax_o3       n1903 <-> cdp2_b_s4_ne
   t1376 at   9511,  7452  W/L   69/19   -     gate cdp2_a_c_s4_q n1903 <-> vss
   t1377 at   9643,  7431  W/L   32/14   -     gate cdp2_b_s5_y  cdp2_b_s5_ne <-> vss
-  t1378 at   9854,  7452  W/L   70/20   -     gate cdp2_trk_s5  cdp2_b_s5_ne <-> n1904
+  t1378 at   9854,  7452  W/L   70/20   -     gate rax_o2       cdp2_b_s5_ne <-> n1904
   t1379 at   9901,  7452  W/L   69/19   -     gate cdp2_a_c_s5_q n1904 <-> vss
   t1380 at  10033,  7431  W/L   32/14   -     gate cdp2_b_s6_y  cdp2_b_s6_ne <-> vss
-  t1381 at  10244,  7452  W/L   69/21   -     gate cdp2_trk_s6  cdp2_b_s6_ne <-> n1905
+  t1381 at  10244,  7452  W/L   69/21   -     gate rax_o1       cdp2_b_s6_ne <-> n1905
   t1382 at  10292,  7452  W/L   69/19   -     gate cdp2_a_c_s6_q n1905 <-> vss
   t1383 at  10423,  7431  W/L   32/14   -     gate cdp2_b_s7_y  cdp2_b_s7_ne <-> vss
-  t1384 at  10634,  7452  W/L   69/21   -     gate cdp2_trk_s7  cdp2_b_s7_ne <-> n1906
+  t1384 at  10634,  7452  W/L   69/21   -     gate rax_o0       cdp2_b_s7_ne <-> n1906
   t1385 at  10682,  7452  W/L   69/19   -     gate cdp2_a_c_s7_q n1906 <-> vss
   t1386 at   8608,  7596  W/L   15/83   hold  gate vss          cdp2_a_c_s2_a <-> cdp2_a_c_s2_q
   t1387 at   8998,  7596  W/L   15/83   hold  gate vss          cdp2_a_c_s3_a <-> cdp2_a_c_s3_q
@@ -1540,7 +1540,7 @@ transistors
   t1534 at  11379, 18825  W/L   50/26   -     gate ck_g1        ck_g2 <-> vss
   t1535 at  11256, 18720  W/L   26/96   load  gate ck_g1        vcc <-> ck_g1
   t1536 at  11250, 18825  W/L   50/24   -     gate ck_b         ck_g1 <-> vss
-  t1537 at  10468, 18941  W/L   59/32   clamp gate ck_out       vcc <-> n516
+  t1537 at  10468, 18941  W/L   59/32   clamp gate ck_out       vcc <-> n518
   t1538 at  11270, 19458  W/L  180/23   -     gate ck_g2        ck_a_pu <-> vss
   t1539 at  11176, 19609  W/L  482/31   -     gate ck_g2        ck_a <-> vss
   t1540 at  10992, 19374  W/L  577/27   -     gate ck_a_pu      vcc <-> ck_a
@@ -3402,6 +3402,8 @@ gates
   rcs_u3425    = NOT rcs_bc3460
   rcs_c1       = NOR(rcs_a2, rcs_b1)
   rcs_n4200    = NOT((clk_tl & rcs_cond) | rcs_g4240)
+  rcs_cond     = NOT rcs_cond_n
+  rcs_in3      = NOR(rcs_e3, rcs_e4)
   rcs_in2      = NOR(rcs_e4, rcs_w2)
   c4l3_co      = NOR(c4l3_ci_n, c4l3_q_n)
   clk_tl       = NOT ck_out
@@ -3438,8 +3440,6 @@ gates
   ma12_pu      = NOT ma12_drv_in
   rcs_b1       = NOR(rcs_a2, rcs_u3425, rcs_x1)
   rcs_bc3460   = NOR(rcs_e3, rcs_e4)
-  rcs_cond     = NOT rcs_cond_n
-  rcs_in3      = NOR(rcs_e3, rcs_e4)
   larr_n4_s0   = NOT larr_g6_s0
   larr_n4_s1   = NOT larr_g6_s1
   larr_n4_s2   = NOT larr_g6_s2
@@ -3457,24 +3457,25 @@ gates
   ma1_pd       = NOT ma1_pu
   rcs_in1      = NOR(rcs_mu, rcs_mv)
   rc_stepreq_n = NOR(rcs_in1, rcs_in2, rcs_in3)
+  c4l3_m_n     = NOT c4l3_m
   c4l3_q_n     = NOT c4l3_q
   c4l2_q_n     = NOT c4l2_q
   c4l1_q_n     = NOT c4l1_q
+  c4l0_m_n     = NOT c4l0_m
   c4l0_q_n     = NOT c4l0_q
+  sl4_m_n      = NOT sl4_m
   sl4_q_n      = NOT sl4_q
   sl3_q_n      = NOT sl3_q
   sl2_q_n      = NOT sl2_q
   sl1_q_n      = NOT sl1_q
+  sl0_m_n      = NOT sl0_m
   sl0_q_n      = NOT sl0_q
-  c4l3_m_n     = NOT c4l3_m
   c4l3_nx_n    = NOT c4l3_nx
   c4l2_m_n     = NOT c4l2_m
   c4l2_nx_n    = NOT c4l2_nx
   c4l1_m_n     = NOT c4l1_m
   c4l1_nx_n    = NOT c4l1_nx
-  c4l0_m_n     = NOT c4l0_m
   c4l0_nx_n    = NOT c4l0_nx
-  sl4_m_n      = NOT sl4_m
   sl4_nx_n     = NOT sl4_nx
   sl3_m_n      = NOT sl3_m
   sl3_nx_n     = NOT sl3_nx
@@ -3482,7 +3483,6 @@ gates
   sl2_nx_n     = NOT sl2_nx
   sl1_m_n      = NOT sl1_m
   sl1_nx_n     = NOT sl1_nx
-  sl0_m_n      = NOT sl0_m
   sl0_nx_n     = NOT sl0_nx
   ma13_pu      = NOT ma13_drv_in
   ma13_pd      = NOT ma13_pu
@@ -3515,12 +3515,12 @@ gates
   tc1_r5_out   = NOT((tc1_g & tc1_l2_out) | (tc1_i & tc1_l3_out))
   cdp2_a_c_s1_q = NOT cdp2_a_c_s1_n2
   cdp3_bl_c1   = NAND(cdp3_k_b, cdp3_k_c)
-  cdp3_hq_c1   = NOT((cdp3_gate_e & cdp3_gate_f) | cdp3_h_c1_q1)
   cdp3_hq_c0   = NOT((cdp3_gate_e & cdp3_gate_f) | cdp3_h_c0_q1)
+  cdp3_hq_c1   = NOT((cdp3_gate_e & cdp3_gate_f) | cdp3_h_c1_q1)
   cdp3_hw_c1   = NOT cdp3_h_c1_q1
   cdp3_hw_c0   = NOT cdp3_h_c0_q1
-  cdp4_lr_s1_q = NOT cdp4_lr_s1_n2
   cdp4_lr_s0_q = NOT cdp4_lr_s0_n2
+  cdp4_lr_s1_q = NOT cdp4_lr_s1_n2
   cdp4_b_s0    = NOT(cdp4_lr_s0_n2 | (cdp4_rst & cdp4_sel2) | (cdp4_sel1 & cdp4_sel2) | (cdp4_sel2 & cdp4_sel4))
   cdp4_b_s1    = NOT(cdp4_lr_s1_n2 | (cdp4_rst & cdp4_sel2) | (cdp4_sel1 & cdp4_sel2) | (cdp4_sel2 & cdp4_sel4))
   cdp4_d_s1    = NOT(cdp4_lc_s1_n2 | (cdp4_rst & cdp4_sel3) | (cdp4_sel1 & cdp4_sel3) | (cdp4_sel3 & cdp4_sel4))
@@ -3539,8 +3539,8 @@ gates
   bc1_dec01_n  = NAND(bc1_s0, bc1_s1_n)
   cudisp_pu    = NOT cudisp_drv_in
   cudisp_pd    = NOT cudisp_pu
-  cdp1_a0_q    = NOT cdp1_a0_q1
   cdp1_a1_q    = NOT cdp1_a1_q1
+  cdp1_a0_q    = NOT cdp1_a0_q1
   cdp1_b_eq    = NOR(cdp1_b1_ne, cdp1_b2_ne, cdp1_b3_ne, cdp1_b4_ne, cdp1_b5_ne)
   cdp1_c1_q    = NOT cdp1_c1_q1
   cdp2_a_s3_q  = NOT cdp2_a_s3_n2
@@ -3549,98 +3549,98 @@ gates
   cdp2_b_s3_ne = NOT((cdp2_a_c_s3_q & cdp2_trk_s3) | cdp2_b_s3_y)
   cdp2_a_c_s3_q = NOT cdp2_a_c_s3_n2
   cdp2_a_c_s2_q = NOT cdp2_a_c_s2_n2
-  cdp3_cw_c3   = NOT cdp3_c_c3_q1
   cdp3_cw_c2   = NOT cdp3_c_c2_q1
-  cdp3_cq_c2   = NOT cdp3_c_c2_q1
+  cdp3_cw_c3   = NOT cdp3_c_c3_q1
   cdp3_cq_c3   = NOT cdp3_c_c3_q1
-  cdp3_hq_c2   = NOT cdp3_h_c2_q1
+  cdp3_cq_c2   = NOT cdp3_c_c2_q1
   cdp3_hq_c3   = NOT cdp3_h_c3_q1
+  cdp3_hq_c2   = NOT cdp3_h_c2_q1
   cdp3_hw_c3   = NOT cdp3_h_c3_q1
   cdp3_hw_c2   = NOT cdp3_h_c2_q1
   cdp4_lr_s2_q = NOT cdp4_lr_s2_n2
   cdp4_lr_s3_q = NOT cdp4_lr_s3_n2
+  cdp4_b_s3    = NOT(cdp4_lr_s3_n2 | (cdp4_rst & cdp4_sel2))
   cdp4_b_s2    = NOT(cdp4_lr_s2_n2 | (cdp4_rst & cdp4_sel2))
   cdp4_d_s2    = NOT(cdp4_lc_s2_n2 | (cdp4_rst & cdp4_sel3))
+  cdp4_d_s3    = NOT(cdp4_lc_s3_n2 | (cdp4_rst & cdp4_sel3))
   cdp4_c_s3    = NOT(cdp4_ldr_s2_n2 | (cdp4_rst & cdp4_sel4))
   cdp4_lc_s2_q = NOT cdp4_lc_s2_n2
   cdp4_lc_s3_q = NOT cdp4_lc_s3_n2
+  cdp4_c_s4    = NOT(cdp4_ldr_s3_n2 | (cdp4_rst & cdp4_sel4))
   cdp4_ldr_s3_q = NOT cdp4_ldr_s3_n2
   cdp4_ldr_s2_q = NOT cdp4_ldr_s2_n2
   cdp1_a2_q    = NOT cdp1_a2_q1
   cdp1_c2_q    = NOT cdp1_c2_q1
   cdp2_a_s4_q  = NOT cdp2_a_s4_n2
-  cdp2_b_s4_y  = NOR(cdp2_a_c_s4_q, cdp2_trk_s4)
-  cdp2_b_s4_ne = NOT((cdp2_a_c_s4_q & cdp2_trk_s4) | cdp2_b_s4_y)
-  cdp2_b_s5_ne = NOT((cdp2_a_c_s5_q & cdp2_trk_s5) | cdp2_b_s5_y)
+  cdp2_b_s4_y  = NOR(cdp2_a_c_s4_q, rax_o3)
+  cdp2_b_s5_ne = NOT((cdp2_a_c_s5_q & rax_o2) | cdp2_b_s5_y)
+  cdp2_b_s4_ne = NOT((cdp2_a_c_s4_q & rax_o3) | cdp2_b_s4_y)
   cdp2_a_c_s4_q = NOT cdp2_a_c_s4_n2
   cdp3_cw_c4   = NOT cdp3_c_c4_q1
   cdp3_cq_c4   = NOT cdp3_c_c4_q1
   cdp3_hq_c4   = NOT cdp3_h_c4_q1
   cdp3_hw_c4   = NOT cdp3_h_c4_q1
   cdp4_lr_s4_q = NOT cdp4_lr_s4_n2
-  cdp4_b_s3    = NOT(cdp4_lr_s3_n2 | (cdp4_rst & cdp4_sel2))
   cdp4_b_s4    = NOT(cdp4_lr_s4_n2 | (cdp4_rst & cdp4_sel2))
-  cdp4_d_s3    = NOT(cdp4_lc_s3_n2 | (cdp4_rst & cdp4_sel3))
   cdp4_d_s4    = NOT(cdp4_lc_s4_n2 | (cdp4_rst & cdp4_sel3))
-  cdp4_c_s4    = NOT(cdp4_ldr_s3_n2 | (cdp4_rst & cdp4_sel4))
   cdp4_c_s5    = NOT(cdp4_ldr_s4_n2 | (cdp4_rst & cdp4_sel4))
   cdp4_lc_s4_q = NOT cdp4_lc_s4_n2
   cdp4_ldr_s4_q = NOT cdp4_ldr_s4_n2
   cdp1_a3_q    = NOT cdp1_a3_q1
+  cdp1_a4_q    = NOT cdp1_a4_q1
   cdp1_c3_q    = NOT cdp1_c3_q1
+  cdp1_c4_q    = NOT cdp1_c4_q1
   cdp2_a_s5_q  = NOT cdp2_a_s5_n2
-  cdp2_b_s5_y  = NOR(cdp2_a_c_s5_q, cdp2_trk_s5)
-  cdp2_b_s6_ne = NOT((cdp2_a_c_s6_q & cdp2_trk_s6) | cdp2_b_s6_y)
+  cdp2_a_s6_q  = NOT cdp2_a_s6_n2
+  cdp2_b_s6_y  = NOR(cdp2_a_c_s6_q, rax_o1)
+  cdp2_b_s5_y  = NOR(cdp2_a_c_s5_q, rax_o2)
+  cdp2_b_s6_ne = NOT((cdp2_a_c_s6_q & rax_o1) | cdp2_b_s6_y)
   cdp2_a_c_s5_q = NOT cdp2_a_c_s5_n2
-  cdp3_cw_c5   = NOT cdp3_c_c5_q1
+  cdp2_a_c_s6_q = NOT cdp2_a_c_s6_n2
   cdp3_cw_c6   = NOT cdp3_c_c6_q1
+  cdp3_cw_c5   = NOT cdp3_c_c5_q1
   cdp3_cq_c5   = NOT cdp3_c_c5_q1
   cdp3_cq_c6   = NOT cdp3_c_c6_q1
-  cdp3_hq_c5   = NOT cdp3_h_c5_q1
   cdp3_hq_c6   = NOT cdp3_h_c6_q1
+  cdp3_hq_c5   = NOT cdp3_h_c5_q1
   cdp3_hw_c6   = NOT cdp3_h_c6_q1
   cdp3_hw_c5   = NOT cdp3_h_c5_q1
   cdp4_lr_s5_q = NOT cdp4_lr_s5_n2
+  cdp4_lr_s6_q = NOT cdp4_lr_s6_n2
   cdp4_b_s5    = NOT(cdp4_lr_s5_n2 | (cdp4_rst & cdp4_sel2))
   cdp4_d_s5    = NOT(cdp4_lc_s5_n2 | (cdp4_rst & cdp4_sel3))
   cdp4_c_s6    = NOT(cdp4_ldr_s5_n2 | (cdp4_rst & cdp4_sel4))
   cdp4_lc_s5_q = NOT cdp4_lc_s5_n2
+  cdp4_lc_s6_q = NOT cdp4_lc_s6_n2
   cdp4_ldr_s5_q = NOT cdp4_ldr_s5_n2
+  cdp4_ldr_s6_q = NOT cdp4_ldr_s6_n2
   ck_n2        = NOT ck_t
   vsync_pd     = NOT vsync_pu
-  cdp1_a4_q    = NOT cdp1_a4_q1
+  vsync_pu     = NOT vsync_drv_in
   cdp1_a5_q    = NOT cdp1_a5_q1
-  cdp1_c4_q    = NOT cdp1_c4_q1
-  cdp2_a_s6_q  = NOT cdp2_a_s6_n2
   cdp2_a_s7_q  = NOT cdp2_a_s7_n2
-  cdp2_b_s7_y  = NOR(cdp2_a_c_s7_q, cdp2_trk_s7)
-  cdp2_b_s6_y  = NOR(cdp2_a_c_s6_q, cdp2_trk_s6)
-  cdp2_b_s7_ne = NOT((cdp2_a_c_s7_q & cdp2_trk_s7) | cdp2_b_s7_y)
-  cdp2_a_c_s6_q = NOT cdp2_a_c_s6_n2
+  cnt_la_a_n   = NOT cnt_la_a
+  cdp2_b_s7_y  = NOR(cdp2_a_c_s7_q, rax_o0)
+  cdp2_b_s7_ne = NOT((cdp2_a_c_s7_q & rax_o0) | cdp2_b_s7_y)
   cdp2_a_c_s7_q = NOT cdp2_a_c_s7_n2
   cdp3_cw_c7   = NOT cdp3_c_c7_q1
   cdp3_cq_c7   = NOT cdp3_c_c7_q1
   cdp3_hq_c7   = NOT cdp3_h_c7_q1
   cdp3_hw_c7   = NOT cdp3_h_c7_q1
   cdp4_lr_s7_q = NOT cdp4_lr_s7_n2
-  cdp4_lr_s6_q = NOT cdp4_lr_s6_n2
   cdp4_b_s7    = NOT(cdp4_lr_s7_n2 | (cdp4_rst & cdp4_sel2))
   cdp4_b_s6    = NOT(cdp4_lr_s6_n2 | (cdp4_rst & cdp4_sel2))
   cdp4_d_s7    = NOT(cdp4_lc_s7_n2 | (cdp4_rst & cdp4_sel3))
   cdp4_d_s6    = NOT(cdp4_lc_s6_n2 | (cdp4_rst & cdp4_sel3))
   cdp4_c_s7    = NOT(cdp4_ldr_s6_n2 | (cdp4_rst & cdp4_sel4))
-  cdp4_lc_s6_q = NOT cdp4_lc_s6_n2
   cdp4_lc_s7_q = NOT cdp4_lc_s7_n2
-  cdp4_ldr_s6_q = NOT cdp4_ldr_s6_n2
   ck_t         = NOT clk
-  vsync_pu     = NOT vsync_drv_in
-  cnt_la_a_n   = NOT cnt_la_a
   hsw3_co      = NOR(hsw3_ci_n, hsw3_q_n)
   inh_rc       = NOT inh_n
   hsw3_q_n     = NOT hsw3_q
   hsw2_co      = NOR(hsw2_ci_n, hsw2_q_n)
-  rc_ck_s_dly  = NOT rc_ck_s_n
   hsw2_q_n     = NOT hsw2_q
+  rc_ck_s_dly  = NOT rc_ck_s_n
   rc_step      = NOR(inh_rc, rc_stepreq_n)
   hsw1_co      = NOR(hsw1_ci_n, hsw1_q_n)
   rc_ck_m_dly  = NOT rc_ck_m_n
@@ -3724,8 +3724,8 @@ gates
   hc1_m_n      = NOT hc1_m
   hc1_nx_n     = NOT hc1_nx
   hc0_m_n      = NOT hc0_m
-  hsync_pu     = NOT hsync_drv_in
   hc0_nx_n     = NOT hc0_nx
+  hsync_pu     = NOT hsync_drv_in
   r5_b0_q      = NOT r5_b0_n2
   wr_r5        = NOR(rsel5_n, wr_stb_n)
   wr_r3        = NOR(rsel3_n, wr_stb_n)
@@ -3746,10 +3746,11 @@ gates
   wr_r7        = NOR(rsel7_n, wr_stb_n)
   uc_eq_r6     = NOR(r6c_b0_x, r6c_b1_x, r6c_b2_x, r6c_b3_x, r6c_b4_x, r6c_b5_x, r6c_b6_x)
   rc1          = NOT rc1_m_n
+  hc7          = NOT hc7_m_n
   rc0          = NOT rc0_m_n
   wr_r6        = NOR(rsel6_n, wr_stb_n)
-  wr_r1        = NOR(rsel1_n, wr_stb_n)
   hc3          = NOT hc3_m_n
+  wr_r1        = NOR(rsel1_n, wr_stb_n)
   wr_r2        = NOR(rsel2_n, wr_stb_n)
   wr_r0        = NOR(rsel0_n, wr_stb_n)
   wr_r4        = NOR(rsel4_n, wr_stb_n)
@@ -3762,14 +3763,13 @@ gates
   ra0_pu       = NOT ra0_drv_in
   r5_b2_q      = NOT r5_b2_n2
   r5_b1_q      = NOT r5_b1_n2
-  r7_b2_q      = NOT r7_b2_n2
   r7_b1_q      = NOT r7_b1_n2
+  r7_b2_q      = NOT r7_b2_n2
   r6_b2_q      = NOT r6_b2_n2
   r6_b1_q      = NOT r6_b1_n2
-  r4_b1_q      = NOT r4_b1_n2
   r4_b2_q      = NOT r4_b2_n2
+  r4_b1_q      = NOT r4_b1_n2
   r0_b1_q      = NOT r0_b1_n2
-  hc7          = NOT hc7_m_n
   r0_b0_q      = NOT r0_b0_n2
   r2_b7_q      = NOT r2_b7_n2
   r2_b0_q      = NOT r2_b0_n2
@@ -3777,12 +3777,12 @@ gates
   r1_b7_q      = NOT r1_b7_n2
   hc6          = NOT hc6_m_n
   ar0          = NOT ar0_n2
-  rsel4        = NOR(ar0, ar1, ar2_n, ar3, ar4)
-  rsel1        = NOR(ar0_n, ar1, ar2, ar3, ar4)
-  rsel7        = NOR(ar0_n, ar1_n, ar2_n, ar3, ar4)
-  rsel0        = NOR(ar0, ar1, ar2, ar3, ar4)
   rsel2        = NOR(ar0, ar1_n, ar2, ar3, ar4)
+  rsel4        = NOR(ar0, ar1, ar2_n, ar3, ar4)
   rsel6        = NOR(ar0, ar1_n, ar2_n, ar3, ar4)
+  rsel7        = NOR(ar0_n, ar1_n, ar2_n, ar3, ar4)
+  rsel1        = NOR(ar0_n, ar1, ar2, ar3, ar4)
+  rsel0        = NOR(ar0, ar1, ar2, ar3, ar4)
   bd1_n1       = NOT((bd1_a & inh_lat) | bd1_q)
   wr_stb_n     = NOT wr_data_lat
   rsel12_bufn  = NOT rsel12
@@ -3790,31 +3790,31 @@ gates
   wr_r11       = NOR(rsel11_n, wr_stb_n)
   wr_r10       = NOR(rsel10_n, wr_stb_n)
   clk_n        = NOT clk
-  r5_b3_q      = NOT r5_b3_n2
   r5_b4_q      = NOT r5_b4_n2
-  r7_b3_q      = NOT r7_b3_n2
+  r5_b3_q      = NOT r5_b3_n2
   r7_b4_q      = NOT r7_b4_n2
+  r7_b3_q      = NOT r7_b3_n2
   r6_b4_q      = NOT r6_b4_n2
   r6_b3_q      = NOT r6_b3_n2
   r4_b4_q      = NOT r4_b4_n2
   r4_b3_q      = NOT r4_b3_n2
-  r0_b3_q      = NOT r0_b3_n2
   r0_b2_q      = NOT r0_b2_n2
-  r2_b1_q      = NOT r2_b1_n2
+  r0_b3_q      = NOT r0_b3_n2
   r2_b2_q      = NOT r2_b2_n2
-  r1_b2_q      = NOT r1_b2_n2
+  r2_b1_q      = NOT r2_b1_n2
   r1_b1_q      = NOT r1_b1_n2
+  r1_b2_q      = NOT r1_b2_n2
   ar1          = NOT ar1_n2
   ar2          = NOT ar2_n2
-  rsel12       = NOR(ar0, ar1, ar2_n, ar3_n, ar4)
+  rsel9        = NOR(ar0_n, ar1, ar2, ar3_n, ar4)
+  rsel3        = NOR(ar0_n, ar1_n, ar2, ar3, ar4)
   rsel14       = NOR(ar0, ar1_n, ar2_n, ar3_n, ar4)
   rsel13       = NOR(ar0_n, ar1, ar2_n, ar3_n, ar4)
+  rsel12       = NOR(ar0, ar1, ar2_n, ar3_n, ar4)
   rsel11       = NOR(ar0_n, ar1_n, ar2, ar3_n, ar4)
-  rsel10       = NOR(ar0, ar1_n, ar2, ar3_n, ar4)
-  rsel9        = NOR(ar0_n, ar1, ar2, ar3_n, ar4)
   rsel5        = NOR(ar0_n, ar1, ar2_n, ar3, ar4)
   rsel8        = NOR(ar0, ar1, ar2, ar3_n, ar4)
-  rsel3        = NOR(ar0_n, ar1_n, ar2, ar3, ar4)
+  rsel10       = NOR(ar0, ar1_n, ar2, ar3_n, ar4)
   rsel15       = NOR(ar0_n, ar1_n, ar2_n, ar3_n, ar4)
   rsel16_buf   = NOT rsel16_bn
   rsel17_buf   = NOT rsel17_bn
@@ -3827,27 +3827,28 @@ gates
   rw_c         = NOT rw_b
   ra1_pd       = NOT ra1_pu
   ra1_pu       = NOT ra1_drv_in
-  r3_b1_q      = NOT r3_b1_n2
   r3_b0_q      = NOT r3_b0_n2
-  r7_b6_q      = NOT r7_b6_n2
+  r3_b1_q      = NOT r3_b1_n2
   r7_b5_q      = NOT r7_b5_n2
-  r6_b5_q      = NOT r6_b5_n2
+  r7_b6_q      = NOT r7_b6_n2
   r6_b6_q      = NOT r6_b6_n2
+  r6_b5_q      = NOT r6_b5_n2
   r4_b5_q      = NOT r4_b5_n2
   r4_b6_q      = NOT r4_b6_n2
+  r0_b5_q      = NOT r0_b5_n2
   r0_b4_q      = NOT r0_b4_n2
   r2_b3_q      = NOT r2_b3_n2
   r2_b4_q      = NOT r2_b4_n2
-  r1_b3_q      = NOT r1_b3_n2
   r1_b4_q      = NOT r1_b4_n2
+  r1_b3_q      = NOT r1_b3_n2
   ar3          = NOT ar3_n2
   ar4          = NOT ar4_n2
-  rsel17       = NOR(ar0_n, ar1, ar2, ar3, ar4_n)
   rsel16       = NOR(ar0, ar1, ar2, ar3, ar4_n)
+  rsel17       = NOR(ar0_n, ar1, ar2, ar3, ar4_n)
   wr_data_lat  = NOT((e_b & wr_data_sel_n) | wr_data_lat_n)
+  wr_data_sel  = NOR(bd2_rs_n, cs_d, rw_d)
   wr_data_lat_n = NOT((e_b & wr_data_sel) | wr_data_lat)
   wr_data_sel_n = NOT wr_data_sel
-  wr_data_sel  = NOR(bd2_rs_n, cs_d, rw_d)
   rsel14_buf   = NOT rsel14_bn
   e_b          = NOT e_n
   rs_d         = NOT rs_c
@@ -3864,11 +3865,10 @@ gates
   d0_c         = NOT d0_b
   d0_d         = NOT d0_c
   r0_b6_q      = NOT r0_b6_n2
-  r0_b5_q      = NOT r0_b5_n2
   r2_b5_q      = NOT r2_b5_n2
   r2_b6_q      = NOT r2_b6_n2
-  r1_b6_q      = NOT r1_b6_n2
   r1_b5_q      = NOT r1_b5_n2
+  r1_b6_q      = NOT r1_b6_n2
   ar_load      = NOT ar_load_n
   wr_addr_sel  = NOR(cs_d, rs_d, rw_d)
   cs_d         = NOT cs_c
@@ -3981,8 +3981,8 @@ gates
   cdp2_a_c_s1_n2 = NOT cdp2_a_c_s1_a
   cdp3_h_c1_q1 = NOT cdp3_h_c1_x
   cdp3_h_c0_q1 = NOT cdp3_h_c0_x
-  cdp3_h_c0_q  = NOT cdp3_h_c0_q1
   cdp3_h_c1_q  = NOT cdp3_h_c1_q1
+  cdp3_h_c0_q  = NOT cdp3_h_c0_q1
   cdp4_lr_s0_n2 = NOT cdp4_lr_s0_a
   cdp4_lr_s1_n2 = NOT cdp4_lr_s1_a
   cdp4_lc_s0_n2 = NOT cdp4_lc_s0_a
@@ -4012,12 +4012,17 @@ gates
   cdp3_h_c3_q1 = NOT cdp3_h_c3_x
   cdp3_h_c3_q  = NOT cdp3_h_c3_q1
   cdp4_lr_s3_n2 = NOT cdp4_lr_s3_a
+  cdp4_lr_s4_n2 = NOT cdp4_lr_s4_a
   cdp4_lc_s3_n2 = NOT cdp4_lc_s3_a
   cdp4_ldr_s3_n2 = NOT cdp4_ldr_s3_a
+  cdp4_ldr_s4_n2 = NOT cdp4_ldr_s4_a
   cdp1_a2_q1   = NOT cdp1_a2_x
+  cdp1_a3_q1   = NOT cdp1_a3_x
   cdp1_b3_ne   = NOT((cdp1_b3_b & cdp1_c3_q) | cdp1_b3_n2)
+  cdp1_b3_n2   = NOR(cdp1_b3_b, cdp1_c3_q)
   cdp1_b2_n2   = NOR(cdp1_b2_b, cdp1_c2_q)
   cdp1_c2_q1   = NOT cdp1_c2_x
+  cdp1_c3_q1   = NOT cdp1_c3_x
   cdp2_a_s4_n2 = NOT cdp2_a_s4_a
   cdp2_a_s5_n2 = NOT cdp2_a_s5_a
   cdp2_b_s4_x  = NAND(cdp2_b_s4_ne, cdp2_b_s4_p1)
@@ -4027,29 +4032,24 @@ gates
   cdp3_c_c4_q  = NOT cdp3_c_c4_q1
   cdp3_c_c5_q  = NOT cdp3_c_c5_q1
   cdp3_c_c4_q1 = NOT cdp3_c_c4_x
+  cdp3_c_c5_q1 = NOT cdp3_c_c5_x
   cdp3_h_c5_q1 = NOT cdp3_h_c5_x
   cdp3_h_c4_q1 = NOT cdp3_h_c4_x
   cdp3_h_c4_q  = NOT cdp3_h_c4_q1
   cdp3_h_c5_q  = NOT cdp3_h_c5_q1
-  cdp4_lr_s4_n2 = NOT cdp4_lr_s4_a
   cdp4_lr_s5_n2 = NOT cdp4_lr_s5_a
   cdp4_lc_s4_n2 = NOT cdp4_lc_s4_a
   cdp4_lc_s5_n2 = NOT cdp4_lc_s5_a
-  cdp4_ldr_s4_n2 = NOT cdp4_ldr_s4_a
   cdp4_ldr_s5_n2 = NOT cdp4_ldr_s5_a
-  cdp1_a3_q1   = NOT cdp1_a3_x
   cdp1_a4_q1   = NOT cdp1_a4_x
   cdp1_b4_ne   = NOT((cdp1_b4_b & cdp1_c4_q) | cdp1_b4_n2)
-  cdp1_b3_n2   = NOR(cdp1_b3_b, cdp1_c3_q)
   cdp1_b4_n2   = NOR(cdp1_b4_b, cdp1_c4_q)
-  cdp1_c3_q1   = NOT cdp1_c3_x
   cdp1_c4_q1   = NOT cdp1_c4_x
   cdp2_a_s6_n2 = NOT cdp2_a_s6_a
   cdp2_b_s5_x  = NAND(cdp2_b_s5_ne, cdp2_b_s5_p1)
   cdp2_b_s6_o2 = NOT cdp2_b_s5_x
   cdp2_a_c_s6_n2 = NOT cdp2_a_c_s6_a
   cdp3_c_c6_q  = NOT cdp3_c_c6_q1
-  cdp3_c_c5_q1 = NOT cdp3_c_c5_x
   cdp3_c_c6_q1 = NOT cdp3_c_c6_x
   cdp3_h_c6_q1 = NOT cdp3_h_c6_x
   cdp3_h_c6_q  = NOT cdp3_h_c6_q1
@@ -4074,8 +4074,8 @@ gates
   rc_ck_s_n    = NOT rc_ck_s
   rc_step_n    = NOT rc_step
   rc_ck_m_n    = NOT rc_ck_m
-  ck_g3        = NOT ck_a
   ck_g1        = NOT ck_b
+  ck_g3        = NOT ck_a
   ck_a_pu      = NOR(ck_g2, clk_b)
   ck_b_pu      = NOR(ck_clkn, ck_g4)
   ck_clkn      = NOT clk_b
@@ -4182,13 +4182,11 @@ gates
   r5_b2_n2     = NOT r5_b2_a
   r7c_b2_x     = NOT((r7_b2_q & uc_b2) | r7c_b2_nor)
   r7c_b2_nor   = NOR(r7_b2_q, uc_b2)
-  r7_b2_n2     = NOT r7_b2_a
   r6c_b2_x     = NOT((r6_b2_q & uc_b2) | r6c_b2_nor)
   r6c_b2_nor   = NOR(r6_b2_q, uc_b2)
   r6_b2_n2     = NOT r6_b2_a
   r4c_b2_x     = NOT((r4_b2_q & uc_b2) | r4c_b2_nor)
   r4c_b2_nor   = NOR(r4_b2_q, uc_b2)
-  r4_b2_n2     = NOT r4_b2_a
   r0hc_s1_x    = NOT((hc0_u & r0_b1_q) | r0hc_s1_nor)
   r0hc_s1_nor  = NOR(hc0_u, r0_b1_q)
   r0c_b0_x     = NOT((hc0_u & r0_b0_q) | r0c_b0_nor)
@@ -4198,6 +4196,8 @@ gates
   r1c_b0_x     = NOT((hc0_u & r1_b0_q) | r1c_b0_nor)
   r1c_b0_nor   = NOR(hc0_u, r1_b0_q)
   rsel12_buf   = NOT rsel12_bufn
+  r7_b2_n2     = NOT r7_b2_a
+  r4_b2_n2     = NOT r4_b2_a
   r0_b0_n2     = NOT r0_b0_a
   r2_b0_n2     = NOT r2_b0_a
   r1_b0_n2     = NOT r1_b0_a
@@ -4338,12 +4338,13 @@ gates
   cs_b         = NOT cs_a
   r3c_b2_x     = NOT((hsw2 & r3_b2_q) | r3c_b2_nor)
   r3c_b3_x     = NOT((hsw3 & r3_b3_q) | r3c_b3_nor)
-  r3c_b2_nor   = NOR(hsw2, r3_b2_q)
   r3c_b3_nor   = NOR(hsw3, r3_b3_q)
+  r3c_b2_nor   = NOR(hsw2, r3_b2_q)
   r3_b2_n2     = NOT r3_b2_a
+  r3_b3_n2     = NOT r3_b3_a
   r0hc_s7_x    = NOT((hc6 & r0_b7_q) | r0hc_s7_nor)
-  r0hc_s6_nor  = NOR(hc5_u, r0_b6_q)
   r0hc_s7_nor  = NOR(hc6, r0_b7_q)
+  r0hc_s6_nor  = NOR(hc5_u, r0_b6_q)
   r0c_b6_x     = NOT((hc6 & r0_b6_q) | r0c_b6_nor)
   r0c_b5_nor   = NOR(hc5_u, r0_b5_q)
   r0c_b6_nor   = NOR(hc6, r0_b6_q)
@@ -4360,7 +4361,6 @@ gates
   r1_b5_n2     = NOT r1_b5_a
   r1_b6_n2     = NOT r1_b6_a
   cs_c         = NOT cs_b
-  r3_b3_n2     = NOT r3_b3_a
   d0_a         = NOT d0_in
   d1_a         = NOT d1_in
   d1_b         = NOT d1_a
