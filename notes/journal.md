@@ -846,3 +846,22 @@ end at x 10518. Method note: `tools/follow.py --gap 50` bridges real gaps (it jo
 pad at (7900,4372) to a rail 40 px away); keep the default 24 and look at every reported
 corner near a rail.
 
+**Same day: the units and the stage in front of the pads.** `rax`: the pull-down of each
+unit drawn (five transistors); taken to be inverters (AMB-011), load not traced. `ral`:
+the band in front of the RA pad drivers is five copies of one cell, and
+`tools/findcell.py` finds the same cell fourteen times in the left array's untraced left
+column, in front of the MA drivers. Ports read, cell not traced; it looks like the
+register rows' static latch on a strobe line (`notes/blocks/ral.md`). `bd2`: looked for
+where `wr_data_e_n` goes (the write-strobe question of jsbeeb issue 1866): it leaves on a
+strap between two poly pads, destination not read.
+
+**Open, in the order I would take them**
+
+1. The `ral` cell (twenty copies: RA and MA outputs), then its strobe and force lines to
+   their sources.
+2. `bd2`'s gate group east of the rail: `wr_data_e_n`'s destination.
+3. `rax`: the load and the east half of the unit.
+4. The selector's two gate lines and bit 0's extra sources (interlace logic).
+5. As before: `lc_step`; `sl_eq_r5`; `inh_src`'s three ends; `rdp2`'s routing zone; R3's
+   high nibble and `c4l`; `e4`.
+
