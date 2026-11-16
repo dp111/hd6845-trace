@@ -1007,3 +1007,23 @@ into the west part of `fld`'s upper group, which is therefore the next piece: it
 between `tc1_x1` and the still unsourced `fld_a_in`, `fld_y_b`, `ras_o0_alt2`. I did not
 join `tc1_x1` to `fld_a_in` although the first view suggested it: they are two lines.
 
+## 2026-11-23: the bit-0 sources followed to a gate group west of the island
+
+`trace/fld.txt`. 2,030 nets, 3,413 transistors, no errors.
+
+- `fld_a_in` and `fld_y_b` drawn end to end (1,500 and 2,300 px, two poly cross-unders
+  of the six-line bus each) to one gate group at x 6380-6700, y 3880-4220: a series pair
+  pulls `fld_a_in` low, a single gate pulls `fld_y_b` low (loads untraced, AMB-014).
+- The three inputs of that group (`tcw_a`, `tcw_b`, `tcw_c`) come on thin metals from the
+  next rows north. The region west of the island is one untraced block (`tcw` in the
+  queue); it is where the field flip-flop has to be, and it should be traced as a block.
+
+Method: before joining the line along y 4937/4915 I looked at its unclear 80 px at 4.4x
+(trap 17); it is one line with a jog under a rail.
+
+**Open, in the order I would take them**
+
+1. `tcw` as a block.
+2. R8 in row r10 (`cnt_la_a`); `ras_o0_alt2`.
+3. R9's match (`r9m`, AMB-013); the `ral` cell; `bd2` (R12).
+

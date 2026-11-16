@@ -173,6 +173,49 @@ from the selector: it would not be the source of `fld_a_in`, `fld_y_b` or `ras_o
 after all. Those three then come from further west or north (pads at x 6300-6500,
 y 4780-4930), where the field of vertical polys x 6050-6400 passes.
 
+## `fld_a_in` and `fld_y_b` traced to a gate group west of the island (2026-11-23; drawn, partial)
+
+Views `w1a.png`, `w2m.png`, `w2a.png`, `w3c.png`, `w3a.png`, `w3m.png`, `w4.png`, `w5cm.png`
+(class map), `jog.png`, `eq10.png`; overlay check `tcw_chk.png`.
+
+Both lines go north-west to one gate group at x 6380-6700, y 3880-4220, down two of the
+vertical polys that cross the six bus metals at y 4470-4745:
+
+- `fld_a_in`: inverter gate, north along x 7034, west along y 4915, a jog to y 4937 under
+  the rail x 6520-6585 (checked at 4.4x, `jog.png`), west to x 6320, north to a pad
+  (6316,4437); metal north, west along y 4182, north along x 6276 to a pad (6272,3957);
+  poly east along y 3957.
+- `fld_y_b`: pad (6660,6085), poly west and north along x 6558 to a pad (6535,5848);
+  metal north along x 6536, west along y 5482, north along x 6404 to a pad (6400,4870);
+  poly north along x 6405 to a pad (6405,4437); metal north to a pad (6400,4180).
+
+The gate group, as far as drawn: under the rail x 6505-6560 one diffusion column with
+three gates (class map: poly over channel at y 3986-4004, 4031-4052, 4126-4143, diffusion
+between; two contact pits to the rail at y 4078 and 4100). From the extraction:
+
+    fld_a_in : pulled to the rail through two gates in series, tcw_a AND tcw_b
+    fld_y_b  : pulled to the rail through one gate, tcw_c
+
+With loads (not traced) and the rail being VSS: `fld_a_in` = NAND(`tcw_a`, `tcw_b`),
+`fld_y_b` = NOT `tcw_c`. The three inputs arrive on pads with thin metals from the
+north: `tcw_a` pad (6400,4005), metal x 6403 to y 3786, and a poly on west along y 4000;
+`tcw_b` pad (6455,4045), metal x 6465 (not followed); `tcw_c` pad (6318,4135), metal
+x 6319 to y 3740, and a poly on west along y 4130. They end in the next rows of the same
+untraced region (x 6200-6700, y 3600-3800).
+
+**AMB-014** (assumptions): the rail is VSS; both nodes have loads (candidates east of the
+rail); the buried contacts that tie `fld_a_in`'s poly to the node above the series pair
+and `fld_y_b`'s pad poly to the node below the third gate; the node above the series
+pair is cut off from the rail contact at y 3905 (a strip of field at y 3948-3956 in the
+class map); a 12 px dark spot on the rail at (6548,4188) is not a contact.
+
+So the chain for the comparator's bit-0 input in interlace sync and video now reads, as
+extracted: `tc1_g` = NOT `fld_a_in`; `fld_a_in` pulled low by `tcw_a` AND `tcw_b`; and for
+row address bit 0 (R9 bit 0 set): `ras_o0_alt1` = `rc0_n` XOR `fld_y_b`, `fld_y_b` pulled
+low by `tcw_c`. **`tcw_a`, `tcw_b`, `tcw_c` are the open ends**, and the whole region
+west of the island (x 6200-6700, y 2500-4450) is untraced logic: it has to be taken as a
+block, not chased line by line.
+
 ## Not done
 
 Everything under "Followed, not drawn"; the routing field y 4720-4990 (seven horizontal

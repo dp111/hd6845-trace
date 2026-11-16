@@ -272,3 +272,13 @@ x 4149-4157 and 4169-4196 on y 3376) do not decide it. **Not adopted either way;
 drawn.** Settle by tracing the other line (poly y 2595 at x 5400) to its driver: if that
 is a second comparator's match, reading A is the design.
 
+## AMB-014: the gate group that makes `fld_a_in` and `fld_y_b` (2026-11-23)
+
+`notes/blocks/fld.md`, last traced section. Three pull-downs under the rail x 6505-6560 are
+drawn from a class map and 3.6-4.6x views in both stripped shots. Not established: that
+the rail is VSS; the loads; the two buried contacts (`?B`) that put the two output lines
+on their nodes; that the node above the series pair is separate from the rail contact
+at y 3905; that the dark spot (6548,4188) is not a contact (if it were, `fld_y_b`'s node
+would sit on the rail). **Adopted** as drawn: `fld_a_in` = NAND(`tcw_a`, `tcw_b`),
+`fld_y_b` = NOT `tcw_c`. Settle when the region west of the island is traced as a block.
+

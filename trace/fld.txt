@@ -171,3 +171,70 @@ M 11025,7498 11025,7606 11069,7652 11069,8583 11113,8627 11113,9277 11157,9321 1
 P 11568,12443:11602,12477
 C 11585,12460
 P 11585,12458 x11700 w=18
+
+# ===== fld_a_in and fld_y_b to their sources (2026-11-23) =====
+# Both come from one gate group 900-1,900 px north-west, at x 6380-6700, y 3880-4220 (west of the
+# island tc1), down two of the vertical polys that cross the six bus metals at y 4470-4745.
+# Views cache/scratch/rax/w1a.png, w2m.png, w2a.png, w3c.png, w3a.png, w3m.png, w4.png,
+# w5cm.png (class map), jog.png, yb1-3.png, eq10.png.
+# --- fld_a_in: from the inverter's gate north along x 7034, west along y 4915, a jog down to
+# y 4937 under the rail x 6520-6585 (jog.png), west to x 6320, north (crossing the bus metals,
+# no pad) to a pad (6316,4437); metal north, west along y 4182, north along x 6276 to a pad
+# (6272,3957); poly east along y 3957 to the gate group.
+P 7034,5000 7034,4915 6583,4915 6583,4937 6320,4937 6320,4437 w=16
+P 6299,4420:6333,4454
+C 6316,4437
+M 6319,4437 y4182 x6276 y3952 w=12
+P 6255,3940:6289,3974
+C 6272,3957
+P 6272,3957 x6492 w=16
+# --- fld_y_b: from (6560,6085) north along x 6558 to a pad (6535,5848); metal north along x 6536,
+# west along y 5482, north along x 6404 to a pad (6400,4870); poly north along x 6405 (crossing
+# the bus metals, no pad) to a pad (6405,4437); metal north to a pad (6400,4180)
+P 6558,6094 y5850 w=18
+P 6518,5830:6568,5868
+C 6535,5848
+M 6536,5848 y5482 x6404 y4865 w=12
+P 6383,4853:6417,4887
+C 6400,4870
+P 6405,4870 y4437 w=16
+P 6388,4420:6422,4454
+C 6405,4437
+M 6405,4437 y4176 w=12
+P 6383,4163:6417,4197
+C 6400,4180
+
+# ===== the gate group at x 6380-6700, y 3880-4220: PARTIAL (three pull-downs; loads NOT TRACED) =====
+# Under the rail x 6505-6560 one diffusion column (class map: diffusion under metal, poly over
+# channel at the three gates):
+#   y 3956-3986 node N1 | gate y 3986-4004 | node | gate y 4031-4052 | y 4052-4118 rail contacts
+#   | gate y 4126-4143 | y 4143-4195 node N3
+# N1 is cut off from the rail contact above it (3905) by a strip of field at y 3948-3956.
+#   fld_a_in pulled to the rail through two gates in series (tcw_a AND tcw_b)
+#   fld_y_b  pulled to the rail through one gate (tcw_c)
+# ASSUMPTIONS: the rail is VSS (not followed); N1 and N3 have loads (candidates east of the rail:
+# blocks at (6600-6670, 4025-4050) and (6625-6670, 4130-4190)); the two buried contacts.
+M 6532,3870 y4230 w=50
+N M 6532,4215 vss
+D 6500,3956:6560,4195
+C 6520,4078 6530,4100
+P 6483,3957:6506,3984                 # the end of fld_a_in's poly, down onto N1's west edge
+?B 6481,3947:6510,3986
+P 6383,3988:6418,4022                 # pad (6400,4005): metal from the north (x 6403, to y 3786), poly on west
+C 6400,4005
+P 6400,3986:6568,4004                 # gate 1
+M 6403,4005 y3786 w=12
+N M 6403,3900 tcw_a
+P 6438,4028:6475,4062                 # pad (6455,4045): metal from the north (x 6465, not followed)
+C 6455,4045
+M 6462,4045 y3990 w=12                 # stub: the metal goes on north along x 6465 (not followed)
+P 6470,4031:6568,4052                 # gate 2
+N P 6520,4041 tcw_b
+P 6300,4118:6336,4152                 # pad (6318,4135): metal from the north (x 6319, to y 3740); poly on west
+C 6318,4135
+P 6318,4126:6570,4143                 # gate 3
+M 6319,4135 y3740 w=12
+N M 6319,3900 tcw_c
+D 6440,4160:6505,4195                 # N3's arm west to the buried contact of fld_y_b's pad poly
+P 6400,4172:6462,4190
+?B 6436,4165:6466,4195
