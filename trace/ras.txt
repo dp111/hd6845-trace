@@ -120,19 +120,73 @@ C 7290,5045
 M 7290,5040 y5066 x7072 y5311 w=13    # follower; its end (7078,5311) not looked at
 N M 7150,5066 ras_o0_alt1
 
-# --- the outputs' metal, as far as followed
+# --- the outputs: metal from the contact boxes, then all five go on east as poly lines
+# (y 4765, 4893, 5133, 5262, 5392; seen to x 7960, not followed further). Metal routes from
+# tools/follow.py, corners checked on 2-3x metal views (mR4.png, nestN.png, pads7.png).
 M 7337,4908 x7381 y5132 w=13          # strap between output 0's two boxes
-M 7337,5132 x7576 y4847 x7712 y4765 x7793 w=13    # follower; end (7793,4765) not looked at
+M 7337,5132 x7576 y4847 x7712 y4765 x7800 w=13
+P 7778,4748:7812,4782
+C 7795,4765
+P 7795,4765 x7960 w=18
 N M 7500,5132 ras_o0
-M 7325,5305 y5258 x7490 y5200 w=13    # goes on north-east on a diagonal (not drawn)
+M 7325,5305 y5258 x7490 y5202 7516,5178 7622,5178 7622,4893 7752,4893 w=13
+P 7731,4876:7765,4910
+C 7748,4893
+P 7748,4893 x7960 w=18
 N M 7400,5258 ras_o1
-M 7335,5480 y5439 x7402 y5305 x7532 y5220 x7662 y5195 w=13   # goes on north (not drawn)
+M 7335,5480 y5439 x7402 y5305 x7532 y5220 x7662 y5130 x7712 w=13
+P 7691,5116:7725,5150
+C 7708,5133
+P 7708,5133 x7960 w=18
 N M 7450,5305 ras_o2
 M 7332,5652 x7402 y5502 x7448 y5350 x7582 y5262 w=13
-?P 7560,5245:7594,5279                # what is under this pad was not looked at
-C 7577,5262                           # a pad; the metal goes on east along y 5262 (not drawn)
+P 7560,5245:7594,5279
+C 7577,5262
+P 7577,5262 x7960 w=18
+# from that pad the metal goes on east, with a branch south to the first line of the channel
+# below (pad 7707,5935) and a staircase north-east to a pad (7836,4808)
+M 7577,5264 x7706 y5168 x7751 y5098 x7792 y4806 x7840 w=13
+?P 7819,4791:7853,4825                # pad seen, what it is on not looked at
+C 7836,4808
+M 7620,5264 y5460 x7532 y5937 x7710 w=13
+P 7690,5918:7724,5952
+C 7707,5935
+P 7707,5935 x8250 w=18                # channel line; goes on east and steps down (not drawn)
 N M 7500,5350 ras_o3
 M 7335,5829 x7452 y5546 x7490 y5393 x7578 w=13
 P 7560,5375:7594,5409
-C 7577,5392                           # a pad; poly goes on east along y 5392 (not drawn)
+C 7577,5392
+P 7577,5392 x7960 w=18
 N M 7452,5700 ras_o4
+
+# --- the other lines of the nest east of the column. Each ends on a pad at the west end of a
+# poly line of the channel below (the central datapath's channel 1 further east).
+# from a pad (7836,4945): staircase south-west to the pad (7660,5890)
+?P 7819,4928:7853,4962
+C 7836,4945
+M 7836,4945 y5134 x7792 y5218 x7751 y5308 x7664 y5503 x7576 y5894 x7664 w=13
+P 7643,5873:7677,5907
+C 7660,5890
+P 7660,5890 x8250 w=18
+N M 7576,5700 ch1w_5890
+# from a pad (7836,5172): staircase south-west to the pad (7705,5848)
+?P 7819,5155:7853,5189
+C 7836,5172
+M 7836,5172 y5263 x7792 y5352 x7706 y5549 x7622 y5850 x7708 w=13
+P 7688,5831:7722,5865
+C 7705,5848
+P 7705,5848 x8250 w=18
+N M 7622,5700 ch1w_5848
+# the pad (7660,5800): metal north along x 7662 and east along y 5586 to x 7756; its east end
+# lies on a poly that comes from a pad at (7487,5587): not resolved, not drawn beyond
+P 7643,5783:7677,5817
+C 7660,5800
+M 7662,5800 y5586 x7756 w=12
+P 7660,5800 x8250 w=18
+N M 7662,5700 ch1w_5800
+# the pad (7705,5758): metal north along x 7705 and east along y 5634 to x 7799 (end not looked at)
+P 7688,5741:7722,5775
+C 7705,5758
+M 7705,5758 y5634 x7799 w=12
+P 7705,5758 x8250 w=18
+N M 7705,5700 ch1w_5758

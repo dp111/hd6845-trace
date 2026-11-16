@@ -150,6 +150,7 @@ Eleven pass transistors between the scan line counter and five output nodes.
 | `ras_shift` | gate line (right poly band) of the four pass transistors `sl`# to `ras_o`(#+1). Driver not traced |
 | `ras_o0_alt1`, `ras_o0_alt2` | the two other sources of `ras_o0` (metal from the west along y 5066; metal from the north along x 7207). Not traced back |
 | `ras_o0_sel1`, `ras_o0_sel2` | gates of the pass transistors from `ras_o0_alt1` and `ras_o0_alt2` to `ras_o0`. Not traced back |
+| `ch1w_#` | a poly line of the central datapath's channel 1 at its west end, named by the y of its pad there (# = 5758, 5800, 5848, 5890; the fifth line is `ras_o3`). Fed through the nest of metals east of the selector; what drives each is not resolved |
 
 ## Row counter clock generator and step
 
