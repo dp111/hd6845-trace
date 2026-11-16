@@ -7,6 +7,7 @@
   out/report.txt      rule-check report and recovered gates
   out/floorplan.jpg   the die at reduced scale with the functional blocks outlined
   out/floorplan.svg   the same outlines as a stand-alone SVG over the photo
+  out/floorplan_legend.txt   every block as a line of text (number, kind, name, box, description)
 
 floorplan.txt (repo root) and floorplan.d/*.txt list the blocks, one per line. The
 fragments in floorplan.d are written by whoever traces a block and are drawn on top:
@@ -120,17 +121,19 @@ def svg_layer(name, body, visible=True):
 
 def floorplan_svg_body(blocks):
     s = []
-    for b in blocks:
+    for b in sorted(blocks, key=lambda b: -(b['x1'] - b['x0']) * (b['y1'] - b['y0'])):
         col = hexcol(KIND_COL[b['kind']])
         dash = ' stroke-dasharray="60 40"' if b['prov'] else ''
         w, h = b['x1'] - b['x0'], b['y1'] - b['y0']
+        name = b['name'] + (' ?' if b['prov'] else '')
         s.append(f'<rect x="{b["x0"]:.0f}" y="{b["y0"]:.0f}" width="{w:.0f}" height="{h:.0f}" '
-                 f'fill="{col}" fill-opacity="0.12" stroke="{col}" stroke-width="14"{dash}>'
+                 f'fill="{col}" fill-opacity="0.10" stroke="{col}" stroke-width="10"{dash}>'
                  f'<title>{escape(b["name"])}: {escape(b["desc"])}</title></rect>\n')
-        fs = max(70, min(170, w / max(4, len(b['name'])) * 1.5))
-        s.append(f'<text x="{b["x0"] + 24:.0f}" y="{b["y0"] + fs + 10:.0f}" font-family="sans-serif" '
-                 f'font-size="{fs:.0f}" fill="#ffffff" stroke="#000000" stroke-width="{fs / 12:.0f}" '
-                 f'paint-order="stroke">{escape(b["name"])}{" ?" if b["prov"] else ""}</text>\n')
+        # one line, sized so that it fits the block's width and a third of its height
+        fs = max(14, min(150, (w - 30) / max(4, len(name)) / 0.58, h * 0.33))
+        s.append(f'<text x="{b["x0"] + 16:.0f}" y="{b["y0"] + fs + 8:.0f}" font-family="sans-serif" '
+                 f'font-size="{fs:.0f}" fill="#ffffff" stroke="#000000" stroke-width="{max(2, fs / 10):.0f}" '
+                 f'paint-order="stroke">{escape(name)}</text>\n')
     return ''.join(s)
 
 
@@ -180,9 +183,109 @@ def build_svg(tr, nl, blocks):
         f.write(''.join(out))
 
 
-def build_floorplan(blocks, scale=1 / 8):
+def _wrap(d, text, f, maxw):
+    lines, cur = [], ''
+    for w_ in text.split():
+        t = (cur + ' ' + w_).strip()
+        if d.textlength(t, font=f) <= maxw or not cur:
+            cur = t
+        else:
+            lines.append(cur)
+            cur = w_
+    lines.append(cur)
+    return lines
+
+
+def layout_labels(blocks, scale, d, font, size_max=22, size_min=9):
+    """Decide where every block's label goes on the reduced image.
+
+    A label is drawn inside its own block, clear of every smaller block that lies in it
+    and of every label already placed; small blocks choose first. A block whose name does
+    not fit at the smallest size gets a number instead and goes into the legend.
+    Returns (placed, numbered): placed = list of (block index, x, y, lines, size);
+    numbered = list of (number, block index, x, y).
+    """
+    n = len(blocks)
+    R = [(b['x0'] * scale, b['y0'] * scale, b['x1'] * scale, b['y1'] * scale) for b in blocks]
+    area = [(r[2] - r[0]) * (r[3] - r[1]) for r in R]
+    Wd = int(max(r[2] for r in R)) + 4
+    Hd = int(max(r[3] for r in R)) + 4
+    taken = np.zeros((Hd, Wd), bool)          # labels placed so far
+    order = sorted(range(n), key=lambda k: area[k])
+    placed, unplaced = [], []
+
+    def free_spot(occ, tw, th):
+        """First window of tw x th in occ (bool) that is all False, scanning rows; or None."""
+        hh, ww = occ.shape
+        if tw > ww or th > hh:
+            return None
+        ii = np.zeros((hh + 1, ww + 1), np.int32)
+        ii[1:, 1:] = occ.cumsum(0).cumsum(1)
+        s = ii[th:, tw:] - ii[:-th, tw:] - ii[th:, :-tw] + ii[:-th, :-tw]
+        ys, xs = np.nonzero(s == 0)
+        if len(ys) == 0:
+            return None
+        return int(xs[0]), int(ys[0])
+
+    for k in order:
+        b = blocks[k]
+        x0, y0, x1, y1 = [int(round(v)) for v in R[k]]
+        x0, y0 = max(0, x0 + 2), max(0, y0 + 2)
+        x1, y1 = min(Wd, x1 - 2), min(Hd, y1 - 2)
+        if x1 - x0 < 8 or y1 - y0 < 8:
+            unplaced.append(k)
+            continue
+        occ = taken[y0:y1, x0:x1].copy()
+        for j in range(n):                      # smaller blocks inside this one
+            if j != k and area[j] < area[k]:
+                a0, b0, a1, b1 = R[j]
+                if a0 < x1 and a1 > x0 and b0 < y1 and b1 > y0:
+                    occ[max(0, int(b0) - y0 - 1):max(0, int(b1) - y0 + 2),
+                        max(0, int(a0) - x0 - 1):max(0, int(a1) - x0 + 2)] = True
+        label = b['name'] + (' ?' if b['prov'] else '')
+        done = False
+        top = size_max if area[k] > 9000 else min(size_max, 15)
+        for size in range(top, size_min - 1, -1):
+            f = font(size)
+            lines = _wrap(d, label, f, x1 - x0 - 4)
+            tw = int(max(d.textlength(l, font=f) for l in lines)) + 6
+            th = len(lines) * (size + 2) + 4
+            spot = free_spot(occ, tw, th)
+            if spot is not None:
+                px, py = spot[0] + x0, spot[1] + y0
+                taken[py:py + th, px:px + tw] = True
+                placed.append((k, px + 3, py + 1, lines, size))
+                done = True
+                break
+        if not done:
+            unplaced.append(k)
+    unplaced.sort(key=lambda k: (round(R[k][1] / 60), R[k][0]))      # reading order
+    numbered = []
+    f = font(10)
+    for num, k in enumerate(unplaced, 1):
+        x0, y0, x1, y1 = R[k]
+        t = str(num)
+        tw, th = int(d.textlength(t, font=f)) + 5, 13
+        cands = [(x0 + 2, y0 + 2), (x1 - tw - 1, y0 + 2), (x0 + 2, y1 - th - 1), (x1 - tw - 1, y1 - th - 1),
+                 ((x0 + x1 - tw) / 2, (y0 + y1 - th) / 2), (x1 + 2, y0), (x0 - tw - 2, y0), (x0, y0 - th - 1),
+                 (x0, y1 + 1)]
+        best = None
+        for cx, cy in cands:
+            cx, cy = int(max(0, min(Wd - tw, cx))), int(max(0, min(Hd - th, cy)))
+            if not taken[cy:cy + th, cx:cx + tw].any():
+                best = (cx, cy)
+                break
+        if best is None:
+            best = (int(max(0, min(Wd - tw, x0 + 2))), int(max(0, min(Hd - th, y0 + 2))))
+        taken[best[1]:best[1] + th, best[0]:best[0] + tw] = True
+        numbered.append((num, k, best[0], best[1]))
+    return placed, numbered
+
+
+def build_floorplan(blocks, scale=1 / 6):
     a = np.load(os.path.join(ROOT, 'cache', 'metal.npy'), mmap_mode='r')
     step = round(1 / scale)
+    scale = 1 / step
     # box-filter downsample
     hh, ww = (H // step) * step, (W // step) * step
     small = np.zeros((hh // step, ww // step, 3), np.float32)
@@ -191,47 +294,80 @@ def build_floorplan(blocks, scale=1 / 8):
         blk = np.asarray(a[y0:y1, :ww]).astype(np.float32)
         blk = blk.reshape((y1 - y0) // step, step, ww // step, step, 3).mean(axis=(1, 3))
         small[y0 // step:y1 // step] = blk
-    base = Image.fromarray((small * 0.75).astype(np.uint8)).convert('RGBA')
+    base = Image.fromarray((small * 0.7).astype(np.uint8)).convert('RGBA')
     lay = Image.new('RGBA', base.size, (0, 0, 0, 0))
     d = ImageDraw.Draw(lay)
     try:
-        font = lambda s: ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf', s)
-        font(10)
+        _fb = '/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf'
+        _fr = '/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf'
+        ImageFont.truetype(_fb, 10)
+        font = lambda s: ImageFont.truetype(_fb, s)
+        fontr = lambda s: ImageFont.truetype(_fr, s)
     except OSError:
-        font = lambda s: ImageFont.load_default()
-    for b in blocks:
+        font = fontr = lambda s: ImageFont.load_default()
+    # big blocks first, so that the small ones are drawn on top of them
+    for b in sorted(blocks, key=lambda b: -(b['x1'] - b['x0']) * (b['y1'] - b['y0'])):
         col = KIND_COL[b['kind']]
         box = [b['x0'] * scale, b['y0'] * scale, b['x1'] * scale, b['y1'] * scale]
-        d.rectangle(box, fill=col + (38,), outline=col + (255,), width=1 if b['prov'] else 3)
+        d.rectangle(box, fill=col + (30,), outline=col + (255,), width=1 if b['prov'] else 2)
     img = Image.alpha_composite(base, lay).convert('RGB')
     d = ImageDraw.Draw(img)
-    for b in blocks:
-        bw = (b['x1'] - b['x0']) * scale
-        bh = (b['y1'] - b['y0']) * scale
-        label = b['name'] + (' ?' if b['prov'] else '')
-        size = 22
-        while size > 9:
-            f = font(size)
-            words, lines, cur = label.split(), [], ''
-            for w_ in words:
-                if d.textlength((cur + ' ' + w_).strip(), font=f) <= bw - 8:
-                    cur = (cur + ' ' + w_).strip()
-                else:
-                    if cur:
-                        lines.append(cur)
-                    cur = w_
-            lines.append(cur)
-            if (len(lines) * (size + 2) <= bh - 6 and
-                    all(d.textlength(l, font=f) <= bw - 6 for l in lines)):
-                break
-            size -= 1
+    placed, numbered = layout_labels(blocks, scale, d, font)
+    for k, x, y, lines, size in placed:
         f = font(size)
-        y = b['y0'] * scale + 4
         for l in lines:
-            d.text((b['x0'] * scale + 5, y), l, fill=(255, 255, 255), font=f,
-                   stroke_width=2, stroke_fill=(0, 0, 0))
+            d.text((x, y), l, fill=(255, 255, 255), font=f, stroke_width=2, stroke_fill=(0, 0, 0))
             y += size + 2
-    img.save(os.path.join(OUT, 'floorplan.jpg'), quality=88)
+    f10 = font(10)
+    for num, k, x, y in numbered:
+        col = KIND_COL[blocks[k]['kind']]
+        t = str(num)
+        tw = int(d.textlength(t, font=f10)) + 4
+        d.rectangle([x, y, x + tw, y + 12], fill=(0, 0, 0), outline=col)
+        d.text((x + 2, y), t, fill=(255, 255, 255), font=f10)
+
+    # legend panel on the right: key of kinds, then the numbered blocks
+    lh, colw = 15, 330
+    rows = max(1, (img.size[1] - 190) // lh)
+    ncol = max(1, -(-len(numbered) // rows))
+    panel = Image.new('RGB', (ncol * colw + 16, img.size[1]), (24, 24, 24))
+    pd = ImageDraw.Draw(panel)
+    fr, fbold = fontr(11), font(12)
+    pd.text((10, 8), 'HD6845S floor plan', fill=(255, 255, 255), font=font(15))
+    y = 34
+    for i, (kind, col) in enumerate(KIND_COL.items()):
+        cx, cy = 10 + (i % 3) * 105, y + (i // 3) * 16
+        pd.rectangle([cx, cy + 2, cx + 10, cy + 12], fill=col)
+        pd.text((cx + 15, cy), kind, fill=(230, 230, 230), font=fr)
+    y += 52
+    pd.text((10, y), 'thin outline and "?": identification provisional', fill=(200, 200, 200), font=fr)
+    pd.text((10, y + 15), 'numbers: blocks too small for their name', fill=(200, 200, 200), font=fr)
+    y0 = y + 40
+    for i, (num, k, _, _) in enumerate(numbered):
+        b = blocks[k]
+        cx = 8 + (i // rows) * colw
+        cy = y0 + (i % rows) * lh
+        pd.rectangle([cx, cy + 3, cx + 8, cy + 11], fill=KIND_COL[b['kind']])
+        name = b['name'] + (' ?' if b['prov'] else '')
+        t = '%d  %s' % (num, name)
+        while pd.textlength(t, font=fr) > colw - 20 and len(t) > 8:
+            t = t[:-2]
+        pd.text((cx + 13, cy), t, fill=(240, 240, 240), font=fr)
+    out = Image.new('RGB', (img.size[0] + panel.size[0], img.size[1]), (24, 24, 24))
+    out.paste(img, (0, 0))
+    out.paste(panel, (img.size[0], 0))
+    out.save(os.path.join(OUT, 'floorplan.jpg'), quality=85)
+
+    # every block as text: number (if it has one), kind, name, box, description
+    numof = {k: num for num, k, _, _ in numbered}
+    with open(os.path.join(OUT, 'floorplan_legend.txt'), 'w') as f:
+        f.write('# no.\tkind\tname\tx0,y0:x1,y1 (metal-shot pixels)\tdescription\n')
+        idx = sorted(range(len(blocks)), key=lambda k: (round(blocks[k]['y0'] / 500), blocks[k]['x0']))
+        for k in idx:
+            b = blocks[k]
+            f.write('%s\t%s%s\t%s\t%d,%d:%d,%d\t%s\n' % (
+                numof.get(k, '-'), '?' if b['prov'] else '', b['kind'], b['name'],
+                b['x0'], b['y0'], b['x1'], b['y1'], b['desc']))
 
     with open(os.path.join(OUT, 'floorplan.svg'), 'w') as f:
         f.write(f'<?xml version="1.0" encoding="UTF-8"?>\n'
@@ -239,6 +375,7 @@ def build_floorplan(blocks, scale=1 / 8):
                 f'viewBox="0 0 {W} {H}">\n'
                 f'<image xlink:href="../dieshots/hd6845metal2ndchip.jpg" x="0" y="0" width="{W}" height="{H}"/>\n'
                 + floorplan_svg_body(blocks) + '</svg>\n')
+    print('floor plan: %d labels drawn in place, %d numbered' % (len(placed), len(numbered)))
 
 
 def main():
