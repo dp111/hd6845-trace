@@ -224,6 +224,8 @@ Traps, all of them real:
    be merged with `tools/rename.py` until the uncertain stretch has been read in a second
    shot. Found 2026-11-21: `tc1_i` and `ras_o0_alt1` had been merged across 250 px of
    `?P`, reported as a result, and were two nets.
+   `tools/unsure.py` lists every net whose labelled pieces are joined only through `?`
+   items; run it before writing up a join.
 
 **When a trap turns out to affect work already done**, add the affected blocks to the
 "Re-read list" in `notes/work-packages.md` in the same commit that records the finding.
