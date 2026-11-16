@@ -87,12 +87,13 @@ the first notes) are bits 0-3 of that nibble.
 ## The inhibit signal
 
 One core signal stops both the horizontal counter's master clock and the row counter's
-step. Its source is not traced; it enters the strobe channel's gate column from the
-bottom bus field. All five names below are copies of it.
+step. Its source is not traced. It is a line of the bottom bus field with at least four
+branches (followed 2026-11-18 from the strobe channel 3,700 px west, `notes/blocks/trunks.md`).
+All five names below are copies of it.
 
 | Name | What it is |
 |---|---|
-| `inh_src` | the signal as it arrives (gate of the driver of `inh_n`); source unknown |
+| `inh_src` | the signal itself: a bottom-bus line that reaches the gate of the driver of `inh_n`, a metal north along x 10225, a poly east into the bottom-centre logic at (10470,16950) and the bus further west than x 8978; source unknown |
 | `inh_n` | NOT `inh_src`: "line X" of the notes. Input of the lone inverter in the input buffer row |
 | `inh_ck` | NOT `inh_n` from that inverter: holds `ck_b` low in the clock block, and is distributed along the bottom bus field and up the left bus field ("S" in the notes) |
 | `inh_rc` | NOT `inh_n` from the upper inverter in the strobe channel: runs up the wiring channel, over the top of the counters, to the row counter's step gate (`rc_step` = NOR(`inh_rc`, `rc_stepreq_n`)) |
@@ -137,6 +138,18 @@ in brackets).
 | `cnt_la_a`, `cnt_la_b`, `cnt_la_c` | three pieces of the metal x 12285 through the rows; no contact found in the rows (re-read item R8). `cnt_la_a` feeds an inverter west of the counters |
 | `cnt_la_a_n` | NOT `cnt_la_a`; leaves north |
 | `cnt_bus_a`, `cnt_bus_b` | bus lines A and B of the channel between rows r3 and r4; not identified. B runs from the datapath channel 3 to the upper right datapath |
+
+## Row address selector (`notes/blocks/ras.md`)
+
+Eleven pass transistors between the scan line counter and five output nodes.
+
+| Name | What it is |
+|---|---|
+| `ras_o#` | output bit # of the selector (# = 0-4). Expected to be the row address that goes to pin RA#; not yet followed to the pad |
+| `ras_straight` | gate line (left poly band) of the five pass transistors `sl`# to `ras_o`#. Driver not traced |
+| `ras_shift` | gate line (right poly band) of the four pass transistors `sl`# to `ras_o`(#+1). Driver not traced |
+| `ras_o0_alt1`, `ras_o0_alt2` | the two other sources of `ras_o0` (metal from the west along y 5066; metal from the north along x 7207). Not traced back |
+| `ras_o0_sel1`, `ras_o0_sel2` | gates of the pass transistors from `ras_o0_alt1` and `ras_o0_alt2` to `ras_o0`. Not traced back |
 
 ## Row counter clock generator and step
 

@@ -526,3 +526,53 @@ x 8580: 17,238 px, the same line. Drawn in `trace/trunks.txt`.
   (y 8360, 8965, 9573, 10181, 10831, 11440, 12142 ...): the trunk's taps into the left
   column cells of the left array. Not looked at.
 
+## `inh_src` followed west (2026-11-18)
+
+Drawn in `trace/trunks.txt` (last section); views `cache/scratch/bd1/inh1.png` ...
+`inh17.png`. From where `trace/bd1.txt` left it at (13480,17150):
+
+| Stretch | Layer | Ends |
+|---|---|---|
+| south to y 17662, south-west, west along y 17815 under the vertical trunks | poly | pad (12805,17815) |
+| west along y 17822, the middle one of three nested Z bends at x 11640-11725, west along y 17650 | metal | pad (11245,17650) |
+| west, south-west under ten vertical metals, west along y 17950 | poly | pad (10262,17950) |
+| south, short diagonal, west along y 18083, over a pad (10075,18080) | metal | pad (9770,18081) |
+| from the pad (10075,18080): north along x 10075, east along y 17770 | poly | pad (10262,17770) |
+| north along x 10266, jog at y 17428, north along x 10312 | metal | pad (10310,16950) |
+| from that pad west along y 16950 and north | poly | pad (10225,16820) |
+| north along x 10225 | metal | y 15886 at least (follower); end not looked at |
+
+Three ends are open: the metal x 10225 north of y 15886; the poly along y 16950 east of
+x 10470, into the bottom-centre logic; the bus line west of the pad (9770,18081) (poly
+under two vertical metals to a pad at about x 9562, then metal to x 8978 at least). So
+`inh_src` is a widely distributed line of the bottom bus, and its driver is at none of
+the places looked at so far. The full extraction is unchanged by the new geometry
+(one net, no new joins).
+
+On the way: `inh_lat`'s poly from the pad (11288,17517) goes west along y 17515,
+south-west to (10960,17640), west along y 17645 over a pad at (10850,17645) on the
+vertical metal x 10850, and on west. `h_eq_r1`'s goes west along y 17600 past x 10800.
+Neither drawn beyond what the trace had.
+
+## The RA pad drivers' inputs, followed from the pads (2026-11-18, not drawn)
+
+Views `cache/scratch/rdp1/ra0_m.png`, `ra_end_m.png`, `ra_s.png`, `ra_t_a.png`,
+`ra_t_m.png`. All metal routes are `tools/follow.py` output.
+
+- `ra0_drv_in`: contact (14935,2090); metal `14850,2097 x14730 y3376 x14996 y3838 x15299
+  y4140` to a pad at (15300,4120); poly south along x 15305 to a pad (15305,4762), where a
+  metal goes west along y 4764 to x 14338; the poly goes on south to y 4985 and east to a
+  pad (15430,4980) with a metal east.
+- `ra1_drv_in`: metal `16490,2097 x14965 y2141 x14778 y3333 x15039 y3794 x15342 y4184` to a
+  pad (15340,4170); poly south along x 15345 to a pad (15345,4590), where a metal goes west
+  along y 4592 to x 14774; the poly goes on to y 4750 and a pad (15385,4762), metal south
+  along x 15385 to y 5020 and east.
+- A third poly from a pad (15255,4170) (its metal not followed; RA2's by position) runs
+  south along x 15255/15215 to a pad (15210,4805); metal east to x 15340 and south.
+- Two more metals pass here from the west: `15250,4678 x13692 y4455 x11671` (ends east
+  on a pad (15425,4675), poly north) and `15250,4722 x13644 y4500 x11650` (goes on east).
+
+None of these has been joined to the row address selector's outputs (`notes/blocks/ras.md`),
+which were followed only to x 7860. The stretch between (x 7860 to 11650, y 4450-4800,
+along the top of the central datapath) is the gap.
+

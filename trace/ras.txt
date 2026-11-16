@@ -1,0 +1,138 @@
+# ras: the row address selector (x 7100-7800, y 4880-6680). Notes: notes/blocks/ras.md.
+# A column of pass transistors between the scan line counter's five lines (sl0..sl4, tapped from
+# the metal stretch of trace/slbus.txt) and five output nodes ras_o0..ras_o4. Each gate is a
+# horizontal poly strip about 25 px long and 150 px wide between two diffusion fingers; the
+# contact boxes alternate left (a counter bit) and right (an output). The strips tied to the poly
+# band at the left (ras_straight) pass sl k to output k; the strips tied to the band at the right
+# (ras_shift) pass sl k to output k+1. Output 0 has two more sources at the top (S1, S2).
+# Diffusion is drawn as one rectangle through each strip plus the contact boxes; the field
+# islands between the two fingers of a node are not drawn.
+@block ras
+@requires slbus
+@w M=13 P=18
+@s 26x26
+
+# --- taps on the scan line counter's lines: pad under the metal line, poly north, pad, metal north
+P 7103,6656:7137,6690
+C 7120,6673
+P 7120,6673 y6065 w=18
+P 7103,6048:7137,6082
+C 7120,6065
+M 7120,6072 y5218 x7250 w=13          # sl0 to the contact box at (7235,5215)
+P 7147,6569:7181,6603
+C 7164,6586
+P 7164,6586 y6023 w=18
+P 7147,6006:7181,6040
+C 7164,6023
+M 7164,6030 y5390 x7250 w=13          # sl1 to (7235,5390)
+P 7191,6524:7225,6558
+C 7208,6541
+P 7208,6541 y6065 w=18
+P 7191,6048:7225,6082
+C 7208,6065
+M 7208,6072 y5564 x7262 w=13          # sl2 to (7248,5567)
+P 7255,6481:7289,6515
+C 7272,6498
+P 7272,6498 y6023 w=18
+P 7255,6006:7289,6040
+C 7272,6023
+M 7270,6030 y5730 w=13                # sl3 to (7264,5738)
+P 7320,6609:7354,6643
+C 7337,6626
+P 7337,6626 y6065 w=18
+P 7320,6048:7354,6082
+C 7337,6065
+M 7337,6072 y5905 w=13                # sl4 to (7337,5915)
+
+# --- the gate strips
+# straight (left band): the strips at y 5160, 5340, 5515, 5695, 5870
+P 7155,5158:7395,5185
+P 7155,5325:7400,5350
+P 7155,5500:7390,5527
+?P 7155,5685:7378,5710                # left ends of these two not seen clearly (under sl1's and sl2's metal)
+?P 7155,5860:7380,5885
+P 7161,5140 y5527 w=20                # the band, x 7151-7171
+?P 7161,5527 y5885 w=20               # its lower part: under sl1's metal, placed by the strips' ends
+N P 7161,5250 ras_straight
+# shift (right band): the strips at y 5250, 5425, 5605, 5780
+P 7205,5248:7412,5272
+P 7205,5415:7412,5440
+P 7205,5593:7412,5620
+P 7240,5770:7412,5795
+?P 7410,5250:7426,5270                # the joins to the band are read under the outputs' metal
+?P 7410,5417:7426,5438
+?P 7410,5595:7426,5618
+?P 7410,5772:7426,5793
+P 7425,5235 y5800 w=15                # the band, x 7418-7432; goes on north-east from its top (not drawn)
+N P 7425,5330 ras_shift
+# the two extra strips of output 0
+P 7160,4945:7440,4970                 # S1: from the north along x 7427 (not followed)
+P 7415,4875:7440,4950
+N P 7427,4900 ras_o0_sel2
+P 7165,5078:7390,5100                 # S2: ends on a pad (7425,5090), metal from the north
+P 7385,5073:7447,5107
+C 7425,5090
+M 7425,5090 x7467 y4746 x7657 y4673 x7860 w=13    # follower; its end (7860,4678) not looked at
+N M 7467,4900 ras_o0_sel1
+
+# --- diffusion: one rectangle through each strip
+D 7225,4929:7370,4986                 # S1
+D 7232,5062:7372,5116                 # S2
+D 7232,5142:7372,5201                 # straight 0
+D 7232,5232:7372,5288                 # shift 0>1
+D 7232,5309:7372,5366                 # straight 1
+D 7232,5399:7372,5456                 # shift 1>2
+D 7232,5484:7372,5543                 # straight 2
+D 7232,5577:7372,5636                 # shift 2>3
+D 7232,5669:7372,5726                 # straight 3
+D 7250,5754:7372,5811                 # shift 3>4
+D 7232,5844:7372,5901                 # straight 4
+# --- contact boxes: counter bits (left), outputs (right)
+D 7213,5195:7257,5238
+C 7235,5215
+D 7213,5360:7257,5405
+C 7235,5390
+D 7226,5537:7270,5583
+C 7248,5567
+D 7242,5720:7286,5760
+C 7264,5738
+D 7315,5895:7359,5937
+C 7337,5915
+D 7315,5110:7359,5148                 # output 0, lower box
+C 7337,5130
+D 7315,4886:7359,4935                 # output 0, upper box (above S1)
+C 7337,4908
+D 7303,5282:7347,5315
+C 7325,5300
+D 7313,5450:7357,5490
+C 7335,5475
+D 7310,5630:7354,5675
+C 7332,5652
+D 7313,5805:7357,5850
+C 7335,5828
+# the other side of S1 and S2
+D 7185,4975:7235,5025                 # below S1, contact (7205,5000): metal north and west
+C 7205,5000
+M 7207,5005 y4788 x6922 w=13          # follower; its end (6922,4787) not looked at
+N M 7207,4850 ras_o0_alt2
+D 7268,5025:7312,5068                 # above S2, contact (7290,5045): metal west and south
+C 7290,5045
+M 7290,5040 y5066 x7072 y5311 w=13    # follower; its end (7078,5311) not looked at
+N M 7150,5066 ras_o0_alt1
+
+# --- the outputs' metal, as far as followed
+M 7337,4908 x7381 y5132 w=13          # strap between output 0's two boxes
+M 7337,5132 x7576 y4847 x7712 y4765 x7793 w=13    # follower; end (7793,4765) not looked at
+N M 7500,5132 ras_o0
+M 7325,5305 y5258 x7490 y5200 w=13    # goes on north-east on a diagonal (not drawn)
+N M 7400,5258 ras_o1
+M 7335,5480 y5439 x7402 y5305 x7532 y5220 x7662 y5195 w=13   # goes on north (not drawn)
+N M 7450,5305 ras_o2
+M 7332,5652 x7402 y5502 x7448 y5350 x7582 y5262 w=13
+?P 7560,5245:7594,5279                # what is under this pad was not looked at
+C 7577,5262                           # a pad; the metal goes on east along y 5262 (not drawn)
+N M 7500,5350 ras_o3
+M 7335,5829 x7452 y5546 x7490 y5393 x7578 w=13
+P 7560,5375:7594,5409
+C 7577,5392                           # a pad; poly goes on east along y 5392 (not drawn)
+N M 7452,5700 ras_o4

@@ -759,3 +759,50 @@ registers (central datapath), R3's other nibble, R8.
    `uc_eq_r6` and `h_eq_r0` (strobe channel gate column), `h_eq_r1` (bottom-centre).
 4. The rest of the step-logic clusters; the 4-bit left counter's outputs; `e4`.
 
+## 2026-11-18: the row address selector; `inh_src` is a bus line
+
+Questions from the user: is the scan line counter put out directly as RA0-4; how do the
+R5 and R9 compares work; what makes VSYNC width 0 special. And two sets of questions on
+jsbeeb issue 1866 (write strobe and E, R8 skew path, compare phase, shortest CLK pulse,
+what `inh` does).
+
+**Found**
+
+- **The scan line counter does not go straight to the pins.** Its five lines are tapped
+  at x 7120-7337 and feed a column of eleven pass transistors (`trace/ras.txt`,
+  `notes/blocks/ras.md`): one gate line passes `sl` k to output k, the other passes `sl`
+  k to output k+1, and output 0 has two more gated sources. A shift by one bit with a
+  separate bit 0: the shape of interlace sync and video. 3,375 transistors, 2,025 nets,
+  no errors.
+- `inh_src` followed 3,700 px west from the strobe channel and drawn: a bottom-bus line
+  with four branches, three still open (`notes/blocks/trunks.md`). Not made locally.
+- RA0's and RA1's pad driver inputs followed from the pads to x 15300, y 4140-4800,
+  where they meet metals from the west (not drawn; `notes/blocks/trunks.md`).
+
+**Not found**
+
+- The selector's outputs are not joined to the pads (gap: x 7860 to 11650 along
+  y 4450-4800) nor to the central datapath's channel 1, towards which a nest of metals
+  east of the column turns. If channel 1's lines are the selector's outputs, R9, R10 and
+  R11 are compared with what goes to the pins, not with the counter. Open.
+- R9's comparator: still not identified. Candidates are the central datapath's rows A
+  (five latches) and B (5-bit comparator on the through tracks).
+- R3's high nibble and the 4-bit counter `c4l`: nothing new.
+
+**Method**
+
+- A structure with no supply rail over it is worth a second look before assuming gates:
+  this column is pass transistors only.
+- The strip pattern was plain in the chip-2 stripped shot at 2.5x and unreadable in the
+  clean shot at 4.4x (narrow diffusion fingers between two edge lines print black
+  there). Try the other stripped shot before zooming further.
+
+**Open, in the order I would take them**
+
+1. The selector's five outputs to their ends, and the nest of metals at x 7530-7715 into
+   channel 1; then the two gate lines and bit 0's extra sources (interlace logic).
+2. Where `lc_step` is made; where `sl_eq_r5` goes.
+3. `inh_src`'s three open ends.
+4. As before: `rdp2`'s routing zone; the other match lines; the step-logic clusters;
+   `c4l`'s outputs and R3's high nibble; `e4`.
+

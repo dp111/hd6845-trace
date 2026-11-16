@@ -212,3 +212,21 @@ with a term that can never be true. That is why this reading was not adopted.
 other end goes (poly west along y 4010-4030 from the pad at (3040,4028)): a latch node must
 end on a gate.
 
+## AMB-010: is the strip S1 of the row address selector tied to the metal that crosses it at (7207,4955)? (2026-11-18)
+
+`notes/blocks/ras.md`. The metal of `ras_o0_alt2` comes down x 7207 over the left end of
+the poly strip S1 (gate `ras_o0_sel2`, y 4945-4970) and ends 45 px further on the contact
+(7205,5000) of the diffusion below the strip.
+
+- For a contact: a dark pit at (7207,4955) in the chip-2 stripped shot, and the strip's
+  left end is wide enough for one.
+- Against: no ring in either metal shot (the contact 45 px below has a plain one); the
+  bright spots on the metal there are the stretches between the edge lines of the strip
+  and of the diffusion finger above it.
+
+**Adopted: no contact** (assumption). Then S1 is a third pass transistor into `ras_o0`,
+gated by a poly that arrives from the north along x 7427. With a contact, gate and source
+of S1 would be one net and the device a diode from `ras_o0_alt2` to `ras_o0`. Settle by
+tracing `ras_o0_sel2` north and `ras_o0_alt2` north-west: if they turn out to be one net
+anyway, the question is moot.
+

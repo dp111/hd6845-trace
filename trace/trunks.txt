@@ -290,3 +290,49 @@ N M 12400,17692 inh_lat
 # Contact candidates along it about every 608 px (y 8360, 8965, 9573, 10181, 10831, 11440 ...):
 # its taps into the left column of the left array, not looked at.
 M 2504,18310 2500,7990 w=18
+
+# ====================================================================
+# inh_src, followed from where trace/bd1.txt leaves it (13480,17150), 2026-11-18. It is a line of
+# the bottom bus field, not something made near the strobe channel. Notes: notes/blocks/trunks.md.
+# Poly south under the horizontal metals to y 17650, south-west on a diagonal, west along y 17815
+# under the vertical trunks to a pad (12805,17815).
+P 13480,17150 13480,17662 13328,17815 12805,17815 w=18
+P 12788,17798:12824,17832
+C 12805,17815
+# Metal west along y 17822; the middle one of three nested Z bends at x 11640-11725 (the same
+# braid that h_eq_r1 and inh_lat pass, the four poly diagonals from the south-west under it);
+# west along y 17650 to a pad (11245,17650).
+M 12818,17822 x11682 y17650 x11232 w=13
+C 11245,17650
+P 11228,17633:11262,17667
+# Poly west, south-west under ten vertical metals (no pad on the way), west along y 17950 to a
+# pad (10262,17950).
+P 11250,17647 11160,17647 10858,17950 10262,17950 w=18
+P 10245,17933:10281,17967
+C 10262,17950
+# Metal south, a short diagonal, west along y 18083 over a pad (10075,18080) to a pad (9770,18081).
+# West of that pad the line goes on in poly under two vertical metals (x 9650, 9710) to a pad at
+# about x 9562 and on in metal to x 8978 at least (follower): NOT DRAWN, not followed further.
+M 10266,17938 10266,18058 10240,18083 9762,18083 w=13
+C 10075,18080
+P 10058,18063:10092,18097
+C 9770,18081
+P 9753,18064:9787,18098
+# From the pad (10075,18080): poly north along x 10075 between two field boxes, east along y 17770
+# to a pad (10262,17770); metal north along x 10266, jog at y 17428, north along x 10312 to a pad
+# (10310,16950).
+P 10075,18080 10075,17772 10262,17772 w=18
+P 10245,17753:10281,17789
+C 10262,17770
+M 10268,17782 10268,17428 10312,17428 10312,16940 w=13
+C 10310,16950
+P 10293,16933:10327,16967
+# The pad lies on a poly along y 16950: east into the logic at x 10480 (NOT DRAWN beyond x 10470),
+# west to x 10225 and north to a pad (10225,16820), where a metal leaves north along x 10225 to
+# y 15886 at least (follower; drawn to there, its end not looked at).
+P 10470,16950 10225,16950 10225,16820 w=18
+P 10208,16803:10242,16837
+C 10225,16820
+M 10225,16830 10225,15886 w=13
+N M 12400,17822 inh_src
+N M 10225,16400 inh_src
