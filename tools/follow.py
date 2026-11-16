@@ -151,6 +151,7 @@ def main():
     cont = []
     lowrun = 0
     turns = 0
+    corners = []
     while total < a.max:
         nx, ny = x + step * d[0], y + step * d[1]
         c = cut(t, nx, ny, p)
@@ -210,16 +211,24 @@ def main():
                 good = (x, y)
                 wide_from = None
                 turns += 1
-                if turns > 200:
-                    print('too many corners: stopped')
+                if any(abs(sx - cx) < 8 and abs(sy - cy) < 8 for cx, cy in corners):
+                    print('back at a corner already turned: stopped (the start point was probably on a wide rail)')
+                    break
+                corners.append((sx, sy))
+                if turns > 60:
+                    print('more than 60 corners: stopped')
                     break
         total += step
     else:
         print('stopped at %d,%d after %d px (limit)' % (x, y, total))
     pts.append(good)
     if cont:
-        print('contact candidates: ' + '  '.join('%d,%d' % (cx, cy) for cx, cy in cont))
-    if a.trace:
+        uniq = []
+        for cx, cy in cont:
+            if not any(abs(cx - ux) < 12 and abs(cy - uy) < 12 for ux, uy in uniq):
+                uniq.append((cx, cy))
+        print('contact candidates: ' + '  '.join('%d,%d' % (cx, cy) for cx, cy in uniq[:40]))
+    if a.trace and len(pts) <= 40:
         out = 'M %d,%d' % pts[0]
         for (px, py), (qx, qy) in zip(pts, pts[1:]):
             out += ' x%d' % qx if abs(qy - py) < abs(qx - px) else ' y%d' % qy

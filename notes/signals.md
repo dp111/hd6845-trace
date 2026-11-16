@@ -448,3 +448,5 @@ datapath s1...s7, s0 became b0...b6, b7.
 | wl_la_n | cnt_la_a_n | |
 | wl_p | rc_step | |
 | wl_pb | rc_step_n | |
+| h_eq_r0_u | h_eq_r0 | |
+| h_eq_r1_u | h_eq_r1 | |

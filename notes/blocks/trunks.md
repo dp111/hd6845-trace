@@ -484,3 +484,28 @@ contact at (5145,6110) under a metal from the north). All five lines go south to
 fan out diagonally and become horizontal metals going east from pads at x 6130-6165,
 y 6950-7350. Not followed beyond the pads except `rcs_e4`.
 
+## `h_eq_r0`, `h_eq_r1` and `inh_lat` (coordinating session, 2026-11-17)
+
+- **Joins closed.** The R0 and R1 match lines are single straight metals between the right
+  datapath's bundle (y 13480) and the strobe channel's tracks k7 and k8 (y 14690):
+  `tools/follow.py` from (13391,14750) north runs to (13431,10010) (the R0 comparator's
+  exit) and from (13434,14750) north to (13476,11701) (the R1 comparator's exit). Drawn in
+  `trace/trunks.txt`; the labels that were `h_eq_r0_u`, `h_eq_r1_u` are now on the real nets.
+- **`h_eq_r1` beyond the strobe channel**: track k8's metal (x 13478) turns south-west at
+  y 16776, runs down x 13345-13352 to a contact (13345,17645); poly west along y 17647
+  under the wide VCC rail to a contact (12805,17647); metal west to x 11851, north to
+  y 17476, west to a contact (11240,17475); poly west and then diagonally south-west
+  (seen to (10940,17598)): **into the bottom-centre logic**. Not followed further.
+- **`inh_lat`** takes the parallel route one line over: x 13435 turns south-west at
+  y 16761, down x 13303 to a contact (13303,17688), poly west along y 17691, contact
+  (12850,17691), metal west to x 11810, north to y 17514, west to a contact (11288,17517),
+  poly west and south-west (seen to (10980,17640)).
+- Two more lines run with them (poly y 17557 and y 17603 from pads at (13385,17555) and
+  (13425,17600); metal west of x 12805/12850 to pads at (12030,17560) and (12075,17603)):
+  not identified, not drawn.
+- `h_eq_r0` (track k7) ends inside the strobe channel: contact (13432,15888), poly east
+  along y 15889 into the gate column (`notes/blocks/bd1.md`).
+
+The R1 match (end of the displayed part of a line) going to the bottom-centre logic fits
+the DISPTMG pad being at the bottom edge; that logic is not traced.
+

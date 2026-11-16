@@ -82,13 +82,12 @@ the poly as salmon under where the metal was; `tools/strips.py --layer acid1b` a
 ## Open joins
 
 Wires labelled `NAME_u` are believed to be net NAME but are not joined to it by drawn
-geometry. `tools/build.py` prints the current list (14 on 2026-11-17). Each is closed by
+geometry. `tools/build.py` prints the current list (12 on 2026-11-17, after the R0 and R1 match lines were joined). Each is closed by
 tracing the stretch between the two pieces and renaming the label.
 
 | Names | Where the gap is |
 |---|---|
 | `hc0_u` ... `hc5_u` | the horizontal counter lines between the strobe channel / wiring channel and the comparators' c lines (right datapath, y 13480-14700 and east of x 13425) |
-| `h_eq_r0_u`, `h_eq_r1_u` | tracks k7 and k8 of the strobe channel: the R0 and R1 match lines between the right datapath's bundle (y 13480) and the channel (y 14700) |
 | `h_eq_r2_u` | bus line G west of the counters: the R2 match line through the upper right datapath's undrawn bars (enters at (13425,9707)) |
 | `wr_r0_u`, `wr_r1_u`, `wr_r2_u`, `wr_r4_u` | the load strobes at the register rows: between the strobe channel's tracks and the latch rows |
 | `ck_a_u` | the horizontal counter's L3 line: poly from (12631,16954) to the `ck_a` bus line at (12740,18471), followed but not drawn |

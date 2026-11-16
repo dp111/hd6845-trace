@@ -244,3 +244,39 @@ M 8613,18772 x7487 w=18
 C 7500,18772
 P 7495,18760:7540,18800             # top of the wide poly that goes down into the cell row
 # (net name: clk_p / clk, from the clock trace)
+
+# ====================================================================
+# h_eq_r0, h_eq_r1: the R0 and R1 match lines between the right datapath's bundle (rdp3
+# draws them to y 13480) and the strobe channel's tracks k7, k8 (bd1 draws from y 14690).
+# Straight metal, followed with tools/follow.py in both directions (2026-11-17).
+M 13391,13470 y14700 w=18
+M 13434,13470 y14700 w=18
+
+# h_eq_r1 beyond the strobe channel: k8's metal (x 13478) turns south-west at y 16780, runs
+# down x 13345 to a contact (13345,17645); poly west along y 17647 under the wide VCC rail to
+# a contact (12805,17647); metal west to x 11850, north to y 17476, west to a contact
+# (11240,17475); poly west and diagonally south-west towards (10940,17598): into the
+# bottom-centre logic. Not followed further.
+M 13478,16580 13478,16780 13352,16905 13348,17660 w=13
+C 13345,17645
+P 13360,17647 x12792 w=18
+P 12788,17630:12825,17664
+C 12805,17647
+M 12818,17648 x11851 y17476 x11226 w=13
+C 11240,17475
+P 11222,17460:11262,17492
+P 11250,17476 11062,17476 10940,17598 w=18
+N M 12400,17648 h_eq_r1
+# inh_lat likewise: x 13435 turns south-west at y 16770, runs down x 13300 to a contact
+# (13303,17688); poly west along y 17691 to a contact (12850,17691); metal west to x 11810,
+# north to y 17514, west to a contact (11288,17517); poly west and south-west. Not followed.
+M 13435,16750 13435,16761 13305,16891 13303,17702 w=13
+C 13303,17688
+P 13318,17691 x12835 w=18
+P 12832,17674:12870,17708
+C 12850,17691
+M 12862,17692 x11810 y17514 x11274 w=13
+C 11288,17517
+P 11270,17502:11308,17534
+P 11298,17518 11102,17518 10980,17640 w=18
+N M 12400,17692 inh_lat

@@ -225,8 +225,8 @@ gate is `inh_lat`, the inverse of line X.
 | k4 13261 | bd1_k4 | jogs to x 13304 at y 15308; by scan runs on past y 16700 |
 | k5 13304 | h_eq_r0half | jogs to x 13348 at y 15262, down to contact (13348,16411); poly east along y 16410 towards the gate column (seen to x 13700 at 0.9x, not followed) |
 | k6 13348 | inh_rc | ends at contact (13347,15150) |
-| k7 13391 | h_eq_r0_u | jogs to x 13435 at y 15176, down to contact (13432,15888); poly east along y 15889 under five lines into the gate column's dense group (seen to x 13695) |
-| k8 13435 | h_eq_r1_u | jogs to x 13478 at y 15130, runs south; by scan metal to y 16594, a 23 px break, then to y 16797. Lower end not traced |
+| k7 13391 | h_eq_r0 | jogs to x 13435 at y 15176, down to contact (13432,15888); poly east along y 15889 under five lines into the gate column's dense group (seen to x 13695) |
+| k8 13435 | h_eq_r1 | jogs to x 13478 at y 15130, runs south; by scan metal to y 16594, a 23 px break, then to y 16797. Lower end not traced |
 | k9 13478 | hc2 | jogs to x 13521 at y 15087, **ends at contact (13520,15390)**; poly west along y 15388 (under wr_r7's jog, no contact), corner at x 13108, south, west into the mid-right array at (13035,15497) (the poly's route is from the first run, `?`) |
 | k10 13521 | wr_r4 | ends at contact (13521,15042) |
 | k11 13565 | bd1_k11 | jogs to x 13608 at y 15005, down to a contact at (13609,15608) (scan, 1.5x); poly west then diagonally down-left towards (13250,15750), not traced |
@@ -243,8 +243,8 @@ positions therefore carry other nets than at the top edge:
 
 | Position | Net below the jogs | Segments (contact to contact) |
 |---|---|---|
-| x 13435 | h_eq_r0_u, then **inh_lat** | k7 to (13432,15888). A new line starts at contact (13432,15955) and runs south (scan: to y 16769, lower end not traced): it is `inh_lat`, see below |
-| x 13478 | h_eq_r1_u | from the jog south |
+| x 13435 | h_eq_r0, then **inh_lat** | k7 to (13432,15888). A new line starts at contact (13432,15955) and runs south (scan: to y 16769, lower end not traced): it is `inh_lat`, see below |
+| x 13478 | h_eq_r1 | from the jog south |
 | x 13521 | hc2, then **inh_lat**, then **bd1_k** | k9 to (13520,15390). Break. (13520,15458) to (13520,15931): `inh_lat`. Break. (13522,15999) south (scan: to y 16273, lower end not traced; a further piece y 16445-16805 is wr_r3's): `bd1_k` |
 | x 13674 | bd1_k | (13674,15715) to (13674,15975) |
 
@@ -271,8 +271,8 @@ X's lines, contact (13522,15999), metal south on x 13521 to about y 16273.
 | bd1_k4 | metal | 13261,14700 (north) | ? | track k4 |
 | h_eq_r0half | metal | 13304,14700 (north) | ? | track k5 |
 | inh_rc | metal | 13348,14700 (north) | out | track k6: NOT X |
-| h_eq_r0_u | metal | 13391,14700 (north) | ? | track k7; ends on a poly going east along y 15889 into the dense group of the gate column |
-| h_eq_r1_u | metal | 13435,14700 (north) | ? | track k8; runs south past y 16590 (lower end not traced) |
+| h_eq_r0 | metal | 13391,14700 (north) | ? | track k7; ends on a poly going east along y 15889 into the dense group of the gate column |
+| h_eq_r1 | metal | 13435,14700 (north) | ? | track k8; runs south past y 16590 (lower end not traced) |
 | hc2 | metal | 13478,14700 (north) | ? | track k9; ends at contact (13520,15390) |
 | hc2 | poly | 13035,15497 (west) | ? | k9's poly, into the mid-right array (`?`: route from the first run) |
 | inh_lat | metal | 13435,16769 (drawn to there) | out | NOT X going south on k8's position; lower end not traced |

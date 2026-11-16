@@ -419,10 +419,10 @@ M 13391,14690 y15176 x13435 y15901 w=20
 C 13432,15888
 P 13418,15874:13449,15904
 ?P 13432,15889 x13700 w=18
-N M 13391,14700 h_eq_r0_u
+N M 13391,14700 h_eq_r0
 # k8: east at y 15130 to k9's position, south (scan: metal to y 16594, a 23 px break, then to y 16797; lower end not traced)
 M 13435,14690 y15130 x13478 y16590 w=20
-N M 13435,14700 h_eq_r1_u
+N M 13435,14700 h_eq_r1
 # k9: east at y 15087 to k10's position, south to a contact at 13520,15390 where the line ends; poly west along
 # y 15388 (east end seen at 4.6x; the rest from the first run's notes: under wr_r7's jog without contact,
 # corner at x 13108, south, and west into the mid-right array at y 15497)
