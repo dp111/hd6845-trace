@@ -305,3 +305,12 @@ would sit on the rail). **Adopted** as drawn: `fld_a_in` = NAND(`tcw_a`, `tcw_b`
 of the first stack. Settle 1 with a profile across the strip in the chip-2 shots at
 several y, and by finding the load of `tcw_o3326` (one load or two decides it).
 
+Profile done the same day (sum of red minus green over the two chip-2 shots, 4 px
+steps, x 6556-6626, at y 3345, 3365, 3380, 3395, 3415, 3440): the strip x 6594-6602 reads
+as diffusion at every height; the space between the two gates' east ends (x 6572-6576,
+y 3365-3395) reads as **field**, so the gates are not joined to each other (the
+alternative reading is out). Still open: at y 3440 a dark line (x 6580-6588) lies between
+the lower arm and the strip, and a dark line cannot show whether two regions meet. So
+item 1 stands as "a diffusion strip runs between the two arms; that it joins them is
+assumed".
+
