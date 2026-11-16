@@ -291,6 +291,17 @@ under that poly, `fld_a_in` has a third pull-down gated by `tcw_m6232`
 field there, it goes on to the east side. Not decided; the trace stops the poly at the
 rail's west edge.
 
+Checked by colour the same day (clean shot, rows under the rail x 6514-6546, with the
+known poly-over-field crossing of `tcw_b` at y 3641-3650 for comparison: salmon, about
+(217,165,115)): at y 3911-3932 there is **no salmon row**; the middle of the rail is
+tan-green there (the contact box reaches down to about y 3925). Across the rail at
+y 3920 the bright salmon of the poly is at x 6480-6489 only, then dark, then the box. So
+the poly **does not cross the rail and gates nothing under it**: the third pull-down is
+out. It ends at the rail's west edge, 30 px above the end of `fld_a_in`'s poly. What it
+ends on is open: if on the same node as `fld_a_in`'s poly, the bus net `tcw_m6232` *is*
+`fld_a_in` (and `tcw_o3550` its inverse). Not drawn; next thing to read there, at 5x in
+the chip-2 stripped shot.
+
 ## AMB-015: three joins on the east side of the gate column's middle stretch (2026-11-26)
 
 `notes/blocks/tcw.md`, "Stretch B, east side". All three are in the trace as `?` items:

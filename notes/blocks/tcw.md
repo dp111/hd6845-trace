@@ -225,7 +225,9 @@ height of the first contact box); the loads; everything east of the rail.
   y 3912 to the ground rail, which it reaches between the rail contact (6535,3905) and
   the node of `fld_a_in`. The rail profile reported a dull "poly over field" at exactly
   y 3910-3934. Whether the poly only crosses, or gates a third pull-down of `fld_a_in`'s
-  node, is not resolved (added to AMB-014); it is drawn to the rail's west edge only.
+  node, was open; a colour check the same day shows it does not cross the rail (AMB-014): it
+  ends at the rail's west edge, 30 px above the end of `fld_a_in`'s poly, possibly on the
+  same node (then `tcw_m6232` would be `fld_a_in`). Drawn to the rail's west edge only.
 - **A third metal on the x 6362 track**, `tcw_m6362c`, from a pad (6362,3832) to a pad
   (6362,4266). The upper pad's poly goes east towards the west side of `tcw_o3820`'s
   output node (drawn to x 6440; the join is not read). The lower pad's poly is the gate
