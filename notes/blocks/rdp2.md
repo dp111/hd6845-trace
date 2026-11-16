@@ -208,9 +208,9 @@ uc_eq_r4  = NOR(the seven x)              high when the seven uc lines equal RE
 | `wr_r4_u` (= `rdp3_n1s4`) | metal | 13391,10700 going south (track L1) | in | R4 load strobe = `wr_r4` |
 | `wr_r6` | poly | 13340,8295 going west | in | RF load strobe, not identified |
 | `uc_eq_r4` | poly | 13340,8339 going west | out | high when uc = R4 |
-| `ubus_sm1`, `_s0`..`_s5` | metal | x 13455, 13845, 14236, 14626, 15016, 15407, 15797; north at y 8051, south at y 9075 | through | data lines of the upper array |
-| `uc_sm1`, `_s0`..`_s5` | metal | x 13541, 13931, 14321, 14712, 15102, 15492, 15882; north at y 8051, south at y 9075 | in | compared with R4 (and by rdp1's comparator with RF) |
-| `r6_sm1_q`, `_s0_q`..`_s5_q` | poly | x 13707, 14097, 14487, 14878, 15268, 15658, 16048 (22 wide) at y 8048 going north | out | RF's bits, into rdp1's comparator |
+| `ubus_b0`, `_s0`..`_s5` | metal | x 13455, 13845, 14236, 14626, 15016, 15407, 15797; north at y 8051, south at y 9075 | through | data lines of the upper array |
+| `uc_b0`, `_s0`..`_s5` | metal | x 13541, 13931, 14321, 14712, 15102, 15492, 15882; north at y 8051, south at y 9075 | in | compared with R4 (and by rdp1's comparator with RF) |
+| `r6_b0_q`, `_s0_q`..`_s5_q` | poly | x 13707, 14097, 14487, 14878, 15268, 15658, 16048 (22 wide) at y 8048 going north | out | RF's bits, into rdp1's comparator |
 | `rdp2_t13714` | metal | 13714,8051 north; 13714,9075 south | through | thin line on sm1's strap track |
 | `vss` | metal | x 13393, 13783, 14174, .., 16125 (8) at y 8040 going north; x 16516, 16906 at y 9540 going north | - | rails. x 13393 ends at y 9275; x 13783 is cut at y 9100-9400 (AMB-5) |
 | `vcc` | metal | x 13600, 13990, .., 15942 (7) at y 8040 going north; x 16332, 16723 at y 9540 going north | - | rails. x 13600 is drawn to y 9080 only (AMB-5) |

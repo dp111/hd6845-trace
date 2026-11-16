@@ -45,7 +45,7 @@ P 4502,6157 x4720 w=20
 
 # ---- 5-bit counter (rows u4-u8): five tracks that step east by nested corners at y 7985-8195
 # and run north to five poly lines going east at y 6497-6672
-# c5l4: pad (4420,8590); track x 4432 north to y 8182, east to x 4632, north to a contact (4627,6625)
+# sl4: pad (4420,8590); track x 4432 north to y 8182, east to x 4632, north to a contact (4627,6625)
 P 4244,8576:4436,8596
 P 4402,8572:4440,8608
 C 4420,8590
@@ -53,7 +53,7 @@ M 4432,8604 y8182 x4632 y6611 w=20
 P 4610,6608:4648,6642
 C 4627,6625
 P 4640,6626 x4720 w=20
-# c5l3: pad (4380,9066); track x 4388 north to y 8138, east to x 4587, north to y 6497, east to a contact (4625,6497)
+# sl3: pad (4380,9066); track x 4388 north to y 8138, east to x 4587, north to y 6497, east to a contact (4625,6497)
 P 4244,9052:4398,9072
 P 4362,9048:4400,9084
 C 4380,9066
@@ -61,7 +61,7 @@ M 4388,9080 y8138 x4587 y6497 x4640 w=20
 P 4608,6480:4646,6514
 C 4625,6497
 P 4638,6498 x4720 w=20
-# c5l2: pad (4335,9542); track x 4345 north to y 8092, east to x 4543, north to a contact (4540,6540)
+# sl2: pad (4335,9542); track x 4345 north to y 8092, east to x 4543, north to a contact (4540,6540)
 P 4244,9530:4352,9550
 P 4317,9524:4355,9560
 C 4335,9542
@@ -69,7 +69,7 @@ M 4345,9556 y8092 x4543 y6526 w=20
 P 4522,6523:4560,6557
 C 4540,6540
 P 4552,6541 x4720 w=20
-# c5l1: pad (4292,10018); track x 4301 north to y 8047, east to x 4498, north to a contact (4495,6585)
+# sl1: pad (4292,10018); track x 4301 north to y 8047, east to x 4498, north to a contact (4495,6585)
 P 4244,10006:4310,10026
 P 4274,10000:4312,10036
 C 4292,10018
@@ -77,7 +77,7 @@ M 4301,10032 y8047 x4498 y6571 w=20
 P 4477,6568:4515,6602
 C 4495,6585
 P 4507,6586 x4720 w=20
-# c5l0: pad (4283,10490); track north (x 4283, then 4258 from about y 10440) to y 7997, east to
+# sl0: pad (4283,10490); track north (x 4283, then 4258 from about y 10440) to y 7997, east to
 # x 4455, north to a contact (4453,6672)
 P 4244,10482:4298,10502
 P 4265,10472:4303,10508

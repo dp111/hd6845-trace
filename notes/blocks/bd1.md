@@ -222,7 +222,7 @@ gate is `inh_lat`, the inverse of line X.
 | k1 13131 | wr_r5 | jogs to x 13088 at y 14912, down to contact (13085,15563) |
 | k2 13174 | wr_r7 | jogs to x 13218 at y 15390, down to contact (13218,16642) |
 | k3 13218 | wr_r3 | jogs to x 13261 at y 15346, down to contact (13262,16456) |
-| k4 13261 | bd1_k4 | jogs to x 13304 at y 15308; by scan runs on past y 16700 |
+| k4 13261 | uc_eq_r6 | jogs to x 13304 at y 15308; by scan runs on past y 16700 |
 | k5 13304 | h_eq_r0half | jogs to x 13348 at y 15262, down to contact (13348,16411); poly east along y 16410 towards the gate column (seen to x 13700 at 0.9x, not followed) |
 | k6 13348 | inh_rc | ends at contact (13347,15150) |
 | k7 13391 | h_eq_r0 | jogs to x 13435 at y 15176, down to contact (13432,15888); poly east along y 15889 under five lines into the gate column's dense group (seen to x 13695) |
@@ -268,7 +268,7 @@ X's lines, contact (13522,15999), metal south on x 13521 to about y 16273.
 | wr_r5 | metal | 13131,14700 (north) | out | track k1 |
 | wr_r7 | metal | 13174,14700 (north) | out | track k2 |
 | wr_r3 | metal | 13218,14700 (north) | out | track k3 |
-| bd1_k4 | metal | 13261,14700 (north) | ? | track k4 |
+| uc_eq_r6 | metal | 13261,14700 (north) | ? | track k4 |
 | h_eq_r0half | metal | 13304,14700 (north) | ? | track k5 |
 | inh_rc | metal | 13348,14700 (north) | out | track k6: NOT X |
 | h_eq_r0 | metal | 13391,14700 (north) | ? | track k7; ends on a poly going east along y 15889 into the dense group of the gate column |

@@ -21,11 +21,11 @@ of the cell to a pad with a contact on a vertical metal track.
 | `c4l2` (u1) | (4400,7068) | x 4400-4420 north to y 6240, east | contact (4495,6238) | poly east along y 6239 |
 | `c4l1` (u2) | (4358,7548) | x 4358-4380 north to y 6197, east | contact (4535,6196) | poly east along y 6197 |
 | `c4l0` (u3) | poly east and north to a pad (4280,7950) | x 4310-4335 north to y 6157, east | contact (4492,6157) | poly east along y 6157 |
-| `c5l4` (u4) | (4420,8590) | x 4432 north to y 8182, east to x 4632, north | contact (4627,6625) | poly east along y 6626 |
-| `c5l3` (u5) | (4380,9066) | x 4388 north to y 8138, east to x 4587, north to y 6497, east | contact (4625,6497) | poly east along y 6498 |
-| `c5l2` (u6) | (4335,9542) | x 4345 north to y 8092, east to x 4543, north | contact (4540,6540) | poly east along y 6541 |
-| `c5l1` (u7) | (4292,10018) | x 4301 north to y 8047, east to x 4498, north | contact (4495,6585) | poly east along y 6586 |
-| `c5l0` (u8) | (4283,10490) | north (x 4283, then 4258) to y 7997, east to x 4455, north | contact (4453,6672) | poly east along y 6673 |
+| `sl4` (u4) | (4420,8590) | x 4432 north to y 8182, east to x 4632, north | contact (4627,6625) | poly east along y 6626 |
+| `sl3` (u5) | (4380,9066) | x 4388 north to y 8138, east to x 4587, north to y 6497, east | contact (4625,6497) | poly east along y 6498 |
+| `sl2` (u6) | (4335,9542) | x 4345 north to y 8092, east to x 4543, north | contact (4540,6540) | poly east along y 6541 |
+| `sl1` (u7) | (4292,10018) | x 4301 north to y 8047, east to x 4498, north | contact (4495,6585) | poly east along y 6586 |
+| `sl0` (u8) | (4283,10490) | north (x 4283, then 4258) to y 7997, east to x 4455, north | contact (4453,6672) | poly east along y 6673 |
 
 The five tracks of the 5-bit counter step east together by nested corners at y 7985-8195
 (checked at 2.6x: five separate metals). Metal routes are from `tools/follow.py`; every
@@ -52,10 +52,8 @@ comparators must be.
 **4-bit counter.** The four lines (y 6157, 6197, 6239, 6280) go east from x 4720 under
 the vertical metals at x 4670-4720. Not followed.
 
-## What this says about which counter is which (belief, not shown)
+## Which counter is which
 
-A 5-bit counter that is stepped by its own gated clock (`lc_step`) and compared in a
-register array fits the **scan line counter** (R9 maximum scan line, R5 adjust, both 5
-bits; R10/R11 cursor lines); the 4-bit counter sharing its clock would then be the
-**vertical sync width counter** (16 lines on this chip, or R3's upper nibble). To be
-confirmed by tracing `rdp1`: the register rows there have write strobes that name them.
+The 5-bit counter is the **scan line counter**: its five lines are now drawn to the R5
+comparator (`notes/blocks/slbus.md`). The 4-bit counter's four lines (y 6157-6280) are
+not followed.

@@ -104,10 +104,10 @@ P 11932,10207:11962,10228                 # ... and joins the INV2 load gate blo
 @end
 
 # Row placements, r0 (top) .. r18 (bottom); offsets from findcell.py.
-@inst mra_chain 0,-2646 tag=c4b3
-@inst mra_chain 0,-2169 tag=c4b2
-@inst mra_chain 0,-1692 tag=c4b1
-@inst mra_chain 0,-1215 tag=c4b0
+@inst mra_chain 0,-2646 tag=hsw3
+@inst mra_chain 0,-2169 tag=hsw2
+@inst mra_chain 0,-1692 tag=hsw1
+@inst mra_chain 0,-1215 tag=hsw0
 @inst mra_chain 0,-477 tag=rc6
 @inst mra_chain 0,477 tag=rc4
 @inst mra_chain 0,1040 tag=rc3
@@ -133,9 +133,9 @@ P 11963,10328:11986,10425                 # chain poly, lower part
 M 11992,10168 x11969 y10250 x11978 y10470 w=22
 N M 11978,10350 {}_md
 @end
-@inst mra_link 0,-2646 tag=c4b3
-@inst mra_link 0,-2169 tag=c4b2
-@inst mra_link 0,-1692 tag=c4b1
+@inst mra_link 0,-2646 tag=hsw3
+@inst mra_link 0,-2169 tag=hsw2
+@inst mra_link 0,-1692 tag=hsw1
 @inst mra_link 0,-477 tag=rc6
 @inst mra_link 0,1040 tag=rc3
 @inst mra_link 1,1518 tag=rc2
@@ -200,7 +200,7 @@ P 11963,9113:11986,9200                   # chain poly of r3, lower part
 P 11958,9168:11998,9207                   # pad
 C 11976,9187 s=28x28
 M 11992,8953 x11969 y9035 x11978 y9518 w=22
-N M 11978,9300 c4b_ci
+N M 11978,9300 hsw_ci
 
 # --- row r10: chain poly turns left and leaves the region at x 11700, y 12911
 P 11964,12800:11987,12925
@@ -220,7 +220,7 @@ N M 11980,16850 hc0_md
 
 # --- row r0 (top): separate strip over r0's H1 blob and H2
 M 11983,7262 y7352 w=24
-N M 11983,7300 c4b3_mt
+N M 11983,7300 hsw3_mt
 
 # The tabs of rows r7-r10 and r15-r18 are on the group lines.
 @alias rc_lo4_set rc3_tab
@@ -357,10 +357,10 @@ D 12198,10153:12250,10215                 # third run: diffusion above and under
                                           # (neither field pink nor clean tan) at x 12140-12184 under the g1 metal: still uncertain
 @end
 
-@inst mra_col2 0,-2646 tag=c4b3
-@inst mra_col2 0,-2169 tag=c4b2
-@inst mra_col2 0,-1692 tag=c4b1
-@inst mra_col2 0,-1215 tag=c4b0
+@inst mra_col2 0,-2646 tag=hsw3
+@inst mra_col2 0,-2169 tag=hsw2
+@inst mra_col2 0,-1692 tag=hsw1
+@inst mra_col2 0,-1215 tag=hsw0
 @inst mra_col2 0,-477 tag=rc6
 @inst mra_col2 0,477 tag=rc4
 @inst mra_col2 0,1040 tag=rc3
@@ -421,7 +421,7 @@ N M 12543,16000 cnt_l2_c
 #   rows r11-r18: from the contact (12631,16954); notes/blocks/trunks.md takes the poly behind it
 #     for a second ck_a route (seen at 0.9x only). To be checked: see notes/blocks/mra.md.
 M 12587,7130 y9196 w=14
-N M 12587,8000 c4b_l3
+N M 12587,8000 hsw_l3
 M 12587,9440 y13005 x12556 w=14
 N M 12587,9950 rc_l3
 C 12567,13005
@@ -522,10 +522,10 @@ P 12700,9905:12765,9922                   # continues right (seen to x 13045)
 D 12398,9957:12750,9969
 @end
 
-@inst mra_col3 0,-2646 tag=c4b3
-@inst mra_col3 0,-2169 tag=c4b2
-@inst mra_col3 0,-1692 tag=c4b1
-@inst mra_col3 0,-1215 tag=c4b0
+@inst mra_col3 0,-2646 tag=hsw3
+@inst mra_col3 0,-2169 tag=hsw2
+@inst mra_col3 0,-1692 tag=hsw1
+@inst mra_col3 0,-1215 tag=hsw0
 @inst mra_col3 0,-477 tag=rc6
 @inst mra_col3 0,477 tag=rc4
 @inst mra_col3 0,1040 tag=rc3
@@ -708,10 +708,10 @@ P 12962,9955:13050,9977
 N D 12900,9940 {}_z
 @end
 
-@inst mra_col4 0,-2646 tag=c4b3
-@inst mra_col4 0,-2169 tag=c4b2
-@inst mra_col4 0,-1692 tag=c4b1
-@inst mra_col4 0,-1215 tag=c4b0
+@inst mra_col4 0,-2646 tag=hsw3
+@inst mra_col4 0,-2169 tag=hsw2
+@inst mra_col4 0,-1692 tag=hsw1
+@inst mra_col4 0,-1215 tag=hsw0
 @inst mra_col4 0,-477 tag=rc6
 @inst mra_col4 0,477 tag=rc4
 @inst mra_col4 0,1040 tag=rc3

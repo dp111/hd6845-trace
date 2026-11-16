@@ -34,20 +34,22 @@ Counters (mid-right array, rows r0-r18 from the top, `notes/blocks/mra.md`):
 |---|---|---|
 | r18 ... r11 | horizontal character counter, `hc0` ... `hc7` | r18 = bit 0 (carry enters there), r11 = bit 7 |
 | r10 ... r4 | character row counter, `rc0` ... `rc6` | r10 = bit 0, r4 = bit 6 |
-| r3 ... r0 | 4-bit counter, `c4b0` ... `c4b3` (not identified; its outputs leave north) | r3 = bit 0 (taken from the carry chain's direction), r0 = bit 3 |
+| r3 ... r0 | horizontal sync width counter, `hsw0` ... `hsw3` (4 bits, on the character clock; compared bit for bit with R3's nibble in the upper right datapath) | r3 = bit 0, r0 = bit 3 |
 
 Counters in the left array's upper rows (rows u0-u8 from the top, `notes/blocks/ur.md`; the
 same bit cell as the mid-right array's):
 
 | Rows | Counter | Bit of row |
 |---|---|---|
-| u8 ... u4 | 5-bit counter, `c5l0` ... `c5l4` (not identified) | u8 = bit 0 (the carry enters there from the left column), u4 = bit 4 |
-| u3 ... u0 | 4-bit counter, `c4l0` ... `c4l3` (not identified) | u3 = bit 0, u0 = bit 3 |
+| u8 ... u4 | scan line counter, `sl0` ... `sl4` (5 bits; stepped by `lc_step`; compared bit for bit with R5) | u8 = bit 0 (the carry enters there from the left column), u4 = bit 4 |
+| u3 ... u0 | 4-bit counter, `c4l0` ... `c4l3` (not identified; same clocks as the scan line counter) | u3 = bit 0, u0 = bit 3 |
 
 Right datapath, lower array (R0, R1, R2 and their comparators): slice s1 = bit 0, s2 =
 bit 1, ... s7 = bit 6, **s0 = bit 7** (from the counter lines: `hc0` arrives at s1, `hc7`
-at s0). Upper array (R4, R6): bit order not established, names keep the slice (`sm1`, `s0`
-... `s5`, left to right).
+at s0). Upper array (R4, R6, R7, R5 and their comparators): the slices that the notes of
+`rdp2` call sm1, s0, s1, ... s5 (left to right) are **bits 0 to 6** (from the scan line
+counter's lines at R5's comparator, `notes/blocks/rdp1.md`). R3's four slices (t0-t3 in
+the first notes) are bits 0-3 of that nibble.
 
 ## Supplies, pins and pad circuits
 
@@ -98,13 +100,15 @@ bottom bus field. All five names below are copies of it.
 
 ## Counters
 
-For `<bit>` read `hc#`, `rc#`, `c4b#`, `c5l#` or `c4l#`. Each bit is a master-slave pair
-(`notes/blocks/mra.md`; the node letters used there are given in brackets).
+For `<bit>` read `hc#` (horizontal), `rc#` (character row), `hsw#` (horizontal sync
+width), `sl#` (scan line) or `c4l#` (the left array's 4-bit counter, not identified). Each
+bit is a master-slave pair (`notes/blocks/mra.md`; the node letters used there are given
+in brackets).
 
 | Name | What it is |
 |---|---|
-| `hc#`, `rc#`, `c4b#`, `c5l#`, `c4l#` | the bit as the rest of the chip sees it: the buffered **master** (node n1). The comparators compare this, not the slave |
-| `hc#_q`, `rc#_q`, `c4b#_q`, `c5l#_q`, `c4l#_q` | slave latch (q): takes `_d` on the slave clock |
+| `hc#`, `rc#`, `hsw#`, `sl#`, `c4l#` | the bit as the rest of the chip sees it: the buffered **master** (node n1). The comparators compare this, not the slave |
+| `hc#_q`, `rc#_q`, `hsw#_q`, `sl#_q`, `c4l#_q` | slave latch (q): takes `_d` on the slave clock |
 | `*_q_n` | NOT `_q` (g1) |
 | `*_m` | master latch node (a): takes `_nx_g` on the master clock |
 | `*_mb` | node b, joined to `_m` through a pass transistor gated by `cnt_gab`; gate of the feedback device from `_d` to `_m` |
@@ -119,15 +123,15 @@ For `<bit>` read `hc#`, `rc#`, `c4b#`, `c5l#` or `c4l#`. Each bit is a master-sl
 | `*_rb` | lower part of the diffusion R in the `_nx` network; its continuation is not resolved |
 | `*_z` | far side of the weak always-on device from `_q`; ends as a free stub as traced (re-read item R9) |
 | `*_md`, `*_mt` | metal straps between a row and its neighbour in the chain column (lower, upper); their joins are in `notes/blocks/mra.md` |
-| `hc_ci`, `rc_ci`, `c4b_ci` | carry-in of each counter's bit 0. Sources not traced |
+| `hc_ci`, `rc_ci`, `hsw_ci` | carry-in of each counter's bit 0. Sources not traced |
 | `hc_lo4_set`, `rc_lo4_set` | look-ahead line: low while any of bits 0-3 is clear, i.e. high when `_q` of bits 0-3 are all 1 (group lines B and A) |
 | `rc_ck_m`, `rc_ck_s` | master and slave clock of the row counter (bus lines E and D), made by the generator below |
-| `rc_l3`, `c4b_l3` | the L3 line of the row counter (from the west along y 13005) and of the 4-bit counter (from the north). What they carry is not known; for the horizontal counter L3 is `ck_a` |
+| `rc_l3`, `hsw_l3` | the L3 line of the row counter (from the west along y 13005) and of the 4-bit counter (from the north). What they carry is not known; for the horizontal counter L3 is `ck_a` |
 | `lc_ck_m`, `lc_ck_s` | master clock (line L1) and slave clock (rail x 4218) of both counters of the left array's upper rows: one line each through all nine rows. Made by a second copy of the row counter's clock generator, in the left column beside rows u0-u2: `lc_ck_s` = NOR(`lc_ck_m_dly`, `lc_step`), `lc_ck_m` = NOR(`lc_step_n`, `lc_ck_s_dly`) |
 | `lc_step`, `lc_step_n` | the step pulse of those two counters and its inverse: both counters step once per pulse. `lc_step` comes from the left-centre logic (poly up x 5012, west along y 6368 over the counters, metal down x 2412); its gate is not traced |
 | `lc_ck_m_n`, `lc_ck_m_dly`, `lc_ck_s_n`, `lc_ck_s_dly` | inverse and two-inverter delay of each of the two clocks, inside that generator |
-| `c4l_l3`, `c5l_l3` | the L3 lines of those two counters: the 4-bit one's comes from the north; the 5-bit one's from a poly along y 6410 (from the west, and from a metal from the north at x 3968) |
-| `c4l_gab`, `c5l_gab` | their pass-gate lines: the 4-bit one's comes from the north; the 5-bit one's from a poly from the east along y 6520, ending on a contact at (4087,11005) |
+| `c4l_l3`, `sl_l3` | the L3 lines of those two counters: the 4-bit one's comes from the north; the 5-bit one's from a poly along y 6410 (from the west, and from a metal from the north at x 3968) |
+| `c4l_gab`, `sl_gab` | their pass-gate lines: the 4-bit one's comes from the north; the 5-bit one's from a poly from the east along y 6520, ending on a contact at (4087,11005) |
 | `cnt_gab` | gate line of the `_m` to `_mb` pass transistors of all 19 bits (x 12902), fed from the top by band H4. Source not traced |
 | `cnt_l2_a`, `cnt_l2_b`, `cnt_l2_c` | three pieces of the metal line L2 that passes through the rows without a contact |
 | `cnt_la_a`, `cnt_la_b`, `cnt_la_c` | three pieces of the metal x 12285 through the rows; no contact found in the rows (re-read item R8). `cnt_la_a` feeds an inverter west of the counters |
@@ -171,18 +175,19 @@ For `<bit>` read `hc#`, `rc#`, `c4b#`, `c5l#` or `c4l#`. Each bit is a master-sl
 | `wr_r#` | write strobe of register #: `rsel#` AND NOT `wr_stb_n` |
 | `wr_r#_u` | the load strobe line at the register's latch row, where its join to `wr_r#` is not drawn |
 | `r#_b#_a`, `r#_b#_n2`, `r#_b#_q` | register R#, bit #: storage node (loaded from the bus while the strobe is high), its inverse, and the output (= the stored bit) |
-| `r#_s#_*`, `r#_sm#_*` | the same for R4 and R6, by slice |
+| `r#_b#_d` | the data line of a register bit where it is not one of the shared bus lines (R3's four) |
 | `r#c_b#_nor`, `r#c_b#_x` | comparator of R#, bit #: NOR(counter bit, register bit), and x = counter bit XOR register bit |
-| `r#c_s#_*`, `r#c_sm#_*` | the same for the R4 comparator, by slice |
 | `r#hc_s#_nor`, `r#hc_s#_x` | comparator of the horizontal counter against R0 shifted one place (R0/2), by slice |
+| `sl_eq_r#` | high when the scan line counter equals R5 (vertical total adjust). Leaves the comparator northwards; not followed |
+| `hsw_eq_r#` | high when the horizontal sync width counter equals R3's nibble (the end of HSYNC). Not followed |
 | `h_eq_r#` | high when the horizontal counter equals R# (R0: end of line; R1: displayed width; R2: sync position) |
 | `h_eq_r#half` | high when the horizontal counter equals R0/2 |
 | `h_eq_r#_u` | a piece believed to be `h_eq_r#` whose join is not drawn (tracks k7, k8 of the strobe channel; bus line G west of the counters) |
-| `uc_s#`, `uc_sm#` | the seven counter lines of the upper right array, by slice. Believed to be the row counter (four of seven joined by geometry) |
-| `uc_eq_r#` | high when those lines equal R4 |
+| `uc_b#` | the seven counter lines of the upper right array (bit 0 at the left). Believed to be the character row counter `rc#` (four of its seven lines are joined to this array's bundle by geometry; the join to these tracks, in the routing zone y 9080-9560, is not drawn) |
+| `uc_eq_r#` | high when those lines equal R4 (vertical total), R6 (vertical displayed) or R7 (vertical sync position). `uc_eq_r6` goes down the wiring channel to the strobe channel (its track k4); `uc_eq_r7` leaves west along y 6820 |
 | `hc#_u` | the horizontal counter line at the comparators, where its join to `hc#` is not drawn |
 | `rbus_b#` | data line of bit # through the lower right datapath (believed D#; its connection to the data pads is not traced) |
-| `ubus_s#`, `ubus_sm#` | data lines of the upper right array, by slice |
+| `ubus_b#` | data line of bit # through the upper right array (R4, R6, R7: bits 0-6; R5: bits 0-4). Believed D#; they go north in poly under the supply metal at y 5450-5545, not followed to the pads |
 | `ar#`, `ar#_n` | address register bit # and its inverse (rows of the decode array) |
 | `ar#_a`, `ar#_n2`, `ar#_q`, `ar#_trk` | nodes of address register bit #: storage node, its inverse, output, and the track that takes it to the decode |
 | `ar_load`, `ar_load_n` | load strobe of the address register and its inverse |
@@ -204,7 +209,7 @@ For `<bit>` read `hc#`, `rc#`, `c4b#`, `c5l#` or `c4l#`. Each bit is a master-sl
 
 | Name | What it is |
 |---|---|
-| `bd1_k#` | tracks of the channel not yet identified (`bd1_k4`, `bd1_k11`) |
+| `bd1_k#` | tracks of the channel not yet identified (`uc_eq_r6`, `bd1_k11`) |
 | `bd1_a`, `bd1_an` | input and output of inverter A |
 | `bd1_n#`, `bd1_q`, `bd1_k` | nodes of the latch gated by `inh_lat` (upper half node, lower half node, output, and the node pulled low by `inh_src`'s line) |
 
@@ -479,3 +484,321 @@ datapath s1...s7, s0 became b0...b6, b7.
 | rcs_bb3807 | rcs_stb | |
 | rcs_stb_n | ck_out | |
 | rcs_stb | clk_tl | |
+| bd1_k4 | uc_eq_r6 | |
+| c4b0 | hsw0 | |
+| c4b0_ci_n | hsw0_ci_n | |
+| c4b0_co | hsw0_co | |
+| c4b0_d | hsw0_d | |
+| c4b0_m | hsw0_m | |
+| c4b0_m_n | hsw0_m_n | |
+| c4b0_mb | hsw0_mb | |
+| c4b0_nx | hsw0_nx | |
+| c4b0_nx_g | hsw0_nx_g | |
+| c4b0_nx_n | hsw0_nx_n | |
+| c4b0_q | hsw0_q | |
+| c4b0_q_n | hsw0_q_n | |
+| c4b0_rb | hsw0_rb | |
+| c4b0_tab | hsw0_tab | |
+| c4b0_z | hsw0_z | |
+| c4b1 | hsw1 | |
+| c4b1_ci_n | hsw1_ci_n | |
+| c4b1_co | hsw1_co | |
+| c4b1_d | hsw1_d | |
+| c4b1_m | hsw1_m | |
+| c4b1_m_n | hsw1_m_n | |
+| c4b1_mb | hsw1_mb | |
+| c4b1_md | hsw1_md | |
+| c4b1_nx | hsw1_nx | |
+| c4b1_nx_g | hsw1_nx_g | |
+| c4b1_nx_n | hsw1_nx_n | |
+| c4b1_q | hsw1_q | |
+| c4b1_q_n | hsw1_q_n | |
+| c4b1_rb | hsw1_rb | |
+| c4b1_tab | hsw1_tab | |
+| c4b1_z | hsw1_z | |
+| c4b2 | hsw2 | |
+| c4b2_ci_n | hsw2_ci_n | |
+| c4b2_co | hsw2_co | |
+| c4b2_d | hsw2_d | |
+| c4b2_m | hsw2_m | |
+| c4b2_m_n | hsw2_m_n | |
+| c4b2_mb | hsw2_mb | |
+| c4b2_md | hsw2_md | |
+| c4b2_nx | hsw2_nx | |
+| c4b2_nx_g | hsw2_nx_g | |
+| c4b2_nx_n | hsw2_nx_n | |
+| c4b2_q | hsw2_q | |
+| c4b2_q_n | hsw2_q_n | |
+| c4b2_rb | hsw2_rb | |
+| c4b2_tab | hsw2_tab | |
+| c4b2_z | hsw2_z | |
+| c4b3 | hsw3 | |
+| c4b3_ci_n | hsw3_ci_n | |
+| c4b3_co | hsw3_co | |
+| c4b3_d | hsw3_d | |
+| c4b3_m | hsw3_m | |
+| c4b3_m_n | hsw3_m_n | |
+| c4b3_mb | hsw3_mb | |
+| c4b3_md | hsw3_md | |
+| c4b3_mt | hsw3_mt | |
+| c4b3_nx | hsw3_nx | |
+| c4b3_nx_g | hsw3_nx_g | |
+| c4b3_nx_n | hsw3_nx_n | |
+| c4b3_q | hsw3_q | |
+| c4b3_q_n | hsw3_q_n | |
+| c4b3_rb | hsw3_rb | |
+| c4b3_tab | hsw3_tab | |
+| c4b3_z | hsw3_z | |
+| c4b_ci | hsw_ci | |
+| c4b_l3 | hsw_l3 | |
+| c5l0 | sl0 | |
+| c5l0_ci_n | sl0_ci_n | |
+| c5l0_co | sl0_co | |
+| c5l0_d | sl0_d | |
+| c5l0_m | sl0_m | |
+| c5l0_m_n | sl0_m_n | |
+| c5l0_mb | sl0_mb | |
+| c5l0_nx | sl0_nx | |
+| c5l0_nx_g | sl0_nx_g | |
+| c5l0_nx_n | sl0_nx_n | |
+| c5l0_q | sl0_q | |
+| c5l0_q_n | sl0_q_n | |
+| c5l0_rb | sl0_rb | |
+| c5l0_tab | sl0_tab | |
+| c5l0_z | sl0_z | |
+| c5l1 | sl1 | |
+| c5l1_ci_n | sl1_ci_n | |
+| c5l1_co | sl1_co | |
+| c5l1_d | sl1_d | |
+| c5l1_m | sl1_m | |
+| c5l1_m_n | sl1_m_n | |
+| c5l1_mb | sl1_mb | |
+| c5l1_md | sl1_md | |
+| c5l1_nx | sl1_nx | |
+| c5l1_nx_g | sl1_nx_g | |
+| c5l1_nx_n | sl1_nx_n | |
+| c5l1_q | sl1_q | |
+| c5l1_q_n | sl1_q_n | |
+| c5l1_rb | sl1_rb | |
+| c5l1_tab | sl1_tab | |
+| c5l1_z | sl1_z | |
+| c5l2 | sl2 | |
+| c5l2_ci_n | sl2_ci_n | |
+| c5l2_co | sl2_co | |
+| c5l2_d | sl2_d | |
+| c5l2_m | sl2_m | |
+| c5l2_m_n | sl2_m_n | |
+| c5l2_mb | sl2_mb | |
+| c5l2_md | sl2_md | |
+| c5l2_nx | sl2_nx | |
+| c5l2_nx_g | sl2_nx_g | |
+| c5l2_nx_n | sl2_nx_n | |
+| c5l2_q | sl2_q | |
+| c5l2_q_n | sl2_q_n | |
+| c5l2_rb | sl2_rb | |
+| c5l2_tab | sl2_tab | |
+| c5l2_z | sl2_z | |
+| c5l3 | sl3 | |
+| c5l3_ci_n | sl3_ci_n | |
+| c5l3_co | sl3_co | |
+| c5l3_d | sl3_d | |
+| c5l3_m | sl3_m | |
+| c5l3_m_n | sl3_m_n | |
+| c5l3_mb | sl3_mb | |
+| c5l3_md | sl3_md | |
+| c5l3_nx | sl3_nx | |
+| c5l3_nx_g | sl3_nx_g | |
+| c5l3_nx_n | sl3_nx_n | |
+| c5l3_q | sl3_q | |
+| c5l3_q_n | sl3_q_n | |
+| c5l3_rb | sl3_rb | |
+| c5l3_tab | sl3_tab | |
+| c5l3_z | sl3_z | |
+| c5l4 | sl4 | |
+| c5l4_ci_n | sl4_ci_n | |
+| c5l4_co | sl4_co | |
+| c5l4_d | sl4_d | |
+| c5l4_m | sl4_m | |
+| c5l4_m_n | sl4_m_n | |
+| c5l4_mb | sl4_mb | |
+| c5l4_md | sl4_md | |
+| c5l4_nx | sl4_nx | |
+| c5l4_nx_g | sl4_nx_g | |
+| c5l4_nx_n | sl4_nx_n | |
+| c5l4_q | sl4_q | |
+| c5l4_q_n | sl4_q_n | |
+| c5l4_rb | sl4_rb | |
+| c5l4_tab | sl4_tab | |
+| c5l4_z | sl4_z | |
+| c5l_gab | sl_gab | |
+| c5l_l3 | sl_l3 | |
+| hsw_eq_r3_x | hsw_eq_r3 | |
+| r3_t0_a | r3_b0_a | |
+| r3_t0_d | r3_b0_d | |
+| r3_t0_n2 | r3_b0_n2 | |
+| r3_t0_q | r3_b0_q | |
+| r3_t1_a | r3_b1_a | |
+| r3_t1_d | r3_b1_d | |
+| r3_t1_n2 | r3_b1_n2 | |
+| r3_t1_q | r3_b1_q | |
+| r3_t2_a | r3_b2_a | |
+| r3_t2_d | r3_b2_d | |
+| r3_t2_n2 | r3_b2_n2 | |
+| r3_t2_q | r3_b2_q | |
+| r3_t3_a | r3_b3_a | |
+| r3_t3_d | r3_b3_d | |
+| r3_t3_n2 | r3_b3_n2 | |
+| r3_t3_q | r3_b3_q | |
+| r3c_t0_nor | r3c_b0_nor | |
+| r3c_t0_x | r3c_b0_x | |
+| r3c_t1_nor | r3c_b1_nor | |
+| r3c_t1_x | r3c_b1_x | |
+| r3c_t2_nor | r3c_b2_nor | |
+| r3c_t2_x | r3c_b2_x | |
+| r3c_t3_nor | r3c_b3_nor | |
+| r3c_t3_x | r3c_b3_x | |
+| r4_s0_a | r4_b1_a | |
+| r4_s0_n2 | r4_b1_n2 | |
+| r4_s0_q | r4_b1_q | |
+| r4_s1_a | r4_b2_a | |
+| r4_s1_n2 | r4_b2_n2 | |
+| r4_s1_q | r4_b2_q | |
+| r4_s2_a | r4_b3_a | |
+| r4_s2_n2 | r4_b3_n2 | |
+| r4_s2_q | r4_b3_q | |
+| r4_s3_a | r4_b4_a | |
+| r4_s3_n2 | r4_b4_n2 | |
+| r4_s3_q | r4_b4_q | |
+| r4_s4_a | r4_b5_a | |
+| r4_s4_n2 | r4_b5_n2 | |
+| r4_s4_q | r4_b5_q | |
+| r4_s5_a | r4_b6_a | |
+| r4_s5_n2 | r4_b6_n2 | |
+| r4_s5_q | r4_b6_q | |
+| r4_sm1_a | r4_b0_a | |
+| r4_sm1_n2 | r4_b0_n2 | |
+| r4_sm1_q | r4_b0_q | |
+| r4c_s0_nor | r4c_b1_nor | |
+| r4c_s0_x | r4c_b1_x | |
+| r4c_s1_nor | r4c_b2_nor | |
+| r4c_s1_x | r4c_b2_x | |
+| r4c_s2_nor | r4c_b3_nor | |
+| r4c_s2_x | r4c_b3_x | |
+| r4c_s3_nor | r4c_b4_nor | |
+| r4c_s3_x | r4c_b4_x | |
+| r4c_s4_nor | r4c_b5_nor | |
+| r4c_s4_x | r4c_b5_x | |
+| r4c_s5_nor | r4c_b6_nor | |
+| r4c_s5_x | r4c_b6_x | |
+| r4c_sm1_nor | r4c_b0_nor | |
+| r4c_sm1_x | r4c_b0_x | |
+| r5_s0_a | r5_b1_a | |
+| r5_s0_n2 | r5_b1_n2 | |
+| r5_s0_q | r5_b1_q | |
+| r5_s1_a | r5_b2_a | |
+| r5_s1_n2 | r5_b2_n2 | |
+| r5_s1_q | r5_b2_q | |
+| r5_s2_a | r5_b3_a | |
+| r5_s2_n2 | r5_b3_n2 | |
+| r5_s2_q | r5_b3_q | |
+| r5_s3_a | r5_b4_a | |
+| r5_s3_n2 | r5_b4_n2 | |
+| r5_s3_q | r5_b4_q | |
+| r5_sm1_a | r5_b0_a | |
+| r5_sm1_n2 | r5_b0_n2 | |
+| r5_sm1_q | r5_b0_q | |
+| r5c_s0_nor | r5c_b1_nor | |
+| r5c_s0_x | r5c_b1_x | |
+| r5c_s1_nor | r5c_b2_nor | |
+| r5c_s1_x | r5c_b2_x | |
+| r5c_s2_nor | r5c_b3_nor | |
+| r5c_s2_x | r5c_b3_x | |
+| r5c_s3_nor | r5c_b4_nor | |
+| r5c_s3_x | r5c_b4_x | |
+| r5c_sm1_nor | r5c_b0_nor | |
+| r5c_sm1_x | r5c_b0_x | |
+| r6_s0_a | r6_b1_a | |
+| r6_s0_n2 | r6_b1_n2 | |
+| r6_s0_q | r6_b1_q | |
+| r6_s1_a | r6_b2_a | |
+| r6_s1_n2 | r6_b2_n2 | |
+| r6_s1_q | r6_b2_q | |
+| r6_s2_a | r6_b3_a | |
+| r6_s2_n2 | r6_b3_n2 | |
+| r6_s2_q | r6_b3_q | |
+| r6_s3_a | r6_b4_a | |
+| r6_s3_n2 | r6_b4_n2 | |
+| r6_s3_q | r6_b4_q | |
+| r6_s4_a | r6_b5_a | |
+| r6_s4_n2 | r6_b5_n2 | |
+| r6_s4_q | r6_b5_q | |
+| r6_s5_a | r6_b6_a | |
+| r6_s5_n2 | r6_b6_n2 | |
+| r6_s5_q | r6_b6_q | |
+| r6_sm1_a | r6_b0_a | |
+| r6_sm1_n2 | r6_b0_n2 | |
+| r6_sm1_q | r6_b0_q | |
+| r6c_s0_nor | r6c_b1_nor | |
+| r6c_s0_x | r6c_b1_x | |
+| r6c_s1_nor | r6c_b2_nor | |
+| r6c_s1_x | r6c_b2_x | |
+| r6c_s2_nor | r6c_b3_nor | |
+| r6c_s2_x | r6c_b3_x | |
+| r6c_s3_nor | r6c_b4_nor | |
+| r6c_s3_x | r6c_b4_x | |
+| r6c_s4_nor | r6c_b5_nor | |
+| r6c_s4_x | r6c_b5_x | |
+| r6c_s5_nor | r6c_b6_nor | |
+| r6c_s5_x | r6c_b6_x | |
+| r6c_sm1_nor | r6c_b0_nor | |
+| r6c_sm1_x | r6c_b0_x | |
+| r7_s0_a | r7_b1_a | |
+| r7_s0_n2 | r7_b1_n2 | |
+| r7_s0_q | r7_b1_q | |
+| r7_s1_a | r7_b2_a | |
+| r7_s1_n2 | r7_b2_n2 | |
+| r7_s1_q | r7_b2_q | |
+| r7_s2_a | r7_b3_a | |
+| r7_s2_n2 | r7_b3_n2 | |
+| r7_s2_q | r7_b3_q | |
+| r7_s3_a | r7_b4_a | |
+| r7_s3_n2 | r7_b4_n2 | |
+| r7_s3_q | r7_b4_q | |
+| r7_s4_a | r7_b5_a | |
+| r7_s4_n2 | r7_b5_n2 | |
+| r7_s4_q | r7_b5_q | |
+| r7_s5_a | r7_b6_a | |
+| r7_s5_n2 | r7_b6_n2 | |
+| r7_s5_q | r7_b6_q | |
+| r7_sm1_a | r7_b0_a | |
+| r7_sm1_n2 | r7_b0_n2 | |
+| r7_sm1_q | r7_b0_q | |
+| r7c_s0_nor | r7c_b1_nor | |
+| r7c_s0_x | r7c_b1_x | |
+| r7c_s1_nor | r7c_b2_nor | |
+| r7c_s1_x | r7c_b2_x | |
+| r7c_s2_nor | r7c_b3_nor | |
+| r7c_s2_x | r7c_b3_x | |
+| r7c_s3_nor | r7c_b4_nor | |
+| r7c_s3_x | r7c_b4_x | |
+| r7c_s4_nor | r7c_b5_nor | |
+| r7c_s4_x | r7c_b5_x | |
+| r7c_s5_nor | r7c_b6_nor | |
+| r7c_s5_x | r7c_b6_x | |
+| r7c_sm1_nor | r7c_b0_nor | |
+| r7c_sm1_x | r7c_b0_x | |
+| sl_eq_r5_x | sl_eq_r5 | |
+| ubus_s0 | ubus_b1 | |
+| ubus_s1 | ubus_b2 | |
+| ubus_s2 | ubus_b3 | |
+| ubus_s3 | ubus_b4 | |
+| ubus_s4 | ubus_b5 | |
+| ubus_s5 | ubus_b6 | |
+| ubus_sm1 | ubus_b0 | |
+| uc_s0 | uc_b1 | |
+| uc_s1 | uc_b2 | |
+| uc_s2 | uc_b3 | |
+| uc_s3 | uc_b4 | |
+| uc_s4 | uc_b5 | |
+| uc_s5 | uc_b6 | |
+| uc_sm1 | uc_b0 | |

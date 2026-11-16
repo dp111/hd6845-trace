@@ -585,7 +585,7 @@ them. Make sure that all the documents reference the correct names."
 Done, at the source:
 
 - 672 net names renamed in the trace files (labels, templates, tags, aliases): counter
-  bits (`hc0`-`hc7`, `rc0`-`rc6`, `c4b0`-`c4b3` and their nodes), registers and comparators
+  bits (`hc0`-`hc7`, `rc0`-`rc6`, `hsw0`-`hsw3` and their nodes), registers and comparators
   by register number and bit (`r1_b3_q`, `r0c_b5_x`), match lines (`h_eq_r0`...), write
   strobes (`wr_r6`), the row counter's clocks and step (`rc_ck_m`, `rc_step`,
   `rc_stepreq_n`), the inhibit signal and its copies (`inh_n`, `inh_ck`, `inh_rc`,
@@ -696,4 +696,66 @@ does not settle: e3, e4, a2 and in1 are still unnamed.
 Lesson: when a net has only gate loads, follow the *input* of whatever drives it before
 giving up, and try the follower from the far end of any long line a trace left unfinished:
 `ck_out`'s trunk "followed at 1x to y 18300" was 10,000 px short of its end.
+
+## 2026-11-17 (continued) Two more counters, their clock generator, and the upper right datapath
+
+Serial. New blocks `ur`, `urch`, `rdp1`, `slbus`. Full extraction 2,014 nets, 3,364
+transistors, 0 errors, 0 warnings. User: "let's continue".
+
+**What was established**
+
+- **The nine upper rows of the left array are counter bits**: nine copies of the mid-right
+  array's bit cell (`tools/findcell.py`, scores 0.88-0.92). A 4-bit counter (rows u0-u3)
+  and a 5-bit one (u4-u8), plain ripple chains, sharing one master and one slave clock.
+- **Their clock generator is a second copy of the row counter's**, in the left column
+  beside rows u0-u2 (found the same way; the generator is now a shared cell). Both
+  counters step once per pulse of `lc_step`, which comes from the left-centre logic.
+- **The 5-bit counter is the scan line counter** (`sl0`-`sl4`). Its five output lines were
+  followed and drawn 9,000 px east, through the central datapath's channel 2 (unused
+  there), to the comparator of R5 in the upper right datapath.
+- **The upper right datapath's top rows** (`rdp1`) are built from the cells of the rows
+  below: R6's comparator, R7 and its comparator, and a top row holding **R5** (5 bits) and
+  **one nibble of R3** (4 bits), each with a comparator. 284 transistors by instancing.
+  Strobes `wr_r7`, `wr_r5`, `wr_r3` followed in; `uc_eq_r6` joined to the strobe
+  channel's track k4.
+- **The mid-right 4-bit counter is the horizontal sync width counter** (`hsw0`-`hsw3`):
+  its four outputs end under the counter tracks of R3's comparator.
+- **Bit order of the upper right array**: slices left to right are bits 0-6. Names of R4,
+  R6, R7, R5, their comparators and the lines `ubus`, `uc` now carry bit numbers.
+
+So the registers found so far: R0, R1, R2 (lower right), R4, R6, R7, R5, R3-nibble (upper
+right), all with equality comparators. Still to find: R9 and the cursor and start-address
+registers (central datapath), R3's other nibble, R8.
+
+**Mistakes caught**
+
+- Instancing the clock generator put its input contact on the neighbouring metal
+  (`clk_tl`); the first extraction said "the scan line counter is clocked by CLK". The
+  overlay showed the real pad one track to the west. Per-copy differences of an instanced
+  cell must be looked for at every port, on the overlay, before the extraction is read.
+- The last comparator slice of a group came out as "x = NOT nor": its series pair ends on
+  a VSS land of the next slice's rail, absent at a group's right end.
+- A straight "c track" profile showed a gap in every latch row; it is a jog of the track,
+  the same in every row, not a break.
+
+**Method**
+
+- **`findcell.py` first.** Three blocks today (252 + 16 + 284 transistors) came from
+  cells already traced. Before tracing any regular-looking region by hand, try every known
+  cell against it, in all orientations.
+- `tools/rowstrips.py`: the same strip for every row of an array in one image.
+- Poly lines that change line position in a knot: check the result against an independent
+  expectation (here: bits must come out in order across the slices).
+
+**Open, in the order I would take them**
+
+1. Where `lc_step` is made (left-centre logic, at about (5030,7000-7150)): the scan line
+   counter's step. And the scan line counter's other comparators (R9 at least): its lines
+   pass channel 2 unused, so R9's comparator takes them elsewhere, or they are tapped
+   further west (the pads at x 4925-6196, and the vertical poly bus they cross).
+2. `rdp2`'s routing zone (y 9080-9560): joins the row counter to the `uc` lines, closing
+   `uc_eq_r4/r6/r7` against `rc`.
+3. Where the match lines go: `sl_eq_r5` (north), `hsw_eq_r3`, `uc_eq_r7` (west),
+   `uc_eq_r6` and `h_eq_r0` (strobe channel gate column), `h_eq_r1` (bottom-centre).
+4. The rest of the step-logic clusters; the 4-bit left counter's outputs; `e4`.
 

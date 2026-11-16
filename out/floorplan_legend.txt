@@ -55,10 +55,14 @@
 -	?logic	small cluster below the step logic	2440,5650:3090,6330	not traced; ck_out reaches it from the left-edge trunk
 -	?route	second crossing field	3400,5480:5860,5700	horizontal poly lines over vertical metals; the step signal b crosses it on the poly y 5585
 -	route	comparator operand lines	8480,5720:10850,6020	five long poly lines carry a 5-bit value to the through tracks of the slices, which take it up to the rows above and down to the comparator below; the q tracks of the latch row cross them
+-	array	R5 comparator (5 bit)	13360,5710:15370,6090	scan line counter sl0-sl4 against R5 (vertical total adjust); result sl_eq_r5 leaves north
+-	array	R3 comparator (4 bit)	15410,5710:17020,6090	horizontal sync width counter hsw0-hsw3 against R3's nibble; result hsw_eq_r3
 -	?logic	data bus interface column	17050,5300:17700,17000	column of logic beside the D0-D7 pads
 -	route	counter outputs of the left array	4240,6140:4720,10520	nine tracks: the 4-bit counter's outputs go north to four poly lines east along y 6157-6280; the 5-bit counter's step east and go north to five poly lines along y 6498-6673, which run 9,000 px east through the central datapath's channel 2 to the upper right datapath
 12	route	poly bus (RES, LPSTB, e4 and two more)	5080,5830:5300,6870	vertical poly lines taking signals from the top-left logic south: lines 3, 4, 5 are RES (buffered), LPSTB (buffered) and the unidentified control line e4; lines 1, 2 not identified
 -	array	5-bit latch	8780,6020:10790,6345	five static latch bits (pass transistor from the per-slice data bus line, two inverters, weak hold device), loaded together by one strobe line. Outputs q go up to a comparator in the rows above. Which register: not yet established
+-	array	R5 register (5 bit)	13360,6095:15370,6365	vertical total adjust; five latches on the data lines of the array below
+-	array	R3 register (4 bit)	15410,6095:17020,6365	one nibble of R3 (horizontal sync width, by the datasheet's layout); four latches with data lines of their own
 -	?io	D0-D7 pad cells	17720,5950:19150,19150	eight identical cells, 1600-1735 px apart: tri-state driver with its pre-driver under the VCC band, input protection above. Located, not yet fully traced (AMB-003)
 -	pad	33 D0	18420,5820:19180,6580	pin 33, D0
 -	pad	9 MA5	670,6270:1430,7030	pin 9, MA5
@@ -67,7 +71,10 @@
 -	?logic	left column beside the arrays	2480,6700:2860,18500	cells on the row boundaries; the inputs of the MA8 and MA9 output drivers end in the cells at the s4/s5 and s8/s9 boundaries (traced), so these are the MA output stages; group carry logic believed here too. Cells not traced
 -	array	4-bit counter (left array)	2918,6543:4240,8452	four copies of the counter bit cell of the mid-right array (c4l3..c4l0 from the top); shares its master and slave clock with the 5-bit counter below; not yet identified
 -	route	clock lines into the left array's counters	3560,6340:4260,6540	four poly lines from the west: master clock (y 6500), slave clock (y 6455), the 5-bit counter's L3 (y 6410), one more
+-	route	scan line counter lines	4700,6480:11100,6690	sl0-sl4 from the left array's wiring channel east: over the poly bus, through the central datapath's channel 2 (unused there), to the corners at x 11200-11360
 -	?route	channel 2	7600,6350:10850,6900	13 horizontal poly lines under the per-slice metal lines and rails; the lowest carries the comparator's chain output
+-	route	scan line counter lines, east part	11100,6580:13520,6840	the five lines step up one position at x 11730-11930 and run over the logic above the counters to the R5 comparator
+-	route	routing zone above R7	13060,6365:17020,6900	the four lines of the horizontal sync width counter and the five of the scan line counter arrive here from the west and end under the comparators' counter tracks; R3's data lines leave east
 -	?logic	left-centre logic	4400,6900:6450,10400	random logic between the left array and the central datapath
 -	?route	diagonal fan	5280,6850:6170,7360	the five lines of the poly bus turn south-east and then east to pads at x 6130-6165, where horizontal metals take them on
 -	?route	crossing field west of the datapath	6330,7150:7700,7700	horizontal poly lines over vertical metals; each of the lines ends here on one metal. The step signal b leaves north on the metal x 5841 towards the top-left logic
@@ -75,11 +82,14 @@
 -	array	5-bit comparator (ripple chain)	8700,6930:10830,7480	per bit: XOR of the register bit with the bit on the slice's through track, a chain from left (most significant) to right, and a pull-down on a row-long line. Believed outputs: "equal" at the right end of the chain, "greater" on the line; one connection per bit not seen
 -	route	bands above the counters	11040,7020:11700,7230	four horizontal poly lines that go on east over the top of the mid-right array: H3 is inh_rc, H4 feeds the counters' line x 12902
 -	route	wiring channel right of the counters	13040,7130:13425,14700	seven metal tracks with poly hidden under them: write strobes of R3, R5, R6, R7 going north, the counter outputs going east to the comparators (rows r4-r14) or north (r0-r3), match lines coming back, and the clock-related line inh_rc on its way to the top of the array
+-	array	R7 comparator (7 bit)	13360,6902:16160,7282	counter lines of the upper array against R7 (vertical sync position); result uc_eq_r7 leaves west
 -	array	7-bit latch	7990,7500:10790,7825	seven copies of the same static latch cell with their own strobe line. Five bits feed the comparator above, the two leftmost bits leave to the left. Which register: not yet established (the 5 + 2 split would fit R10)
 -	logic	row counter step gate	11215,7650:11665,7860	p = NOR(a, b): a is the core signal that also stops ck_b (inh_rc), b comes from the bus field in the west
 -	logic	two inverters	11260,7265:11665,7555	upper: inverse of the line that runs down through all counter rows (x 12285), sent north; lower: inverter for a bus-field signal
--	?array	4-bit counter	11730,7260:13040,9180	the same bit cell on the free-running clocks; its four outputs leave north (towards whatever holds R3: believed the sync-width counter); the chain link from r4 into r3 is not resolved
+-	array	horizontal sync width counter (4 bit)	11730,7260:13040,9180	rows r0-r3; on the character clock like the horizontal counter; compared with R3's nibble in the upper right datapath
 14	route	ck_a rail	13005,7270:13045,16950	clock phase A up the right edge of the mid-right array, one tap per row
+-	array	R7 register (7 bit)	13360,7289:16160,7559	vertical sync position
+-	array	R6 comparator (7 bit)	13360,7662:16160,8042	counter lines of the upper array against R6 (vertical displayed); result uc_eq_r6 goes down the wiring channel to the strobe channel
 15	route	pad driver lines	17590,7380:17660,18840	P_x, one metal line common to all eight data pad cells (enable), and the per-bit lines and pad input lines beside it
 -	pad	32 D1	18420,7570:19180,8330	pin 32, D1
 -	pad	10 MA6	670,7870:1430,8630	pin 10, MA6
@@ -90,7 +100,7 @@
 -	?array	row of large cells (untraced)	8380,8040:10720,8450	six slices, continues below y 8450 (cdp3's row A); fed by the data bus lines only from above. Not traced
 -	logic	row counter clock generator	11090,7890:11665,8900	makes the character-row counter's two non-overlapping clocks from one step pulse p: slave clock = NOR(buffered master clock, p), master clock = NOR(NOT p, buffered slave clock); two NOR drivers 350 px wide
 -	array	R6 register (7 bit)	13360,8048:16160,8318	vertical displayed. Same latch cells on the same data lines as R4; its strobe runs down the wiring channel to the R6 write strobe (so this is R6); its comparator is above (rdp1)
--	array	5-bit counter (left array)	2918,8539:4240,10924	five copies of the counter bit cell (c5l4..c5l0 from the top), a plain ripple chain; not yet identified
+-	array	scan line counter (5 bit)	2918,8539:4240,10924	five copies of the counter bit cell (sl4..sl0 from the top), a plain ripple chain; stepped once per pulse of lc_step; compared with R5 in the upper right datapath
 -	?array	row A cells (6 bit)	8380,8450:10770,8790	large cell per column c2..c7, on the same bit lines as the two registers, with one line each from the west and one output (line f) going south; not traced
 -	array	R4 comparator (7 bit)	13360,8415:16160,8806	XOR per bit and wired NOR against the upper array's seven c lines (believed the row counter); output leaves west at y 8339
 18	io	D0 buffer capacitors	16960,8445:17040,8880	plain diffusion rectangles for d0_b (contact cut, not strapped) and d0_c

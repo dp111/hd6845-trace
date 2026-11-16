@@ -19,16 +19,16 @@ datapath (`rdp2`, `rdp3`) and the strobe channel (`bd1`) by geometry alone.
 
 | Track | Piece | Net | Ends |
 |---|---|---|---|
-| T0 | y 7130-8727 | `c4b0` | leaves north; contact (13087,8711) on r3's line |
+| T0 | y 7130-8727 | `hsw0` | leaves north; contact (13087,8711) on r3's line |
 | T0 | y 8822-14690 | `wr_r6` | contact (13086,8836), poly diagonal and north beside T5, leaves east at (13425,8299) = rdp2's RF strobe: **RF is R6**; south = bd1's k0 |
-| T1 | y 7130-7380 | `c4b2` | leaves north; contact (13129,7365), poly west and south under T0 to r1's line (y 7748-7769) |
+| T1 | y 7130-7380 | `hsw2` | leaves north; contact (13129,7365), poly west and south under T0 to r1's line (y 7748-7769) |
 | T1 | y 7417-12586 | `inh_rc` | contact (13129,7431) on the poly from the band above r0; contact (13130,12570), poly south under T1 and east along y 12830 to rdp3's pad under T6 |
 | T2 | y 7130-12616, then T1 to 14690 | `wr_r5` | leaves north; bd1's k1 |
-| T3 | y 7130-7489 | `c4b1` | leaves north; contact (13215,7474), poly west and south under T2 to r2's line (y 8225-8246) |
+| T3 | y 7130-7489 | `hsw1` | leaves north; contact (13215,7474), poly west and south under T2 to r2's line (y 8225-8246) |
 | T3 | y 7527-12659, then T2 | `wr_r7` | contact (13217,7541), poly leaves east at (13425,7541) (into rdp1: R7's strobe); bd1's k2 |
-| T4 | y 7130-7293 | `c4b3` | leaves north; contact (13259,7278) on r0's line |
+| T4 | y 7130-7293 | `hsw3` | leaves north; contact (13259,7278) on r0's line |
 | T4 | from x 13327 north, step at y 7368, y to 12707, then T3 | `wr_r3` | leaves north on x 13327; bd1's k3 |
-| T5 | y 7571-12745, then T4 | `bd1_k4` | contact (13300,7585), poly leaves east at (13425,7585) (into rdp1) |
+| T5 | y 7571-12745, then T4 | `uc_eq_r6` | contact (13300,7585), poly leaves east at (13425,7585) (into rdp1) |
 | T6 | y 9346-9678 | `uc_eq_r4` | "uc = R4" match: from the east at (13425,8343), poly south in the open strip x 13334, contacts (13348,9360) and (13349,9663), poly east again at y 9663 |
 | T6 | y 9822-12789, then T5 | `h_eq_r0half` | rdp2's and rdp3's L0; bd1's k5 |
 | T6 | y 12816-14690 | `inh_rc` | rdp3's pad and contact (13346,12829); bd1's k6 |

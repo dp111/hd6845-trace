@@ -1,0 +1,3 @@
+# slbus: the scan line counter's lines
+4700,6480:11100,6690    route   scan line counter lines | sl0-sl4 from the left array's wiring channel east: over the poly bus, through the central datapath's channel 2 (unused there), to the corners at x 11200-11360
+11100,6580:13520,6840   route   scan line counter lines, east part | the five lines step up one position at x 11730-11930 and run over the logic above the counters to the R5 comparator

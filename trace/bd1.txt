@@ -270,7 +270,7 @@ M 13218,14690 y15346 x13261 y16469 w=20
 N M 13218,14700 wr_r3
 # k4: by scan runs on past y 16700 into the diagonals; drawn as far as seen straight.
 M 13261,14690 y15308 x13304 y16500 w=20
-N M 13261,14700 bd1_k4
+N M 13261,14700 uc_eq_r6
 # k5: ends on a contact at 13347,16410; poly east along y 16410 towards the gate column.
 M 13304,14690 y15262 x13348 y16423 w=20
 P 13337,16398:13369,16427

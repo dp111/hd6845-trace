@@ -487,8 +487,8 @@ y 7971 band H1's line.
 
 ## Channel 2, five of its lines identified (coordinating session, 2026-11-17)
 
-The lines at y 6498, 6542, 6584, 6626 and 6672 are the outputs `c5l3`, `c5l2`, `c5l1`,
-`c5l4`, `c5l0` of the 5-bit counter in the left array's upper rows, followed from the
+The lines at y 6498, 6542, 6584, 6626 and 6672 are the outputs `sl3`, `sl2`, `sl1`,
+`sl4`, `sl0` of the 5-bit counter in the left array's upper rows, followed from the
 west (`notes/blocks/urch.md`). They pass through this block unused and go on east to the
 upper right datapath. Not drawn here yet.
 

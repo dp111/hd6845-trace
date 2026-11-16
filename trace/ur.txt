@@ -2,7 +2,7 @@
 # bit cell of the mid-right array (trace/mra.txt), found with tools/findcell.py (scores 0.88-0.92
 # for all four columns of the cell in all nine rows; dx -8807). A 4-bit counter (rows u0-u3)
 # and a 5-bit counter (rows u4-u8) with an 87 px channel between them. Notes: notes/blocks/ur.md.
-# Tags: c4l3..c4l0 = rows u0..u3, c5l4..c5l0 = rows u4..u8 (bit 0 = bottom row of each group,
+# Tags: c4l3..c4l0 = rows u0..u3, sl4..sl0 = rows u4..u8 (bit 0 = bottom row of each group,
 # where the carry enters from the left column, as in the mid-right array).
 @block ur
 @requires mra
@@ -14,53 +14,53 @@
 @inst mra_chain -8807,-2862 tag=c4l2
 @inst mra_chain -8807,-2384 tag=c4l1
 @inst mra_chain -8807,-1907 tag=c4l0
-@inst mra_chain -8807,-1343 tag=c5l4
-@inst mra_chain -8807,-866 tag=c5l3
-@inst mra_chain -8807,-389 tag=c5l2
-@inst mra_chain -8807,88 tag=c5l1
-@inst mra_chain -8807,566 tag=c5l0
+@inst mra_chain -8807,-1343 tag=sl4
+@inst mra_chain -8807,-866 tag=sl3
+@inst mra_chain -8807,-389 tag=sl2
+@inst mra_chain -8807,88 tag=sl1
+@inst mra_chain -8807,566 tag=sl0
 
 # mra_col2
 @inst mra_col2 -8807,-3339 tag=c4l3
 @inst mra_col2 -8807,-2862 tag=c4l2
 @inst mra_col2 -8807,-2384 tag=c4l1
 @inst mra_col2 -8807,-1907 tag=c4l0
-@inst mra_col2 -8807,-1343 tag=c5l4
-@inst mra_col2 -8807,-866 tag=c5l3
-@inst mra_col2 -8807,-389 tag=c5l2
-@inst mra_col2 -8807,88 tag=c5l1
-@inst mra_col2 -8807,566 tag=c5l0
+@inst mra_col2 -8807,-1343 tag=sl4
+@inst mra_col2 -8807,-866 tag=sl3
+@inst mra_col2 -8807,-389 tag=sl2
+@inst mra_col2 -8807,88 tag=sl1
+@inst mra_col2 -8807,566 tag=sl0
 
 # mra_col3
 @inst mra_col3 -8807,-3339 tag=c4l3
 @inst mra_col3 -8807,-2862 tag=c4l2
 @inst mra_col3 -8807,-2384 tag=c4l1
 @inst mra_col3 -8807,-1907 tag=c4l0
-@inst mra_col3 -8807,-1343 tag=c5l4
-@inst mra_col3 -8807,-866 tag=c5l3
-@inst mra_col3 -8807,-389 tag=c5l2
-@inst mra_col3 -8807,88 tag=c5l1
-@inst mra_col3 -8807,566 tag=c5l0
+@inst mra_col3 -8807,-1343 tag=sl4
+@inst mra_col3 -8807,-866 tag=sl3
+@inst mra_col3 -8807,-389 tag=sl2
+@inst mra_col3 -8807,88 tag=sl1
+@inst mra_col3 -8807,566 tag=sl0
 
 # mra_col4
 @inst mra_col4 -8807,-3339 tag=c4l3
 @inst mra_col4 -8807,-2862 tag=c4l2
 @inst mra_col4 -8807,-2384 tag=c4l1
 @inst mra_col4 -8807,-1907 tag=c4l0
-@inst mra_col4 -8807,-1343 tag=c5l4
-@inst mra_col4 -8807,-866 tag=c5l3
-@inst mra_col4 -8807,-389 tag=c5l2
-@inst mra_col4 -8807,88 tag=c5l1
-@inst mra_col4 -8807,566 tag=c5l0
+@inst mra_col4 -8807,-1343 tag=sl4
+@inst mra_col4 -8807,-866 tag=sl3
+@inst mra_col4 -8807,-389 tag=sl2
+@inst mra_col4 -8807,88 tag=sl1
+@inst mra_col4 -8807,566 tag=sl0
 
 # carry links within a group (row N to row N+1): seven, none at the bottom row of a group
 @inst mra_link -8807,-3339 tag=c4l3
 @inst mra_link -8807,-2862 tag=c4l2
 @inst mra_link -8807,-2384 tag=c4l1
-@inst mra_link -8807,-1343 tag=c5l4
-@inst mra_link -8807,-866 tag=c5l3
-@inst mra_link -8807,-389 tag=c5l2
-@inst mra_link -8807,88 tag=c5l1
+@inst mra_link -8807,-1343 tag=sl4
+@inst mra_link -8807,-866 tag=sl3
+@inst mra_link -8807,-389 tag=sl2
+@inst mra_link -8807,88 tag=sl1
 
 # ====================================================================
 # Through-lines (drawn once, outside the cells; x = the mid-right array's x - 8807).
@@ -112,7 +112,7 @@ P 3560,6400:3985,6420
 P 3950,6393:3988,6428
 C 3968,6410
 M 3968,6330 y6426 w=20
-N M 3780,9700 c5l_l3
+N M 3780,9700 sl_l3
 
 # gate line of the m <-> mb pass gates ("gab"): the 4-bit counter's comes from the north and
 # ends plainly in the channel at y 8505
@@ -127,7 +127,7 @@ C 3968,6520
 P 3980,6510:4260,6530
 P 4068,10988:4108,11024
 C 4087,11005
-N M 4095,9700 c5l_gab
+N M 4095,9700 sl_gab
 
 # ====================================================================
 # The clock generator of the two counters: a second copy of the row counter's generator

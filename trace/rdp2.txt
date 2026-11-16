@@ -312,13 +312,13 @@ M 16838,9440 y10575 w=20
 # copy with rdp3's row RB (tools/rdp3_cmp.py): identical. Its strobe is traced to L1 =
 # rdp3_n1s4, which rdp3 follows to wr_r4: RE is R4.
 # =====================================================================================
-@inst rdp3_lat -1172,-4213 mx=14790 rot=180 o=14790,13150 tag=r4_sm1
-@inst rdp3_lat -782,-4213 mx=14790 rot=180 o=14790,13150 tag=r4_s0
-@inst rdp3_lat -392,-4213 mx=14790 rot=180 o=14790,13150 tag=r4_s1
-@inst rdp3_lat -1,-4213 mx=14790 rot=180 o=14790,13150 tag=r4_s2
-@inst rdp3_lat 390,-4213 mx=14790 rot=180 o=14790,13150 tag=r4_s3
-@inst rdp3_lat 780,-4213 mx=14790 rot=180 o=14790,13150 tag=r4_s4
-@inst rdp3_lat 1170,-4213 mx=14790 rot=180 o=14790,13150 tag=r4_s5
+@inst rdp3_lat -1172,-4213 mx=14790 rot=180 o=14790,13150 tag=r4_b0
+@inst rdp3_lat -782,-4213 mx=14790 rot=180 o=14790,13150 tag=r4_b1
+@inst rdp3_lat -392,-4213 mx=14790 rot=180 o=14790,13150 tag=r4_b2
+@inst rdp3_lat -1,-4213 mx=14790 rot=180 o=14790,13150 tag=r4_b3
+@inst rdp3_lat 390,-4213 mx=14790 rot=180 o=14790,13150 tag=r4_b4
+@inst rdp3_lat 780,-4213 mx=14790 rot=180 o=14790,13150 tag=r4_b5
+@inst rdp3_lat 1170,-4213 mx=14790 rot=180 o=14790,13150 tag=r4_b6
 N P 14850,9058 wr_r4_u
 @alias wr_r4_u rdp3_n1s4
 # right end: VSS land and contact for s5's second pull-down, under the rail x 16125
@@ -341,20 +341,20 @@ M 13391,9297 y10700 w=18
 # pieces included (plain metal pieces with no contact, as in rdp3's bands).
 #   rdp2_ce_K_x = uc_K XOR q(RE, K);  uc_eq_r4 = NOR of the seven x
 # =====================================================================================
-@inst rdp2_xor -1171,-1670 tag=r4c_sm1
-@inst rdp3_mpd1 -781,-3361 tag=r4c_sm1
-@inst rdp2_xor -781,-1670 tag=r4c_s0
-@inst rdp3_mpd -782,-3361 tag=r4c_s0
-@inst rdp2_xor -391,-1670 tag=r4c_s1
-@inst rdp3_mpd -392,-3361 tag=r4c_s1
-@inst rdp2_xor 0,-1670 tag=r4c_s2
-@inst rdp3_mpd -1,-3361 tag=r4c_s2
-@inst rdp2_xor 390,-1670 tag=r4c_s3
-@inst rdp3_mpd 389,-3361 tag=r4c_s3
-@inst rdp2_xor 781,-1670 tag=r4c_s4
-@inst rdp3_mpd 780,-3361 tag=r4c_s4
-@inst rdp2_xor 1171,-1670 tag=r4c_s5
-@inst rdp3_mpd 1170,-3361 tag=r4c_s5
+@inst rdp2_xor -1171,-1670 tag=r4c_b0
+@inst rdp3_mpd1 -781,-3361 tag=r4c_b0
+@inst rdp2_xor -781,-1670 tag=r4c_b1
+@inst rdp3_mpd -782,-3361 tag=r4c_b1
+@inst rdp2_xor -391,-1670 tag=r4c_b2
+@inst rdp3_mpd -392,-3361 tag=r4c_b2
+@inst rdp2_xor 0,-1670 tag=r4c_b3
+@inst rdp3_mpd -1,-3361 tag=r4c_b3
+@inst rdp2_xor 390,-1670 tag=r4c_b4
+@inst rdp3_mpd 389,-3361 tag=r4c_b4
+@inst rdp2_xor 781,-1670 tag=r4c_b5
+@inst rdp3_mpd 780,-3361 tag=r4c_b5
+@inst rdp2_xor 1171,-1670 tag=r4c_b6
+@inst rdp3_mpd 1170,-3361 tag=r4c_b6
 # --- eq line: row-wide diffusion strip, ends under the rails x 13393 and x 16125
 D 13378,8415:16144,8437
 N D 15000,8426 uc_eq_r4
@@ -404,34 +404,34 @@ M 15552,8300 y9540 w=56
 M 15942,8300 y9540 w=56
 # data lines of the upper array (one contact per latch cell)
 M 13455,8300 y8815 w=24
-N M 13455,8500 ubus_sm1
+N M 13455,8500 ubus_b0
 M 13845,8300 y8815 w=24
-N M 13845,8500 ubus_s0
+N M 13845,8500 ubus_b1
 M 14236,8300 y8815 w=24
-N M 14236,8500 ubus_s1
+N M 14236,8500 ubus_b2
 M 14626,8300 y8815 w=24
-N M 14626,8500 ubus_s2
+N M 14626,8500 ubus_b3
 M 15016,8300 y8815 w=24
-N M 15016,8500 ubus_s3
+N M 15016,8500 ubus_b4
 M 15407,8300 y8815 w=24
-N M 15407,8500 ubus_s4
+N M 15407,8500 ubus_b5
 M 15797,8300 y8815 w=24
-N M 15797,8500 ubus_s5
+N M 15797,8500 ubus_b6
 # c lines of the upper array (two contacts per XOR cell)
 M 13541,8300 y8815 w=22
-N M 13541,8500 uc_sm1
+N M 13541,8500 uc_b0
 M 13931,8300 y8815 w=22
-N M 13931,8500 uc_s0
+N M 13931,8500 uc_b1
 M 14321,8300 y8815 w=22
-N M 14321,8500 uc_s1
+N M 14321,8500 uc_b2
 M 14712,8300 y8815 w=22
-N M 14712,8500 uc_s2
+N M 14712,8500 uc_b3
 M 15102,8300 y8815 w=22
-N M 15102,8500 uc_s3
+N M 15102,8500 uc_b4
 M 15492,8300 y8815 w=22
-N M 15492,8500 uc_s4
+N M 15492,8500 uc_b5
 M 15882,8300 y8815 w=22
-N M 15882,8500 uc_s5
+N M 15882,8500 uc_b6
 # sm1 only: a thin through line on the strap track
 M 13714,8300 y8815 w=20
 N M 13714,8500 rdp2_t13714
@@ -442,13 +442,13 @@ N M 13714,8500 rdp2_t13714
 # compared copy by copy with rdp3's row RB (tools/rdp3_cmp.py): identical, top edge
 # included (q goes up in poly as in rows RA, RB, RE).
 # =====================================================================================
-@inst rdp3_lat -1172,-4972 mx=14790 rot=180 o=14790,13150 tag=r6_sm1
-@inst rdp3_lat -782,-4972 mx=14790 rot=180 o=14790,13150 tag=r6_s0
-@inst rdp3_lat -392,-4972 mx=14790 rot=180 o=14790,13150 tag=r6_s1
-@inst rdp3_lat -1,-4972 mx=14790 rot=180 o=14790,13150 tag=r6_s2
-@inst rdp3_lat 389,-4972 mx=14790 rot=180 o=14790,13150 tag=r6_s3
-@inst rdp3_lat 779,-4972 mx=14790 rot=180 o=14790,13150 tag=r6_s4
-@inst rdp3_lat 1169,-4972 mx=14790 rot=180 o=14790,13150 tag=r6_s5
+@inst rdp3_lat -1172,-4972 mx=14790 rot=180 o=14790,13150 tag=r6_b0
+@inst rdp3_lat -782,-4972 mx=14790 rot=180 o=14790,13150 tag=r6_b1
+@inst rdp3_lat -392,-4972 mx=14790 rot=180 o=14790,13150 tag=r6_b2
+@inst rdp3_lat -1,-4972 mx=14790 rot=180 o=14790,13150 tag=r6_b3
+@inst rdp3_lat 389,-4972 mx=14790 rot=180 o=14790,13150 tag=r6_b4
+@inst rdp3_lat 779,-4972 mx=14790 rot=180 o=14790,13150 tag=r6_b5
+@inst rdp3_lat 1169,-4972 mx=14790 rot=180 o=14790,13150 tag=r6_b6
 N P 14850,8299 wr_r6
 # --- strobe: from the foot of sm1's loop the poly runs WEST along y 8287-8303, under
 # the rail x 13393, out of the region

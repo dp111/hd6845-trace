@@ -245,6 +245,12 @@ A 100,100:150,150 kind=clamp           # mark a transistor here: clamp, field (b
 
 ## 6. The loop
 
+0. **Try the known cells first.** Before tracing any regular-looking region by hand, run
+   `findcell.py` with the master rectangle of every cell already traced, in all
+   orientations. On 2026-11-17 three regions (552 transistors) turned out to be copies of
+   the counter bit, the counter clock generator and the register/comparator cells. Then
+   check each copy's ports on an overlay: a copy can differ from the master by one contact
+   on a neighbouring track.
 1. **Survey** your region at 0.5-1x in `metal` and `acid1b`. Find the rails, the rows of
    loads, the repeated units, where wires enter and leave. Write a short inventory in
    your notes file before tracing. In the arrays, first run `findcell.py` with the

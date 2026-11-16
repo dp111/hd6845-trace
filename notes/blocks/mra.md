@@ -10,14 +10,14 @@ the suffix.
 |---|---|---|---|---|---|---|---|
 | r18 ... r11 | `hc0` ... `hc7` | | n1 | `<bit>` | | m | `<bit>_nx` |
 | r10 ... r4 | `rc0` ... `rc6` | | q | `<bit>_q` | | nb | `<bit>_nx_n` |
-| r3 ... r0 | `c4b0` ... `c4b3` | | g1 | `<bit>_q_n` | | na | `<bit>_nx_g` |
+| r3 ... r0 | `hsw0` ... `hsw3` | | g1 | `<bit>_q_n` | | na | `<bit>_nx_g` |
 | | | | a (also "u", "A") | `<bit>_m` | | n2 | `<bit>_ci_n` |
 | | | | b ("B", "gb") | `<bit>_mb` | | x | `<bit>_co` |
-| | | | p3 ("d2") | `<bit>_m_n` | | cin | `_co` of the row below, or `hc_ci` / `rc_ci` / `c4b_ci` |
+| | | | p3 ("d2") | `<bit>_m_n` | | cin | `_co` of the row below, or `hc_ci` / `rc_ci` / `hsw_ci` |
 | | | | d | `<bit>_d` | | z, rb, tab | `<bit>_z`, `_rb`, `_tab` |
 
 Lines: L1 of rows r4-r10 = `rc_ck_m`, the rail piece of those rows = `rc_ck_s`, L3 =
-`c4b_l3` / `rc_l3` / `ck_a_u`, the line x 12902 = `cnt_gab`, L2 = `cnt_l2_a/b/c`, the line
+`hsw_l3` / `rc_l3` / `ck_a_u`, the line x 12902 = `cnt_gab`, L2 = `cnt_l2_a/b/c`, the line
 x 12285 = `cnt_la_a/b/c`, group lines A and B = `rc_lo4_set`, `hc_lo4_set`.
 
 ## Status
@@ -202,7 +202,7 @@ Chain (`cin` of each row), unchanged from the first run:
 | Row | cin is | How |
 |---|---|---|
 | r0-r2, r4, r5, r7-r9, r11-r13, r15-r17 | x of the row below | poly straight down from band-3 into the next row's H1 blob |
-| r3 | `c4b_ci`, undetermined | chain poly ends in a pad with a metal contact (11976,9187); see A1 |
+| r3 | `hsw_ci`, undetermined | chain poly ends in a pad with a metal contact (11976,9187); see A1 |
 | r6 | group line A | poly y 10893-10910 from the contact at (11699,10899) |
 | r10 | `rc_ci`, from outside | poly y 12897-12925 leaving left at x 11700 |
 | r14 | group line B | poly y 14962-14985 from the contact at (11699,14972) |
@@ -256,7 +256,7 @@ boundary). Per-row ports are given for the master row r5; add the row's dy (Surv
 | `rc0` | P | 11700, 12459 | out | r10 only: the H2 stub is extended left to a contact at (11590,12460) on a vertical metal x 11580-11600 that runs up to about (11600,10500) and on, outside this block |
 | `rc_ci` | P | 11700, 12911 | in | leaves the region to the left |
 | `hc_ci` | P | 12215, 17016 | in | continues right |
-| `c4b_ci` | M/P | strap x 11967-11989, y 9035-9518 | ? | see A1 |
+| `hsw_ci` | M/P | strap x 11967-11989, y 9035-9518 | ? | see A1 |
 | `<bit>_rb` | D | 12100, 10268 | ? | bottom part of R, internal; continuation not resolved (B3) |
 | gap-1 bus (6 poly lines) | P | y 9220-9425 at x 11700 | ? | not traced, pass under the rails |
 
@@ -329,7 +329,7 @@ lines start inside the chain column.
   H2 (y 9488-9511), ending at y 9518. For the chain to continue the strap must contact
   r4's H1 blob (x of r4). No contact ring is visible there in either metal shot and no
   pale disc in the stripped shots, whereas the contacts at (11976,9187) and (11762,9927)
-  are obvious. Working assumption: none drawn; `c4b_ci` is left as an open port.
+  are obvious. Working assumption: none drawn; `hsw_ci` is left as an open port.
   Candidates: (a) a contact to r4's H1 blob that does not show (then cin(r3) = x(r4) and
   r0-r6 is one seven-row ripple group); (b) cin(r3) is driven through band-3 of r3 from
   the right-hand columns. (b) is unlikely: the right-hand columns of r3 are identical to
@@ -343,10 +343,10 @@ lines start inside the chain column.
   at its head, so there it can be dead metal; in r3 its head is on the chain poly, so the
   strap is the only possible source of cin(r3) and must end on a driven node. A foot contact
   in r4 therefore exists; H1 blob (x of r4, reading (a)) is the reading that continues the
-  chain, H2 (n1 of r4) the alternative. Still not drawn, `c4b_ci` stays an open port.
+  chain, H2 (n1 of r4) the alternative. Still not drawn, `hsw_ci` stays an open port.
 - A2. The same metal strap exists in every row (from the band-2 stub of row N, y 10160,
   down to H2 of row N+1, y 9995+477), lying exactly over the chain poly, with no contact
-  visible at either end. Drawn as isolated metal (`<bit>_md`; `c4b3_mt/r11/r15` where
+  visible at either end. Drawn as isolated metal (`<bit>_md`; `hsw3_mt/r11/r15` where
   only the lower part exists). If it does connect to anything unseen, the candidates are
   the band-2 stub at its head and H1 or H2 at its tail. A thin strip (x 11985-11996,
   y 9990-10100) along the right edge of the INV1 load gate, visible in both stripped
@@ -584,7 +584,7 @@ y 12869-13035 (between r10 and r11). Extracted, per group:
 |---|---|---|---|
 | master gate `na -> a` (L1) | `ck_b` | **`rc_ck_m`**: bus line E, from the west | `ck_b` |
 | slave gate `d -> q` (rail x 13025) | `ck_a` | **`rc_ck_s`**: bus line D, from the west | `ck_a` |
-| second pull-down of `na` (L3) | `c4b_l3`: leaves north past y 7130 | `rc_l3`: from the west on a metal line along y 13005 (contact (11765,13005), poly, contact (12567,13005)) | `ck_a_u`: from the contact (12631,16954); trunks' notes take the poly behind it for a second `ck_a` route (seen at 0.9x only) |
+| second pull-down of `na` (L3) | `hsw_l3`: leaves north past y 7130 | `rc_l3`: from the west on a metal line along y 13005 (contact (11765,13005), poly, contact (12567,13005)) | `ck_a_u`: from the contact (12631,16954); trunks' notes take the poly behind it for a second `ck_a` route (seen at 0.9x only) |
 | gate `a <-> b` (line x 12902) | `cnt_gab` | `cnt_gab` | `cnt_gab` |
 
 So the 8-bit counter (believed horizontal) and the 4-bit counter step on every clock
