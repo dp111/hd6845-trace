@@ -1,0 +1,130 @@
+# Upper rows of the left array (x 2918-4240, y 6543-10924): nine more copies of the counter
+# bit cell of the mid-right array (trace/mra.txt), found with tools/findcell.py (scores 0.88-0.92
+# for all four columns of the cell in all nine rows; dx -8807). A 4-bit counter (rows u0-u3)
+# and a 5-bit counter (rows u4-u8) with an 87 px channel between them. Notes: notes/blocks/ur.md.
+# Tags: c4l3..c4l0 = rows u0..u3, c5l4..c5l0 = rows u4..u8 (bit 0 = bottom row of each group,
+# where the carry enters from the left column, as in the mid-right array).
+@block ur
+@requires mra
+@w M=18 P=18
+@s 28x28
+
+# mra_chain
+@inst mra_chain -8807,-3339 tag=c4l3
+@inst mra_chain -8807,-2862 tag=c4l2
+@inst mra_chain -8807,-2384 tag=c4l1
+@inst mra_chain -8807,-1907 tag=c4l0
+@inst mra_chain -8807,-1343 tag=c5l4
+@inst mra_chain -8807,-866 tag=c5l3
+@inst mra_chain -8807,-389 tag=c5l2
+@inst mra_chain -8807,88 tag=c5l1
+@inst mra_chain -8807,566 tag=c5l0
+
+# mra_col2
+@inst mra_col2 -8807,-3339 tag=c4l3
+@inst mra_col2 -8807,-2862 tag=c4l2
+@inst mra_col2 -8807,-2384 tag=c4l1
+@inst mra_col2 -8807,-1907 tag=c4l0
+@inst mra_col2 -8807,-1343 tag=c5l4
+@inst mra_col2 -8807,-866 tag=c5l3
+@inst mra_col2 -8807,-389 tag=c5l2
+@inst mra_col2 -8807,88 tag=c5l1
+@inst mra_col2 -8807,566 tag=c5l0
+
+# mra_col3
+@inst mra_col3 -8807,-3339 tag=c4l3
+@inst mra_col3 -8807,-2862 tag=c4l2
+@inst mra_col3 -8807,-2384 tag=c4l1
+@inst mra_col3 -8807,-1907 tag=c4l0
+@inst mra_col3 -8807,-1343 tag=c5l4
+@inst mra_col3 -8807,-866 tag=c5l3
+@inst mra_col3 -8807,-389 tag=c5l2
+@inst mra_col3 -8807,88 tag=c5l1
+@inst mra_col3 -8807,566 tag=c5l0
+
+# mra_col4
+@inst mra_col4 -8807,-3339 tag=c4l3
+@inst mra_col4 -8807,-2862 tag=c4l2
+@inst mra_col4 -8807,-2384 tag=c4l1
+@inst mra_col4 -8807,-1907 tag=c4l0
+@inst mra_col4 -8807,-1343 tag=c5l4
+@inst mra_col4 -8807,-866 tag=c5l3
+@inst mra_col4 -8807,-389 tag=c5l2
+@inst mra_col4 -8807,88 tag=c5l1
+@inst mra_col4 -8807,566 tag=c5l0
+
+# carry links within a group (row N to row N+1): seven, none at the bottom row of a group
+@inst mra_link -8807,-3339 tag=c4l3
+@inst mra_link -8807,-2862 tag=c4l2
+@inst mra_link -8807,-2384 tag=c4l1
+@inst mra_link -8807,-1343 tag=c5l4
+@inst mra_link -8807,-866 tag=c5l3
+@inst mra_link -8807,-389 tag=c5l2
+@inst mra_link -8807,88 tag=c5l1
+
+# ====================================================================
+# Through-lines (drawn once, outside the cells; x = the mid-right array's x - 8807).
+# Each was looked at in the metal shot at 2.1x at the top end (y 6330-6580), in the channel
+# between the groups (y 8410-8590) and at the bottom end (y 10880-11130).
+
+# supply rails (wide; continue north of y 6330; seen unbroken through the channel for the
+# three right-hand ones)
+M 3021,6560 y10920 w=48
+N M 3021,7300 vss
+M 3110,6560 y10920 w=48
+N M 3110,7300 vcc
+M 3274,6560 y10920 w=50
+N M 3274,7300 vss
+M 3630,6330 y10920 w=50
+N M 3630,7300 vcc
+M 3913,6330 y10975 w=48
+N M 3913,7300 vss
+M 4150,6330 y11040 w=44
+N M 4150,7300 vcc
+
+# L1, master clock of BOTH counters: one line from a contact (3715,6497) at the top through
+# the channel to the bottom of row u8. Its poly comes from the west along y 6490-6510.
+M 3715,6483 y6560 x3693 y10915 w=14
+P 3698,6480:3736,6514
+C 3715,6497
+P 3560,6490:3705,6510
+N M 3693,7300 lc_ck_m
+
+# slave clock rail of BOTH counters: from a contact (4212,6455), unbroken through the
+# channel, ends plainly at y 10985. Its poly comes from the west along y 6445-6465.
+M 4218,6441 y10985 w=21
+P 4194,6438:4232,6474
+C 4212,6455
+P 3560,6445:4205,6465
+N M 4218,7300 lc_ck_s
+
+# L3 of the 4-bit counter: comes from the north, ends plainly in the channel at y 8500
+M 3780,6330 y8500 w=14
+N M 3780,7300 c4l_l3
+# L3 of the 5-bit counter: the line that passes the 4-bit rows on the L2 position (no contact
+# there) steps right in the channel (y 8525-8548) onto the L3 position. Top: contact
+# (3757,6410) on a poly along y 6400-6420, which comes from the west and also has a contact
+# (3968,6410) to a metal that arrives from the north on x 3958-3978.
+M 3757,6396 y6560 x3736 y8537 x3780 y10915 w=14
+P 3740,6393:3776,6428
+C 3757,6410
+P 3560,6400:3985,6420
+P 3950,6393:3988,6428
+C 3968,6410
+M 3968,6330 y6426 w=20
+N M 3780,9700 c5l_l3
+
+# gate line of the m <-> mb pass gates ("gab"): the 4-bit counter's comes from the north and
+# ends plainly in the channel at y 8505
+M 4095,6330 y8505 w=13
+N M 4095,7300 c4l_gab
+# the 5-bit counter's: the line that passes the 4-bit rows at x 3958-3978 (no contact there)
+# turns east in the channel (y 8525-8548) and comes down the gab position. Top: contact
+# (3968,6520), fed by a poly from the east along y 6510-6530. Bottom: contact (4087,11005).
+M 3968,6506 y8537 x4095 y11019 w=14
+P 3950,6503:3988,6538
+C 3968,6520
+P 3980,6510:4260,6530
+P 4068,10988:4108,11024
+C 4087,11005
+N M 4095,9700 c5l_gab

@@ -36,6 +36,14 @@ Counters (mid-right array, rows r0-r18 from the top, `notes/blocks/mra.md`):
 | r10 ... r4 | character row counter, `rc0` ... `rc6` | r10 = bit 0, r4 = bit 6 |
 | r3 ... r0 | 4-bit counter, `c4b0` ... `c4b3` (not identified; its outputs leave north) | r3 = bit 0 (taken from the carry chain's direction), r0 = bit 3 |
 
+Counters in the left array's upper rows (rows u0-u8 from the top, `notes/blocks/ur.md`; the
+same bit cell as the mid-right array's):
+
+| Rows | Counter | Bit of row |
+|---|---|---|
+| u8 ... u4 | 5-bit counter, `c5l0` ... `c5l4` (not identified) | u8 = bit 0 (the carry enters there from the left column), u4 = bit 4 |
+| u3 ... u0 | 4-bit counter, `c4l0` ... `c4l3` (not identified) | u3 = bit 0, u0 = bit 3 |
+
 Right datapath, lower array (R0, R1, R2 and their comparators): slice s1 = bit 0, s2 =
 bit 1, ... s7 = bit 6, **s0 = bit 7** (from the counter lines: `hc0` arrives at s1, `hc7`
 at s0). Upper array (R4, R6): bit order not established, names keep the slice (`sm1`, `s0`
@@ -90,13 +98,13 @@ bottom bus field. All five names below are copies of it.
 
 ## Counters
 
-For `<bit>` read `hc#`, `rc#` or `c4b#`. Each bit is a master-slave pair
+For `<bit>` read `hc#`, `rc#`, `c4b#`, `c5l#` or `c4l#`. Each bit is a master-slave pair
 (`notes/blocks/mra.md`; the node letters used there are given in brackets).
 
 | Name | What it is |
 |---|---|
-| `hc#`, `rc#`, `c4b#` | the bit as the rest of the chip sees it: the buffered **master** (node n1). The comparators compare this, not the slave |
-| `hc#_q`, `rc#_q`, `c4b#_q` | slave latch (q): takes `_d` on the slave clock |
+| `hc#`, `rc#`, `c4b#`, `c5l#`, `c4l#` | the bit as the rest of the chip sees it: the buffered **master** (node n1). The comparators compare this, not the slave |
+| `hc#_q`, `rc#_q`, `c4b#_q`, `c5l#_q`, `c4l#_q` | slave latch (q): takes `_d` on the slave clock |
 | `*_q_n` | NOT `_q` (g1) |
 | `*_m` | master latch node (a): takes `_nx_g` on the master clock |
 | `*_mb` | node b, joined to `_m` through a pass transistor gated by `cnt_gab`; gate of the feedback device from `_d` to `_m` |
@@ -115,6 +123,9 @@ For `<bit>` read `hc#`, `rc#` or `c4b#`. Each bit is a master-slave pair
 | `hc_lo4_set`, `rc_lo4_set` | look-ahead line: low while any of bits 0-3 is clear, i.e. high when `_q` of bits 0-3 are all 1 (group lines B and A) |
 | `rc_ck_m`, `rc_ck_s` | master and slave clock of the row counter (bus lines E and D), made by the generator below |
 | `rc_l3`, `c4b_l3` | the L3 line of the row counter (from the west along y 13005) and of the 4-bit counter (from the north). What they carry is not known; for the horizontal counter L3 is `ck_a` |
+| `lc_ck_m`, `lc_ck_s` | master clock (line L1) and slave clock (rail x 4218) of both counters of the left array's upper rows: one line each through all nine rows, each fed at the top by a poly from the west (y 6500 and y 6455). Sources not traced |
+| `c4l_l3`, `c5l_l3` | the L3 lines of those two counters: the 4-bit one's comes from the north; the 5-bit one's from a poly along y 6410 (from the west, and from a metal from the north at x 3968) |
+| `c4l_gab`, `c5l_gab` | their pass-gate lines: the 4-bit one's comes from the north; the 5-bit one's from a poly from the east along y 6520, ending on a contact at (4087,11005) |
 | `cnt_gab` | gate line of the `_m` to `_mb` pass transistors of all 19 bits (x 12902), fed from the top by band H4. Source not traced |
 | `cnt_l2_a`, `cnt_l2_b`, `cnt_l2_c` | three pieces of the metal line L2 that passes through the rows without a contact |
 | `cnt_la_a`, `cnt_la_b`, `cnt_la_c` | three pieces of the metal x 12285 through the rows; no contact found in the rows (re-read item R8). `cnt_la_a` feeds an inverter west of the counters |

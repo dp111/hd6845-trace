@@ -63,7 +63,8 @@
 -	pad	9 MA5	670,6270:1430,7030	pin 9, MA5
 -	route	MA line bundle	2140,6400:2520,18600	nine vertical metal tracks between the left column and the MA output drivers; lines step from track to track
 -	?logic	left column beside the arrays	2480,6700:2860,18500	cells on the row boundaries; the inputs of the MA8 and MA9 output drivers end in the cells at the s4/s5 and s8/s9 boundaries (traced), so these are the MA output stages; group carry logic believed here too. Cells not traced
--	?array	upper rows (9 rows, untraced)	2950,6543:4200,10924	nine identical rows of another type, extra 87 px after the fourth. Not traced
+-	array	4-bit counter (left array)	2918,6543:4240,8452	four copies of the counter bit cell of the mid-right array (c4l3..c4l0 from the top); shares its master and slave clock with the 5-bit counter below; not yet identified
+-	route	clock lines into the left array's counters	3560,6340:4260,6540	four poly lines from the west: master clock (y 6500), slave clock (y 6455), the 5-bit counter's L3 (y 6410), one more
 -	?route	channel 2	7600,6350:10850,6900	13 horizontal poly lines under the per-slice metal lines and rails; the lowest carries the comparator's chain output
 -	?logic	left-centre logic	4400,6900:6450,10400	random logic between the left array and the central datapath
 -	?route	diagonal fan	5280,6850:6170,7360	the five lines of the poly bus turn south-east and then east to pads at x 6130-6165, where horizontal metals take them on
@@ -87,6 +88,7 @@
 -	?array	row of large cells (untraced)	8380,8040:10720,8450	six slices, continues below y 8450 (cdp3's row A); fed by the data bus lines only from above. Not traced
 -	logic	row counter clock generator	11090,7890:11665,8900	makes the character-row counter's two non-overlapping clocks from one step pulse p: slave clock = NOR(buffered master clock, p), master clock = NOR(NOT p, buffered slave clock); two NOR drivers 350 px wide
 -	array	R6 register (7 bit)	13360,8048:16160,8318	vertical displayed. Same latch cells on the same data lines as R4; its strobe runs down the wiring channel to the R6 write strobe (so this is R6); its comparator is above (rdp1)
+-	array	5-bit counter (left array)	2918,8539:4240,10924	five copies of the counter bit cell (c5l4..c5l0 from the top), a plain ripple chain; not yet identified
 -	?array	row A cells (6 bit)	8380,8450:10770,8790	large cell per column c2..c7, on the same bit lines as the two registers, with one line each from the west and one output (line f) going south; not traced
 -	array	R4 comparator (7 bit)	13360,8415:16160,8806	XOR per bit and wired NOR against the upper array's seven c lines (believed the row counter); output leaves west at y 8339
 18	io	D0 buffer capacitors	16960,8445:17040,8880	plain diffusion rectangles for d0_b (contact cut, not strapped) and d0_c
