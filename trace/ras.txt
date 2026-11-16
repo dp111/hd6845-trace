@@ -168,7 +168,7 @@ M 7836,4945 y5134 x7792 y5218 x7751 y5308 x7664 y5503 x7576 y5894 x7664 w=13
 P 7643,5873:7677,5907
 C 7660,5890
 P 7660,5890 x8250 w=18
-N M 7576,5700 ch1w_5890
+N M 7576,5700 cdp2_trk_s6
 # from a pad (7836,5172): staircase south-west to the pad (7705,5848)
 ?P 7819,5155:7853,5189
 C 7836,5172
@@ -176,17 +176,28 @@ M 7836,5172 y5263 x7792 y5352 x7706 y5549 x7622 y5850 x7708 w=13
 P 7688,5831:7722,5865
 C 7705,5848
 P 7705,5848 x8250 w=18
-N M 7622,5700 ch1w_5848
+N M 7622,5700 cdp2_trk_s5
 # the pad (7660,5800): metal north along x 7662 and east along y 5586 to x 7756; its east end
 # lies on a poly that comes from a pad at (7487,5587): not resolved, not drawn beyond
 P 7643,5783:7677,5817
 C 7660,5800
 M 7662,5800 y5586 x7756 w=12
 P 7660,5800 x8250 w=18
-N M 7662,5700 ch1w_5800
+N M 7662,5700 cdp2_trk_s4
 # the pad (7705,5758): metal north along x 7705 and east along y 5634 to x 7799 (end not looked at)
 P 7688,5741:7722,5775
 C 7705,5758
 M 7705,5758 y5634 x7799 w=12
 P 7705,5758 x8250 w=18
 N M 7705,5700 ch1w_5758
+
+# --- the five channel lines east of x 8250: nested steps down onto the long lines of the central
+# datapath's channel 1 (trace/cdp2.txt, from x 8480). Clean shot at 2.9x (join_a.png).
+@requires cdp2
+@alias ras_o3 cdp2_trk_s7             # the through track of slice s7 is the selector's output 3
+P 8250,5758 x8462 y5826 x8490 w=18    # to line 5826
+P 8250,5800 x8415 y5870 x8490 w=18    # to line 5870
+P 8250,5848 x8377 y5913 x8490 w=18    # to line 5913
+P 8250,5890 x8338 y5956 x8490 w=18    # to line 5956
+P 8250,5935 x8295 y6000 x8490 w=18    # ras_o3 to line 6000
+

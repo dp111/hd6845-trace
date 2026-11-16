@@ -150,7 +150,7 @@ Eleven pass transistors between the scan line counter and five output nodes.
 | `ras_shift` | gate line (right poly band) of the four pass transistors `sl`# to `ras_o`(#+1). Driver not traced |
 | `ras_o0_alt1`, `ras_o0_alt2` | the two other sources of `ras_o0` (metal from the west along y 5066; metal from the north along x 7207). Not traced back |
 | `ras_o0_sel1`, `ras_o0_sel2` | gates of the pass transistors from `ras_o0_alt1` and `ras_o0_alt2` to `ras_o0`. Not traced back |
-| `ch1w_#` | a poly line of the central datapath's channel 1 at its west end, named by the y of its pad there (# = 5758, 5800, 5848, 5890; the fifth line is `ras_o3`). Fed through the nest of metals east of the selector; what drives each is not resolved |
+| `ch1w_5758` | the poly line of the central datapath's channel 1 that starts on the pad (7705,5758) and becomes the line at y 5826 further east. Fed by a metal whose end at (7799,5634) is not resolved; no through track is tied to it as traced |
 
 ## Row counter clock generator and step
 
@@ -246,7 +246,7 @@ None of these rows has a register number yet, so all names are by place. Columns
 | `cdp2_a_s#`, `cdp2_c_s#`, `cdp2_c_s#_bus` | per-slice lines and bit lines of those rows |
 | `cdp2_b_s#`, `cdp2_b_s#_*` | cdp2 row B comparator with a ripple chain, slice #: `_y` = NOR(q, t), `_ne` = q XOR t, `_x` chain output of the slice, `_o2` inverse of the previous slice's chain output, `_p1` internal node |
 | `cdp2_b_cin`, `cdp2_b_hl` | chain input of that comparator; and a row-long line pulled low per bit |
-| `cdp2_trk_s#` | the value that row B compares row C against, per slice (through track) |
+| `cdp2_trk_s#` | the value that row B compares row C against, per slice (through track). Each is one long line of channel 1, fed from the nest of metals east of the row address selector (`notes/blocks/ras.md`): s7's is `ras_o3` itself (alias), s6's comes from the pad (7836,4945), s5's from the pad (7836,5172), s4's from a metal ending at (7756,5586); what drives those three is not traced |
 | `cdp2_ch#_#` | a line of channel 1, named by its y |
 | `cdp3_c_c#_*`, `cdp3_h_c#_*` | cdp3 rows C (6 bit) and H (8 bit), static register bit in column #: `_x`, `_q1`, `_q` as in cdp1 |
 | `cdp3_c_wr`, `cdp3_h_wr` | write lines of rows C and H |
@@ -816,3 +816,7 @@ datapath s1...s7, s0 became b0...b6, b7.
 | uc_s4 | uc_b5 | |
 | uc_s5 | uc_b6 | |
 | uc_sm1 | uc_b0 | |
+| cdp2_ch1_5826 | ch1w_5758 | |
+| ch1w_5890 | cdp2_trk_s6 | |
+| ch1w_5848 | cdp2_trk_s5 | |
+| ch1w_5800 | cdp2_trk_s4 | |

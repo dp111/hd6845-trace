@@ -806,3 +806,14 @@ what `inh` does).
 4. As before: `rdp2`'s routing zone; the other match lines; the step-logic clusters;
    `c4l`'s outputs and R3's high nibble; `e4`.
 
+**Later the same day.** All five selector outputs leave east as poly lines (y 4765, 4893,
+5133, 5262, 5392) into a column at x 7860-8100 that is not traced. `ras_o3` also runs,
+through the nest of metals east of the selector, onto a line of the central datapath's
+channel 1; with the five channel lines drawn to `cdp2`'s, the extraction makes
+`cdp2_trk_s7` and `ras_o3` one net. So the central datapath's 5-bit comparator (rows B,
+against row C's register) sees the selector's output on at least that bit. Lesson for
+the method: a named net of one block turning out to be a named net of another is
+reported by the extraction as "carries several names"; that message is the join being
+confirmed, and the fix is one name (`tools/rename.py`, or `@alias` where the name comes
+from a cell template).
+

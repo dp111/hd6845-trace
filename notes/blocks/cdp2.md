@@ -182,7 +182,7 @@ the metal shot.
   band runs right to x 9086 and (seen at 1.4x) turns up across y 5700. Below the line
   e runs on as a stub to y 6115, where it ends over field just above the node-a poly of
   s3's latch: pink field colour under the end, no green speckle, metal ends 4 px short
-  of the poly band in both metal shots. Named `cdp2_ch1_5826`.
+  of the poly band in both metal shots. Named `ch1w_5758`.
 - The bus lines cross channel 1 without any contact and leave the region upward.
 
 Believed: a 5-bit register written from five bus lines when its strobe is high; its
@@ -357,7 +357,7 @@ How the nets are made (coordinates of the master):
 | `cdp2_trk_s6` | poly | line y 5956: x 8480 and x 10850 | ? | |
 | `cdp2_trk_s7` | poly | line y 6000: x 8480 (ends at x 10518) | ? | |
 | `cdp2_trk_s1` | metal | x 8165, y 7395 going up | ? | through track of row C's s1 |
-| `cdp2_ch1_5826` | poly | line y 5826: x 8480 and x 10850; band at y 5730 to x 9086, then up across y 5700 at x 9080 (`?`) | unknown | not connected to row A |
+| `ch1w_5758` | poly | line y 5826: x 8480 and x 10850; band at y 5730 to x 9086, then up across y 5700 at x 9080 (`?`) | unknown | not connected to row A |
 | `cdp2_a_c_s2_q` | poly | line L1, x 7990, y 7472, going left | out | output of row C's s2 |
 | `cdp2_a_c_s1_q` | poly | line L2, x 7990, y 7513, going left | out | output of row C's s1 |
 | `cdp2_a_c_s1_q` | metal | x 8338, y 7395, going up | out | same net in metal (if track c is contacted to q, Ambiguities 7) |

@@ -113,9 +113,9 @@ comparator). Join to `cdp2` not drawn.
 | Channel pad | Line | Fed by |
 |---|---|---|
 | 7707,5935 | `ras_o3` | a branch of `ras_o3`'s metal: south from (7620,5264), x 7532, y 5937 |
-| 7660,5890 | `ch1w_5890` | staircase from a pad (7836,4945) |
-| 7705,5848 | `ch1w_5848` | staircase from a pad (7836,5172) |
-| 7660,5800 | `ch1w_5800` | metal north along x 7662, east along y 5586 to x 7756; that end lies on a poly that comes from a pad (7487,5587). No pad seen at the metal's end: **not resolved** |
+| 7660,5890 | `cdp2_trk_s6` | staircase from a pad (7836,4945) |
+| 7705,5848 | `cdp2_trk_s5` | staircase from a pad (7836,5172) |
+| 7660,5800 | `cdp2_trk_s4` | metal north along x 7662, east along y 5586 to x 7756; that end lies on a poly that comes from a pad (7487,5587). No pad seen at the metal's end: **not resolved** |
 | 7705,5758 | `ch1w_5758` | metal north along x 7705, east along y 5634 to x 7799: end not resolved |
 
 `ras_o3`'s metal also climbs a staircase to a pad (7836,4808). The three pads at
@@ -126,13 +126,33 @@ they are the other outputs (crossing under) or something made from them is the n
 thing to trace. Two more pads at the channel's west end, (7748,5672) and (7790,5718),
 have metals going south to y 6070 and y 6158 (not drawn).
 
+### The join to the central datapath's comparator (drawn, extracted)
+
+East of x 8250 the five channel lines step down in nested bends (clean shot at 2.9x,
+`join_a.png`) onto the long lines of channel 1 that `trace/cdp2.txt` starts at x 8480:
+5758 to 5826, 5800 to 5870, 5848 to 5913, 5890 to 5956, 5935 to 6000. With those five
+polys drawn the full extraction joins them to that block's through tracks, and the
+names were made one: the line from the pad (7660,5890) is `cdp2_trk_s6`, (7705,5848) is
+`cdp2_trk_s5`, (7660,5800) is `cdp2_trk_s4`, and **`cdp2_trk_s7` is `ras_o3`**. So:
+
+```
+cdp2_b_s7_y  = NOR(cdp2_a_c_s7_q, ras_o3)
+cdp2_b_s7_ne = NOT((cdp2_a_c_s7_q & ras_o3) | cdp2_b_s7_y)      = XOR
+```
+
+The 5-bit comparator of the central datapath's rows B (against the register of row C)
+takes the selector's output 3 on one of its bits: it compares the row address as it
+leaves the selector, not the scan line counter. For the other four bits this rests on
+what drives the pads at x 7836 and the two unresolved metal ends, which is not traced.
+Bit numbers are not assigned to the slices s3-s7 yet: `ras_o3` on the last slice does
+not fit a plain order with s3 as the most significant bit (`notes/blocks/cdp2.md`).
+
 ## Not done
 
 1. Each output's poly east of x 7960 to its end (expected: the RA pad drivers; the lines
    found at the pad end are listed in `notes/blocks/trunks.md`), and what else it feeds.
    The column at x 7880-7960, y 4740-5450 and its pads at x 7836. The ends of the feeds
-   of `ch1w_5800` and `ch1w_5758`. The five channel lines east of x 8250 to
-   `trace/cdp2.txt`'s lines at x 8480.
+   of `cdp2_trk_s4` and `ch1w_5758`.
 2. `ras_straight` and `ras_shift` to their drivers: the left band bends west at its top
    (y 5140); the right band goes on north-east from (7425,5235).
 3. `ras_o0_alt1`, `ras_o0_alt2`, `ras_o0_sel1`, `ras_o0_sel2` to their sources.
