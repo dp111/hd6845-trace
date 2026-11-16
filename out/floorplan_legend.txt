@@ -56,6 +56,7 @@
 -	?route	second crossing field	3400,5480:5860,5700	horizontal poly lines over vertical metals; the step signal b crosses it on the poly y 5585
 -	route	comparator operand lines	8480,5720:10850,6020	five long poly lines carry a 5-bit value to the through tracks of the slices, which take it up to the rows above and down to the comparator below; the q tracks of the latch row cross them
 -	?logic	data bus interface column	17050,5300:17700,17000	column of logic beside the D0-D7 pads
+-	route	counter outputs of the left array	4240,6140:4720,10520	nine tracks: the 4-bit counter's outputs go north to four poly lines east along y 6157-6280; the 5-bit counter's step east and go north to five poly lines along y 6498-6673, which run 9,000 px east through the central datapath's channel 2 to the upper right datapath
 12	route	poly bus (RES, LPSTB, e4 and two more)	5080,5830:5300,6870	vertical poly lines taking signals from the top-left logic south: lines 3, 4, 5 are RES (buffered), LPSTB (buffered) and the unidentified control line e4; lines 1, 2 not identified
 -	array	5-bit latch	8780,6020:10790,6345	five static latch bits (pass transistor from the per-slice data bus line, two inverters, weak hold device), loaded together by one strobe line. Outputs q go up to a comparator in the rows above. Which register: not yet established
 -	?io	D0-D7 pad cells	17720,5950:19150,19150	eight identical cells, 1600-1735 px apart: tri-state driver with its pre-driver under the VCC band, input protection above. Located, not yet fully traced (AMB-003)

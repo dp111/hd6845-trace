@@ -485,3 +485,10 @@ the other four turn **north** at x 7790-7930 (not down, as the Ports table above
 Their nets: y 7840 bus line B's line, y 7882 `ck_a`, y 7926 the row counter's step `rc_stepreq_n`,
 y 7971 band H1's line.
 
+## Channel 2, five of its lines identified (coordinating session, 2026-11-17)
+
+The lines at y 6498, 6542, 6584, 6626 and 6672 are the outputs `c5l3`, `c5l2`, `c5l1`,
+`c5l4`, `c5l0` of the 5-bit counter in the left array's upper rows, followed from the
+west (`notes/blocks/urch.md`). They pass through this block unused and go on east to the
+upper right datapath. Not drawn here yet.
+
