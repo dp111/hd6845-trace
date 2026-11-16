@@ -405,3 +405,36 @@ Channel:
 - Bottom edge: a long vertical poly at x 13870-13885 passing under all the horizontal
   lines (y 16840-17150).
 - wr_r9, wr_r11, wr_r10 west of x 14100 (they lie below y 17100).
+
+## Gate column y 15860-16125: what a look from the coordinating session added (2026-11-17)
+
+Not traced; these are observations to start from (views `g1a/g1m/g1o/g1b`, `h1a/h1b/h1m/h1o`,
+`t1ab/t1m/t1c` in the scratch folder).
+
+- **The ground rail runs straight through**: `tools/follow.py` from (13830,15950) follows one
+  metal from y 15156 to y 16807. In this stretch it is 70 px wide (x 13810-13880) with two
+  contacts, (13820,15887) and (13868,15893). **Both land on poly**, not diffusion (12x: the
+  first sits on the field end of a poly bar x 13808-13828 that is bright, i.e. over a
+  channel, from y 15897 to 15945; the second on the top of a poly bar x 13857-13878 that
+  runs down to y 15985). A poly tied to VSS over a channel is the weak always-on device of
+  this chip's latches (rdp3, cdp2, larr). So this group is a latch of that family, built to
+  order: `findcell.py` finds no copy of the register latch cell here.
+- **`h_eq_r0`** (track k7's poly, y 15878-15898) ends in a heavy-outlined box at
+  x 13755-13800, y 15868-15915: a buried contact onto a diffusion node.
+- **`ck_out`**: the metal x 13704-13728 that trunks.txt draws from y 16724 up to y 15918 ends
+  on a contact (13712,15928); its poly runs east along y 15920-15945 to x 13806, right
+  beside that node. Read (not established): it is the gate of the pass transistor that
+  takes the R0 match from the buried-contact node onto the latch's storage node (the tan
+  strip x 13830-13855 and its foot y 15945-15962). **The R0 match is sampled on NOT CLK
+  here.**
+- **`inh_n`** (line X) comes up from its driver to the contact (13925,15918) on a box
+  x 13905-13945, y 15895-15945.
+- Below, y 15960-16050: a stack of three or four horizontal poly fingers across the rail's
+  diffusion column (x 13790-13878): the latch's inverters. East of it a load block
+  x 13945-13990 and the VCC land x 14000-14050 with a contact (14020,16025).
+- `bd1_k` arrives at the contact (13674,15973) west of the group.
+
+What to settle first when this is traced: whether `ck_out`'s poly and the VSS-tied bar are
+two pieces (they must be: one is a clock, the other is at VSS, yet at 5.6x they touch at
+x 13806), which means a gap of field or a diffusion edge is being misread there.
+
