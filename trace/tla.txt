@@ -717,6 +717,9 @@ B 2716,7896:2738,7928
 M 2512,7907 x2370 y5836 w=18
 P 2348,5830:2386,5866
 C 2365,5847
-P 2380,5849 x2560 w=20
+P 2380,5849 x2735 w=20                # ... east across the diffusion under the VSS rail x 2600-2655 (bright there: it is
+P 2726,5826:2764,5862                # a gate of a unit of the small cluster, not drawn) to a pad with a contact
+C 2745,5842                          # (2745,5842) under a thin vertical metal x 2728-2760 (not followed)
+M 2744,5822 y5868 w=28
 M 2500,7895 y8000 w=22
 N M 2370,7000 rcs_stb_n

@@ -112,7 +112,10 @@ runs east into the small cluster below this one (y 5650-6300), and it goes on so
 the inverter at x 2500. So the signal is made near the foot of this cluster, taken down
 the left column of the left array's upper rows (where other cells use it too), inverted
 there, and the inverse is brought all the way back up as the step logic's strobe. It
-behaves like a clock phase being distributed; which one is not known. The column was read from the chip-2 shots at
+behaves like a clock phase being distributed; which one is not known. Its poly at the
+top (y 5838-5860) is seen to cross the diffusion under the VSS rail at (2620,5849) as a
+gate and to end on a contact (2745,5842) under a thin vertical metal x 2728-2760: so
+`rcs_stb_n` is itself only passing through there, with more loads. Not followed further. The column was read from the chip-2 shots at
 7x: where no metal lies over it, they show the poly bands and the diffusion edges (as
 lines across the bands) far more clearly than the clean shot.
 

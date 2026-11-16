@@ -1230,7 +1230,7 @@ transistors
   t1224 at  10466, 12668  W/L  197/28   -     gate cdp4_sel4    cdp4_n_s7 <-> cdp4_c_s7
   t1225 at  10649, 12874  W/L   94/22   -     gate cdp4_rst     cdp4_n_s7 <-> vss
   t1226 at  10433, 13028  W/L   68/22   -     gate cdp4_ld      cdp4_in_s7 <-> cdp4_lc_s7_a
-  t1227 at  10468, 18941  W/L   59/32   clamp gate ck_out       vcc <-> n394
+  t1227 at  10468, 18941  W/L   59/32   clamp gate ck_out       vcc <-> n393
   t1228 at  10578, 19505  W/L  480/23   -     gate clk          ck_t <-> vss
   t1229 at  10508, 19505  W/L  480/23   -     gate clk          ck_t <-> vss
   t1230 at  10436, 19505  W/L  480/22   -     gate clk          ck_t <-> vss
@@ -2818,20 +2818,20 @@ transistors
 
 gates
   ma2_pu       = NOT ma2_drv_in
+  ma2_pd       = NOT ma2_pu
   ma3_pu       = NOT ma3_drv_in
   ma3_pd       = NOT ma3_pu
   ma4_pu       = NOT ma4_drv_in
   ma4_pd       = NOT ma4_pu
   ma5_pu       = NOT ma5_drv_in
-  ma5_pd       = NOT ma5_pu
   ma1_pu       = NOT ma1_drv_in
-  ma2_pd       = NOT ma2_pu
   rcs_u3288    = NOR(rcs_bd3330, rcs_g3245)
   rcs_u3425    = NOT rcs_bc3460
   rcs_c1       = NOR(rcs_a2, rcs_b1)
   rcs_n4200    = NOT((rcs_cond & rcs_stb) | rcs_g4240)
   rcs_in2      = NOR(rcs_e4, rcs_w2)
   rcs_stb      = NOT rcs_stb_n
+  ma5_pd       = NOT ma5_pu
   ma6_pu       = NOT ma6_drv_in
   ma6_pd       = NOT ma6_pu
   ma7_pu       = NOT ma7_drv_in
@@ -2896,23 +2896,23 @@ gates
   bc1_ld_a     = NOT bc1_ld_n
   disptmg_pu   = NOT disptmg_drv_in
   ma13_pu      = NOT ma13_drv_in
-  disptmg_pd   = NOT disptmg_pu
   ma13_pd      = NOT ma13_pu
+  disptmg_pd   = NOT disptmg_pu
   tc1_r2_out   = NOR(cdp1_c5_q, tc1_b)
   cdp1_b5_a    = NOR(tc1_r2_out, tc1_r4_out)
   tc1_r5_out   = NOT((tc1_g & tc1_l2_out) | (tc1_i & tc1_l3_out))
   cdp2_a_c_s1_q = NOT cdp2_a_c_s1_n2
   cdp3_bl_c1   = NAND(cdp3_k_b, cdp3_k_c)
-  cdp3_hq_c1   = NOT((cdp3_gate_e & cdp3_gate_f) | cdp3_h_c1_q1)
   cdp3_hq_c0   = NOT((cdp3_gate_e & cdp3_gate_f) | cdp3_h_c0_q1)
+  cdp3_hq_c1   = NOT((cdp3_gate_e & cdp3_gate_f) | cdp3_h_c1_q1)
   cdp3_hw_c1   = NOT cdp3_h_c1_q1
   cdp3_hw_c0   = NOT cdp3_h_c0_q1
-  cdp4_lr_s1_q = NOT cdp4_lr_s1_n2
   cdp4_lr_s0_q = NOT cdp4_lr_s0_n2
-  cdp4_b_s0    = NOT(cdp4_lr_s0_n2 | (cdp4_rst & cdp4_sel2) | (cdp4_sel1 & cdp4_sel2) | (cdp4_sel2 & cdp4_sel4))
+  cdp4_lr_s1_q = NOT cdp4_lr_s1_n2
   cdp4_b_s1    = NOT(cdp4_lr_s1_n2 | (cdp4_rst & cdp4_sel2) | (cdp4_sel1 & cdp4_sel2) | (cdp4_sel2 & cdp4_sel4))
-  cdp4_d_s1    = NOT(cdp4_lc_s1_n2 | (cdp4_rst & cdp4_sel3) | (cdp4_sel1 & cdp4_sel3) | (cdp4_sel3 & cdp4_sel4))
+  cdp4_b_s0    = NOT(cdp4_lr_s0_n2 | (cdp4_rst & cdp4_sel2) | (cdp4_sel1 & cdp4_sel2) | (cdp4_sel2 & cdp4_sel4))
   cdp4_d_s0    = NOT(cdp4_lc_s0_n2 | (cdp4_rst & cdp4_sel3) | (cdp4_sel1 & cdp4_sel3) | (cdp4_sel3 & cdp4_sel4))
+  cdp4_d_s1    = NOT(cdp4_lc_s1_n2 | (cdp4_rst & cdp4_sel3) | (cdp4_sel1 & cdp4_sel3) | (cdp4_sel3 & cdp4_sel4))
   cdp4_lc_s1_q = NOT cdp4_lc_s1_n2
   cdp4_lc_s0_q = NOT cdp4_lc_s0_n2
   cdp4_c_s2    = NOT(cdp4_ldr_s1_n2 | (cdp4_rst & cdp4_sel4))
@@ -2932,8 +2932,8 @@ gates
   cdp2_b_s7_x  = NAND(cdp2_b_s7_ne, cdp2_b_s7_p1)
   cdp2_b_s3_ne = NOT((cdp2_a_c_s3_q & cdp2_trk_s3) | cdp2_b_s3_y)
   cdp2_a_c_s2_q = NOT cdp2_a_c_s2_n2
-  cdp3_cw_c3   = NOT cdp3_c_c3_q1
   cdp3_cw_c2   = NOT cdp3_c_c2_q1
+  cdp3_cw_c3   = NOT cdp3_c_c3_q1
   cdp3_cq_c2   = NOT cdp3_c_c2_q1
   cdp3_hq_c2   = NOT cdp3_h_c2_q1
   cdp3_hw_c3   = NOT cdp3_h_c3_q1
@@ -2956,20 +2956,20 @@ gates
   cdp2_a_c_s3_q = NOT cdp2_a_c_s3_n2
   cdp2_a_c_s4_q = NOT cdp2_a_c_s4_n2
   cdp3_cw_c4   = NOT cdp3_c_c4_q1
-  cdp3_cq_c4   = NOT cdp3_c_c4_q1
   cdp3_cq_c3   = NOT cdp3_c_c3_q1
-  cdp3_hq_c4   = NOT cdp3_h_c4_q1
+  cdp3_cq_c4   = NOT cdp3_c_c4_q1
   cdp3_hq_c3   = NOT cdp3_h_c3_q1
+  cdp3_hq_c4   = NOT cdp3_h_c4_q1
   cdp3_hw_c4   = NOT cdp3_h_c4_q1
   cdp4_lr_s4_q = NOT cdp4_lr_s4_n2
   cdp4_lr_s3_q = NOT cdp4_lr_s3_n2
   cdp4_b_s3    = NOT(cdp4_lr_s3_n2 | (cdp4_rst & cdp4_sel2))
   cdp4_b_s4    = NOT(cdp4_lr_s4_n2 | (cdp4_rst & cdp4_sel2))
-  cdp4_d_s3    = NOT(cdp4_lc_s3_n2 | (cdp4_rst & cdp4_sel3))
   cdp4_d_s4    = NOT(cdp4_lc_s4_n2 | (cdp4_rst & cdp4_sel3))
+  cdp4_d_s3    = NOT(cdp4_lc_s3_n2 | (cdp4_rst & cdp4_sel3))
   cdp4_c_s4    = NOT(cdp4_ldr_s3_n2 | (cdp4_rst & cdp4_sel4))
-  cdp4_lc_s4_q = NOT cdp4_lc_s4_n2
   cdp4_lc_s3_q = NOT cdp4_lc_s3_n2
+  cdp4_lc_s4_q = NOT cdp4_lc_s4_n2
   cdp4_c_s5    = NOT(cdp4_ldr_s4_n2 | (cdp4_rst & cdp4_sel4))
   cdp4_ldr_s3_q = NOT cdp4_ldr_s3_n2
   cdp4_ldr_s4_q = NOT cdp4_ldr_s4_n2
@@ -3004,11 +3004,10 @@ gates
   cdp3_cw_c7   = NOT cdp3_c_c7_q1
   cdp3_cq_c6   = NOT cdp3_c_c6_q1
   cdp3_cq_c7   = NOT cdp3_c_c7_q1
-  cdp3_hq_c6   = NOT cdp3_h_c6_q1
   cdp3_hq_c7   = NOT cdp3_h_c7_q1
+  cdp3_hq_c6   = NOT cdp3_h_c6_q1
   cdp3_hw_c7   = NOT cdp3_h_c7_q1
   cdp3_hw_c6   = NOT cdp3_h_c6_q1
-  cdp4_lr_s7_q = NOT cdp4_lr_s7_n2
   cdp4_lr_s6_q = NOT cdp4_lr_s6_n2
   cdp4_b_s6    = NOT(cdp4_lr_s6_n2 | (cdp4_rst & cdp4_sel2))
   cdp4_d_s6    = NOT(cdp4_lc_s6_n2 | (cdp4_rst & cdp4_sel3))
@@ -3035,6 +3034,7 @@ gates
   rc4_co       = NOR(rc4_ci_n, rc4_q_n)
   rc3_co       = NOR(rc3_ci_n, rc3_q_n)
   rc2_co       = NOR(rc2_ci_n, rc2_q_n)
+  cdp4_lr_s7_q = NOT cdp4_lr_s7_n2
   cdp4_b_s7    = NOT(cdp4_lr_s7_n2 | (cdp4_rst & cdp4_sel2))
   rc1_co       = NOR(rc1_ci_n, rc1_q_n)
   rc0_co       = NOR(rc0_ci_n, rc0_q_n)
@@ -3132,13 +3132,12 @@ gates
   wr_r2        = NOR(rsel2_n, wr_stb_n)
   wr_r4        = NOR(rsel4_n, wr_stb_n)
   hc2          = NOT hc2_m_n
-  inh_n        = NOT inh_src
   hc0          = NOT hc0_m_n
   ra0_pd       = NOT ra0_pu
   ra0_pu       = NOT ra0_drv_in
   r6_sm1_q     = NOT r6_sm1_n2
-  r6_s1_q      = NOT r6_s1_n2
   r6_s0_q      = NOT r6_s0_n2
+  r6_s1_q      = NOT r6_s1_n2
   r4_sm1_q     = NOT r4_sm1_n2
   r4_s1_q      = NOT r4_s1_n2
   r4_s0_q      = NOT r4_s0_n2
@@ -3148,13 +3147,13 @@ gates
   rc3          = NOT rc3_m_n
   r2_b0_q      = NOT r2_b0_n2
   r2_b7_q      = NOT r2_b7_n2
-  r1_b0_q      = NOT r1_b0_n2
   r1_b7_q      = NOT r1_b7_n2
+  r1_b0_q      = NOT r1_b0_n2
   hc6          = NOT hc6_m_n
   ar0          = NOT ar0_n2
   rsel4        = NOR(ar0, ar1, ar2_n, ar3, ar4)
-  rsel7        = NOR(ar0_n, ar1_n, ar2_n, ar3, ar4)
   rsel6        = NOR(ar0, ar1_n, ar2_n, ar3, ar4)
+  rsel7        = NOR(ar0_n, ar1_n, ar2_n, ar3, ar4)
   wr_r1        = NOR(rsel1_n, wr_stb_n)
   hc3          = NOT hc3_m_n
   wr_r0        = NOR(rsel0_n, wr_stb_n)
@@ -3162,6 +3161,7 @@ gates
   rsel0        = NOR(ar0, ar1, ar2, ar3, ar4)
   bd1_an       = NOT bd1_a
   bd1_n1       = NOT((bd1_a & inh_lat) | bd1_q)
+  inh_n        = NOT inh_src
   wr_stb_n     = NOT wr_data_lat
   rsel12_bufn  = NOT rsel12
   wr_r8        = NOR(rsel8_n, wr_stb_n)
@@ -3171,25 +3171,25 @@ gates
   clk_n        = NOT clk
   r6_s3_q      = NOT r6_s3_n2
   r6_s2_q      = NOT r6_s2_n2
-  r4_s2_q      = NOT r4_s2_n2
   r4_s3_q      = NOT r4_s3_n2
-  r0_b1_q      = NOT r0_b1_n2
+  r4_s2_q      = NOT r4_s2_n2
   r0_b2_q      = NOT r0_b2_n2
-  r2_b2_q      = NOT r2_b2_n2
+  r0_b1_q      = NOT r0_b1_n2
   r2_b1_q      = NOT r2_b1_n2
+  r2_b2_q      = NOT r2_b2_n2
   r1_b1_q      = NOT r1_b1_n2
   r1_b2_q      = NOT r1_b2_n2
   ar2          = NOT ar2_n2
   ar1          = NOT ar1_n2
-  rsel1        = NOR(ar0_n, ar1, ar2, ar3, ar4)
-  rsel12       = NOR(ar0, ar1, ar2_n, ar3_n, ar4)
-  rsel13       = NOR(ar0_n, ar1, ar2_n, ar3_n, ar4)
-  rsel9        = NOR(ar0_n, ar1, ar2, ar3_n, ar4)
-  rsel8        = NOR(ar0, ar1, ar2, ar3_n, ar4)
   rsel10       = NOR(ar0, ar1_n, ar2, ar3_n, ar4)
+  rsel11       = NOR(ar0_n, ar1_n, ar2, ar3_n, ar4)
+  rsel8        = NOR(ar0, ar1, ar2, ar3_n, ar4)
+  rsel1        = NOR(ar0_n, ar1, ar2, ar3, ar4)
   rsel3        = NOR(ar0_n, ar1_n, ar2, ar3, ar4)
   rsel5        = NOR(ar0_n, ar1, ar2_n, ar3, ar4)
-  rsel11       = NOR(ar0_n, ar1_n, ar2, ar3_n, ar4)
+  rsel13       = NOR(ar0_n, ar1, ar2_n, ar3_n, ar4)
+  rsel9        = NOR(ar0_n, ar1, ar2, ar3_n, ar4)
+  rsel12       = NOR(ar0, ar1, ar2_n, ar3_n, ar4)
   rsel14       = NOR(ar0, ar1_n, ar2_n, ar3_n, ar4)
   rsel16_buf   = NOT rsel16_bn
   wr_r15       = NOR(rsel15_n, wr_stb_n)
@@ -3204,18 +3204,17 @@ gates
   r6_s5_q      = NOT r6_s5_n2
   r4_s5_q      = NOT r4_s5_n2
   r4_s4_q      = NOT r4_s4_n2
-  r0_b4_q      = NOT r0_b4_n2
-  r0_b5_q      = NOT r0_b5_n2
   r0_b3_q      = NOT r0_b3_n2
+  r0_b4_q      = NOT r0_b4_n2
   r2_b3_q      = NOT r2_b3_n2
   r2_b4_q      = NOT r2_b4_n2
-  r1_b4_q      = NOT r1_b4_n2
   r1_b3_q      = NOT r1_b3_n2
+  r1_b4_q      = NOT r1_b4_n2
   ar4          = NOT ar4_n2
   ar3          = NOT ar3_n2
   rsel17       = NOR(ar0_n, ar1, ar2, ar3, ar4_n)
-  rsel15       = NOR(ar0_n, ar1_n, ar2_n, ar3_n, ar4)
   rsel16       = NOR(ar0, ar1, ar2, ar3, ar4_n)
+  rsel15       = NOR(ar0_n, ar1_n, ar2_n, ar3_n, ar4)
   wr_data_lat  = NOT((e_b & wr_data_sel_n) | wr_data_lat_n)
   wr_data_lat_n = NOT((e_b & wr_data_sel) | wr_data_lat)
   wr_data_sel_n = NOT wr_data_sel
@@ -3235,6 +3234,7 @@ gates
   d0_b         = NOT d0_a
   d0_c         = NOT d0_b
   d0_d         = NOT d0_c
+  r0_b5_q      = NOT r0_b5_n2
   r0_b6_q      = NOT r0_b6_n2
   r2_b5_q      = NOT r2_b5_n2
   r2_b6_q      = NOT r2_b6_n2
@@ -3413,23 +3413,23 @@ gates
   cdp4_lc_s7_n2 = NOT cdp4_lc_s7_a
   wl_i2_out    = NOT wl_i2_in
   rc_ck_s_n    = NOT rc_ck_s
+  c4b2_ci_n    = NOT c4b1_co
   rc_step_n    = NOT rc_step
   rc_ck_m_n    = NOT rc_ck_m
-  c4b0_ci_n    = NOT c4b_ci
   rc6          = NOT rc6_m_n
   rc5          = NOT rc5_m_n
   rc4          = NOT rc4_m_n
   hc5          = NOT hc5_m_n
   hc4          = NOT hc4_m_n
   hc1          = NOT hc1_m_n
-  ck_g1        = NOT ck_b
   ck_g3        = NOT ck_a
+  ck_g1        = NOT ck_b
   ck_b_pu      = NOR(ck_clkn, ck_g4)
   ck_a_pu      = NOR(ck_g2, clk_b)
   ck_clkn      = NOT clk_b
   c4b3_ci_n    = NOT c4b2_co
-  c4b2_ci_n    = NOT c4b1_co
   c4b1_ci_n    = NOT c4b0_co
+  c4b0_ci_n    = NOT c4b_ci
   rc6_ci_n     = NOT rc5_co
   rc5_ci_n     = NOT rc4_co
   rc4_ci_n     = NOT rc_lo4_set
@@ -3486,8 +3486,8 @@ gates
   r6_sm1_n2    = NOT r6_sm1_a
   r4c_sm1_x    = NOT((r4_sm1_q & uc_sm1) | r4c_sm1_nor)
   r4c_s0_x     = NOT((r4_s0_q & uc_s0) | r4c_s0_nor)
-  r4c_sm1_nor  = NOR(r4_sm1_q, uc_sm1)
   r4c_s0_nor   = NOR(r4_s0_q, uc_s0)
+  r4c_sm1_nor  = NOR(r4_sm1_q, uc_sm1)
   r4_sm1_n2    = NOT r4_sm1_a
   r0c_b7_x     = NOT((hc7 & r0_b7_q) | r0c_b7_nor)
   r0c_b7_nor   = NOR(hc7, r0_b7_q)
@@ -3495,7 +3495,6 @@ gates
   r2c_b7_nor   = NOR(hc7, r2_b7_q)
   r1c_b7_x     = NOT((hc7 & r1_b7_q) | r1c_b7_nor)
   r1c_b7_nor   = NOR(hc7, r1_b7_q)
-  r1_b7_n2     = NOT r1_b7_a
   r6_s0_n2     = NOT r6_s0_a
   r6_s1_n2     = NOT r6_s1_a
   r4c_s1_x     = NOT((r4_s1_q & uc_s1) | r4c_s1_nor)
@@ -3514,6 +3513,7 @@ gates
   r2_b0_n2     = NOT r2_b0_a
   r1c_b0_x     = NOT((hc0_u & r1_b0_q) | r1c_b0_nor)
   r1c_b0_nor   = NOR(hc0_u, r1_b0_q)
+  r1_b7_n2     = NOT r1_b7_a
   r1_b0_n2     = NOT r1_b0_a
   ar0_n2       = NOT ar0_a
   rsel12_buf   = NOT rsel12_bufn
@@ -3558,8 +3558,8 @@ gates
   rw_a         = NOT rw
   r6_s3_n2     = NOT r6_s3_a
   r4c_s4_x     = NOT((r4_s4_q & uc_s4) | r4c_s4_nor)
-  r4c_s4_nor   = NOR(r4_s4_q, uc_s4)
   r4c_s3_nor   = NOR(r4_s3_q, uc_s3)
+  r4c_s4_nor   = NOR(r4_s4_q, uc_s4)
   r4_s3_n2     = NOT r4_s3_a
   r0hc_s4_x    = NOT((hc3_u & r0_b4_q) | r0hc_s4_nor)
   r0hc_s4_nor  = NOR(hc3_u, r0_b4_q)
@@ -3599,8 +3599,8 @@ gates
   rsel13_n     = NOT rsel13
   rsel13_bn    = NOT rsel13
   rsel13_buf   = NOT rsel13_bn
-  rs_b         = NOT rs_a
   rs_c         = NOT rs_b
+  rs_b         = NOT rs_a
   r6_s5_n2     = NOT r6_s5_a
   r4c_s5_nor   = NOR(r4_s5_q, uc_s5)
   r4_s5_n2     = NOT r4_s5_a
@@ -3616,8 +3616,8 @@ gates
   cs_b         = NOT cs_a
   r0hc_s6_x    = NOT((hc5_u & r0_b6_q) | r0hc_s6_nor)
   r0hc_s7_x    = NOT((hc6 & r0_b7_q) | r0hc_s7_nor)
-  r0hc_s7_nor  = NOR(hc6, r0_b7_q)
   r0hc_s6_nor  = NOR(hc5_u, r0_b6_q)
+  r0hc_s7_nor  = NOR(hc6, r0_b7_q)
   r0c_b5_x     = NOT((hc5_u & r0_b5_q) | r0c_b5_nor)
   r0c_b6_x     = NOT((hc6 & r0_b6_q) | r0c_b6_nor)
   r0c_b5_nor   = NOR(hc5_u, r0_b5_q)
@@ -3632,8 +3632,8 @@ gates
   r2_b6_n2     = NOT r2_b6_a
   r1c_b6_x     = NOT((hc6 & r1_b6_q) | r1c_b6_nor)
   r1c_b5_x     = NOT((hc5_u & r1_b5_q) | r1c_b5_nor)
-  r1c_b6_nor   = NOR(hc6, r1_b6_q)
   r1c_b5_nor   = NOR(hc5_u, r1_b5_q)
+  r1c_b6_nor   = NOR(hc6, r1_b6_q)
   r1_b5_n2     = NOT r1_b5_a
   r1_b6_n2     = NOT r1_b6_a
   cs_c         = NOT cs_b
