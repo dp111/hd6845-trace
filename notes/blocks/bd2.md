@@ -467,3 +467,32 @@ The lists marked ? at the south, east and top edges come from `tools/sel_cut.py`
   `cs_d`'s taps at about y 16815 and 17170; where `bd2_rs_n` goes south of y 16570.
 - **Right-hand column** (x 16480-16800, y 14700-16450) and the routing east and south of
   it: not looked at. `areg_w6`, `areg_w7`, and probably `bd2_x`, `wr_data_e_n` go there.
+
+## Where `wr_data_e_n` goes: looked at 2026-11-19, not resolved
+
+This is the node that would answer "what closes the write strobe when E falls" (jsbeeb
+issue 1866): NOT(`wr_data_sel` AND `e_b`) is the only traced signal that is a write to
+the data register gated by E, and nothing traced uses it. Views
+`cache/scratch/rax/bd2g_m.png`, `bd2g_a1.png`, `bd2g_a2.png`, `bd2q.png` (the last, a
+four-shot view at 3.8x, shows nothing the 3.4x clean view does not).
+
+Seen east of the ground rail (x 16370-16490), none of it drawn:
+
+- **Its load**: a diffusion band leaves the node's east end, runs north along
+  x 16372-16402 to y 15462 and east under a poly block (x 16405-16475, y 15468-15497)
+  to the VCC land under the wide metal x 16490-16545 (contact pits at x 16510). The
+  block's west end has the loop of a buried contact on the band. An ordinary depletion
+  load, gate tied to the node.
+- **A pad at (16452,15535)** just below the block (green centre in the clean shot, ring in
+  both metal shots), from which a metal strap runs south along x 16454 to a second pad
+  at (16452,15735). Under the strap: poly blocks at y 15585-15615 and 15625-15645 (the
+  second is the east end of the gate band `bd2_x`, which therefore does not "arrive from
+  the east" as the trace's comment says but ends here), field, poly at y 15675-15712.
+- Not established: whether the pad (16452,15535) is on `wr_data_e_n` (through the load
+  gate's poly) or on something else; what the pad (16452,15735) is on. If the first, the
+  node goes to whatever the second pad feeds, in the lower part of this gate group
+  (y 15700-15860: a loop at (16395-16420,15700-15740), a band along y 15750-15775).
+
+Next step: this group at 3x in the clean shot with a class map, device by device,
+x 16370-16490, y 15440-15860; then the right-hand column x 16480-16800.
+
