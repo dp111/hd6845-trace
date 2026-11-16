@@ -19,6 +19,7 @@
 -	?logic	top-left logic	2100,2500:6400,6350	random logic
 -	?route	vertical bus	3090,2400:3400,6400	seven metal positions, in pieces, joining the gate clusters at x 2450-3090 to each other and to poly lines going east. Eight pieces drawn
 -	?route	poly lines along the top	3400,2620:4250,2900	seven horizontal lines from the vertical bus east to a second bus field at x 4140-4420; one drawn (first input of the step gate)
+-	?route	second bus field	4120,2600:4430,5500	seven vertical metal positions, in pieces, between the middle and right clusters; five pieces drawn
 -	?logic	top-centre logic	6400,2500:8250,6400	random logic left of the central datapath
 -	?logic	gate columns	6400,2650:7000,4450	dense random logic with large devices under wide rails; not traced. At 6750,3930:6940,4200 a big driver gated by g and by the metal x 6808-6828
 -	?route	top bus field	6400,2500:8250,2975	seven horizontal metal lines crossing the VSS rail in poly; y 2771 = w1/ns1, y 2727 = ns2 traced, rest not
@@ -26,6 +27,8 @@
 -	test	process test structures	14900,2400:17650,3750	devices labelled E, A, S, D with probe pads
 -	pad	35 RA3	18420,2370:19180,3130	pin 35, RA3
 -	?logic	row counter step logic (cluster)	2440,2940:3090,5330	two mirrored columns of small NOR gates between VSS, VCC, VSS rails. Traced: the row counter's step = in1 OR (NOT e4 AND ((x1 AND NOT a2) OR NOT e3)), seven gates. About twenty more gates not traced
+-	?logic	middle cluster of the vertical control	3440,3040:4120,5500	same construction as the step logic cluster, 1042 px east: small NOR gates on a column beside a VSS rail. Three gates traced (the one that makes in1 of the step gate, an inverter, and a NOR that takes in1)
+-	?logic	right cluster of the vertical control	4640,2950:5060,5450	not traced; one input of the step logic comes from here on a poly at y 3805
 2	?route	channel west of the island	7000,2950:7170,4450	four more vertical metals with poly taps into the gate columns; carries l4_out north and the g poly west; mostly untraced
 3	route	channel lines W1-W4	7170,2975:7330,3985	four metal verticals serving the island; three are cut where a gate is inserted (a/NOT a/b/NOT b in, driver outputs out, all continuing south)
 8	logic	2-bit decode drivers	7330,3100:7600,4000	NOT b; two strong NOR drivers giving (NOT a AND b) and (a AND b); NOR of the first with line W1. Outputs leave by the channel on the west

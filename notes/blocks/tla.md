@@ -5,7 +5,7 @@ Serial work, started 2026-11-16. Trace: `trace/tla.txt`. Views: `cache/scratch/t
 ## Names
 
 In this note `in1`, `in2`, `in3`, `e3`, `e4`, `w2`, `c1`, `a2`, `b1`, `x1`, `m2` are the
-signals `rcs_in1` ... `rcs_m2` (`rcs_` = row counter step logic), and the step signal is
+signals `rcs_in1` ... `rcs_cond_n` (`rcs_` = row counter step logic), and the step signal is
 `rc_stepreq_n`. Bus line letters (A-G) and unit names are places, not signals.
 
 ## Status
@@ -22,9 +22,9 @@ c1         = NOR(a2, b1)                 east column, top of the cluster        
 b1         = NOR(x1, a2, rcs_u3425)      east column; third pull-down west of the rail (3046,3590), (2920,3628)
 rcs_u3425  = NOT rcs_bc3460              inverter; its output goes by a strap to b1's third gate
 rcs_bc3460 = NOR(e3, e4)                 a second copy of in3's function               (3046,3892)
-rcs_m2     = NOR(in2, in3)               feeds gate E0 further up                      (3046,4765)
+rcs_cond_n     = NOR(in2, in3)               feeds gate E0 further up                      (3046,4765)
 rcs_u3288  = NOR(rcs_g3245, rcs_bd3330)                                                (3046,3288)
-rcs_n4200  = NOT(rcs_ba4100 AND rcs_bb3807 OR rcs_g4240)   AND-OR-INVERT under the rail (3008,4200)
+rcs_n4200  = NOT(rcs_cond AND rcs_bb3807 OR rcs_g4240)   AND-OR-INVERT under the rail (3008,4200)
 in1        = NOR(rcs_mu, rcs_mv)         middle cluster                                (4081,4072)
 rcs_mu     = NOT rcs_bq3335              middle cluster, inverter                      (4050,3374)
 rcs_mn3852 = NOR(?, in1)                 middle cluster; second gate not read

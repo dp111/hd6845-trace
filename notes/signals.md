@@ -131,11 +131,12 @@ For `<bit>` read `hc#`, `rc#` or `c4b#`. Each bit is a master-slave pair
 | `rc_ck_s_n`, `rc_ck_s_dly` | the same for `rc_ck_s`; `rc_ck_m` = NOR(`rc_step_n`, `rc_ck_s_dly`) |
 | `rcs_in1`, `rcs_in2`, `rcs_in3` | the three inputs of the NOR that makes `rc_stepreq_n`. `rcs_in2` = NOR(`rcs_w2`, `rcs_e4`), `rcs_in3` = NOR(`rcs_e3`, `rcs_e4`). `rcs_in1` not identified: from the bus field at x 4279 |
 | `rcs_w2`, `rcs_c1`, `rcs_b1` | `rcs_w2` = NOT `rcs_c1`; `rcs_c1` = NOR(`rcs_a2`, `rcs_b1`); `rcs_b1` = NOR(`rcs_x1`, `rcs_a2`, `rcs_u3425`) |
-| `rcs_m2` | NOR(`rcs_in2`, `rcs_in3`); feeds a gate further up the same column |
+| `rcs_cond_n` | NOR(`rcs_in2`, `rcs_in3`) = `rcs_e4` OR (`rcs_e3` AND `rcs_a2`): the step condition inverted (called m2 in the block notes) |
+| `rcs_cond` | NOT `rcs_cond_n`: the row counter's step condition apart from `rcs_in1`. On bus line A's piece A3; first gate of the series pair in `rcs_n4200` |
+| `rcs_cond_lat` | `rcs_cond` sampled through a pass transistor while `rcs_bb3807` is high (a dynamic latch on a metal and two poly pads); its poly goes west under the rail at y 4010-4030, not followed |
 | `rcs_e3`, `rcs_e4`, `rcs_a2`, `rcs_x1` | inputs of the step logic, **not identified**. `rcs_e4` gates everything except `rcs_in1`; it is a long control line (17,000 px, five gate loads, driver not found) that runs beside `res_b` and `lpstb_b` |
 | `rcs_u#` | output of a unit of the step logic cluster that has no better name yet, by the y of its buried contact (`rcs_u3288` = NOR(`rcs_g3245`, `rcs_bd3330`); `rcs_u3425` = NOT `rcs_bc3460` = `rcs_e3` OR `rcs_e4`, third input of `rcs_b1`) |
-| `rcs_n#` | output of an AND-OR-INVERT unit of the first cluster (`rcs_n4200` = NOT(`rcs_ba4100` AND `rcs_bb3807` OR `rcs_g4240`)) |
-| `rcs_cm#` | a signal metal that runs down over the east column of the first cluster (x 3025-3060), by the y of its top contact |
+| `rcs_n#` | output of an AND-OR-INVERT unit of the first cluster (`rcs_n4200` = NOT(`rcs_cond` AND `rcs_bb3807` OR `rcs_g4240`)); leaves on a metal strap x 2845-2885 |
 | `rcs_g#` | an input of the cluster that arrives on a poly line from outside, by the y of that line |
 | `rcs_ba#`, `rcs_bb#`, `rcs_bc#`, `rcs_bd#`, `rcs_be#`, `rcs_bf#`, `rcs_bg#` | a piece of bus line A-G beside the first cluster (x 3090-3380) whose driver is not yet known, by the y of its top end |
 | `rcs_bp#`, `rcs_bq#`, `rcs_br#`, `rcs_bs#`, `rcs_bt#`, `rcs_bu#`, `rcs_bv#` | the same for the second bus field (x 4140-4420; tracks P-V at x 4148, 4192, 4235, 4279, 4322, 4365, 4409) |
@@ -458,3 +459,6 @@ datapath s1...s7, s0 became b0...b6, b7.
 | wl_pb | rc_step_n | |
 | h_eq_r0_u | h_eq_r0 | |
 | h_eq_r1_u | h_eq_r1 | |
+| rcs_ba4100 | rcs_cond | |
+| rcs_cm4028 | rcs_cond_lat | |
+| rcs_m2 | rcs_cond_n | |

@@ -110,7 +110,7 @@ P 3090,4787:3127,4823
 # output: buried contact box, poly east along y 4753-4772 to x 3196, north to y 4636, west
 B 3045,4750:3068,4780
 P 3048,4762 x3196 y4636 x3022 w=19
-N P 3120,4762 rcs_m2
+N P 3120,4762 rcs_cond_n
 # gate E0 = m2 on the upper part of the column: below it the column joins rail box 1 (VSS);
 # above it the column goes on north (next piece)
 D 3005,4650:3063,4663
@@ -578,7 +578,7 @@ M 4148,3320 y3596 w=20                # bus piece x 4138-4160, y 3320-3596 (foll
 N M 4148,3500 rcs_bq3335
 
 # ====================================================================
-# AOI unit of the first cluster, y 4045-4320: rcs_n4200 = NOT( rcs_ba4100 . rcs_bb3807 + rcs_g4240 ).
+# AOI unit of the first cluster, y 4045-4320: rcs_n4200 = NOT( rcs_cond . rcs_bb3807 + rcs_g4240 ).
 # Here the diffusion is one wide area under the VSS rail AND under a second metal beside it
 # (x 3025-3060, a signal line that only passes over). From the top: VSS box (contact
 # (2985,4070)), gate g1, gate g2 (in series), node N, gate g3, VSS (contact (2985,4292)).
@@ -593,13 +593,13 @@ C 2985,4292 s=26x26
 P 2985,4103:3095,4128
 P 3090,4096:3128,4130
 C 3105,4112
-M 3108,4098 y4567 w=22
-N M 3108,4300 rcs_ba4100
+M 3108,4098 y4606 w=22
+N M 3108,4300 rcs_cond
 # g2: poly y 4150-4175 from the pad (contact (3150,4160)) on bus line B's piece y 3807-4552
 P 2985,4150:3140,4175
 P 3132,4142:3172,4180
 C 3150,4160
-M 3152,3807 y4552 w=20
+M 3152,3807 y4566 w=20
 N M 3152,4300 rcs_bb3807
 # g3: one long poly y 4230-4250 from the east, across the whole bus without a contact
 P 2945,4230:3400,4250
@@ -622,6 +622,42 @@ N M 2865,4300 rcs_n4200
 # poly runs west along y 4010-4030 under the rail (not followed)
 P 3022,4010:3066,4046
 C 3040,4028
-M 3042,4014 y4490 w=34
+M 3042,4014 y4502 w=34
 P 2950,4010:3030,4030
-N M 3042,4300 rcs_cm4028
+N M 3042,4300 rcs_cond_lat
+
+# ====================================================================
+# What rcs_cond_n feeds: the column x 3028-3063 between rcs_cond_n's unit and the AOI unit (y 4455-4650).
+# In the open (no metal over it): read from the chip-2 shots at 7x, where the three poly bands
+# and the column's edges (x 3015 and x 3066, lines across the bands) are clear.
+#   rcs_cond = NOT rcs_cond_n: node y 4558-4622, pull-down E0 (gate rcs_cond_n) to the VSS box below,
+#     standard load west of the rail, buried contact to band 2, whose pad (contact (3105,4590))
+#     is the bottom end of bus line A's piece A3.
+#   pass transistor (band 1, gate rcs_bb3807) from that node up to the column's top end, which
+#     is tied by a buried contact to the poly pad (contact (3045,4485)) at the bottom of the
+#     metal rcs_cond_lat. So rcs_cond_lat takes rcs_cond while rcs_bb3807 is high: a dynamic latch.
+#     The buried contact is drawn uncertain: see AMB-009 (the other reading ties the column top
+#     to the VSS box under the rail, which makes the AOI unit above degenerate).
+D 3028,4512:3063,4610
+P 3024,4455:3066,4522
+C 3045,4485
+?B 3026,4508:3066,4526
+# band 1
+P 3018,4535:3140,4558
+P 3135,4530:3172,4568
+C 3152,4548
+# band 2
+P 3046,4580:3095,4600
+B 3038,4574:3070,4606
+P 3088,4575:3125,4606
+C 3105,4590
+# load of rcs_cond (standard unit geometry, 175 px above rcs_cond_n's)
+D 2925,4580:3048,4597
+D 2898,4582:2932,4618
+D 2913,4615:2929,4653
+D 2835,4590:2905,4618
+D 2778,4588:2842,4627
+C 2812,4615
+P 2842,4567:2897,4657
+P 2890,4631:2926,4653
+B 2908,4629:2932,4655
