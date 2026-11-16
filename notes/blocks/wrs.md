@@ -67,28 +67,11 @@ numbers (`sel`). Nothing in this block tests that independently except the four 
   function of two other signals: the shape of "R9 is N-2 and the field decides" in
   interlace sync and video. `tc1_b`, `tc1_g`, `tc1_i` are not traced to their sources,
   and that the slice is bit 0 rests on the column it stands in.
-- **The value R9 is compared with** does not come from the selector's units (`rax_o#`).
-  Followed end to end with `tools/follow.py` and four views (`r9cmp_a.png`, `r9cmp2.png`,
-  `r9src_m.png`, `r9src_a.png`, `r9src2.png`, `r9e.png`, `r9f.png`), **not drawn**:
-
-  | Stretch | Layer |
-  |---|---|
-  | from `cdp1`'s east edge along y 4003, 4046, 4089, 4132, 4176 (slices 5 ... 1), under the strobe lines and the supply metal | poly, to pads at (11650,4000), (11695,4045), (11650,4090), (11695,4133), (11650,4176) |
-  | east 3,300 px | metal, to pads at (14952,4003), (14995,4048), (15127,4003), (15082,4047), (15124,4088) |
-  | slices 3, 2, 1: east under the RA0-2 pad drivers' input metals (no contact: the rings there are the gaps between metals) | poly, to pads at (15385,4003), (15428,4047), (15385,4090) |
-  | east along y 4097, 4138, 4186 to x 16468, 16428, 16383 | metal, to pads at (16465,4175), (16422,4130), (16382,4175) |
-  | slices 4, 5: from the pads (14995,4048) and (14952,4003) to metals that start at (15424,3962) and (15381,3919): **this stretch not seen**; those metals run east along y 4044 and y 4000 and south | metal, to pads at (16507,4130), (16550,4175) |
-  | all five: south under two rails (y 4220-4350) | poly, to pads at y 4390 / 4435 |
-  | south, east along y 4938, 4900, 4850, 4808, 4770, south along x 17208, 17258, 17295, 17344, 17388 | metal |
-
-  They end in five units of a column at x 17300-17500, y 5190-5850, pitch 130, just
-  below the RA4 pad driver, which the floor plan carried as part of the "data bus
-  interface column" without anyone having looked at it. **So what R9 is compared with
-  is made in those five units, which are not traced.** It is neither the scan line
-  counter's lines nor `rax_o#` directly.
+- **The value R9 is compared with** is traced: `trace/r9c.txt`, `notes/blocks/r9c.md`. It
+  is the row address as it goes to the pins (`ra#_cmp`, made from the pad drivers' input
+  lines by five units near the right edge), not the lines R10's comparator uses.
 
 ## Not done
 
-The five compare-value lines of R9: draw them (routes above), and trace the five units at
-x 17300-17500, y 5190-5850 that drive them. `tc1_b`, `tc1_g`, `tc1_i`. The
+`tc1_b`, `tc1_g`, `tc1_i`. The
 nets of the four rows still carry `cdp1_`/`cdp2_` names (queue).

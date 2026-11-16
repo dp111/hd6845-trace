@@ -1,0 +1,9 @@
+# r9c: what R9 is compared with
+17290,5170:17660,5880    logic   R9 compare inverters | five units, one per RA bit: gate = the RA pad driver input line, output = the compare line of R9's comparator. Pull-downs traced, loads not
+17060,4950:17420,5330    route   R9 compare inputs | five metals from the west (the RA pad drivers' input lines) to pads, poly on to the units
+16350,4110:17420,4960    route   R9 compare lines, east | the units' outputs north and west, under two rails at x 16382-16550
+15360,3900:16580,4200    route   R9 compare lines, nest | five metals between two cross-unders
+14930,3895:15450,4110    route   R9 compare lines under the RA driver lines | five polys
+11630,3985:15140,4195    route   R9 compare lines, long run | five metals along y 4005-4179
+10840,3985:11720,4195    route   R9 compare lines into the comparator | five polys under the supply metal and the strobe lines
+14720,2080:16510,4200    route   RA0, RA1 driver input lines | from the pad cells down to their polys at x 15303 / 15345

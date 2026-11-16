@@ -202,11 +202,11 @@ one **starts at a pad under the B line of one slice and runs east out of the blo
 
 | Line y | Starts at (pad, contact) | Feeds |
 |---|---|---|
-| 4176 | 8928-8962, contact 8946,4180 | `cdp1_b1_b`, B input of slice 1 |
-| 4132 | 9316-9352, contact 9336,4138 | `cdp1_b2_b` |
-| 4089 | 9706-9742, contact 9724,4092 | `cdp1_b3_b` |
-| 4046 | 10098-10132, contact 10116,4049 | `cdp1_b4_b` |
-| 4003 | 10488-10522, contact 10506,4006 | `cdp1_b5_b` |
+| 4176 | 8928-8962, contact 8946,4180 | `ra4_cmp`, B input of slice 1 |
+| 4132 | 9316-9352, contact 9336,4138 | `ra3_cmp` |
+| 4089 | 9706-9742, contact 9724,4092 | `ra2_cmp` |
+| 4046 | 10098-10132, contact 10116,4049 | `ra1_cmp` |
+| 4003 | 10488-10522, contact 10506,4006 | `ra0_cmp` |
 
 So the five-bit value that row C is compared with comes from the **east**, one bit per
 line, the top line going to the rightmost slice. What drives them is outside the block.

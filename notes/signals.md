@@ -245,7 +245,9 @@ None of these rows has a register number yet, so all names are by place. Columns
 |---|---|
 | `cdp1_a#_*`, `cdp1_c#_*` | cdp1 rows A and C, static register bit in column #: `_x` storage node (bit line while the write line is high), `_q1` its inverse, `_q` output, `_bl` bit line, `_m#` metal straps of the cell |
 | `wr_r8`, `wr_r9` | the write strobes of R8 and R9, which are the write lines of rows A and C: **row A is R8, row C is R9** (`notes/blocks/wrs.md`) |
-| `cdp1_b#_a`, `cdp1_b#_b` | cdp1 row B comparator, slice #: its two inputs |
+| `cdp1_b5_a` | the register-side input of R9's comparator in slice 5 (bit 0): not the register bit but the output of the island `tc1` |
+| `ra#_cmp` | the row-address-side input of R9's comparator for bit # (# = 0-4): output of a unit near the right edge whose pull-down is gated by `ra#_drv_in`; with the unit's load, NOT `ra#_drv_in`, the level of pin RA# (AMB-012; `notes/blocks/r9c.md`). The comparator cell's own name for the same net, `cdp1_b#_b` with # = 5 minus the bit, is kept as an alias |
+| `ra#_drv_in_u` | (# = 2, 3, 4) the input of that unit, believed to be `ra#_drv_in`; the line is not drawn back to the pad cell |
 | `cdp1_b#_n2`, `cdp1_b#_ne` | NOR(a, b) and a XOR b |
 | `cdp1_b_eq` | NOR of the five `_ne`: high when R9 equals the 5-bit value on the `_b` lines (in slice 5 the register bit is replaced by `cdp1_b5_a`, made by `tc1`) |
 | `cdp1_l#`, `cdp1_lw#` | horizontal lines of the data bus channel, named by their y; and two write-line links |

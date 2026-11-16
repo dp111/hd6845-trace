@@ -1,0 +1,214 @@
+# r9c: what R9 is compared with. Five inverter units near the right edge (x 17290-17500,
+# y 5190-5870) take the RA pad drivers' input lines and drive the five compare-value lines of
+# R9's comparator (trace/cdp1.txt, cdp1_b#_b), 6,500 px to the west. Notes: notes/blocks/r9c.md.
+# Bit k: unit k+1 (from the top), compare line of cdp1's slice 5-k.
+# Units PARTIAL: pull-down and the output's exit drawn; loads (east of the rail, poly blocks at
+# x 17550-17600 and a second rail x 17610-17660) NOT TRACED.
+@block r9c
+@requires cdp1
+@w M=12 P=18
+@s 26x26
+@alias ra0_cmp cdp1_b5_b
+@alias ra1_cmp cdp1_b4_b
+@alias ra2_cmp cdp1_b3_b
+@alias ra3_cmp cdp1_b2_b
+@alias ra4_cmp cdp1_b1_b
+
+# ===== the compare lines, from cdp1's east edge to the units =====
+# --- poly east under the strobe lines and the supply metal to pads (r9cmp2.png)
+P 10840,4003 x11650 w=20
+P 11633,3986:11667,4020
+C 11650,4003
+P 10840,4046 x11695 w=20
+P 11678,4029:11712,4063
+C 11695,4046
+P 10840,4089 x11650 w=20
+P 11633,4072:11667,4106
+C 11650,4089
+P 10840,4132 x11695 w=20
+P 11678,4115:11712,4149
+C 11695,4132
+P 10840,4176 x11650 w=20
+P 11633,4159:11667,4193
+C 11650,4176
+# --- metal east 3,300 px (follower) to pads in front of the RA pad drivers' input lines
+M 11650,4005 x14956 w=12
+P 14935,3986:14969,4020
+C 14952,4003
+M 11695,4049 x15000 w=12
+P 14978,4031:15012,4065
+C 14995,4048
+M 11650,4093 x15044 y4005 x15130 w=12
+P 15110,3986:15144,4020
+C 15127,4003
+M 11695,4136 x15082 y4045 w=12
+P 15065,4030:15099,4064
+C 15082,4047
+M 11650,4179 x15124 y4086 w=12
+P 15107,4071:15141,4105
+C 15124,4088
+# --- poly under the three RA metals x 15258 / 15300 / 15342 (no contact: gap45.png, r9src_a.png)
+P 14952,4003 y3915 x15380 w=18        # bit 0: north, then east (a metal lies on this stretch: not joined)
+P 15363,3898:15397,3932
+C 15380,3915
+P 14993,4048 y3962 x15425 w=18        # bit 1
+P 15408,3943:15442,3977
+C 15425,3960
+P 15127,4003 x15385 w=18              # bit 2
+P 15368,3986:15402,4020
+C 15385,4003
+P 15082,4047 x15428 w=18              # bit 3
+P 15411,4030:15445,4064
+C 15428,4047
+P 15124,4089 x15385 w=18              # bit 4
+P 15368,4073:15402,4107
+C 15385,4090
+# --- metal east, nested, to a five-wide cross-under at x 16382-16550 (follower; r9src2.png, r9e.png)
+M 15380,3919 x15557 y4000 x16555 y4178 w=12
+M 15425,3963 x15515 y4044 x16512 y4133 w=12
+M 15385,4007 x15472 y4096 x16468 y4178 w=12
+M 15430,4047 15432,4047 15432,4138 16425,4138 w=12
+M 15388,4090 15390,4090 15390,4186 16385,4186 w=12
+P 16533,4158:16567,4192
+C 16550,4175
+P 16490,4113:16524,4147
+C 16507,4130
+P 16448,4158:16482,4192
+C 16465,4175
+P 16405,4113:16439,4147
+C 16422,4130
+P 16365,4158:16399,4192
+C 16382,4175
+# --- poly south under two rails to pads at y 4390 / 4435
+P 16550,4175 y4390 w=18
+P 16533,4373:16567,4407
+C 16550,4390
+P 16507,4130 y4435 w=18
+P 16490,4418:16524,4452
+C 16507,4435
+P 16465,4175 y4390 w=18
+P 16448,4373:16482,4407
+C 16465,4390
+P 16422,4130 y4435 w=18
+P 16405,4418:16439,4452
+C 16422,4435
+P 16382,4175 y4390 w=18
+P 16365,4373:16399,4407
+C 16382,4390
+# --- metal south, east, south to each unit's output pad (follower; u9n.png, u9w.png, u9b.png)
+M 16555,4385 y4770 x17388 y5200 w=12
+M 16512,4430 y4808 x17344 y5460 w=12
+M 16469,4385 y4850 x17295 y5590 x17340 w=12
+M 16426,4430 y4900 x17258 y5718 x17335 w=12
+M 16386,4385 y4938 x17208 y5850 x17295 w=12
+
+# ===== the five units =====
+# The rail they sit under, x 17440-17495: followed north to y 4684, west along y 4670 and north
+# along x 16606 to the rails of the band in front of the RA pad drivers. Taken to be VSS (the
+# gates cross the diffusion under it; the loads' rail is the next one east): ASSUMPTION.
+M 17468,5150 y5900 w=54
+N M 17468,5250 vss
+# unit of bit 0 (flipped: output above its gate). Gate poly y 5325, from the north along x 17318.
+D 17440,5290:17490,5395               # output band above the gate, VSS box below (shared with the next unit)
+C 17458,5370
+D 17372,5272:17445,5310               # the band's arm west to the buried contact
+P 17363,5178:17397,5212
+C 17380,5195
+P 17380,5195 y5290 w=18
+?B 17369,5270:17392,5294
+N D 17465,5300 ra0_cmp
+# unit of bit 1. Gate poly y 5410.
+D 17440,5360:17490,5447
+D 17383,5432:17450,5468
+P 17318,5438:17352,5472
+C 17335,5455
+P 17335,5455 x17397 w=18
+?B 17383,5443:17400,5467
+N D 17465,5437 ra1_cmp
+# unit of bit 2. Gate poly y 5540.
+D 17440,5488:17490,5577
+C 17458,5505
+D 17383,5562:17450,5598
+P 17318,5568:17352,5602
+C 17335,5585
+P 17335,5585 x17397 w=18
+?B 17383,5573:17400,5597
+N D 17465,5567 ra2_cmp
+# unit of bit 3. Gate poly y 5670.
+D 17440,5618:17490,5707
+C 17458,5637
+D 17383,5690:17450,5728
+P 17313,5695:17347,5729
+C 17330,5712
+P 17330,5712 x17397 w=18
+?B 17383,5700:17400,5724
+N D 17465,5697 ra3_cmp
+# unit of bit 4. Gate poly y 5805.
+D 17440,5745:17490,5842
+C 17458,5767
+D 17383,5825:17450,5863
+P 17273,5828:17307,5862
+C 17290,5845
+P 17290,5845 x17397 w=18
+?B 17383,5833:17400,5857
+N D 17465,5832 ra4_cmp
+
+# ===== the units' inputs: five polys from pads at x 17095 / 17135, each fed by a metal from
+# the west along y 4981 ... 5155 (u9s.png, u9n.png, u9w.png) =====
+P 17118,4958:17152,4992
+C 17135,4975
+P 17135,4977 x17318 y5325 x17500 w=18
+M 15430,4981 x17140 w=12
+P 17078,5001:17112,5035
+C 17095,5018
+P 17095,5018 x17278 y5410 x17500 w=18
+M 15385,4762 y5025 x17100 w=12
+P 17118,5045:17152,5079
+C 17135,5062
+P 17135,5062 x17238 y5540 x17500 w=18
+M 15210,4807 x15342 y5068 x17140 w=12
+P 17078,5088:17112,5122
+C 17095,5105
+P 17095,5105 x17190 y5670 x17500 w=18
+M 16290,5111 x17100 w=12              # west end (16290,5109) not looked at
+P 17118,5133:17152,5167
+C 17135,5150
+?P 17135,5150 x17142 y5805 x17500 w=18   # its run south not seen end to end
+M 16202,5155 x17140 w=12              # west end (16202,5153) not looked at
+N M 16500,4981 ra0_drv_in
+N M 16500,5025 ra1_drv_in
+N M 16500,5068 ra2_drv_in_u
+N M 16500,5111 ra3_drv_in_u
+N M 16500,5155 ra4_drv_in_u
+
+# ===== the RA0 and RA1 pad drivers' input lines, from the pad cells to the units' input metals =====
+# (followed 2026-11-18, drawn 2026-11-20; views ra0_m.png, ra_end_m.png, ra_s.png, ra_t_a.png, ra_t_m.png
+# in cache/scratch/rdp1/)
+@requires pads_out
+# RA0: contact on the driver's input poly, metal west and south in three steps to a pad (15300,4125);
+# poly south along x 15303 through a pad (15305,4762) to y 4985, east to a pad (15430,4980).
+C 14935,2092
+M 14935,2092 x14730 y3376 x14996 y3838 x15299 y4130 w=13
+P 15283,4108:15317,4142
+C 15300,4125
+P 15303,4125 y4985 x15430 w=18
+P 15288,4745:15322,4779
+C 15305,4762
+M 15310,4764 x14335 w=12              # west to a pad (14340,4764); poly north from it into the band of
+P 14323,4747:14357,4781               #   cells in front of the pad drivers (NOT DRAWN further)
+C 14340,4764
+P 14340,4764 y4520 w=18
+P 15413,4963:15447,4997
+C 15430,4980
+# RA1: metal from the driver west along y 2095, a step down at x 14962, west, south in three steps to a
+# pad (15342,4175); poly south along x 15345 through a pad (15345,4590) to y 4762, east to a pad (15385,4762).
+C 16496,2092
+M 16496,2095 x14962 y2141 x14778 y3333 x15039 y3794 x15342 y4180 w=13
+P 15325,4158:15359,4192
+C 15342,4175
+P 15345,4175 y4762 x15385 w=18
+P 15328,4573:15362,4607
+C 15345,4590
+M 15350,4592 x14774 w=12              # west to x 14774 (end not looked at)
+P 15368,4745:15402,4779
+C 15385,4762

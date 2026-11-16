@@ -241,3 +241,13 @@ somewhere east. **Adopted** because the result is the complement that the centra
 datapath's comparator needs, found independently. Settle by tracing the unit's east
 half and the thin metal's two end pads.
 
+## AMB-012: the units that make R9's compare value are taken to be inverters under a VSS rail (2026-11-20)
+
+`notes/blocks/r9c.md`, "Assumptions". Drawn: one pull-down per unit from the output to
+the rail x 17440-17495, gate = an RA pad driver's input line. Not established: that the
+rail is VSS (not followed to a labelled rail) and that the unit has a load. If the rail
+were VCC the device would be a pull-up and `ra#_cmp` would follow `ra#_drv_in` instead of
+inverting it. **Adopted: VSS and a load**, by the layout rule (gates under the ground
+rail, load towards the other rail). Settle by tracing a unit's east half and following
+either rail to a labelled one.
+

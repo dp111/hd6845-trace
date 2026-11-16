@@ -40,7 +40,7 @@ All eleven reported by 2026-11-15 night; statuses below are final for the round.
 | `rax` | 7860-8110 x 4700-5470 | five identical units, one per selector output; output on a second pad at x 7836 (`rax_o#`) | partial (serial): the pull-down of each unit traced and extracted (5 transistors); taken to be inverters, AMB-011. Left: the load, the unit east of x 8000, the thin metals x 7902, 8027, 8068 (`notes/blocks/rax.md`) |
 | `rab` | 10510-15430 x 4300-6020 | `rax_o0`-`rax_o4` from the comparator's east end to the logic in front of the RA pad drivers | done (wiring only); ends listed in `notes/blocks/rab.md` |
 | `wrs` | 10870-14100 x 3290-17275 | the write strobes of R8, R9, R10, R11 from the strobe tracks to the central datapath's four register rows | done (wiring only): each joined to one row's strobe in the extraction. Identifies cdp1 row A = R8, row C = R9, cdp2 row A = R11, row C = R10 |
-| `r9c` | 10850-17500 x 3900-5850 | the five compare-value lines of R9's comparator, from `cdp1` east, under the RA drivers' inputs, to five units at x 17300-17500, y 5190-5850 near the right edge | not drawn; followed end to end except 400 px of two lines (`notes/blocks/wrs.md`). The five units are not traced: **they make the value R9 is compared with** |
+| `r9c` | 10840-17660 x 2090-5900 | what R9 is compared with: five units near the right edge driven by the RA pad drivers' input lines, their five output lines to `cdp1`'s comparator, and the RA0/RA1 driver lines | done for the wiring and the units' pull-downs (5 transistors; AMB-012): `ra#_cmp`. Left: the units' loads and east halves; RA2-RA4's lines to the pad cells (three open joins); the pad (17330,5800) |
 | rename | - | the nets of the four identified register rows (`cdp1_a#_*`, `cdp1_c#_*`, `cdp2_a_s#_*`, `cdp2_a_c_s#_*`, `cdp1_b*`) to register names | not done: they come from cell templates and tags; do it with the bit order of R8 and R9 settled |
 | `ral` | 13990-16330 x 4250-4560 | the stage in front of the RA pad drivers: five copies of one cell, pitch 434 (one gap of 563). **The same cell occurs fourteen times in the left array's left column (in front of the MA drivers) and once at (8449,5562)** | surveyed (`notes/blocks/ral.md`): ports read, cell not traced. Guess: a static latch on a strobe. Next: the cell device by device, then all twenty copies. High value: every address output passes through it |
 | `bd2` (rest) | 16370-16800 x 15400-16450 | the loads of the gate group right of the bundle, where `wr_data_e_n` goes, the gate band `bd2_x`, the right-hand column | not traced; observations of 2026-11-19 at the end of `notes/blocks/bd2.md`. **Decides what closes the write strobe when E falls** (jsbeeb issue 1866) |
@@ -95,7 +95,7 @@ the poly as salmon under where the metal was; `tools/strips.py --layer acid1b` a
 ## Open joins
 
 Wires labelled `NAME_u` are believed to be net NAME but are not joined to it by drawn
-geometry. `tools/build.py` prints the current list (12 on 2026-11-17, after the R0 and R1 match lines were joined). Each is closed by
+geometry. `tools/build.py` prints the current list (15 on 2026-11-20). Each is closed by
 tracing the stretch between the two pieces and renaming the label.
 
 | Names | Where the gap is |
@@ -104,6 +104,7 @@ tracing the stretch between the two pieces and renaming the label.
 | `h_eq_r2_u` | bus line G west of the counters: the R2 match line through the upper right datapath's undrawn bars (enters at (13425,9707)) |
 | `wr_r0_u`, `wr_r1_u`, `wr_r2_u`, `wr_r4_u` | the load strobes at the register rows: between the strobe channel's tracks and the latch rows |
 | `ck_a_u` | the horizontal counter's L3 line: poly from (12631,16954) to the `ck_a` bus line at (12740,18471), followed but not drawn |
+| `ra2_drv_in_u`, `ra3_drv_in_u`, `ra4_drv_in_u` | the inputs of the R9 compare units of bits 2-4: from the metals' west ends ((15210,4805) pad; (16290,5109); (16202,5153)) back to the pad cells' input polys |
 
 ## Queue
 

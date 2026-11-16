@@ -892,3 +892,23 @@ the RA pad drivers' input lines (followed, not drawn), not from the lines R10 us
 3. `bd2`: `wr_data_e_n`'s destination.
 4. The selector's gate lines; `rax`'s load; then as before.
 
+**Same day: what R9 is compared with.** The five compare-value lines of R9's comparator
+drawn end to end (`trace/r9c.txt`): they are the outputs of five units near the right
+edge, below the RA4 pad driver, whose gates are the pad drivers' input lines. The
+extraction joins each to one comparator input (bit 0 at slice 5 ... bit 4 at slice 1)
+and, for RA0 and RA1, the unit's gate to the pad cell's own input net. So R9 is compared
+with the row address at the pins, one stage later than R10. 2,024 nets, 3,385
+transistors, no errors; three new open joins (RA2-RA4's lines to the pad cells).
+
+Method: the same five-line bundle had been taken for "data bus interface" in the floor
+plan because it ends beside the data pads' column. A coarse floor-plan label that
+nobody traced is not evidence of anything.
+
+**Open, in the order I would take them**
+
+1. `tc1_b`, `tc1_g`, `tc1_i`: the three inputs that switch bit 0 of the R9 compare.
+2. The `ral` cell (twenty copies) and its strobe: it sits between R10's and R9's view of
+   the row address.
+3. `bd2`: `wr_data_e_n`'s destination. Then the selector's gate lines, the loads of `rax`
+   and of the R9 units, RA2-RA4's lines.
+

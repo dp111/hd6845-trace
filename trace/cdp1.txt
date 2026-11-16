@@ -380,27 +380,27 @@ M 10505,3985 y4018 w=20                # B line of slice 5
 C 10506,4006 s=24x24
 P 10488,3992:10522,4018
 P 10505,4003 x10850 w=16
-N P 10845,4003 cdp1_b5_b
+N P 10845,4003 ra0_cmp
 M 10115,3985 y4062 w=20                # slice 4
 C 10116,4049 s=24x24
 P 10098,4035:10132,4062
 P 10115,4046 x10850 w=16
-N P 10845,4046 cdp1_b4_b
+N P 10845,4046 ra1_cmp
 M 9725,3985 y4106 w=20                 # slice 3
 C 9724,4092 s=24x24
 P 9706,4078:9742,4106
 P 9724,4089 x10850 w=16
-N P 10845,4089 cdp1_b3_b
+N P 10845,4089 ra2_cmp
 M 9335,3985 y4150 w=20                 # slice 2
 C 9336,4138 s=24x24
 P 9316,4120:9352,4150
 P 9334,4132 x10850 w=16
-N P 10845,4132 cdp1_b2_b
+N P 10845,4132 ra3_cmp
 M 8945,3985 y4192 w=20                 # slice 1
 C 8946,4180 s=24x24
 P 8928,4165:8962,4192
 P 8945,4176 x10850 w=16
-N P 10845,4176 cdp1_b1_b
+N P 10845,4176 ra4_cmp
 
 # The bit line of row A's slice 3 ends in this channel on a poly line of its own, which
 # comes from the WEST: along y 4372 under slice 0, up at x 8664, east along y 4132 (in
