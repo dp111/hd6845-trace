@@ -978,3 +978,26 @@ the same bundle ends on that contact. Not drawn (`notes/blocks/r9m.md`).
 Also: `tools/unsure.py` (R12) finds 57 nets joined only through `?` items, among them
 the four nets of the write-strobe latch in `bd2`.
 
+## 2026-11-22: row address bit 0 in interlace sync and video comes from the row counter
+
+`trace/fld.txt`, `notes/blocks/fld.md`. 2,026 nets, 3,408 transistors, no errors.
+
+- The lower gate group west of the selector is **two copies of the comparator's XOR
+  cell** (`tools/findcell.py`, scores 0.88-0.91); instanced, ports checked on overlays.
+- Their A inputs traced end to end, 4,000-10,000 px each, through the central datapath's
+  channel 2: `ras_o0_alt1` = `rc0_n` XOR `fld_y_b`, where `rc0_n` is the inverter I2 of
+  the west logic and its input is **the character row counter's bit 0**; and the
+  comparator's bit-0 input `tc1_i` = NOT(`cnt_la_a_n` XOR `tc1_g`).
+- Channel 2 has a knot at x 7860-7960 where every line steps down one position. Taking
+  each y for one line gave the wrong sources at first; caught by looking at an apparent
+  gap in one line (R10 extended).
+
+Open ends on this path: `cnt_la_a` (R8: the metal x 12285 through the counter rows; its
+top piece ends at the bottom edge of `rc0`'s row), `fld_y_b`, `fld_a_in`, `ras_o0_alt2`.
+
+**Open, in the order I would take them**
+
+1. `fld_y_b`, `fld_a_in`, `ras_o0_alt2` to their sources; R8 in row r10.
+2. R9's match (`r9m`): draw it, settle AMB-013 through the bundle's first line.
+3. The `ral` cell and its strobe; loads of `rax` and of the R9 units; `bd2` (R12).
+

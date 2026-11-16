@@ -157,7 +157,7 @@ Eleven pass transistors between the scan line counter and five output nodes.
 | `ras_o#` | output bit # of the selector (# = 0-4). Expected to be the row address that goes to pin RA#; not yet followed to the pad |
 | `ras_straight` | NOT `ras_shift` (made in the island `tc1`): gate line (left poly band) of the five pass transistors `sl`# to `ras_o`# |
 | `ras_shift`, `ras_shift_n` | the mode line and its inverse: `ras_shift` = `cdp1_a4_q` AND `cdp1_a5_q`, two bits of R8 (believed bits 1 and 0: interlace sync and video), made by a NAND and an inverter below R8's row (`notes/blocks/shm.md`). Gate line (right poly band) of the four pass transistors `sl`# to `ras_o`(#+1), and input of the island `tc1` |
-| `ras_o0_alt1`, `ras_o0_alt2` | the two sources of `ras_o0` when `ras_shift` is high: `alt1` when R9's bit 0 is set, `alt2` when it is clear. Neither is traced to its driver: `alt1` goes from the pad (7078,5303) west in poly along y 5303; `alt2` ends on a pad (6922,4787) with a poly going west along y 4787 |
+| `ras_o0_alt1`, `ras_o0_alt2` | the two sources of `ras_o0` when `ras_shift` is high: `alt1` when R9's bit 0 is set, `alt2` when it is clear. `ras_o0_alt1` = `rc0_n` XOR `fld_y_b` (`notes/blocks/fld.md`). `alt2` ends on a pad (6922,4787) with a poly going west along y 4787; not traced |
 | `ras_o0_sel1`, `ras_o0_sel2` | made in the island `tc1`: `sel1` = `ras_shift` AND R9 bit 0, `sel2` = `ras_shift` AND NOT R9 bit 0. Gates of the pass transistors from `ras_o0_alt1` and `ras_o0_alt2` to `ras_o0`, and of the island's own AND-OR |
 | `rax_o#` | output of the unit that takes selector output `ras_o`# (# = 0-4): pulled to VSS by a transistor gated by `ras_o`#; with the unit's load, not traced, NOT `ras_o`# (AMB-011), the complement of the row address. Each runs from its unit's pad at x 7836 through the nest of metals, along a line of the central datapath's channel 1 (the comparator's through track: `cdp2_trk_s7` is `rax_o0` ... `cdp2_trk_s4` is `rax_o3`), north along x 10981-11154, under the supply metal at y 4331-4500 and east to the logic in front of the RA pad drivers (`notes/blocks/rab.md`) |
 
@@ -184,7 +184,7 @@ Eleven pass transistors between the scan line counter and five output nodes.
 | `rcs_mu`, `rcs_mv` | the two inputs of the NOR that makes `rcs_in1` (middle cluster): bus pieces of the second bus field (x 4192). `rcs_mu` = NOT `rcs_bq3335` (an inverter at y 3413); `rcs_mv` comes from a poly that leaves the bus field east and south at (4283,4745) |
 | `rcs_mn#` | output of a unit of the middle cluster, by the y of its output (`rcs_mn3852` = NOR(?, `rcs_in1`)) |
 | `rcs_thin_e`, `rcs_thin_w` | two thin metals down the cluster, over the loads; what they join is not read |
-| `wl_i#_in`, `wl_i#_out` | input and output of the unidentified inverter I2 west of the counters |
+| `rc0_n` | NOT `rc0`: output of the inverter I2 west of the counters, whose input was traced to the row counter's bit 0 on 2026-11-22 (its two nets had place names until then: see Former names). One input of the XOR that makes `ras_o0_alt1` |
 | `wl_h#` | horizontal poly bands H0 and H1 above the counters; not identified |
 
 ## Registers, comparators and their results
@@ -300,8 +300,8 @@ Row tags `s0` ... `s13` are rows from the top; which MA bit each is has not been
 |---|---|
 | `tc1_l4_out`, `tc1_r#_out` | the island's remaining internal outputs: `tc1_r1_out` = NOT R9 bit 0; `tc1_r2_out` = NOR(R9 bit 0, `ras_shift`); `tc1_r5_out` = NOT((`tc1_i` AND `ras_o0_sel1`) OR (`tc1_g` AND `ras_o0_sel2`)), `tc1_r4_out` its inverse; `tc1_l4_out` = NOR(`ras_o0_sel2`, `tc1_w1`), leaves west |
 | `tc1_g`, `tc1_i`, `tc1_w#`, `tc1_x#` | the island's other inputs and channel lines. `tc1_g` and `tc1_i` are used where the selector uses `ras_o0_alt2` and `ras_o0_alt1`; each is the output of a small inverter west of the selector (`notes/blocks/fld.md`), and they are **not** shown to be the selector's two nets |
-| `fld_a_in`, `fld_b_in` | gates of the two inverters whose outputs are `tc1_g` and `tc1_i` (`notes/blocks/fld.md`). `fld_a_in`: a poly along y 4910 from the west, source not traced. `fld_b_in` = `fld_x_a` XOR `tc1_g` (output of the first XOR cell) |
-| `fld_x_a`, `fld_y_a`, `fld_y_b` | inputs of the two XOR cells west of the selector (x = first cell, y = second; `_a` the poly input, `_b` the metal input; the first cell's `_b` is `tc1_g`). `ras_o0_alt1` = `fld_y_a` XOR `fld_y_b`. Sources not traced |
+| `fld_a_in`, `fld_b_in` | gates of the two inverters whose outputs are `tc1_g` and `tc1_i` (`notes/blocks/fld.md`). `fld_a_in`: a poly along y 4910 from the west, source not traced. `fld_b_in` = `cnt_la_a_n` XOR `tc1_g` (output of the first XOR cell) |
+| `fld_y_b` | the metal input of the second XOR cell west of the selector: `ras_o0_alt1` = `rc0_n` XOR `fld_y_b`. From a pad (6660,6085) a poly west; source not traced |
 | `cdp1_fx_n2`, `cdp1_fy_n2`, `cdp1_fx_b`, `cdp1_fy_b` | names that the comparator cell's template gives the two copies west of the selector: `_n2` the cell's internal NOR of its inputs; `cdp1_fx_b` is an alias of `tc1_g`, `cdp1_fy_b` of `fld_y_b` |
 | `tc1_ns#` | north-south lines ns1-ns6 east of the island |
 | `bc1_s#`, `bc1_s#_n` | the two bus lines the 2-bit decoder decodes, and their inverses |
@@ -845,3 +845,7 @@ datapath s1...s7, s0 became b0...b6, b7.
 | tc1_l3_out | ras_o0_sel1 | |
 | tc1_ns6 | cdp1_a5_q | |
 | tc1_ns5 | cdp1_a4_q | |
+| fld_x_a | cnt_la_a_n | |
+| fld_y_a | rc0_n | via wl_i2_out |
+| wl_i2_in | rc0 | |
+| wl_i2_out | rc0_n | |

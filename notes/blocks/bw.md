@@ -42,8 +42,8 @@ under the metal x 7300-7322. Read with `tools/classmap.py --open`.
 
 ## Other things seen at the bus field's top (not drawn)
 
-- `wl_i2_out` (poly y 7441-7462) ends at a contact (11022,7432) under a metal x 11010-11035
-  that goes north; `wl_i2_in` (poly y 7486-7508) ends at a contact (11022,7503) under a
+- `rc0_n` (poly y 7441-7462) ends at a contact (11022,7432) under a metal x 11010-11035
+  that goes north; `rc0` (poly y 7486-7508) ends at a contact (11022,7503) under a
   metal x 11010-11032 that goes **south**, stepping one pitch east at y 7600-7650, at
   y 8580-8640 and again at y 9280-9320, and on down the bus field.
 - The load strobe of cdp2's row C (`wr_r10`, poly y 7790-7808) ends at a contact

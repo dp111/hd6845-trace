@@ -509,3 +509,14 @@ By their load strobes, followed to the strobe tracks and joined in the extractio
 above is now a traced result, subject only to the decoder's numbering of its select
 lines. Row B therefore compares R10's five low bits with the row address lines `rax_o#`.
 
+## Channel 2 west of the slices: a knot (2026-11-22)
+
+Found while tracing two lines through it (`notes/blocks/fld.md`): at x 7860-7960 every
+line of channel 2 steps down one position by nested bends (6714 to 6756, 6756 to 6802,
+6802 to 6844, and by the same rule 6844 to 6888), and east of the knot the top position
+(y 6714) carries other nets (a piece between pads at x 8165 and 8320; from x 8700 the line
+of `wl_h0`, which ends on a pad (11060,6712)). Identified so far, east of the knot: y 6756
+`rc0_n`, y 6802 `cnt_la_a_n`. The line at y 6888 that this block traced as its
+comparator's chain output is, west of the knot, the line at y 6844, which goes to a pad
+(7330,6845) and on west and north along x 6840 (not drawn).
+

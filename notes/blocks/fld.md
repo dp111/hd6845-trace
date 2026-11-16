@@ -45,15 +45,15 @@ Rails: west VSS x 6575-6625, VCC x 6800-6840, east VSS x 6978-7028 with the cont
 the next slice provides in the comparator rows ((7005,5615) and (7005,5962), rings in the
 metal shot). 14 transistors. From the extraction:
 
-    fld_b_in    = fld_x_a XOR tc1_g         (first cell)      tc1_i = NOT fld_b_in
-    ras_o0_alt1 = fld_y_a XOR fld_y_b       (second cell)
+    fld_b_in    = cnt_la_a_n XOR tc1_g         (first cell)      tc1_i = NOT fld_b_in
+    ras_o0_alt1 = rc0_n XOR fld_y_b       (second cell)
 
 Ports:
 
 | Cell | Input B (metal x 6754, two pads) | Input A (poly x 6919-6942) | Output "ne" |
 |---|---|---|---|
-| first | `tc1_g`: its metal from the pad (6660,4958) comes down x 6665, a diagonal, x 6753 onto the upper pad (6752,5428) | `fld_x_a`: pad (6925,5718), metal west and south along x 6885 to a pad (6880,6062), poly south along x 6882 | a poly comes down x 6665 from the line along y 5345 (`fld_b_in`, the lower inverter's gate line) onto the cell's output diffusion |
-| second | `fld_y_b`: the metal goes on south to y 6085 and west to a pad (6660,6085), poly west | `fld_y_a`: the poly goes on south along x 6930 | a poly comes down from the pad (6662,5712) at the end of `ras_o0_alt1`'s metal |
+| first | `tc1_g`: its metal from the pad (6660,4958) comes down x 6665, a diagonal, x 6753 onto the upper pad (6752,5428) | `cnt_la_a_n`: pad (6925,5718), metal west and south along x 6885 to a pad (6880,6062), poly south along x 6882 | a poly comes down x 6665 from the line along y 5345 (`fld_b_in`, the lower inverter's gate line) onto the cell's output diffusion |
+| second | `fld_y_b`: the metal goes on south to y 6085 and west to a pad (6660,6085), poly west | `rc0_n`: the poly goes on south along x 6930 | a poly comes down from the pad (6662,5712) at the end of `ras_o0_alt1`'s metal |
 
 **Assumption (trap 17), both cells**: the buried contact between the poly that arrives
 from above and the output diffusion is not resolved in any shot (`?B`). It is placed
@@ -63,8 +63,55 @@ cell's output diffusion carries no label of its own).
 
 So, as traced: the line that can become row address bit 0 when R9's bit 0 is set is
 the XOR of two signals, and the comparator's bit-0 input for the same case is the XOR of
-the upper inverter's output with a third signal. None of `fld_x_a`, `fld_y_a`,
+the upper inverter's output with a third signal. None of `cnt_la_a_n`, `rc0_n`,
 `fld_y_b`, `fld_a_in`, `ras_o0_alt2` is traced to its source.
+
+## The XOR cells' A inputs, traced to their sources (2026-11-22; drawn, extracted)
+
+    fld_b_in    = cnt_la_a_n XOR tc1_g           tc1_i = NOT fld_b_in
+    ras_o0_alt1 = rc0_n XOR fld_y_b              rc0_n = NOT rc0
+
+**Row address bit 0, in shift mode with R9's bit 0 set, is the XOR of the inverted bit 0
+of the character row counter with one more signal** (`fld_y_b`, not traced). That is
+the shape interlace sync and video needs when a character row has an odd number of scan
+lines: the parity of the lines flips from one row to the next.
+
+Route of both inputs (views `fxs.png`, `fxs2.png`, `ch2lines.png`, `l6714a.png`,
+`l6714c.png`, `l6756end.png`, `l6756w.png`, `knot_a.png`, `knot_c.png`, `l6802.png`,
+`ch2e.png`, `ch2e_m.png`, `i2.png`, `i2in.png`, `i2end.png`):
+
+1. From the cells the two polys run south (x 6882 and x 6930) to y 6600, south-east on
+   parallel diagonals, and east as two lines of the central datapath's channel 2
+   (y 6756 and y 6712).
+2. **At x 7860-7960 every line of channel 2 steps down one position** (nested bends):
+   6714 becomes 6756, 6756 becomes 6802, 6802 becomes 6844. Read at 6.5x in both
+   stripped shots; the chip-2 shot shows the two lower bends plainly (orange poly with
+   its outlines), the clean shot shows that the line at y 6756 west of the knot does not
+   pass under the thin metal x 7910-7935 (pink there) while the one at y 6712 does. The
+   first reading at 1.2x took each y for one line, which gave the two inputs the wrong
+   sources (the same trap as R10: one y, two nets). East of the knot the top position
+   (y 6714) carries other nets: a piece between pads (8165,6700) and (8320,6700), and from
+   x 8700 the line of `wl_h0`.
+3. East of the knot both lines run through the channel unbroken (strips at 1.2-1.5x) to
+   pads at its east end: (11085,6800) and (11020,6755).
+4. From (11085,6800) a metal south along x 11088 onto the metal of `cnt_la_a_n`
+   (`trace/wl.txt`: the inverter I1's output, NOT `cnt_la_a`). From (11020,6755) a metal
+   south along x 11025 to a pad (11022,7432) at the west end of the output poly of the
+   inverter I2 of `wl`.
+5. I2's input: from the pad (11022,7495) a metal runs south one track east of `wr_r8`
+   (same nest, three 44 px steps and the long diagonal), down x 11592 to a pad
+   (11585,12460) on the poly that `trace/mra.txt` draws from x 11690 as `rc0`. So I2's
+   nets are `rc0` and `rc0_n` (renamed from the place names they had).
+
+The extraction made exactly three joins (2,029 to 2,026 nets); `tools/unsure.py` finds
+no `?` item on any of them.
+
+**`cnt_la_a` is the open end.** It is the top piece of the metal x 12285 through the
+counter rows (re-read item R8: no contact found on it). That piece runs from y 7110 to
+y 12885, which is the bottom edge of row r10, the row of `rc0`; in the same row the cell's
+node `rc0_q_n` lies under it. If its source is in that row (the slave side of bit 0),
+the two XOR cells take the two phases of the same counter bit. Not established: a 2.6x
+look at the row in three shots (`la_r10.png`) does not show a pad on the metal.
 
 ## Followed, not drawn
 
@@ -74,7 +121,7 @@ the upper inverter's output with a third signal. None of `fld_x_a`, `fld_y_a`,
   (6540,5095), (6540,5255) with a poly foot beside each (from a pad (6447,5045) with a
   metal from the north, and from the south along x 6435), a buried contact box at
   (6495,5180) between them, polys under the thin metals x 6400 and x 6660.
-- `fld_x_a` south of (6882,6220), `fld_y_a` south of (6930,6220), `fld_y_b` west of
+- `cnt_la_a_n` south of (6882,6220), `rc0_n` south of (6930,6220), `fld_y_b` west of
   (6560,6085), `fld_b_in`'s line west of (6560,5345), `fld_a_in`'s line (y 4910) west.
 
 ## Not done

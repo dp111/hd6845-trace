@@ -90,7 +90,9 @@ i2_out   = NOT i2_in       (42/22, load 30/38)   y 7440-7550, mirror image
   then the inverter's input is unknown. The inverter's output goes by a
   buried contact, a poly, the metal x 11277-11297 and band H2's west piece to a contact
   (11092,7122) and leaves north on the metal x 11080-11100.
-- I2 takes its input from the bus field on the poly y 7486-7508 and returns its output
+- I2 (input `rc0`, the row counter's bit 0, traced 2026-11-22 in `trace/fld.txt`; output
+  `rc0_n`, which goes to the XOR cell that makes row address bit 0 in interlace sync and
+  video, `notes/blocks/fld.md`) takes its input from the bus field on the poly y 7486-7508 and returns its output
   there on the poly y 7441-7462.
 
 ## Wiring through the block
@@ -142,7 +144,7 @@ here, and a signal on bus line B passes between the bus field and the upper righ
 | `rc_ck_s` | M | (11655,9315) | out | slave clock of the row counter |
 | `rc_ck_m` | P | (11640,9360) | out | master clock of the row counter |
 | `rc_stepreq_n` | P | (11040,7926) | in | from the bus field: NOT (row counter step), while `a` is low |
-| `wl_i2_in`, `wl_i2_out` | P | (11040,7497), (11040,7451) | in, out | inverter I2 |
+| `rc0`, `rc0_n` | P | (11040,7497), (11040,7451) | in, out | inverter I2 |
 | `cnt_la_a_n` | M | (11090,6930) | out | NOT `cnt_la_a`, leaves north |
 | `cnt_gab` | P / M | (11040,7211); (11390,6930) | ? | band H4: from the bus field, and a branch north |
 | `wl_h0` | P | (11353,6930); (12360,6952) | ? | band H0 |

@@ -86,7 +86,7 @@ M 6665,4954 6665,5300 6735,5368 6753,5368 6753,5430 w=13
 P 6908,5701:6942,5735
 C 6925,5718
 M 6925,5720 x6885 y6070 w=11
-N M 6885,5900 fld_x_a
+N M 6885,5900 cnt_la_a_n
 # output: the cell's diffusion "ne" at (6623-6689, 5436-5456). In the comparator a buried contact
 # there takes it to the NOR's gate; here a poly comes down x 6665 to that spot from the line along
 # y 5345, which is the gate line of the lower inverter above (fld_b_in). The buried contact itself
@@ -120,10 +120,10 @@ P 6643,6068:6677,6102
 C 6660,6085
 P 6660,6085 x6560 w=18
 N P 6600,6085 fld_y_b
-# input A: the cell's poly goes on south along x 6930 (NOT DRAWN beyond y 6220)
+# input A: the cell's poly goes on south along x 6930 (route below)
 P 6930,6060 y6220 w=18
-N P 6930,6150 fld_y_a
-# the first cell's input A (fld_x_a): its metal ends on a pad (6880,6062); poly south along x 6882
+N P 6930,6150 rc0_n
+# the first cell's input A (cnt_la_a_n): its metal ends on a pad (6880,6062); poly south along x 6882
 # (NOT DRAWN beyond y 6220)
 P 6863,6045:6897,6079
 C 6880,6062
@@ -133,3 +133,41 @@ P 6882,6062 y6220 w=18
 P 6662,5712 y5800 w=16
 ?B 6652,5781:6680,5805
 
+# ===== the two A inputs to their sources (2026-11-22) =====
+# Both polys run south to y 6600, south-east on parallel diagonals, and east as two lines of the
+# central datapath's channel 2. At x 7860-7960 every line of that channel STEPS DOWN ONE POSITION
+# (a knot of nested bends, read at 6.5x in both stripped shots: cache/scratch/rax/knot_a.png,
+# knot_c.png, l6714c.png): the line at y 6714 west of the knot is the line at y 6756 east of it,
+# 6756 becomes 6802, 6802 becomes 6844. East of the knot they run through the channel without a
+# break (strips ch2lines.png, l6802.png) to pads at its east end (ch2e.png, ch2e_m.png).
+@requires wl
+# first cell's input A: line 6756 west = line 6802 east; pad (11085,6800); metal south along
+# x 11088 onto the metal of cnt_la_a_n (trace/wl.txt: band H2's west contact (11092,7122))
+P 6882,6220 6882,6605 7032,6756 7908,6756 7908,6800 11085,6800 w=18
+P 11068,6783:11102,6817
+C 11085,6800
+M 11088,6800 y6940 w=12
+# second cell's input A: line 6714 west = line 6756 east; pad (11020,6755); metal south along
+# x 11025 to a pad (11022,7432) at the west end of the poly rc0_n (trace/wl.txt)
+P 6930,6220 6930,6590 7052,6712 7948,6712 7948,6756 11020,6756 w=18
+P 11003,6738:11037,6772
+C 11020,6755
+M 11025,6755 y7437 w=12
+P 11005,7415:11045,7462
+C 11022,7432
+
+
+# ===== the input of the inverter I2 (rc0) is the row counter's bit 0 =====
+# From the pad (11022,7495) at the west end of I2's input poly (trace/wl.txt) a metal runs south,
+# one track east of wr_r8 all the way (the same nest: 44 px steps east at y 7606-7652, 8583-8627
+# and 9277-9321, the long diagonal at y 10144-10579), down x 11592 to a pad (11585,12460) at the
+# west end of the poly that trace/mra.txt draws from x 11690 as rc0 (row r10's output).
+# tools/follow.py in two runs (it loses the line at the second step, over two poly bands), steps
+# located with --max; both ends on 3.2-3.4x views (cache/scratch/rax/i2.png, i2in.png, i2end.png).
+@requires mra
+P 11005,7478:11045,7512
+C 11022,7495
+M 11025,7498 11025,7606 11069,7652 11069,8583 11113,8627 11113,9277 11157,9321 11157,10144 11592,10579 11592,12466 w=12
+P 11568,12443:11602,12477
+C 11585,12460
+P 11585,12458 x11700 w=18
