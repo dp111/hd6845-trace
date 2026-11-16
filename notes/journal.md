@@ -608,3 +608,67 @@ Not renamed: the central datapath rows, the left array and the two small logic b
 whose registers have no numbers yet. Their names stay by place and are described in the
 glossary.
 
+## 2026-11-17 (unsupervised) Floor plan, names, and the step logic two more levels deep
+
+Serial, no agents (user: "while unsupervised, just work serially"). The user asked for the
+floor-plan labels to be tidied, for tracing to continue, and "let's see if later on new
+discoveries reveal the nature of e4". Full extraction at the end: see the ship line
+(2,810 transistors at the last build, 0 errors, 0 warnings).
+
+**Housekeeping done**
+
+- Floor plan: labels are placed inside their own block clear of smaller blocks and of each
+  other; blocks too small for a name get a number and a legend panel; names made consistent;
+  superseded coarse blocks dropped; `out/floorplan_legend.txt` lists every block as text.
+- Signal names: see the entry above ("Signal names"). The glossary check is part of the
+  build and stays at zero uncovered names.
+- Two open joins closed by drawing them: `h_eq_r0` and `h_eq_r1` between the right
+  datapath and the strobe channel. `h_eq_r1` and `inh_lat` followed on, through the bottom
+  bus field, to poly lines entering the bottom-centre logic at (10940,17598).
+
+**The step logic (block `tla`)**
+
+- Corrected formula: **step = in1 OR (NOT e4 AND NOT (e3 AND a2))**. `b1` has a third
+  pull-down that the first pass missed (a strap from an inverter of NOR(e3,e4) to a gate
+  hidden under a thin metal), which removes `x1` from the step.
+- `in1` = NOR(`rcs_mu`, `rcs_mv`) is made in the middle cluster (x 3450-4110), a twin of the
+  first; `rcs_mu` is an inverter there.
+- The step condition does not only go to the step gate. `rcs_cond` = NOT e4 AND NOT(e3 AND
+  a2) is sampled by a pass transistor into a dynamic latch (`rcs_cond_lat`) and gated into
+  an AND-OR-INVERT (`rcs_n4200`) by a strobe, `rcs_bb3807` (one junction of this is
+  AMB-009).
+- That strobe was followed to its far end: 4,500 px, out of the cluster's foot and south
+  down x 2457 to the **left column beside upper row 2 of the left array** (`larr`).
+- So the vertical logic is: three gate clusters at x 2450-5050, y 2950-5450, plus the nine
+  upper rows of the left array and their left column. About 34 of perhaps 75 gates of the
+  clusters are not traced; the upper rows are not traced at all.
+
+**e4**: still not identified. Nothing found today names it. Its driver is not in the
+first cluster; every contact on its 17,000 px is a gate.
+
+**Method notes**
+
+- Where no metal lies over a structure, read it in the **chip-2 shots at 6-7x**: poly bands
+  are crisp, and a diffusion edge shows as a dark line running across the bands. The clean
+  shot is poor there (it is the shot for what was under metal).
+- A poly that ends inside a diffusion without crossing it, inside a ring, is a buried
+  contact; one that crosses with the diffusion's edge lines visible through it is a gate.
+  Class runs down the diffusion (`classmap.classify` on a 7 px column) tell the two apart
+  where a thin metal hides them.
+- Check a newly extracted gate for sense. `rcs_cond` first came out as NOR(strobe, m2)
+  feeding a gate with the term (strobe AND that NOR), which can never be true: that is
+  what exposed the pass transistor reading.
+- `tools/follow.py` now stops when it returns to a corner it has turned (it was started on
+  a wide rail and looped).
+
+**Open, in the order I would take them**
+
+1. The left column beside the upper rows of the left array (x 2480-2860, y 6700-10900) and
+   those nine rows: where `rcs_bb3807` comes from. With them the scan-line side of the
+   vertical logic should become nameable, and through it e3, a2 and e4.
+2. The remaining units of the three clusters, unit by unit (first cluster: y 3690-3800,
+   4320-4535, 4830-5330 east; the whole west column above y 4940).
+3. The gate column of the strobe channel (y 15860-16125), where `h_eq_r0` is sampled on
+   `ck_out`: observations are in `notes/blocks/bd1.md`.
+4. The bottom-centre logic, which receives `h_eq_r1`, `inh_lat` and e4.
+

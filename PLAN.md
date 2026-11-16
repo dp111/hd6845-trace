@@ -13,15 +13,18 @@ Goal: recover the complete internal logic of the Hitachi HD6845S CRTC (die marki
 
 Status (2026-11-16): M0 done. M1 done except the data pad cell and pad-ring
 wiring. M2 largely done (strobe latch and decode traced; data bus interface partly).
-M3 well under way: 2,789 transistors traced in twenty-one blocks. The mid-right array is
+M3 well under way: 2,810 transistors traced in twenty-one blocks. The mid-right array is
 identified as the counters (horizontal 8 bits, character row 7 bits, one of 4 bits) and
 their outputs are joined by geometry to the R0, R1, R2 comparators. M4 started: the row
 counter's clock generator is traced (two non-overlapping clocks from one step pulse
-p = NOR(a, b)); a is the core signal that also stops ck_b; b has been followed 9,000 px to
-a gate cluster in the top-left logic, where seven gates give
-step = in1 OR (NOT e4 AND ((x1 AND NOT a2) OR NOT e3)). The five inputs come from the bus
-fields and are not identified yet; that cluster and its buses are the current target. A
-"Re-read list" of earlier work to be checked again is kept in `notes/work-packages.md`.
+`rc_step` = NOR(`inh_rc`, `rc_stepreq_n`)); the step request is made in the top-left
+logic: step = in1 OR (NOT e4 AND NOT (e3 AND a2)), with the condition also latched on a
+strobe that comes from beside the upper rows of the left array. The inputs are not
+identified yet. The vertical logic is three gate clusters (x 2450-5050, y 2950-5450) plus
+those upper rows; it is the current target. A "Re-read list" of earlier work to be
+checked again is kept in `notes/work-packages.md`.
+Signal names follow `notes/signals.md` (glossary of every net name, checked by the build;
+names ending in `_u` are joins still to be drawn).
 
 ## 1. What reconnaissance established
 

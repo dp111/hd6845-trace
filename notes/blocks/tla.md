@@ -101,8 +101,12 @@ the condition is also remembered. Where `rcs_bb3807`, `rcs_cond_lat` and `rcs_n4
 is the next thing to trace in this cluster. `rcs_bb3807` has been followed: four gate
 contacts on bus line B (y 3810: a unit at y 3765 not yet drawn; y 4160; y 4410: the unit at
 y 4320-4535 not yet drawn; y 4548), then by a poly east onto a piece of bus line D down to
-(3240,5587), where a poly leaves west towards the small cluster below (y 5450-6300): its
-driver is there. The column was read from the chip-2 shots at
+(3240,5587), then west on a poly along y 5587 under the cluster's foot to (2458,5587), and
+2,240 px south on a thin metal at x 2457 to a contact (2456,7822), whose poly ends in a
+heavy-outlined box at (2552,7872) in the **left column beside upper row 2 of the left
+array** (`larr`'s untraced left column). So the strobe that samples the step condition
+comes from (or goes to) the cells beside the nine upper rows of the left array: those rows
+and their left column belong to the vertical logic and should be traced with it. The column was read from the chip-2 shots at
 7x: where no metal lies over it, they show the poly bands and the diffusion edges (as
 lines across the bands) far more clearly than the clean shot.
 

@@ -51,6 +51,7 @@
 -	pad	34 RA4	18420,4270:19180,5030	pin 34, RA4
 -	?array	rows D and E (5 cells)	8750,5150:10790,5700	not traced
 -	?logic	logic above the counters	11400,5250:13050,6450	small array, 4 or so columns
+-	route	poly lines under the foot of the step logic cluster	2440,5370:3270,5640	six horizontal poly lines joining the bus lines west and east of the cluster; one carries the strobe rcs_bb3807 west
 -	?route	second crossing field	3400,5480:5860,5700	horizontal poly lines over vertical metals; the step signal b crosses it on the poly y 5585
 -	route	comparator operand lines	8480,5720:10850,6020	five long poly lines carry a 5-bit value to the through tracks of the slices, which take it up to the rows above and down to the comparator below; the q tracks of the latch row cross them
 -	?logic	data bus interface column	17050,5300:17700,17000	column of logic beside the D0-D7 pads

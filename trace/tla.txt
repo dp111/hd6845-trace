@@ -673,4 +673,14 @@ C 3228,4548
 M 3239,4534 y5600 w=20
 P 3222,5570:3262,5604
 C 3240,5587
-P 3170,5576:3230,5598
+P 2470,5576:3230,5598                 # ... all the way west under the cluster's foot to a pad with a contact (2458,5587)
+P 2440,5570:2478,5604
+C 2458,5587
+# from there a thin metal x 2448-2468 runs SOUTH 2,240 px (follow.py; six contact candidates at
+# y 7041-7416 not looked at) to a contact (2456,7822); its pad's poly goes down and east along
+# y 7850-7880 to a heavy-outlined box at (2552,7872) and on east as a thin line under the rail
+# x 2610-2660: into the left column beside upper row 2 of the left array (larr, not traced).
+M 2457,5573 y7836 w=18
+P 2438,7802:2478,7842
+C 2456,7822
+P 2450,7835 y7865 x2552 w=24
