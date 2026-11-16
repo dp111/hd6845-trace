@@ -10,7 +10,7 @@ signals `rcs_in1` ... `rcs_m2` (`rcs_` = row counter step logic), and the step s
 
 ## Status
 
-Ten gates traced and extracted (28 transistors, no errors); the rest of the cluster is
+Thirteen gates traced and extracted (34 transistors, no errors); the rest of the cluster is
 surveyed only. The cluster runs from y 2940 to y 5330.
 
 ```
@@ -55,6 +55,27 @@ rcs_u3288  = NOR(rcs_g3245, rcs_bd3330)   unit at y 3288. Output up bus line C's
 
 Bus pieces now drawn: A1, A2, B (two pieces), C (top, upper, middle), D (y 3330-4380),
 E (one piece y 2722-5158, three contacts), G upper.
+
+**Where `in1` comes from (2026-11-17, extracted).** `in1`'s metal (bus line G of the first
+field, the poly y 2768, then down the second bus field at x 4268-4290) ends on the output
+of a unit of the **middle cluster** (x 3450-4110, the same construction 1042 px east: VCC
+rail x 3824-3868, thin metal x 3948-3962, VSS rail x 3992-4041, units on a column east of
+the VSS rail):
+
+```
+in1        = NOR(rcs_mu, rcs_mv)      unit at (4081,4072), with its load
+rcs_mu     = NOT rcs_bq3335           inverter at (4050,3374): one gate, under the rail and on the column
+rcs_mn3852 = NOR(?, in1)              the unit above in1's: in1 is one of its gates; output up x 4233 to y 2852
+```
+
+`rcs_mv` is a bus piece (x 4192, y 4112-4748) whose far end is a poly that leaves east and
+south at (4283,4745); `rcs_bq3335` is a bus piece (x 4148, y 3320-3596). `e3`'s metal goes
+east along y 2728 to x 4496, south to a contact (4490,3805), and on east in poly along
+y 3805: towards the **right cluster** (x 4650-5050).
+
+So the step logic is spread over all three clusters. They are one block of about 75 small
+gates and three bus fields, and they are being traced unit by unit from here on (no more
+chasing of single signals).
 
 ## How the row counter's step signal gets here
 

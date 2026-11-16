@@ -5,3 +5,6 @@
 3400,5480:5860,5700   ?route  second crossing field | horizontal poly lines over vertical metals; the step signal b crosses it on the poly y 5585
 5080,5830:5300,6870   route   poly bus (RES, LPSTB, e4 and two more) | vertical poly lines taking signals from the top-left logic south: lines 3, 4, 5 are RES (buffered), LPSTB (buffered) and the unidentified control line e4; lines 1, 2 not identified
 5280,6850:6170,7360   ?route  diagonal fan | the five lines of the poly bus turn south-east and then east to pads at x 6130-6165, where horizontal metals take them on
+3440,3040:4120,5500   ?logic  middle cluster of the vertical control | same construction as the step logic cluster, 1042 px east: small NOR gates on a column beside a VSS rail. Three gates traced (the one that makes in1 of the step gate, an inverter, and a NOR that takes in1)
+4120,2600:4430,5500   ?route  second bus field | seven vertical metal positions, in pieces, between the middle and right clusters; five pieces drawn
+4640,2950:5060,5450   ?logic  right cluster of the vertical control | not traced; one input of the step logic comes from here on a poly at y 3805

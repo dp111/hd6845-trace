@@ -466,9 +466,9 @@ B 2908,3932:2932,3959
 # Middle cluster (x 3450-4110): the same construction as the first, 1042 px east. Rails:
 # VCC x 3824-3868, thin metal x 3948-3962, VSS x 3992-4041; units on a diffusion column just
 # east of the VSS rail (x 4052-4110), their loads between the rails.
-M 4017,3700 y4250 w=50               # VSS rail (extent: drawn locally only)
+M 4017,3050 y5300 w=50               # VSS rail (ends not looked at: extent from the 0.3x overview)
 N M 4017,4000 vss
-M 3846,3700 y4250 w=44               # VCC rail (drawn locally only)
+M 3846,3040 y5497 w=44               # VCC rail (extent from a profile of its centre line)
 N M 3846,4000 vcc
 
 # ---- rcs_in1 = NOR(rcs_mu, rcs_mv): east column, node y 3952-4098
@@ -525,3 +525,24 @@ N M 4233,3300 rcs_mn3852
 P 4045,3883:4260,3902
 P 4252,3876:4290,3910
 C 4270,3893
+
+# ---- rcs_mu = NOT rcs_bq3335: an inverter. One gate (y 3363-3385) that is a pull-down both
+# under the VSS rail (between the rail's box, contact (4030,3350), and the node's strip
+# y 3393-3415, which runs on west under the rail to its load: not drawn) and on the column
+# east of the rail. Below the node east of the rail is field (classmap --open), so there is no
+# second pull-down. Output by the buried contact and a poly east to the top contact (4192,3413)
+# of mu's bus piece.
+D 4008,3320:4052,3420
+C 4030,3348 s=28x26
+D 4050,3340:4092,3436
+B 4078,3398:4116,3432
+D 4082,3400:4114,3430
+P 4088,3408:4180,3428
+P 4174,3398:4210,3430
+C 4192,3413
+D 3960,3393:4012,3415                 # the node's strip going west under the rail (to its load, not drawn)
+P 3995,3363:4142,3385
+P 4132,3318:4166,3388                 # stem up to the pad, contact (4148,3335)
+C 4148,3335
+M 4148,3320 y3596 w=20                # bus piece x 4138-4160, y 3320-3596 (follow.py; bottom end not looked at)
+N M 4148,3500 rcs_bq3335
