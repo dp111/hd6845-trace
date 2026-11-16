@@ -347,6 +347,8 @@
 <text x="2876" y="14412" font-family="sans-serif" font-size="71" fill="#ffffff" stroke="#000000" stroke-width="7" paint-order="stroke">carry gap 1 ?</text>
 <rect x="11150" y="18600" width="1000" height="400" fill="#ff5050" fill-opacity="0.10" stroke="#ff5050" stroke-width="10"><title>clock gate row: six inverters: two pairs delay each clock phase for the other half of the generator; one pair sits across the two phase lines</title></rect>
 <text x="11166" y="18727" font-family="sans-serif" font-size="119" fill="#ffffff" stroke="#000000" stroke-width="12" paint-order="stroke">clock gate row</text>
+<rect x="8330" y="2795" width="2350" height="165" fill="#969696" fill-opacity="0.10" stroke="#969696" stroke-width="10"><title>R8 bit outputs west: two of five metals above R8's row, each under two slice rails in poly, to the gates</title></rect>
+<text x="8346" y="2857" font-family="sans-serif" font-size="54" fill="#ffffff" stroke="#000000" stroke-width="5" paint-order="stroke">R8 bit outputs west</text>
 <rect x="13005" y="7270" width="40" height="9680" fill="#969696" fill-opacity="0.10" stroke="#969696" stroke-width="10"><title>ck_a rail: clock phase A up the right edge of the mid-right array, one tap per row</title></rect>
 <text x="13021" y="7292" font-family="sans-serif" font-size="14" fill="#ffffff" stroke="#000000" stroke-width="2" paint-order="stroke">ck_a rail</text>
 <rect x="14890" y="16550" width="690" height="550" fill="#969696" fill-opacity="0.10" stroke="#969696" stroke-width="10"><title>middle bundle, lower part: T0 (strobe) ends; T1-T6 turn west; T7/T8 selects end at their gates; write strobes and buffered selects go on south</title></rect>
@@ -465,6 +467,8 @@
 <text x="11056" y="7073" font-family="sans-serif" font-size="45" fill="#ffffff" stroke="#000000" stroke-width="5" paint-order="stroke">bands above the counters</text>
 <rect x="17060" y="4950" width="360" height="380" fill="#969696" fill-opacity="0.10" stroke="#969696" stroke-width="10"><title>R9 compare inputs: five metals from the west (the RA pad drivers' input lines) to pads, poly on to the units</title></rect>
 <text x="17076" y="4991" font-family="sans-serif" font-size="33" fill="#ffffff" stroke="#000000" stroke-width="3" paint-order="stroke">R9 compare inputs</text>
+<rect x="8300" y="3760" width="360" height="350" fill="#ff5050" fill-opacity="0.10" stroke="#ff5050" stroke-width="10"><title>interlace sync+video gates: NAND of two R8 bits and an inverter: the mode line of the row address selector</title></rect>
+<text x="8316" y="3790" font-family="sans-serif" font-size="22" fill="#ffffff" stroke="#000000" stroke-width="2" paint-order="stroke">interlace sync+video gates</text>
 <rect x="15895" y="15500" width="255" height="490" fill="#ff5050" fill-opacity="0.10" stroke="#ff5050" stroke-width="10"><title>write strobe latch: D latch open while E is high: two cross-coupled AND-OR-invert gates plus the inverter of its data input; holds "write to a data register" through E low; its Q drives the write strobe driver</title></rect>
 <text x="15911" y="15530" font-family="sans-serif" font-size="22" fill="#ffffff" stroke="#000000" stroke-width="2" paint-order="stroke">write strobe latch</text>
 <rect x="14280" y="16740" width="650" height="185" fill="#ff5050" fill-opacity="0.10" stroke="#ff5050" stroke-width="10"><title>R12 select buffer: two inverters: rsel12 buffered, leaves south in poly at x 14199 (?read enable of R12)</title></rect>

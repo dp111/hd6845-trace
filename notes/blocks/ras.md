@@ -167,9 +167,8 @@ be `ras_o0_alt2`). The comparator's other side of that bit is the RA0 pin's leve
 the output stage; what that amounts to depends on the polarity and timing of the stages
 between (`rax`, `ral`), which are not fully traced.
 
-Not traced: what drives `ras_shift` (R8's interlace bits are the candidates: the island's
-notes follow the net north to a metal at x 8088-8105), `ras_o0_alt1`, `ras_o0_alt2`,
-`tc1_g`.
+`ras_shift` is traced to its source (`notes/blocks/shm.md`): the AND of two bits of R8.
+Not traced: `ras_o0_alt1`, `ras_o0_alt2`, `tc1_g`.
 
 A mistake corrected here: the metal of `ras_o0_sel1` was drawn on from its pad
 (7467,4782) along a bus line (y 4746, to x 7860) that `tools/follow.py` reached across
@@ -181,6 +180,5 @@ the pad and the bus line. The same class of error as trap 16; the bus line is no
 1. The five units at x 7860-8100, y 4730-5460 (`rax`): what each does with its output
    bit, and what leaves them towards the RA pad drivers (the lines found at the pad end
    are listed in `notes/blocks/trunks.md`).
-2. The driver of `ras_shift`.
 3. `ras_o0_alt1`, `ras_o0_alt2`, `tc1_g` to their sources.
 4. What is under the pad (7577,5262).

@@ -932,3 +932,19 @@ follower jumped to (24 px gap). Tracing guide and R11 extended.
    (they fix the polarity of the bit-0 compare).
 3. `bd2`: `wr_data_e_n`'s destination.
 
+**Same day: the mode line is the AND of two bits of R8.** `trace/shm.txt`: a NAND and an
+inverter in the slice-0 position below R8's row; their inputs are the outputs of R8's
+bits in columns c6 and c7, which reach the island's metals ns5 and ns6 along two of five
+lines above the row (two poly cross-unders each). 2,019 nets, 3,390 transistors. The
+chain is now extracted end to end: R8's two bits, the mode line, the selector's shift,
+the choice of bit 0's source by R9's bit 0, and the switch of the R9 comparator's bit 0.
+
+**Open, in the order I would take them**
+
+1. `ras_o0_alt1`, `ras_o0_alt2`, `tc1_g`: the two signals that can become row address
+   bit 0 (the field), followed only to pads at (7078,5303)'s metal, (6922,4787) and
+   (6985,4958).
+2. Where `cdp1_b_eq` (R9's match) goes: leaves west along y 4459.
+3. The `ral` cell and its strobe; the loads of `rax` and of the R9 units.
+4. `bd2`: `wr_data_e_n`'s destination.
+

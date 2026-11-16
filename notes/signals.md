@@ -55,7 +55,7 @@ Central datapath (registers identified by their write strobes, `notes/blocks/wrs
 
 | Rows | Register | Slices |
 |---|---|---|
-| `cdp1` row A | R8 (6 bits) | columns c2-c7; which bit is which is not assigned |
+| `cdp1` row A | R8 (6 bits) | columns c2-c7 (cells a0-a5). a5 and a4 (columns c7, c6) are the two bits whose AND is `ras_shift`: believed bits 0 and 1. The rest not assigned |
 | `cdp1` row C, comparator row B | R9 (5 bits) | slices 1-5 = columns c3-c7; slice 5 believed bit 0 |
 | `cdp2` row A | R11 (5 bits) | s3-s7 |
 | `cdp2` row C, comparator rows B | R10 (7 bits) | s1-s7; s3-s7 compared, s7 = bit 0 ... s3 = bit 4 (from the `rax_o#` lines); s1, s2 the two mode bits |
@@ -156,7 +156,7 @@ Eleven pass transistors between the scan line counter and five output nodes.
 |---|---|
 | `ras_o#` | output bit # of the selector (# = 0-4). Expected to be the row address that goes to pin RA#; not yet followed to the pad |
 | `ras_straight` | NOT `ras_shift` (made in the island `tc1`): gate line (left poly band) of the five pass transistors `sl`# to `ras_o`# |
-| `ras_shift` | the mode line: gate line (right poly band) of the four pass transistors `sl`# to `ras_o`(#+1), and input of the island `tc1`. Believed high in interlace sync and video; its driver (somewhere above the island: `notes/blocks/tc1.md`) is not traced |
+| `ras_shift`, `ras_shift_n` | the mode line and its inverse: `ras_shift` = `cdp1_a4_q` AND `cdp1_a5_q`, two bits of R8 (believed bits 1 and 0: interlace sync and video), made by a NAND and an inverter below R8's row (`notes/blocks/shm.md`). Gate line (right poly band) of the four pass transistors `sl`# to `ras_o`(#+1), and input of the island `tc1` |
 | `ras_o0_alt1`, `ras_o0_alt2` | the two sources of `ras_o0` when `ras_shift` is high: `alt1` when R9's bit 0 is set, `alt2` when it is clear. `alt1` also enters the island (it was that block's input i). Neither is traced to its driver: `alt1`'s net has no other end drawn; `alt2` ends on a pad (6922,4787) with a poly going west |
 | `ras_o0_sel1`, `ras_o0_sel2` | made in the island `tc1`: `sel1` = `ras_shift` AND R9 bit 0, `sel2` = `ras_shift` AND NOT R9 bit 0. Gates of the pass transistors from `ras_o0_alt1` and `ras_o0_alt2` to `ras_o0`, and of the island's own AND-OR |
 | `rax_o#` | output of the unit that takes selector output `ras_o`# (# = 0-4): pulled to VSS by a transistor gated by `ras_o`#; with the unit's load, not traced, NOT `ras_o`# (AMB-011), the complement of the row address. Each runs from its unit's pad at x 7836 through the nest of metals, along a line of the central datapath's channel 1 (the comparator's through track: `cdp2_trk_s7` is `rax_o0` ... `cdp2_trk_s4` is `rax_o3`), north along x 10981-11154, under the supply metal at y 4331-4500 and east to the logic in front of the RA pad drivers (`notes/blocks/rab.md`) |
@@ -841,3 +841,5 @@ datapath s1...s7, s0 became b0...b6, b7.
 | tc1_l1_out | ras_straight | |
 | tc1_l3_out | ras_o0_sel1 | |
 | tc1_i | ras_o0_alt1 | |
+| tc1_ns6 | cdp1_a5_q | |
+| tc1_ns5 | cdp1_a4_q | |

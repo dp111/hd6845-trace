@@ -13,7 +13,7 @@ Goal: recover the complete internal logic of the Hitachi HD6845S CRTC (die marki
 
 Status (2026-11-16): M0 done. M1 done except the data pad cell and pad-ring
 wiring. M2 largely done (strobe latch and decode traced; data bus interface partly).
-M3 well under way: 3,385 transistors traced in thirty blocks. Counters identified:
+M3 well under way: 3,390 transistors traced in thirty-one blocks. Counters identified:
 horizontal (8 bits), character row (7), horizontal sync width (4), scan line (5), and a
 4-bit one beside the scan line counter (not identified). Registers with comparators found
 so far: R0, R1, R2 against the horizontal counter; R4, R6, R7 against the row counter's

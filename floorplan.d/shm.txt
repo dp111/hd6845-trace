@@ -1,0 +1,3 @@
+# shm: what makes the row address selector's mode line
+8300,3760:8660,4110     logic   interlace sync+video gates | NAND of two R8 bits and an inverter: the mode line of the row address selector
+8330,2795:10680,2960    route   R8 bit outputs west | two of five metals above R8's row, each under two slice rails in poly, to the gates

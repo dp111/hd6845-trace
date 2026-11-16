@@ -228,18 +228,18 @@ East side (into the datapath, or the random logic at its slice-0 position x 8290
 
 | Name | Layer | Where it crosses | Dir | What |
 |---|---|---|---|---|
-| `tc1_ns5` | P | x 8350, y 2846-2868 | ? | north end of ns5, from contact (8271,2857) |
+| `cdp1_a4_q` | P | x 8350, y 2846-2868 | ? | north end of ns5, from contact (8271,2857) |
 | `tc1_ns3` | M | x 8350, y 2720-2734 | ? | ns3 arrives from the east over the top of the datapath |
 | `tc1_ns4` | M | x 8350, y 2764-2778 | ? | ns4, the same |
-| `tc1_ns6` | M | x 8350, y 2807-2821 | ? | ns6, the same |
+| `cdp1_a5_q` | M | x 8350, y 2807-2821 | ? | ns6, the same |
 | `tc1_f` | P | x 8250, y 3348-3362 | out | R3 output; runs on under ns1..ns6 without contact, in the channel between cdp1's rows A and B |
 | `tc1_a` | P | x 8250, y 3387-3402 | in (believed) | same channel, 40 px below `tc1_f` |
-| `tc1_ns6` | P | x 8350, y 3516-3539 | ? | from contact (8313,3527) |
+| `cdp1_a5_q` | P | x 8350, y 3516-3539 | ? | from contact (8313,3527) |
 | `tc1_ns2` | P | x 8250, y 3556-3578; reaches x 8332 and turns south there | ? | from contact (8139,3567) |
 | `tc1_w1` (= ns1) | P | x 8250, y 3691-3712 (seen to x 8350) | **in** (its only other end is L4's gate) | from contact (8139,3704) |
-| `tc1_ns5` | P | x 8350, y 3728-3751 | ? | from contact (8270,3739) |
-| `tc1_ns5` | P | x 8350, y 3822-3844 | ? | from contact (8270,3833) |
-| `tc1_ns6` | P | x 8350, y 3859-3881 | ? | from contact (8313,3870), the south end of ns6 |
+| `cdp1_a4_q` | P | x 8350, y 3728-3751 | ? | from contact (8270,3739) |
+| `cdp1_a4_q` | P | x 8350, y 3822-3844 | ? | from contact (8270,3833) |
+| `cdp1_a5_q` | P | x 8350, y 3859-3881 | ? | from contact (8313,3870), the south end of ns6 |
 | `ras_o0_sel1` | P | x 8250, y 4212-4228 (drawn to x 8350) | out | a AND b, to the datapath just above cdp1's row C |
 | `tc1_x1` | P | x 8250, y 4255-4275 (drawn to x 8350) | ? | passes through: see the west side, y 4344-4362 |
 | `tc1_x2` | P | x 8250, y 4365-4383 (drawn to x 8350) | ? | passes through: see the south side, x 8075 |

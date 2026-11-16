@@ -1,0 +1,83 @@
+# shm: the two small gates that make the row address selector's mode line (x 8300-8650,
+# y 3760-4110), in the slice-0 position below R8's register row. Notes: notes/blocks/shm.md.
+#   ras_shift_n = NAND(cdp1_a4_q, cdp1_a5_q)     two gates in series under the VSS rail
+#   ras_shift   = NOT ras_shift_n
+# Views cache/scratch/rax/shiftgate.png, g1a.png, g1m.png, g0top.png.
+@block shm
+@requires tc1
+@w M=12 P=18
+@s 26x26
+
+# rails (the slice-0 rails of the central datapath's top block)
+M 8440,3740 y4130 w=50
+N M 8440,3950 vss
+M 8622,3740 y4130 w=55
+N M 8622,3950 vcc
+
+# --- the NAND: VSS box, gate of ns5 (y 3821-3844), gate of ns6 (y 3861-3884), output band
+D 8405,3770:8475,3818
+C 8432,3800
+D 8405,3812:8490,3925
+P 8340,3821:8495,3844                 # from ns5's contact (8270,3833); trace/tc1.txt draws it to x 8350
+P 8340,3861:8500,3884                 # from ns6's contact (8313,3870)
+D 8405,3888:8650,3925                 # output band east to the load and the VCC contact
+P 8535,3878:8585,3932                 # load gate
+P 8515,3890:8540,3923
+?B 8512,3886:8542,3927                # its tie to the band: placed by the dark structure at the block's west end
+C 8618,3897
+D 8370,3890:8410,3925                 # the band's west end
+?B 8370,3896:8400,3928
+P 8398,3912 x8312 y4047 x8492 w=18    # the C-shaped poly: west, south along x 8312, east as the inverter's gate
+N D 8450,3905 ras_shift_n
+
+# --- the inverter: VSS box, gate (y 4038-4056), output band
+D 8405,3990:8472,4032
+C 8432,4010
+D 8405,4028:8490,4095
+D 8405,4060:8650,4095
+P 8535,4052:8585,4102
+P 8515,4062:8540,4093
+?B 8512,4058:8542,4097
+C 8618,4070
+D 8370,4064:8410,4095
+?B 8370,4068:8400,4097
+P 8398,4090 x8318 w=18                # west to the contact (8313,4090) of the mode line's metal
+
+# ===== the NAND's two inputs: the island's metals ns5 and ns6 are the outputs of two bits of R8 =====
+# Two of five horizontal metals above R8's row (y 2768-2945), each crossing under two slice rails
+# in poly (pads at x 9055/9095 - 9255/9290 and 9836/9878 - 10022/10062). Follower + views
+# ns56.png, ns56e.png, ns56f.png, a5q.png. The other three lines are not drawn (y 2945 is bit a2's
+# output, y 2900 bit a3's, by their ends; y 2768 ends on a pad (10614,2768)).
+@requires cdp1
+# ns6 = the output of R8's bit in column c7 (cdp1_a5_q)
+M 8340,2814 x9098 w=13
+P 9078,2796:9112,2830
+C 9095,2813
+P 9095,2813 x9290 w=18
+P 9273,2796:9307,2830
+C 9290,2813
+M 9290,2814 x9880 w=13
+P 9861,2796:9895,2830
+C 9878,2813
+P 9878,2813 x10062 w=18
+P 10045,2796:10079,2830
+C 10062,2813
+M 10062,2813 x10656 y2946 w=13
+P 10636,2923:10670,2957
+C 10653,2940
+# ns5 = the output of R8's bit in column c6 (cdp1_a4_q)
+P 8338,2840:8372,2874
+C 8355,2857
+M 8355,2857 x9058 w=13
+P 9038,2840:9072,2874
+C 9055,2857
+P 9055,2857 x9255 w=18
+P 9238,2840:9272,2874
+C 9255,2857
+M 9255,2857 x9838 w=13
+P 9819,2840:9853,2874
+C 9836,2857
+P 9836,2857 x10022 w=18
+P 10005,2840:10039,2874
+C 10022,2857
+M 10022,2857 x10282 y3030 w=13

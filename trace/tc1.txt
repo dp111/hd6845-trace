@@ -478,14 +478,14 @@ P 8256,2846:8350,2868
 C 8270,3739 8270,3833 s=24x24
 P 8257,3728:8350,3751
 P 8257,3822:8350,3844
-N M 8270,3000 tc1_ns5
+N M 8270,3000 cdp1_a4_q
 # ns6: from the east along y 2807-2821; south; contacts (8313,3527) and (8313,3870),
 #      each to a poly going east. Metal continuous across the upper contact (measured).
 M 8350,2814 x8314 y3883 w=15
 C 8313,3527 8313,3870 s=24x24
 P 8299,3516:8350,3539
 P 8299,3859:8350,3881
-N M 8314,3000 tc1_ns6
+N M 8314,3000 cdp1_a5_q
 # ---- one more line through the bus field: metal from the south at x 8067-8082 to
 #      contact (8075,4372), poly east along y 4365-4382 into the datapath
 C 8075,4372 s=24x24
