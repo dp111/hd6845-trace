@@ -51,6 +51,10 @@ tools/t.sh BLOCK netlist.py
   both chip-2 shots. Three layers go in one row (keep W x S under 430).
 - `mosaic.py X Y W H --offsets "0,0 dx,dy ..." --scale S --layer acid1b --out NAME.png`
   shows the same rectangle at several offsets side by side, to compare repeats.
+- `tools/railprof.py X0 X1 Y0 Y1 [--horizontal]` prints what lies under a rail as text
+  (diffusion, gate, field runs along it, from the clean shot's protected colours): the
+  stack structure of a whole gate column in one call. It does not find contacts. Check
+  each gate on a view before drawing it.
 - `tools/t.sh BLOCK follow.py X Y N|S|E|W [--trace]` follows ONE metal line from a point on
   it (2 px steps, both chips' metal shots, corners and diagonals) and prints corners,
   wide stretches, contact candidates and the end, or the piece as a trace-file `M` line.

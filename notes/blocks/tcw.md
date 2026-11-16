@@ -80,6 +80,32 @@ contact pits at (6885,3640), a wide metal at x 6860-6890, gates and loads betwee
 `tcw_b`'s poly heads into it. So the untraced logic between this column and the island's
 channel W1 (x 7174) is two columns wide, not one; the queue entry is widened.
 
+## The whole ground rail as text (2026-11-25)
+
+`tools/railprof.py 6514 6546 Y0 Y1` (new): classifies the strip of the clean shot under
+a rail and prints the runs along it. Under a rail the clean shot's colours are the
+"protected" ones, so a gate (bright salmon: poly over a channel), diffusion (tan) and
+field (pink) separate cleanly; checked on the six gates already traced (all six found,
+within 6 px). It does **not** find contacts (pits are too small and edge lines look the
+same; two attempts with blob detection in the clean shot and in the metal shots found
+only some of the known ones), and it calls dull edge regions "poly over field" (one such
+at y 3910-3934, checked by colour: not a gate).
+
+Seventeen gates under the rail x 6505-6560, in five stretches of diffusion:
+
+| Stretch | Runs (y) | Reading |
+|---|---|---|
+| A, y 2699-3215 | D 2699-2739, **G 2740-2765**, D, **G 2791-2812**, D 2813-2912, **G 2913-2934**, D, **G 2957-2978**, D 2979-3085, **G 3086-3109**, D, **G 3140-3164**, D 3165-3215 | six gates in three pairs; not looked at |
+| B, y 3237-3616 | D 3237-3250, **G 3251-3274**, D, **G 3295-3317**, D 3318-3337, **G 3338-3361**, D 3362-3408 (rail contact, two pits), **G 3409-3433**, D 3434-3447; then D 3470-3512 (rail contact), **G 3519-3542**, D 3543-3560 | class map `t4cm.png`: the nodes at y 3240, 3326 and 3437 each have an arm east. Readings: an AND-OR-invert at 3237-3408 if the top node is on ground through its arm (not seen), output at y 3326; a single pull-down at 3409 (output y 3437); the inverter at 3519 (output y 3550). The four upper gates take four horizontal polys from the west (y 3260, 3305, 3347, 3392) |
+| C, y 3695-3925 | traced: `tcw_o3820` | |
+| D, y 3956-4195 | traced (pull-downs): `fld_a_in`, `fld_y_b` | |
+| E, y 4200-4344 | D, **G 4257-4281**, D | one gate; not looked at (a `findcell` inverter match at (6572,4273)) |
+
+West of the column a bus of thin vertical metals (x 6232, 6276, 6319, 6360, 6403, 6465)
+brings the inputs: each gate's poly runs west to a pad on one of them. A net can have
+pads at several rows (`tcw_a`, `tcw_c` do), so the bus metals have to be followed pad by
+pad; a metal at one x is several nets along its length.
+
 ## Not done
 
 Everything else in the column (y 2500-3690 and y 4200-4450); the loads of the group at
