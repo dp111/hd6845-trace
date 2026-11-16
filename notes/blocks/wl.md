@@ -161,3 +161,12 @@ here, and a signal on bus line B passes between the bus field and the upper righ
 
 Tools: `tools/wl_net.py` (extraction report restricted to a box), `tools/wl_px.py` (patch
 colours in three shots), `tools/classmap.py --open`.
+
+## The generator is a cell (2026-11-17)
+
+The left array has a second copy of this clock generator, for its two counters
+(`notes/blocks/ur.md`). `trace/wl.txt` therefore defines the devices and internal wires
+as the cell `wl_ckgen` (tag `rc` here, `lc` there); the rails, the VCC strip, the two
+clock metals, and the pad and metal that bring the step signal are drawn outside the
+cell for each copy. The extraction of this block is unchanged.
+

@@ -128,3 +128,59 @@ P 3980,6510:4260,6530
 P 4068,10988:4108,11024
 C 4087,11005
 N M 4095,9700 c5l_gab
+
+# ====================================================================
+# The clock generator of the two counters: a second copy of the row counter's generator
+# (trace/wl.txt, cell wl_ckgen), found with tools/findcell.py at dx -8828, dy -1171 (score 0.83
+# for the whole block, 0.92 for its right-hand part). It lies in the left column beside rows
+# u0-u2 (x 2262-2837, y 6719-7729); the MA bundle's vertical metals pass over its two wide
+# drivers as the bus-field metals do over the other copy.
+@requires wl
+@requires tla
+@inst wl_ckgen -8828,-1171 tag=lc
+# rails of the left column here: VSS x 2608-2660, VCC x 2776-2828 with its contact strip
+M 2634,6560 y7790 w=50
+N M 2634,7000 vss
+M 2802,6719 y7790 w=50
+D 2774,6774:2832,7676
+C 2804,6809 2804,6849 2804,6886 2804,6924 2804,6965 2804,7006 2804,7047 2804,7088 2804,7122 2804,7165 2804,7204 2804,7243 2804,7284 2804,7320 2804,7361 s=28x24
+C 2804,7399 2804,7436 2804,7474 2804,7518 2804,7556 2804,7597 2804,7636 s=28x24
+N M 2802,7000 vcc
+# slave clock: metal x 2686-2706 from a contact (2695,6590) at the top (its poly goes east along
+# y 6445-6465 to the counters' slave rail) down past the generator's contact (2689,6979) to y 7722
+M 2696,6576 y7722 w=20
+P 2676,6572:2714,6608
+C 2695,6590
+P 2686,6455 y6580 w=20
+P 2686,6445:3570,6465
+# master clock: metal x 2730-2752 from a contact (2742,6630) (poly north and east along
+# y 6490-6510 to the counters' line L1) down past the generator's contact (2739,7451) to y 7722
+M 2740,6616 y7722 w=22
+P 2722,6612:2760,6648
+C 2742,6630
+P 2731,6500 y6620 w=20
+P 2731,6490:3570,6510
+
+# the step signal of THIS copy (lc_step) arrives one track further west than in the other copy:
+# pad and contact (2412,7188) on band Gp, at the bottom end of a metal x 2400-2425 that comes
+# down from a contact (2412,6278). (The metal on the next track, x 2457, is clk_tl: it passes
+# over band Gp without a contact, 4x in both metal shots and the clean shot.)
+P 2392,7172:2432,7209
+C 2412,7188
+M 2412,6264 y7202 w=22
+P 2394,6262:2432,6296
+C 2412,6278
+N M 2412,6700 lc_step
+# from that contact: poly east along y 6268-6290 (under the rails and, from x 2950, right under a
+# horizontal metal: no contact) to a pad with a contact (3345,6278); a short metal south to a
+# second contact (3345,6368); poly east along y 6355-6380 over the top of the counters (the
+# fourth of the poly lines there) to x 5012, where it turns south (it lies under a horizontal
+# metal at the corner: no pad, no contact) and runs down x 5003-5022 into the left-centre logic.
+# Followed to y 6900; it ends on something at about (5030,7000-7150), not traced.
+P 2420,6279 x3332 w=20
+P 3326,6262:3364,6296
+C 3345,6278
+M 3347,6264 y6384 w=22
+P 3326,6352:3364,6386
+C 3345,6368
+P 3355,6368 x5012 y6900 w=20

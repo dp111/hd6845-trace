@@ -35,8 +35,14 @@ M 11522,9024 y8136 w=21
 P 11640,9360 x11565 y9044 w=22
 C 11564,9057
 M 11566,9072 y8608 w=25
-C 11567,8622
 
+# ====================================================================
+# The clock generator as a cell: the left array has a second copy (trace/ur.txt). The cell holds
+# the devices and their internal wires; the rails, the VCC strip, the two clock metals and the
+# metal that brings the step signal p are drawn outside it, per copy.
+@cell wl_ckgen tag=rc
+@s 28x28
+C 11567,8622                        # contact of the master clock metal on its pad
 # ---- inverter 1: e_n = NOT E
 # E's pad; the same poly runs west as the gate (y 8621-8643) of a pull-down 62/22 on the
 # diffusion column under the VSS rail, between the VSS contact (11452,8597) and node e_n.
@@ -55,7 +61,7 @@ P 11505,8665:11592,8745
 P 11447,8713:11510,8742
 B 11443,8709:11467,8747
 P 11495,8740:11510,8842
-N P 11550,8730 rc_ck_m_n
+N P 11550,8730 {}_ck_m_n
 
 # ---- inverter 2: e_buf = NOT e_n
 # gate y 8815-8842 across the column under the VSS rail (64/27): VSS contact (11452,8787)
@@ -79,7 +85,7 @@ D 11540,8806:11606,8847
 P 11557,8780:11592,8862
 B 11553,8776:11596,8803
 D 11553,8778:11592,8802
-N D 11537,8800 rc_ck_m_dly
+N D 11537,8800 {}_ck_m_dly
 
 # ====================================================================
 # Driver of E (rc_ck_m): E = NOR(pb, d_buf). Two pull-downs about 320 px wide, made of one
@@ -135,15 +141,11 @@ P 11557,8338:11597,8445
 P 11517,8340:11560,8366
 B 11514,8336:11537,8370
 P 11465,8412:11597,8445
-N P 11480,8450 rc_step_n
-# Gp: y 8350-8372, free end at x 11105, contact (11285,8362) under the foot of the metal
-# x 11277-11297 that comes from the north: signal p. Its east end runs into a vertical poly
+N P 11480,8450 {}_step_n
+# Gp: y 8350-8372, free end at x 11105. The pad and contact where the step signal p arrives are
+# outside the cell: they sit on a different track in each copy (here (11285,8362)). Its east end runs into a vertical poly
 # x 11465-11493 (y 8270-8372) that joins it to the band Gt of the other driver.
 P 11105,8350:11493,8372
-P 11265,8343:11305,8380
-C 11285,8362
-M 11287,8376 y7738 w=20
-N M 11287,8200 rc_step
 P 11465,8275:11493,8372
 
 # ====================================================================
@@ -193,7 +195,7 @@ D 11485,8072:11606,8100
 P 11505,8033:11597,8118
 P 11447,8037:11510,8062
 B 11441,8032:11466,8068
-N P 11550,8048 rc_ck_s_n
+N P 11550,8048 {}_ck_s_n
 # the plate's poly goes up the gap between the VSS rail and line D to the gate of inverter 2
 P 11495,7937:11510,8040
 
@@ -217,7 +219,14 @@ D 11540,7930:11606,7970
 P 11557,7913:11592,7997
 B 11553,7972:11596,8000
 D 11553,7974:11592,8000
-N D 11536,7960 rc_ck_s_dly
+N D 11536,7960 {}_ck_s_dly
+@end
+
+# the step signal p of this copy: metal from the NOR below (y 7752) down to the contact (11285,8362) on band Gp
+P 11265,8343:11305,8380
+C 11285,8362
+M 11287,8376 y7738 w=20
+N M 11287,8200 rc_step
 
 # ====================================================================
 # p = NOR(a, b): the row counter's step pulse. Two pull-downs 43/20 on the column under the

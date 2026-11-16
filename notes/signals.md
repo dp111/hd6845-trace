@@ -123,7 +123,9 @@ For `<bit>` read `hc#`, `rc#`, `c4b#`, `c5l#` or `c4l#`. Each bit is a master-sl
 | `hc_lo4_set`, `rc_lo4_set` | look-ahead line: low while any of bits 0-3 is clear, i.e. high when `_q` of bits 0-3 are all 1 (group lines B and A) |
 | `rc_ck_m`, `rc_ck_s` | master and slave clock of the row counter (bus lines E and D), made by the generator below |
 | `rc_l3`, `c4b_l3` | the L3 line of the row counter (from the west along y 13005) and of the 4-bit counter (from the north). What they carry is not known; for the horizontal counter L3 is `ck_a` |
-| `lc_ck_m`, `lc_ck_s` | master clock (line L1) and slave clock (rail x 4218) of both counters of the left array's upper rows: one line each through all nine rows, each fed at the top by a poly from the west (y 6500 and y 6455). Sources not traced |
+| `lc_ck_m`, `lc_ck_s` | master clock (line L1) and slave clock (rail x 4218) of both counters of the left array's upper rows: one line each through all nine rows. Made by a second copy of the row counter's clock generator, in the left column beside rows u0-u2: `lc_ck_s` = NOR(`lc_ck_m_dly`, `lc_step`), `lc_ck_m` = NOR(`lc_step_n`, `lc_ck_s_dly`) |
+| `lc_step`, `lc_step_n` | the step pulse of those two counters and its inverse: both counters step once per pulse. `lc_step` comes from the left-centre logic (poly up x 5012, west along y 6368 over the counters, metal down x 2412); its gate is not traced |
+| `lc_ck_m_n`, `lc_ck_m_dly`, `lc_ck_s_n`, `lc_ck_s_dly` | inverse and two-inverter delay of each of the two clocks, inside that generator |
 | `c4l_l3`, `c5l_l3` | the L3 lines of those two counters: the 4-bit one's comes from the north; the 5-bit one's from a poly along y 6410 (from the west, and from a metal from the north at x 3968) |
 | `c4l_gab`, `c5l_gab` | their pass-gate lines: the 4-bit one's comes from the north; the 5-bit one's from a poly from the east along y 6520, ending on a contact at (4087,11005) |
 | `cnt_gab` | gate line of the `_m` to `_mb` pass transistors of all 19 bits (x 12902), fed from the top by band H4. Source not traced |
