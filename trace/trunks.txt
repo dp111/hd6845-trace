@@ -208,7 +208,12 @@ M 6593,2095 x5330 w=18
 C 5343,2093
 P 5345,2080 y2566 w=20
 C 5343,2553
-M 5356,2553 x5320 y3790 w=20        # followed at 1x to y 3790, continues down
+M 5356,2553 x5320 y6110 x5218 w=20  # down the whole top-left logic with no tap (class map of the full length),
+                                    # west at y 6100-6120 to a contact (5232,6105) on the pad of line 4 of the poly
+                                    # bus x 5100-5290 (five vertical poly lines, y 6060-6850)
+C 5232,6105
+P 5216,6090:5252,6124
+P 5237,6118 y6160 w=20              # line 4, going south (not followed)
 N M 5320,3000 lpstb_b
 
 C 6710,1965
@@ -218,7 +223,12 @@ M 6712,2083 y2140 x5264 w=18
 C 5277,2140
 P 5279,2127 y2566 w=20
 C 5277,2553
-M 5277,2540 y3790 w=22              # followed at 1x to y 3790, continues down
+M 5277,2540 y6068 x5176 w=22        # down the whole top-left logic with no tap; from y 5857 it lies right over the
+                                    # poly of another net (tla_e4, bus line 5: NO contact, five shots at 5-9x); west at
+                                    # y 6055-6080 to a contact (5190,6065) on the pad of line 3 of the poly bus
+C 5190,6065
+P 5170,6045:5210,6085
+P 5192,6078 y6160 w=20              # line 3, going south (not followed)
 N M 5277,3000 res_b
 
 # ====================================================================

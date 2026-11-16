@@ -3,3 +3,5 @@
 3090,2400:3400,6400   ?route  vertical bus of the top-left logic | seven metal positions, in pieces, joining the gate clusters at x 2450-3090 to each other and to poly lines going east. Eight pieces drawn
 3400,2620:4250,2900   ?route  poly lines along the top of the top-left logic | seven horizontal lines from the vertical bus east to a second bus field at x 4140-4420; one drawn (first input of the step gate)
 3400,5480:5860,5700   ?route  second crossing field | horizontal poly lines over vertical metals; the step signal b crosses it on the poly y 5585
+5080,5830:5300,6870   route   poly bus of five lines | vertical poly lines taking signals from the top-left logic south: lines 3, 4, 5 are RES (buffered), LPSTB (buffered) and the unidentified control line e4; lines 1, 2 not identified
+5280,6850:6170,7360   ?route  diagonal fan | the five lines of the poly bus turn south-east and then east to pads at x 6130-6165, where horizontal metals take them on

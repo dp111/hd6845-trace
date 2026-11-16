@@ -51,6 +51,13 @@ tools/t.sh BLOCK netlist.py
   both chip-2 shots. Three layers go in one row (keep W x S under 430).
 - `mosaic.py X Y W H --offsets "0,0 dx,dy ..." --scale S --layer acid1b --out NAME.png`
   shows the same rectangle at several offsets side by side, to compare repeats.
+- `tools/t.sh BLOCK follow.py X Y N|S|E|W [--trace]` follows ONE metal line from a point on
+  it (2 px steps, both chips' metal shots, corners and diagonals) and prints corners,
+  wide stretches, contact candidates and the end, or the piece as a trace-file `M` line.
+  Use it for every long run; then look at its end, at each staircase it went through and
+  at each "wide" stretch (traps 13-15). `tla_tracks.py` profiles a straight track for
+  breaks; `tla_contacts.py` lists contact candidates on one; `strips.py --layer class`
+  shows 3,000 px of a bus in one image.
 - For following bundles of parallel wires, `tools/sel_tracks.py` and `tools/sel_cut.py`
   (written by the agent that traced the select logic; read their docstrings) report
   where metal is present along a track or a cut. **Do not trust them for
@@ -178,6 +185,18 @@ Traps, all of them real:
    every channel and row-group boundary before drawing it through.
 12. **A line that ends in a widened foot ends *on* something.** Look at 6x for the contact
    or the turn before leaving it as a free end.
+
+13. **A metal that lies on a poly line is not joined to it, however long the overlap.**
+   The RES line runs exactly on top of another net's poly for 217 px and stops there; its
+   real end is a 90 px arm to a contact one bus line over. Before calling two coincident
+   lines one net, find the contact: a pad, a ring in the metal shot, the green patch in
+   the clean shot. If none of the three is there, they are two nets.
+14. **Where a tool says a line ends, look at the end at 5x in the metal shot.** A line ends
+   on a contact; if you see none, the line has turned and the tool missed the corner.
+15. **Crossing fields without pads carry no taps.** In the fields where poly rows cross a
+   metal bus, the clean shot's colour under the metal drifts between salmon and
+   yellow-green by the row, so colour alone finds "contacts" at every crossing. A real tap
+   there has a widened pad.
 
 **When a trap turns out to affect work already done**, add the affected blocks to the
 "Re-read list" in `notes/work-packages.md` in the same commit that records the finding.

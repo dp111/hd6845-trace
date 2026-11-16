@@ -29,7 +29,7 @@ What the five inputs **are** is not known. None has reached a named signal yet:
 
 | Signal | Followed to |
 |---|---|
-| `e4` | 7,000 px: bus line C middle piece (x 3196, y 3944-5677; three gate contacts on it: (3197,3958), (3192,5237), (3192,5325)), east along y 5677, south at x 3527, contact (3565,5848), poly east along y 5847 to x 5285, south to y 6850, diagonally to (5560,7122), east to a contact (6140,7124), metal east along y 7084, south at x 6769, contact (6730,8275), poly under six horizontal metals, contact (6730,8580), metal diagonally south-west and **south down the left bus field at x 6548-6570** (seen to y 13000, where the bundle steps east; that field's crossings at y 9560-9780, 10340-10660, 11860-12080 not read). Drawn to y 8680. Every contact found on it so far is a gate: its driver is at the far end |
+| `e4` | **17,000 px, all drawn, driver not found.** Bus line C middle piece (x 3196, y 3944-5677), east along y 5677, south at x 3527, contact (3565,5848), poly east along y 5847 to x 5285, south as line 5 of the poly bus x 5100-5290 to y 6850, diagonally to (5560,7122), east to a contact (6140,7124), metal east along y 7084, south at x 6769, contact (6730,8275), poly under six horizontal metals, contact (6730,8580), metal diagonally to x 6558, south down the left bus field (two steps west: x 6471 from y 9848, x 6300 from y 11880, x 6236 from y 12772), east at y 14528 to a contact (6411,14526), poly east to a contact (7012,14522), metal south to a contact (7055,15345), poly to the gate of a pull-down under the rail x 7290-7345 at (7317,15435) in bc1's untraced left column. **Five loads, all gates** (four in this cluster, one in bc1). See "The chase of e4" below |
 | `e3` | bus line E, one piece y 2710-5166 with three contacts: (3283,5152) gate of in3; (3283,3852) a second gate (below); top (3283,2725), from which a poly runs east along y 2715-2735 to a pad (4270,2725) and a metal runs on **east along y 2718-2738** (pieces seen to x 5366; the three metals at y 2640, 2683 and 2728 run east in pieces, with cross-unders at the rails, as far as x 11700-12050, but tc1's notes show that pieces on one y are different nets) |
 | `a2` | bus line A piece A2 (y 3166-3778): contacts (3108,3180) gate of c1, (3100,3632) gate of b1, (3103,3762) a poly that leaves **east along y 3752-3770** |
 | `x1` | poly y 3538-3556 from the **east**, across the whole bus without a contact |
@@ -125,6 +125,38 @@ a contact (2412,5196), metal south and east along y 5411, contact (2565,5410), p
 along y 5400-5422 under the whole cluster to bus line B's bottom contact (3150,5412).
 Load: strip east under R1, box under thin metal W, plate x 2722-2775, VCC box under R2.
 
+## The chase of `e4` (2026-11-16/17)
+
+`e4` gates the whole step logic, so naming it was the first aim. Result: its route is
+drawn end to end and it is **not identified**. What was learnt on the way:
+
+- **It is not RES**, though it looked like it for an hour. The RES line (`res_b`, metal
+  x 5266-5290 from the pad buffers at the top) comes down the whole top-left logic without
+  a tap and from y 5857 to y 6075 lies exactly on top of `e4`'s poly (bus line 5). Five
+  shots at 5-9x and a colour profile every 6 px show no contact; the metal's last 20 px
+  turn **west** along y 6055-6080 to a contact (5190,6065) on the pad of bus line 3. The
+  overlap is routing (tracing guide, trap 8). `lpstb_b` ends the same way one line over:
+  contact (5232,6105), bus line 4. Both are now drawn in `trace/trunks.txt`.
+- So the poly bus x 5100-5290 (y 6060-6850) carries, west to east: two unidentified
+  lines, `res_b`, `lpstb_b`, `e4`. All five fan out diagonally at y 6850-7350 to
+  horizontal metals going east (pads at x 6130-6165). `e4` travels with the two input
+  pins' signals from the top-left to the centre, which suggests (no more) that it is a
+  signal of the same standing: a chip-wide control line.
+- It is not the neighbouring gate's output either: `m2`'s poly runs under bus line C for
+  120 px (y 4636-4762) with no contact (6.4x, three shots).
+- The two crossing fields it passes in the left bus field (y 9560-9780 and
+  y 10340-10660) give it no tap. In those fields the clean shot's colour under a metal
+  varies from salmon to yellow-green from crossing to crossing, on whole rows at a time,
+  so the contact-colour test (`tools/xfield.py`) is not usable there; a real tap has a pad.
+- The 13-line bus of bc1 (y 14354-14873): its line y 14526 is **two nets**. The poly from
+  the west ends on the pad (7012,14522) and goes south (`e4`); the line's continuation
+  east starts on a separate pad (7100,14522) fed by a metal from the north. (I followed
+  the eastern piece to a gate at (9480,15560) before noticing: not `e4`.)
+
+Where its driver can still be: on one of the poly stretches as a branch I did not see
+(the diagonal fan and y 7122, x 5560-6128, were only read at 1.1x), or at a contact with
+a pad on the 4,000 px of metal in the left bus field that the profile tools did not flag.
+
 ## Reading aids for this region
 
 - **The loads' ties.** Each load plate has a tab at its lower corner that is tied by a
@@ -138,6 +170,10 @@ Load: strip east under R1, box under thin metal W, plate x 2722-2775, VCC box un
 - **The bus as a class map** (`strips.py --layer class`): metal shows as white bands (field
   that was under metal), gaps between pieces as olive blocks, poly crossings as red bars,
   contacts as yellow-green blobs in a red pad. One image shows 3,000 px of the bus.
+- `tools/follow.py` follows one metal line from a point through corners, jogs and
+  diagonals, using both chips' metal shots, and prints it as a trace line. It turned a
+  4,000 px bus-field run from an afternoon into a minute. Its ends and its staircases must
+  still be looked at: see its docstring for the two mistakes it made here.
 - `tools/tla_tracks.py` (where a track has metal; splits at gaps) and
   `tools/tla_contacts.py` (contact candidates on a track from the clean shot's colour).
   Both are for knowing where to look. A dark band across one chip's metal with nothing

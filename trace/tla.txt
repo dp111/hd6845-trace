@@ -159,7 +159,25 @@ P 6713,8258:6748,8292
 P 6731,8285 y8566 w=20
 P 6713,8562:6750,8597
 C 6730,8580
-M 6732,8566 y8680 w=20
+# ... (metal checked end to end with tools/follow.py and at every corner by eye) diagonally
+# south-west to x 6558; south through the crossing field y 9560-9780 (no tap); two pitches
+# west at y 9848; south at x 6471 through the field y 10340-10660 (no tap); west at y 11880;
+# south at x 6300; west at y 12772; south at x 6236; east at y 14528 to a contact
+# (6411,14526); poly east along y 14511-14530 to a pad with a contact (7012,14522); metal
+# south, one pitch east at y 14632, south at x 7057 to a contact (7055,15345); poly east,
+# south at x 7183-7200 and east along y 15425-15445, where it is the gate of a pull-down
+# under the rail x 7290-7345 of bc1's untraced left column (gate at (7317,15435); the poly
+# ends at x 7370). Every connection found on the net is a gate: its driver is NOT found.
+M 6732,8566 6732,8655 6560,8828 6558,9848 6471,9850 6471,11880 6300,11882 6300,12772 6236,12777 6236,14528 6424,14526 w=13
+P 6392,14508:6432,14542
+C 6411,14526
+P 6420,14520 x7000 w=18
+P 6992,14504:7032,14540
+C 7012,14522
+M 7012,14508 y14632 x7057 y15360 w=20
+P 7035,15328:7078,15362
+C 7055,15345
+P 7065,15343 x7191 y15435 x7370 w=18
 C 3197,3958
 P 3176,3944:3216,3976
 C 3192,5325

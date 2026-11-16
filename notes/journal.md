@@ -523,3 +523,55 @@ scan-line comparisons" is a guess from the formula's shape.
    to the east.
 4. As before: what `a` (`bd1_xn1`) is; re-read R8/R9; `amr`; the bus fields.
 
+## 2026-11-17 The chase of e4
+
+Serial, blocks `tla`, `trunks`. Full extraction 1,683 nets, 2,789 transistors, 0 errors,
+0 warnings. User: "shall we carry on then?"
+
+**Aim**: name `e4`, the input that gates the whole step logic. **Not achieved.**
+
+**What was established**
+
+- `e4`'s net is drawn end to end: 17,000 px from the top-left cluster to a gate in bc1's
+  left column at (7317,15435). It has five loads, all gates; its driver was not found.
+- It is not RES and not `m2` (both looked possible; both refuted at high zoom).
+- `res_b` and `lpstb_b` are traced to their ends: lines 3 and 4 of a five-line poly bus at
+  x 5100-5290, where `e4` is line 5. From there all five go east together.
+- bc1's 13-line bus line y 14526 is two nets split at x 7012/7100.
+
+**Tools**
+
+- `tools/follow.py`: follows one metal line through corners and diagonals using both
+  chips' metal shots. Tested on four hand-traced lines. Two faults found and fixed in use:
+  it bridged a gap before looking for a corner (stepping onto the next line of a
+  staircase), and its corner test did not bridge the 4-8 px step line where metal comes
+  off a poly edge. One fault remains: it can miss a corner right at a contact-rich end
+  (it ended `res_b` 20 px short of its last turn). Ends are looked at by eye.
+- `tools/xfield.py`: contact colours over a crossing field. Not usable where there are no
+  pads (the colour drifts by the row); kept for fields with pads.
+
+**What went wrong and what I changed**
+
+- I followed the wrong net for 2,500 px (the eastern half of bus line y 14526) because a
+  1.9x strip showed one continuous line; it is two pads 90 px apart. Caught when the
+  metal shot at 5x showed the pads' metals going different ways.
+- I nearly reported "e4 is RES" on the strength of a 217 px overlap and a tool's end
+  point. Traps 13-15 in the tracing guide are from this.
+
+**Assessment**
+
+Chasing one signal from its loads does not find its driver in this part of the die: the
+nets are long, cross three bus fields and have no landmarks. Two days of serial work have
+given the step formula and five well-drawn but unnamed inputs. Naming them needs the
+regions they come from traced as wholes: the top-left clusters (where the scan line
+counter probably is), bc1/bc2 and the gate column of bd1. That is the same conclusion as
+on 2026-11-16, now with tools that make the bus fields cheap.
+
+**Open, in the order I would take them**
+
+1. Finish the `tla` cluster as a block (about twenty gates), using the unit structure and
+   `follow.py` for its bus pieces; then the cluster's twin columns at x 3450-3900 and
+   x 4650-5050.
+2. bd1's gate column (re-read R1): it holds what the R0 match feeds and what makes X.
+3. The poly bus's other four lines east of the pads, and the diagonal fan.
+

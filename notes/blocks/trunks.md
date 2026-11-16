@@ -465,3 +465,22 @@ In rough order of value:
 9. The small device on `ck_out` at 10600-10710 x 18390-18525.
 10. Taps are recorded only where they were seen in passing; none is drawn except the
     one at (6148,18948).
+
+## `res_b` and `lpstb_b` to their ends (coordinating session, 2026-11-17)
+
+Both lines run down the whole top-left logic (x 5277 and x 5320, y 2550-6110) **without a
+tap** (metal followed with `tools/follow.py`; class map of the full length shows no pad on
+either). At the bottom each turns west onto the pad of one line of a bus of five vertical
+poly lines (x 5100-5290, y 6060-6850):
+
+| Signal | Last metal | Contact | Poly bus line |
+|---|---|---|---|
+| `res_b` | west along y 6055-6080 from x 5280 | (5190,6065) | line 3, x 5180-5205 |
+| `lpstb_b` | west along y 6100-6120 from x 5320 | (5232,6105) | line 4, x 5225-5250 |
+
+Line 5 (x 5268-5292) is `tla_e4` (see `notes/blocks/tla.md`); `res_b`'s metal lies on it
+for 217 px without a contact. Lines 1 and 2 are not identified (line 2 has a pad with a
+contact at (5145,6110) under a metal from the north). All five lines go south to y 6850,
+fan out diagonally and become horizontal metals going east from pads at x 6130-6165,
+y 6950-7350. Not followed beyond the pads except `tla_e4`.
+
