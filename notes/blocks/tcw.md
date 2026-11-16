@@ -52,6 +52,28 @@ shots. The supply assignment of the two rails is the layout rule (AMB-014).
 not found: the class map of the area east of the rail there (`t2cm.png`) does not give a
 readable picture (the open-area thresholds are not calibrated for this spot).
 
+## Read, not drawn (2026-11-24)
+
+**Class map check.** `tools/wl_px.py` at known spots of the traced gate gives, for the sum
+of red minus green over the two chip-2 shots: load gate (poly) 79, diffusion arm 45,
+field 11-36; at the spots south of it that looked unreadable: 94 and 77 on the blocks
+(poly), 47-49 on two areas (diffusion), 11 on the large area (field). So the `--open`
+thresholds hold here; the map of y 3940-4210 east of the rail (`t2cm.png`) is right as
+far as it goes, it just does not show which poly ties to which node.
+
+**Tile y 3420-3700** (`t3cm.png`):
+
+- An inverter: rail contact (6527,3490), one gate at y 3515-3535 whose poly comes from
+  the west along y 3525 (seen to x 6430), output node y 3540-3560 with an arm east along
+  y 3555 to a poly block (6625-6680, 3540-3570) and the diffusion under the supply rail.
+  This is the place of one of `findcell`'s inverter matches ((6572,3535)).
+- **`tcw_b` passes through**: its thin metal x 6465 ends on a pad (6460,3650); from the
+  pad a poly crosses under the ground rail along y 3640-3655 over field (no transistor)
+  and goes on east from (6580,3647). So `tcw_b` comes from east of the rail, between
+  the column and the island.
+- Under the rail at y 3575-3635 a small island that the map gives as diffusion with a
+  poly outline, inside field: not understood.
+
 ## Not done
 
 Everything else in the column (y 2500-3690 and y 4200-4450); the loads of the group at
