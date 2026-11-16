@@ -251,3 +251,24 @@ inverting it. **Adopted: VSS and a load**, by the layout rule (gates under the g
 rail, load towards the other rail). Settle by tracing a unit's east half and following
 either rail to a labelled one.
 
+## AMB-013: does R9's match line end on the step logic's input `rcs_bq3335`? (2026-11-21)
+
+`notes/blocks/r9m.md`. R9's match (`cdp1_b_eq`) was followed 9,000 px from the comparator
+to the middle cluster of the row counter's step logic. Its last metal comes down x 4192
+from y 2598 and ends at y 3385 with a 25 px stub west (y 3368-3385, to x 4168). Twelve
+pixels further west is the metal x 4148 that ends on the contact (4148,3335) of
+`rcs_bq3335` (`trace/tla.txt`), and that metal is itself the end of **another** line of
+the same four-line bundle (the one that is at y 2598 at x 4760).
+
+- Reading A: the stub joins the metal x 4148 (the 12 px dark line between them is the
+  edge of the poly pad underneath printing through). Then two lines of the bundle are one
+  net, `rcs_bq3335`, which makes sense only if their two drivers are meant to be tied
+  (a wired AND of two gate outputs), and `rcs_in1` = that AND, gated by `rcs_mv`.
+- Reading B: the stub ends on a contact of its own that neither metal shot shows, and
+  R9's match goes somewhere not found.
+
+Both metal shots at 5x (`cache/scratch/rax/eq9.png`) and a profile (`--half 1`: metal at
+x 4149-4157 and 4169-4196 on y 3376) do not decide it. **Not adopted either way; nothing
+drawn.** Settle by tracing the other line (poly y 2595 at x 5400) to its driver: if that
+is a second comparator's match, reading A is the design.
+

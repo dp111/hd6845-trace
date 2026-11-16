@@ -968,3 +968,13 @@ west of the selector (`notes/blocks/fld.md`).
 3. The `ral` cell and its strobe; the loads of `rax` and of the R9 units.
 4. `bd2`: `wr_data_e_n`'s destination. R12.
 
+**Same day: R9's match followed to the step logic.** `cdp1_b_eq` runs 9,000 px west and
+north-west (three poly cross-unders, the top line of the bus above the selector, up
+x 5974, along y 2640) and comes down x 4192 into the middle cluster of the row counter's
+step logic, ending 12 px from the metal of `rcs_bq3335`, the input of the term
+`rcs_in1` of the step. Whether it is on that net is not decided (AMB-013): another line of
+the same bundle ends on that contact. Not drawn (`notes/blocks/r9m.md`).
+
+Also: `tools/unsure.py` (R12) finds 57 nets joined only through `?` items, among them
+the four nets of the write-strobe latch in `bd2`.
+
