@@ -197,6 +197,15 @@ Traps, all of them real:
    metal bus, the clean shot's colour under the metal drifts between salmon and
    yellow-green by the row, so colour alone finds "contacts" at every crossing. A real tap
    there has a widened pad.
+16. **A metal that runs up to a pad's ring is not thereby on the pad.** A second line can
+   pass a pad at minimum spacing, turn a corner there, and lie on the poly that leaves
+   the pad, so that at 3x it looks like the pad's own line going on. Tests: (a) start
+   `tools/follow.py` on the pad's *own* metal: it stops at the pad if the other metal is
+   separate; (b) profile along the line through the pad centre
+   (`tools/tla_tracks.py --half 1 --gap 3`) and compare the dark stretch on that side with
+   the ring on the side where the pad's own line arrives (found: 24 px against 10);
+   (c) a "T" whose stub ends flush with the edge of the crossing line is a corner.
+   Found 2026-11-19 at (7577,5262), after two commits said two nets were one.
 
 **When a trap turns out to affect work already done**, add the affected blocks to the
 "Re-read list" in `notes/work-packages.md` in the same commit that records the finding.

@@ -7,9 +7,9 @@ overlay check `cache/scratch/ras/chk1.png`.
 ## Status
 
 The column and its inputs are drawn and extracted: 11 pass transistors, no load, no supply
-rail. The outputs are drawn to x 7960 and into the west end of the central datapath's
-channel 1 (below); the two gate lines and the three extra lines of bit 0 only as far as
-followed. **That the five outputs are the lines to the RA pins is expected, not shown.**
+rail. The outputs are drawn to x 7960, where each enters a unit of an untraced column; the
+five lines from those units to the central datapath's comparator are drawn in full (below);
+the two gate lines and the three extra lines of bit 0 only as far as followed. **That the five outputs are the lines to the RA pins is expected, not shown.**
 
 ## What it is
 
@@ -84,11 +84,13 @@ names carry it; nothing traced yet says which mode drives which gate line.
 - The metal routes are from `tools/follow.py` and one 3x view (`mR4.png`); three of the
   ends were not looked at.
 
-## Where the outputs go (second pass, same day)
+## Where the outputs go (corrected 2026-11-19)
 
-Views `nestN.png`, `xu.png`, `pads7.png`, `t4.png`; overlay checks `chk2.png`, `chk3.png`.
+Views `nestN.png`, `xu.png`, `pads7.png`, `t4.png`, `cache/scratch/rax/pad3.png`, `pe.png`;
+overlay checks `chk2.png`, `chk3.png`.
 
-**All five outputs leave east as poly lines**, each from a pad at the end of its metal:
+**All five outputs leave east as poly lines**, each from a pad at the end of its metal,
+into a column of five identical units at x 7860-8100 (`trace/rax`, not traced yet):
 
 | Output | Pad | Poly east along |
 |---|---|---|
@@ -98,61 +100,52 @@ Views `nestN.png`, `xu.png`, `pads7.png`, `t4.png`; overlay checks `chk2.png`, `
 | `ras_o3` | 7577,5262 | y 5262 |
 | `ras_o4` | 7577,5392 | y 5392 |
 
-Seen to x 7960, drawn to there, not followed further. Those y are line positions of the
-central datapath's big channel (y 4530-5150, pitch 43.5) and of its rows D and E below
-it (`notes/blocks/cdp1.md`); further east the same y positions carry register bit lines
-coming from the east, so each track holds two nets and the place where the output's
-poly ends has to be found (the R10 lesson of the re-read list).
+Each poly crosses its unit under the rails and ends, rounded, at x 8035. Nothing else is
+on an output: no output goes anywhere but into its unit.
 
-**The nest of metals east of the column** (x 7530-7840, y 4800-5940) ends on five pads
-at the west ends of poly lines that run east into the central datapath's channel 1
-(seen to x 8250; they step down there towards the lines at y 5826-6000 of
-`trace/cdp2.txt`, which feed that block's through tracks, the counter side of its 5-bit
-comparator). Join to `cdp2` not drawn.
+**Each unit has a second pad** at x 7832-7836, 43 px below its output's poly, with a
+short poly into the unit. From these five pads the **nest of metals** east of the
+selector (x 7530-7840, y 4800-5940) runs to five pads at the west ends of poly lines
+that go east and, in nested steps at x 8295-8462 (clean shot at 2.9x, `join_a.png`), come
+down onto the long lines of the central datapath's channel 1 that `trace/cdp2.txt`
+starts at x 8480. All of it is drawn, and the extraction joins each to a through track of
+that block's 5-bit comparator:
 
-| Channel pad | Line | Fed by |
-|---|---|---|
-| 7707,5935 | `ras_o3` | a branch of `ras_o3`'s metal: south from (7620,5264), x 7532, y 5937 |
-| 7660,5890 | `cdp2_trk_s6` | staircase from a pad (7836,4945) |
-| 7705,5848 | `cdp2_trk_s5` | staircase from a pad (7836,5172) |
-| 7660,5800 | `cdp2_trk_s4` | metal north along x 7662, east along y 5586 to x 7756; that end lies on a poly that comes from a pad (7487,5587). No pad seen at the metal's end: **not resolved** |
-| 7705,5758 | `ch1w_5758` | metal north along x 7705, east along y 5634 to x 7799: end not resolved |
+| Unit of | Pad | Channel pad | Channel line | Net |
+|---|---|---|---|---|
+| `ras_o0` | 7836,4808 | 7707,5935 | 6000 | `cdp2_trk_s7` |
+| `ras_o1` | 7836,4945 | 7660,5890 | 5956 | `cdp2_trk_s6` |
+| `ras_o2` | 7836,5172 | 7705,5848 | 5913 | `cdp2_trk_s5` |
+| `ras_o3` | 7836,5300 | 7660,5800 | 5870 | `cdp2_trk_s4` |
+| `ras_o4` | 7832,5437 | 7705,5758 | 5826 | `ch1w_5758` (in `cdp2`, slice s3 is wired differently: its notes) |
 
-`ras_o3`'s metal also climbs a staircase to a pad (7836,4808). The three pads at
-x 7836 (y 4808, 4945, 5172) sit just below the poly lines of outputs 0, 1 and 2 and each
-has a short poly going east into a column at x 7880-7960 that has not been looked at.
-So one channel line is `ras_o3` itself, and the others come from that column: whether
-they are the other outputs (crossing under) or something made from them is the next
-thing to trace. Two more pads at the channel's west end, (7748,5672) and (7790,5718),
-have metals going south to y 6070 and y 6158 (not drawn).
+So the comparator of the central datapath's rows B (against the register of row C) is
+fed, bit for bit, from the five units that take the selector's outputs: slice s7 is bit
+0, s3 is bit 4, which is the order `notes/blocks/cdp2.md` needs for its magnitude chain
+(s3 most significant). **What a unit does to its input (invert, buffer, latch) is not
+traced.** `cdp2`'s own reading needs the tracks to carry the complement of the value.
 
-### The join to the central datapath's comparator (drawn, extracted)
+### The mistake in the first version of this section
 
-East of x 8250 the five channel lines step down in nested bends (clean shot at 2.9x,
-`join_a.png`) onto the long lines of channel 1 that `trace/cdp2.txt` starts at x 8480:
-5758 to 5826, 5800 to 5870, 5848 to 5913, 5890 to 5956, 5935 to 6000. With those five
-polys drawn the full extraction joins them to that block's through tracks, and the
-names were made one: the line from the pad (7660,5890) is `cdp2_trk_s6`, (7705,5848) is
-`cdp2_trk_s5`, (7660,5800) is `cdp2_trk_s4`, and **`cdp2_trk_s7` is `ras_o3`**. So:
+The first version (commits a313716, d96baf3) said "`cdp2_trk_s7` is `ras_o3`". Wrong.
+The line from the pad (7836,4808) comes down the staircase, runs **west along y 5264 on
+top of `ras_o3`'s poly** and turns south at x 7620; that corner stops 19 px short of
+`ras_o3`'s pad (7577,5262). I read the bright metal east of the pad's ring, on a 3x
+view, as leaving the pad. Checks that show two nets: both metal shots at 6x
+(`pad3.png`: dark between x 7590 and 7610, 24 px against 10 px of ring on the side
+where the pad's own metal arrives; in chip 1 the poly's colour shows there); the
+follower started on the pad's own metal stops at the pad; the corner's west edge is the
+vertical's west edge. Trap 16 of the tracing guide; re-read item R11.
 
-```
-cdp2_b_s7_y  = NOR(cdp2_a_c_s7_q, ras_o3)
-cdp2_b_s7_ne = NOT((cdp2_a_c_s7_q & ras_o3) | cdp2_b_s7_y)      = XOR
-```
-
-The 5-bit comparator of the central datapath's rows B (against the register of row C)
-takes the selector's output 3 on one of its bits: it compares the row address as it
-leaves the selector, not the scan line counter. For the other four bits this rests on
-what drives the pads at x 7836 and the two unresolved metal ends, which is not traced.
-Bit numbers are not assigned to the slices s3-s7 yet: `ras_o3` on the last slice does
-not fit a plain order with s3 as the most significant bit (`notes/blocks/cdp2.md`).
+Also seen: a sixth pad at (7832,5522) with a poly east and a metal south along x 7832
+(not drawn); two more pads at the channel's west end, (7748,5672) and (7790,5718), with
+metals south to y 6070 and y 6158 (not drawn).
 
 ## Not done
 
-1. Each output's poly east of x 7960 to its end (expected: the RA pad drivers; the lines
-   found at the pad end are listed in `notes/blocks/trunks.md`), and what else it feeds.
-   The column at x 7880-7960, y 4740-5450 and its pads at x 7836. The ends of the feeds
-   of `cdp2_trk_s4` and `ch1w_5758`.
+1. The five units at x 7860-8100, y 4730-5460 (`rax`): what each does with its output
+   bit, and what leaves them towards the RA pad drivers (the lines found at the pad end
+   are listed in `notes/blocks/trunks.md`).
 2. `ras_straight` and `ras_shift` to their drivers: the left band bends west at its top
    (y 5140); the right band goes on north-east from (7425,5235).
 3. `ras_o0_alt1`, `ras_o0_alt2`, `ras_o0_sel1`, `ras_o0_sel2` to their sources.

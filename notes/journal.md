@@ -817,3 +817,18 @@ reported by the extraction as "carries several names"; that message is the join 
 confirmed, and the fix is one name (`tools/rename.py`, or `@alias` where the name comes
 from a cell template).
 
+## 2026-11-19: correction: `cdp2_trk_s7` is not `ras_o3`
+
+Yesterday's last commit joined `ras_o3`'s pad (7577,5262) to a metal that only passes it
+(trap 16, R11). Corrected in the trace and in `notes/blocks/ras.md`. What stands:
+
+- No selector output goes anywhere but into its own unit of a column of five identical
+  units at x 7860-8100 (`rax`, not traced).
+- Each unit has a second pad; the five lines from those pads are now all drawn and the
+  extraction joins them to `cdp2`'s comparator tracks, bit 0 on slice s7 up to bit 4 on
+  s3. That order is the one `cdp2`'s magnitude chain needs.
+
+What made me look again: the result did not fit (output 3 on the slice that should be
+bit 0), and the unit's second pad looked like an output. A result that breaks a regular
+pattern is a reason to re-test the join that produced it before writing it up.
+

@@ -1,5 +1,5 @@
 # ras: the row address selector
 7100,4880:7500,5950    logic   row address selector | eleven pass transistors: outputs = scan line counter, or the counter shifted up one bit with bit 0 from elsewhere
-7500,4720:7860,5960    route   selector outputs | nest of metals: the five outputs east in poly, and the feeds of the central datapath channel 1 lines (comparator inputs)
-7640,5730:8490,6020    route   channel 1, west end | five poly lines stepping down onto the comparator through-track lines; one is selector output 3
+7500,4720:7860,5960    route   selector outputs | the five outputs east in poly to their units; nest of metals from the units to the central datapath channel 1 lines (comparator inputs)
+7640,5730:8490,6020    route   channel 1, west end | five poly lines stepping down onto the comparator through-track lines of the central datapath
 7100,5950:7360,6690    route   scan line counter taps | five poly lines from the counter's metal lines north to the selector

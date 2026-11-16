@@ -143,15 +143,6 @@ M 7332,5652 x7402 y5502 x7448 y5350 x7582 y5262 w=13
 P 7560,5245:7594,5279
 C 7577,5262
 P 7577,5262 x7960 w=18
-# from that pad the metal goes on east, with a branch south to the first line of the channel
-# below (pad 7707,5935) and a staircase north-east to a pad (7836,4808)
-M 7577,5264 x7706 y5168 x7751 y5098 x7792 y4806 x7840 w=13
-?P 7819,4791:7853,4825                # pad seen, what it is on not looked at
-C 7836,4808
-M 7620,5264 y5460 x7532 y5937 x7710 w=13
-P 7690,5918:7724,5952
-C 7707,5935
-P 7707,5935 x8250 w=18                # channel line; goes on east and steps down (not drawn)
 N M 7500,5350 ras_o3
 M 7335,5829 x7452 y5546 x7490 y5393 x7578 w=13
 P 7560,5375:7594,5409
@@ -159,8 +150,20 @@ C 7577,5392
 P 7577,5392 x7960 w=18
 N M 7452,5700 ras_o4
 
-# --- the other lines of the nest east of the column. Each ends on a pad at the west end of a
-# poly line of the channel below (the central datapath's channel 1 further east).
+# --- the nest of metals east of the column: five lines, each from a pad at x 7832-7836 beside
+# one output's poly (y 4808, 4945, 5172, 5300, 5437) to a pad at the west end of a poly line of
+# the channel below (the central datapath's channel 1 further east).
+# from the pad (7836,4808): staircase south-west, then WEST ALONG y 5264 ON TOP OF ras_o3's POLY
+# to a corner at x 7620, south to the pad (7707,5935). The corner stops 19 px short of ras_o3's
+# pad (7577,5262): two nets (first read as one; both metal shots at 6x, pad3.png, and the
+# follower from the pad's own metal, which stops at the pad).
+?P 7819,4791:7853,4825                # pad seen; what its poly does further east is trace/rax
+C 7836,4808
+M 7840,4806 x7792 y5098 x7751 y5168 x7706 y5264 x7620 y5460 x7532 y5937 x7710 w=13
+P 7690,5918:7724,5952
+C 7707,5935
+P 7707,5935 x8250 w=18
+N M 7620,5350 cdp2_trk_s7
 # from a pad (7836,4945): staircase south-west to the pad (7660,5890)
 ?P 7819,4928:7853,4962
 C 7836,4945
@@ -177,27 +180,31 @@ P 7688,5831:7722,5865
 C 7705,5848
 P 7705,5848 x8250 w=18
 N M 7622,5700 cdp2_trk_s5
-# the pad (7660,5800): metal north along x 7662 and east along y 5586 to x 7756; its east end
-# lies on a poly that comes from a pad at (7487,5587): not resolved, not drawn beyond
+# the pad (7660,5800): metal north along x 7662, east along y 5588, north along x 7750, east
+# along y 5393 (on top of ras_o4's poly), north to the pad (7836,5300)
 P 7643,5783:7677,5817
 C 7660,5800
-M 7662,5800 y5586 x7756 w=12
+M 7662,5800 y5588 x7750 y5393 x7836 y5300 w=12
+?P 7819,5283:7853,5317
+C 7836,5300
 P 7660,5800 x8250 w=18
 N M 7662,5700 cdp2_trk_s4
-# the pad (7705,5758): metal north along x 7705 and east along y 5634 to x 7799 (end not looked at)
+# the pad (7705,5758): metal north along x 7705, east along y 5634, north along x 7792, east
+# along y 5437 to the pad (7832,5437)
 P 7688,5741:7722,5775
 C 7705,5758
-M 7705,5758 y5634 x7799 w=12
+M 7705,5758 y5634 x7792 y5437 x7836 w=12
+?P 7815,5420:7849,5454
+C 7832,5437
 P 7705,5758 x8250 w=18
 N M 7705,5700 ch1w_5758
 
 # --- the five channel lines east of x 8250: nested steps down onto the long lines of the central
 # datapath's channel 1 (trace/cdp2.txt, from x 8480). Clean shot at 2.9x (join_a.png).
 @requires cdp2
-@alias ras_o3 cdp2_trk_s7             # the through track of slice s7 is the selector's output 3
 P 8250,5758 x8462 y5826 x8490 w=18    # to line 5826
 P 8250,5800 x8415 y5870 x8490 w=18    # to line 5870
 P 8250,5848 x8377 y5913 x8490 w=18    # to line 5913
 P 8250,5890 x8338 y5956 x8490 w=18    # to line 5956
-P 8250,5935 x8295 y6000 x8490 w=18    # ras_o3 to line 6000
+P 8250,5935 x8295 y6000 x8490 w=18    # to line 6000
 
