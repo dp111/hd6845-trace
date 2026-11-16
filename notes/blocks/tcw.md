@@ -161,6 +161,48 @@ stack 1's top node (it may be how that node is connected: not read); a vertical 
 x 6640-6665 from y 3220 to y 3375 and another x 6600-6625, y 3320-3400. The load of
 `tcw_o3326` is among these and is not identified.
 
+### Stretch A, y 2690-3220: read, **not drawn** (2026-11-26)
+
+Views `bus2.png` (pads and gate polys west of the column, clean shot at 2.3x), `railA.png`
+(the rail in both metal shots and the clean shot at 2.4x); gate positions from
+`tools/railprof.py`.
+
+Six gates in three series pairs. What the two views show:
+
+| Gate (y under the rail) | Its poly comes from |
+|---|---|
+| 2740-2765 | pad (6405,2745) on the bus metal x 6404 |
+| 2791-2812 | pad (6310,2787) at the top end of the bus metal x 6320 (`tcw_m6320`) |
+| 2913-2934 | pad (6405,2915) on x 6404 |
+| 2957-2978 | pad (6265,2958) on the bus metal x 6278 |
+| 3086-3109 | a C-shaped poly from a structure at (6440-6500, 2985-3020) west of the rail, down x 6385-6405 and back east along y 3090: an internal connection |
+| 3140-3164 | pad (6405,3135) on x 6404 |
+
+- **Rail contacts**: rings in both metal shots at (6533,2870) and (6527,3055), each in a
+  box that the clean shot outlines; in each of the two long diffusion runs the profile
+  reported (2813-2912, 2979-3085) a dark line separates an upper part (next to the pair
+  above) from the box with the contact. Probable further contacts at (6522,2712) and
+  (6512,3185), not clear.
+- **Outputs**: the pad (6360,2832) at the top end of the bus metal x 6362 has a poly that
+  ends in a buried-contact-like loop at (6445-6480, 2815-2850), beside the upper part of
+  the first long run. If the x 6362 metal is one piece from there to the pad (6378,3355)
+  (the track profile has a 37 px gap at y 3161-3198 where a poly crosses), then
+  `tcw_m6362a` is the output of the first pair: NAND of the nets on x 6404 and x 6320.
+  The pad (6265,3180) at the bottom end of the x 6278 metal has a poly east along y 3180
+  to the west side of the last diffusion run (3165-3215); the pad (6225,2877) at the top
+  end of `tcw_m6232` has a poly east along y 2877 to the rail at the height of the first
+  contact box.
+- **One bus net feeds four gates**: by the track profile the metal x 6404 is one piece
+  from y 2749 to y 3709, so the gates at 2740, 2913, 3140 and (stretch B) 3407 would all
+  be `tcw_m6404`. That depends on three contact rings having been bridged as gaps under
+  34 px; not checked on a view.
+
+I did not draw this stretch: which end of each pair is the output rests on the two
+unclear contacts, and with the readings above taken at face value the second and third
+pairs come out as two NANDs feeding each other with the same enable on both, which is
+not a circuit anyone would build. Something in the pad-to-gate assignment or in the
+"one piece" reading of a bus metal is wrong, and it has to be found before drawing.
+
 ## Not done
 
 Everything else in the column (y 2500-3690 and y 4200-4450); the loads of the group at
