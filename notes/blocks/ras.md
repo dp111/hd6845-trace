@@ -141,44 +141,54 @@ Also seen: a sixth pad at (7832,5522) with a poly east and a metal south along x
 (not drawn); two more pads at the channel's west end, (7748,5672) and (7790,5718), with
 metals south to y 6070 and y 6158 (not drawn).
 
-## Where the control lines come from (2026-11-20; drawn, extracted)
+## Where the control lines come from (2026-11-20, corrected 2026-11-21; drawn, extracted)
 
 Views `cache/scratch/rax/tcs_a.png`, `tcs_m.png`, `tcs2.png`, `tcs4.png`, `tcg.png`,
-`tcg2.png`, `tcb.png`. All four gate lines of the selector and one of bit 0's two
-alternative sources come from the nine-gate island north of it (`trace/tc1.txt`, traced
-weeks ago with letters for names), 430-800 px away, as polys under six bus metals. With
-the joins drawn the extraction makes each pair one net; the island's nets took the
-selector's names. With q = R9's bit 0 (`cdp1_c5_q`):
+`tcg2.png`, `tcb.png`, `fldB.png`. All four gate lines of the selector come from the
+nine-gate island north of it (`trace/tc1.txt`, traced weeks ago with letters for names),
+430-800 px away, as polys under six bus metals. With the joins drawn the extraction makes
+each pair one net; the island's nets took the selector's names. With q = R9's bit 0
+(`cdp1_c5_q`):
 
     ras_straight = NOT ras_shift
     ras_o0_sel1  = ras_shift AND q            passes ras_o0_alt1 to ras_o0
     ras_o0_sel2  = ras_shift AND NOT q        passes ras_o0_alt2 to ras_o0
     cdp1_b5_a    = q                          when ras_shift is low
-                 = NOT ras_o0_alt1            when ras_shift is high and q = 1
+                 = NOT tc1_i                  when ras_shift is high and q = 1
                  = NOT tc1_g                  when ras_shift is high and q = 0
+    tc1_g = NOT fld_a_in,  tc1_i = NOT fld_b_in      (two inverters, trace/fld.txt)
 
 So with `ras_shift` low the row address is the scan line counter and R9 is compared
 with it bit for bit. With `ras_shift` high the counter goes out shifted up one bit, **R9's
-bit 0 is not compared as a number: it chooses which of two signals becomes bit 0 of the
-row address**, and the comparator's bit 0 is fed from the same signal that was chosen
-(for q = 1 literally the same net, inverted; for q = 0 from `tc1_g`, which is not shown to
-be `ras_o0_alt2`). The comparator's other side of that bit is the RA0 pin's level
-(`ra0_cmp`), so bit 0 compares the signal now with the same signal as it has come through
-the output stage; what that amounts to depends on the polarity and timing of the stages
-between (`rax`, `ral`), which are not fully traced.
+bit 0 is not compared as a number: it chooses which of two signals (`ras_o0_alt1`,
+`ras_o0_alt2`) becomes bit 0 of the row address**, and by the same choice which of two
+other signals (`tc1_i`, `tc1_g`) is put, inverted, on the register side of the
+comparator's bit 0. **The two pairs are four different nets as traced**: whether
+`tc1_i`/`tc1_g` carry the same information as `alt1`/`alt2` (the natural guess: so that
+bit 0 of the compare tracks the row address bit instead of R9's bit) is not known until
+all four are traced to their sources. They all lead into two untraced gate groups west
+of the selector (`notes/blocks/fld.md`).
 
 `ras_shift` is traced to its source (`notes/blocks/shm.md`): the AND of two bits of R8.
-Not traced: `ras_o0_alt1`, `ras_o0_alt2`, `tc1_g`.
 
-A mistake corrected here: the metal of `ras_o0_sel1` was drawn on from its pad
-(7467,4782) along a bus line (y 4746, to x 7860) that `tools/follow.py` reached across
-a 24 px gap. A brightness profile along x 7467 in both metal shots shows no metal between
-the pad and the bus line. The same class of error as trap 16; the bus line is not drawn.
+### Two mistakes corrected here
+
+1. The metal of `ras_o0_sel1` was drawn on from its pad (7467,4782) along a bus line
+   (y 4746, to x 7860) that `tools/follow.py` reached across a 24 px gap. A brightness
+   profile along x 7467 in both metal shots shows no metal between the pad and the bus
+   line. The bus line is not drawn.
+2. **`tc1_i` is not `ras_o0_alt1`.** On 2026-11-20 the island's poly for its input i was
+   drawn south along x 7102 to the pad (7078,5303) at the end of `ras_o0_alt1`'s metal;
+   the lower 250 px carried a `?` (the two stripped shots disagreed about its x), the
+   extraction then reported the two names on one net, and the notes and the report to
+   the user called that a join found by the extraction. It was a join I had drawn. In
+   the chip-2 stripped shot at 3.4x the poly turns west at (7105,5178) into an inverter's
+   output. Trap 17 of the tracing guide; re-read item R12.
 
 ## Not done
 
 1. The five units at x 7860-8100, y 4730-5460 (`rax`): what each does with its output
    bit, and what leaves them towards the RA pad drivers (the lines found at the pad end
    are listed in `notes/blocks/trunks.md`).
-3. `ras_o0_alt1`, `ras_o0_alt2`, `tc1_g` to their sources.
+3. `ras_o0_alt1`, `ras_o0_alt2`, `fld_a_in`, `fld_b_in` to their sources (`notes/blocks/fld.md`).
 4. What is under the pad (7577,5262).

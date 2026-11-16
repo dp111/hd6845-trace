@@ -59,13 +59,13 @@ numbers (`sel`). Nothing in this block tests that independently except the four 
   is replaced by the output of the nine-gate island `tc1`:
 
       cdp1_b5_a = NOR(tc1_r2_out, tc1_r4_out)
-      with b = ras_shift, q = R9's bit of that slice, g = tc1_g, i = ras_o0_alt1:
+      with b = ras_shift, q = R9's bit of that slice, g = tc1_g, i = tc1_i:
       b = 0:  cdp1_b5_a = q
       b = 1:  cdp1_b5_a = NOT( i if q else g )
 
   One bit of the R9 compare is switched by `ras_shift` between the register bit and a
   function of two other signals: the shape of "R9 is N-2 and the field decides" in
-  interlace sync and video. `ras_shift`, `tc1_g`, `ras_o0_alt1` are not traced to their sources,
+  interlace sync and video. `tc1_g` and `tc1_i` are not traced to their sources (`notes/blocks/fld.md`),
   and that the slice is bit 0 rests on the column it stands in.
 - **The value R9 is compared with** is traced: `trace/r9c.txt`, `notes/blocks/r9c.md`. It
   is the row address as it goes to the pins (`ra#_cmp`, made from the pad drivers' input
@@ -73,5 +73,5 @@ numbers (`sel`). Nothing in this block tests that independently except the four 
 
 ## Not done
 
-`ras_shift`, `tc1_g`, `ras_o0_alt1`. The
+`tc1_g`, `tc1_i`. The
 nets of the four rows still carry `cdp1_`/`cdp2_` names (queue).

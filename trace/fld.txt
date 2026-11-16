@@ -1,0 +1,58 @@
+# fld: the logic west of the row address selector (x 6380-7120, y 4720-5460). PARTIAL: only the two
+# inverters at its east end, which drive the island's inputs g and i (trace/tc1.txt). The rest of
+# the block (two more loads at x 6470-6525, gates under the thin metals x 6400 and 6660, the
+# routing field y 4720-4990) is NOT TRACED. Notes: notes/blocks/fld.md.
+#   tc1_g = NOT fld_a_in        tc1_i = NOT fld_b_in
+# Read from the chip-2 stripped shot at 3.4x (cache/scratch/rax/fldA2.png, fldG.png, fldB.png),
+# where this area has no metal over it except the rails.
+@block fld
+@requires ras
+@requires tc1
+@w M=12 P=18
+@s 26x26
+
+# rails: loads on the west one, pull-downs under the east one (ASSUMPTION: VCC and VSS in that
+# order, by the layout rule; neither followed to a labelled rail)
+M 6725,4990 y5290 w=50
+N M 6725,5140 vcc
+M 6902,4990 y5290 w=46
+N M 6902,5160 vss
+
+# --- upper inverter: output tc1_g
+D 6705,5045:6755,5105                 # VCC box
+C 6722,5070
+D 6740,5048:6840,5075                 # band east under the load gate
+P 6765,5022:6825,5095                 # load gate
+P 6797,5090:6825,5125                 # its tail
+D 6830,5060:6852,5125                 # arm of the output band down and west to under the tail
+D 6795,5103:6852,5125
+?B 6793,5100:6827,5127
+D 6835,5046:6965,5062                 # output band east, thin
+D 6878,5046:6932,5145                 # under the VSS rail: output, channel, VSS box
+C 6905,5122
+P 6868,5075:7048,5098                 # gate: from the north along x 7020-7048
+P 7020,4995:7048,5098
+D 6958,5040:6990,5062                 # the band's end in the buried contact
+B 6962,5032:6996,5066
+P 6987,4958 y5060 w=18                # poly north to the pad (6985,4958): tc1_g
+N P 7034,5030 fld_a_in
+
+# --- lower inverter: output tc1_i
+D 6705,5175:6755,5235
+C 6722,5200
+D 6740,5178:6840,5205
+P 6765,5152:6825,5225
+P 6797,5220:6825,5255
+D 6830,5190:6852,5255
+D 6795,5233:6852,5255
+?B 6793,5230:6827,5257
+D 6835,5176:6968,5192
+D 6878,5176:6932,5275
+C 6905,5252
+P 6868,5205:7012,5228                 # gate: from a pad (7030,5215) whose metal goes south
+P 7010,5197:7050,5235
+C 7030,5215
+M 7030,5215 y5340 w=14                # south to a pad at about (7032,5345) (NOT DRAWN further)
+D 6962,5172:6992,5192
+B 6965,5162:7000,5196                 # the island's input poly (trace/ras.txt) arrives here from the east
+N P 6950,5216 fld_b_in

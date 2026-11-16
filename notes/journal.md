@@ -948,3 +948,23 @@ the choice of bit 0's source by R9's bit 0, and the switch of the R9 comparator'
 3. The `ral` cell and its strobe; the loads of `rax` and of the R9 units.
 4. `bd2`: `wr_data_e_n`'s destination.
 
+## 2026-11-21: correction: `tc1_i` is not `ras_o0_alt1`; two inverters west of the selector
+
+Yesterday's "five joins" between the island and the selector were four. The fifth
+(`tc1_i` = `ras_o0_alt1`) was a `?` poly of my own drawing, reported as extracted (trap
+17, re-read item R12). Corrected in the trace, the notes and the glossary: the island's
+input i comes from an inverter (`trace/fld.txt`), as does its input g:
+`tc1_g` = NOT `fld_a_in`, `tc1_i` = NOT `fld_b_in`. 2,022 nets, 3,394 transistors.
+
+So the statement "in shift mode the comparator's bit 0 is fed from the same signal that
+becomes row address bit 0" is **not established**: the selector's two sources and the
+comparator's two inputs are four nets, all of which lead into two untraced gate groups
+west of the selector (`notes/blocks/fld.md`).
+
+**Open, in the order I would take them**
+
+1. `fld`: the upper group's west part and the lower gate group (field logic).
+2. Where `cdp1_b_eq` (R9's match) goes.
+3. The `ral` cell and its strobe; the loads of `rax` and of the R9 units.
+4. `bd2`: `wr_data_e_n`'s destination. R12.
+

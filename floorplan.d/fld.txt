@@ -1,0 +1,4 @@
+# fld: the logic west of the row address selector
+6690,5010:7060,5285    logic   bit-0 compare inverters | two inverters: outputs are the island's inputs g and i (the R9 comparator's bit 0 in shift mode)
+?6380,4720:6690,5300   logic   field logic, upper group (untraced) | routing field and gates: the sources of row address bit 0 in interlace sync+video lead here
+?6540,5400:6920,5780   logic   field logic, lower group (untraced) | about ten gates; ras_o0_alt1 and the upper inverter's output have pads in it

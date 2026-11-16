@@ -216,6 +216,15 @@ Traps, all of them real:
    passes 24 px away (found 2026-11-20 at (7467,4782)): where its output turns a corner
    within 30 px of a pad or contact candidate, check the corner with a brightness profile.
 
+17. **A join the extraction reports is only as good as the geometry on its path.** When
+   two named nets become one after new geometry is drawn, the message "carries several
+   names" says that the drawing connects them, not that the chip does. If any item on the
+   path between the two labels carries a `?`, or was placed "by analogy" or "from one
+   view", the join is an assumption and must be written up as one, and the names must not
+   be merged with `tools/rename.py` until the uncertain stretch has been read in a second
+   shot. Found 2026-11-21: `tc1_i` and `ras_o0_alt1` had been merged across 250 px of
+   `?P`, reported as a result, and were two nets.
+
 **When a trap turns out to affect work already done**, add the affected blocks to the
 "Re-read list" in `notes/work-packages.md` in the same commit that records the finding.
 A remark in a journal entry or a report is not enough: nobody re-reads those when

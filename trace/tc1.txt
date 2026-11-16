@@ -188,7 +188,7 @@ C 7968,3808 s=24x24
 M 7968,3798 y4082 w=21             # down to track T2
 C 8010,3894 s=24x24
 M 8010,3884 y4128 w=20             # down to track T3
-N M 8010,4050 ras_o0_alt1
+N M 8010,4050 tc1_i
 
 # =====================================================================================
 # Left half of the island: L1 (inverter), L2 and L3 (2-input NOR drivers), L4 (NOR).

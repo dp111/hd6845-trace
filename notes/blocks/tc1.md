@@ -116,7 +116,7 @@ ras_o0_sel2 = NOR(tc1_a, ras_straight)        = NOT a . b        (driver)
 ras_o0_sel1 = NOR(tc1_r1_out, ras_straight)   = a . b            (driver)
 tc1_l4_out = NOR(ras_o0_sel2, tc1_w1)
 tc1_r2_out = NOR(tc1_a, ras_shift)
-tc1_r5_out = NOT(tc1_g.ras_o0_sel2 + ras_o0_alt1.ras_o0_sel1)
+tc1_r5_out = NOT(tc1_g.ras_o0_sel2 + tc1_i.ras_o0_sel1)
 tc1_r4_out = NOT tc1_r5_out                = b . (g.NOT a + i.a)
 tc1_f      = NOR(tc1_r2_out, tc1_r4_out)   = (a + b) . NOT(b.(g.NOT a + i.a))   (driver)
            = a.NOT b  +  b.NOT a.NOT g  +  a.b.NOT i
@@ -137,7 +137,7 @@ puts `res_b` and `lpstb_b` at x 5265-5330, west of this region.
 | `tc1_a` | R1, R2, L2 | metal V3, poly east | east: poly y 3387-3402 at x 8250, in the datapath channel between cdp1's rows A and B (cdp1's notes: that line runs the full width, contact at 10615,3385) |
 | `ras_shift` | L1, R2 | metal V2/V3-lower, corner (8100,3725), metal south x 8088-8105, contact (8139,4090), poly east y 4079-4101, contact (8313,4090), metal south x 8307-8321 and west along y 4411-4426, contact (8247,4417), poly west y 4408-4427, contact (7859,4417), metal west y 4411-4426, contact (7511,4417), poly south | south: poly x 7503-7522 at y 4450 |
 | `tc1_g` | R5 | metal x 8045-8063 south, west along y 4151-4167, contact (7685,4158), poly west y 4144-4167; contact (7317,4158) on the way, metal south to contact (7315,4395), poly west y 4385-4403, south at x 7134-7153 | south: poly x 7134-7153 at y 4450. The other end of the y 4144-4167 poly (north at x 7177-7202, west along y 3995-4014, under the channel metals without contact) is the **gate** of transistors in a big structure at x 6750-6940, y 3930-4200 (Not done), so `g` is not driven there |
-| `ras_o0_alt1` | R5 | track T3, metal south x 7265-7284, contact (7270,4437), poly west y 4424-4443, south at x 7179-7196 | south: poly x 7179-7196 at y 4450 |
+| `tc1_i` | R5 | track T3, metal south x 7265-7284, contact (7270,4437), poly west y 4424-4443, south at x 7179-7196 | south: poly x 7179-7196 at y 4450 |
 | `tc1_w1` | L4 | metal W1 up to contact (7186,2986), poly east and north (x 7290-7308) to contact (7362,2770), bus line y 2764-2778 east, cross-under at the right VSS rail (contacts 7663,2769 and 7858,2769), on east and south as **ns1** (x 8089-8104), jog east at y 3651-3667, contact (8139,3704), poly east | east: poly y 3691-3712 at x 8250 (seen to x 8350), into the random logic at the datapath's slice-0 position |
 
 So `w1` and ns1 are one net (`@alias tc1_w1 tc1_ns1`): the line has exactly two ends, L4's
@@ -272,7 +272,7 @@ South side, in the channel (tc2), west to east:
 |---|---|---|---|---|
 | `tc1_x1` | M | x 7049-7068, y 4450 | ? | from contact (7056,4352) |
 | `tc1_g` | P | x 7134-7153, y 4450 | **in** (believed: every other end of `g` is a gate) | from contact (7315,4395) |
-| `ras_o0_alt1` | P | x 7179-7196, y 4450 | **in** (its only other end) | from contact (7270,4437) |
+| `tc1_i` | P | x 7179-7196, y 4450 | **in** (its only other end) | from contact (7270,4437) |
 
 North side:
 

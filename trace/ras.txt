@@ -235,12 +235,16 @@ P 7161,5145 7148,5122 7146,4772 7232,4668 7232,4478 w=16
 P 7215,4461:7249,4495
 C 7232,4478
 M 7231,4440 y4484 w=18
-# bit 0's first alternative source (through S2): the island's poly x 7179-7196 south, a diagonal,
-# south along x 7102 to the pad (7078,5303) at the end of the metal that comes from S2's contact box
-P 7187,4440 7187,4622 7102,4722 7102,5040 w=16
-?P 7102,5040 7102,5296 7083,5303 w=16   # lower part: the two shots place it 12 px apart; its end on the pad from one 2.6x view
+# the island's input i: its poly x 7179-7196 south, a diagonal, south along x 7102 to y 5178 and
+# WEST along y 5178 to the buried contact of a small inverter's output (trace/fld.txt). It was
+# first drawn on south to the pad (7078,5303) of ras_o0_alt1's metal, with a `?`, and the
+# extraction then "joined" the two nets: wrong (chip-2 stripped shot at 3.4x, fldB.png: the poly
+# turns the corner at (7105,5178)). The pad (7078,5303) belongs to ras_o0_alt1 alone; its poly
+# goes west along y 5303.
+P 7187,4440 7187,4622 7102,4722 7102,5178 6992,5178 w=16
 P 7061,5286:7095,5320
 C 7078,5303
+P 7078,5303 x6640 w=18                # ras_o0_alt1 west to a pad at about (6620,5303): NOT DRAWN further
 # the island's input g: poly x 7134-7153 south, a diagonal, south along x 7050 to a pad (7050,4830);
 # metal south and west to a pad (6985,4958); poly south from there (NOT DRAWN)
 P 7144,4440 7144,4592 7050,4690 7050,4830 w=16
