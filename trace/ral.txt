@@ -1,0 +1,79 @@
+# ral: the stage in front of the RA pad drivers, x 13990-16330, y 4250-4560.
+# Five copies of one cell (pitch 434, one gap of 563): notes/blocks/ral.md.
+# This file draws only what is read with confidence. The cell's inverters, its loads and
+# the two poly bars at 14200-14290 x 4455-4500 are NOT drawn yet (see the notes, "Not done").
+@block ral
+@w M=16 P=20
+@s 26x26
+
+@cell ral_cell tag=s0
+# --- supply rails, one piece per cell (they run on through the band).
+# Top rail VCC, middle rail VSS: by device orientation (pull-down sources on the middle
+# rail, load-shaped blocks under the top one), not followed to a labelled rail.
+M 13996,4220:14452,4268
+N M 14000,4244 vcc
+M 13996,4397:14452,4446
+N M 14000,4421 vss
+
+# --- pull-down Tf: gate = the line y 4350 (ral_frc), source on the middle rail.
+# Poly pad under the line's tab, contact (14157,4318); poly strip down across the
+# diffusion box; drain the strip x 14172-14196 (where it goes: not drawn).
+P 14142,4303:14176,4346
+C 14158,4320 s=24x24
+M 14140,4300:14176,4352
+P 14150,4340:14170,4462
+D 14102,4380:14196,4446
+C 14118,4423 s=28x28
+N D 14185,4420 ral_tf_{}
+
+# --- input pass transistor: rax_o# -> node a, gate = the strobe line y 4548 (ral_stb).
+# The input poly (drawn by rab for bit 0, ending at x 14000) lands on the strip's west
+# end by a buried contact (round ring at (14000,4495) in both stripped shots: ?).
+# The strip y 4479-4494 is diffusion from x 14015 to x 14315 (colour profile along
+# y 4486, tools/ral_prof.py): it passes under the strobe poly and on under the lower
+# poly bar. Drawn here only as far as x 14196. The buried contact is drawn outside the
+# cell, for s0 only: the other copies' input polys are not drawn yet.
+D 13988,4479:14196,4495
+P 14028,4430:14054,4536
+P 14024,4530:14058,4564
+C 14041,4547 s=24x24
+N D 14100,4487 ral_a_{}
+
+# --- output: poly from the cell to the pad driver (S-shaped): vertical x 14372-14395,
+# west along y 4480-4500, south along x 14331-14349 to the pad (14340,4764) that r9c drew
+# for RA0. Drawn from y 4480 down; the upper part and what drives it are not drawn.
+P 14331,4480:14395,4500
+P 14331,4480:14349,4525
+@end
+
+# s0's input: rax_o0's poly (drawn by rab to x 14000) onto the strip.
+?B 13988,4480:14016,4510
+
+@inst ral_cell 434,0 tag=s1
+@inst ral_cell 868,0 tag=s2
+@inst ral_cell 1431,0 tag=s3
+@inst ral_cell 1865,0 tag=s4
+
+# --- the line y 4350 through all five cells (taps in each): local name ral_frc
+M 13990,4351 x16330 w=16
+N M 14000,4351 ral_frc
+
+# --- the strobe line: the sixth line of the row-address bundle (notes/blocks/rab.md:
+# from (11650,4245) east, south along x 13862, east along y 4548 to x 15906). Only its
+# stretch under the band is drawn here.
+M 13990,4548 x15910 w=16
+N M 14000,4548 ral_stb
+
+# --- ports of the copies s1-s4 (inputs and outputs not drawn beyond the cell).
+# Inputs: the strip's west end, where each copy's input poly should land as s0's does.
+# rab: bit 1's poly goes north from the pad (14430,4590) and bit 3's from (15425,4675),
+# right under s1's and s3's input ends; bits 2 and 4 were not followed that far.
+N D 14430,4487 rax_o1_u
+N D 14864,4487 ral_in_s2
+N D 15427,4487 rax_o3_u
+N D 15861,4487 ral_in_s4
+# Outputs: the stub of the S-shaped poly south of the cell (s0's is ra0_drv_in).
+N P 14774,4515 ral_out_s1
+N P 15208,4515 ral_out_s2
+N P 15771,4515 ral_out_s3
+N P 16205,4515 ral_out_s4
