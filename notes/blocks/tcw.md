@@ -212,6 +212,30 @@ Not resolved in this stretch: where `tcw_m6278`'s poly along y 3180 ends; what t
 from `tcw_m6232`'s top pad (6230,2875) does at the rail's west edge (it arrives at the
 height of the first contact box); the loads; everything east of the rail.
 
+### The bus metals south of the column, and the last gate (2026-11-27; drawn)
+
+`tools/follow.py` and one view of both shots (`m6404s.png`).
+
+- **`tcw_m6404`, the common enable, comes from the south**: from the column's foot it runs
+  west along y 3708, south along x 6275, steps west round `fld_a_in`'s pad (y 3919,
+  x 6233), back east at y 4231 and south along x 6282 to a pad (6275,4405) at the top of
+  the vertical poly x 6275 of the field under the six bus metals. That poly goes on south
+  to a pad (6275,4825) (`w1a.png`) and beyond: not drawn.
+- **`tcw_m6232`** ends in the south on a pad (6232,3870); from it a poly runs east along
+  y 3912 to the ground rail, which it reaches between the rail contact (6535,3905) and
+  the node of `fld_a_in`. The rail profile reported a dull "poly over field" at exactly
+  y 3910-3934. Whether the poly only crosses, or gates a third pull-down of `fld_a_in`'s
+  node, is not resolved (added to AMB-014); it is drawn to the rail's west edge only.
+- **A third metal on the x 6362 track**, `tcw_m6362c`, from a pad (6362,3832) to a pad
+  (6362,4266). The upper pad's poly goes east towards the west side of `tcw_o3820`'s
+  output node (drawn to x 6440; the join is not read). The lower pad's poly is the gate
+  of the column's last pull-down (y 4257-4281), between the nodes `tcw_o4228` (above; a
+  box with pit marks at about (6520,4215): probably a rail contact) and `tcw_o4313`
+  (below). `tools/findcell.py` matched `fld`'s inverter here.
+
+With this the first column's ground rail is complete in the trace as pull-downs: all
+seventeen gates.
+
 ## Not done
 
 Everything else in the column (y 2500-3690 and y 4200-4450); the loads of the group at

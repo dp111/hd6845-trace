@@ -282,6 +282,15 @@ at y 3905; that the dark spot (6548,4188) is not a contact (if it were, `fld_y_b
 would sit on the rail). **Adopted** as drawn: `fld_a_in` = NAND(`tcw_a`, `tcw_b`),
 `fld_y_b` = NOT `tcw_c`. Settle when the region west of the island is traced as a block.
 
+Added 2026-11-27: a poly from the lower pad (6232,3870) of the bus metal `tcw_m6232` runs
+east along y 3912 and reaches the rail at y 3910-3934, between the rail contact
+(6535,3905) and the node of `fld_a_in` (which starts at y 3956 below a strip of field at
+y 3948-3956; the clean shot is dull tan at y 3935-3947). If diffusion is continuous
+under that poly, `fld_a_in` has a third pull-down gated by `tcw_m6232`
+(`fld_a_in` = NOT(`tcw_m6232` OR (`tcw_a` AND `tcw_b`))); if the poly only passes over
+field there, it goes on to the east side. Not decided; the trace stops the poly at the
+rail's west edge.
+
 ## AMB-015: three joins on the east side of the gate column's middle stretch (2026-11-26)
 
 `notes/blocks/tcw.md`, "Stretch B, east side". All three are in the trace as `?` items:

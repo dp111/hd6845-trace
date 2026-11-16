@@ -88,8 +88,7 @@ C 6226,3526
 P 6222,3520:6572,3540                 # gate at y 3520-3540
 # --- the bus metals, from tools/tla_tracks.py (runs with gaps under 34 px bridged). Their ends and
 # any other taps along them have NOT been looked at: uncertain as nets.
-M 6232,2875 y3620 w=12
-?M 6232,3620 y3852 w=12
+M 6232,2875 y3872 w=12
 N M 6232,3700 tcw_m6232
 M 6316,2787 y3662 w=12
 N M 6320,3500 tcw_m6320
@@ -104,8 +103,7 @@ N M 6375,3500 tcw_m6362b
 P 6368,3550:6402,3584                 # its lower pad (6385,3567); poly east towards stack 3's output (join not read)
 C 6385,3567
 P 6385,3567 x6440 w=18
-M 6404,2745 y3620 w=12
-?M 6404,3620 y3709 w=12
+M 6404,2745 y3708 w=12
 N M 6404,3600 tcw_m6404
 
 # ===== stretch B, east side (2026-11-26): what could be read with all five shots =====
@@ -199,4 +197,35 @@ P 6272,3172:6462,3190
 P 6212,2858:6248,2892
 C 6230,2875
 P 6230,2868:6497,2886
+
+# ===== the bus metals south of the column (2026-11-27) =====
+# tools/follow.py and one view of both shots (cache/scratch/rax/m6404s.png, x 6190-6440, y 3690-4430).
+# tcw_m6404: from the column's foot west along y 3708, south along x 6275, a step west round the
+# pad (6272,3957) of fld_a_in (y 3919, x 6233), back east at y 4231, south along x 6282 to a pad
+# (6275,4405) at the top of the vertical poly x 6275 of the field under the six bus metals
+# (NOT DRAWN further: the common enable comes from the south).
+M 6404,3702 y3708 x6275 y3919 x6233 y4231 x6282 y4410 w=12
+P 6258,4388:6292,4422
+C 6275,4405
+# tcw_m6232: lower pad (6232,3870); poly from it east along y 3912 to the ground rail, which it
+# reaches between the rail contact (6535,3905) and the node of fld_a_in. Whether it only crosses
+# or gates a third pull-down of that node is NOT RESOLVED (AMB-014): drawn to the rail's edge only.
+P 6214,3853:6250,3888
+C 6232,3870
+P 6232,3880 6232,3912 6495,3912 w=18
+# tcw_m6362c: a third metal on the x 6362 track, from a pad (6362,3832) to a pad (6362,4266); the
+# upper pad's poly goes east towards the west side of the output tcw_o3820 (join not read); the
+# lower pad's poly is the gate of the last pull-down of the column (stretch E, y 4257-4281)
+P 6345,3815:6379,3849
+C 6362,3832
+P 6362,3824:6440,3842
+M 6363,3832 y4266 w=12
+N M 6363,4100 tcw_m6362c
+P 6345,4249:6379,4283
+C 6362,4266
+P 6362,4258:6565,4280
+M 6532,4230 y4360 w=50
+D 6500,4200:6560,4344
+N D 6530,4228 tcw_o4228
+N D 6530,4313 tcw_o4313
 

@@ -1102,3 +1102,10 @@ bus, look at the metal shots; the profile is not evidence either way.
 2. The sources of `tcw_m6404`, `tcw_m6320`, `tcw_m6278`, `tcw_m6232` (their far ends).
 3. The second column; then the standing list (R8, `ras_o0_alt2`, `r9m`, `ral`, `bd2`).
 
+**Same day, later.** The bus metals followed south: the common enable `tcw_m6404` comes up
+from the vertical poly field under the six bus metals (pad (6275,4405)); `tcw_m6232`'s
+lower pad sends a poly to the rail at the height where the profile had reported a dull
+poly, right beside `fld_a_in`'s node (AMB-014 extended: possibly a third pull-down). A
+third metal on the x 6362 track gates the column's last pull-down. 2,050 nets, 3,430
+transistors; all seventeen gates under the first column's ground rail are in the trace.
+
