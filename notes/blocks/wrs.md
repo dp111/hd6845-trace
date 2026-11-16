@@ -10,12 +10,12 @@ drawn there west to x 14090) are drawn on to their ends, and the full extraction
 each to the load strobe of one register row of the central datapath. The names were made
 one:
 
-| Strobe | Register row | Bits | Old name of the row's strobe |
+| Strobe | Register row | Bits | The row's strobe before the join |
 |---|---|---|---|
-| `wr_r8` | `cdp1` row A (y 3040-3330) | 6 | `cdp1_a_wr` |
-| `wr_r9` | `cdp1` row C (y 4232-4524) | 5 | `cdp1_c_wr` |
-| `wr_r11` | `cdp2` row A (y 6020-6345) | 5 | `cdp2_a_ld` |
-| `wr_r10` | `cdp2` row C (y 7500-7825) | 7 | `cdp2_c_ld` |
+| `wr_r8` | `cdp1` row A (y 3040-3330) | 6 | former name `cdp1_a_wr` |
+| `wr_r9` | `cdp1` row C (y 4232-4524) | 5 | former name `cdp1_c_wr` |
+| `wr_r11` | `cdp2` row A (y 6020-6345) | 5 | former name `cdp2_a_ld` |
+| `wr_r10` | `cdp2` row C (y 7500-7825) | 7 | former name `cdp2_c_ld` |
 
 So, by their strobes: **R8 is the 6-bit row at the top, R9 the 5-bit row with the
 equality comparator below it, R11 the 5-bit row of `cdp2`, R10 the 7-bit row whose five
