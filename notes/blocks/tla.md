@@ -24,9 +24,9 @@ rcs_u3425  = NOT rcs_bc3460              inverter; its output goes by a strap to
 rcs_bc3460 = NOR(e3, e4)                 a second copy of in3's function               (3046,3892)
 rcs_cond_n = NOR(in2, in3)               "m2": the step condition inverted              (3046,4765)
 rcs_cond   = NOT rcs_cond_n              inverter on the column above; on bus piece A3   (3046,4636)
-rcs_cond_lat <- rcs_cond while rcs_bb3807  pass transistor latch (AMB-009)                (3046,4546)
+rcs_cond_lat <- rcs_cond while rcs_stb  pass transistor latch (AMB-009)                (3046,4546)
 rcs_u3288  = NOR(rcs_g3245, rcs_bd3330)                                                (3046,3288)
-rcs_n4200  = NOT(rcs_cond AND rcs_bb3807 OR rcs_g4240)   AND-OR-INVERT under the rail (3008,4200)
+rcs_n4200  = NOT(rcs_cond AND rcs_stb OR rcs_g4240)   AND-OR-INVERT under the rail (3008,4200)
 in1        = NOR(rcs_mu, rcs_mv)         middle cluster                                (4081,4072)
 rcs_mu     = NOT rcs_bq3335              middle cluster, inverter                      (4050,3374)
 rcs_mn3852 = NOR(?, in1)                 middle cluster; second gate not read
@@ -90,23 +90,29 @@ y 3805: towards the **right cluster** (x 4650-5050).
 
 ```
 rcs_cond     = NOT rcs_cond_n           = NOT e4 AND NOT (e3 AND a2): the bracket of the step formula
-rcs_cond_lat <- rcs_cond while rcs_bb3807 is high      pass transistor: a dynamic latch
-rcs_n4200    = NOT( rcs_cond AND rcs_bb3807  OR  rcs_g4240 )
+rcs_cond_lat <- rcs_cond while rcs_stb is high      pass transistor: a dynamic latch
+rcs_n4200    = NOT( rcs_cond AND rcs_stb  OR  rcs_g4240 )
 ```
 
-`rcs_bb3807` (bus line B, y 3807-4552, at least four contacts) therefore behaves as a
+`rcs_stb` (bus line B, y 3807-4552, at least four contacts) therefore behaves as a
 clock or strobe: it samples the step condition into a latch and, in the same phase, lets
 it through the AND-OR-INVERT gate. So the row counter's step is not only combinational:
-the condition is also remembered. Where `rcs_bb3807`, `rcs_cond_lat` and `rcs_n4200` go
-is the next thing to trace in this cluster. `rcs_bb3807` has been followed: four gate
+the condition is also remembered. Where `rcs_stb`, `rcs_cond_lat` and `rcs_n4200` go
+is the next thing to trace in this cluster. `rcs_stb` has been followed: four gate
 contacts on bus line B (y 3810: a unit at y 3765 not yet drawn; y 4160; y 4410: the unit at
 y 4320-4535 not yet drawn; y 4548), then by a poly east onto a piece of bus line D down to
 (3240,5587), then west on a poly along y 5587 under the cluster's foot to (2458,5587), and
 2,240 px south on a thin metal at x 2457 to a contact (2456,7822), whose poly ends in a
 heavy-outlined box at (2552,7872) in the **left column beside upper row 2 of the left
-array** (`larr`'s untraced left column). So the strobe that samples the step condition
-comes from (or goes to) the cells beside the nine upper rows of the left array: those rows
-and their left column belong to the vertical logic and should be traced with it. The column was read from the chip-2 shots at
+array** (`larr`'s untraced left column). That box is the output of an **inverter** there (traced: `rcs_stb` = NOT `rcs_stb_n`,
+pull-down under the VSS rail x 2600-2652 at (2626,7908), load to the VCC rail x 2780-2832):
+the left column continues this cluster's west side downwards. The inverter's input
+`rcs_stb_n` comes 2,050 px down a metal at x 2370 from a contact (2365,5847), whose poly
+runs east into the small cluster below this one (y 5650-6300), and it goes on south from
+the inverter at x 2500. So the signal is made near the foot of this cluster, taken down
+the left column of the left array's upper rows (where other cells use it too), inverted
+there, and the inverse is brought all the way back up as the step logic's strobe. It
+behaves like a clock phase being distributed; which one is not known. The column was read from the chip-2 shots at
 7x: where no metal lies over it, they show the poly bands and the diffusion edges (as
 lines across the bands) far more clearly than the clean shot.
 

@@ -635,7 +635,7 @@ discoveries reveal the nature of e4". Full extraction at the end: see the ship l
   first; `rcs_mu` is an inverter there.
 - The step condition does not only go to the step gate. `rcs_cond` = NOT e4 AND NOT(e3 AND
   a2) is sampled by a pass transistor into a dynamic latch (`rcs_cond_lat`) and gated into
-  an AND-OR-INVERT (`rcs_n4200`) by a strobe, `rcs_bb3807` (one junction of this is
+  an AND-OR-INVERT (`rcs_n4200`) by a strobe, `rcs_stb` (one junction of this is
   AMB-009).
 - That strobe was followed to its far end: 4,500 px, out of the cluster's foot and south
   down x 2457 to the **left column beside upper row 2 of the left array** (`larr`).
@@ -664,11 +664,21 @@ first cluster; every contact on its 17,000 px is a gate.
 **Open, in the order I would take them**
 
 1. The left column beside the upper rows of the left array (x 2480-2860, y 6700-10900) and
-   those nine rows: where `rcs_bb3807` comes from. With them the scan-line side of the
+   those nine rows: where `rcs_stb` comes from. With them the scan-line side of the
    vertical logic should become nameable, and through it e3, a2 and e4.
 2. The remaining units of the three clusters, unit by unit (first cluster: y 3690-3800,
    4320-4535, 4830-5330 east; the whole west column above y 4940).
 3. The gate column of the strobe channel (y 15860-16125), where `h_eq_r0` is sampled on
    `ck_out`: observations are in `notes/blocks/bd1.md`.
 4. The bottom-centre logic, which receives `h_eq_r1`, `inh_lat` and e4.
+
+**Addendum, same session: the strobe has a driver.** `rcs_bb3807` is renamed `rcs_stb`:
+it is the output of an inverter at (2626,7908) in the left column beside upper row 2 of
+the left array (traced, extracted: `rcs_stb` = NOT `rcs_stb_n`). The left column there is
+the downward continuation of the first cluster's west side (same VSS and VCC rails, same
+"rail gate" inverter as `rcs_w2`). Its input `rcs_stb_n` comes down a metal at x 2370 from
+a contact (2365,5847) at the foot of the first cluster and carries on south at x 2500.
+A signal that is made in one place, run 2,000 px, inverted locally and run 2,200 px back
+is being distributed like a clock; which signal it is, is the next thing to find, in the
+small cluster at y 5650-6300.
 

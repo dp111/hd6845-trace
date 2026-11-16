@@ -51,7 +51,8 @@
 -	pad	34 RA4	18420,4270:19180,5030	pin 34, RA4
 -	?array	rows D and E (5 cells)	8750,5150:10790,5700	not traced
 -	?logic	logic above the counters	11400,5250:13050,6450	small array, 4 or so columns
--	route	poly lines under the foot of the step logic cluster	2440,5370:3270,5640	six horizontal poly lines joining the bus lines west and east of the cluster; one carries the strobe rcs_bb3807 west
+-	route	poly lines under the foot of the step logic cluster	2440,5370:3270,5640	six horizontal poly lines joining the bus lines west and east of the cluster; one carries the strobe rcs_stb west
+-	?logic	small cluster below the step logic	2440,5650:3090,6330	not traced; the strobe's source signal rcs_stb_n comes from here
 -	?route	second crossing field	3400,5480:5860,5700	horizontal poly lines over vertical metals; the step signal b crosses it on the poly y 5585
 -	route	comparator operand lines	8480,5720:10850,6020	five long poly lines carry a 5-bit value to the through tracks of the slices, which take it up to the rows above and down to the comparator below; the q tracks of the latch row cross them
 -	?logic	data bus interface column	17050,5300:17700,17000	column of logic beside the D0-D7 pads
@@ -80,6 +81,7 @@
 16	route	pad driver lines	17590,7380:17660,18840	P_x, one metal line common to all eight data pad cells (enable), and the per-bit lines and pad input lines beside it
 -	pad	32 D1	18420,7570:19180,8330	pin 32, D1
 -	pad	10 MA6	670,7870:1430,8630	pin 10, MA6
+-	logic	strobe inverter	2480,7790:2850,8000	rcs_stb = NOT rcs_stb_n: the strobe that samples the row counter's step condition, made here in the left column beside the upper rows of the left array and run back north to the step logic
 -	?logic	block right of the upper rows	4450,8250:4780,10500	not surveyed
 -	route	channel 3 (five control lines)	7950,7780:11040,8040	five poly lines from the block west of the counters: bus line B, ck_a, the row counter's step b, band H1's line, the R2 match; no contact on the way
 -	?array	row of large cells (untraced)	8380,8040:10720,8450	six slices, continues below y 8450 (cdp3's row A); fed by the data bus lines only from above. Not traced

@@ -188,13 +188,13 @@ sources are traced.
 ## AMB-009: the top of the column at (3045,4515) in the step logic cluster: buried contact or VSS? (2026-11-17)
 
 **Where.** `trace/tla.txt`, the column x 3028-3063 above gate E0. A poly band (gate
-`rcs_bb3807`, y 4535-4558) crosses the column between the node `rcs_cond` and the column's
+`rcs_stb`, y 4535-4558) crosses the column between the node `rcs_cond` and the column's
 top end (y 4512-4532). Directly above that end sits the poly pad (3024-3066, 4455-4522) at
 the bottom of the metal `rcs_cond_lat`.
 
 **Reading adopted (drawn `?B`).** The pad overlaps the column top and is tied to it by a
 buried contact: the band is a pass transistor, and `rcs_cond_lat` is a dynamic latch that
-takes `rcs_cond` while `rcs_bb3807` is high. Evidence: the pad's lower edge is a much
+takes `rcs_cond` while `rcs_stb` is high. Evidence: the pad's lower edge is a much
 heavier dark band than its other edges (clean shot, 5.8x); the pad has no other poly
 leaving it, so without the tie the metal would end on nothing; and the circuit makes
 sense.
@@ -204,8 +204,8 @@ map shows diffusion on both sides of the rail's edge at y 4515-4530, with two da
 x 2998 and x 3018 between them that could be the rail's etch boundary rather than edges),
 and a 5 px strip between pad and column measures as field (green; it lies in the margin
 of the metal's end, so it may be an artefact). Then the band would be a second pull-down:
-`rcs_cond` = NOR(`rcs_bb3807`, `rcs_cond_n`), and the unit above,
-NOT(`rcs_cond` AND `rcs_bb3807` OR `rcs_g4240`), would reduce to NOT `rcs_g4240`: a gate
+`rcs_cond` = NOR(`rcs_stb`, `rcs_cond_n`), and the unit above,
+NOT(`rcs_cond` AND `rcs_stb` OR `rcs_g4240`), would reduce to NOT `rcs_g4240`: a gate
 with a term that can never be true. That is why this reading was not adopted.
 
 **To settle it.** Simulation will not distinguish them easily; find where `rcs_cond_lat`'s
