@@ -370,7 +370,7 @@ B 3042,3574:3068,3607
 P 3045,3580:3140,3600
 P 3132,3575:3170,3606
 C 3150,3590
-# West of the rail (read 2026-11-17 at 5.5x and 9x, with class runs down x 2912-2928):
+# West of the rail (read 2026-11-16 at 5.5x and 9x, with class runs down x 2912-2928):
 # b1's node strip runs west under the rail to its box under thin metal E, and that box has a
 # THIRD pull-down: the poly arm of the pad (2865,3640) crosses it at y 3617-3638 (bright:
 # over a channel; diffusion on both sides) and the part below links east to the VSS box.

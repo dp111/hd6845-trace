@@ -1,6 +1,6 @@
 # ras: the row address selector (x 7100-7800, y 4880-6680)
 
-Serial work, 2026-11-18. Trace: `trace/ras.txt`. Views: `cache/scratch/slbus/col5.png`,
+Serial work, 2026-11-16. Trace: `trace/ras.txt`. Views: `cache/scratch/slbus/col5.png`,
 `unit_*.png`, `mL1.png`, `mL2.png`, `mR1.png`, `mR4.png`, `top_m.png`, `top_a.png`;
 overlay check `cache/scratch/ras/chk1.png`.
 
@@ -84,7 +84,7 @@ names carry it; nothing traced yet says which mode drives which gate line.
 - The metal routes are from `tools/follow.py` and one 3x view (`mR4.png`); three of the
   ends were not looked at.
 
-## Where the outputs go (corrected 2026-11-19)
+## Where the outputs go (corrected 2026-11-16)
 
 Views `nestN.png`, `xu.png`, `pads7.png`, `t4.png`, `cache/scratch/rax/pad3.png`, `pe.png`;
 overlay checks `chk2.png`, `chk3.png`.
@@ -141,7 +141,7 @@ Also seen: a sixth pad at (7832,5522) with a poly east and a metal south along x
 (not drawn); two more pads at the channel's west end, (7748,5672) and (7790,5718), with
 metals south to y 6070 and y 6158 (not drawn).
 
-## Where the control lines come from (2026-11-20, corrected 2026-11-21; drawn, extracted)
+## Where the control lines come from (2026-11-16, corrected 2026-11-16; drawn, extracted)
 
 Views `cache/scratch/rax/tcs_a.png`, `tcs_m.png`, `tcs2.png`, `tcs4.png`, `tcg.png`,
 `tcg2.png`, `tcb.png`, `fldB.png`. All four gate lines of the selector come from the
@@ -177,7 +177,7 @@ of the selector (`notes/blocks/fld.md`).
    (y 4746, to x 7860) that `tools/follow.py` reached across a 24 px gap. A brightness
    profile along x 7467 in both metal shots shows no metal between the pad and the bus
    line. The bus line is not drawn.
-2. **`tc1_i` is not `ras_o0_alt1`.** On 2026-11-20 the island's poly for its input i was
+2. **`tc1_i` is not `ras_o0_alt1`.** On 2026-11-16 the island's poly for its input i was
    drawn south along x 7102 to the pad (7078,5303) at the end of `ras_o0_alt1`'s metal;
    the lower 250 px carried a `?` (the two stripped shots disagreed about its x), the
    extraction then reported the two names on one net, and the notes and the report to

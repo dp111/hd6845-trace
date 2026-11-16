@@ -1,6 +1,6 @@
 # bw: bus field between the central datapath and the counters, and the lines that cross it
 
-Serial work, started 2026-11-16. Trace: `trace/bw.txt`. Views: `cache/scratch/bw/`.
+Serial work, started 2026-11-15. Trace: `trace/bw.txt`. Views: `cache/scratch/bw/`.
 
 ## Status
 

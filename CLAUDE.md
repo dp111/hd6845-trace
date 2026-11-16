@@ -2,6 +2,8 @@
 
 Reverse engineering the Hitachi HD6845S CRTC from two die photographs. Read `PLAN.md`
 first, then `notes/journal.md` (latest entry) and `notes/ambiguities.md` if they exist.
+`notes/operation.md` is the short summary of what is established about how the chip
+works (firm / marked / open); the block notes are the deep reference.
 
 ## Standing rules from the user
 
@@ -18,7 +20,7 @@ first, then `notes/journal.md` (latest entry) and `notes/ambiguities.md` if they
 - Refer to features by pixel coordinates of the metal shot
   (`dieshots/hd6845metal2ndchip.jpg`, 19838 x 21025, origin top-left).
 - Name signals from pin names, register numbers and counter numbers.
-- **Signal names** (user, 2026-11-17): every label must be meaningful, or be described
+- **Signal names** (user, 2026-11-16): every label must be meaningful, or be described
   in a table where it cannot be named yet, and every document must use the current
   names. The glossary is `notes/signals.md`: read its rules. A signal is named for what
   it is as soon as that is known, and until then for where it is; when it is identified,
@@ -37,7 +39,7 @@ first, then `notes/journal.md` (latest entry) and `notes/ambiguities.md` if they
 - Schematics (user, 2026-11-15): higher-order structures (N-bit registers, comparators,
   counters) are drawn as blocks, **and** one instance of each kind gets its own
   gate-level sheet. So every block's notes must give the bit cell's gates in full.
-- **Re-read rule** (user, 2026-11-16): when tracing shows that a method used on earlier
+- **Re-read rule** (user, 2026-11-15): when tracing shows that a method used on earlier
   blocks can miss or misread things, the affected blocks go on the "Re-read list" in
   `notes/work-packages.md` in the same commit, as tasks with a region and a reason, and
   the lesson goes into the traps of `notes/tracing-guide.md`. A mention in the journal
@@ -46,6 +48,16 @@ first, then `notes/journal.md` (latest entry) and `notes/ambiguities.md` if they
   kept current: rename and tighten a block whenever tracing identifies it.
 
 ## Practical
+
+- **Dates** (user, 2026-11-16: "the journal dates are nonsense"): take the date and time
+  from `date`, and when something was done from `git log`. Never advance the date by
+  guess between pieces of work. Journal headings carry date and time (`## YYYY-MM-DD
+  HH:MM  title`).
+- **`notes/operation.md`** (user, 2026-11-16): keep it current and readable. It states
+  only what the extraction supports, marked firm (`tools/unsure.py --equations` says the
+  equation survives without every uncertain item), marked, or open. When a block changes
+  what is known about clocks, resets, comparators or outputs, update it in the same
+  commit.
 
 - Use `.venv/bin/python` (shapely, opencv, scikit-image, networkx are installed there).
 - `cache/` is derived data and is not in git. `tools/prepare.py` then `tools/align.py`
@@ -67,13 +79,13 @@ first, then `notes/journal.md` (latest entry) and `notes/ambiguities.md` if they
 - Trace file format: docstring of `tools/tracelib.py`. Layer legend and what each
   feature looks like: `notes/layers.md`. Read that before tracing anything.
 
-## Parallel work (from 2026-11-15)
+## Parallel work (from 2026-11-14)
 
 The user asked for parallel agents and for the session to work unsupervised until the
 weekly usage limit is reached, committing and pushing each new traced piece and
 keeping the floor plan up to date.
 
-**Confirmed 2026-11-17 (user, before leaving a session to run unsupervised):** "while
+**Confirmed 2026-11-16 (user, before leaving a session to run unsupervised):** "while
 unsupervised, just work serially, rather than trying to do things with multiple agents in
 parallel".
 

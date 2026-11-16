@@ -448,7 +448,7 @@ have to be followed east.
   (R about equal to G, B under 100: 160/165/93, 143/135/80), plain poly under metal is
   216/160/115, a buried contact under metal 172/139/115.
 
-## Which registers these are (2026-11-20)
+## Which registers these are (2026-11-16)
 
 By their write lines, followed to the strobe tracks and joined in the extraction
 (`notes/blocks/wrs.md`): **row A is R8, row C is R9**, and row B is R9's equality

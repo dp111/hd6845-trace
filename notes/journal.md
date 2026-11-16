@@ -1,6 +1,6 @@
 # Journal
 
-## 2026-11-14  M0: groundwork and pilot
+## 2026-11-14 19:28  M0: groundwork and pilot
 
 Done
 - Both shots converted to raw arrays; acid shot resampled into the metal frame
@@ -42,7 +42,7 @@ Not done yet (planned for later milestones)
 Next: M1, the pad ring. Start by following the metal plane from the VSS pad and the
 rail from the VCC pad to confirm which is which, then each pad's buffer or driver.
 
-## 2026-11-14 (later)  M1 in progress: pad ring
+## 2026-11-14 20:07  M1 in progress: pad ring
 
 Done
 - VSS/VCC confirmed. The top-middle pad sits in the peripheral plane (outer ring =
@@ -98,7 +98,7 @@ Next
   y 18620-18750, four large rectangles at y 18575-18794, links to the protection
   cells and pads). Then RES and LPSTB, then the block left of the CLK pad.
 
-## 2026-11-14 (end of session)  M1 status
+## 2026-11-14 20:20  M1 status
 
 Traced and extracting cleanly (290 transistors, no rule errors):
 - 23 output drivers (cell `outdrv`).
@@ -124,7 +124,7 @@ Still to do for M1, in the order I would take them:
 4. Pad squares and the two supply rings as drawn metal.
 5. Data pad cell (AMB-003), after the bus-interface logic that drives it.
 
-## 2026-11-15  Clock block
+## 2026-11-14 21:25  Clock block
 
 Result
 - The main internal clock is NOT CLK. The CLK pin node runs along the bottom of the
@@ -165,7 +165,7 @@ Next
   input row; the decode array is at 14180-15780 x 13480-14680.
 - Carry AMB-007 and the source of `inh_ck` as open items to pick up from the core.
 
-## 2026-11-15 (later)  Second die, clock generator, register decode
+## 2026-11-14 23:19  Second die, clock generator, register decode
 
 Three shots of a second die were added and registered into the reference frame
 (`tools/align.py`, layers `metal1`, `acid1`, `acid1b`). `acid1b` (hd6845acid2.jpg) is
@@ -208,7 +208,7 @@ Next
   array; where the 18 select lines go; then the bus interface that produces the two
   lines into each data pad cell, and back to AMB-003.
 
-## 2026-11-15 (night)  Parallel round
+## 2026-11-15 18:48  Parallel round
 
 Twenty-six agent runs on seventeen blocks, each working from `notes/tracing-guide.md`
 on its own files. The round ended when the usage limit was reached; the last eleven
@@ -284,7 +284,7 @@ Next (serial, in this order)
 4. Memory address counter: reload path and bit numbering.
 5. Remaining rows of both datapaths; data bus; pad ring; then simulation (M5).
 
-## 2026-11-15/16  Serial again: the counters
+## 2026-11-15 21:05  Serial again: the counters
 
 After the parallel round, back to one block at a time (user instruction). Two requests
 from the user during the session, both recorded in `PLAN.md` and `CLAUDE.md`: a "visual
@@ -362,7 +362,7 @@ show registers, comparators and counters as blocks plus one gate-level sheet per
 5. Then as before: remaining datapath rows, data bus and pad cell (AMB-003), bd1/bd2/bd3
    re-read in the clean shot, top-left / left-centre / bottom logic, pad ring.
 
-## 2026-11-16 West of the counters: the row counter's clock generator
+## 2026-11-15 22:59  West of the counters: the row counter's clock generator
 
 Serial. Blocks `wl` (new, complete) and `bw` (new, wiring part-way). Full extraction
 1,669 nets, 2,768 transistors, 0 errors, 0 warnings.
@@ -394,7 +394,7 @@ Serial. Blocks `wl` (new, complete) and `bw` (new, wiring part-way). Full extrac
   `wl` and nothing found drives it: a contact has been missed in the rows (re-read R8).
 - cdp2's note that the channel-3 lines "turn down" at their west end: they turn north.
 
-**The user's instruction about revisits (2026-11-16)**
+**The user's instruction about revisits (2026-11-15)**
 
 "Make sure the need to revisit is noted somewhere where it will be done later, and please
 learn from this for the future." Done as: a **Re-read list** in `notes/work-packages.md`
@@ -426,7 +426,7 @@ earlier work goes on that list in the same commit; a remark in a report does not
 4. North of the counters (`amr`): the 4-bit counter's outputs, bands H0/H1/H4, `la_n`.
 5. The bus field's own lines; the ends of the other channel-3 lines; then as before.
 
-## 2026-11-16 (later) The row counter's step followed to its gate
+## 2026-11-15 23:24  The row counter's step followed to its gate
 
 Serial. Blocks `bw` (route completed), `tla` (new, three gates). Full extraction 1,676
 nets, 2,778 transistors, 0 errors, 0 warnings.
@@ -473,7 +473,7 @@ standing rule needs the user's word.
 2. The rest as listed in the previous entry (what `a` is; re-read R8/R9; `amr`; the bus
    field between datapath and counters).
 
-## 2026-11-16 (night) The step logic, three levels deep
+## 2026-11-16 00:25  The step logic, three levels deep
 
 Serial, block `tla`. Full extraction after this entry: see the ship line. User: "carry on
 serially for now please. The NOR gates are intriguing and I would love to know what they
@@ -523,7 +523,7 @@ scan-line comparisons" is a guess from the formula's shape.
    to the east.
 4. As before: what `a` (`inh_rc`) is; re-read R8/R9; `amr`; the bus fields.
 
-## 2026-11-17 The chase of e4
+## 2026-11-16 01:00  The chase of e4
 
 Serial, blocks `tla`, `trunks`. Full extraction 1,683 nets, 2,789 transistors, 0 errors,
 0 warnings. User: "shall we carry on then?"
@@ -575,7 +575,7 @@ on 2026-11-16, now with tools that make the bus fields cheap.
 2. bd1's gate column (re-read R1): it holds what the R0 match feeds and what makes X.
 3. The poly bus's other four lines east of the pads, and the diagonal fan.
 
-## 2026-11-17 Signal names
+## 2026-11-16 01:23  Signal names
 
 The user asked whether signals were being renamed as they were understood (they were
 not: only joined by alias), and then: "one of the aims here should be to ensure that all
@@ -608,7 +608,7 @@ Not renamed: the central datapath rows, the left array and the two small logic b
 whose registers have no numbers yet. Their names stay by place and are described in the
 glossary.
 
-## 2026-11-17 (unsupervised) Floor plan, names, and the step logic two more levels deep
+## 2026-11-16 02:03  Floor plan, names, and the step logic two more levels deep
 
 Serial, no agents (user: "while unsupervised, just work serially"). The user asked for the
 floor-plan labels to be tidied, for tracing to continue, and "let's see if later on new
@@ -697,7 +697,7 @@ Lesson: when a net has only gate loads, follow the *input* of whatever drives it
 giving up, and try the follower from the far end of any long line a trace left unfinished:
 `ck_out`'s trunk "followed at 1x to y 18300" was 10,000 px short of its end.
 
-## 2026-11-17 (continued) Two more counters, their clock generator, and the upper right datapath
+## 2026-11-16 08:42  Two more counters, their clock generator, and the upper right datapath
 
 Serial. New blocks `ur`, `urch`, `rdp1`, `slbus`. Full extraction 2,014 nets, 3,364
 transistors, 0 errors, 0 warnings. User: "let's continue".
@@ -759,7 +759,7 @@ registers (central datapath), R3's other nibble, R8.
    `uc_eq_r6` and `h_eq_r0` (strobe channel gate column), `h_eq_r1` (bottom-centre).
 4. The rest of the step-logic clusters; the 4-bit left counter's outputs; `e4`.
 
-## 2026-11-18: the row address selector; `inh_src` is a bus line
+## 2026-11-16 10:48  the row address selector; `inh_src` is a bus line
 
 Questions from the user: is the scan line counter put out directly as RA0-4; how do the
 R5 and R9 compares work; what makes VSYNC width 0 special. And two sets of questions on
@@ -817,7 +817,7 @@ reported by the extraction as "carries several names"; that message is the join 
 confirmed, and the fix is one name (`tools/rename.py`, or `@alias` where the name comes
 from a cell template).
 
-## 2026-11-19: correction: `cdp2_trk_s7` is not `ras_o3`
+## 2026-11-16 11:18  correction: `cdp2_trk_s7` is not `ras_o3`
 
 Yesterday's last commit joined `ras_o3`'s pad (7577,5262) to a metal that only passes it
 (trap 16, R11). Corrected in the trace and in `notes/blocks/ras.md`. What stands:
@@ -865,7 +865,7 @@ strap between two poly pads, destination not read.
 5. As before: `lc_step`; `sl_eq_r5`; `inh_src`'s three ends; `rdp2`'s routing zone; R3's
    high nibble and `c4l`; `e4`.
 
-## 2026-11-20: R8, R9, R10, R11 identified by their write strobes
+## 2026-11-16 13:15  R8, R9, R10, R11 identified by their write strobes
 
 The user doubted that the 7-bit row with the comparator is R10. Settled by tracing
 instead of by elimination: the four strobe tracks T3-T6 followed 11,000-14,000 px each
@@ -948,7 +948,7 @@ the choice of bit 0's source by R9's bit 0, and the switch of the R9 comparator'
 3. The `ral` cell and its strobe; the loads of `rax` and of the R9 units.
 4. `bd2`: `wr_data_e_n`'s destination.
 
-## 2026-11-21: correction: `tc1_i` is not `ras_o0_alt1`; two inverters west of the selector
+## 2026-11-16 16:04  correction: `tc1_i` is not `ras_o0_alt1`; two inverters west of the selector
 
 Yesterday's "five joins" between the island and the selector were four. The fifth
 (`tc1_i` = `ras_o0_alt1`) was a `?` poly of my own drawing, reported as extracted (trap
@@ -978,7 +978,7 @@ the same bundle ends on that contact. Not drawn (`notes/blocks/r9m.md`).
 Also: `tools/unsure.py` (R12) finds 57 nets joined only through `?` items, among them
 the four nets of the write-strobe latch in `bd2`.
 
-## 2026-11-22: row address bit 0 in interlace sync and video comes from the row counter
+## 2026-11-16 16:32  row address bit 0 in interlace sync and video comes from the row counter
 
 `trace/fld.txt`, `notes/blocks/fld.md`. 2,026 nets, 3,408 transistors, no errors.
 
@@ -1007,7 +1007,7 @@ into the west part of `fld`'s upper group, which is therefore the next piece: it
 between `tc1_x1` and the still unsourced `fld_a_in`, `fld_y_b`, `ras_o0_alt2`. I did not
 join `tc1_x1` to `fld_a_in` although the first view suggested it: they are two lines.
 
-## 2026-11-23: the bit-0 sources followed to a gate group west of the island
+## 2026-11-16 17:02  the bit-0 sources followed to a gate group west of the island
 
 `trace/fld.txt`. 2,030 nets, 3,413 transistors, no errors.
 
@@ -1027,7 +1027,7 @@ Method: before joining the line along y 4937/4915 I looked at its unclear 80 px 
 2. R8 in row r10 (`cnt_la_a`); `ras_o0_alt2`.
 3. R9's match (`r9m`, AMB-013); the `ral` cell; `bd2` (R12).
 
-## 2026-11-24: first gate of the column west of the island
+## 2026-11-16 17:31  first gate of the column west of the island
 
 `trace/tcw.txt`, `notes/blocks/tcw.md`. 2,033 nets, 3,417 transistors, no errors.
 
@@ -1045,7 +1045,7 @@ Method: before joining the line along y 4937/4915 I looked at its unclear 80 px 
 1. `tcw`: calibrate the class map, then the column in tiles from y 3690 up.
 2. R8 (`cnt_la_a`), `ras_o0_alt2`; `r9m` (AMB-013); the `ral` cell; `bd2` (R12).
 
-## 2026-11-25: the gate column as text; its middle stretch drawn
+## 2026-11-16 17:40  the gate column as text; its middle stretch drawn
 
 - `tools/railprof.py` prints what lies under a rail from the clean shot's protected
   colours. For the ground rail of `tcw` it lists seventeen gates in five stretches of
@@ -1066,7 +1066,7 @@ That is three images for five transistors, against six or more by views alone.
    then stretch A (six gates) and E; then the second column.
 2. As before: R8, `ras_o0_alt2`, `r9m` (AMB-013), `ral`, `bd2` (R12).
 
-## 2026-11-26: the east side of the column's middle stretch, with all five shots
+## 2026-11-16 17:45  the east side of the column's middle stretch, with all five shots
 
 The two shots not used there before (chip 1's metal shot and its fringed stripped shot)
 gave three joins, all drawn as uncertain items (AMB-015): the two upper stacks are one
@@ -1080,7 +1080,7 @@ the opposite way round from the clean shot's open-area legend (diffusion green).
 patch means field in one and diffusion in the other; name the shot whenever a colour is
 used as evidence.
 
-## 2026-11-27: the gate column's top stretch drawn; a wrong doubt and a wrong profile
+## 2026-11-16 17:54  the gate column's top stretch drawn; a wrong doubt and a wrong profile
 
 `trace/tcw.txt`: 2,047 nets, 3,429 transistors, no errors. The top stretch (six gates in
 three pairs) is drawn with its pads, polys and bus metals; the overlay sits on every pad
@@ -1108,4 +1108,20 @@ lower pad sends a poly to the rail at the height where the profile had reported 
 poly, right beside `fld_a_in`'s node (AMB-014 extended: possibly a third pull-down). A
 third metal on the x 6362 track gates the column's last pull-down. 2,050 nets, 3,430
 transistors; all seventeen gates under the first column's ground rail are in the trace.
+
+## 2026-11-16 18:04  Dates repaired; `notes/operation.md`
+
+The user: "the journal dates are nonsense", and the notes are too dense to read; wanted a
+summary of what is certain.
+
+- **Dates.** From the entry on the chase of `e4` onward I had been advancing the date by
+  a day with each piece of work; the real commits all lie on 2026-11-14 to 16. Repaired
+  from `git blame`: every date that lay after its own line's commit date (126 lines in
+  the notes, trace comments and one tool) is replaced by the commit date, and the journal
+  headings now carry the commit's date and time. Rule added to `CLAUDE.md`.
+- **`notes/operation.md`**: clocks, counters, registers, comparators and the row address
+  path, each statement marked firm, marked or open. "Firm" is a test, not a feeling:
+  `tools/unsure.py --equations` extracts the netlist with and without every uncertain
+  item; 683 of 1,013 equations are unchanged. The page says plainly that no counter's
+  reset and no comparator's effect is established yet.
 

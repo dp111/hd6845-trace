@@ -151,7 +151,7 @@ suits a clamp.
 
 Where: 10900-12000 x 19140-19890.
 
-Resolved 2026-11-15 from the clean shot of chip 1: the block is the two-phase
+Resolved 2026-11-14 from the clean shot of chip 1: the block is the two-phase
 non-overlapping clock generator (notes/blocks/clock.md). Its logic is traced and
 extracts as two cross-coupled NORs.
 
@@ -185,7 +185,7 @@ line), so there it is a clock phase, not a clear. What the L3 lines of the row c
 (from the west along y 13005) and of the 4-bit counter (north) carry is open until their
 sources are traced.
 
-## AMB-009: the top of the column at (3045,4515) in the step logic cluster: buried contact or VSS? (2026-11-17)
+## AMB-009: the top of the column at (3045,4515) in the step logic cluster: buried contact or VSS? (2026-11-16)
 
 **Where.** `trace/tla.txt`, the column x 3028-3063 above gate E0. A poly band (gate
 `clk_tl`, y 4535-4558) crosses the column between the node `rcs_cond` and the column's
@@ -212,7 +212,7 @@ with a term that can never be true. That is why this reading was not adopted.
 other end goes (poly west along y 4010-4030 from the pad at (3040,4028)): a latch node must
 end on a gate.
 
-## AMB-010: is the strip S1 of the row address selector tied to the metal that crosses it at (7207,4955)? (2026-11-18)
+## AMB-010: is the strip S1 of the row address selector tied to the metal that crosses it at (7207,4955)? (2026-11-16)
 
 `notes/blocks/ras.md`. The metal of `ras_o0_alt2` comes down x 7207 over the left end of
 the poly strip S1 (gate `ras_o0_sel2`, y 4945-4970) and ends 45 px further on the contact
@@ -230,7 +230,7 @@ of S1 would be one net and the device a diode from `ras_o0_alt2` to `ras_o0`. Se
 tracing `ras_o0_sel2` north and `ras_o0_alt2` north-west: if they turn out to be one net
 anyway, the question is moot.
 
-## AMB-011: the units east of the row address selector are taken to be inverters (2026-11-19)
+## AMB-011: the units east of the row address selector are taken to be inverters (2026-11-16)
 
 `notes/blocks/rax.md`, "Assumptions". Drawn: one pull-down per unit, gate = selector
 output, from VSS to the node that leaves on the unit's second pad (`rax_o#`). Not
@@ -241,7 +241,7 @@ somewhere east. **Adopted** because the result is the complement that the centra
 datapath's comparator needs, found independently. Settle by tracing the unit's east
 half and the thin metal's two end pads.
 
-## AMB-012: the units that make R9's compare value are taken to be inverters under a VSS rail (2026-11-20)
+## AMB-012: the units that make R9's compare value are taken to be inverters under a VSS rail (2026-11-16)
 
 `notes/blocks/r9c.md`, "Assumptions". Drawn: one pull-down per unit from the output to
 the rail x 17440-17495, gate = an RA pad driver's input line. Not established: that the
@@ -251,7 +251,7 @@ inverting it. **Adopted: VSS and a load**, by the layout rule (gates under the g
 rail, load towards the other rail). Settle by tracing a unit's east half and following
 either rail to a labelled one.
 
-## AMB-013: does R9's match line end on the step logic's input `rcs_bq3335`? (2026-11-21)
+## AMB-013: does R9's match line end on the step logic's input `rcs_bq3335`? (2026-11-16)
 
 `notes/blocks/r9m.md`. R9's match (`cdp1_b_eq`) was followed 9,000 px from the comparator
 to the middle cluster of the row counter's step logic. Its last metal comes down x 4192
@@ -272,7 +272,7 @@ x 4149-4157 and 4169-4196 on y 3376) do not decide it. **Not adopted either way;
 drawn.** Settle by tracing the other line (poly y 2595 at x 5400) to its driver: if that
 is a second comparator's match, reading A is the design.
 
-## AMB-014: the gate group that makes `fld_a_in` and `fld_y_b` (2026-11-23)
+## AMB-014: the gate group that makes `fld_a_in` and `fld_y_b` (2026-11-16)
 
 `notes/blocks/fld.md`, last traced section. Three pull-downs under the rail x 6505-6560 are
 drawn from a class map and 3.6-4.6x views in both stripped shots. Not established: that
@@ -282,7 +282,7 @@ at y 3905; that the dark spot (6548,4188) is not a contact (if it were, `fld_y_b
 would sit on the rail). **Adopted** as drawn: `fld_a_in` = NAND(`tcw_a`, `tcw_b`),
 `fld_y_b` = NOT `tcw_c`. Settle when the region west of the island is traced as a block.
 
-Added 2026-11-27: a poly from the lower pad (6232,3870) of the bus metal `tcw_m6232` runs
+Added 2026-11-16: a poly from the lower pad (6232,3870) of the bus metal `tcw_m6232` runs
 east along y 3912 and reaches the rail at y 3910-3934, between the rail contact
 (6535,3905) and the node of `fld_a_in` (which starts at y 3956 below a strip of field at
 y 3948-3956; the clean shot is dull tan at y 3935-3947). If diffusion is continuous
@@ -302,7 +302,7 @@ ends on is open: if on the same node as `fld_a_in`'s poly, the bus net `tcw_m623
 `fld_a_in` (and `tcw_o3550` its inverse). Not drawn; next thing to read there, at 5x in
 the chip-2 stripped shot.
 
-## AMB-015: three joins on the east side of the gate column's middle stretch (2026-11-26)
+## AMB-015: three joins on the east side of the gate column's middle stretch (2026-11-16)
 
 `notes/blocks/tcw.md`, "Stretch B, east side". All three are in the trace as `?` items:
 
@@ -334,7 +334,7 @@ the lower arm and the strip, and a dark line cannot show whether two regions mee
 item 1 stands as "a diffusion strip runs between the two arms; that it joins them is
 assumed".
 
-## AMB-016: two buried contacts in the gate column's top stretch (2026-11-27)
+## AMB-016: two buried contacts in the gate column's top stretch (2026-11-16)
 
 `notes/blocks/tcw.md`, "Stretch A". (1) Pair 1's output arm to the poly of the pad
 (6355,2830): makes the output the bus net `tcw_m6362a`. (2) Pair 2's output arm to the

@@ -97,7 +97,7 @@ Central datapath (registers identified by their write strobes, `notes/blocks/wrs
 
 One core signal stops both the horizontal counter's master clock and the row counter's
 step. Its source is not traced. It is a line of the bottom bus field with at least four
-branches (followed 2026-11-18 from the strobe channel 3,700 px west, `notes/blocks/trunks.md`).
+branches (followed 2026-11-16 from the strobe channel 3,700 px west, `notes/blocks/trunks.md`).
 All five names below are copies of it.
 
 | Name | What it is |
@@ -184,7 +184,7 @@ Eleven pass transistors between the scan line counter and five output nodes.
 | `rcs_mu`, `rcs_mv` | the two inputs of the NOR that makes `rcs_in1` (middle cluster): bus pieces of the second bus field (x 4192). `rcs_mu` = NOT `rcs_bq3335` (an inverter at y 3413); `rcs_mv` comes from a poly that leaves the bus field east and south at (4283,4745) |
 | `rcs_mn#` | output of a unit of the middle cluster, by the y of its output (`rcs_mn3852` = NOR(?, `rcs_in1`)) |
 | `rcs_thin_e`, `rcs_thin_w` | two thin metals down the cluster, over the loads; what they join is not read |
-| `rc0_n` | NOT `rc0`: output of the inverter I2 west of the counters, whose input was traced to the row counter's bit 0 on 2026-11-22 (its two nets had place names until then: see Former names). One input of the XOR that makes `ras_o0_alt1` |
+| `rc0_n` | NOT `rc0`: output of the inverter I2 west of the counters, whose input was traced to the row counter's bit 0 on 2026-11-16 (its two nets had place names until then: see Former names). One input of the XOR that makes `ras_o0_alt1` |
 | `wl_h#` | horizontal poly bands H0 and H1 above the counters; not identified |
 
 ## Registers, comparators and their results
@@ -323,7 +323,7 @@ Row tags `s0` ... `s13` are rows from the top; which MA bit each is has not been
 
 ## Former names
 
-Names used before 2026-11-17, for reading older commits; `tools/rename.py` adds a line for
+Names used before 2026-11-16, for reading older commits; `tools/rename.py` adds a line for
 every later rename. Row tags of the counter cells changed with the names: r18...r11 became
 hc0...hc7, r10...r4 became rc0...rc6, r3...r0 became c4b0...c4b3; slice tags of the lower right
 datapath s1...s7, s0 became b0...b6, b7.

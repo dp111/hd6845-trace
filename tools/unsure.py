@@ -2,6 +2,7 @@
 """Which joins rest on uncertain ('?') items  (re-read item R12, trap 17).
 
 usage: unsure.py [--names REGEX]
+       unsure.py --equations [REGEX]     which extracted equations survive without them
 
 Builds the netlist twice, with everything and with every '?' item left out, and compares
 where the labels end up. A net whose labels fall into more than one net once the '?' items
@@ -11,6 +12,10 @@ with. Labels that sit on '?' geometry themselves are listed as "on uncertain geo
 
 It sees only joins between labelled pieces. Supply nets (vss, vcc) are skipped: they are
 joined by name anyway.
+
+--equations is the stricter test and the one notes/operation.md uses for "firm": every
+equation of the extraction is printed as FIRM (identical when all '?' items are left out) or
+DEPENDS (it changes or vanishes), optionally only those whose name matches REGEX.
 """
 import argparse
 import copy
@@ -39,6 +44,8 @@ def node_at(nl, layer, x, y):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--names', default=None, help='only nets with a name matching this regex')
+    ap.add_argument('--equations', nargs='?', const='.', default=None,
+                    help='classify the extracted equations (optional regex on the name)')
     a = ap.parse_args()
     tr = tracelib.load()
     full = netlist.Netlist(tr)
@@ -46,6 +53,25 @@ def main():
     red_tr.items = [it for it in tr.items if not it.uncertain]
     red = netlist.Netlist(red_tr)
     n_unc = len(tr.items) - len(red_tr.items)
+    if a.equations is not None:
+        def eqs(nl):
+            out = {}
+            for ln in nl.report().split('\n'):
+                m = re.match(r'\s+(\S+)\s+= (.*)$', ln)
+                if m:
+                    out[m.group(1)] = m.group(2).strip()
+            return out
+        ea, eb = eqs(full), eqs(red)
+        firm = 0
+        for k in sorted(ea):
+            ok = ea[k] == eb.get(k)
+            firm += ok
+            if re.search(a.equations, k):
+                print(('FIRM    ' if ok else 'DEPENDS ') + f'{k} = {ea[k]}'
+                      + ('' if ok else f'   || without ?: {eb.get(k)}'))
+        print(f'{len(ea)} equations, {firm} firm, {len(ea) - firm} depend on uncertain items '
+              f'({n_unc} uncertain items in the trace)')
+        return
 
     by_full = defaultdict(list)
     for lb in tr.labels:

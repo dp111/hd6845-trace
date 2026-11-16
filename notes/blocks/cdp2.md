@@ -476,7 +476,7 @@ How the nets are made (coordinates of the master):
   the clean shot's class under it: the quickest way to follow a line), `cdp2_reg.py`,
   `cdp2_cmont.py`, `cdp2_w.py`.
 
-## Correction from the coordinating session (2026-11-16)
+## Correction from the coordinating session (2026-11-15)
 
 Channel 3 (y 7830-8030) was read in the clean shot from x 7950 to x 11040 while following
 its five lines from the east (`notes/blocks/bw.md`). There is no contact on any of them on
@@ -485,14 +485,14 @@ the other four turn **north** at x 7790-7930 (not down, as the Ports table above
 Their nets: y 7840 bus line B's line, y 7882 `ck_a`, y 7926 the row counter's step `rc_stepreq_n`,
 y 7971 band H1's line.
 
-## Channel 2, five of its lines identified (coordinating session, 2026-11-17)
+## Channel 2, five of its lines identified (coordinating session, 2026-11-16)
 
 The lines at y 6498, 6542, 6584, 6626 and 6672 are the outputs `sl3`, `sl2`, `sl1`,
 `sl4`, `sl0` of the 5-bit counter in the left array's upper rows, followed from the
 west (`notes/blocks/urch.md`). They pass through this block unused and go on east to the
 upper right datapath. Not drawn here yet.
 
-## Where the long lines of channel 1 come from and go to (2026-11-19)
+## Where the long lines of channel 1 come from and go to (2026-11-16)
 
 Traced from outside this block (`notes/blocks/ras.md`, `notes/blocks/rab.md`): the lines
 at y 6000, 5956, 5913, 5870, 5826 are the outputs `rax_o0` ... `rax_o4` of the five units
@@ -502,14 +502,14 @@ in metal to the logic in front of the RA pad drivers. So row B compares row C's 
 with the row address (after the selector; polarity set by the units, not traced), and the
 "through tracks" are driven from the west, not by row A.
 
-## Which registers these are (2026-11-20)
+## Which registers these are (2026-11-16)
 
 By their load strobes, followed to the strobe tracks and joined in the extraction
 (`notes/blocks/wrs.md`): **row A is R11, row C is R10.** The "guess from widths only"
 above is now a traced result, subject only to the decoder's numbering of its select
 lines. Row B therefore compares R10's five low bits with the row address lines `rax_o#`.
 
-## Channel 2 west of the slices: a knot (2026-11-22)
+## Channel 2 west of the slices: a knot (2026-11-16)
 
 Found while tracing two lines through it (`notes/blocks/fld.md`): at x 7860-7960 every
 line of channel 2 steps down one position by nested bends (6714 to 6756, 6756 to 6802,

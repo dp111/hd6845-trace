@@ -1,6 +1,6 @@
 # rdp1: upper right datapath, top rows (x 13350-17050, y 5560-8050)
 
-Serial work, 2026-11-17. Trace: `trace/rdp1.txt`. Views: `cache/scratch/rdp1/`.
+Serial work, 2026-11-16. Trace: `trace/rdp1.txt`. Views: `cache/scratch/rdp1/`.
 
 ## Status
 

@@ -1,6 +1,6 @@
 # slbus: the scan line counter's five lines from the left array to the R5 comparator
 
-Serial work, 2026-11-17. Trace: `trace/slbus.txt`. Views: `cache/scratch/rdp1/c5a.png`,
+Serial work, 2026-11-16. Trace: `trace/slbus.txt`. Views: `cache/scratch/rdp1/c5a.png`,
 `c5b.png`, `w5m.png`, `knot_chk.png`; `cache/scratch/urch/e5.png`, `e6.png`.
 
 ## Status

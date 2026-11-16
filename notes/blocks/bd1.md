@@ -406,7 +406,7 @@ Channel:
   lines (y 16840-17150).
 - wr_r9, wr_r11, wr_r10 west of x 14100 (they lie below y 17100).
 
-## Gate column y 15860-16125: what a look from the coordinating session added (2026-11-17)
+## Gate column y 15860-16125: what a look from the coordinating session added (2026-11-16)
 
 Not traced; these are observations to start from (views `g1a/g1m/g1o/g1b`, `h1a/h1b/h1m/h1o`,
 `t1ab/t1m/t1c` in the scratch folder).

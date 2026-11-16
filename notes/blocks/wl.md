@@ -1,6 +1,6 @@
 # wl: logic west of the 4-bit counter (x 11080-11700, y 6950-9450)
 
-Serial work, started 2026-11-16. Trace: `trace/wl.txt`. Views: `cache/scratch/wl/`.
+Serial work, started 2026-11-15. Trace: `trace/wl.txt`. Views: `cache/scratch/wl/`.
 
 ## Status
 
@@ -90,7 +90,7 @@ i2_out   = NOT i2_in       (42/22, load 30/38)   y 7440-7550, mirror image
   then the inverter's input is unknown. The inverter's output goes by a
   buried contact, a poly, the metal x 11277-11297 and band H2's west piece to a contact
   (11092,7122) and leaves north on the metal x 11080-11100.
-- I2 (input `rc0`, the row counter's bit 0, traced 2026-11-22 in `trace/fld.txt`; output
+- I2 (input `rc0`, the row counter's bit 0, traced 2026-11-16 in `trace/fld.txt`; output
   `rc0_n`, which goes to the XOR cell that makes row address bit 0 in interlace sync and
   video, `notes/blocks/fld.md`) takes its input from the bus field on the poly y 7486-7508 and returns its output
   there on the poly y 7441-7462.
@@ -164,7 +164,7 @@ here, and a signal on bus line B passes between the bus field and the upper righ
 Tools: `tools/wl_net.py` (extraction report restricted to a box), `tools/wl_px.py` (patch
 colours in three shots), `tools/classmap.py --open`.
 
-## The generator is a cell (2026-11-17)
+## The generator is a cell (2026-11-16)
 
 The left array has a second copy of this clock generator, for its two counters
 (`notes/blocks/ur.md`). `trace/wl.txt` therefore defines the devices and internal wires

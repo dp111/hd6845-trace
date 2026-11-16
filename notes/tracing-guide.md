@@ -217,10 +217,10 @@ Traps, all of them real:
    (`tools/tla_tracks.py --half 1 --gap 3`) and compare the dark stretch on that side with
    the ring on the side where the pad's own line arrives (found: 24 px against 10);
    (c) a "T" whose stub ends flush with the edge of the crossing line is a corner.
-   Found 2026-11-19 at (7577,5262), after two commits said two nets were one.
+   Found 2026-11-16 at (7577,5262), after two commits said two nets were one.
    `tools/padjoin.py` lists the contacts where the trace has this shape.
    The follower's default `--gap 24` is itself enough to jump from a pad to a line that
-   passes 24 px away (found 2026-11-20 at (7467,4782)): where its output turns a corner
+   passes 24 px away (found 2026-11-16 at (7467,4782)): where its output turns a corner
    within 30 px of a pad or contact candidate, check the corner with a brightness profile.
 
 17. **A join the extraction reports is only as good as the geometry on its path.** When
@@ -229,7 +229,7 @@ Traps, all of them real:
    path between the two labels carries a `?`, or was placed "by analogy" or "from one
    view", the join is an assumption and must be written up as one, and the names must not
    be merged with `tools/rename.py` until the uncertain stretch has been read in a second
-   shot. Found 2026-11-21: `tc1_i` and `ras_o0_alt1` had been merged across 250 px of
+   shot. Found 2026-11-16: `tc1_i` and `ras_o0_alt1` had been merged across 250 px of
    `?P`, reported as a result, and were two nets.
    `tools/unsure.py` lists every net whose labelled pieces are joined only through `?`
    items; run it before writing up a join.
@@ -283,7 +283,7 @@ A 100,100:150,150 kind=clamp           # mark a transistor here: clamp, field (b
 
 0. **Try the known cells first.** Before tracing any regular-looking region by hand, run
    `findcell.py` with the master rectangle of every cell already traced, in all
-   orientations. On 2026-11-17 three regions (552 transistors) turned out to be copies of
+   orientations. On 2026-11-16 three regions (552 transistors) turned out to be copies of
    the counter bit, the counter clock generator and the register/comparator cells. Then
    check each copy's ports on an overlay: a copy can differ from the master by one contact
    on a neighbouring track.

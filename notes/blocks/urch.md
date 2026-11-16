@@ -1,6 +1,6 @@
 # urch: wiring channel east of the left array's counters (x 4240-4720, y 6140-10500)
 
-Serial work, 2026-11-17. Trace: `trace/urch.txt`. Views: `cache/scratch/urch/`, and the
+Serial work, 2026-11-16. Trace: `trace/urch.txt`. Views: `cache/scratch/urch/`, and the
 `outs_a.png`, `st*.png`, `top*.png` views in `cache/scratch/ur/`.
 
 ## Status

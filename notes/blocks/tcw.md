@@ -1,6 +1,6 @@
 # tcw: the gate column west of the island (x 6380-6760, y 2500-4450)
 
-Serial work, 2026-11-24/25. Trace: `trace/tcw.txt` (one full gate and three pull-down stacks); the three pull-downs at
+Serial work, 2026-11-16. Trace: `trace/tcw.txt` (one full gate and three pull-down stacks); the three pull-downs at
 y 3940-4200 are in `trace/fld.txt`. Views in `cache/scratch/rax/`: `tcw_s.png` (survey of
 the whole column at 1.03x), `t1a.png`, `t1m.png`, `t1cm.png` (class map), `t1load.png`
 (the gate at y 3690-3905), `t2cm.png`, `w3a.png`, `w3c.png`, `w3m.png`, `w4.png`,
@@ -52,7 +52,7 @@ shots. The supply assignment of the two rails is the layout rule (AMB-014).
 not found: the class map of the area east of the rail there (`t2cm.png`) does not give a
 readable picture (the open-area thresholds are not calibrated for this spot).
 
-## Read, not drawn (2026-11-24)
+## Read, not drawn (2026-11-16)
 
 **Class map check.** `tools/wl_px.py` at known spots of the traced gate gives, for the sum
 of red minus green over the two chip-2 shots: load gate (poly) 79, diffusion arm 45,
@@ -80,7 +80,7 @@ contact pits at (6885,3640), a wide metal at x 6860-6890, gates and loads betwee
 `tcw_b`'s poly heads into it. So the untraced logic between this column and the island's
 channel W1 (x 7174) is two columns wide, not one; the queue entry is widened.
 
-## The whole ground rail as text (2026-11-25)
+## The whole ground rail as text (2026-11-16)
 
 `tools/railprof.py 6514 6546 Y0 Y1` (new): classifies the strip of the clean shot under
 a rail and prints the runs along it. Under a rail the clean shot's colours are the
@@ -136,7 +136,7 @@ The bus metals' extents are from `tools/tla_tracks.py` (gaps under 34 px bridged
 are marked uncertain: a gap of 46-48 px in two of them was read as the ring of a contact
 in mid-run, which the overlay supports, but their far ends and other taps are not seen.
 
-### Stretch B, east side (2026-11-26; drawn as uncertain items, AMB-015)
+### Stretch B, east side (2026-11-16; drawn as uncertain items, AMB-015)
 
 Tried with the two shots not used before here (`eastB_m.png`: both metal shots at 3.6x;
 `strapB.png`: the chip-1 fringed and the chip-2 stripped shot at 5.4x). They added three
@@ -161,7 +161,7 @@ stack 1's top node (it may be how that node is connected: not read); a vertical 
 x 6640-6665 from y 3220 to y 3375 and another x 6600-6625, y 3320-3400. The load of
 `tcw_o3326` is among these and is not identified.
 
-### Stretch A, y 2690-3220: six gates in three pairs (2026-11-27; drawn, partial)
+### Stretch A, y 2690-3220: six gates in three pairs (2026-11-16; drawn, partial)
 
 Views `bus2.png` (clean), `bus2m.png` (both metal shots: the bus metals and their pad
 rings), `railA.png`, `A_cm.png` (class maps at 4x); gate positions from
@@ -193,7 +193,7 @@ bus metals and the three rail contacts). Six more transistors. From the extracti
 - Rail contacts: (6522,2712) above pair 1; (6535,2872) and (6520,3052), each in a box cut
   off from the output above it by a line of field.
 
-Corrections to what I wrote on 2026-11-26, when I held this stretch back:
+Corrections to what I wrote on 2026-11-16, when I held this stretch back:
 
 - "One piece feeding four gates" was right; I doubted it for the wrong reason.
 - The "two NANDs feeding each other" reading is **not** established and is not drawn.
@@ -203,7 +203,7 @@ Corrections to what I wrote on 2026-11-26, when I held this stretch back:
   a two-input NOR with its output in the middle (if the last node is on the rail: pit
   marks at about (6520,3190), no clear ring) or a series pair with its output at the
   bottom. Both nodes are labelled; neither is called the output.
-- The first track profile of the bus (2026-11-25) bridged gaps under 34 px. Unbridged, the
+- The first track profile of the bus (2026-11-16) bridged gaps under 34 px. Unbridged, the
   x 6404 track shows only short bright runs, at the heights of the horizontal polys: the
   profile sees poly crossings as "metal" and misses the metal itself where a poly lies
   under it. The metal shots are the evidence for the bus metals, not that profile.
@@ -212,7 +212,7 @@ Not resolved in this stretch: where `tcw_m6278`'s poly along y 3180 ends; what t
 from `tcw_m6232`'s top pad (6230,2875) does at the rail's west edge (it arrives at the
 height of the first contact box); the loads; everything east of the rail.
 
-### The bus metals south of the column, and the last gate (2026-11-27; drawn)
+### The bus metals south of the column, and the last gate (2026-11-16; drawn)
 
 `tools/follow.py` and one view of both shots (`m6404s.png`).
 

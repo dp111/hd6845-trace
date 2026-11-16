@@ -248,7 +248,7 @@ P 7495,18760:7540,18800             # top of the wide poly that goes down into t
 # ====================================================================
 # h_eq_r0, h_eq_r1: the R0 and R1 match lines between the right datapath's bundle (rdp3
 # draws them to y 13480) and the strobe channel's tracks k7, k8 (bd1 draws from y 14690).
-# Straight metal, followed with tools/follow.py in both directions (2026-11-17).
+# Straight metal, followed with tools/follow.py in both directions (2026-11-16).
 M 13391,13470 y14700 w=18
 M 13434,13470 y14700 w=18
 
@@ -292,7 +292,7 @@ N M 12400,17692 inh_lat
 M 2504,18310 2500,7990 w=18
 
 # ====================================================================
-# inh_src, followed from where trace/bd1.txt leaves it (13480,17150), 2026-11-18. It is a line of
+# inh_src, followed from where trace/bd1.txt leaves it (13480,17150), 2026-11-16. It is a line of
 # the bottom bus field, not something made near the strobe channel. Notes: notes/blocks/trunks.md.
 # Poly south under the horizontal metals to y 17650, south-west on a diagonal, west along y 17815
 # under the vertical trunks to a pad (12805,17815).

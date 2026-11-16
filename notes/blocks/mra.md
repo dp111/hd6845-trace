@@ -1,6 +1,6 @@
 # mra: mid-right vertical array (x 11700-13320, y 7200-17050)
 
-## Names (2026-11-17)
+## Names (2026-11-16)
 
 The text below was written with one-letter node names per row. The signals are now named
 by bit (`notes/signals.md`): for row rN read the bit of the table, and for a node letter

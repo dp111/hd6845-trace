@@ -182,7 +182,7 @@ N M 16500,5111 ra3_drv_in_u
 N M 16500,5155 ra4_drv_in_u
 
 # ===== the RA0 and RA1 pad drivers' input lines, from the pad cells to the units' input metals =====
-# (followed 2026-11-18, drawn 2026-11-20; views ra0_m.png, ra_end_m.png, ra_s.png, ra_t_a.png, ra_t_m.png
+# (followed 2026-11-16, drawn 2026-11-16; views ra0_m.png, ra_end_m.png, ra_s.png, ra_t_a.png, ra_t_m.png
 # in cache/scratch/rdp1/)
 @requires pads_out
 # RA0: contact on the driver's input poly, metal west and south in three steps to a pad (15300,4125);

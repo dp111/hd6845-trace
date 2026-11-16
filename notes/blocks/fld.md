@@ -1,6 +1,6 @@
 # fld: the logic west of the row address selector (x 6380-7120, y 4720-5780)
 
-Serial work, 2026-11-21/22. Trace: `trace/fld.txt` (two inverters and two XOR cells; the upper group's west part not traced). Views in
+Serial work, 2026-11-16. Trace: `trace/fld.txt` (two inverters and two XOR cells; the upper group's west part not traced). Views in
 `cache/scratch/rax/`: `fld_a.png`, `fld_m.png` (the upper group, clean and metal at 1.65x),
 `fldR.png`, `fldM.png`, `fldL.png` (three tiles at 2.7x), `fldA1.png`, `fldA2.png` (chip-2
 stripped shot at 3.4x: the clearest), `fldG.png`, `fldB.png`, `fldS.png`, `fldD.png`,
@@ -66,7 +66,7 @@ the XOR of two signals, and the comparator's bit-0 input for the same case is th
 the upper inverter's output with a third signal. None of `cnt_la_a_n`, `rc0_n`,
 `fld_y_b`, `fld_a_in`, `ras_o0_alt2` is traced to its source.
 
-## The XOR cells' A inputs, traced to their sources (2026-11-22; drawn, extracted)
+## The XOR cells' A inputs, traced to their sources (2026-11-16; drawn, extracted)
 
     fld_b_in    = cnt_la_a_n XOR tc1_g           tc1_i = NOT fld_b_in
     ras_o0_alt1 = rc0_n XOR fld_y_b              rc0_n = NOT rc0
@@ -124,7 +124,7 @@ look at the row in three shots (`la_r10.png`) does not show a pad on the metal.
 - `cnt_la_a_n` south of (6882,6220), `rc0_n` south of (6930,6220), `fld_y_b` west of
   (6560,6085), `fld_b_in`'s line west of (6560,5345), `fld_a_in`'s line (y 4910) west.
 
-## Read on the way, not drawn (2026-11-22)
+## Read on the way, not drawn (2026-11-16)
 
 Views `yb1.png`, `yb2.png`, `yb3.png`, `rf.png`, `rfR_c.png`, `rfW_c.png`, `four_a.png`,
 `pad4478.png`.
@@ -145,7 +145,7 @@ Views `yb1.png`, `yb2.png`, `yb3.png`, `rf.png`, `rfR_c.png`, `rfW_c.png`, `four
   something on the way to `fld_a_in`, `fld_y_b` or `ras_o0_alt2`. It is the next thing
   to trace here.
 
-## The upper group's west part: first reading, not drawn (2026-11-22)
+## The upper group's west part: first reading, not drawn (2026-11-16)
 
 Views `fw1.png`, `fw2.png` (chip-2 stripped shot at 4x), `nor_cm.png` (class map with
 `--open`), `nor_c.png`. **A reading from one class map and two views; nothing of it is in
@@ -173,7 +173,7 @@ from the selector: it would not be the source of `fld_a_in`, `fld_y_b` or `ras_o
 after all. Those three then come from further west or north (pads at x 6300-6500,
 y 4780-4930), where the field of vertical polys x 6050-6400 passes.
 
-## `fld_a_in` and `fld_y_b` traced to a gate group west of the island (2026-11-23; drawn, partial)
+## `fld_a_in` and `fld_y_b` traced to a gate group west of the island (2026-11-16; drawn, partial)
 
 Views `w1a.png`, `w2m.png`, `w2a.png`, `w3c.png`, `w3a.png`, `w3m.png`, `w4.png`, `w5cm.png`
 (class map), `jog.png`, `eq10.png`; overlay check `tcw_chk.png`.

@@ -106,7 +106,7 @@ P 6385,3567 x6440 w=18
 M 6404,2745 y3708 w=12
 N M 6404,3600 tcw_m6404
 
-# ===== stretch B, east side (2026-11-26): what could be read with all five shots =====
+# ===== stretch B, east side (2026-11-16): what could be read with all five shots =====
 # Views cache/scratch/rax/eastB_m.png (both metal shots), strapB.png (chip-1 fringed and chip-2
 # stripped shots at 5.4x), eastB.png, t3cm.png, t4cm.png.
 # (1) The two output arms at y 3326 and y 3437 are joined by a vertical strip x 6588-6612: an
@@ -133,7 +133,7 @@ P 6436,3558:6484,3576
 ?B 6464,3550:6486,3578
 @alias tcw_o3550 tcw_m6362b
 
-# ===== stretch A, y 2690-3220: six gates in three pairs (2026-11-27; PARTIAL) =====
+# ===== stretch A, y 2690-3220: six gates in three pairs (2026-11-16; PARTIAL) =====
 # Views cache/scratch/rax/bus2.png (clean), bus2m.png (both metal shots: the bus metals and their
 # pad rings), railA.png, A_cm.png (class maps at 4x); gate positions from tools/railprof.py.
 # Outputs' loads and what lies east of the rail are NOT TRACED.
@@ -198,7 +198,7 @@ P 6212,2858:6248,2892
 C 6230,2875
 P 6230,2868:6497,2886
 
-# ===== the bus metals south of the column (2026-11-27) =====
+# ===== the bus metals south of the column (2026-11-16) =====
 # tools/follow.py and one view of both shots (cache/scratch/rax/m6404s.png, x 6190-6440, y 3690-4430).
 # tcw_m6404: from the column's foot west along y 3708, south along x 6275, a step west round the
 # pad (6272,3957) of fld_a_in (y 3919, x 6233), back east at y 4231, south along x 6282 to a pad

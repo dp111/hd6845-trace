@@ -1,6 +1,6 @@
 # rax: the five units east of the row address selector (x 7860-8110, y 4700-5470)
 
-Serial work, 2026-11-19. Trace: `trace/rax.txt` (**partial**). Views in
+Serial work, 2026-11-16. Trace: `trace/rax.txt` (**partial**). Views in
 `cache/scratch/rax/`: `rows_acid1b.png`, `rows_metal.png` (the five units, one strip
 each), `u4.png`, `q4L.png`, `q4R.png` (one unit at 4.4x in four shots), `cm4.png` (class
 map), `pL_m.png`, `pL_a.png` (left margin of three units), `topv.png`, `bot.png` (ends

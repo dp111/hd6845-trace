@@ -71,7 +71,7 @@ Read so far (D0 coordinates), all still to be confirmed by trace and extraction:
   bus-interface side: P_x (y 7399-7422, turning up at x 18170) and P_y (y 7465-7492).
 
 Re-read from the clean shot of chip 1 with the eight-cell metal composite
-(2026-11-15). Much more is now established, but the cell has more logic than the
+(2026-11-14). Much more is now established, but the cell has more logic than the
 "two lines in, two gates out" picture assumed, and it is still not traced. Parked
 again (AMB-003); the facts below are the starting point for finishing it.
 

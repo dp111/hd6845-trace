@@ -79,7 +79,7 @@ VCC diffusion block with nine contacts lies under the gate row's lines at
 
 ## Driver logic (10900-12000 x 19140-19890): read from the clean shot, being traced
 
-Read from `acid1b` with `metal1` for contacts and `acid` for open areas (2026-11-15).
+Read from `acid1b` with `metal1` for contacts and `acid` for open areas (2026-11-14).
 The earlier survey of this block from the chip-2 shots alone was wrong in several
 places and is superseded.
 
@@ -195,7 +195,7 @@ continues down its right-hand side at x 9797-9830 to the contact at 9810,19337 o
 the `ck_ga` metal; the bar that joins F1-F3 (y 19357-19372) is a separate piece of
 poly just below that contact. This fixes the polarity of the output.
 
-Checked against the clean shot of chip 1 (2026-11-15):
+Checked against the clean shot of chip 1 (2026-11-14):
 - s1 and s2 hang from one poly pad (10283-10372 x 19180-19218, an inverted U) that
   carries two contacts to the `ck_t` bus. Confirmed.
 - F1, F2 and F3 hang from one poly band (9850-10010 x 19325-19372) that lies under

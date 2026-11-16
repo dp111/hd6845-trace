@@ -1,6 +1,6 @@
 # ral: the stage in front of the RA pad drivers (x 13990-16330, y 4250-4560)
 
-Serial work, 2026-11-19. **Survey only; no trace file yet.** Views in
+Serial work, 2026-11-16. **Survey only; no trace file yet.** Views in
 `cache/scratch/rax/`: `ral1.png`, `ral2.png` (the band at 1.55x), `ralA.png`, `ralM.png`,
 `ralC.png` (the master cell at 2.8x in the clean, metal and chip-2 stripped shots),
 `ralq1.png` ... `ralq4.png` (its four quadrants at 3.6x), `ram1.png` ... `ram3.png`.

@@ -1,6 +1,6 @@
 # wrs: the write strobes of R8, R9, R10 and R11 to their register rows
 
-Serial work, 2026-11-20. Trace: `trace/wrs.txt`. Views: `cache/scratch/rax/wr1.png`,
+Serial work, 2026-11-16. Trace: `trace/wrs.txt`. Views: `cache/scratch/rax/wr1.png`,
 `wr2.png`, `wr3.png` (the cross-under under the vertical trunks), `wr9top.png` (R9's top end).
 
 ## Result

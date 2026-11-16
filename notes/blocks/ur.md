@@ -1,6 +1,6 @@
 # ur: upper rows of the left array (x 2918-4240, y 6543-10924): two more counters
 
-Serial work, 2026-11-17. Trace: `trace/ur.txt` (the clock generator's cell is defined in
+Serial work, 2026-11-16. Trace: `trace/ur.txt` (the clock generator's cell is defined in
 `trace/wl.txt`). Views: `cache/scratch/ur/`.
 
 ## Status

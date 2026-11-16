@@ -468,7 +468,7 @@ The lists marked ? at the south, east and top edges come from `tools/sel_cut.py`
 - **Right-hand column** (x 16480-16800, y 14700-16450) and the routing east and south of
   it: not looked at. `areg_w6`, `areg_w7`, and probably `bd2_x`, `wr_data_e_n` go there.
 
-## Where `wr_data_e_n` goes: looked at 2026-11-19, not resolved
+## Where `wr_data_e_n` goes: looked at 2026-11-16, not resolved
 
 This is the node that would answer "what closes the write strobe when E falls" (jsbeeb
 issue 1866): NOT(`wr_data_sel` AND `e_b`) is the only traced signal that is a write to

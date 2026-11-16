@@ -1,6 +1,6 @@
 # rab: the five row address lines east of the central datapath (x 10510-15430, y 4300-6020)
 
-Serial work, 2026-11-19. Trace: `trace/rab.txt`. Views: `cache/scratch/rax/ch1e_a.png`,
+Serial work, 2026-11-16. Trace: `trace/rab.txt`. Views: `cache/scratch/rax/ch1e_a.png`,
 `l6000.png`, `rae.png`, `ram1.png`, `ram2.png`, `ram3.png`; overlay checks `chkA.png`,
 `chkB.png`.
 

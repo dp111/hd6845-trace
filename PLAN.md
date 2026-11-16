@@ -11,7 +11,7 @@ Goal: recover the complete internal logic of the Hitachi HD6845S CRTC (die marki
 - a reference model that is checked against the netlist and reproduces the
   undocumented edge-case behaviour.
 
-Status (2026-11-16): M0 done. M1 done except the data pad cell and pad-ring
+Status (2026-11-15): M0 done. M1 done except the data pad cell and pad-ring
 wiring. M2 largely done (strobe latch and decode traced; data bus interface partly).
 M3 well under way: 3,430 transistors traced in thirty-three blocks. Counters identified:
 horizontal (8 bits), character row (7), horizontal sync width (4), scan line (5), and a

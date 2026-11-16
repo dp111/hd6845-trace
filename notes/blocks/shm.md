@@ -1,6 +1,6 @@
 # shm: what makes the row address selector's mode line (x 8250-10670, y 2800-4110)
 
-Serial work, 2026-11-20. Trace: `trace/shm.txt`. Views in `cache/scratch/rax/`:
+Serial work, 2026-11-16. Trace: `trace/shm.txt`. Views in `cache/scratch/rax/`:
 `shiftsrc.png`, `shiftgate.png`, `g1a.png`, `g1m.png`, `g0top.png` (the two gates);
 `ns56.png`, `ns56e.png`, `ns56f.png`, `a5q.png` (their inputs).
 
@@ -37,7 +37,7 @@ Ten transistors with the island's two that it already had on the net; five are n
 here. The four buried contacts are marked `?` (placed from the heavy dark boxes at the
 poly ends); everything else is plain in the clean shot at 2.7-2.9x.
 
-## A third gate in the same column (2026-11-22)
+## A third gate in the same column (2026-11-16)
 
 175 px below the inverter, same layout (`g3.png`, `x1e.png`): VSS contact (8432,4185),
 gate poly y 4212-4232, output band y 4238-4270 with its load and the VCC contact

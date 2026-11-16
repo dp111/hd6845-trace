@@ -466,7 +466,7 @@ In rough order of value:
 10. Taps are recorded only where they were seen in passing; none is drawn except the
     one at (6148,18948).
 
-## `res_b` and `lpstb_b` to their ends (coordinating session, 2026-11-17)
+## `res_b` and `lpstb_b` to their ends (coordinating session, 2026-11-16)
 
 Both lines run down the whole top-left logic (x 5277 and x 5320, y 2550-6110) **without a
 tap** (metal followed with `tools/follow.py`; class map of the full length shows no pad on
@@ -484,7 +484,7 @@ contact at (5145,6110) under a metal from the north). All five lines go south to
 fan out diagonally and become horizontal metals going east from pads at x 6130-6165,
 y 6950-7350. Not followed beyond the pads except `rcs_e4`.
 
-## `h_eq_r0`, `h_eq_r1` and `inh_lat` (coordinating session, 2026-11-17)
+## `h_eq_r0`, `h_eq_r1` and `inh_lat` (coordinating session, 2026-11-16)
 
 - **Joins closed.** The R0 and R1 match lines are single straight metals between the right
   datapath's bundle (y 13480) and the strobe channel's tracks k7 and k8 (y 14690):
@@ -509,7 +509,7 @@ y 6950-7350. Not followed beyond the pads except `rcs_e4`.
 The R1 match (end of the displayed part of a line) going to the bottom-centre logic fits
 the DISPTMG pad being at the bottom edge; that logic is not traced.
 
-## `ck_out`: the left-edge trunk to its top (2026-11-17)
+## `ck_out`: the left-edge trunk to its top (2026-11-16)
 
 The bottom trunk (branch (B) of `ck_out`, from the contact (8567,18946)) had been followed
 at 1x up the left edge to y 18300. `tools/follow.py`, started at the other end, follows
@@ -526,7 +526,7 @@ x 8580: 17,238 px, the same line. Drawn in `trace/trunks.txt`.
   (y 8360, 8965, 9573, 10181, 10831, 11440, 12142 ...): the trunk's taps into the left
   column cells of the left array. Not looked at.
 
-## `inh_src` followed west (2026-11-18)
+## `inh_src` followed west (2026-11-16)
 
 Drawn in `trace/trunks.txt` (last section); views `cache/scratch/bd1/inh1.png` ...
 `inh17.png`. From where `trace/bd1.txt` left it at (13480,17150):
@@ -554,7 +554,7 @@ south-west to (10960,17640), west along y 17645 over a pad at (10850,17645) on t
 vertical metal x 10850, and on west. `h_eq_r1`'s goes west along y 17600 past x 10800.
 Neither drawn beyond what the trace had.
 
-## The RA pad drivers' inputs, followed from the pads (2026-11-18, not drawn)
+## The RA pad drivers' inputs, followed from the pads (2026-11-16, not drawn)
 
 Views `cache/scratch/rdp1/ra0_m.png`, `ra_end_m.png`, `ra_s.png`, `ra_t_a.png`,
 `ra_t_m.png`. All metal routes are `tools/follow.py` output.

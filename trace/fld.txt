@@ -133,7 +133,7 @@ P 6882,6062 y6220 w=18
 P 6662,5712 y5800 w=16
 ?B 6652,5781:6680,5805
 
-# ===== the two A inputs to their sources (2026-11-22) =====
+# ===== the two A inputs to their sources (2026-11-16) =====
 # Both polys run south to y 6600, south-east on parallel diagonals, and east as two lines of the
 # central datapath's channel 2. At x 7860-7960 every line of that channel STEPS DOWN ONE POSITION
 # (a knot of nested bends, read at 6.5x in both stripped shots: cache/scratch/rax/knot_a.png,
@@ -172,7 +172,7 @@ P 11568,12443:11602,12477
 C 11585,12460
 P 11585,12458 x11700 w=18
 
-# ===== fld_a_in and fld_y_b to their sources (2026-11-23) =====
+# ===== fld_a_in and fld_y_b to their sources (2026-11-16) =====
 # Both come from one gate group 900-1,900 px north-west, at x 6380-6700, y 3880-4220 (west of the
 # island tc1), down two of the vertical polys that cross the six bus metals at y 4470-4745.
 # Views cache/scratch/rax/w1a.png, w2m.png, w2a.png, w3c.png, w3a.png, w3m.png, w4.png,

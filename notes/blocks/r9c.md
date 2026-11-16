@@ -1,6 +1,6 @@
 # r9c: what R9 is compared with (x 10840-17660, y 2090-5900)
 
-Serial work, 2026-11-20. Trace: `trace/r9c.txt`. Views in `cache/scratch/rax/`:
+Serial work, 2026-11-16. Trace: `trace/r9c.txt`. Views in `cache/scratch/rax/`:
 `r9cmp_a.png`, `r9cmp2.png`, `gap45.png`, `r9src_m.png`, `r9src_a.png`, `r9src2.png`,
 `r9e.png`, `r9f.png` (the lines); `u9a.png`, `u9w.png`, `u9b.png`, `u9e.png`, `u9n.png`,
 `u9s.png` (the units and their inputs); overlay check `chkD.png`.

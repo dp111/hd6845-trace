@@ -1,6 +1,6 @@
 # tla: top-left logic, the gate cluster x 2450-3100, y 4600-5320 and its bus
 
-Serial work, started 2026-11-16. Trace: `trace/tla.txt`. Views: `cache/scratch/tla/`.
+Serial work, started 2026-11-15. Trace: `trace/tla.txt`. Views: `cache/scratch/tla/`.
 
 ## Names
 
@@ -54,7 +54,7 @@ What the inputs **are** is not known. None has reached a named signal yet:
 | `x1` | poly y 3538-3556 from the **east**, across the whole bus without a contact |
 | `in1` | bus line G (x 3369, y 2754-4952), top contact (3368,2768), poly east along y 2768 to a contact (4225,2765), metal east and **south at x 4268-4290** (profile: unbroken to about y 4072; contact candidates at y 3898 and y 4090): into the middle or right gate column |
 
-More of the east column (added 2026-11-17, extracted):
+More of the east column (added 2026-11-16, extracted):
 
 ```
 rcs_bc3460 = NOR(e3, e4)          unit at y 3892: a second copy of in3's function; its output
@@ -69,7 +69,7 @@ rcs_u3288  = NOR(rcs_g3245, rcs_bd3330)   unit at y 3288. Output up bus line C's
 Bus pieces now drawn: A1, A2, B (two pieces), C (top, upper, middle), D (y 3330-4380),
 E (one piece y 2722-5158, three contacts), G upper.
 
-**Where `in1` comes from (2026-11-17, extracted).** `in1`'s metal (bus line G of the first
+**Where `in1` comes from (2026-11-16, extracted).** `in1`'s metal (bus line G of the first
 field, the poly y 2768, then down the second bus field at x 4268-4290) ends on the output
 of a unit of the **middle cluster** (x 3450-4110, the same construction 1042 px east: VCC
 rail x 3824-3868, thin metal x 3948-3962, VSS rail x 3992-4041, units on a column east of
@@ -86,7 +86,7 @@ south at (4283,4745); `rcs_bq3335` is a bus piece (x 4148, y 3320-3596). `e3`'s 
 east along y 2728 to x 4496, south to a contact (4490,3805), and on east in poly along
 y 3805: towards the **right cluster** (x 4650-5050).
 
-**What the step condition feeds (2026-11-17, extracted; one junction is AMB-009).**
+**What the step condition feeds (2026-11-16, extracted; one junction is AMB-009).**
 
 ```
 rcs_cond     = NOT rcs_cond_n           = NOT e4 AND NOT (e3 AND a2): the bracket of the step formula
@@ -94,7 +94,7 @@ rcs_cond_lat <- rcs_cond while clk_tl is high      pass transistor: a dynamic la
 rcs_n4200    = NOT( rcs_cond AND clk_tl  OR  rcs_g4240 )
 ```
 
-`clk_tl` is **the clock**: NOT `ck_out`, i.e. CLK polarity (identified 2026-11-17 by
+`clk_tl` is **the clock**: NOT `ck_out`, i.e. CLK polarity (identified 2026-11-16 by
 following it to its driver and the driver's input to the clock trunk; before that it was
 the placeholder with the former name `rcs_bb3807`). Its route: bus line B (y 3807-4552; gate contacts at y 3810,
 4160, 4410, 4548), a poly east onto a piece of bus line D down to (3240,5587), a poly west
@@ -207,7 +207,7 @@ a contact (2412,5196), metal south and east along y 5411, contact (2565,5410), p
 along y 5400-5422 under the whole cluster to bus line B's bottom contact (3150,5412).
 Load: strip east under R1, box under thin metal W, plate x 2722-2775, VCC box under R2.
 
-## The chase of `e4` (2026-11-16/17)
+## The chase of `e4` (2026-11-16)
 
 `e4` gates the whole step logic, so naming it was the first aim. Result: its route is
 drawn end to end and it is **not identified**. What was learnt on the way:
@@ -239,7 +239,7 @@ Where its driver can still be: on one of the poly stretches as a branch I did no
 (the diagonal fan and y 7122, x 5560-6128, were only read at 1.1x), or at a contact with
 a pad on the 4,000 px of metal in the left bus field that the profile tools did not flag.
 
-## The thin metals and the dense part (open, 2026-11-17)
+## The thin metals and the dense part (open, 2026-11-16)
 
 - **Thin metal E (x 2903-2923)** shows dark stretches of 40-60 px wherever it passes a
   load's tie (the buried contact between the load plate's tab and the tail of the node's
@@ -248,7 +248,7 @@ a pad on the 4,000 px of metal in the left bus field that the profile tools did 
   buried contacts (if those were metal contacts, the outputs of several different gates
   would be shorted together). So where thin E really makes contact is still not found;
   `tools/tla_contacts.py` is no help on it (it passes over tan diffusion boxes all the way).
-- **The dense part west of the rail, x 2835-2975, y 3395-3665: resolved 2026-11-17.** It is
+- **The dense part west of the rail, x 2835-2975, y 3395-3665: resolved 2026-11-16.** It is
   two loads and a strap. The inverter `rcs_u3425`'s node strip runs west under the rail to a
   diffusion column under thin E (x 2900-2940, ending at y 3500); its load plate
   (x 2845-2895) continues downwards as a pad with a metal contact (2865,3488) and a

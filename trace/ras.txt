@@ -73,7 +73,7 @@ P 7168,5078:7390,5100                 # S2: ends on a pad (7425,5090), metal fro
 P 7385,5073:7447,5107
 C 7425,5090
 M 7425,5090 x7467 y4776 w=13          # ends on a pad (7467,4782). (First drawn on along a bus line y 4746 that the
-                                      # follower jumped to across a 24 px gap: wrong, profile 2026-11-20.)
+                                      # follower jumped to across a 24 px gap: wrong, profile 2026-11-16.)
 N M 7467,4900 ras_o0_sel1
 
 # --- diffusion: one rectangle through each strip
@@ -210,7 +210,7 @@ P 8250,5890 x8338 y5956 x8490 w=18    # to line 5956
 P 8250,5935 x8295 y6000 x8490 w=18    # to line 6000
 
 # ===== where the selector's control lines come from: the nine-gate island trace/tc1.txt =====
-# (2026-11-20; views cache/scratch/rax/tcs_a.png, tcs_m.png, tcs2.png, tcs4.png, tcg.png, tcg2.png, tcb.png)
+# (2026-11-16; views cache/scratch/rax/tcs_a.png, tcs_m.png, tcs2.png, tcs4.png, tcg.png, tcg2.png, tcb.png)
 # Five polys and one metal leave the island south at y 4450 and cross under six horizontal bus
 # metals (y 4520-4745, not drawn, no contacts).
 @requires tc1

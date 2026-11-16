@@ -1,6 +1,6 @@
 # r9m: where R9's match goes (followed, not drawn)
 
-Serial work, 2026-11-21. No trace file. Views in `cache/scratch/rax/`: `eq1.png` ...
+Serial work, 2026-11-16. No trace file. Views in `cache/scratch/rax/`: `eq1.png` ...
 `eq9.png`. Every metal stretch from `tools/follow.py`.
 
 ## Route of `cdp1_b_eq`, from the comparator west

@@ -19,7 +19,7 @@ elsewhere):
 --open: where chip 2 had no metal either, take the class from the two chip-2 shots instead
 (`metal` and `acid`), which show open diffusion redder than open field: the sum of red
 minus green over both shots is about 15-27 on field, 48-63 on diffusion, 80 or more on
-poly (measured west of the 4-bit counter, 2026-11-16; check locally). In the clean shot
+poly (measured west of the 4-bit counter, 2026-11-15; check locally). In the clean shot
 alone a wide open diffusion is merely a little greener than field and cannot be told
 by eye, while a narrow one is red-brown. Open diffusion is painted olive, open field pale
 green, open poly dark red, as before; what --open cannot place stays blue.
