@@ -74,6 +74,12 @@ far as it goes, it just does not show which poly ties to which node.
 - Under the rail at y 3575-3635 a small island that the map gives as diffusion with a
   poly outline, inside field: not understood.
 
+**East of the supply rail** (`tb1.png`, x 6560-7120, y 3590-3720): the logic does not
+end at the rail x 6690-6740. A second gate column stands at x 6750-6960 (boxes with
+contact pits at (6885,3640), a wide metal at x 6860-6890, gates and loads between), and
+`tcw_b`'s poly heads into it. So the untraced logic between this column and the island's
+channel W1 (x 7174) is two columns wide, not one; the queue entry is widened.
+
 ## Not done
 
 Everything else in the column (y 2500-3690 and y 4200-4450); the loads of the group at
