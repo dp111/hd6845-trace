@@ -150,6 +150,15 @@ def xform(g, mx, my, dx, dy, rot=0, o=(0, 0)):
 ALIASES = {}          # other name -> canonical name
 
 
+def canonical(name):
+    """The name a net is shown under: an alias is replaced by the name it stands for."""
+    seen = set()
+    while name in ALIASES and name not in seen:
+        seen.add(name)
+        name = ALIASES[name]
+    return name
+
+
 def parse_file(path, items, labels, cells, insts, requires=None):
     widths = {}
     csize = (24.0, 24.0)
@@ -364,6 +373,6 @@ def overlay(im, x, y, w, h, scale, only=None, fill=True, trace=None):
         if x <= lb.x < x + w and y <= lb.y < y + h and (not only or lb.layer in only):
             px, py = (lb.x - x) * scale, (lb.y - y) * scale
             d.ellipse([px - 3, py - 3, px + 3, py + 3], fill=(255, 255, 255), outline=(0, 0, 0))
-            d.text((px + 5, py - 7), lb.name, fill=(255, 255, 255), font=f,
+            d.text((px + 5, py - 7), canonical(lb.name), fill=(255, 255, 255), font=f,
                    stroke_width=2, stroke_fill=(0, 0, 0))
     return out

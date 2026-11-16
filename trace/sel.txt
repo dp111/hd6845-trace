@@ -156,7 +156,7 @@ P 14524,14956:14576,15019          # load gate
 P 14524,14930:14548,14958          # load gate stem to buried contact
 B 14520,14927:14550,14955          # load gate tied to output
 B 14348,14980:14380,15016          # output to gate B poly
-N D 14480,14990 sel_n{}                # NOT rsel<N>
+N D 14480,14990 rsel{}_n                # NOT rsel<N>
 
 # --- row B: 2-input NOR
 D 14405,15028:14460,15240          # pull-down strip under the ground rail
@@ -172,7 +172,7 @@ P 14340,15131 x14372 w=20          # output stub; continues per instance
 P 14508,15094:14550,15192          # load gate
 B 14498,15168:14534,15198          # load gate tied to output
 B 14346,15110:14378,15144          # output to poly
-N D 14480,15130 sel_w{}                # write strobe of register N (see notes)
+N D 14480,15130 wr_r{}                # write strobe of register N (see notes)
 @end
 
 @inst sel_wr 0,304 tag=2
@@ -223,7 +223,7 @@ P 14073,16477 x14350 w=22
 P 14345,16651 x14135 y16760 w=22
 # Strobe line of the left half: metal x 14307 from the 1l contact down past the region.
 M 14307,15163 y16760 w=20
-N M 14307,16555 sel_stb_l
+N M 14307,16555 wr_stb_n
 
 # ---- right half: select inputs, strobe line, outputs. The vertical metal lines of the
 # bundle to the right sit on a 43.3 px grid: T0 14912, T1 14954, T2 14998, T3 15041,
@@ -271,7 +271,7 @@ M 15128,16635 y16760 w=20                   # T5 on down, below the region
 P 14870,15159:15490,15197
 C 15474,15172
 M 14912,15161 y16760 w=20
-N M 14912,16555 sel_stb_r
+N M 14912,16555 wr_stb_n
 M 15474,15098 y15218 x15561 w=20            # from the bar's contact (stub up to y 15098, no contact there) across to T15
 # T15 carries the strobe: from a contact at 15622,14822 (poly arriving from the east
 # along y 14825) down the whole region.
@@ -304,7 +304,7 @@ P 15600,14910 x15757 w=22          # gate bar
 B 15604,14938:15634,14968          # output to poly
 D 15604,14938:15634,14968
 P 15606,14953 x15586 y15037 x15757 w=22    # output poly: west, down, then east as the second gate bar
-N D 15700,14936 sel_bn{}           # NOT rsel<N>
+N D 15700,14936 rsel{}_bn           # NOT rsel<N>
 ?D 15745,14922:15880,14948         # output band on east to the supply contact
 ?P 15808,14880:15843,14958         # load gate
 ?C 15862,14935
@@ -314,7 +314,7 @@ D 15662,14985:15712,15030          # ground contact land
 D 15612,15012:15745,15078          # pull-down and output band
 B 15604,15070:15634,15098          # output to poly (leaves west per instance)
 D 15604,15070:15634,15098
-N D 15700,15066 sel_b{}            # rsel<N> buffered
+N D 15700,15066 rsel{}_buf            # rsel<N> buffered
 ?D 15745,15052:15880,15078
 ?P 15808,15010:15843,15090
 ?C 15862,15065
@@ -336,16 +336,16 @@ M 15472,14812 y15040 x15344 y15966 w=20     # rsel15: x 15474 down, west along y
 # buffer outputs: poly west to a contact on a track, which starts there and runs down
 P 15620,15084 x15373 w=22
 C 15387,15086
-M 15388,15073 y16560 w=20                   # T11: sel_b16
+M 15388,15073 y16560 w=20                   # T11: rsel16_buf
 P 15620,15344 x15417 w=22
 C 15431,15349
-M 15431,15336 y16560 w=20                   # T12: sel_b17
+M 15431,15336 y16560 w=20                   # T12: rsel17_buf
 P 15620,15604 x15457 w=22
 C 15471,15606
-M 15474,15593 y16560 w=20                   # T13: sel_b15
+M 15474,15593 y16560 w=20                   # T13: rsel15_buf
 P 15620,15864 x15501 w=22
 C 15515,15866
-M 15517,15853 y16560 w=20                   # T14: sel_b14
+M 15517,15853 y16560 w=20                   # T14: rsel14_buf
 
 # Inverter + 2-input NOR with the strobe: the same logic as the gate column, for R15
 # and R14.
@@ -362,7 +362,7 @@ P 15600,15956 x15747 w=22          # gate bar
 B 15604,15978:15634,16008          # output to poly
 D 15604,15978:15634,16008
 P 15606,15993 x15587 y16082 x15747 w=24    # output poly: west, down, east as NOR gate A
-N D 15700,15986 sel_n{}
+N D 15700,15986 rsel{}_n
 ?D 15735,15972:15880,16000         # output band east to the supply contact
 ?P 15800,15940:15835,16012         # load gate
 ?C 15862,15986
@@ -373,7 +373,7 @@ P 15546,16172 x15747 w=24          # gate B: strobe, from a contact on T15
 C 15560,16172
 B 15600,16110:15630,16140          # output to poly (leaves west per instance)
 D 15600,16110:15650,16140
-N D 15700,16127 sel_w{}
+N D 15700,16127 wr_r{}
 ?D 15735,16100:15880,16148         # output band east to the supply contact
 ?P 15770,16092:15805,16195         # load gate
 ?C 15862,16124
@@ -389,7 +389,7 @@ P 15285,16256 x15612 w=22
 # outputs: poly west to a contact on the track the select came down, which goes on down
 P 15615,16127 x15330 w=20
 C 15344,16127
-M 15344,16114 y16560 w=20                   # T10: sel_w15
+M 15344,16114 y16560 w=20                   # T10: wr_r15
 P 15615,16427 x15287 w=20
 C 15301,16428
-M 15301,16415 y16560 w=20                   # T9: sel_w14
+M 15301,16415 y16560 w=20                   # T9: wr_r14

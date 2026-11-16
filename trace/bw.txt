@@ -12,7 +12,7 @@
 # the crossing field west of the datapath (x 6330-7700, y 7150-7700). All of it is poly; long
 # stretches lie under vertical metals and were read in the clean shot (classmap --open).
 
-# b (wl_b: the row counter's step, active low). Channel line y 7917-7935 to x 7839; north to
+# b (rc_stepreq_n: the row counter's step, active low). Channel line y 7917-7935 to x 7839; north to
 # y 7649; west under the wide metal x 7725-7775 to x 7753; north under that metal to y 7436;
 # west to x 7407; south to y 7519; west through the crossing field (no contact on the way) to
 # x 6300; north to y 7471; west to a pad with a contact (5838,7470) under the foot of a
@@ -21,7 +21,7 @@ P 11045,7926 x7839 y7649 x7753 y7436 x7407 y7519 x6300 y7471 x5825 w=18
 P 5818,7455:5858,7487
 C 5838,7470
 M 5841,7484 y5571 w=22
-N M 5841,6800 wl_b
+N M 5841,6800 rc_stepreq_n
 # ... the metal ends at y 5571 on a pad with a contact (5838,5585); poly west along
 # y 5576-5594 across a second crossing field (no contact on the way) to a pad with a contact
 # (3518,5587); metal west along y 5578-5598 and north at x 3272-3294 to a contact (3283,5238)
@@ -44,7 +44,7 @@ P 7395,7371:7445,7405
 C 7419,7387
 M 7421,7400 y7150 w=22
 
-# bus line B's line (mra_busb). Channel line y 7831-7849 to x 7925; north to y 7560; west to
+# bus line B's line (cnt_bus_b). Channel line y 7831-7849 to x 7925; north to y 7560; west to
 # x 7832; north to y 7345; west to a pad with a contact (7466,7343) under a vertical metal
 # x 7455-7478 going north.
 P 11045,7840 x7925 y7560 x7832 y7345 x7450 w=18
@@ -60,7 +60,7 @@ P 7010,7544:7052,7577
 C 7031,7560
 M 7036,7530 y7590 w=23
 
-# R2 match (mra_busg). Channel line y 8006-8024 west to a pad with a contact (8340,8010)
+# R2 match (h_eq_r2_u). Channel line y 8006-8024 west to a pad with a contact (8340,8010)
 # under a vertical metal x 8330-8352 (not followed).
 P 11045,8015 x8330 w=18
 P 8320,7995:8362,8030

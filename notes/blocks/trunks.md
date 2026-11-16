@@ -13,7 +13,7 @@ State at the end of the first session (2026-11-15). Everything below is in
 | `ck_out` | all four routes out of the clock block, to their entry points | top end of the left-edge trunk (x 2504; seen only at 0.5x above y 18300); `ck_out` #1 beyond x 10230; the taps |
 | `ck_a` | rail up the right edge of the mid-right array to its end; second entry at the array's bottom row | nothing outside the array |
 | `ck_b` | bottom row of the mid-right array (its only route) | nothing outside the array |
-| S (`t_g0_out`, the clock notes' `ck_src`) | gate g5; the long run along the bottom and up the left bus field to (6690,8366), still running | where it ends; its taps |
+| S (`inh_ck`, the clock notes' `inh_ck`) | gate g5; the long run along the bottom and up the left bus field to (6690,8366), still running | where it ends; its taps |
 | X (input of gate 0, so S = NOT X) | back to (13566,15880) in the channel right of the mid-right array | **its source** (most likely `ck_b`, not shown) |
 | `e_b` | entry below the decode logic at (16170,17690); seen running up to y 16400 | where it ends |
 | `rw_d`, `rs_d`, `cs_d` | entry below the decode logic; verticals to about y 16200 | upper ends of `rw_d`, `rs_d` |
@@ -21,7 +21,7 @@ State at the end of the first session (2026-11-15). Everything below is in
 | `clk` | contact (7500,18772) on a cell row by the CUDISP pad | that row |
 | `clk_b` | not looked at (it enters the clock driver logic; whether it also leaves the clock block is not known) | all |
 
-The line the clock notes call `ck_src` is **not** `ck_a` (Ambiguities A1).
+The line the clock notes call `inh_ck` is **not** `ck_a` (Ambiguities A1).
 
 ## How to use this file
 
@@ -307,7 +307,7 @@ above y 15900 into dense logic; not followed.
 The metal lines at y 18703-18722 and y 18742-18760 below the row are the RS and CS pin
 nodes arriving from their protection cells, not outputs.
 
-## S: output of input-row gate 0 (`t_g0_out`; the clock notes' `ck_src`)
+## S: output of input-row gate 0 (`inh_ck`; the clock notes' `inh_ck`)
 
 Source: the single inverter at the left end of the input row (gate 0, x 13730-13925).
 S = NOT X. It is one of the most widely distributed lines on the die and behaves like
@@ -395,10 +395,10 @@ whether a branch leaves the block was not checked.
 
 ## Ambiguities
 
-### A1. `ck_src` is not `ck_a`: trace/clock.txt has a wrong link
+### A1. `inh_ck` is not `ck_a`: trace/clock.txt has a wrong link
 
 `trace/clock.txt` ends with eight uncertain shapes ("seen at 1.1x; drawn roughly") and
-`@alias ck_a ck_src`. They say that the bus piece feeding gate g5 (L6 left piece) is
+`@alias ck_a inh_ck`. They say that the bus piece feeding gate g5 (L6 left piece) is
 joined to gate g6's output through a line at y 18335-18358 with contacts at
 (12741,18347) and (11852,18347). Checked at 2.25x-6x in all four shots:
 
@@ -416,9 +416,9 @@ the other way: L4, the poly at x 13200, and the metal at y 18775 lead to the out
 of input-row gate 0.
 
 Consequence for the extraction: with `clock.txt` as it stands, `ck_out`, `ck_a` and
-`ck_src` are shorted (reported as one error by `netlist.py`). Fix in `clock.txt`:
-delete the eight `?` shapes after "line A is also the line first labelled ck_src"
-and the `@alias ck_a ck_src`.
+`inh_ck` are shorted (reported as one error by `netlist.py`). Fix in `clock.txt`:
+delete the eight `?` shapes after "line A is also the line first labelled inh_ck"
+and the `@alias ck_a inh_ck`.
 
 Consequence for the clock block's logic (not re-traced here): gate g5's input is S,
 not `ck_a`. The clock notes have g5's output on line B and g6 (input line B) driving
@@ -478,9 +478,9 @@ poly lines (x 5100-5290, y 6060-6850):
 | `res_b` | west along y 6055-6080 from x 5280 | (5190,6065) | line 3, x 5180-5205 |
 | `lpstb_b` | west along y 6100-6120 from x 5320 | (5232,6105) | line 4, x 5225-5250 |
 
-Line 5 (x 5268-5292) is `tla_e4` (see `notes/blocks/tla.md`); `res_b`'s metal lies on it
+Line 5 (x 5268-5292) is `rcs_e4` (see `notes/blocks/tla.md`); `res_b`'s metal lies on it
 for 217 px without a contact. Lines 1 and 2 are not identified (line 2 has a pad with a
 contact at (5145,6110) under a metal from the north). All five lines go south to y 6850,
 fan out diagonally and become horizontal metals going east from pads at x 6130-6165,
-y 6950-7350. Not followed beyond the pads except `tla_e4`.
+y 6950-7350. Not followed beyond the pads except `rcs_e4`.
 

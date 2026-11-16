@@ -2,19 +2,25 @@
 
 Serial work, started 2026-11-16. Trace: `trace/tla.txt`. Views: `cache/scratch/tla/`.
 
+## Names
+
+In this note `in1`, `in2`, `in3`, `e3`, `e4`, `w2`, `c1`, `a2`, `b1`, `x1`, `m2` are the
+signals `rcs_in1` ... `rcs_m2` (`rcs_` = row counter step logic), and the step signal is
+`rc_stepreq_n`. Bus line letters (A-G) and unit names are places, not signals.
+
 ## Status
 
 Seven gates traced and extracted (20 transistors, no errors); the rest of the cluster is
 surveyed only. The cluster runs from y 2940 to y 5330.
 
 ```
-wl_b    = NOR(in1, in2, in3)     the row counter's step signal (active low)     (2975,5035)
+rc_stepreq_n    = NOR(in1, in2, in3)     the row counter's step signal (active low)     (2975,5035)
 in2     = NOR(w2, e4)            west column                                     (2571,5197)
 in3     = NOR(e3, e4)            east column                                     (3046,5197)
 w2      = NOT c1                 pull-down under rail R1 itself                  (2625,5066)
 c1      = NOR(a2, b1)            east column, top of the cluster                 (3046,3115)
 b1      = NOR(x1, a2)            east column; its load is not the usual one, not drawn  (3046,3590)
-tla_m2  = NOR(in2, in3)          east column; feeds gate E0 further up           (3046,4765)
+rcs_m2  = NOR(in2, in3)          east column; feeds gate E0 further up           (3046,4765)
 ```
 
 Put together (c1 = x1 AND NOT a2):
@@ -43,7 +49,7 @@ y 3420.
 
 ## How the row counter's step signal gets here
 
-`wl_b` (see `notes/blocks/wl.md`, `notes/blocks/bw.md`) was followed from the block west of
+`rc_stepreq_n` (see `notes/blocks/wl.md`, `notes/blocks/bw.md`) was followed from the block west of
 the counters: west along the central datapath's channel 3, north, west through the crossing
 field x 6330-7700, up the metal x 5841 to a contact (5838,5585), west as poly along y 5585
 through a second crossing field to a contact (3518,5587), by metal west and north to a
@@ -76,7 +82,7 @@ rail is the tan boxes only.
   x 2845-2875. The plate's poly runs up to y 4962; its tie to the node (a dark box at
   (2885-2908, 4958-4996) on the strip) is drawn uncertain.
 - The node goes east in the open to a buried contact (box x 3045-3068, y 5015-5047) with the
-  poly that carries `wl_b` away.
+  poly that carries `rc_stepreq_n` away.
 
 Inputs (pieces of the vertical bus):
 

@@ -25,7 +25,7 @@ order is not known.
   = "c = R0 shifted by one bit"; the wiring between them; both equality lines out to
   bundle tracks at the left edge; R0 bit 7's line round the array.
 - Upper array, cells placed and checked: register row RE (7 latches) = **R4** (strobe
-  traced to track L1, which rdp3 follows to `sel_w4`); comparator E above it (7 XORs,
+  traced to track L1, which rdp3 follows to `wr_r4`); comparator E above it (7 XORs,
   wired NOR; output leaves west in poly at y 8339); register row RF (7 latches; strobe
   leaves west in poly at y 8295, register not identified; its comparator is in rdp1).
   The upper array's c lines and data lines are drawn only through these rows.
@@ -76,18 +76,18 @@ and rotation). Compared copy by copy with row RB (`rdp3_cmp`, offset 0,-757): id
 except the top edge, where q leaves. Per bit, as rdp3: `a <- bus` while the strobe is
 high, `n2 = NOT a`, `q = NOT n2`, weak hold device q -> a. q is in the sense of the bus.
 
-- Bus lines `rdp3_bus_s0..s7` (one contact per cell, y 10809). s0's bus line ends at the
+- Bus lines `rbus_b7..s7` (one contact per cell, y 10809). s0's bus line ends at the
   top of its RC cell (y 10567); the others run on north through both comparators with no
   contact.
-- **Strobe: `rdp3_rc_ld` = `sel_w0`, so RC is R0.** The row poly runs west under the first
+- **Strobe: `wr_r0_u` = `wr_r0`, so RC is R0.** The row poly runs west under the first
   VSS rail to a pad with a contact at (13690,10815) on bundle track L8 (x 13694), metal
   south. Followed outside the region: L8 straight to y 12400, there one step left onto
   x 13652 (both metal shots, `jog.png`: the three tracks L6, L7, L8 each step one place
   left at y 12310, 12355, 12400), straight on to the contact at (13652,15000)
-  (`l8_a.png`, `l8_b.png`, `l8_c.png`), which sel and bd1 give as `sel_w0`. rdp3's run 3
+  (`l8_a.png`, `l8_b.png`, `l8_c.png`), which sel and bd1 give as `wr_r0`. rdp3's run 3
   found the same independently and draws pad, contact and track (its file names the net).
   By the same staircase RB's strobe (contact 13648,11571 on x 13652) lands on x 13608 =
-  `sel_w2`: rdp3's earlier "RB = R0" came from a track scan that bridged the 25 px
+  `wr_r2`: rdp3's earlier "RB = R0" came from a track scan that bridged the 25 px
   between the two steps.
 
 ### XOR cell `rdp2_xor` (rdp3's cell, traced there)
@@ -106,8 +106,8 @@ poly from below at x 14879-14901 (s2).
 ### Comparator C (traced): c = R0
 
 ```
-rdp2_cc_sK_x = c_sK XOR R0_sK        K = 0..7
-rdp2_cc_eq   = NOR(rdp2_cc_s0_x .. rdp2_cc_s7_x)      high when the eight c lines equal R0
+r0c_bK_x = c_sK XOR R0_sK        K = 0..7
+h_eq_r0   = NOR(r0c_b7_x .. r0c_b6_x)      high when the eight c lines equal R0
 ```
 
 - The cells are band A's moved by (dx,-1692/-1691); all eight XORs and the seven plain
@@ -126,9 +126,9 @@ rdp2_cc_eq   = NOR(rdp2_cc_s0_x .. rdp2_cc_s7_x)      high when the eight c line
 ### Comparator D (traced): c against R0 shifted one slice
 
 ```
-rdp2_cd_sK_x = c_sK XOR R0_s(K+1)    K = 1..6
-rdp2_cd_s7_x = c_s7 XOR R0_s0
-rdp2_cd_eq   = NOR(rdp2_cd_s1_x .. rdp2_cd_s7_x)
+r0hc_sK_x = c_sK XOR R0_s(K+1)    K = 1..6
+r0hc_s7_x = c_s7 XOR R0_s0
+h_eq_r0half   = NOR(r0hc_s1_x .. r0hc_s7_x)
 ```
 
 - Seven slices, s1..s7; cells are band A's moved by (dx,-2213/-2212), compared as above:
@@ -155,10 +155,10 @@ rdp2_cd_eq   = NOR(rdp2_cd_s1_x .. rdp2_cd_s7_x)
   y 10700 as `rdp3_n0` (straight to y 12789, steps left to x 13307, leaves at 13307,12850).
 
 Believed: the pairing is a one-bit shift, so the bits ascend s1, s2, .., s7, s0, and
-`rdp2_cd_eq` is "c[6:0] = R0[7:1]", i.e. c = R0/2 with **bit 7 of c (slice s0) not
+`h_eq_r0half` is "c[6:0] = R0[7:1]", i.e. c = R0/2 with **bit 7 of c (slice s0) not
 compared**. This fits the CPC document's "VSYNC on C0 = R0/2" for interlace and rdp3's
 guess that the address register (slices s1..s5) takes D0..D4. If c is the horizontal
-counter, `rdp2_cc_eq` is end of line. Not traced: which slice is which data bit.
+counter, `h_eq_r0` is end of line. Not traced: which slice is which data bit.
 
 ### Upper array: rows RE = R4 and RF, comparator E (traced)
 
@@ -167,18 +167,18 @@ All three rows are rdp3's cells unchanged, seven slices (sm1, s0..s5). Checked w
 `ov_upmid.png`, `ov_upleft.png`, `up_right.png`, `ov_rf_right.png`.
 
 ```
-RE:  a <- rdp2_ubus_K while rdp2_re_ld;  q = a (two inverters, hold device)
-RF:  a <- rdp2_ubus_K while rdp2_rf_ld;  q = a
-rdp2_ce_K_x = rdp2_uc_K XOR q(RE, K)        K = sm1, s0..s5
-rdp2_ce_eq  = NOR(the seven x)              high when the seven uc lines equal RE
+RE:  a <- ubus_sK while wr_r4_u;  q = a (two inverters, hold device)
+RF:  a <- ubus_sK while wr_r6;  q = a
+r4c_sK_x = uc_sK XOR q(RE, K)        K = sm1, s0..s5
+uc_eq_r4  = NOR(the seven x)              high when the seven uc lines equal RE
 ```
 
-- **RE's strobe = track L1 = `sel_w4`, so RE is R4** (vertical total, 7 bits). At the
+- **RE's strobe = track L1 = `wr_r4`, so RE is R4** (vertical total, 7 bits). At the
   foot of sm1's loop the row poly steps left and runs south under the VSS rail
   (x 13385-13403) to a pad with a contact at (13391,9311) just below the rail's end;
   thin metal south on L1, straight to y 10700 (`re_ld2.png`, `re_s_c.png`,
   `re_s_m.png`; the crossings at y 9650-9760 checked in both metal shots, `l1_x.png`).
-  rdp3 follows L1 from there to `sel_w4` (its `rdp3_n1s4`).
+  rdp3 follows L1 from there to `wr_r4` (its `rdp3_n1s4`).
 - RF's strobe: from the foot of sm1's loop the poly goes west along y 8287-8303 and
   leaves the region (`rf_ld.png`). Not identified. RF's q lines go up in poly into the
   comparator above it (rdp1).
@@ -187,10 +187,10 @@ rdp2_ce_eq  = NOR(the seven x)              high when the seven uc lines equal R
   x 13393, out of the region. The c track of sm1 passes over the buried contact without
   touching it (rdp3 settled this for the same structure in its bands; in comparator C
   the box has no metal over it at all).
-- Both registers hang on the same seven data lines `rdp2_ubus_K` and comparator E on
-  the seven lines `rdp2_uc_K`; all of these go on north (RF's comparator) and south
+- Both registers hang on the same seven data lines `ubus_sK` and comparator E on
+  the seven lines `uc_sK`; all of these go on north (RF's comparator) and south
   (routing zone), untraced. Believed: `uc` is the vertical (character row) counter and
-  `rdp2_ce_eq` is "row counter = R4".
+  `uc_eq_r4` is "row counter = R4".
 - sm1 has a thin through line on its strap track (x 13714), as s7 has in the lower
   array (x 16838).
 
@@ -198,31 +198,31 @@ rdp2_ce_eq  = NOR(the seven x)              high when the seven uc lines equal R
 
 | Name | Layer | Where | Direction | What |
 |---|---|---|---|---|
-| `rdp3_bus_s1`..`s7` | metal | x 14236, 14626, 15016, 15407, 15797, 16187, 16577 at y 9540, going north | through | data lines; drawn to y 9540, they go on north (track scan: to about y 9480 and beyond in places) |
-| `rdp3_bus_s0` | metal | ends at (13845,10567) | - | top end of s0's data line |
-| `rdp3_c_s0`..`s7` | metal | joined to rdp3's at y 10700 (x 13931, 14321, 14712, 15102, 15492, 15882, 16272, 16663) | in | compared with R0; not driven here; top ends y 10220 (s0), 9705 (others) |
-| `rdp3_rc_ld` | poly | (13750,10815) going west to rdp3's pad | in | R0 load strobe = `sel_w0` |
-| `rdp2_cc_eq` (= `rdp3_n2s1`) | metal | 13434,10700 going south (track L2) | out | high when c = R0 |
-| `rdp2_cd_eq` (= `rdp3_n0`) | metal | 13348,10700 going south (track L0) | out | high when c_s1..s7 = R0_s2..s7,s0 |
+| `rbus_b0`..`s7` | metal | x 14236, 14626, 15016, 15407, 15797, 16187, 16577 at y 9540, going north | through | data lines; drawn to y 9540, they go on north (track scan: to about y 9480 and beyond in places) |
+| `rbus_b7` | metal | ends at (13845,10567) | - | top end of s0's data line |
+| `hc7`..`s7` | metal | joined to rdp3's at y 10700 (x 13931, 14321, 14712, 15102, 15492, 15882, 16272, 16663) | in | compared with R0; not driven here; top ends y 10220 (s0), 9705 (others) |
+| `wr_r0_u` | poly | (13750,10815) going west to rdp3's pad | in | R0 load strobe = `wr_r0` |
+| `h_eq_r0` (= `rdp3_n2s1`) | metal | 13434,10700 going south (track L2) | out | high when c = R0 |
+| `h_eq_r0half` (= `rdp3_n0`) | metal | 13348,10700 going south (track L0) | out | high when c_s1..s7 = R0_s2..s7,s0 |
 | `rdp3_t16837` | metal | 16838,9440 going north | through | thin line on s7's strap track, no contact seen in comparators C, D or row RC |
-| `rdp2_re_ld` (= `rdp3_n1s4`) | metal | 13391,10700 going south (track L1) | in | R4 load strobe = `sel_w4` |
-| `rdp2_rf_ld` | poly | 13340,8295 going west | in | RF load strobe, not identified |
-| `rdp2_ce_eq` | poly | 13340,8339 going west | out | high when uc = R4 |
-| `rdp2_ubus_sm1`, `_s0`..`_s5` | metal | x 13455, 13845, 14236, 14626, 15016, 15407, 15797; north at y 8051, south at y 9075 | through | data lines of the upper array |
-| `rdp2_uc_sm1`, `_s0`..`_s5` | metal | x 13541, 13931, 14321, 14712, 15102, 15492, 15882; north at y 8051, south at y 9075 | in | compared with R4 (and by rdp1's comparator with RF) |
-| `rdp3_rf_sm1_q`, `_s0_q`..`_s5_q` | poly | x 13707, 14097, 14487, 14878, 15268, 15658, 16048 (22 wide) at y 8048 going north | out | RF's bits, into rdp1's comparator |
+| `wr_r4_u` (= `rdp3_n1s4`) | metal | 13391,10700 going south (track L1) | in | R4 load strobe = `wr_r4` |
+| `wr_r6` | poly | 13340,8295 going west | in | RF load strobe, not identified |
+| `uc_eq_r4` | poly | 13340,8339 going west | out | high when uc = R4 |
+| `ubus_sm1`, `_s0`..`_s5` | metal | x 13455, 13845, 14236, 14626, 15016, 15407, 15797; north at y 8051, south at y 9075 | through | data lines of the upper array |
+| `uc_sm1`, `_s0`..`_s5` | metal | x 13541, 13931, 14321, 14712, 15102, 15492, 15882; north at y 8051, south at y 9075 | in | compared with R4 (and by rdp1's comparator with RF) |
+| `r6_sm1_q`, `_s0_q`..`_s5_q` | poly | x 13707, 14097, 14487, 14878, 15268, 15658, 16048 (22 wide) at y 8048 going north | out | RF's bits, into rdp1's comparator |
 | `rdp2_t13714` | metal | 13714,8051 north; 13714,9075 south | through | thin line on sm1's strap track |
 | `vss` | metal | x 13393, 13783, 14174, .., 16125 (8) at y 8040 going north; x 16516, 16906 at y 9540 going north | - | rails. x 13393 ends at y 9275; x 13783 is cut at y 9100-9400 (AMB-5) |
 | `vcc` | metal | x 13600, 13990, .., 15942 (7) at y 8040 going north; x 16332, 16723 at y 9540 going north | - | rails. x 13600 is drawn to y 9080 only (AMB-5) |
 
-`rdp3_rc_s0_q` (R0 bit of slice s0) leaves the region for 14 px at (16950-16964, 9480 to
+`r0_b7_q` (R0 bit of slice s0) leaves the region for 14 px at (16950-16964, 9480 to
 10020) and comes back; nothing else is on it out there as far as seen (`east1.png`).
 
 ## Ambiguities
 
 - **Correction to rdp3 run 2 (already made by its run 3):** RB is R2, not R0; R0 is RC.
-  `trace/zz_joins.txt` still has `@alias sel_w0 rdp3_rb_ld`, which is wrong: `sel_w0`
-  is `rdp3_rc_ld`, `sel_w2` is `rdp3_rb_ld`.
+  `trace/zz_joins.txt` still has `@alias wr_r0 wr_r2_u`, which is wrong: `wr_r0`
+  is `wr_r0_u`, `wr_r2` is `wr_r2_u`.
 - **AMB-1, buried contact of comparator D's exit** (14308-14347 x 9518-9560). Larger than
   the ones in the other three bands (38 x 40 against 26 x 22) and the poly reaches it
   straight from the west instead of from above. No metal over it in either metal shot,
@@ -273,12 +273,12 @@ rdp2_ce_eq  = NOR(the seven x)              high when the seven uc lines equal R
   - a bar at y 9573 from a contact at about (13455,9573) east through the column;
     a bar at y 9525 from L6's top contact (13607,9528) east to x 13786, then north.
 - **Left bundle, x 13330-13782, y 9440-10700**: only L0 and L2 south of their pads are
-  drawn. Seen at 1.28x (`bundle1.png`), coordinates approximate: L3 (`rdp3_cb_eq`) ends on
+  drawn. Seen at 1.28x (`bundle1.png`), coordinates approximate: L3 (`h_eq_r2`) ends on
   a contact at (13475,9705), poly west along y 9705; L2's piece from the north ends at
   (13433,9922), poly bar y 9915-9932 east to a contact at (13649,9919), which is the top
   of L7 south (`rdp3_n7s9`); L7's piece y 9593-9733 ends on a contact at (13649,9747),
   poly west along y 9745; L8's top contact at (13691,9485); L0's upper piece
   (y 9396-9646) and L2's top end share a poly bar at y 9661 that goes west. Track scan of
   all twelve (gap 8) is in the run's log, not kept.
-- The upper pad (13692,10748) on L8 is in rdp3's file (`rdp3_n8`).
+- The upper pad (13692,10748) on L8 is in rdp3's file (`rc3`).
 - Which slice is which data bit (needs the data bus followed to the D pads).

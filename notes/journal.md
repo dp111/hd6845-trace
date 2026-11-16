@@ -133,9 +133,9 @@ Result
   push-pull pair whose pull-up gate is the inverse of its pull-down gate. No gating,
   no division. Output `ck_out` goes up into the core at x 10845-10870 and away to
   the left at y 19240-19262.
-- A gate row of six inverters buffers a global signal `ck_src` into both polarities
+- A gate row of six inverters buffers a global signal `inh_ck` into both polarities
   (lines A and B). Those go right into the core, and down into a "driver logic" of
-  two mirrored circuits together with CLK. `ck_src` was followed 4000 px along the
+  two mirrored circuits together with CLK. `inh_ck` was followed 4000 px along the
   bottom bus field to the foot of the left bus field; its source is not known.
 - The driver logic is not traced (AMB-007).
 
@@ -163,7 +163,7 @@ Method notes
 Next
 - M2: bus interface and register decode. `rw`, `rs`, `cs` and `e` are ready at the
   input row; the decode array is at 14180-15780 x 13480-14680.
-- Carry AMB-007 and the source of `ck_src` as open items to pick up from the core.
+- Carry AMB-007 and the source of `inh_ck` as open items to pick up from the core.
 
 ## 2026-11-15 (later)  Second die, clock generator, register decode
 
@@ -222,11 +222,11 @@ Established by tracing
 - Register decode rows come straight from a 5-bit address register (five transparent
   latches above the decode array); five inverters right of the array make the
   complement rows.
-- Register strobes: `sel_wN` = (register N selected) AND NOT `sel_stb_r` for R0-R15;
+- Register strobes: `wr_rN` = (register N selected) AND NOT `wr_stb_n` for R0-R15;
   R12-R17 also have a buffered select (believed read enables); R16/R17 have no strobe.
-- `sel_stb_r` is the output of a latch, open while E is high:
+- `wr_stb_n` is the output of a latch, open while E is high:
   `c = NOR(rw_d, m255, cs_d)` with m255 believed NOT rs_d, `n1 = NOT(qb OR (E AND NOT c))`,
-  `qb = NOT(n1 OR (E AND c))`, `sel_stb_r = NOT n1`. Nothing traced closes the strobe
+  `qb = NOT(n1 OR (E AND c))`, `wr_stb_n = NOT n1`. Nothing traced closes the strobe
   when E falls. The address register's load strobe is
   NOT(NOT(x OR (E AND NOR(rw_d, rs_d, cs_d)))), x unknown.
 - Horizontal registers in the right datapath, identified by following their strobes:
@@ -245,12 +245,12 @@ Established by tracing
   node q with group look-ahead, toggle-like logic, a stage clocked by `ck_a` and
   `ck_b`; right-hand columns not traced.
 - Global wiring: `ck_out`, `ck_a`, `ck_b`, E, R/W, RS, CS, RES, LPSTB mapped to their
-  first entries. The clock block's `ck_src` is not `ck_a`: it is the inverse of a
+  first entries. The clock block's `inh_ck` is not `ck_a`: it is the inverse of a
   core signal X, whose driver is an inverter in the gate column left of the select
   logic; X also gates a latch there.
 
 Corrections made during the round (each was a wrong statement at the time)
-- `ck_src` = `ck_a` (mine, from a 1.1x view): no such link.
+- `inh_ck` = `ck_a` (mine, from a 1.1x view): no such link.
 - "strobe = NOT E" (one agent): the line it followed is broken; settled by a second
   agent's measurement.
 - "this row is R0" (one agent): a track-scanning tool bridged a jog; two later runs
@@ -312,7 +312,7 @@ show registers, comparators and counters as blocks plus one gate-level sheet per
   only when the logic there pulses them. Its outputs go to the upper right array (the R4
   and R6 comparators): the character-row counter.
 - rdp2's unidentified 7-bit register "RF" is **R6**: its strobe line runs down track T0
-  of the wiring channel into bd1's `sel_w6`.
+  of the wiring channel into bd1's `wr_r6`.
 - `ck_a` reaches the 4-bit counter by a diffusion cross-under, a tapless line through
   rows r10-r4 and a bus line; the same bus line carries `ck_a` on west.
 - Fourteen cross-block joins closed by geometry (`trace/zz_joins.txt`); full extraction
@@ -349,13 +349,13 @@ show registers, comparators and counters as blocks plus one gate-level sheet per
 
 1. The logic west of the counters (x 10400-11700 and the bands above row r0): it makes
    the row counter's two clocks (bus lines D, E), its L3 line (metal along y 13005), the
-   carry-ins of r10 and r18, `mra_gab`, and it receives the R2 match (bus line F/G) and
+   carry-ins of r10 and r18, `cnt_gab`, and it receives the R2 match (bus line F/G) and
    `ck_a` (bus line C). This is the end-of-line / end-of-frame control: M4.
 2. The rest of the bit cell: node `m`'s pull-up and the unresolved branch (B3, B4, load
    1 in `mra_col2`). Until then "next = q XOR carry" is believed, not extracted, and how
    a counter is cleared is unknown (L3 is `ck_a` for the horizontal counter, verified by
    following its poly in the clean shot, so the clear is not there).
-3. North of the array (y < 7130): the 4-bit counter's outputs, `sel_w3`, `sel_w5`, L3 of
+3. North of the array (y < 7130): the 4-bit counter's outputs, `wr_r3`, `wr_r5`, L3 of
    r0-r3 and the VSS/VCC rails all leave there (`amr`, `rdp1`).
 4. The east ends of the wiring channel that rdp2 saw and did not draw (row counter bits
    r4-r6, bus lines A, B, F), and the stretch between rdp3 and bd1 (bits r13, r14, r17).
@@ -377,7 +377,7 @@ Serial. Blocks `wl` (new, complete) and `bw` (new, wiring part-way). Full extrac
   NOR(NOT p, buffered slave clock). The two NOR drivers are 350 px wide with strong loads.
   So the row counter's master latches take the next count while `p` is high and its slaves
   pass it on when `p` is low again: one step per pulse of `p`.
-- **`p` = NOR(a, b).** `a` is `bd1_xn1`, the same core signal whose other copy (`ck_src`)
+- **`p` = NOR(a, b).** `a` is `inh_rc`, the same core signal whose other copy (`inh_ck`)
   holds `ck_b` low in the clock block: one signal stops both the horizontal counter's
   master clock and the row counter's step. `b` comes from far away: followed west along the
   central datapath's channel 3, north in a nested bundle at x 7790-7930, west through the
@@ -389,7 +389,7 @@ Serial. Blocks `wl` (new, complete) and `bw` (new, wiring part-way). Full extrac
 
 **Corrections**
 
-- mra's line x 12285 (`mra_la`), "one metal through all nineteen rows, no contact", is
+- mra's line x 12285 (`cnt_la_a`), "one metal through all nineteen rows, no contact", is
   three pieces cut at two of the four routing channels. The top piece feeds an inverter in
   `wl` and nothing found drives it: a contact has been missed in the rows (re-read R8).
 - cdp2's note that the channel-3 lines "turn down" at their west end: they turn north.
@@ -412,14 +412,14 @@ earlier work goes on that list in the same commit; a remark in a report does not
 - A crossing of a poly line under a metal in the clean shot shows a dark ring at each metal
   edge. That is the metal's margin, not a contact: a contact has a widened pad and a green
   dot. All five channel-3 lines cross twenty metals this way with no contact.
-- Trap 11 struck again within the hour (`mra_la`). Any line longer than one row group gets
+- Trap 11 struck again within the hour (`cnt_la_a`). Any line longer than one row group gets
   looked at where it crosses each routing channel before it is used.
 
 **Open, in the order I would take them**
 
 1. The source of `b`: the metal x 5841 north of y 6300 (top-left logic, `tl`). That is
    where the row counter's step is decided (scan line count, end of line): M4.
-2. What `a` / `ck_src` is: bd1's `bd1_g`, which comes from the bottom bus field.
+2. What `a` / `inh_ck` is: bd1's `inh_src`, which comes from the bottom bus field.
 3. Re-read R8/R9 in the counters (the line x 12285 and node `z`), then the rest of the bit
    cell (node `m`'s pull-up, B3/B4): the counters' next-state and clear are still not
    extracted.
@@ -433,7 +433,7 @@ nets, 2,778 transistors, 0 errors, 0 warnings.
 
 **What was established**
 
-- `wl_b`, the row counter's step, was followed to its driver: up the metal x 5841 to
+- `rc_stepreq_n`, the row counter's step, was followed to its driver: up the metal x 5841 to
   (5838,5585), west as poly through a second crossing field to (3518,5587), by metal to
   (3283,5238) and by poly to a buried contact on the output node of a gate at (2975,5035)
   in the top-left logic. About 9,000 px of wire from the counters, all drawn.
@@ -521,7 +521,7 @@ scan-line comparisons" is a guess from the formula's shape.
 2. The rest of this cluster: y 3400-4590 east, the west side above y 4940, b1's load.
 3. `in1` (bus field x 4140-4420, then the middle or right gate column), `e3`, `a2`, `x1`
    to the east.
-4. As before: what `a` (`bd1_xn1`) is; re-read R8/R9; `amr`; the bus fields.
+4. As before: what `a` (`inh_rc`) is; re-read R8/R9; `amr`; the bus fields.
 
 ## 2026-11-17 The chase of e4
 
@@ -574,4 +574,37 @@ on 2026-11-16, now with tools that make the bus fields cheap.
    x 4650-5050.
 2. bd1's gate column (re-read R1): it holds what the R0 match feeds and what makes X.
 3. The poly bus's other four lines east of the pads, and the diagonal fan.
+
+## 2026-11-17 Signal names
+
+The user asked whether signals were being renamed as they were understood (they were
+not: only joined by alias), and then: "one of the aims here should be to ensure that all
+labels are meaningful, or at very least are described in a table if it's hard to name
+them. Make sure that all the documents reference the correct names."
+
+Done, at the source:
+
+- 672 net names renamed in the trace files (labels, templates, tags, aliases): counter
+  bits (`hc0`-`hc7`, `rc0`-`rc6`, `c4b0`-`c4b3` and their nodes), registers and comparators
+  by register number and bit (`r1_b3_q`, `r0c_b5_x`), match lines (`h_eq_r0`...), write
+  strobes (`wr_r6`), the row counter's clocks and step (`rc_ck_m`, `rc_step`,
+  `rc_stepreq_n`), the inhibit signal and its copies (`inh_n`, `inh_ck`, `inh_rc`,
+  `inh_lat`), bus control (`wr_data_sel`...). Extraction unchanged: 1,683 nets, 2,789
+  transistors, 0 errors, 0 warnings.
+- The same table applied to every note, the plan, the instructions and the floor-plan
+  descriptions (771 replacements). **This journal was rewritten too**: entries above use
+  the new names. The old names are in "Former names" at the end of `notes/signals.md`.
+- `notes/signals.md`: the glossary. Every one of the 1,526 named nets is covered by a row
+  (name or pattern) saying what it is or, for a placeholder, what is known. `tools/build.py`
+  checks it and reports names it does not cover (now 0).
+- Convention `NAME_u` for a wire believed to be NAME whose join is not drawn. The rename
+  exposed 14 such open joins that had been hidden behind unrelated-looking names; they
+  are listed in `notes/work-packages.md`.
+- Overlays and the SVG now show the canonical name of a net at every label.
+- `tools/rename.py OLD NEW` for every later identification; `tools/signals.py` for the
+  check on one block.
+
+Not renamed: the central datapath rows, the left array and the two small logic blocks,
+whose registers have no numbers yet. Their names stay by place and are described in the
+glossary.
 

@@ -482,6 +482,6 @@ Channel 3 (y 7830-8030) was read in the clean shot from x 7950 to x 11040 while 
 its five lines from the east (`notes/blocks/bw.md`). There is no contact on any of them on
 the way; the lowest (y 8006-8024, the R2 match) ends on a pad with a contact (8340,8010);
 the other four turn **north** at x 7790-7930 (not down, as the Ports table above says).
-Their nets: y 7840 bus line B's line, y 7882 `ck_a`, y 7926 the row counter's step `wl_b`,
+Their nets: y 7840 bus line B's line, y 7882 `ck_a`, y 7926 the row counter's step `rc_stepreq_n`,
 y 7971 band H1's line.
 

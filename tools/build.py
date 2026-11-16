@@ -4,7 +4,8 @@
   out/hd6845s.svg     the trace as an SVG in metal-shot coordinates, with Inkscape
                       layers and all five die photos linked as background layers
   out/netlist.json    extracted transistor netlist
-  out/report.txt      rule-check report and recovered gates
+  out/report.txt      rule-check report and recovered gates; at the end, the net names
+                      that notes/signals.md does not cover and the open joins
   out/floorplan.jpg   the die at reduced scale with the functional blocks outlined
   out/floorplan.svg   the same outlines as a stand-alone SVG over the photo
   out/floorplan_legend.txt   every block as a line of text (number, kind, name, box, description)
@@ -168,7 +169,7 @@ def build_svg(tr, nl, blocks):
         lab.append(f'<circle cx="{lb.x:.0f}" cy="{lb.y:.0f}" r="3" fill="#fff" stroke="#000"/>'
                    f'<text x="{lb.x + 6:.0f}" y="{lb.y + 5:.0f}" font-family="monospace" font-size="14" '
                    f'fill="#fff" stroke="#000" stroke-width="2.5" paint-order="stroke">'
-                   f'{escape(lb.name)}</text>\n')
+                   f'{escape(tracelib.canonical(lb.name))}</text>\n')
     out.append(svg_layer('labels', ''.join(lab)))
     tl = []
     for t in nl.transistors:
@@ -396,13 +397,21 @@ def main():
     nl = netlist_mod.Netlist(tr)
     with open(os.path.join(OUT, 'netlist.json'), 'w') as f:
         json.dump(nl.to_json(), f, indent=1)
+    import signals as signals_mod
+    missing, opens = signals_mod.check([n.name for n in nl.nodes.values() if n.names])
     with open(os.path.join(OUT, 'report.txt'), 'w') as f:
         f.write(nl.report() + '\n')
+        f.write('\nsignal names (notes/signals.md)\n')
+        f.write('  not in the glossary (%d): %s\n' % (len(missing), ' '.join(missing) or '-'))
+        f.write('  open joins, names ending in _u (%d): %s\n' % (len(opens), ' '.join(opens) or '-'))
     blocks = read_floorplan()
     build_svg(tr, nl, blocks)
     if '--no-floorplan' not in sys.argv:
         build_floorplan(blocks)
     print(nl.report().split('\n')[0])
+    print('signal names: %d not in notes/signals.md%s; %d open joins (_u)'
+          % (len(missing), (' (' + ' '.join(missing[:8]) + (' ...' if len(missing) > 8 else '') + ')') if missing else '',
+             len(opens)))
     print(f'{len(tr.items)} shapes, {len(blocks)} floor-plan blocks -> out/')
 
 

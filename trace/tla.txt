@@ -15,7 +15,7 @@ M 2806,3020 y5330 w=55               # R2: top end at y 3018 (how it is fed: not
 N M 2803,4700 vcc
 
 # ====================================================================
-# b = NOR(in1, in2, in3): the row counter's step signal (wl_b). Three pull-downs on the VSS
+# b = NOR(in1, in2, in3): the row counter's step signal (rc_stepreq_n). Three pull-downs on the VSS
 # rail's diffusion, load to the VCC rail. The output node is a U of diffusion round the VSS
 # contact box: top (y 4903-4927), west arm and strip x 2888-2905, bottom (y 5022-5050).
 D 2947,4903:2999,5050
@@ -27,7 +27,7 @@ D 2888,5030:2950,5047
 P 2940,4929:3345,4947
 P 3340,4920:3382,4954
 C 3360,4937
-N P 3200,4938 tla_in1
+N P 3200,4938 rcs_in1
 # in2: poly y 4970-4992 from a pad with a contact (3148,4975) under a vertical metal
 # x 3138-3160; at the rail's east edge it turns south (x 3000-3012) into the gate band y 5001-5020
 P 3000,4970:3135,4992
@@ -35,7 +35,7 @@ P 3128,4961:3170,4993
 C 3148,4976
 P 3000,4968:3012,5022
 P 2942,5001:3012,5020
-N P 3060,4981 tla_in2
+N P 3060,4981 rcs_in2
 # in3: poly y 5055-5075 from a pad with a contact (3108,5068) under a vertical metal
 # x 3097-3120; gate on the narrower box below the node (VSS contact (2987,5108))
 D 2972,5045:3010,5140
@@ -43,7 +43,7 @@ C 2987,5108 s=24x44
 P 2966,5055:3100,5075
 P 3090,5050:3126,5086
 C 3108,5068
-N P 3050,5065 tla_in3
+N P 3050,5065 rcs_in3
 # the node's way east in the open to a buried contact with the poly that carries b away
 # (bw.txt draws that poly from here east, south and east to the row counter's logic)
 D 2995,5030:3050,5048
@@ -110,7 +110,7 @@ P 3090,4787:3127,4823
 # output: buried contact box, poly east along y 4753-4772 to x 3196, north to y 4636, west
 B 3045,4750:3068,4780
 P 3048,4762 x3196 y4636 x3022 w=19
-N P 3120,4762 tla_m2
+N P 3120,4762 rcs_m2
 # gate E0 = m2 on the upper part of the column: below it the column joins rail box 1 (VSS);
 # above it the column goes on north (next piece)
 D 3005,4650:3063,4663
@@ -133,7 +133,7 @@ P 3012,5157 x3270 w=20
 P 3265,5137:3302,5170
 C 3283,5152
 M 3283,5060 y5166 w=22
-N P 3200,5157 tla_e3
+N P 3200,5157 rcs_e3
 # gate E4: poly y 5230-5250 from a pad with a contact (3192,5237) on bus line C
 P 3012,5240 x3180 w=20
 P 3172,5222:3212,5253
@@ -187,7 +187,7 @@ P 3172,5308:3212,5341
 P 2575,5322 x3180 w=20
 P 2548,5306:2590,5338
 C 2565,5321
-N P 3120,5240 tla_e4
+N P 3120,5240 rcs_e4
 # output: buried contact, poly east to the pad of bus line A
 B 3042,5181:3068,5214
 P 3045,5186:3095,5208
@@ -208,7 +208,7 @@ P 2890,5240:2926,5262
 B 2908,5237:2932,5264
 M 2740,2986 x2914 y5400 w=20          # thin metal E: comes from the west along y 2977-2996 (right over c1's poly line,
                                       # no contact) and turns down the cluster; passes over the load boxes. Ends not yet read
-N M 2913,5000 tla_thin
+N M 2913,5000 rcs_thin_e
 
 # ---- load of m2: the same construction one unit up. Strip west under the VSS rail
 # (y 4755-4772) to a box under the thin metal, strip under the plate x 2842-2897 (y 4742-4832)
@@ -230,7 +230,7 @@ B 2908,4804:2932,4830
 M 2625,4590 y5330 w=50
 N M 2625,4800 vss
 M 2698,4940 y5330 w=20                # thin metal W: passes over the load boxes (ends not yet read)
-N M 2698,5100 tla_thinw
+N M 2698,5100 rcs_thin_w
 
 # ---- in2 = NOR(w2, e4)
 D 2598,5080:2652,5142                 # rail box, VSS contact
@@ -246,7 +246,7 @@ D 2550,5262:2605,5282
 P 2346,5142:2598,5164
 P 2346,5015:2363,5164
 P 2346,5015:2575,5032
-N P 2470,5153 tla_w2
+N P 2470,5153 rcs_w2
 
 # ---- w2 = NOT c1: a "rail gate", the pull-down is under R1 itself. Node = diffusion under
 # R1 at y 5028-5057 (between the two VSS boxes of the rail: field above it, the gate below
@@ -258,7 +258,7 @@ P 2420,5057:2672,5075
 P 2396,5050:2434,5084
 C 2414,5067
 M 2415,2972 y5082 w=24                # c1's metal: 2,100 px, no other contact (profile, contact finder, top end seen)
-N M 2417,4950 tla_c1
+N M 2417,4950 rcs_c1
 # its top end is a contact (2405,2985) on a pad of the horizontal poly y 2977-2995, which runs
 # on west and east; east it ends on the top contact (3108,2985) of bus line A's top piece.
 P 2385,2970:2425,3000
@@ -318,7 +318,7 @@ P 3012,3066:3140,3082
 P 3132,3052:3170,3084
 C 3150,3067
 M 3152,3053 y3606 w=22                # bus line B, piece B1: y 3053-3606, contacts (3150,3067) and (3150,3590)
-N P 3070,3074 tla_b1
+N P 3070,3074 rcs_b1
 # gate a2: poly y 3148-3166 from the top contact (3108,3180) of bus line A's piece A2
 P 3012,3148:3098,3166
 P 3090,3160:3128,3196
@@ -331,7 +331,7 @@ M 3106,3166 y3778 w=24                # bus line A, piece A2: y 3166-3778, three
 P 3090,3745:3130,3778
 C 3103,3762
 P 3125,3752:3400,3770
-N P 3060,3157 tla_a2
+N P 3060,3157 rcs_a2
 # load
 D 2925,3105:3048,3124
 D 2898,3105:2932,3138
@@ -354,7 +354,7 @@ C 2985,3690 s=24x40
 D 3000,3648:3063,3662
 # gate x1: poly y 3538-3556, which comes from the east across the whole bus without a contact
 P 3012,3538:3400,3556
-N P 3300,3547 tla_x1
+N P 3300,3547 rcs_x1
 # gate a2: poly y 3628-3648 from A2's middle contact
 P 3012,3628:3095,3648
 P 3085,3616:3125,3650

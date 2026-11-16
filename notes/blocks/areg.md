@@ -1,8 +1,8 @@
 # areg: address lines into the decode array, and the logic right of the array
 
-> **Correction (coordinator, 2026-11-15).** The load strobe `areg_load` is not simply
-> NOT `e_b`. The bd2 block traced its driver: `areg_load = NOT bd2_al_n`, with
-> `bd2_al_n = NOT(bd2_x OR (e_b AND bd2_m210))` and `bd2_m210 = NOR(rw_d, rs_d, cs_d)`
+> **Correction (coordinator, 2026-11-15).** The load strobe `ar_load` is not simply
+> NOT `e_b`. The bd2 block traced its driver: `ar_load = NOT ar_load_n`, with
+> `ar_load_n = NOT(bd2_x OR (e_b AND wr_addr_sel))` and `wr_addr_sel = NOR(rw_d, rs_d, cs_d)`
 > (see `notes/blocks/bd2.md`). The same block found this file's reading of the poly
 > from (16252,14862) wrong: it ends on a buried contact.
 
@@ -19,7 +19,7 @@ Extracts with 0 errors, 0 warnings, no unnamed open nets.
   rdp3's area. The fifth (x 15745-16150) is in this region and is **partly** traced: its
   write path, its output inverter and its output line are in the trace; the first
   inverter's load and two internal links are described below but not drawn.
-- The load strobe (`areg_load`) is traced from the register cells to where it leaves the
+- The load strobe (`ar_load`) is traced from the register cells to where it leaves the
   region: metal at x 16299, y 14700, going down. Followed by eye below the region: it is
   the output of a gate at about x 15880-16150, y 15230-15330 (bd2's area), see Logic.
 - Vertical bundle x 16200-16450: traced as labelled wires with ports.
@@ -35,7 +35,7 @@ Extracts with 0 errors, 0 warnings, no unnamed open nets.
 | VCC rail of the inverters | enters at (16282,12900), x 16142-16194, leaves at y 14700 | traced |
 | VCC rail of the register row | x 15925-15975 from y 12900 to 13578, then the wide rail x 15795-15890 down to y 14700; joins the decode array's VCC bus | traced |
 | Fifth register cell | 15745-16150 x 13000-13290 | partial (see Logic) |
-| Bundle: `areg_load`, `areg_w6`, `areg_w7`, `areg_rail_r` | x 16291-16451 | traced as wires |
+| Bundle: `ar_load`, `areg_w6`, `areg_w7`, `areg_rail_r` | x 16291-16451 | traced as wires |
 | Right-hand column | x 16480-16800 | not traced |
 
 ## Logic
@@ -71,7 +71,7 @@ wire that arrives from the register; `ar<k>_n`, the lower row, is generated here
 | 1 | metal, x 15800, y 13433 | contact 15840,13433; poly right to x 16189, down, jog right at y 13565 to x 16210, down to cell 1's tab at y 13936 |
 | 2 | metal, x 15800, y 13391 | contact 15885,13392; poly right to x 16231, down to contact 16232,13522; metal x 16232 down to contact 16232,14107 on a poly pad joined to cell 2's tab |
 | 3 | metal, x 15800, y 13350 | contact 15840,13350; poly right to x 16280, down to y 14286, left into cell 3's tab |
-| 4 | poly, from the fifth register cell at 16066,13280 | right along y 13309 to x 16320, down to y 14459, left (under `areg_load`) into cell 4's tab |
+| 4 | poly, from the fifth register cell at 16066,13280 | right along y 13309 to x 16320, down to y 14459, left (under `ar_load`) into cell 4's tab |
 
 No gate anywhere on these routes: each upper row is the register cell's output node itself.
 The four metal lines collect, in a wide view, one line from each of the four register
@@ -91,7 +91,7 @@ Traced (in the trace file, extracted):
 - **Strobe poly.** One poly line snakes through all five cells: a band along the top of
   the cell (y 13015-13033), at its left end a strip down (x 15852-15872) to a band at
   y 13061-13081 that crosses the write strip. In this cell the top band runs on right to
-  a contact at (16297,13022) and from there in metal down the bundle (`areg_load`). To the
+  a contact at (16297,13022) and from there in metal down the bundle (`ar_load`). To the
   left the band at y 13061-13081 meets a leg (x 15745-15766, y 13015-13085) that is the
   right end of cell 4's top band.
 - **Write path.** Thin vertical metal at x 15787-15807 comes from above the region and
@@ -100,7 +100,7 @@ Traced (in the trace file, extracted):
   the band the strip ends in a buried contact (15818-15850 x 13088-13106) to a poly
   (`areg_s4`, the storage node) that runs down under the data line and is the gate of a
   pull-down at 15781-15801 x 13150-13200 (W/L 50/20).
-  Extracted: `areg_s4 <- areg_din4` through the pass transistor when `areg_load` is high.
+  Extracted: `areg_s4 <- areg_din4` through the pass transistor when `ar_load` is high.
 - **First inverter (pull-down only).** Source side runs left under the next cell's VSS
   rail to its contact at (15728,13165) (outside this region, labelled `areg_c5_src`);
   drain side is `areg_s4_n`.
@@ -138,12 +138,12 @@ Seen but not drawn (believed):
 What the cell is, as far as established:
 
 - Kind of latch: a level-sensitive latch written through a single pass transistor.
-  Transparent while `areg_load` is high. The address register must hold indefinitely, so
+  Transparent while `ar_load` is high. The address register must hold indefinitely, so
   it has to be static; two inverters are present, which fits a cross-coupled pair, but
   the closing link is not traced.
 - Data input: the thin vertical metal at x 15797, entering the region at y 12900 from
   the datapath above (a data bus bit line by its position; which bit is not established).
-- Load strobe: `areg_load` (see Ports). No clock is involved in the cell.
+- Load strobe: `ar_load` (see Ports). No clock is involved in the cell.
 
 ### Is the upper row of each pair the true address bit?
 
@@ -162,7 +162,7 @@ What the cell is, as far as established:
 
 ### Where the load strobe comes from (seen below the region, not traced: bd2's area)
 
-Followed `areg_load` past the boundary at 1-3x, without tracing:
+Followed `ar_load` past the boundary at 1-3x, without tracing:
 
 - Metal x 16291-16307 goes down from y 14700 to a contact at (16298,14822), ducks under a
   horizontal metal band (y 14905-14960, a branch of `areg_rail_r`) in poly, and comes back
@@ -176,13 +176,13 @@ Followed `areg_load` past the boundary at 1-3x, without tracing:
   diffusion on its far side (y 15315-15350, contacted to the wide rail at about
   16035,15335): a pull-down on the strobe node. The band comes from a contact at
   (16210,15300) whose metal goes down at x 16200-16220.
-- So **`areg_load` is the output node of a gate at about x 15880-16150, y 15230-15330**,
+- So **`ar_load` is the output node of a gate at about x 15880-16150, y 15230-15330**,
   not a pin signal wired straight through. The rest of that gate (its load and other
   pull-downs, to the left of x 15985) was not looked at.
 - Warning for whoever joins the ports: `notes/blocks/trunks.md` has `rw_d` on a metal at
   x 16290-16308 from y 17558 up to "above 15900, not followed", and `rs_d` at
-  x 16333-16352. These are in line with `areg_load` (x 16299) and `areg_w6` (x 16341) but
-  **`areg_load` is not that metal continued**: its metal ends at (16255,15258). `areg_w6`
+  x 16333-16352. These are in line with `ar_load` (x 16299) and `areg_w6` (x 16341) but
+  **`ar_load` is not that metal continued**: its metal ends at (16255,15258). `areg_w6`
   likewise leaves metal at a contact at (16337,14862) and continues as a poly that runs
   down x 16340 to y 15255 and then diagonally down-right to about (16490,15390). Whether
   either trunk line reaches these by another route is open.
@@ -201,8 +201,8 @@ Followed `areg_load` past the boundary at 1-3x, without tracing:
 | `ar3` | metal | x 15800, y 13350 | from outside | same, pair 3 |
 | `ar0`..`ar4`, `ar0_n`..`ar4_n` | poly | x 15800, the ten decode rows | upper rows pass through to the array, lower rows driven here | joined to `trace/decode.txt` by overlap |
 | decode ground rails | diffusion | x 15775, y 13782-13832 and every 173 below | - | also contacted to VSS here |
-| `areg_load` | metal | x 16299, y 14700 | from outside (below) | load strobe of the address register; no tap in this region other than the register |
-| `areg_load` | poly | x 15800, y 13061-13081 | passes on to the left | the same strobe continuing to the other four register cells |
+| `ar_load` | metal | x 16299, y 14700 | from outside (below) | load strobe of the address register; no tap in this region other than the register |
+| `ar_load` | poly | x 15800, y 13061-13081 | passes on to the left | the same strobe continuing to the other four register cells |
 | `areg_din4` | metal | x 15797, y 12900 | from outside (above) | data line of the fifth register cell |
 | `areg_c5_src` | diffusion | x 15745, y 13150-13200 | - | source of the first pull-down; joins cell 4's VSS rail contact at (15728,13165) |
 | `areg_w6` | metal | x 16341, y 14700 | unknown | up the bundle to contact 16337,13264, then poly right along y 13263; drawn to x 16480, goes on to the right-hand column |
@@ -212,7 +212,7 @@ Followed `areg_load` past the boundary at 1-3x, without tracing:
 | `vcc` | metal | x 16282, y 12900 and x 16168, y 14700 | supply | VCC rail of the inverters |
 | `vcc` | metal | x 15950, y 12900 and x 15795-15890, y 14700 | supply | VCC rail of the register row / wide rail; also joins the decode VCC bus at x 15775, y 13518-13632 |
 
-No taps on `areg_load`, `areg_w6`, `areg_w7` between their ends: looked at in the clean and
+No taps on `ar_load`, `areg_w6`, `areg_w7` between their ends: looked at in the clean and
 metal shots over the full height.
 
 ## Ambiguities
@@ -247,7 +247,7 @@ metal shots over the full height.
   trace the cell on the median picture at 6x in three strips (x 15800-15925 is the hard
   one), then check the result on each of the five instances; the cell differs between
   instances only below y 13270 (output contact at y 13308 in cells 1-4, none in cell 5).
-- The gate that drives `areg_load` (about x 15880-16150, y 15230-15330, outside the
+- The gate that drives `ar_load` (about x 15880-16150, y 15230-15330, outside the
   region): trace it and its inputs. This is the question that matters most.
 - Right-hand column, x 16480-16800: four identical cells at about y 13060-13250,
   13270-13450, 13470-13640, 13660-13840 (pitch about 190, each with a contact near

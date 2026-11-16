@@ -16,32 +16,32 @@
 # the left (west); T1 from the north ends and T6 to the south starts (on rdp3's contact).
 M 13087,7130 y8727                        # T0 north: n1 of row r3, leaves north
 C 13087,8711
-M 13087,8822 y14695                       # T0 south: sel_w6 (bd1's k0) up to the poly that leaves east at y 8299
+M 13087,8822 y14695                       # T0 south: wr_r6 (bd1's k0) up to the poly that leaves east at y 8299
 C 13086,8836
 M 13130,7130 y7380                        # T1 north: n1 of row r1, leaves north
 C 13129,7365
 M 13130,7417 y12586                       # T1: the line from the top band down to the staircase
 C 13129,7431
 C 13130,12570
-M 13174,7130 y12616 x13131 y14695         # T2 from the north, T1 below the staircase (bd1's k1 = sel_w5)
+M 13174,7130 y12616 x13131 y14695         # T2 from the north, T1 below the staircase (bd1's k1 = wr_r5)
 M 13217,7130 y7489                        # T3 north: n1 of row r2, leaves north
 C 13215,7474
-M 13217,7527 y12659 x13174 y14695         # T3 from its contact, T2 below the staircase (k2 = sel_w7)
+M 13217,7527 y12659 x13174 y14695         # T3 from its contact, T2 below the staircase (k2 = wr_r7)
 C 13217,7541
 M 13261,7130 y7293                        # T4 north: n1 of row r0, leaves north
 C 13259,7278
-M 13327,7130 y7368 x13262 y12707 x13218 y14695   # a line from the north at x 13327 steps onto T4; T3 below the staircase (k3 = sel_w3)
+M 13327,7130 y7368 x13262 y12707 x13218 y14695   # a line from the north at x 13327 steps onto T4; T3 below the staircase (k3 = wr_r3)
 M 13304,7571 y12745 x13261 y14695         # T5 from its contact, T4 below the staircase (k4)
 C 13300,7585
 M 13348,9346 y9678                        # T6, upper piece: a link in the R4 match line's route
 C 13348,9360
 C 13349,9663
 M 13306,12845 y14695                      # T5 below the staircase: continues rdp3_n0 (k5)
-M 13348,13475 y14695                      # T6 below rdp3's piece: rdp3_s0 (k6 = bd1_xn1)
+M 13348,13475 y14695                      # T6 below rdp3's piece: inh_rc (k6 = inh_rc)
 
 # ---------------------------------------------------------------------------
 # Top: the band that crosses the array above row r0 (y 7162-7178) comes down beside T5 and
-# reaches T1 south. Via the staircase and rdp3's contact this is bd1_xn1.
+# reaches T1 south. Via the staircase and rdp3's contact this is inh_rc.
 P 12910,7170 x13308 y7410 x13122
 P 11690,7162:12915,7178                   # ... west across the array (west end not followed)
 P 13114,7402:13148,7448
@@ -58,7 +58,7 @@ P 13045,8225:13187,8246
 P 13170,7462:13187,8246
 P 13170,7462:13235,7483
 P 13200,7455:13235,7495
-# T3 (sel_w7) -> east, out of the channel at y 7541; T5 (k4) -> east at y 7585
+# T3 (wr_r7) -> east, out of the channel at y 7541; T5 (k4) -> east at y 7585
 P 13200,7524:13235,7558
 P 13205,7532:13425,7550
 P 13283,7568:13318,7602
@@ -67,7 +67,7 @@ P 13290,7576:13425,7594
 # n1 of row r3 -> T0 north
 P 13045,8702:13100,8723
 P 13070,8695:13104,8728
-# T0 south (sel_w6) -> diagonal -> north beside T5 -> east at y 8299 (rdp2's RF strobe: RF is R6)
+# T0 south (wr_r6) -> diagonal -> north beside T5 -> east at y 8299 (rdp2's RF strobe: RF is R6)
 P 13070,8820:13104,8853
 P 13086,8836 x13136 13290,8690 y8299 x13425
 # from the east at y 8343 (rdp2's "uc = R4" match) south in the open strip to T6's upper piece,
@@ -90,12 +90,12 @@ P 13045,10405 x13092 13331,10166 y10032 13394,9963 x13425 w=16   # n1 of row r6 
 
 # ---------------------------------------------------------------------------
 # Rows r7-r11: straight east (rdp3 has drawn the lines from x 13330 on)
-P 13045,10957:13400,10978                 # n1 of row r7  (rdp3_n8)
-P 13045,11435:13400,11456                 # n1 of row r8  (rdp3_n6)
-P 13045,11912:13400,11933                 # n1 of row r9  (rdp3_n5)
-P 13045,12389:13400,12410                 # n1 of row r10 (rdp3_n4)
+P 13045,10957:13400,10978                 # n1 of row r7  (rc3)
+P 13045,11435:13400,11456                 # n1 of row r8  (rc2)
+P 13045,11912:13400,11933                 # n1 of row r9  (rc1)
+P 13045,12389:13400,12410                 # n1 of row r10 (rc0)
 P 13046,12995:13064,13061                 # n1 of row r11 turns north at the edge of the cell ...
-P 13046,12995:13400,13013                 # ... and runs east along y 12995-13013 (rdp3_c_s0)
+P 13046,12995:13400,13013                 # ... and runs east along y 12995-13013 (hc7)
 # T1 from the north -> hidden poly south under T1 -> east to rdp3's pad under T6
 P 13113,12553:13148,12588
 P 13125,12553:13143,12839
@@ -105,7 +105,7 @@ P 13125,12822:13340,12839
 # Rows r12-r14
 P 13045,13518:13121,13539                 # n1 of row r12: north beside T0 ...
 P 13103,13408:13121,13539
-P 13103,13408:13400,13425                 # ... east along y 13408-13425 (rdp3_c_s7)
+P 13103,13408:13400,13425                 # ... east along y 13408-13425 (hc6)
 P 13045,13994:13123,14015                 # n1 of row r13: north ...
 P 13105,13884:13123,14015
 P 13105,13884:13425,13902                 # ... east along y 13884-13902

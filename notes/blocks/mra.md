@@ -1,5 +1,25 @@
 # mra: mid-right vertical array (x 11700-13320, y 7200-17050)
 
+## Names (2026-11-17)
+
+The text below was written with one-letter node names per row. The signals are now named
+by bit (`notes/signals.md`): for row rN read the bit of the table, and for a node letter
+the suffix.
+
+| Rows | Bits | | Node | Signal | | Node | Signal |
+|---|---|---|---|---|---|---|---|
+| r18 ... r11 | `hc0` ... `hc7` | | n1 | `<bit>` | | m | `<bit>_nx` |
+| r10 ... r4 | `rc0` ... `rc6` | | q | `<bit>_q` | | nb | `<bit>_nx_n` |
+| r3 ... r0 | `c4b0` ... `c4b3` | | g1 | `<bit>_q_n` | | na | `<bit>_nx_g` |
+| | | | a (also "u", "A") | `<bit>_m` | | n2 | `<bit>_ci_n` |
+| | | | b ("B", "gb") | `<bit>_mb` | | x | `<bit>_co` |
+| | | | p3 ("d2") | `<bit>_m_n` | | cin | `_co` of the row below, or `hc_ci` / `rc_ci` / `c4b_ci` |
+| | | | d | `<bit>_d` | | z, rb, tab | `<bit>_z`, `_rb`, `_tab` |
+
+Lines: L1 of rows r4-r10 = `rc_ck_m`, the rail piece of those rows = `rc_ck_s`, L3 =
+`c4b_l3` / `rc_l3` / `ck_a_u`, the line x 12902 = `cnt_gab`, L2 = `cnt_l2_a/b/c`, the line
+x 12285 = `cnt_la_a/b/c`, group lines A and B = `rc_lo4_set`, `hc_lo4_set`.
+
 ## Status
 
 **What it is (fourth run, serial session 2026-11-15): 19 bits of synchronous two-phase
@@ -118,7 +138,7 @@ use `--raw`, the classes are rough) and `tools/mra_runs.py` (metal runs along cu
 median or of the die; lines over poly and diffusion drop out, so read several cuts).
 
 
-Per row N (names `mra_<net>_rN`). First-run pieces (chain column):
+Per row N (names `<bit>_<node>`). First-run pieces (chain column):
 
 - `n1 = NOT p3`. INV1: pull-down 109/22, strong depletion load 85/39. `n1` runs right along
   the top of the row in poly (y 9924-9945) and left as a dead-end stub (H2).
@@ -149,7 +169,7 @@ Second-run pieces (`mra_col2`):
     continues along the top and down the right side of the g1 pad, under the g1 poly
     (17/17, gate `g1`), to the VSS strip. As drawn: `m` is pulled to VSS when
     `NOT cin AND NOT q`.
-  - gate `cin` (57/23): `m` <-> the bottom part of R (`mra_rb`), whose continuation is not
+  - gate `cin` (57/23): `m` <-> the bottom part of R (`<bit>_rb`), whose continuation is not
     resolved (B3).
   `m` leaves to the right (port at x 12470); no load on it was found left of x 12470.
 - **Hold device (third run).** The poly from the pad on the tongue of the VSS land is the gate
@@ -165,7 +185,7 @@ Third-run pieces (`mra_col3`), traced:
   `nb` leaves by a metal strap to a poly that runs up at x 12653-12680, y 10030-10108, and is a
   gate there; what it crosses is not resolved (C4).
 - `na`: depletion load 27/48 (load 3); pulled to VSS through a transistor 40/22 gated by L3
-  (`mra_cka2`, believed `ck_a`); connected to node `u` through a pass transistor 63/21 gated
+  (`ck_a_u`, believed `ck_a`); connected to node `u` through a pass transistor 63/21 gated
   by L1 (`ck_b`). As extracted: `na = NOT ck_a`, and `u <-> na` while `ck_b`.
 - `d2` is pulled to VSS by a transistor 62/17 whose gate `gb` is the vertical poly under the
   rail; neither `d2` nor `gb` has been followed.
@@ -182,11 +202,11 @@ Chain (`cin` of each row), unchanged from the first run:
 | Row | cin is | How |
 |---|---|---|
 | r0-r2, r4, r5, r7-r9, r11-r13, r15-r17 | x of the row below | poly straight down from band-3 into the next row's H1 blob |
-| r3 | `mra_cin_r3`, undetermined | chain poly ends in a pad with a metal contact (11976,9187); see A1 |
+| r3 | `c4b_ci`, undetermined | chain poly ends in a pad with a metal contact (11976,9187); see A1 |
 | r6 | group line A | poly y 10893-10910 from the contact at (11699,10899) |
-| r10 | `mra_cin_r10`, from outside | poly y 12897-12925 leaving left at x 11700 |
+| r10 | `rc_ci`, from outside | poly y 12897-12925 leaving left at x 11700 |
 | r14 | group line B | poly y 14962-14985 from the contact at (11699,14972) |
-| r18 | `mra_cin_r18`, from outside | poly down to y 17016, then right beyond x 12215 |
+| r18 | `hc_ci`, from outside | poly down to y 17016, then right beyond x 12215 |
 
 - Group line B = NOR(g1 of r15..r18) = AND(q of r15..r18), with a depletion load at its
   bottom end. Group line A = the same for r7..r10; no load found (A3).
@@ -206,7 +226,7 @@ What the traced logic shows, and what it does not:
   the bit's toggle logic (next = q XOR carry-in: `m` = NOT(NOT cin . NOT q + cin . q) if the
   unresolved cin branch ends in a transistor gated by q). An equality chain has no use for
   its own running value inside the bit. The carry would then enter at r18 and at r10
-  (`mra_cin_r18`, `mra_cin_r10`), least significant bit at the bottom of each chain.
+  (`hc_ci`, `rc_ci`), least significant bit at the bottom of each chain.
 - Not shown: the cin branch beyond R (B3), the load of `m`, and what `q` and `p3` are
   (stored bit, its master, a match?). That is in x 12470-13000: follow `q` (y 9977-9997),
   `p3` (y 10231-10248) and `m` (y 10364-10381) to the right.
@@ -223,21 +243,21 @@ boundary). Per-row ports are given for the master row r5; add the row's dy (Surv
 | vcc (rail 2) | M | x 12412-12462. Top: continues up past y 7090. Bottom: runs into the horizontal VCC bus y 17035-17093 | in | VCC of the two loads per row |
 | vss (rail) | M | x 12055-12115 at y 7130 (top, continues up) | in | VSS |
 | vss (rail x 11828) | M | ends at y 7265 and y 16940 | - | how it is fed was not found (A4) |
-| `mra_la`, `mra_la2`, `mra_la3` | M | x 12276-12294, **three pieces** (y 7110-12885, 13030-14965, 15010-16940; found 2026-11-16 from block wl). Top piece: contact (12285,7124) onto band H2 east, which ends on the gate of inverter I1 in `wl`. No contact found in any row or at the other ends: re-read item R8 | ? | not one through-line as first drawn; something on it has been missed |
-| `mra_q_rN` | P | 12840, 9965 (y 9957-9974); seen to x 13045 | in | node q, from the wiring channel on the right |
-| `mra_p3_rN` | P | 12765, 10286 (y 10277-10296, under the rail) | in | gate of INV1, from the right-hand columns |
-| `mra_n1_rN` | P | 12765, 9913 (y 9905-9922); seen to x 13045 | out | NOT p3, to the right |
-| `mra_m_rN` | P | internal: ends at x 12649 as the gate of `nb` | - | row node; its pull-up has not been found |
-| `mra_nb_rN` | P | 12666, 10030 (top of the poly x 12653-12680) | out | NOT m; gate of something not resolved (C4) |
-| `mra_u_rN` | D | 12610, 10024 (y 10012-10036); band y 10012-10026 on to x 12790 | ? | node above the `ck_b` gate; believed node A |
-| `mra_d2_rN` | D | 12770, 10150 | ? | drain of the `gb` transistor |
-| `mra_gb_rN` | P | 12738, 10050 and 10194 (both ends of the poly) | in | gate under the rail; source not found (C3) |
-| `mra_z_rN` | D | strip y 9957-9969 ends at x 12750 | ? | far side of the hold device (C2) |
-| `mra_n1_r10` | P | 11700, 12459 | out | r10 only: the H2 stub is extended left to a contact at (11590,12460) on a vertical metal x 11580-11600 that runs up to about (11600,10500) and on, outside this block |
-| `mra_cin_r10` | P | 11700, 12911 | in | leaves the region to the left |
-| `mra_cin_r18` | P | 12215, 17016 | in | continues right |
-| `mra_cin_r3` | M/P | strap x 11967-11989, y 9035-9518 | ? | see A1 |
-| `mra_rb_rN` | D | 12100, 10268 | ? | bottom part of R, internal; continuation not resolved (B3) |
+| `cnt_la_a`, `cnt_la_b`, `cnt_la_c` | M | x 12276-12294, **three pieces** (y 7110-12885, 13030-14965, 15010-16940; found 2026-11-16 from block wl). Top piece: contact (12285,7124) onto band H2 east, which ends on the gate of inverter I1 in `wl`. No contact found in any row or at the other ends: re-read item R8 | ? | not one through-line as first drawn; something on it has been missed |
+| `<bit>_q` | P | 12840, 9965 (y 9957-9974); seen to x 13045 | in | node q, from the wiring channel on the right |
+| `<bit>_m_n` | P | 12765, 10286 (y 10277-10296, under the rail) | in | gate of INV1, from the right-hand columns |
+| `<bit>` | P | 12765, 9913 (y 9905-9922); seen to x 13045 | out | NOT p3, to the right |
+| `<bit>_nx` | P | internal: ends at x 12649 as the gate of `nb` | - | row node; its pull-up has not been found |
+| `<bit>_nx_n` | P | 12666, 10030 (top of the poly x 12653-12680) | out | NOT m; gate of something not resolved (C4) |
+| `mra_u_rN` (old name; now `<bit>_m`) | D | 12610, 10024 (y 10012-10036); band y 10012-10026 on to x 12790 | ? | node above the `ck_b` gate; believed node A |
+| `mra_d2_rN` (old name; now `<bit>_m_n`) | D | 12770, 10150 | ? | drain of the `gb` transistor |
+| `mra_gb_rN` (old name; now `<bit>_mb`) | P | 12738, 10050 and 10194 (both ends of the poly) | in | gate under the rail; source not found (C3) |
+| `<bit>_z` | D | strip y 9957-9969 ends at x 12750 | ? | far side of the hold device (C2) |
+| `rc0` | P | 11700, 12459 | out | r10 only: the H2 stub is extended left to a contact at (11590,12460) on a vertical metal x 11580-11600 that runs up to about (11600,10500) and on, outside this block |
+| `rc_ci` | P | 11700, 12911 | in | leaves the region to the left |
+| `hc_ci` | P | 12215, 17016 | in | continues right |
+| `c4b_ci` | M/P | strap x 11967-11989, y 9035-9518 | ? | see A1 |
+| `<bit>_rb` | D | 12100, 10268 | ? | bottom part of R, internal; continuation not resolved (B3) |
 | gap-1 bus (6 poly lines) | P | y 9220-9425 at x 11700 | ? | not traced, pass under the rails |
 
 **Vertical lines through the rows, third run** (x measured on the median of the rows with
@@ -248,8 +268,8 @@ and y 16880-17010). "T" = position in the top 100 px of a row, where the thin li
 |---|---|---|---|---|---|
 | VCC rail | 12412-12462 | straight | continues up | into the VCC bus y 17035 | `vcc` |
 | L1 | 12493-12507 | T 12496-12508, out to 12508-12528 at y 9916-9964 | seen at 12512-12520, y 7320; not seen above y 7310 | 12519-12532 at y 16920-16990, turns right along y 17000 | **`ck_b`** (joined to `trunks.txt`) |
-| L2 | 12536-12550 | T 12559-12572 | seen at 12562-12571, y 7320; not above | 12563-12575, ends about y 16940 | `mra_l2`, **no contact in the rows as far as traced**; not identified |
-| L3 | 12580-12594 | T 12606-12615 | 12604-12616, continues up past y 7240 | 12607-12618, ends about y 16940 at the contact (12631,16954) | `mra_cka2`; `ck_a` by `trunks.md` (second route, not drawn there) |
+| L2 | 12536-12550 | T 12559-12572 | seen at 12562-12571, y 7320; not above | 12563-12575, ends about y 16940 | `cnt_l2_a/b/c`, **no contact in the rows as far as traced**; not identified |
+| L3 | 12580-12594 | T 12606-12615 | 12604-12616, continues up past y 7240 | 12607-12618, ends about y 16940 at the contact (12631,16954) | `ck_a_u`; `ck_a` by `trunks.md` (second route, not drawn there) |
 | rail | 12696-12744 | straight | continues up (12696-12739 at y 7240) | 12700-12742, ends about y 16935 | `vss` (by structure) |
 | line | 12767-12782 | jogs to 12761-12790 at y 9950-9990 | not seen | 12773-12792, ends about y 16935 | not traced |
 | line | 12810-12821 | from the contact (12847,10006) down | - | - | node A of each row? (per row or through: not established) |
@@ -309,7 +329,7 @@ lines start inside the chain column.
   H2 (y 9488-9511), ending at y 9518. For the chain to continue the strap must contact
   r4's H1 blob (x of r4). No contact ring is visible there in either metal shot and no
   pale disc in the stripped shots, whereas the contacts at (11976,9187) and (11762,9927)
-  are obvious. Working assumption: none drawn; `mra_cin_r3` is left as an open port.
+  are obvious. Working assumption: none drawn; `c4b_ci` is left as an open port.
   Candidates: (a) a contact to r4's H1 blob that does not show (then cin(r3) = x(r4) and
   r0-r6 is one seven-row ripple group); (b) cin(r3) is driven through band-3 of r3 from
   the right-hand columns. (b) is unlikely: the right-hand columns of r3 are identical to
@@ -323,10 +343,10 @@ lines start inside the chain column.
   at its head, so there it can be dead metal; in r3 its head is on the chain poly, so the
   strap is the only possible source of cin(r3) and must end on a driven node. A foot contact
   in r4 therefore exists; H1 blob (x of r4, reading (a)) is the reading that continues the
-  chain, H2 (n1 of r4) the alternative. Still not drawn, `mra_cin_r3` stays an open port.
+  chain, H2 (n1 of r4) the alternative. Still not drawn, `c4b_ci` stays an open port.
 - A2. The same metal strap exists in every row (from the band-2 stub of row N, y 10160,
   down to H2 of row N+1, y 9995+477), lying exactly over the chain poly, with no contact
-  visible at either end. Drawn as isolated metal (`mra_md_rN`; `mra_mt_r0/r11/r15` where
+  visible at either end. Drawn as isolated metal (`<bit>_md`; `c4b3_mt/r11/r15` where
   only the lower part exists). If it does connect to anything unseen, the candidates are
   the band-2 stub at its head and H1 or H2 at its tail. A thin strip (x 11985-11996,
   y 9990-10100) along the right edge of the INV1 load gate, visible in both stripped
@@ -379,7 +399,7 @@ lines start inside the chain column.
   node and where the node goes. Candidate: an inverter of `g1` (the g1 poly runs along its
   lower edge), which would give a restored copy of `q`; with B4 this is the place to look
   for the driver of `m` or of `z`.
-- B3 (12111-12140 x 10271-10310). The bottom part of R (`mra_rb`, below the cin gate) has a
+- B3 (12111-12140 x 10271-10310). The bottom part of R (`<bit>_rb`, below the cin gate) has a
   small tab at 12111-12132 x 10271-10282 towards the poly tab of the g1 pad (12127-12155 x
   10285-10308, dark-red blob in `acid1b`, orange in `acid`). Either R's bottom is a dead end
   (then the cin transistor does nothing), or it continues under that tab (a transistor gated
@@ -454,7 +474,7 @@ of the two metal edges there and cannot tell.
 |---|---|---|
 | L1 = `ck_b` | metal x 12493-12507 in the body; contact (12493,10041) on poly pad 12480-12510 x 10028-10058 | joined to the `ck_b` metal of `trunks.txt` below r18 |
 | `ck_b` pass gate | poly band y 10036-10057, x 12505-12612 (ends rounded); bright at x 12547-12610 over a diffusion: `u` above (y 10012-10036), `na` below (y 10057-10088) | measured |
-| L3 = `ck_a` (second route) | metal x 12580-12594; contact (12592,10113) on pad 12578-12619 x 10093-10131 | identity by position at the bottom end only (name `mra_cka2`) |
+| L3 = `ck_a` (second route) | metal x 12580-12594; contact (12592,10113) on pad 12578-12619 x 10093-10131 | identity by position at the bottom end only (name `ck_a_u`) |
 | `ck_a` pull-down of `na` | gate x 12578-12600, y 10125-10203 between `na` (x 12535-12577) and the diffusion under the strap bar (x 12613-12682, y 10152-10190), which runs on under the rail to its contact (12714,10237) | the join to the rail's diffusion is C1 below |
 | load 3 -> `na` | VCC box 12405-12475 x 10150-10198, contact (12433,10172); strip y 10163-10190; block 12481-12529 x 10148-10206; tie box 12509-12541 x 10118-10147 | profile down x 12502; tie stem `?P` |
 | load 4 -> `nb` | VCC box of `mra_col2` (12433,10305); strip y 10303-10330; block 12474-12548 x 10286-10332; `nb` = D 12552-12622 x 10300-10347; buried contact 12577-12599 x 10267-10299 to the pad 12575-12651 x 10252-10290 | profile down x 12502; arm of the block to the pad `?P` |
@@ -480,7 +500,7 @@ Read from the median of the 19 rows (`--comp mrarow`) with the false-colour clas
 (`tools/classmap.py`, also `view.py --layers class`) and colour profiles
 (`tools/larr_px.py`); every junction below that decides connectivity was measured.
 
-One row as extracted (names `mra_<net>_rN`; `a` is what the third run called `u` and `gb`,
+One row as extracted (names `<bit>_<node>`; `a` is what the third run called `u` and `gb`,
 `p3` is also its `d2`):
 
 ```
@@ -562,14 +582,14 @@ y 12869-13035 (between r10 and r11). Extracted, per group:
 
 | | rows r0-r3 (4 bits) | rows r4-r10 (7 bits) | rows r11-r18 (8 bits) |
 |---|---|---|---|
-| master gate `na -> a` (L1) | `ck_b` | **`mra_m7`**: bus line E, from the west | `ck_b` |
-| slave gate `d -> q` (rail x 13025) | `ck_a` | **`mra_s7`**: bus line D, from the west | `ck_a` |
-| second pull-down of `na` (L3) | `mra_l3n`: leaves north past y 7130 | `mra_l3m`: from the west on a metal line along y 13005 (contact (11765,13005), poly, contact (12567,13005)) | `mra_cka2`: from the contact (12631,16954); trunks' notes take the poly behind it for a second `ck_a` route (seen at 0.9x only) |
-| gate `a <-> b` (line x 12902) | `mra_gab` | `mra_gab` | `mra_gab` |
+| master gate `na -> a` (L1) | `ck_b` | **`rc_ck_m`**: bus line E, from the west | `ck_b` |
+| slave gate `d -> q` (rail x 13025) | `ck_a` | **`rc_ck_s`**: bus line D, from the west | `ck_a` |
+| second pull-down of `na` (L3) | `c4b_l3`: leaves north past y 7130 | `rc_l3`: from the west on a metal line along y 13005 (contact (11765,13005), poly, contact (12567,13005)) | `ck_a_u`: from the contact (12631,16954); trunks' notes take the poly behind it for a second `ck_a` route (seen at 0.9x only) |
+| gate `a <-> b` (line x 12902) | `cnt_gab` | `cnt_gab` | `cnt_gab` |
 
 So the 8-bit counter (believed horizontal) and the 4-bit counter step on every clock
 cycle, and the 7-bit counter (believed character rows) steps only when the logic to the
-west pulses its two clock lines. `mra_gab` is not `ck_b` as the third run believed: the
+west pulses its two clock lines. `cnt_gab` is not `ck_b` as the third run believed: the
 line x 12902 ends free 55 px above trunks' `ck_b` contact at the bottom and is fed at the
 top, from a contact at (12889,7214) on a poly line that crosses the array along
 y 7200-7225 from the west. What it is has to be found there; if it is simply a supply or a
@@ -620,11 +640,11 @@ east ends in the clean shot (`bus_w.png`):
 | A | 9178-9195 | starts under the vss rail at x 12700 (not resolved) | wiring channel, leaves at (13420,9405) |
 | B | 9222-9240 | contact at about (11656,9230) | wiring channel, leaves at (13420,9447) |
 | C | 9266-9284 | runs on west of x 11640 | contacts (12784,9275) and (13021,9276): `ck_a` |
-| D | 9310-9328 | contact at about (11656,9317) | contact (13021,9340): `mra_s7` |
-| E | 9351-9369 | runs on west of x 11640 | contact (12521,9360): `mra_m7` |
-| G/F | 9397-9413, stepping up at x 12650-12670 to 9373-9391 | (contact near x 11656?) | wiring channel, leaves at (13420,9707): the R2 match line `rdp3_cb_eq` |
+| D | 9310-9328 | contact at about (11656,9317) | contact (13021,9340): `rc_ck_s` |
+| E | 9351-9369 | runs on west of x 11640 | contact (12521,9360): `rc_ck_m` |
+| G/F | 9397-9413, stepping up at x 12650-12670 to 9373-9391 | (contact near x 11656?) | wiring channel, leaves at (13420,9707): the R2 match line `h_eq_r2` |
 
-In the channel y 12869-13035: the carry-in of r10 (`mra_cin_r10`, y 12905-12920, from the
+In the channel y 12869-13035: the carry-in of r10 (`rc_ci`, y 12905-12920, from the
 west), the poly line to L3's contact (y 12996-13014), and the diffusion strip above.
 
 ## Right-hand part, x 12770-13040: third-run readings (superseded by the section above)

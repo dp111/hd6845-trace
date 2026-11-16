@@ -31,8 +31,8 @@ The two clock lines of the 7-bit counter come up out of the bus channel into thi
 
 | Line | mra name | Route from the channel |
 |---|---|---|
-| D, slave clock | `mra_s7` | contact (11655,9315), metal west, contact (11519,9315), poly north under the VSS bus, contact (11519,9010), metal x 11512-11533 north to the contact (11517,8150) |
-| E, master clock | `mra_m7` | poly y 9351-9369 west to x 11565, north, contact (11564,9057), metal x 11553-11578 north to the contact (11567,8622) |
+| D, slave clock | `rc_ck_s` | contact (11655,9315), metal west, contact (11519,9315), poly north under the VSS bus, contact (11519,9010), metal x 11512-11533 north to the contact (11517,8150) |
+| E, master clock | `rc_ck_m` | poly y 9351-9369 west to x 11565, north, contact (11564,9057), metal x 11553-11578 north to the contact (11567,8622) |
 
 Extracted logic (names `wl_*`):
 
@@ -59,26 +59,26 @@ from a contact (11287,7752) on the output of a NOR at y 7650-7860:
 
 ```
 p = NOR(a, b)              pull-downs 44/22 each, load 31/40
-a = bd1_xn1                band H3 (y 7158-7178) -> contact (11240,7168) -> metal x 11232-11252
-b = wl_b                   poly line y 7915-7937 from the bus field -> contact (11243,7925) -> metal
+a = inh_rc                band H3 (y 7158-7178) -> contact (11240,7168) -> metal x 11232-11252
+b = rc_stepreq_n                   poly line y 7915-7937 from the bus field -> contact (11243,7925) -> metal
 ```
 
-`a` is the line the strobe channel calls `bd1_xn1` (NOT X, where X is the line whose
-inverse, made by input-row gate 0, is the clock block's `ck_src`: so `a` and `ck_src` are
-two copies of one signal, `NOT X`). In the clock block a high `ck_src` holds `ck_b` low.
+`a` is the line the strobe channel calls `inh_rc` (NOT X, where X is the line whose
+inverse, made by input-row gate 0, is the clock block's `inh_ck`: so `a` and `inh_ck` are
+two copies of one signal, `NOT X`). In the clock block a high `inh_ck` holds `ck_b` low.
 Here a high `a` holds `p` low. So **one core signal stops both the horizontal counter's
 master clock and the row counter's step**; what it is has still to be found at its source
-(bd1's `bd1_g`, which comes from the bottom bus field). While `a` is low, `p = NOT b`: the
+(bd1's `inh_src`, which comes from the bottom bus field). While `a` is low, `p = NOT b`: the
 row counter steps on a low pulse of `b`.
 
 ## The two inverters
 
 ```
-la_n     = NOT mra_la      (42/22, load 30/38)   y 7265-7380
+la_n     = NOT cnt_la_a      (42/22, load 30/38)   y 7265-7380
 i2_out   = NOT i2_in       (42/22, load 30/38)   y 7440-7550, mirror image
 ```
 
-- `mra_la` is the metal x 12276-12294 in the counter array. mra drew it as one line through
+- `cnt_la_a` is the metal x 12276-12294 in the counter array. mra drew it as one line through
   all nineteen rows with no contact. Looked at again from here at 3x: it is **three
   pieces**, cut at the routing channels y 12885-13030 and y 14965-15010 (it passes over the
   other two channels unbroken), each with plain rounded ends, and the bottom end at y 16940
@@ -101,19 +101,19 @@ Horizontal poly bands at the top (all go on east over the top of the mid-right a
 |---|---|---|---|---|
 | H0 | 7030-7048 | turns north in poly at x 11345-11362, leaves at y 6930 | under the rails to x 12060, north, then east along y 6943-6962 (into `amr`) | `wl_h0` |
 | H1 | 7068-7088 | pad, contact (11155,7078): metal down, jogging west at y 7273, to a contact (11107,7972) on a poly line from the west (y 7960-7982) | pad, contact (11978,7083), metal strap north to a contact (11978,7000) on a poly going north | `wl_h1` |
-| H2 west | 7112-7132 | pad, contact (11092,7122), metal x 11080-11100 north | pad, contact (11285,7122): metal down to I1's output | `wl_la_n` |
-| H2 east | 7112-7132 | pad, contact (11350,7122): metal down to I1's gate | pad, contact (12285,7124): the line x 12285 down the array | `mra_la` |
-| H3 | 7158-7178 | pad, contact (11240,7168): metal down to gate a | into the wiring channel (mrach) | `bd1_xn1` |
-| H4 | 7200-7222 | runs on west into the bus field | feed of mra's line x 12902 (`mra_gab`); on the way a pad with a contact (11392,7210) under a metal that leaves north (x 11380-11400) | `mra_gab` |
+| H2 west | 7112-7132 | pad, contact (11092,7122), metal x 11080-11100 north | pad, contact (11285,7122): metal down to I1's output | `cnt_la_a_n` |
+| H2 east | 7112-7132 | pad, contact (11350,7122): metal down to I1's gate | pad, contact (12285,7124): the line x 12285 down the array | `cnt_la_a` |
+| H3 | 7158-7178 | pad, contact (11240,7168): metal down to gate a | into the wiring channel (mrach) | `inh_rc` |
+| H4 | 7200-7222 | runs on west into the bus field | feed of mra's line x 12902 (`cnt_gab`); on the way a pad with a contact (11392,7210) under a metal that leaves north (x 11380-11400) | `cnt_gab` |
 
 Vertical metals over the clock drivers (no contact to them). Each steps one pitch east by a
 diagonal at y 8500-8600:
 
 | Metal (top / bottom x) | Top end | Bottom end | Net |
 |---|---|---|---|
-| 11189-11209 / 11235-11255 | contact (11197,7842), poly line y 7830-7850 from the west | bus line B, contact (11655,9228): on east through the channel into rdp2 at (13425,9447) | `mra_busb` |
+| 11189-11209 / 11235-11255 | contact (11197,7842), poly line y 7830-7850 from the west | bus line B, contact (11655,9228): on east through the channel into rdp2 at (13425,9447) | `cnt_bus_b` |
 | 11147-11167 / 11190-11210 | contact (11155,7882), poly line y 7872-7893 | bus line C, contact (11608,9272): **`ck_a`** from the counters' own `ck_a` line | `ck_a` |
-| 11101-11121 / 11145-11165 | contact (11106,8060), poly up to the line y 8005-8025 | bus line G, contact (11655,9402): the **R2 match** line from the right datapath | `mra_busg` |
+| 11101-11121 / 11145-11165 | contact (11106,8060), poly up to the line y 8005-8025 | bus line G, contact (11655,9402): the **R2 match** line from the right datapath | `h_eq_r2_u` |
 
 So `ck_a` and the R2 match (horizontal sync position) are taken west into the bus field
 here, and a signal on bus line B passes between the bus field and the upper right datapath.
@@ -139,24 +139,24 @@ here, and a signal on bus line B passes between the bus field and the upper righ
 
 | Name | Layer | Where | Dir | What |
 |---|---|---|---|---|
-| `mra_s7` | M | (11655,9315) | out | slave clock of the row counter |
-| `mra_m7` | P | (11640,9360) | out | master clock of the row counter |
-| `wl_b` | P | (11040,7926) | in | from the bus field: NOT (row counter step), while `a` is low |
+| `rc_ck_s` | M | (11655,9315) | out | slave clock of the row counter |
+| `rc_ck_m` | P | (11640,9360) | out | master clock of the row counter |
+| `rc_stepreq_n` | P | (11040,7926) | in | from the bus field: NOT (row counter step), while `a` is low |
 | `wl_i2_in`, `wl_i2_out` | P | (11040,7497), (11040,7451) | in, out | inverter I2 |
-| `wl_la_n` | M | (11090,6930) | out | NOT `mra_la`, leaves north |
-| `mra_gab` | P / M | (11040,7211); (11390,6930) | ? | band H4: from the bus field, and a branch north |
+| `cnt_la_a_n` | M | (11090,6930) | out | NOT `cnt_la_a`, leaves north |
+| `cnt_gab` | P / M | (11040,7211); (11390,6930) | ? | band H4: from the bus field, and a branch north |
 | `wl_h0` | P | (11353,6930); (12360,6952) | ? | band H0 |
 | `wl_h1` | P | (11040,7971); (11979,6930) | ? | band H1 and the poly line y 7960-7982 |
-| `mra_busb` | P | (11040,7840) | ? | bus line B's line into the bus field |
+| `cnt_bus_b` | P | (11040,7840) | ? | bus line B's line into the bus field |
 | `ck_a` | P | (11040,7882) | out | `ck_a` into the bus field |
-| `mra_busg` | P | (11040,8015) | out | R2 match into the bus field |
+| `h_eq_r2_u` | P | (11040,8015) | out | R2 match into the bus field |
 | vss | M | y 9100-9150 at x 11832; x 11434-11478 at y 6930 | - | joins mra's rail; continues north |
 | vcc | M | x 11605-11655 at y 6930, continues north | - | |
 
 ## Not done
 
 - Sources and sinks of everything in the Ports table that ends at x 11040 or y 6930.
-- The bottom end of `mra_la` (y 16942).
+- The bottom end of `cnt_la_a` (y 16942).
 - The leftmost vertical metals (x 11010-11080) are bus-field lines and are not drawn.
 
 Tools: `tools/wl_net.py` (extraction report restricted to a box), `tools/wl_px.py` (patch

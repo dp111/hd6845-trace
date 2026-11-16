@@ -98,11 +98,11 @@ P 16066,13280 y13309 x16320 y14459 x16172 w=18
 
 # ---------------------------------------------------------------------------------
 # Vertical bundle right of the inverters (besides the ar1..ar4 feeds above).
-# areg_load: the load strobe of the address register. Metal x 16299 from the bottom of the
+# ar_load: the load strobe of the address register. Metal x 16299 from the bottom of the
 # region up to a contact at 16297,13022, then poly left along y 13024 into the register
 # cells (top band of the fifth cell; continues as one poly snake through all five).
 M 16299,13010 y14700 w=16
-N M 16299,14690 areg_load
+N M 16299,14690 ar_load
 C 16297,13022
 P 16275,13006:16316,13037
 # areg_w6: metal x 16341 from the bottom of the region up to a contact at 16337,13264; poly

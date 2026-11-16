@@ -14,53 +14,53 @@
 # (x 13895-13935, 13985-14030) and under the tracks east of its own, and ends on a contact
 # under the track that takes it north. (2.6x views; the contact rings are plain in `metal`.)
 
-# sel_w6: y 14867, all the way west to track k0
+# wr_r6: y 14867, all the way west to track k0
 P 14105,14867 x13072 w=18
 P 13071,14851:13106,14883
 C 13088,14867
 M 13088,14690 y14880 w=20
-N M 13088,14700 sel_w6
+N M 13088,14700 wr_r6
 
-# sel_w1: y 14909, to track k16
+# wr_r1: y 14909, to track k16
 P 14105,14909 x13770 w=18
 P 13768,14897:13802,14929
 C 13785,14913
 M 13782,14690 y14926 w=20
-N M 13782,14700 sel_w1
+N M 13782,14700 wr_r1
 
-# sel_w2: y 14957, to track k12
+# wr_r2: y 14957, to track k12
 P 14105,14957 x13595 w=18
 P 13593,14940:13627,14972
 C 13609,14956
 M 13608,14690 y14970 w=20
-N M 13608,14700 sel_w2
+N M 13608,14700 wr_r2
 
-# sel_w0: y 15001, to track k13
+# wr_r0: y 15001, to track k13
 P 14105,15001 x13638 w=18
 P 13636,14984:13670,15016
 C 13652,15000
 M 13652,14690 y15013 w=20
-N M 13652,14700 sel_w0
+N M 13652,14700 wr_r0
 
-# sel_w4: y 15043, to track k10
+# wr_r4: y 15043, to track k10
 P 14105,15043 x13506 w=18
 P 13504,15026:13538,15058
 C 13521,15042
 M 13521,14690 y15055 w=20
-N M 13521,14700 sel_w4
+N M 13521,14700 wr_r4
 
-# Track k14 ends on a contact 93 px west of sel_w1's, on a second poly in line with
-# sel_w1's (gap x 13712-13768 between the two pads). That poly runs west along y 14912
+# Track k14 ends on a contact 93 px west of wr_r1's, on a second poly in line with
+# wr_r1's (gap x 13712-13768 between the two pads). That poly runs west along y 14912
 # to x 13133, south, and west along y 15020 under track k0's line and the ck_a rail into
 # the mid-right array. Not a strobe.
 M 13694,14690 y14926 w=20
 C 13692,14913
 P 13676,14897:13710,14929
 P 13700,14912 x13133 y15020 x12990 w=18
-N M 13694,14700 bd1_k14
+N M 13694,14700 hc3
 
 # ================================================================ write strobes from bd3
-# sel_w7: poly along y 16864 (from bd3) to a contact at 13958,16861; metal west along
+# wr_r7: poly along y 16864 (from bd3) to a contact at 13958,16861; metal west along
 # y 16862 to a contact at 13480,16864; poly west, diagonally up-left, north to a
 # contact at 13218,16642 where track k3's line ends.
 P 14095,16864 x13944 w=20
@@ -73,7 +73,7 @@ P 13480,16862 13358,16862 13218,16722 13218,16628 w=18
 P 13202,16626:13234,16660
 C 13218,16642
 
-# sel_w5: metal along y 17041 (from bd3), north at x 13915, west along y 16954, north at
+# wr_r5: metal along y 17041 (from bd3), north at x 13915, west along y 16954, north at
 # x 13435 to a contact at 13435,16908; poly west along y 16905 and north at x 13164 to a
 # contact at 13174,16730 where a line on track k2 ends.
 M 14100,17041 x13915 y16954 x13435 y16895 w=18
@@ -83,13 +83,13 @@ P 13435,16905 x13170 y16720 w=18
 P 13158,16714:13190,16748
 C 13174,16730
 
-# sel_w3: metal along y 17084 (from bd3), step up at x 13832 to y 17041, west, north at
+# wr_r3: metal along y 17084 (from bd3), step up at x 13832 to y 17041, west, north at
 # x 13522 to a contact at 13522,16995; poly north at x 13518 to a contact at 13522,16820;
 # metal north on x 13521.
 M 14100,17084 x13832 y17041 x13522 y16982 w=18
 C 13522,16995
 P 13506,16978:13538,17010
-P 13518,16990 y16808 w=20              # north, under sel_w7's metal, to a contact at 13522,16820
+P 13518,16990 y16808 w=20              # north, under wr_r7's metal, to a contact at 13522,16820
 P 13506,16805:13538,16836
 C 13522,16820
 M 13521,16833 y16442 w=20              # north on k10's position to a contact at 13521,16455
@@ -99,13 +99,13 @@ P 13521,16453 x13250 w=16              # poly west along y 16453 (3.6x: one unbr
 P 13248,16440:13281,16470
 C 13262,16456                          # ... to the foot of the line that leaves north as track k3
 
-# sel_w8: metal along y 17128 (from bd3) to a contact at 13392,17126; poly west along
+# wr_r8: metal along y 17128 (from bd3) to a contact at 13392,17126; poly west along
 # y 17125 under every vertical line, past x 12985 (below the mid-right array's bottom row).
 M 14100,17128 x13379 w=18
 C 13392,17126
 P 13376,17110:13408,17142
 P 13392,17125 x12985 w=18
-N P 12990,17125 sel_w8
+N P 12990,17125 wr_r8
 
 # ================================================================ supply rails of the gate column
 # Named from the loads: every load of the column ends on the rail x 13997-14044, every
@@ -130,7 +130,7 @@ M 13567,15180 y16188 x13672 w=20   # X: track k11, then east along y 16188 (trun
 P 13657,16176:13688,16204          # X's tap: a poly leaves east from here (see the gate column)
 C 13672,16190
 M 13672,16178 y16610 w=20          # X south on x 13672 (drawn in trunks.txt from y 16600)
-N M 13567,15600 bd1_x
+N M 13567,15600 inh_n
 
 # --- inverter 1 (gate bar y 15183-15203)
 P 13567,15193 x13900 w=20          # gate bar 1, from X's upper contact
@@ -145,7 +145,7 @@ P 13782,15151 x13333 w=14          # output 1 west along y 15151, under tracks k
 P 13331,15135:13363,15167
 C 13347,15150                      # ... to track k6, which ends here
 M 13348,14690 y15163 w=20
-N M 13348,14700 bd1_xn1          # inverter 1's output leaves north on track k6
+N M 13348,14700 inh_rc          # inverter 1's output leaves north on track k6
 D 13898,15157:13962,15177          # output band 1 east to the load
 D 13905,15130:13927,15160          # bump up under the load's gate tie
 B 13904,15128:13928,15154
@@ -154,7 +154,7 @@ P 13925,15122:13970,15138          # ... east to the load block
 P 13962,15122:14000,15226          # load gate
 D 13945,15150:14050,15220          # load: strip west of the gate, channel, supply land
 C 14022,15185 s=26x36
-N D 13860,15170 bd1_xn1
+N D 13860,15170 inh_rc
 
 # --- inverter 2 (gate bar y 15271-15291)
 P 13567,15281 x13917 w=20          # gate bar 2, from X's lower contact
@@ -172,10 +172,10 @@ P 13925,15333:14000,15349          # ... east along y 15341 to the foot of the l
 P 13959,15250:14000,15340          # load gate
 D 13926,15257:14049,15326          # load: strip west of the gate, channel, supply land
 C 14022,15289 14035,15311
-N D 13860,15305 bd1_xn2
+N D 13860,15305 inh_lat
 
 # ================================================================ track k17 into the mid-right array
-# k17 jogs west to k16's track at y 14975 (k16 having ended at sel_w1's contact), runs
+# k17 jogs west to k16's track at y 14975 (k16 having ended at wr_r1's contact), runs
 # down to y 15131, west to x 13696 and down to a contact; poly west along y 15238 under
 # the tracks to a contact at 13131,15235, where a new line on track k1 starts and runs
 # south to a contact at 13131,16413.
@@ -190,7 +190,7 @@ P 13115,16398:13147,16428
 C 13131,16413
 P 13131,16413 y16451 x13040 w=20    # poly on into the mid-right array: it is the n1 line (master output) of counter row r18,
                                     # which mra_col4 draws to x 13052 (coordinator, 2026-11-15: end moved from x 12970, where it ran over row r18's z strip)
-N M 13826,14700 bd1_k17
+N M 13826,14700 hc0
 
 # ================================================================ X's driver (y 16125-16280)
 # One inverter: X = NOT g. The output diffusion (above the gate, under the rail) is tied
@@ -222,10 +222,10 @@ M 13711,17082 x13467 w=18           # metal west along y 17082
 C 13480,17083
 P 13464,17067:13496,17098
 P 13480,17083 y17150 w=18           # poly south, leaving the region (seen to y 17145)
-N P 13480,17145 bd1_g
+N P 13480,17145 inh_src
 P [ 13640,16220 13802,16220 13846,16184 13890,16184 13890,16205 13853,16205 13812,16243 13640,16243 ]
 P 13886,16183:13926,16258          # the block at its east end
-N P 13700,16232 bd1_g
+N P 13700,16232 inh_src
 # --- diffusion under the rail: X above the gate, ground below
 D 13817,16154:13888,16275
 C 13855,16250 s=22x34              # ground rail to source
@@ -249,25 +249,25 @@ D 13945,16196:14050,16263          # load channel and supply land
 C 14017,16228 s=26x40
 
 # ================================================================ tracks: strobes going north, nested jogs
-# sel_w7: from its contact at 13218,16642 a line runs north on k3's position, jogs west
+# wr_r7: from its contact at 13218,16642 a line runs north on k3's position, jogs west
 # at y 15390 (lying on a poly for 60 px, no contact: 4x in both metal shots) and
 # continues north as track k2.
 M 13174,14690 y15390 x13218 y16655 w=20
-N M 13174,14700 sel_w7
-# sel_w5: from its contact at 13174,16730 north on k2's position to a contact at
+N M 13174,14700 wr_r7
+# wr_r5: from its contact at 13174,16730 north on k2's position to a contact at
 # 13175,15562; poly link west to a contact at 13085,15563; north on k0's position,
-# east along y 14912 (k0 having ended at sel_w6's contact), north as track k1.
+# east along y 14912 (k0 having ended at wr_r6's contact), north as track k1.
 M 13174,16743 y15549 w=20
 C 13175,15562
 P 13068,15548:13192,15578
 C 13085,15563
 M 13088,15576 y14912 x13131 y14690 w=20
-N M 13131,14700 sel_w5
+N M 13131,14700 wr_r5
 # k3, k4, k5 each step one track east in turn (y 15346, 15308, 15262) and run on south
 # (straight, no contact ring seen on them at 0.9x; ends at 3.6x).
-# k3 is sel_w3: its line ends on the contact 13262,16456 (see sel_w3 above).
+# k3 is wr_r3: its line ends on the contact 13262,16456 (see wr_r3 above).
 M 13218,14690 y15346 x13261 y16469 w=20
-N M 13218,14700 sel_w3
+N M 13218,14700 wr_r3
 # k4: by scan runs on past y 16700 into the diagonals; drawn as far as seen straight.
 M 13261,14690 y15308 x13304 y16500 w=20
 N M 13261,14700 bd1_k4
@@ -276,7 +276,7 @@ M 13304,14690 y15262 x13348 y16423 w=20
 P 13337,16398:13369,16427
 C 13348,16411
 ?P 13360,16410 x13700 w=16              # seen to x 13565 at 3.6x, to about x 13700 at 0.9x; not followed
-N M 13304,14700 bd1_k5
+N M 13304,14700 h_eq_r0half
 
 # ================================================================ where inverter 2's output goes
 # From the contact at 13695,15325: metal south to y 15452, where it meets a line from a
@@ -372,7 +372,7 @@ N M 13957,15650 bd1_n1
 ?B 13894,15558:13926,15576
 ?D 13896,15560:13924,15570
 
-# --- pull-down of bd1_k gated by bd1_g, on a strip under bd1_an's metal
+# --- pull-down of bd1_k gated by inh_src, on a strip under bd1_an's metal
 D 13773,15634:13804,15730          # strip: top segment, channel under g (y 15661-15681), lower segment
 ?D 13800,15634:13830,15650         # top segment to the ground diffusion through the gap between the two metals (see notes)
 B 13768,15699:13792,15733          # lower segment to the poly from the west
@@ -383,7 +383,7 @@ M 13674,15702 y15988 w=20          # bd1_k south on x 13674 to a contact at 1367
 N M 13674,15800 bd1_k
 C 13674,15975
 P 13658,15960:13692,16008
-P 13522,15997 x13690 w=20          # poly west under bd1_g's and X's metal (4.3x metal view)
+P 13522,15997 x13690 w=20          # poly west under inh_src's and X's metal (4.3x metal view)
 P 13506,15982:13540,16014
 C 13522,15999
 M 13521,15986 y16273 w=20          # ... and south on k10's position (scan: metal to y 16273; lower end not traced)
@@ -419,18 +419,18 @@ M 13391,14690 y15176 x13435 y15901 w=20
 C 13432,15888
 P 13418,15874:13449,15904
 ?P 13432,15889 x13700 w=18
-N M 13391,14700 bd1_k7
+N M 13391,14700 h_eq_r0_u
 # k8: east at y 15130 to k9's position, south (scan: metal to y 16594, a 23 px break, then to y 16797; lower end not traced)
 M 13435,14690 y15130 x13478 y16590 w=20
-N M 13435,14700 bd1_k8
+N M 13435,14700 h_eq_r1_u
 # k9: east at y 15087 to k10's position, south to a contact at 13520,15390 where the line ends; poly west along
-# y 15388 (east end seen at 4.6x; the rest from the first run's notes: under sel_w7's jog without contact,
+# y 15388 (east end seen at 4.6x; the rest from the first run's notes: under wr_r7's jog without contact,
 # corner at x 13108, south, and west into the mid-right array at y 15497)
 M 13478,14690 y15087 x13521 y15403 w=20
 C 13520,15390
 P 13506,15376:13540,15402
 ?P 13520,15388 x13108 y15497 x13030 w=18
-N M 13478,14700 bd1_k9
+N M 13478,14700 hc2
 # k11: east at y 15005 to k12's position, south to a contact at 13609,15608 (scan and the first run's 1.5x view);
 # the poly from there (west, then diagonally down-left) is not traced
 M 13565,14690 y15005 x13608 y15621 w=20

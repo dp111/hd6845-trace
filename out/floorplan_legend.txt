@@ -66,10 +66,10 @@
 -	?route	crossing field west of the datapath	6330,7150:7700,7700	horizontal poly lines over vertical metals; each of the lines ends here on one metal. The step signal b leaves north on the metal x 5841 towards the top-left logic
 14	route	channel 3 bundle turning north	7700,7230:7950,7990	the first four of those lines turn north here, bend twice and go west
 -	array	5-bit comparator (ripple chain)	8700,6930:10830,7480	per bit: XOR of the register bit with the bit on the slice's through track, a chain from left (most significant) to right, and a pull-down on a row-long line. Believed outputs: "equal" at the right end of the chain, "greater" on the line; one connection per bit not seen
--	route	bands above the counters	11040,7020:11700,7230	four horizontal poly lines that go on east over the top of the mid-right array: H3 is bd1_xn1, H4 feeds the counters' line x 12902
--	route	wiring channel right of the counters	13040,7130:13425,14700	seven metal tracks with poly hidden under them: write strobes of R3, R5, R6, R7 going north, the counter outputs going east to the comparators (rows r4-r14) or north (r0-r3), match lines coming back, and the clock-related line bd1_xn1 on its way to the top of the array
+-	route	bands above the counters	11040,7020:11700,7230	four horizontal poly lines that go on east over the top of the mid-right array: H3 is inh_rc, H4 feeds the counters' line x 12902
+-	route	wiring channel right of the counters	13040,7130:13425,14700	seven metal tracks with poly hidden under them: write strobes of R3, R5, R6, R7 going north, the counter outputs going east to the comparators (rows r4-r14) or north (r0-r3), match lines coming back, and the clock-related line inh_rc on its way to the top of the array
 -	array	7-bit latch	7990,7500:10790,7825	seven copies of the same static latch cell with their own strobe line. Five bits feed the comparator above, the two leftmost bits leave to the left. Which register: not yet established (the 5 + 2 split would fit R10)
--	logic	row counter step gate	11215,7650:11665,7860	p = NOR(a, b): a is the core signal that also stops ck_b (bd1_xn1), b comes from the bus field in the west
+-	logic	row counter step gate	11215,7650:11665,7860	p = NOR(a, b): a is the core signal that also stops ck_b (inh_rc), b comes from the bus field in the west
 -	logic	two inverters	11260,7265:11665,7555	upper: inverse of the line that runs down through all counter rows (x 12285), sent north; lower: inverter for a bus-field signal
 -	?array	4-bit counter	11730,7260:13040,9180	the same bit cell on the free-running clocks; its four outputs leave north (towards whatever holds R3: believed the sync-width counter); the chain link from r4 into r3 is not resolved
 15	route	ck_a rail	13005,7270:13045,16950	clock phase A up the right edge of the mid-right array, one tap per row
@@ -90,7 +90,7 @@
 -	array	6-bit read/write register (row C)	8380,9195:10770,9550	static register cell per column c2..c7: written from the column bit line when the write line is high, held through a grounded-gate device; one buffered output west, one onto bus N. Believed R12 or R14 (high bits)
 -	route	bus channel, west end	11040,9160:11670,9420	ck_a, the R2 match and bus line B turn north here and cross the block to poly lines into the bus field
 -	route	bus lines A, B, F in the channel	13040,9160:13425,9760	A and B come from the routing channel between counter rows r3 and r4 and leave east; F is the R2 match line going west across the array
--	array	R4 register (7 bit)	13360,8807:16160,9077	vertical total; latches loaded by sel_w4 (strobe comes up bundle track L1); feeds the comparator above
+-	array	R4 register (7 bit)	13360,8807:16160,9077	vertical total; latches loaded by wr_r4 (strobe comes up bundle track L1); feeds the comparator above
 -	route	routing zone	13360,9080:16950,9560	horizontal poly lines; carries R0 bit 7 (y 9487) and comparator D's output (y 9532); otherwise not traced
 -	?logic	D0 bus gating and read driver	17150,8885:17590,9520	NAND and AND-OR-invert pull-downs seen under the ground rail; takes d0_d, drives the per-bit line to the D0 pad cell; not traced
 -	pad	11 MA7	670,9520:1430,10280	pin 11, MA7
@@ -108,8 +108,8 @@
 -	route	left bus field	4850,10400:7550,15000	dense horizontal wiring between the left array and the rest
 -	route	channel G tracks	7600,10300:10850,10720	per column: one poly line between the west edge and the row H cell, and the column's bus N line leaving east
 -	array	8-bit read/write register (row H)	7600,10690:10770,11050	the row C register cell upside down in all eight columns, on the same bit lines, with its own write line; outputs west on the channel G tracks and onto bus N. Believed R13 or R15 (low byte)
--	route	left-edge bundle	13330,10700:13840,13480	twelve vertical tracks stepping one place left at y 12300-12540: write strobes sel_w0 (to R0 above), sel_w2, sel_w1, sel_w4 coming up; R2 match going north, R1 match going south; four c lines going south
--	array	R0 register (8 bit)	13780,10561:16940,10834	horizontal total; latches loaded from the data lines by sel_w0; feeds the two comparators above
+-	route	left-edge bundle	13330,10700:13840,13480	twelve vertical tracks stepping one place left at y 12300-12540: write strobes wr_r0 (to R0 above), wr_r2, wr_r1, wr_r4 coming up; R2 match going north, R1 match going south; four c lines going south
+-	array	R0 register (8 bit)	13780,10561:16940,10834	horizontal total; latches loaded from the data lines by wr_r0; feeds the two comparators above
 -	logic	MA counter: incrementer and bit (14 rows)	2860,10992:3480,18063	per row: carry = carry-in AND Q, sum = carry-in XOR Q by pass gates, all-ones line per group; the bit is a static pair with a weak hold device. Believed the MA counter. Traced
 -	logic	MA counter latch stage	3480,10992:3900,18063	dynamic node X1 takes the incremented value (strobe Vm2) or a value from the right (Vm3); inverter; pass gate to Y (Vm5); write gate of the stored bit (Vm6); clear (Vm1). Traced
 21	?array	MA counter rows, middle (untraced)	3900,10992:4250,18063	Y ends on a gate here, Z (the value written back) and the load value come from here; a wide driver on rail F. Not traced
@@ -118,26 +118,26 @@
 19	route	counter bit cell (by column)	11730,10870:12060,10955	x 11730-12060: carry chain x(N) = x(N+1) AND q(N) and inverter n1 = NOT p3. x 12060-12470: g1 = NOT q, hold device on q, toggle network on node m. x 12470-12770: nb = NOT m, na = NOR(ck_a, nb), ck_b pass gate into the master latch a, p3 = NOT a. x 12770-13040: d = NOT p3, ck_a pass gate d -> q (slave), second ck_b gate a -> b, feedback device d -> a
 20	route	R2 match line exit	13400,10840:14340,10925	poly line from the buried contact in slice s1 west to bundle track L3
 -	logic	R2 comparator, XOR row	13760,11056:16950,11321	per slice x = c XOR q of the R2 bit and the per-slice line c
--	logic	R2 comparator, match line	13760,10925:16950,11056	wired NOR of the eight XORs (rdp3_cb_eq, high when R2 = c); load and exit in slice s1; leaves west in poly, then north on the bundle
+-	logic	R2 comparator, match line	13760,10925:16950,11056	wired NOR of the eight XORs (h_eq_r2, high when R2 = c); load and exit in slice s1; leaves west in poly, then north on the bundle
 -	?io	D2 input buffer	17255,11012:17590,11612	same cell, assigned by position
 -	pad	30 D3	18420,10920:19180,11680	pin 30, D3
 -	pad	12 MA8	670,11320:1430,12080	pin 12, MA8
 -	array	8-bit latch (selector source b)	7650,11490:10780,11855	the register latch cell upside down: strobe line along its bottom edge, data tracks from the row above, buffered output down to the selector
 22	route	R1 match line exit	13400,11690:14340,11770	poly line from the buried contact in slice s1 west to bundle track L3
--	array	R2 register (8 bit)	13620,11321:16940,11591	written from the bus lines when sel_w2 is high (strobe followed down the bundle, which steps one track left at y 12357, to bd1's sel_w2)
+-	array	R2 register (8 bit)	13620,11321:16940,11591	written from the bus lines when wr_r2 is high (strobe followed down the bundle, which steps one track left at y 12357, to bd1's wr_r2)
 -	?logic	D2 bus gating and read driver	17150,11617:17590,12252	looks like a copy of the D0 group; not traced
 -	route	channel 1: per-slice lines to the left	7600,11860:10560,12195	eight poly lines from the left edge, one per slice, each tapped by a vertical metal that goes up into the row above
 -	array	4-way read selector (8 bit)	7650,12200:10600,12800	four pass transistors per slice put one of four sources on the output node n: a and c are 6 bits wide (slices s2-s7, the two left slices strapped to VSS), b and d 8 bits; select lines sel1-sel4 come from the left
--	array	R1 register (8 bit)	13760,12167:16940,12437	same latch cell as the address register, upside down; written from the bus lines when sel_w1 is high (strobe followed down bundle track L11, jog to L10 at y 14000, to bd1's sel_w1)
+-	array	R1 register (8 bit)	13760,12167:16940,12437	same latch cell as the address register, upside down; written from the bus lines when wr_r1 is high (strobe followed down bundle track L11, jog to L10 at y 14000, to bd1's wr_r1)
 -	logic	R1 comparator, XOR row	13760,11905:16950,12167	per slice x = c XOR q (two gates, 7 transistors) of the R1 bit and the per-slice line c
--	logic	R1 comparator, match line	13760,11770:16950,11905	wired NOR of the eight XORs on a row-wide diffusion line (rdp3_ca_eq, high when R1 = c); load and exit in slice s1; leaves west in poly, then south on the bundle
+-	logic	R1 comparator, match line	13760,11770:16950,11905	wired NOR of the eight XORs on a row-wide diffusion line (h_eq_r1, high when R1 = c); load and exit in slice s1; leaves west in poly, then south on the bundle
 -	route	bus and counter-line routing	13830,12437:16950,13005	poly cross-unders: bus lines s0, s5, s6, s7 leave to the lower right (s0 also goes up the right edge on x 16838); the eight c lines leave to the lower left
 -	?io	D3 input buffer	17255,12378:17590,12978	same cell, assigned by position
 -	pad	29 D4	18420,12520:19180,13280	pin 29, D4
 -	array	selector output pull-down	7650,12800:10780,12950	per slice a transistor from n to VSS gated by one line (rst) from the left
 -	array	8-bit latch (selector source d)	7650,12950:10780,13300	pass transistor loaded from the left by strobe ld, two inverters, and a buffer inverter that drives the selector; same cell family as the right datapath's register latch
 -	array	horizontal counter (8 bit)	11730,13030:13040,16945	synchronous two-phase counter; the horizontal character counter: its master outputs are the c lines of the R0, R1 and R2 comparators (bit 0 = bottom row r18). Clocked by ck_b (master) and ck_a (slave) every cycle; carry enters at r18 and ripples up, with a 4-bit look-ahead line (group line B)
--	array	address register (5 bit)	14140,13005:16160,13285	five transparent latch bits loaded from bus lines s1..s5 when rdp3_ar_ld (areg_load) is high; outputs ar0..ar4 leave to the right
+-	array	address register (5 bit)	14140,13005:16160,13285	five transparent latch bits loaded from bus lines s1..s5 when ar_load (ar_load) is high; outputs ar0..ar4 leave to the right
 -	array	address register, bit 5	15745,13000:16150,13290	latch written from a data line through a pass transistor gated by the load strobe; drives decode row pair 4. Partly traced
 23	?unknown	cells right of the bundle (untraced)	16480,13050:16800,14700	four identical cells then larger ones; not traced
 -	?logic	D3 bus gating and read driver	17150,12983:17590,13618	looks like a copy of the D0 group; not traced
@@ -156,31 +156,31 @@
 -	?route	carry gap 1	2860,14333:4720,14549	carry out of bits 0-6 leaves here, carry into bit 7 arrives; horizontal poly bands
 -	?logic	bottom-centre logic	7000,14600:11000,18550	random logic below the central datapath
 -	route	13-line bus	7780,14330:8290,14890	horizontal metal lines from the left field towards the right; the two lowest drop into the decoder
--	route	write strobes turning north	13040,14700:13850,15100	sel_w6 w1 w2 w0 w4 arrive in poly and each ends on a contact under a track of the 18-line bundle (x 13088-13826) that carries it north
+-	route	write strobes turning north	13040,14700:13850,15100	wr_r6 w1 w2 w0 w4 arrive in poly and each ends on a contact under a track of the 18-line bundle (x 13088-13826) that carries it north
 -	route	select lines leave the decode array	14100,14636:15850,14900	each rselN crosses under the VSS rail in poly and continues on a metal line (or in poly) to its gate
-30	route	strobe and E bundle	16090,14700:16300,15900	areg_load and sel_stb_r up, E (x 16169) from below, latch data input (x 16277) and its inverse (x 16104)
+30	route	strobe and E bundle	16090,14700:16300,15900	ar_load and wr_stb_n up, E (x 16169) from below, latch data input (x 16277) and its inverse (x 16104)
 -	?unknown	right-hand column (untraced)	16480,14700:17000,17100	not looked at
 -	?io	D5 input buffer	17255,14503:17590,15103	same cell, assigned by position
 -	logic	latch strobe drivers	7520,14950:7860,15400	two strong inverters with one input: one drives cdp4_ld6 (strobe of the 6-bit latch row D), the other a twin line going up at x 7448
 -	logic	2-bit decoder	8040,15060:8565,15860	two bus lines (y 14832, 14873) inverted and decoded by three NANDs into active-low lines for 00, 10 and 01
 31	route	look-ahead line B	11680,14955:11722,17090	wired NOR of g1 = AND of q of rows r15-r18 with its load at the bottom, feeds the chain input of row r14
--	route	strobe track channel	13040,15100:13700,17100	18 vertical metal tracks with poly cross-unders; sel_w5 and sel_w7 climb it from the bottom and leave north on tracks k1, k2; other lines go into the mid-right array
+-	route	strobe track channel	13040,15100:13700,17100	18 vertical metal tracks with poly cross-unders; wr_r5 and wr_r7 climb it from the bottom and leave north on tracks k1, k2; other lines go into the mid-right array
 32	logic	two inverters on line X	13760,15120:14055,15350	both driven by X (the input of input-row gate 0); outputs NOT X leave north on track k6 and south on x 13716
 28	route	left bundle	14070,14850:14330,16720	rsel7 rsel6 rsel4 rsel0 rsel2 down to their gates; strobes of R1 R2 R0 R4 R6 back up and out to the west in poly
--	logic	write strobes R0-R11	14330,14890:14890,16720	12 x (inverter + NOR): sel_wN = rselN AND NOT strobe. Left half top to bottom R1 R2 R0 R4 R6 R7, right half R10 R5 R3 R8 R9 R11
+-	logic	write strobes R0-R11	14330,14890:14890,16720	12 x (inverter + NOR): wr_rN = rselN AND NOT strobe. Left half top to bottom R1 R2 R0 R4 R6 R7, right half R10 R5 R3 R8 R9 R11
 -	route	middle bundle (16 tracks)	14895,14850:15580,16550	selects down to the gates, strobes of R10 R5 R3 R8 R9 R11 down; rsel12 rsel13 pass through; taps to the right-hand column
 -	logic	select buffers R16 R17 R15 R14	15540,14850:15890,15895	two inverters each; the buffered selects go down tracks T11-T14 (?read enables)
 29	route	strobe to the select gates	15840,14810:16275,15045	poly y 14825, metal y 14872, poly x 16259 from the driver's output
-34	logic	write strobe driver	15895,15020:16280,15165	inverter: sel_stb_r = NOT bd2_n1 (the strobe latch); output north and west to the register select gates
-33	logic	address load driver	15895,15220:16280,15365	inverter: areg_load = NOT bd2_al_n = bd2_x OR (E AND write to the address register); output up the bundle to the address register
+34	logic	write strobe driver	15895,15020:16280,15165	inverter: wr_stb_n = NOT wr_data_lat (the strobe latch); output north and west to the register select gates
+33	logic	address load driver	15895,15220:16280,15365	inverter: ar_load = NOT ar_load_n = bd2_x OR (E AND write to the address register); output up the bundle to the address register
 -	?logic	data bus control logic	17150,15103:17590,16600	single gates on a 152 px pitch, not surveyed
 -	logic	latch strobe NAND	7470,15400:7900,15600	2-input NAND of two channel lines; the strobe is their AND
-35	logic	latch gated by NOT X (upper half)	13700,15468:14050,15700	bd1_n1 = NOT(bd1_a.bd1_xn2 + bd1_q); output on a metal line x 13957
-41	logic	latch gated by NOT X (lower half)	13700,15700:14050,15860	bd1_n2: pull-downs bd1_an.bd1_xn2 and bd1_n1 traced; its load (north-east, y 15640-15705) not traced
-36	logic	pull-down	13770,15634:13806,15735	gate bd1_g (the input of X's driver)
+35	logic	latch gated by NOT X (upper half)	13700,15468:14050,15700	bd1_n1 = NOT(bd1_a.inh_lat + bd1_q); output on a metal line x 13957
+41	logic	latch gated by NOT X (lower half)	13700,15700:14050,15860	bd1_n2: pull-downs bd1_an.inh_lat and bd1_n1 traced; its load (north-east, y 15640-15705) not traced
+36	logic	pull-down	13770,15634:13806,15735	gate inh_src (the input of X's driver)
 37	logic	inverter	13860,15385:14050,15515	bd1_an = NOT bd1_a; output goes south on a metal line (x 13783) to the latch's lower half
 -	logic	write strobe latch	15895,15500:16150,15990	D latch open while E is high: two cross-coupled AND-OR-invert gates plus the inverter of its data input; holds "write to a data register" through E low; its Q drives the write strobe driver
-38	logic	address load gate	16240,15400:16480,15850	under a ground rail: bd2_al_n = NOT(bd2_x OR (E AND bd2_m210)) for the address register strobe, and bd2_nu = NOT(bd2_c AND E); loads and inputs from the east not traced
+38	logic	address load gate	16240,15400:16480,15850	under a ground rail: ar_load_n = NOT(bd2_x OR (E AND wr_addr_sel)) for the address register strobe, and wr_data_e_n = NOT(wr_data_sel AND E); loads and inputs from the east not traced
 -	pad	27 D6	18420,15720:19180,16480	pin 27, D6
 -	pad	14 MA10	670,15770:1430,16530	pin 14, MA10
 -	?route	carry gap 2	2860,15981:4720,16154	carry out of bits 7-9; all-ones line of bits 7-9 becomes carry into bit 10
@@ -201,8 +201,8 @@
 47	?logic	bus control gates (lower part)	15890,16730:16150,17100	not traced
 -	route	bottom bus field	6500,17000:13300,18600	wiring along the bottom of the core
 49	route	clock verticals	12980,16940:13160,18480	ck_b (x 13022), ck_a (x 13066), ck_out (x 13132) crossing the bus field
--	route	write strobes from below	13380,16840:14100,17140	sel_w7 w5 w3 w8 from bd3: w7 and w5 turn north into the channel, w3 goes north in poly, w8 west in poly along y 17125
--	route	write strobes going west	14100,16980:14930,17280	sel_w5 w3 w8 w9 w11 w10 on metal at y 17041-17258, crossing the supply rail x 14609 in poly; the strobe's poly link to the left strobe line along y 16996
+-	route	write strobes from below	13380,16840:14100,17140	wr_r7 w5 w3 w8 from bd3: w7 and w5 turn north into the channel, w3 goes north in poly, w8 west in poly along y 17125
+-	route	write strobes going west	14100,16980:14930,17280	wr_r5 w3 w8 w9 w11 w10 on metal at y 17041-17258, crossing the supply rail x 14609 in poly; the strobe's poly link to the left strobe line along y 16996
 50	logic	R13 select buffer	15540,17130:15890,17365	two inverters: rsel13 buffered, leaves south in poly at x 15512 (?read enable of R13)
 -	pad	15 MA11	670,17470:1430,18230	pin 15, MA11
 -	route	E, R/W, RS, CS to the core	16150,17500:16840,18140	e_b (metal, nested corner), rw_d / rs_d / cs_d (diagonal polys, then verticals at x 16298, 16342, 16385)

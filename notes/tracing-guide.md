@@ -227,6 +227,13 @@ A 100,100:150,150 kind=clamp           # mark a transistor here: clamp, field (b
   *through* under the gate; the extractor splits it.
 - A contact joins the metal over it to the poly under it, or else to the diffusion.
 - Comment generously: what each group of shapes is. Someone will have to check it.
+- **Names.** Label every net you can say something about (`N` lines). Use the name from
+  `notes/signals.md` if the net is already there; a functional name if you know what the
+  signal is (`h_eq_r0`, `wr_r6`, `rc3_q`); otherwise your block prefix and a local name
+  (`bc1_ld_in1`), and add a row to the glossary saying what is known about it. When a
+  placeholder is identified, `tools/rename.py OLD NEW` renames it in every trace file and
+  note. A wire you believe is net X but have not joined to it is labelled `X_u`.
+  `tools/t.sh BLOCK signals.py` lists your names that the glossary does not cover.
 - Edge positions are uncertain by about 3 px. Draw shapes that must connect with a
   clear overlap, and shapes that must not with a clear gap (5 px or more). Slivers
   where edges nearly coincide produce warnings.

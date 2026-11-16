@@ -78,7 +78,7 @@ straight from the address register, as the names assume.
 Whether the register's output is the true or the inverted data bit is supported but
 not proven by tracing (it rests on one link inside the register cell that is still
 uncertain, see `notes/blocks/areg.md`); the 0-17 argument above remains the main
-evidence for the polarity. The register's load strobe (`areg_load`) comes up a
+evidence for the polarity. The register's load strobe (`ar_load`) comes up a
 vertical line at x 16299 from a gate at about x 15880-16150, y 15230-15330.
 
 ## Next

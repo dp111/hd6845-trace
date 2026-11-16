@@ -20,11 +20,11 @@ There each ends on a pad with a contact to one vertical metal.
 
 | Line (name in `wl`) | Channel y | Turns north at x | Ends on | Then |
 |---|---|---|---|---|
-| bus line B's line (`mra_busb`) | 7831-7849 | 7925, then 7832 | pad, contact (7466,7343) | metal x 7455-7478 **north** (seen to y 7150) |
+| bus line B's line (`cnt_bus_b`) | 7831-7849 | 7925, then 7832 | pad, contact (7466,7343) | metal x 7455-7478 **north** (seen to y 7150) |
 | `ck_a` | 7873-7891 | 7880, then 7787 | pad, contact (7419,7387) | metal x 7410-7432 **north** (seen to y 7150) |
-| `wl_b` (row counter step, active low) | 7917-7935 | 7839, then under the wide metal at x 7753 | after y 7436 west, x 7407 south, y 7519 west through the whole crossing field, x 6300 north, y 7471 west: pad, contact (5838,7470) | metal x 5830-5852 north to a contact (5838,5585); poly west along y 5585 through a second crossing field to a contact (3518,5587); metal west and north to a contact (3283,5238); poly east, north and west along y 5018 to the output node of the step gate at (2975,5035): block `tla` |
+| `rc_stepreq_n` (row counter step, active low) | 7917-7935 | 7839, then under the wide metal at x 7753 | after y 7436 west, x 7407 south, y 7519 west through the whole crossing field, x 6300 north, y 7471 west: pad, contact (5838,7470) | metal x 5830-5852 north to a contact (5838,5585); poly west along y 5585 through a second crossing field to a contact (3518,5587); metal west and north to a contact (3283,5238); poly east, north and west along y 5018 to the output node of the step gate at (2975,5035): block `tla` |
 | `wl_h1` (band H1's line) | 7962-7980 | 7792, then x 7709 | after y 7477 west, x 7450 south, y 7562 west: pad, contact (7031,7560) | metal x 7025-7048, direction not followed |
-| R2 match (`mra_busg`) | 8006-8024 | does not turn | pad, contact (8340,8010) | metal x 8330-8352, not followed |
+| R2 match (`h_eq_r2_u`) | 8006-8024 | does not turn | pad, contact (8340,8010) | metal x 8330-8352, not followed |
 
 So the row counter's step signal is made in the **top-left logic**, by a three-input NOR
 at (2975,5035) (`notes/blocks/tla.md`). `ck_a` and bus line B's signal go north on two metals at x 7421
@@ -35,7 +35,7 @@ end, not down; and the whole channel has now been read in the clean shot from x 
 x 11040: there is no contact on any of the five lines on the way (cdp2 had looked at two
 slices only).
 
-Stretches that lie under metal and cannot be seen in the metal shots: `wl_b` and `wl_h1`
+Stretches that lie under metal and cannot be seen in the metal shots: `rc_stepreq_n` and `wl_h1`
 under the wide vertical metal x 7725-7775 (y 7430-7700), all crossings in the crossing
 field, and the piece of the first line of the bundle (not one of ours) that runs down
 under the metal x 7300-7322. Read with `tools/classmap.py --open`.
@@ -48,7 +48,7 @@ under the metal x 7300-7322. Read with `tools/classmap.py --open`.
   y 8580-8640 and again at y 9280-9320, and on down the bus field.
 - The load strobe of cdp2's row C (`cdp2_c_ld`, poly y 7790-7808) ends at a contact
   (10893,7797) under the top of a metal x 10880-10905 that goes south.
-- Band H4 (`mra_gab`) runs on west of x 11040 along y 7200-7222: not followed.
+- Band H4 (`cnt_gab`) runs on west of x 11040 along y 7200-7222: not followed.
 
 ## Survey of the bus field itself (y 9400-17200)
 

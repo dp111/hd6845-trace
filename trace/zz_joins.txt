@@ -3,15 +3,14 @@
 @block joins
 
 # address register (rdp3) to the decode rows and their inverters (areg), x 15800-15890
-@alias ar0 rdp3_ar_s1_q
-@alias ar1 rdp3_ar_s2_q
-@alias ar2 rdp3_ar_s3_q
-@alias ar3 rdp3_ar_s4_q
-@alias ar4 rdp3_ar_s5_q
+@alias ar0 ar0_q
+@alias ar1 ar1_q
+@alias ar2 ar2_q
+@alias ar3 ar3_q
+@alias ar4 ar4_q
 # its load strobe: areg's metal at x 16299 to rdp3's row-wide poly at (16285,13022)
-@alias areg_load rdp3_ar_ld
 
-# (An alias "sel_w0 = rdp3_rb_ld" stood here on the strength of rdp3's second run. It was
+# (An alias "wr_r0 = wr_r2_u" stood here on the strength of rdp3's second run. It was
 # wrong: a track-scanning tool had bridged a jog in the bundle. Two later runs, working
 # independently, followed the strobes again: R0 is rdp2's row RC, and rdp3's row RB is R2.)
 
@@ -24,25 +23,12 @@
 @alias cdp1_a3_bl tc1_x2
 
 # bd1's line X is the input of the lone inverter in the pad buffer row (inrow gate 0),
-# whose output is the clock block's ck_src. Joined by geometry at about (13567,15679).
-@alias t_g0_in bd1_x
+# whose output is the clock block's inh_ck. Joined by geometry at about (13567,15679).
 
 # Counter outputs meet bd1's tracks (found by geometry when mra_col4 was added, 2026-11-15):
 # the n1 line (master output) of rows r15, r16, r18 of the mid-right array runs into the poly
 # leads bd1 had followed west from its tracks k14, k9, k17.
-@alias mra_n1_r15 bd1_k14
-@alias mra_n1_r16 bd1_k9
-@alias mra_n1_r18 bd1_k17
 
 # Joins closed by the wiring channel right of the counters (trace/mrach.txt, 2026-11-15). In each
 # case the two blocks' geometry now meets; the alias only says which name the net keeps.
-@alias sel_w6 rdp2_rf_ld                  # T0 south -> poly east at y 8299: rdp2's row RF is R6
-@alias bd1_xn1 rdp3_s0                    # T6 south; and on, by rdp3's pad, T1 and the band above row r0
-@alias rdp2_cd_eq bd1_k5                  # the "c = R0/2" match comes down T6/T5 to bd1's k5
-@alias mra_n1_r7 rdp3_n8                  # row counter outputs into rdp3's bundle (L8, L6, L5, L4 north)
-@alias mra_n1_r8 rdp3_n6
-@alias mra_n1_r9 rdp3_n5
-@alias mra_n1_r10 rdp3_n4
-@alias mra_n1_r11 rdp3_c_s0               # horizontal counter outputs = the c lines of the R0/R1/R2 comparators
-@alias mra_n1_r12 rdp3_c_s7
 

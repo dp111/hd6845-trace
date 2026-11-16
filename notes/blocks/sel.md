@@ -17,7 +17,7 @@
 |---|---|---|
 | VSS rail | y 14697-14747, x 14140-15720 | joins the decode array's VSS bus at the left; three ground rails hang from it (x 14434, 14789, 15690) |
 | Top band | y 14636-14900 | each select column: contact at y ~14650 to poly, poly under the VSS rail, contact to a metal line (or straight on in poly) |
-| Left bundle | x 14070-14320 | metal lines at x 14083 (rsel7), 14128 (rsel6), 14171 (rsel4), 14217 (rsel0), 14262 (sel_w6 going up), 14307 (strobe), 14347 (rsel2); poly lines in the gaps at x 14107, 14150, 14241, 14285 (outputs going up) |
+| Left bundle | x 14070-14320 | metal lines at x 14083 (rsel7), 14128 (rsel6), 14171 (rsel4), 14217 (rsel0), 14262 (wr_r6 going up), 14307 (strobe), 14347 (rsel2); poly lines in the gaps at x 14107, 14150, 14241, 14285 (outputs going up) |
 | Gate column | x 14330-14890, y 14890-16720 | cell `sel_wr` x 12: left half at dy 0, 304, 608, 912, 1216, 1520; right half the same mirrored about x 14611.5. VCC rail x 14609 between the halves (top end y 14904), ground rails x 14434 and 14789 |
 | Middle bundle | x 14900-15575 | 16 metal tracks on a 43.3 px grid, T0 14912 ... T15 15561 (list below) |
 | Right gate column | x 15540-15890, y 14850-16550 | ground rail x 15663-15718, supply rail x 15795-15890. Cell `sel_rbuf` (two inverters) x 4 at y 14855 + 260k; cell `sel_rwr` (inverter + NOR) x 2 at y 15895 and 16195 |
@@ -33,8 +33,8 @@ All of this is traced (extracted by netlist.py), except where marked believed.
 
 Each half-row of the gate column is
 
-    sel_nN = NOT rselN
-    sel_wN = NOR(sel_nN, strobe)        = rselN AND NOT strobe
+    rselN_n = NOT rselN
+    wr_rN = NOR(rselN_n, strobe)        = rselN AND NOT strobe
 
 | Row | Left half: register, select arrives by | Right half: register, select arrives by |
 |---|---|---|
@@ -50,14 +50,14 @@ nowhere else (each metal line ends at its contact; checked with tools/sel_tracks
 and by overlay).
 
 The strobe input (gate C of each NOR):
-- left half: metal x 14307 (`sel_stb_l`), contacts at 14305,15176 + 304k. It has no
+- left half: metal x 14307 (`wr_stb_n`), contacts at 14305,15176 + 304k. It has no
   other connection inside the region and leaves it downwards.
-- right half: metal T0 x 14912 (`sel_stb_r`), contacts at 14912,15174 + 304k. In row 0
+- right half: metal T0 x 14912 (`wr_stb_n`), contacts at 14912,15174 + 304k. In row 0
   the gate C poly is a wide bar (y 15159-15197) that runs on east under the bundle to a
   contact at 15474,15172; metal from there joins T15 (x 15561), which comes down from
   a contact at 15622,14822 on a poly line arriving from the east along y 14825.
-- Believed, not traced: `sel_stb_l` and `sel_stb_r` are one signal, an active-low write
-  pulse, so that sel_wN is the write strobe of register N (high while the register is
+- Believed, not traced: `wr_stb_n` and `wr_stb_n` are one signal, an active-low write
+  pulse, so that wr_rN is the write strobe of register N (high while the register is
   addressed and the pulse is low). Below the region (y 16715-17000) the left line has a
   metal branch to x 14240 and T0 turns west into a horizontal metal at y 16990; whether
   they meet is for package bd3 to trace.
@@ -74,7 +74,7 @@ contact into poly.
 
 Upper part, y 14855-15895: four times two inverters in series, a non-inverting buffer.
 
-    sel_bnN = NOT rselN          sel_bN = NOT sel_bnN = rselN
+    rselN_bn = NOT rselN          rselN_buf = NOT rselN_bn = rselN
 
 | Buffer | Input arrives by | Gates at y | Output leaves by |
 |---|---|---|---|
@@ -89,8 +89,8 @@ read pulse outside this region.
 
 Lower part, y 15895-16530: twice the same logic as the gate column.
 
-    sel_n15 = NOT rsel15     sel_w15 = NOR(sel_n15, sel_stb_r)     gates at y 15956; 16082, 16172
-    sel_n14 = NOT rsel14     sel_w14 = NOR(sel_n14, sel_stb_r)     gates at y 16256; 16382, 16472
+    rsel15_n = NOT rsel15     wr_r15 = NOR(rsel15_n, wr_stb_n)     gates at y 15956; 16082, 16172
+    rsel14_n = NOT rsel14     wr_r14 = NOR(rsel14_n, wr_stb_n)     gates at y 16256; 16382, 16472
 
 rsel15 reaches its second tap on T10 (contact 15340,15953, where T10's upper line
 ends), rsel14 on T9 (contact 15299,16253, likewise). The strobe gates are fed from T15
@@ -102,31 +102,31 @@ run on down from there.
 
 | Select | Used for |
 |---|---|
-| rsel0-rsel11 | one gate pair each: sel_wN = rselN AND NOT strobe. Nothing else |
+| rsel0-rsel11 | one gate pair each: wr_rN = rselN AND NOT strobe. Nothing else |
 | rsel12, rsel13 | nothing here. T8 (x 15258) and T7 (x 15214) carry them through to y 16550 with no contact (track scan, and overlay on the metal shot). rsel12's first tap is exactly on the bottom edge: contact 15258,16560, poly east along y 16560 (seen to x 15600, not followed). rsel13 runs on south |
-| rsel14, rsel15 | each: a buffer (sel_bN) and a gate pair (sel_wN) |
-| rsel16, rsel17 | a buffer each (sel_b16, sel_b17), nothing else: no write strobe |
+| rsel14, rsel15 | each: a buffer (rselN_buf) and a gate pair (wr_rN) |
+| rsel16, rsel17 | a buffer each (rsel16_buf, rsel17_buf), nothing else: no write strobe |
 
 ## Middle bundle: what is on each track (from tools/sel_tracks.py, y ranges)
 
 | Track | x | Segments |
 |---|---|---|
-| T0 | 14912 | 15161 - below region: sel_stb_r |
-| T1 | 14954 | 14822-15272 rsel5; 15418 - below: sel_w5 |
-| T2 | 14998 | 14783-15577 rsel3; 15724 - below: sel_w3 |
-| T3 | 15041 | 14812-15880 rsel8; 16030 - below: sel_w8 |
-| T4 | 15085 | 14770-16185 rsel9; 16334 - below: sel_w9 |
-| T5 | 15128 | 14803-16490 rsel11; 16635 - below: sel_w11 |
-| T6 | 15171 | 15115 - below: sel_w10 |
+| T0 | 14912 | 15161 - below region: wr_stb_n |
+| T1 | 14954 | 14822-15272 rsel5; 15418 - below: wr_r5 |
+| T2 | 14998 | 14783-15577 rsel3; 15724 - below: wr_r3 |
+| T3 | 15041 | 14812-15880 rsel8; 16030 - below: wr_r8 |
+| T4 | 15085 | 14770-16185 rsel9; 16334 - below: wr_r9 |
+| T5 | 15128 | 14803-16490 rsel11; 16635 - below: wr_r11 |
+| T6 | 15171 | 15115 - below: wr_r10 |
 | T7 | 15214 | 14860 - below: rsel13 |
 | T8 | 15258 | 14905 - below: rsel12 |
-| T9 | 15301 | 15000-16266 rsel14 (taps at 15692 and 16253); 16415 - below: sel_w14 |
-| T10 | 15344 | 15040-15966 rsel15 (taps at 15428 and 15953); 16114 - below: sel_w15 |
-| T11 | 15388 | 14812-14905 rsel12 on its way to T8; 15073 - below: sel_b16 |
-| T12 | 15431 | 14770-15000 rsel14 on its way to T9; 15336 - below: sel_b17 |
-| T13 | 15474 | 14812-15040 rsel15 on its way to T10; 15098-15218 stub of sel_stb_r; 15593 - below: sel_b15 |
-| T14 | 15517 | 14770-15144 rsel17; 15853 - below: sel_b14 |
-| T15 | 15561 | 14822 - below: sel_stb_r |
+| T9 | 15301 | 15000-16266 rsel14 (taps at 15692 and 16253); 16415 - below: wr_r14 |
+| T10 | 15344 | 15040-15966 rsel15 (taps at 15428 and 15953); 16114 - below: wr_r15 |
+| T11 | 15388 | 14812-14905 rsel12 on its way to T8; 15073 - below: rsel16_buf |
+| T12 | 15431 | 14770-15000 rsel14 on its way to T9; 15336 - below: rsel17_buf |
+| T13 | 15474 | 14812-15040 rsel15 on its way to T10; 15098-15218 stub of wr_stb_n; 15593 - below: rsel15_buf |
+| T14 | 15517 | 14770-15144 rsel17; 15853 - below: rsel14_buf |
+| T15 | 15561 | 14822 - below: wr_stb_n |
 
 ## Ports
 
@@ -138,30 +138,30 @@ Local name, layer, where it crosses the boundary, direction.
 | vss | metal | 14140-14200, 14700 (top left) | - | decode array's VSS bus |
 | vcc | metal | 14609, 16550 (bottom) | - | gate column supply rail, comes from below |
 | rsel7 | metal | 14083, 14636-16490 | - | this line runs just outside the region's west edge (x < 14100) but belongs to it |
-| sel_w6 | poly | 14100, 14867 (west) | out | rsel6 AND NOT strobe |
-| sel_w1 | poly | 14100, 14909 (west) | out | rsel1 AND NOT strobe |
-| sel_w2 | poly | 14100, 14957 (west) | out | rsel2 AND NOT strobe |
-| sel_w0 | poly | 14100, 15001 (west) | out | rsel0 AND NOT strobe |
-| sel_w4 | poly | 14100, 15043 (west) | out | rsel4 AND NOT strobe |
-| sel_w7 | poly | 14135, 16550 (bottom; drawn to 16760) | out | rsel7 AND NOT strobe. Its NOR is at y 16600-16720 |
-| sel_stb_l | metal | 14307, 16550 (bottom) | in | strobe of the left half |
-| sel_stb_r | metal | 14912, 16550 (bottom) | - | strobe of the right half, continues down |
-| sel_stb_r | metal | 15561, 16550 (bottom) | - | same net on T15, continues down |
-| sel_stb_r | poly | 15850, 14825 (east) | in | where the strobe arrives |
-| sel_w5 | metal | 14954, 16550 (bottom) | out | T1 |
-| sel_w3 | metal | 14998, 16550 (bottom) | out | T2 |
-| sel_w8 | metal | 15041, 16550 (bottom) | out | T3 |
-| sel_w9 | metal | 15085, 16550 (bottom) | out | T4 |
-| sel_w11 | metal | 15128, 16550 (bottom; starts at y 16635) | out | T5. At y 16550 T5 is still unconnected: rsel11's line ended at 16490 |
-| sel_w10 | metal | 15171, 16550 (bottom) | out | T6 |
+| wr_r6 | poly | 14100, 14867 (west) | out | rsel6 AND NOT strobe |
+| wr_r1 | poly | 14100, 14909 (west) | out | rsel1 AND NOT strobe |
+| wr_r2 | poly | 14100, 14957 (west) | out | rsel2 AND NOT strobe |
+| wr_r0 | poly | 14100, 15001 (west) | out | rsel0 AND NOT strobe |
+| wr_r4 | poly | 14100, 15043 (west) | out | rsel4 AND NOT strobe |
+| wr_r7 | poly | 14135, 16550 (bottom; drawn to 16760) | out | rsel7 AND NOT strobe. Its NOR is at y 16600-16720 |
+| wr_stb_n | metal | 14307, 16550 (bottom) | in | strobe of the left half |
+| wr_stb_n | metal | 14912, 16550 (bottom) | - | strobe of the right half, continues down |
+| wr_stb_n | metal | 15561, 16550 (bottom) | - | same net on T15, continues down |
+| wr_stb_n | poly | 15850, 14825 (east) | in | where the strobe arrives |
+| wr_r5 | metal | 14954, 16550 (bottom) | out | T1 |
+| wr_r3 | metal | 14998, 16550 (bottom) | out | T2 |
+| wr_r8 | metal | 15041, 16550 (bottom) | out | T3 |
+| wr_r9 | metal | 15085, 16550 (bottom) | out | T4 |
+| wr_r11 | metal | 15128, 16550 (bottom; starts at y 16635) | out | T5. At y 16550 T5 is still unconnected: rsel11's line ended at 16490 |
+| wr_r10 | metal | 15171, 16550 (bottom) | out | T6 |
 | rsel13 | metal | 15214, 16550 (bottom) | out | T7, not used inside the region |
 | rsel12 | metal, poly | 15258, 16560 (bottom) | out | T8, not used inside the region; contact at 15258,16560 to a poly line going east along y 16560 |
-| sel_w14 | metal | 15301, 16550 (bottom) | out | T9: rsel14 AND NOT strobe |
-| sel_w15 | metal | 15344, 16550 (bottom) | out | T10: rsel15 AND NOT strobe |
-| sel_b16 | metal | 15388, 16550 (bottom) | out | T11: rsel16 buffered |
-| sel_b17 | metal | 15431, 16550 (bottom) | out | T12: rsel17 buffered |
-| sel_b15 | metal | 15474, 16550 (bottom) | out | T13: rsel15 buffered |
-| sel_b14 | metal | 15517, 16550 (bottom) | out | T14: rsel14 buffered |
+| wr_r14 | metal | 15301, 16550 (bottom) | out | T9: rsel14 AND NOT strobe |
+| wr_r15 | metal | 15344, 16550 (bottom) | out | T10: rsel15 AND NOT strobe |
+| rsel16_buf | metal | 15388, 16550 (bottom) | out | T11: rsel16 buffered |
+| rsel17_buf | metal | 15431, 16550 (bottom) | out | T12: rsel17 buffered |
+| rsel15_buf | metal | 15474, 16550 (bottom) | out | T13: rsel15 buffered |
+| rsel14_buf | metal | 15517, 16550 (bottom) | out | T14: rsel14 buffered |
 | vss | metal | 14434, 14789, 15690 at 16550 (bottom) | - | the three ground rails run on down (the two of the gate column end near y 16870) |
 | vcc | metal | 15795-15890, whole east edge | - | supply rail of the right-hand column; wider than the region, extent not traced |
 
@@ -170,7 +170,7 @@ and 13985-14030 to at least x 13880.
 
 ## Ambiguities
 
-- `sel_stb_l` / `sel_stb_r`: see Logic. Working assumption: one net. Settled by
+- `wr_stb_n` / `wr_stb_n`: see Logic. Working assumption: one net. Settled by
   tracing y 16700-17050, x 14200-14930 (package bd3).
 - Loads of the right-hand column (all `?` shapes at x 15745-15880). What is established:
   each output band runs east from its pull-down, passes under a poly block near
@@ -188,7 +188,7 @@ and 13985-14030 to at least x 13880.
   no contact at y 14650: its metal continues (jogging right) to 15755,14783. Harmless;
   sel.txt adds the continuation.
 - Metal stub on T13 from the strobe bar's contact 15474,15172 up to y 15098: it ends
-  just below the poly bar of sel_b16 (y 15084) with no contact (4x view). Purpose unknown.
+  just below the poly bar of rsel16_buf (y 15084) with no contact (4x view). Purpose unknown.
 
 ## Not done
 

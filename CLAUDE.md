@@ -18,6 +18,13 @@ first, then `notes/journal.md` (latest entry) and `notes/ambiguities.md` if they
 - Refer to features by pixel coordinates of the metal shot
   (`dieshots/hd6845metal2ndchip.jpg`, 19838 x 21025, origin top-left).
 - Name signals from pin names, register numbers and counter numbers.
+- **Signal names** (user, 2026-11-17): every label must be meaningful, or be described
+  in a table where it cannot be named yet, and every document must use the current
+  names. The glossary is `notes/signals.md`: read its rules. A signal is named for what
+  it is as soon as that is known, and until then for where it is; when it is identified,
+  rename it everywhere with `tools/rename.py OLD NEW` and add it to the glossary's
+  tables. `tools/build.py` reports any net name the glossary does not cover: that count
+  stays at zero. Names ending in `_u` are open joins and are tasks.
 - N-bit comparators and similar may be left as blocks. Derived signals, latches,
   flip-flops and glue gates are wanted in full, especially the end-of-frame state
   machine, the interlace odd/even logic, and whatever makes some registers hold N and

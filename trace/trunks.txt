@@ -94,11 +94,10 @@ M 13120,18471 x13066 y16952 x13025 y12921 w=21   # the rail up the right edge of
 N M 13066,17500 ck_a
 
 # ====================================================================
-@alias t_g0_out ck_src
-# S: output of input-row gate 0 (inrow's t_g0_out). Metal down and left, poly under the
+# S: output of input-row gate 0 (inrow's inh_ck). Metal down and left, poly under the
 # diagonal supply metals, up at x 13200, left in poly under the vertical metals, then
 # bus line L4 to the left. At its left end a poly T joins it to bus line L6's left
-# piece (the clock trace's ck_src: gate g5's input) and to the contact at (10810,18470)
+# piece (the clock trace's inh_ck: gate g5's input) and to the contact at (10810,18470)
 # from which the run to the left of the die starts (clock.md; not yet re-followed).
 M 13849,18590 y18775 x13508 w=18
 C 13522,18774
@@ -224,7 +223,7 @@ C 5277,2140
 P 5279,2127 y2566 w=20
 C 5277,2553
 M 5277,2540 y6068 x5176 w=22        # down the whole top-left logic with no tap; from y 5857 it lies right over the
-                                    # poly of another net (tla_e4, bus line 5: NO contact, five shots at 5-9x); west at
+                                    # poly of another net (rcs_e4, bus line 5: NO contact, five shots at 5-9x); west at
                                     # y 6055-6080 to a contact (5190,6065) on the pad of line 3 of the poly bus
 C 5190,6065
 P 5170,6045:5210,6085
