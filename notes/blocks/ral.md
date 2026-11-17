@@ -1,17 +1,17 @@
 # ral: the stage in front of the RA pad drivers (x 13990-16330, y 4250-4560)
 
-## Status (2026-11-17 06:23, contributor session)
+## Status (2026-11-17 07:16, contributor session; corrected after independent review)
 
 **Partly traced** (`trace/ral.txt`, cell `ral_cell`, five copies s0-s4 west to east; s0 is
 RA bit 0's cell, at x 13990-14460). Drawn: the two supply rails per cell, the line
-`cnt_gab` (y 4350) with its tap and the pull-down it gates, the strobe line `ral_stb`
+`cnt_gab` (y 4354) with its tap and the pull-down it gates, the strobe line `ral_stb`
 (y 4548) with its pad and the input pass transistor, the input strip, the hold device
-(gate on VSS) from node a to the output, the buried contact onto the output poly,
-**inverter 2** (the output stage: load, pull-down, output buried contact), s0's input
-join to `rax_o0`, and the output stub to `ra0_drv_in`; and **every copy's input and
-output joined**: `rax_o0`-`rax_o4` in, the RA0-RA4 pad drivers' input lines out. **Not drawn**: the two
-inverters and their loads (the forward path from node a to the output), and the upper
-part of the output poly. 15 transistors (three per cell).
+(gate on VSS) from node a to the output, **inverter 2** (the output stage: load,
+pull-down, output buried contact), and every copy's input (`rax_o0`-`rax_o4`). Outputs:
+s0 and s1 join the RA0 and RA1 pad drivers' input lines (`ra0_drv_in`, `ra1_drv_in`);
+s2-s4 join r9c's RA2-RA4 comparator-unit lines (`ra2/3/4_drv_in_u`), and reach the pad
+drivers only with branch `rad-lines` (the renames are on `ra-joins`). **Not drawn**:
+inverter 1 (node a -> `ral_n1_s#`). 25 transistors (five per cell).
 
 ### Logic (traced)
 
@@ -91,14 +91,15 @@ it shows what single shots and the five-copy composite did not
   up x 14255-14280 to y 4320) between the VSS-contacted box 14255-14330 x 4385-4445
   and the drain strip.
 
-Extracted: `ra#_drv_in = NOT ral_n1_s#` for all five RA copies, and the same in the
-fourteen MA copies. **Inverter 1 is the remaining piece**: `ral_n1_s#` should be
+Extracted: `ra#_drv_in = NOT ral_n1_s#` (`_u` for 2-4 on this branch) for all five RA
+copies (and for the fourteen MA copies on branch `mal`). **Inverter 1 is the remaining piece**: `ral_n1_s#` should be
 NOT node a. Candidates seen: the outlined box at 14225-14280 x 4290-4345 at the
 L-poly's upper end (a buried contact onto an output diffusion?), and a diffusion strip
 x 14205-14225 rising from the VSS-contacted box at 14205-14250 x 4400-4450. That box is
 cream like the diffusion boxes, not orange like poly, so it may be diffusion and not
-the poly pad drawn as the hold device's gate. If so, the hold device's gate connection
-needs re-reading too.
+the poly pad drawn as the hold device's gate. (Withdrawn by the independent review: R-G
+is 58-73 on that pad against 15-22 on the diffusion boxes, in all five copies, with a
+ring in the metal shot: it is poly, as drawn.)
 
 Third pass on inverter 1 (19-copy composite, metal and stripped shots at 3x, `i1.png`):
 the strip x 14205-14225 is plain from y 4290 to y 4395, and the outlined region at the
@@ -141,28 +142,25 @@ tab pad, to decide poly against diffusion.
 
 ### Not done (next)
 
-1. **The forward path from node a to the output**: no buried contact from the strip
-   (x 14055-14200) to any poly was seen; Tf's poly ends at y 4462, 17 px above the
-   strip. Candidates: the L-shaped poly 14245-14345 x 4325-4370 / 14325-14345 x
-   4370-4448 (a pull-down gate in the box 14252-14365 x 4378-4448, VSS contact at about
-   (14265,4415), drain x 14348-14370, which seems to run up to a load under the top rail:
-   poly block 14285-14365 x 4277-4310); and a vertical diffusion strip x 14200-14225,
-   y 4300-4395, above the VSS pad. Two passes did not give a consistent circuit.
-   Third look, with `metal1` (2026-11-17, `cache/scratch/ral/a2.png`, four shots of
-   14000-14150 x 4370-4530 at 4x): east of the strobe gate the strip seems to have an
-   arm going **north**, x 14055-14085, from the strip up to y about 4380 under the VSS
-   rail (outlines in `metal1` and `acid`: a vertical edge at x 14083-14090 from y 4380 to
-   4495; row profiles at y 4468, 4473, 4500 show colour at x 14058-14078 that the strip
-   east of it does not have). Both metal shots show a ring at about (14045,4425), over
-   the strobe poly's rounded top end (14010-14060 x 4405-4432). Neither is resolved: if
-   the ring is a contact onto the arm, node a would sit on VSS, which makes no sense, so
-   one of these readings is wrong. This corner is the next thing to settle (contact test
-   `tools/cdp2_pt.py` on the ring; colour profile across x 14050-14095 at y 4420).
-2. Whether Tf's drain `ral_tf_s#` (strip x 14172-14196) is the first inverter's output,
-   i.e. n2 = NOR(a, cnt_gab), which would make `cnt_gab` a force/clear of the latch.
-3. The output poly from y 4300 to 4480 (x 14375-14395): believed to be the second
-   inverter's output node (its load's gate tie at about 14365-14395 x 4280-4310).
-4. The copies' input and output polys (s1-s4), and the fifteen copies in the left array.
+1. **Inverter 1** (node a -> `ral_n1_s#`): see the three passes above. The independent
+   review adds two leads: an undrawn tan band under the VSS rail at y about 4413-4432,
+   with a rounded east end at x 14065 (the "ring at (14045,4425)" is that end; no contact
+   seen) - possibly node a's route north; and an undrawn closed outline west of the
+   L-poly (west edge x 14225 from y 4325 to 4395, stepping in to the VSS box), which
+   would also be the "strip" puzzled over above.
+2. **Inverter 2's pull-down is probably under-drawn** (review, medium confidence; nets
+   unchanged): drawn W/L 61/25 against the load's 61/32 is not a workable ratio. The
+   outline above suggests VSS diffusion wrapping the L-poly on its west and south, the
+   drain inside the elbow (14272-14345 x 4318-4352), the whole L as gate (W about
+   170-190). Re-read at 5-6x and extend the diffusion.
+3. **The pass transistor's width** (review, unsure): drawn 16/26; the gate poly is
+   uniformly bright over y 4455-4493 in all five copies and the chip-2 stripped shot
+   shows diffusion on both sides from y 4440 to 4500, so W is probably about 45, and the
+   gate about 5 px further east (x 14035-14059).
+4. Whether Tf's drain `ral_tf_s#` is inverter 1's output (n1 = NOR(a, `cnt_gab`)?), which
+   would make `cnt_gab` a force/clear of the latch.
+5. `cnt_gab`'s driver (above), the `?P` (hold gate to its pad) and the output `?B`.
+6. The fifteen copies in the left array are on branch `mal`.
 
 ## First survey
 

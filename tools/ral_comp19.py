@@ -3,7 +3,8 @@
 of those mirrored) in the master's frame, written as composite ral_c19 for view.py --comp.
 
 usage: ral_comp19.py
-The MA copies are undone with the inverse of their @inst transform (trace/mal.txt):
+The MA copies are undone with the inverse of their @inst transform (their placements are
+listed below; they are drawn in trace/mal.txt on branch mal):
 a master point p maps to the copy at R90(mirror(p)) + offset, about o = (14235,4395).
 """
 import json, os

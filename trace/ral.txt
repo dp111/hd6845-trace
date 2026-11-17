@@ -1,7 +1,7 @@
 # ral: the stage in front of the RA pad drivers, x 13990-16330, y 4250-4560.
 # Five copies of one cell (pitch 434, one gap of 563): notes/blocks/ral.md.
-# This file draws only what is read with confidence. The cell's inverters, its loads and
-# the two poly bars at 14200-14290 x 4455-4500 are NOT drawn yet (see the notes, "Not done").
+# This file draws only what is read with confidence. Inverter 1 (node a -> ral_n1_{}) is NOT
+# drawn yet (see the notes, "Not done").
 @block ral
 @w M=16 P=20
 @s 26x26
@@ -32,7 +32,7 @@ N D 14185,4420 ral_tf_{}
 # The strip y 4479-4494 is diffusion from x 14015 to x 14315 (colour profile along
 # y 4486, tools/ral_prof.py): it passes under the strobe poly and on under the lower
 # poly block. The buried contact is drawn outside the
-# cell, for s0 only: the other copies' input polys are not drawn yet.
+# cell, for s0 only; the other copies' inputs are drawn after the instances.
 D 13988,4479:14340,4495
 P 14028,4430:14054,4536
 P 14024,4530:14058,4564
@@ -87,7 +87,7 @@ N P 14268,4330 ral_n1_{}
 
 # --- output: poly from the cell to the pad driver (S-shaped): vertical x 14372-14395,
 # west along y 4480-4500, south along x 14331-14349 to the pad (14340,4764) that r9c drew
-# for RA0. Drawn from y 4480 down; the upper part and what drives it are not drawn.
+# for RA0. Drawn from y 4480 down; the part above is inverter 2's output (drawn below).
 P 14331,4480:14395,4500
 P 14331,4480:14349,4525
 @end
