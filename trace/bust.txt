@@ -108,7 +108,7 @@ C 15016,5630
 @alias cdp1_l4588 amr_ob_c1
 @alias cdp1_l4632 amr_ob_c2
 @alias cdp1_a0_bl amr_oa_c1
-@alias cdp1_lw2 amr_oa_c2
+@alias cdp1_a3_bl amr_oa_c2
 @alias cdp1_a2_bl amr_oa_c3
 
 
@@ -159,7 +159,7 @@ P 15870,6825 x16005 w=20
 P 15853,6808:15887,6842
 C 15870,6825
 M 15870,6825 x15790 y6910 w=20
-@alias cdp1_lw2 ubus_b6
+@alias cdp1_a3_bl ubus_b6
 # cdp1_a2_bl: its pad (16926,5196); poly south to a pad (16922,5625); metal south along
 # x 16926 to y 6744, west to x 16839, south (follower sampled with --max: x 16838-16840 at
 # y 6777 ... 12377). Its end, near y 12663, not looked at (the follower ends on a VCC rail
@@ -224,3 +224,15 @@ P 11607,5585 x11617 y5500 11786,5331 y4690 11640,4544 x10845 w=16
 
 
 # c0's outputs, named as the bus lines they drive (amr_oa_c0 / amr_ob_c0 in amr's terms)
+
+# --- the prediction checked: cdp1_a3_bl (R8's row-A slice 3, which writes only R8; tc1 draws
+# its metal as tc1_x2, from the contact (8075,4372) south) runs on south along x 8075
+# (tools/follow.py, to y 5848) and has a contact (8078,5020) onto a poly that runs east
+# along y 5024 to cdp1's west edge as cdp1_lw2 = data bit 6 (ring in the metal shot, poly
+# band in the chip-2 stripped shot from x 8090 to 8340 at y 5017-5035, 3x:
+# cache/scratch/bust/lw2w.png; column profiles at x 8110, 8240, 8310).
+M 8075,4440 y5040 w=12
+P 8060,5003:8096,5037
+C 8078,5020
+P 8078,5024 x8345 w=12
+@alias cdp1_a3_bl cdp1_lw2

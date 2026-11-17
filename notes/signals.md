@@ -212,7 +212,7 @@ Eleven pass transistors between the scan line counter and five output nodes.
 | `uc_eq_r#` | high when those lines equal R4 (vertical total), R6 (vertical displayed) or R7 (vertical sync position). `uc_eq_r6` goes down the wiring channel to the strobe channel (its track k4); `uc_eq_r7` leaves west along y 6820 |
 | `hc#_u` | the horizontal counter line at the comparators, where its join to `hc#` is not drawn |
 | `rbus_b#` | data line of bit # through the lower right datapath (believed D#; its connection to the data pads is not traced) |
-| `ubus_b#` | data line of bit # through the upper right array (R4, R6, R7: bits 0-6; R5: bits 0-4). Believed D#. `ubus_b0`-`ubus_b6` are joined (`trace/bust.txt`) to the central datapath's lines `cdp1_c5_bl` ... `cdp1_c1_bl`, `cdp1_a0_bl`, `cdp1_lw2` (aliases), and `rbus_b7` to `cdp1_a2_bl`: the data bus, table in `notes/blocks/bust.md` |
+| `ubus_b#` | data line of bit # through the upper right array (R4, R6, R7: bits 0-6; R5: bits 0-4). Believed D#. `ubus_b0`-`ubus_b6` are joined (`trace/bust.txt`) to the central datapath's lines `cdp1_c5_bl` ... `cdp1_c1_bl`, `cdp1_a0_bl`, `cdp1_a3_bl` (= `cdp1_lw2`) (aliases), and `rbus_b7` to `cdp1_a2_bl`: the data bus, table in `notes/blocks/bust.md`. R8 = cdp1 row A (bits 0,1,4,5,6,7 in slices 5,4,1,0,3,2), R9 = row C (bits 0-4 in slices 5-1) |
 | `ar#`, `ar#_n` | address register bit # and its inverse (rows of the decode array) |
 | `ar#_a`, `ar#_n2`, `ar#_q`, `ar#_trk` | nodes of address register bit #: storage node, its inverse, output, and the track that takes it to the decode |
 | `ar_load`, `ar_load_n` | load strobe of the address register and its inverse |

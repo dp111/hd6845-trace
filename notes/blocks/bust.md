@@ -84,7 +84,7 @@ skew bit). The six data lines now joined across the chip:
 | 3 | `cdp1_c2_bl` (slice 2, row C) | `ubus_b3` |
 | 4 | `cdp1_c1_bl` (slice 1) | `ubus_b4` |
 | 5 | `cdp1_a0_bl` (slice 0, row A) | `ubus_b5` |
-| 6 | `cdp1_lw2` (from cdp1's west edge) | `ubus_b6` |
+| 6 | `cdp1_a3_bl` (slice 3, row A) = `cdp1_lw2` (enters from the west) | `ubus_b6` |
 | 7 | `cdp1_a2_bl` (slice 2, row A) | `rbus_b7` |
 
 `amr`'s inner outputs drive bits 5, 6 and 7 (c1, c2, c3).
@@ -145,6 +145,13 @@ R5 and R9 are 5 bits (0-4), R4, R6 and R7 are 7 bits (0-6), and R8 has bits 0, 1
 plus `cdp1_a3_bl`, so **`cdp1_a3_bl` is R8 bit 6** (the datasheet's R8 is bits 0-1, 4-5,
 6-7). **Prediction**: `cdp1_a3_bl` joins `cdp1_lw2` (bit 6) somewhere west of the central
 datapath (it leaves `cdp1` towards `tc1`, as `tc1_x2`).
+
+**Confirmed** (same session): `tc1_x2`'s metal runs on south along x 8075 and has a contact
+(8078,5020) on the poly y 5024 that enters `cdp1` from the west as `cdp1_lw2` (3x,
+`lw2w.png`; ring in the metal shot; the poly band continuous to x 8340 in the chip-2
+stripped shot, column profiles at x 8110, 8240, 8310). Drawn; firm (`tools/unsure.py`
+does not list it). Bit 6 now writes R4, R6, R7 and R8. The bit-6 group's canonical
+name is `cdp1_a3_bl`, because `zz_joins.txt` already makes it canonical for `tc1_x2`.
 
 Hence the central datapath rows: **R8 = row A**, slice 5 bit 0, slice 4 bit 1, slice 1
 bit 4, slice 0 bit 5, slice 3 bit 6 (by the above), slice 2 bit 7; **R9 = row C**,
