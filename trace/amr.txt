@@ -77,11 +77,15 @@ N M 11916,6000 amr_oa_c1
 # a pad with a contact (13310,6385)". The same metal goes on north (tools/follow.py from
 # (13327,6300) north: corner at y 5628, west to x 13123) to a pad with a contact
 # (13125,5628) (ring in the metal shot, poly pad in the stripped shot, 2.2x:
-# cache/scratch/bust/wr3.png), from which a poly runs west along y 5615-5630 across all four
-# slices (seen continuous at 1.45x in both stripped shots, wr3c.png, wr3d.png; not at a
-# zoom that would show every crossing: ?P).
+# cache/scratch/bust/wr3.png), from which a poly runs west across all four slices. It is NOT
+# straight (independent review, 4.7-7x in four shots): in each slice it detours south
+# around a metal-to-diffusion contact box (c3: x 12675-12720, y 5622-5665, ring at
+# (12690,5640)) - east of the box it turns south at x 12752-12770, runs west along
+# y 5668-5690 under the box (looks like a transistor gated by this line on the inner
+# metal's diffusion), and turns back north at x 12640-12668. The corner joins are not
+# profiled: ?P. West end rounded at about x 11445.
 M 13327,6390 y5628 x13118 w=14
 P 13108,5611:13142,5645
 C 13125,5628
-?P 13125,5622 x11460 w=16
+?P 13125,5628 x12761 y5679 x12655 y5628 x12371 y5679 x12265 y5628 x11980 y5679 x11874 y5628 x11591 y5679 x11485 y5628 x11445 w=16
 N P 12000,5622 wr_r3

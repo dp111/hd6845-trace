@@ -53,10 +53,14 @@ the slice is not traced, so what it computes is open.
 ## R3's write strobe runs through the slices (2026-11-17)
 
 `wr_r3` (R3's write strobe; `rdp1` drew it ending at (13310,6385)) goes on north along
-x 13327 to y 5628, west to a contact (13125,5628), and a poly runs west from there along
-y 5615-5630 across all four slices (`trace/amr.txt`, the crossing drawn `?P`: seen
-continuous at 1.45x only). With `bust`'s result that the slices' inner outputs are data
-bits 4-7 (c0..c3), **`amr` is very likely R3's high nibble**: the vertical sync width
+x 13327 to y 5628, west to a contact (13125,5628), and a poly runs west from there across
+all four slices (`trace/amr.txt`, drawn `?P`). An independent review (4.7-7x, four shots)
+found that it is not straight: in each slice it detours south around a metal-to-diffusion
+contact box on the inner vertical metal (c3: box x 12675-12720, y 5622-5665, ring at
+(12690,5640)), passing under the box along y 5668-5690, where it looks like a transistor
+gated by the strobe on that metal's diffusion. The two corner joins per slice are not
+profiled. With the result on branch `bust` (`notes/blocks/bust.md` there) that the slices' inner lines
+are data bits 4-7 (c0..c3), **`amr` is very likely R3's high nibble**: the vertical sync width
 register, written from D4-D7 on `wr_r3`. `rdp1` has only R3's low nibble (the horizontal
 sync width, compared with `hsw`). The outer outputs (to the vertical control logic) would
 then be the register's bits, or per-bit comparisons with a 4-bit counter, on their way to
@@ -67,7 +71,7 @@ a comparator. Believed, not traced: the slice. (The 4-bit counter in the left ar
 
 | Name | Layer | Where | Direction | What |
 |---|---|---|---|---|
-| `amr_oa_c1` ... `amr_oa_c3` | metal | x 11916, 12304, 12693, y 5585-6312 | out | inner outputs; to bus y 5047, 5135, 5177 |
+| `amr_oa_c1` ... `amr_oa_c3` | metal | x 11916, 12304, 12693, y 5585-6312 | open | inner lines; to bus y 5047, 5135, 5177 (data bits, so possibly written in, not out); each has a metal-to-diffusion contact at (12693 - 390k, 5640) |
 | `amr_ob_c1`, `amr_ob_c2` | metal | x 12001, 12390, y 5585-6312 | out | outer outputs; to bus y 4657, 4696 |
 | `rcs_bq3335` | metal | x 12782, y 5585-6312 | out | c3's outer output (r9m) |
 | `wr_r3` | poly | y 5622, x 11460-13125 | in | R3's write strobe, from `rdp1`'s x 13327 line |

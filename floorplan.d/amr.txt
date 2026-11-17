@@ -1,3 +1,3 @@
 # amr: logic above the mid-right array (surveyed)
-11450,5560:13050,6460  ?array  R3 high nibble (vertical sync width)? 4 slices | one slice per data bit D4-D7, strobed by wr_r3 (poly y 5622); each slice drives its data bit and one line to the vertical control logic (c3's is rcs_bq3335). Slice not traced
+11450,5560:13050,6460  ?array  R3 high nibble (vertical sync width)? 4 slices | believed: one slice per data bit D4-D7, on R3's write strobe (wr_r3 runs through the slices); each slice is connected to its data bit and sends one line to the vertical control logic (c3's is rcs_bq3335). Slice not traced
 11880,4630:12800,5600  route   amr outputs north | six polys under the supply metal from the slices' top contacts (y 5585) to pads on the bus
