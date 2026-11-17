@@ -66,8 +66,8 @@ follower jump between lines: it took m4 and m5 to MA7). Contacts read at 2.6-3.5
 | m12 | (2455,18040) | west to x 2026, south | contact (2025,19214), MA12 |
 | m13 | (2540,18905) | output poly south to the pad, metal east along y 18908 | contact (3627,18902), MA13 |
 
-The end contacts of m0-m3 and m7 are drawn where the follower ended, on the drivers'
-polys, without a view each (`?C`). Extraction: every copy's hold device joins
+The end contacts of m0-m3 and m7 were checked at 4x in both the metal and clean shots
+(`cends.png`, `cends2.png`): a ring on a poly pad in each. Extraction: every copy's hold device joins
 `ral_a_m#` to `ma#_drv_in`; 0 errors, 0 warnings.
 
 This settles the bit order for the left column, and with `larr`'s carry direction it

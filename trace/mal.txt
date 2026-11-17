@@ -90,32 +90,33 @@ N M 2200,18040 ma12_drv_in
 # tools/follow.py started on each copy's own metal (starting on the shared column x 2195
 # jumps between lines). The drivers' input polys are pads_out's; the metal ends land on
 # them at the y of each driver's gate (ma0 x 4602, ma1 x 3062, ma2 y 1658, ma3 y 3264,
-# ma4 y 4912, ma5 y 6994, ma7 y 10118). Contacts at those ends are drawn as found by the
-# follower's end, not each viewed: marked ?. For MA4, MA5 and MA6 pads_out's poly does
+# ma4 y 4912, ma5 y 6994, ma7 y 10118). The end contacts of m0-m3 and m7 checked at 4x in
+# the metal shot (ring) and the clean shot (poly pad, contact centre): mosaics
+# cache/scratch/ral/cends.png, cends2.png. For MA4, MA5 and MA6 pads_out's poly does
 # not reach the metal's end: the poly hops are drawn at the end of this file.
 P 2195,8040 x2555 w=16
 P 2178,8023:2212,8057
 C 2195,8038
 M 2198,8042 x2153 y2142 x4606 w=12
-?C 4600,2142
+C 4600,2142
 N M 2153,5000 ma0_drv_in
 P 2148,8642 x2555 w=16
 P 2131,8625:2165,8659
 C 2148,8640
 M 2150,8642 x2110 y2100 x3069 w=12
-?C 3065,2100
+C 3065,2100
 N M 2110,5000 ma1_drv_in
 P 2108,9250 x2555 w=16
 P 2091,9233:2125,9267
 C 2108,9250
 M 2112,9250 y8757 x2023 y1659 w=12
-?C 2025,1662
+C 2025,1662
 N M 2023,5000 ma2_drv_in
 P 2150,9858 x2555 w=16
 P 2133,9841:2167,9875
 C 2150,9858
 M 2154,9858 y8709 x2061 y3265 w=12
-?C 2063,3268
+C 2063,3268
 N M 2061,5000 ma3_drv_in
 P 2283,10510 x2555 w=16
 P 2266,10493:2300,10527
@@ -138,7 +139,7 @@ P 2155,12615 x2555 w=16
 P 2138,12598:2172,12632
 C 2155,12615
 M 2155,12617 y10120 x2018 w=12
-?C 2022,10120
+C 2022,10120
 N M 2155,11000 ma7_drv_in
 # m13 (not mirrored, last of the column): its output poly turns south at x 2535 to a pad
 # (2540,18905); metal east along y 18908 to a contact (3627,18902) on the top of the MA13
