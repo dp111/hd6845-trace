@@ -1,9 +1,10 @@
-# amr: the logic above the mid-right array (x 11400-13050, y 5250-6450).
-# notes/blocks/amr.md. Four copies of one slice at a pitch of 390 (findcell on the clean
-# shot: dx 0, -390, -781 at 0.91-1.00; -1170 at 0.69-0.75, a partial copy). Columns by
-# their left edge: c0 x 11490 (partial), c1 11880, c2 12270, c3 12660.
-# Drawn so far: only each full slice's two output lines from the top of the slice north
-# to the horizontal bus at y 4650-5180 (wiring, no transistors). The slice is not traced.
+# amr: R3's high nibble and its comparator, above the mid-right array (x 11400-13060,
+# y 5540-6450). notes/blocks/amr.md. Four copies of one slice at a pitch of 390 (columns by
+# their left edge: x 11490, 11880, 12270, 12660 = data bits 4, 5, 6, 7). Each slice is a
+# register bit written from its data line on wr_r3, and a comparator bit against the slice's
+# outer line; the four comparator bits pull down one diffusion line (amr_eq_r3).
+# The first part of the file (2026-11-17 early) draws each slice's two lines north to the bus;
+# the cell and what stands outside it follow.
 @block amr
 @w M=12 P=18
 @s 24x24
@@ -87,5 +88,233 @@ N M 11916,6000 amr_oa_c1
 M 13327,6390 y5628 x13118 w=14
 P 13108,5611:13142,5645
 C 13125,5628
-?P 13125,5628 x12761 y5679 x12655 y5628 x12371 y5679 x12265 y5628 x11980 y5679 x11874 y5628 x11591 y5679 x11485 y5628 x11445 w=16
-N P 12000,5622 wr_r3
+# 2026-11-17 (amrc): re-read on a 4-5x sub-pixel median of c1..c3 (tools/cdp1_sr.py,
+# cache/scratch/amrc/t_12575_5600.png, z1.png): the poly is 22 wide, top runs y 5625-5647,
+# bottom runs y 5667-5690; the west corner of each detour (x 12642-12665 in c3) is seen
+# end to end under the rail's edge. The east leg (x 12752-12772) lies in the 28 px gap
+# between two metals: there both chip-2 shots show it as one orange band from y 5622 to
+# 5695 in all four columns (5x mosaic, wl.png). The bottom run and west corner of the
+# column at x 11490 are seen only at 1.4x (c0.png): ?P.
+P 13125,5636 x12762 w=22
+P 12762,5625 y5690 w=22
+P 12773,5679 x12653 y5636 x12372 w=22
+P 12372,5625 y5690 w=22
+P 12383,5679 x12263 y5636 x11981 w=22
+P 11981,5625 y5690 w=22
+P 11992,5679 x11872 y5636 x11591 w=22
+P 11591,5625 y5690 w=22
+?P 11602,5679 x11482 y5636 x11445 w=22
+N P 12000,5636 wr_r3
+
+# =====================================================================================
+# The slice. Master = column c3 (x 12560-13000, y 5620-6330); read on sub-pixel medians of
+# c1..c3 at 3-5x (cache/scratch/amrc/q11, q12, a15, a2, z1..z8.png) and the class map.
+# Top third (y 5620-5880): one register bit, the same circuit as rdp3_lat in another
+# layout: pass transistor from the inner (data) line on wr_r3, two inverters, and a weak
+# always-on device (gate on VSS) from the output back to the storage node.
+# Rails: x 12603-12653 carries the pull-down lands (vss); x 12800-12856 the lands the
+# loads hang from (vcc).
+# =====================================================================================
+@cell amr_slice tag=b7
+M 12628,5545 y6440 w=48                 # VSS rail (hangs from the wide metal y 5450-5545)
+N M 12628,6100 vss
+M 12843,5627 y6335 w=54                 # VCC rail (x 12816-12870; goes on south with a jog west, not drawn)
+N M 12843,6100 vcc
+M 12735,5627 y6312 w=20                 # thin metal on n2; one contact only (below)
+M 12910,5750 y6348 x12968 w=24          # q line; at the bottom an arm east to a pad
+M 12887,5714:12932,5752                 #   its pad at the top
+M 12957,5627 y5880 w=22                 # short metal over the q diffusion (one contact, ?C below)
+
+# --- pass transistor T1: data line -> a, gate wr_r3 (W 73, L 23)
+D 12673,5622:12714,5668                 # land under the data line
+C 12692,5640 s=26x26
+D 12673,5648:12746,5706                 # wide part: the strobe poly crosses it at y 5667-5690
+D 12676,5700:12701,5744                 # strip down to the buried contact
+B 12674,5710:12703,5746
+P 12678,5712:12700,5846                 # a: poly from the buried contact down; gate of T2
+N P 12689,5780 r3_{}_a
+
+# --- inverter 1: n2 = NOT a. T2 (L 22, W 58) from the VSS land; load L1 from the VCC land
+D 12603,5704:12633,5762                 # VSS land, upper left part
+D 12612,5731:12666,5808                 # VSS land
+C 12628,5772 s=30x40
+D 12660,5750:12724,5808                 # T2 channel
+D 12720,5750:12762,5800                 # n2 node (hook under the thin metal)
+C 12742,5759 s=24x22                    # thin metal x 12735 to n2
+D 12758,5774:12814,5800                 # n2 band east to the foot of the load
+D 12783,5655:12860,5705                 # VCC land
+C 12825,5680 s=30x30
+D 12786,5700:12810,5776                 # load strip (W 24) down to n2
+P 12766,5708:12836,5768                 # load gate block (L 60)
+P 12800,5764:12836,5796                 # down to the band
+B 12796,5766:12818,5800                 # gate tie: heavy-outlined box at the end of the n2 band, under the foot of the block (6x median of four copies, k12.png)
+P 12800,5772:12992,5796                 # n2 poly east to T3
+N P 12900,5784 r3_{}_n2
+
+# --- inverter 2: q = NOT n2. T3 (L 22, W 58) to the NEXT slice's VSS land; load L2
+D 12855,5676:12950,5702                 # load strip east from the VCC land (W 26)
+P 12862,5670:12918,5712                 # load gate block (L 56), in the open east of the rail
+P 12866,5708:12922,5748                 # its lower part: pad under the q line
+C 12903,5732 s=26x26
+D 12928,5676:12950,5752                 # strip down to the buried contact
+P 12916,5722:12950,5750
+B 12927,5721:12951,5751
+D 12928,5704:13000,5762                 # q diffusion, T3 channel, to the next VSS land
+P 12970,5697:12992,5796                 # T3 gate (n2), poly in the open
+N D 12960,5740 r3_{}_q
+
+# --- hold device: a -> buried contact -> strip under a VSS-tied poly block -> q land
+P 12676,5816:12762,5846                 # a: pad at the foot of the a poly
+B 12737,5815:12763,5847
+D 12738,5824:12890,5848                 # strip
+D 12880,5802:12936,5848                 # q land under the q line
+C 12906,5822 s=30x30
+D 12930,5824:12976,5848                 # the land's east arm
+P 12617,5840:12652,5876                 # poly pad on the VSS rail
+C 12631,5858 s=22x22
+P 12617,5852:12872,5876                 # band
+P 12795,5822:12872,5856                 # block over the strip (L 77, W 24)
+A 12795,5824:12872,5848 kind=hold
+
+# --- q to the comparator: a poly (PE) runs south in the open gap east of the slice from the
+# east arm of the q land. Its head lies on the arm in a box with a heavy outline (4x median,
+# z8.png, there at x 12548-12578): a buried contact, ?B. The short metal x 12957 has a bright
+# block between dark bars over the same box (mo1, mo34.png; pale in the chip-2 stripped shot in
+# two copies of three): a contact on the box, ?C. A second such block at y 5857-5877 shows no
+# contact patch in the clean shot and is not drawn. Either one alone makes PE = q.
+?B 12946,5824:12976,5850
+?C 12957,5837 s=20x20 butt=1
+P 12950,5826:12973,5960                 # PE: q poly, in the open (orange in both chip-2 shots)
+P 12950,5932:12993,5960
+P 12972,5932:12993,6097
+
+# =====================================================================================
+# Lower two thirds: one comparator bit. c = the outer line (it has two contacts, both to
+# poly, and no contact to diffusion: an input here).
+#   nor = NOR(c, q)        load L3, pull-downs To1 (c) and Tq1 (q)
+#   x = NOT(nor + c.q)     load L4, pull-down Tx (nor), series pair Tc2 (c), Tq2 (q):  x = c XOR q
+#   big pull-down, gate x, between VSS and the diffusion line y 6246-6272 that runs through
+#   all four slices (amr_eq_r3; its load is in the column at x 11490).
+# =====================================================================================
+# --- VSS land of the comparator, with a column south under the rail for the next slice west
+D 12603,5890:12697,5958
+C 12628,5915 s=30x40
+D 12605,5890:12633,6091                 # column (source of the series pair of the slice to the west)
+D 12640,5936:12714,5959                 # arm east under the data line: source of Tx and To1
+
+# --- node nor: load L3 from the second VCC land north, strip west to To1, arm east to Tq1
+D 12800,6002:12872,6050                 # VCC land
+C 12847,6028 s=30x30
+D 12848,5888:12870,6006                 # load strip (W 22)
+P 12825,5942:12896,5996                 # load gate block (L 54); east part in the open
+D 12722,5888:12870,5904                 # strip west
+D 12722,5888:12762,5958                 # To1 column (W 40)
+D 12846,5888:13000,5926                 # arm east, through PE, to the next slice's VSS land
+P 12876,5920:12896,5946                 # the block's poly goes on north into the arm:
+?B 12874,5918:12898,5928                #   the gate tie (green box with a ring at (12882,5927))
+?P 12897,5932:12926,5964                # box with a heavy outline under the q line, beside it
+N D 12800,5896 r3c_{}_nor
+P 12700,5906:12768,5932                 # To1 gate (L 26): poly from the pad west
+P 12764,5906:12801,5946                 # pad
+C 12782,5928
+?D 12710,5938:12726,5958                # To1's source joins the VSS arm in the gap between two
+                                        # metals (dark bar): by elimination, it has no other exit
+P 12638,5964:12830,5989                 # nor poly west from the load block: gate of Tx
+
+# --- node x: Tx (W 38, L 25) from the VSS arm; load L4 from the VCC land west
+D 12652,5955:12690,6018                 # Tx column
+D 12652,6016:12722,6050                 # x land
+D 12716,6024:12802,6050                 # load strip (W 26)
+P 12720,6008:12756,6058                 # load gate block (L 36)
+P 12692,6056:12752,6078                 # its poly west to the buried contact
+P 12662,6056:12694,6086
+B 12661,6054:12695,6088                 # gate tie
+D 12652,6046:12692,6110                 # x column south
+D 12652,6090:12758,6110                 # x arm east
+N D 12670,6100 r3c_{}_x
+?D 12754,6072:12770,6110                # arm joins the strip in the gap between two metals (dark
+                                        # bar y 6070-6115; open field below it is green)
+D 12766,6072:12900,6093                 # strip east under the VCC rail
+D 12897,6022:13000,6092                 # widens under the q line: series pair, to the next VSS column
+P 12930,6002:12951,6124                 # PF: c poly north from the band (Tc2, W 70, L 21)
+P 12776,6099:12951,6124                 # band from the outer line's second pad
+P 12776,6096:12801,6128
+C 12784,6112
+
+# --- big pull-down (gate x) on the diffusion line through the slices. Only the part that
+# all four columns share is in the cell (to x 12812); its east end differs in the column at
+# x 11490 and is drawn after the instances.
+D 12612,6153:12662,6206                 # VSS land
+C 12630,6182 s=30x30
+?D 12656,6176:12684,6208                # joined under the gap beside the rail (outline seen)
+D 12680,6174:12812,6272                 # inside the gate: VSS; south of it: the line
+P 12689,6107:12713,6169                 # x: buried contact at the foot of the x arm
+B 12688,6106:12714,6135
+D 12690,6105:12712,6134
+P 12688,6142:12822,6169                 # over field along the top
+P 12650,6215:12822,6241                 # south side: the gate
+D 12616,6246:12822,6272                 # the line (diffusion); its west end is under the VSS rail
+
+# --- q leaves the slice: the q line's arm ends on a pad (ring; green patch in the clean shot,
+# b5.png), from which a poly runs south (not followed below y 6400)
+P 12944,6332:12977,6366
+C 12957,6348
+P 12955,6360:12976,6400
+@end
+@inst amr_slice -390,0 tag=b6
+@inst amr_slice -781,0 tag=b5
+@inst amr_slice -1171,0 tag=b4       # the column at x 11490: same slice (cellcheck: differs only
+                                        # at the pull-down's east end and outside; overlay c0.png)
+
+# --- east end of the big pull-down in the three full columns: the gate goes round the east
+# end of the VSS diffusion (x 12856, rounded; mb.png) and back along the top, and the line
+# goes on east under the next VSS rail.
+P 12815,6142:12881,6169
+P 12858,6142:12881,6241
+P 12815,6215:12881,6241
+D 12808,6174:12856,6272
+?D 12852,6176:12906,6250                # east of the gate's east side, in the open gap: outline
+                                        # seen, colour not readable (adds W 38 round the corner)
+D 12816,6246:13010,6272
+P 12425,6142:12491,6169
+P 12468,6142:12491,6241
+P 12425,6215:12491,6241
+D 12418,6174:12466,6272
+?D 12462,6176:12516,6250
+D 12426,6246:12620,6272
+P 12034,6142:12100,6169
+P 12077,6142:12100,6241
+P 12034,6215:12100,6241
+D 12027,6174:12075,6272
+?D 12071,6176:12125,6250
+D 12035,6246:12230,6272
+D 13006,6250:13047,6273                 # the line ends (rounded) under the rail east of the last slice
+N D 12900,6259 amr_eq_r3
+
+# --- the column at x 11490: the gate's east side is 42 px further west, and east of it stand
+# the line's load and its gate tie (single-shot views c0b, c0c, c0d.png, 3-4x, clean shot and
+# both chip-2 shots; one copy only, so no median).
+P 11645,6142:11663,6246                 # gate's east side, under the VCC rail's west edge
+?D 11636,6248:11662,6284                # the line steps down about 12 px here (gap between two metals)
+D 11656,6262:11800,6284                 # the line, east
+D 11677,6150:11718,6221                 # VCC land east of the rail: contact with a ring in both metal shots
+M 11690,6150:11713,6221                 #   the rail's pad over it
+C 11690,6186 s=24x30
+?D 11714,6152:11728,6220                # dark bar in the 17 px gap between the pad and the q line
+D 11724,6152:11814,6221                 # band east through the load gate (W 69)
+D 11790,6215:11814,6284                 # down to the line
+D 11796,6248:11840,6274                 # the line, east to the next column
+P 11746,6136:11782,6252                 # load gate block (L 36): orange in both chip-2 shots
+P 11762,6250:11786,6278                 # its foot on the line
+?B 11760,6249:11790,6280                # gate tie: outlined box in the chip-2 stripped shot (c0d.png)
+
+# --- east of the last slice: a VSS rail with the two lands that the slice's T3, Tq1 and series
+# pair end on (east.png, 2.3x, clean shot and metal)
+M 13021,5545 y6440 w=46
+N M 13021,6000 vss
+D 12993,5704:13023,5762
+D 13000,5735:13048,5786
+C 13016,5758 s=24x34
+D 12993,5888:13048,5946
+C 13018,5907 s=24x34
+D 12996,5940:13022,6095

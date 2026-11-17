@@ -1,0 +1,4 @@
+# rde: data bus lines through rows D/E of the central datapath, and bits 5, 6 to R10
+8840,5150:10430,5700  route   data bus bits 4-0 through rows D/E | cdp1's five slice bit lines down to R11 and R10; a 54 px necked stretch at y 5542-5596 is assumed continuous
+8065,5040:8128,7395   route   data bit 6 to R10 | metal down x 8075, step east at y 5848, down x 8118 to R10's west slice
+8455,5150:8740,7395   route   data bit 5 to R10 | R8 bit 5's tap down x 8727, poly west along y 6087, metal down x 8464 and 8532 to R10's second slice

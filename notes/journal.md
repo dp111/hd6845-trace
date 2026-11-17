@@ -1162,3 +1162,79 @@ AMB-017, AMB-018; floor plan: the coarse "logic above the counters" block remove
 top-right logic rows trimmed above the `ral` band; `out/` rebuilt.
 
 Next: the `rename` package (now unblocked), then the queue as before.
+
+## 2026-11-17 13:01  Parallel work for remote collaborators; the master list covers the die
+
+The user: claims must show at once, by commit and push, so that several remote
+collaborators can work in parallel; the workflow must be where they see it first,
+including an independent review; we keep the master list. Then: "do we have the entire
+die mapped out into blocks for tracing", and a `/trace6845` command that does a package
+end to end. Collaborators will be given write access.
+
+- **Claims**: `tools/claim.py take` pulls main into the checkout (fast-forward only,
+  user: "Ensure that the remote is always pulled before claiming a task"), refuses a
+  prefix the master list does not name, a taken prefix or an overlapping region, and
+  pushes `claims/PREFIX.md` straight to main with git plumbing (the working tree is not
+  touched; a race loses at the push and sees the winner's claim). `list`, `release`,
+  and `done` (after a merge: the claim becomes "merged, awaiting coordinator" and holds
+  the tracer's proposals for the coordinator's files). Tested against a local bare copy.
+- **Work**: one branch and worktree per package (`tools/newwork.sh`); `tools/ship.sh`
+  pushes the current branch and refuses main unless `HD_COORD=1`; its lock now works in
+  worktrees.
+- **Gate**: `tools/mergecheck.py PREFIX` (branch contains main; only own files, the
+  glossary, `operation.md` and named trace fixes changed; extraction 0/0; glossary and
+  former names clean; a Review section ending "Round N: no findings."; new `?`-only joins
+  written up). Run on main for `wrj`: passes all but the review wording, as expected.
+- **`/trace6845`** (`.claude/skills/trace6845/SKILL.md`): pull, choose the first free
+  queue row, claim, worktree, trace by the guide, review rounds with a fresh agent each
+  round until one finds nothing (at most five, else stop without merging), merge through
+  the gate, push to main, hand off.
+- Documents: `notes/workflow.md` (new), the top of `CLAUDE.md`, `README.md` (new),
+  `.github/pull_request_template.md` (for those without write access), the tracing
+  guide's sections 1, 9 and 10, the master list's header.
+
+**Coverage.** `tools/coverage.py` (new) draws the die: traced, untraced inside some
+package's region, untraced in none. Before: 28 % of the die rectangle in none. The gaps:
+the pad ring (39 of 40 pad squares are not drawn: only MA3's is; the RA0-RA4 drivers are
+traced but not their pad squares or the metal to them), the D0-D7 pad cells (named in
+`dbus`'s row without a region), a bus field with a gate group at 13200-17750 x
+16900-18560, a gate group at 4780-7000 x 15000-17000, the test structures, and seams
+between regions. New queue rows `dpad`, `busC`, `bl0`, `teststr`; `padring` given
+regions; seams closed. After: 0.0 % in none. About 54 % of the die rectangle is traced
+(within 100 px), which overstates it inside partly traced arrays.
+
+## 2026-11-17 14:24  PRs #13 (rde) and #14 (amr) merged
+
+Both from dp111, both on b8e2524, independent of each other; merged onto main without
+conflicts. Checks on the merged tree: 2,112 nets, 3,582 transistors (+57: `amr`'s slice),
+0 errors, 0 warnings; glossary and former names clean; `tools/unsure.py`: five new nets
+joined only through `?` items, `cdp1_c1_bl`..`cdp1_c5_bl` (rde's `?M` neck, disclosed,
+now AMB-019). Notes read in full; the slice equations checked by hand (x = NOT(NOR(c, q) +
+c.q) = c XOR q). Photo spot checks: `amr` c3 overlaid on the clean shot at 1.5x (every
+outline on a feature); rde's neck at (9630, 5545-5595) at 4x in two shots: no metal can be
+seen across it, as the notes say.
+
+- **R3's high nibble is traced** (`amr`): four latches on `wr_r3` from data bits 4-7,
+  and a 4-bit equality comparator, `amr_eq_r3`, against four lines from the west. Those
+  lines are **inputs**; `bust` and the first survey had called them outputs (corrected
+  in `bust.md` and the glossary; trap 20, re-read R18). Where `amr_eq_r3` goes and what
+  drives the four lines: not found.
+- **R10 and R11** take their data from the bus (`rde`): `cdp2` row A = R11 (bits 0-4),
+  row C = R10 (bits 0-6), as the datasheet. Bits 0-4 marked (AMB-019).
+- Method notes from both became traps 18-19 and re-read items R16-R17.
+
+The PRs predate the claim workflow, so there were no claims to release.
+
+## 2026-11-17 14:30  /refresh6845
+
+User: a skill to regenerate `out/`, update `notes/operation.md` and rename the default
+named signals whose purpose is now clear. `.claude/skills/refresh6845/SKILL.md`
+(coordinator only, on main): baseline; renames in batches, each proved by
+`tools/names.py compare` (transistors and connections identical, only names changed)
+and the glossary checks, committed per batch; `operation.md` against
+`tools/unsure.py --equations`; `tools/build.py`; journal. `tools/names.py` (new):
+`candidates` lists placeholders and old `@alias` names beside a functional name, split
+into firm (rename) and through `?` items (do not, trap 17), plus glossary hints;
+`snapshot` / `compare`. On today's tree it lists, among others, `uc_b0`..`uc_b6` ->
+`rc0`..`rc6`, `cdp1_l4719` -> `sl_eq_r5`, `rdp3_n2s1` -> `h_eq_r0`, and keeps rde's
+data bits 0-4 apart (AMB-019). Not run yet.
