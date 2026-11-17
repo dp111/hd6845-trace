@@ -384,3 +384,21 @@ Inverter 1 (node a to `ral_n1`) is not drawn after three passes.
 
 Device sizes: re-read item R14. Settle inverter 1 with single shots at 5-6x of
 x 14195-14300, y 4280-4460 in copies s1 and m4.
+
+## AMB-019: the data bit lines 0-4 through `cdp1`'s rows D/E, y 5542-5596 (2026-11-17)
+
+`notes/blocks/rde.md`, "The five lines through rows D and E". On each of the five bit lines
+(x 8856 + 390 k, k = 0..4) the bright metal fades out at y 5540-5547 and comes back at
+y 5593-5600; about 12 px across a thin dark bar (y 5557-5567) cannot be seen in any shot.
+
+- Reading 1 (adopted, drawn `?M`): the line narrows to about 10 px to clear the next
+  track's contact pad, and is continuous. Then R11 is written from bits 0-4 and R10 from
+  bits 0-6, as the datasheet says.
+- Reading 2: a long contact from the line to the diffusion column below it (row E's tap).
+  Same net.
+- Reading 3: two pieces, each contacting the column either side of the bar, with the bar
+  a gate: a transistor in series with each bit line. The joins would be wrong.
+
+The contributor's review leaned to continuous (about 80 %); the coordinator's look at 4x
+in two shots agrees that it cannot be seen. Settle by tracing row E's cell. The `cdp2`
+bus names are aliases, not renamed.
