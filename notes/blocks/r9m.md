@@ -130,6 +130,25 @@ y 3345-3360: the upper piece (the first line) ends on the contact and drives
 x 4148 from y 3330 to 3370 in both metal shots, against a known crossing of poly under
 unbroken metal, would decide the break.
 
+## The bundle's lines 3 and 4, followed east from the step logic (observed, not drawn)
+
+- **Line 3** (pad (4270,2640) in the middle cluster): metal east along y 2642 to a pad
+  (4866,2681); beyond the `res_b`/`lpstb_b` metals a metal from x 5440 runs east along
+  y 2685 to x 5848 and **south along x 5842 to a pad (5845,5045)** (tools/follow.py). The
+  hop under the two metals is assumed from lines 1 and 2, not seen. Directly below, at
+  (5845,5575), is the top pad of `bw`'s metal x 5841, which is `rc_stepreq_n` (the row
+  counter's step request, made in the step logic). In the chip-2 stripped shot there is
+  no poly between the two pads (1.6x, `cache/scratch/bust/sr.png`), so they are not shown
+  to be one net. If they were, line 3 would be the step logic's output on its way to
+  `wl`, not an input.
+- **Line 4** (pad (4232,2683)): metal east along y 2685, then down to y 2728, to x 4868
+  (pad, sampled with --max). The metal beyond the hop was not found from x 5420-5520 at
+  y 2727.
+- From the bus side (`notes/blocks/bust.md`): `amr`'s outer outputs c1 and c2 run west on
+  `cdp1_l4588` and `cdp1_l4632`, along the bus metals above the row address selector to
+  x 6913-6921. Whether those are lines 3 and 4 is not established; given line 3's route
+  south at x 5842, probably not.
+
 ## Not done
 
 The first line's source: the logic block x 12600-12900, y 5600-6400, from the pad at
