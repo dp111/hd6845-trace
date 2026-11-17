@@ -252,7 +252,6 @@ None of these rows has a register number yet, so all names are by place. Columns
 | `ral_a_s#` | `ral` cell s# (s0-s4 west to east; s0 is RA bit 0's cell), node a: the input pass transistor's far side, diffusion strip y 4479-4494, joined by a hold device (gate VSS) to the cell's output, which is the RA# pad driver's input line (`ra#_drv_in`; `ra#_drv_in_u` for 2-4, as r9c names them). Its use as a gate input is not drawn |
 | `ral_tf_s#` | `ral` cell s#: drain of the pull-down gated by `cnt_gab`; not drawn further |
 | `ral_a_m#`, `ral_tf_m#` | the same nodes in the fourteen copies of the `ral` cell in front of the MA pad drivers (`trace/mal.txt`, tags m0-m13 top to bottom; **copy m# drives MA#**: each output followed to its pad driver) |
-| `ma#_drv_in_u` | (# = 4, 5, 6) the metal from MA copy m#'s output to the MA# pad driver: it ends level with the driver's input poly, but the poly hop between them (as drawn for MA8) is not drawn (`trace/mal.txt`) |
 | `mal_frc_m#` | the gate tab of the force pull-down in MA copy m#: a pad of its own (no common line, unlike the RA band's `cnt_gab`); where it goes not followed |
 | `cdp1_b#_n2`, `cdp1_b#_ne` | NOR(a, b) and a XOR b |
 | `cdp1_b_eq` | NOR of the five `_ne`: high when R9 equals the 5-bit value on the `_b` lines (in slice 5 the register bit is replaced by `cdp1_b5_a`, made by `tc1`) |

@@ -92,8 +92,7 @@ N M 2200,18040 ma12_drv_in
 # them at the y of each driver's gate (ma0 x 4602, ma1 x 3062, ma2 y 1658, ma3 y 3264,
 # ma4 y 4912, ma5 y 6994, ma7 y 10118). Contacts at those ends are drawn as found by the
 # follower's end, not each viewed: marked ?. For MA4, MA5 and MA6 pads_out's poly does
-# not reach the metal's end (as with MA8, a poly hop under the vertical metals is
-# expected): those three are labelled _u and the hop is not drawn.
+# not reach the metal's end: the poly hops are drawn at the end of this file.
 P 2195,8040 x2555 w=16
 P 2178,8023:2212,8057
 C 2195,8038
@@ -122,19 +121,19 @@ P 2283,10510 x2555 w=16
 P 2266,10493:2300,10527
 C 2283,10510
 M 2283,10510 y4914 w=12
-N M 2283,7000 ma4_drv_in_u
+N M 2283,7000 ma4_drv_in
 P 2240,11115 x2555 w=16
 P 2223,11098:2257,11132
 C 2240,11112
 M 2242,11120 y6995 w=12
-N M 2242,9000 ma5_drv_in_u
+N M 2242,9000 ma5_drv_in
 # m6: larr's line x 2192-2206 (y 8552-11931) ends on a contact (2197,11923) on m6's output
 # poly; its top is level with ma6_drv_in (y 8555). larr: "not checked by a view".
 P 2197,11921 x2555 w=16
 P 2180,11906:2214,11940
 C 2197,11923
 M 2197,11930 y8555 w=12
-N M 2197,10000 ma6_drv_in_u
+N M 2197,10000 ma6_drv_in
 P 2155,12615 x2555 w=16
 P 2138,12598:2172,12632
 C 2155,12615
@@ -151,3 +150,17 @@ M 2530,18908 x3640 w=12
 P 3610,18885:3644,18919
 C 3627,18902
 N M 3000,18908 ma13_drv_in
+
+# MA4-MA6: the drivers' input polys (pads_out, ending about x 2085) run on east under the
+# vertical metals to a pad at the end of each copy's metal, as MA8's does (mosaic of the
+# three at 1.25x in the metal shot, cache/scratch/ral/hop.png: a continuous poly with a
+# ringed pad at each end).
+P 2080,4912 x2283 w=20
+P 2266,4897:2300,4931
+C 2283,4914
+P 2080,6994 x2241 w=20
+P 2224,6978:2258,7012
+C 2241,6995
+P 2080,8555 x2197 w=20
+P 2180,8538:2214,8572
+C 2197,8555
