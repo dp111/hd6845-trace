@@ -59,9 +59,8 @@ y 5632 to y 8815). R3 has four data lines of its own.
   zone to a contact under the counter track of one comparator slice: slice 0 takes bit
   0, ... slice 3 takes bit 3 (four 1.25x metal views of the zone, `rz1m`-`rz4m.png`).
   A 4-bit counter on the character clock compared with R3: the **horizontal sync width
-  counter**, now `hsw0`-`hsw3`. That the nibble here is R3's *low* one (bits 0-3) is taken
-  from the datasheet's register layout, not from the trace: its data lines are not yet
-  followed to the pads.
+  counter**, now `hsw0`-`hsw3`. That the nibble here is R3's *low* one (bits 0-3) now follows
+  from the trace: its four data lines are data bus bits 0-3 (`notes/blocks/r3d.md`).
 - **R5's comparator against the left array's 5-bit counter.** That counter's five output
   lines were followed and drawn 9,000 px from the left array to here
   (`trace/slbus.txt`, `notes/blocks/slbus.md`). Each ends on a contact under one counter
@@ -88,9 +87,10 @@ Seen, not drawn:
 
 - The right group's rails shift 88 px west by diagonals at y 6560-6680 to become the
   rails of the array below.
-- R3's four data lines shift sideways below the latch row and end on contacts
-  ((15470,6775), (15945,6730), (16355,6688), and one further right) on poly lines that
-  run east and then south on metals at x 16225, 16380, 16650: towards the data bus.
+- R3's four data lines below the latch row: drawn by `r3d` to the data bus (bits 0-3).
+  `r3_b0_d` and `r3_b1_d` end on contacts (15490,6775) and (15880,6735) on poly lines east;
+  `r3_b2_d` turns east as metal to a contact (16362,6688); `r3_b3_d` runs straight on. The
+  metals south are x 16274, 16404, 16620, 16664 (`notes/blocks/r3d.md`).
 - A thin metal on the strap track of the last R5 slice (x 15250-15277) comes down to a
   contact (15255,6815); poly east to a contact (15385,6815) at the top of a metal at
   x 15390 (`ubus_b5`'s position). So that track may be how `ubus_b5` reaches the north.

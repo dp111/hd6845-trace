@@ -1,0 +1,47 @@
+# dbl: data bus bits 0-3 from the right datapath's routing zone to the D-pin units of dbus.
+#
+# Each of the four data lines goes on east past the R3 taps (r3d) to the wiring field left
+# of the dbus column (x 17050-17300) and down it as one of the field's vertical metals to
+# a contact at the foot of a poly that runs east into the cluster of unit k (the units
+# are at a 1366 px pitch: contacts at y 9467, 10832, 12200, 13563).
+
+# ---- bit 0: a tap on its own thin metal x 16274 (contact (16270,9203), 4.5x in three
+# shots, r3d/tap0.png), poly east along y 9205 to a contact (16960,9210), metal east along
+# y 9210 to x 17125, south to y 9465 and east to a contact (17207,9467) (b0x.png, stair.png,
+# u0.png).
+P 16253,9186:16287,9220
+C 16270,9203
+P 16270,9205 x16960 w=14
+P 16943,9193:16977,9227
+C 16960,9210
+M 16955,9210 x17128 y9467 x17212 w=14
+P 17190,9450:17224,9484
+C 17207,9467
+
+# ---- bit 1: row y 9400 on east from the R3 tap (16400,9400) to a contact (16985,9400);
+# metal x 16985 south to y 9660, east to x 17078, south to a contact (17077,10832).
+P 16400,9400 x16985 w=14
+P 16968,9383:17002,9417
+C 16985,9400
+M 16988,9395 y9660 x17078 y10840 w=14
+P 17060,10815:17094,10849
+C 17077,10832
+
+# ---- bit 2: row y 9355 on east from the R3 tap (16615,9355) to a contact (17030,9355);
+# metal x 17032 south to y 9580, east to x 17166, south to a contact (17165,12200).
+P 16615,9355 x17030 w=14                     # x 16630-16700: continuous in acid, metal and metal1 at 6x (review)
+P 17013,9338:17047,9372
+C 17030,9355
+M 17032,9350 y9580 x17166 y12206 w=14
+P 17148,12183:17182,12217
+C 17165,12200
+
+# ---- bit 3: row y 9310 on east from the R3 tap (16660,9312) to a contact (16985,9310);
+# metal east along y 9312 to x 17085, south to y 9530, east to x 17210, south to a contact
+# (17208,13563).
+P 16660,9312 x16985 w=14
+P 16968,9293:17002,9327
+C 16985,9310
+M 16980,9312 x17085 y9530 x17210 y13570 w=14
+P 17191,13546:17225,13580
+C 17208,13563

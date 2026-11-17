@@ -1,0 +1,4 @@
+# r3d: R3's low-nibble data lines from the data bus (wiring)
+14230,9295:16680,9460  route   data bits 0-3, east | the routing-zone rows on east to four contacts
+16255,6680:16680,9460  route   R3 data, bundle | four thin metals north to R3's data lines
+15470,6670:16420,6790  route   R3 data, top | poly rows y 6688-6775 from R3's data lines east to the bundle
