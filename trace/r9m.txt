@@ -41,7 +41,10 @@ C 4912,2641
 # west (y 3368-3385) to x 4170. Whether the stub ends on the metal x 4148 twelve px
 # further west is AMB-013.
 M 4912,2641 x4668 4626,2599 x4194 y3384 w=13
-M 4194,3376 x4170 w=17
+M 4194,3376 x4142 w=17
+# The stub joins track P's lower piece (x 4148, y 3371-3596): 5-6 px between them at
+# x 4162-4166 is the edge of tla's poly stem printing through continuous metal (measured in
+# both metal shots, notes AMB-013). Drawn with tla's split of track P (separate commit).
 
 N M 7600,4462 cdp1_b_eq
 N M 4194,3000 cdp1_b_eq
