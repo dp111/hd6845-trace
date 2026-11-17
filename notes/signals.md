@@ -248,7 +248,7 @@ None of these rows has a register number yet, so all names are by place. Columns
 | `wr_r8`, `wr_r9` | the write strobes of R8 and R9, which are the write lines of rows A and C: **row A is R8, row C is R9** (`notes/blocks/wrs.md`) |
 | `cdp1_b5_a` | the register-side input of R9's comparator in slice 5 (bit 0): not the register bit but the output of the island `tc1` |
 | `ra#_cmp` | the row-address-side input of R9's comparator for bit # (# = 0-4): output of a unit near the right edge whose pull-down is gated by `ra#_drv_in`; with the unit's load, NOT `ra#_drv_in`, the level of pin RA# (AMB-012; `notes/blocks/r9c.md`). The comparator cell's own name for the same net, `cdp1_b#_b` with # = 5 minus the bit, is kept as an alias |
-| `ra#_drv_in_u` | (# = 2, 4) the input of that unit, believed to be `ra#_drv_in`. RA4's is aliased to `ra4_drv_in` (`trace/rad.txt`) through r9c's `?P`; RA2's joins `ral` cell s2's output but its last stretch to the pad cell's line (below (15252,4183)) is not drawn. RA3's was renamed: the join through x 16297 is firm |
+| `ra#_drv_in_u` | (# = 4) the input of r9c's RA4 unit, aliased to `ra4_drv_in` (`trace/rad.txt`) through r9c's `?P`. RA2's and RA3's were renamed when the joins through `ral` came out firm |
 | `ral_stb` | the strobe of the `ral` cells' input pass transistors (metal y 4548 under the band). Followed back and drawn (`trace/ral.txt`): north along x 13862, west along y 4245 (the sixth line of rab's bundle), a cross-under at x 11150-11650, north along x 11068, west along y 2768 with three poly hops, to x 8350, where it is `tc1`'s nested bus metal ns4 (old name under former names). That metal goes south past y 4450 to a pad at about (8205,5672), whose poly runs east towards the twentieth `ral` copy at (8449,5562) (seen, not drawn). Source: not found yet |
 | `ral_a_s#` | `ral` cell s# (s0-s4 west to east; s0 is RA bit 0's cell), node a: the input pass transistor's far side, diffusion strip y 4479-4494, joined by a hold device (gate VSS) to the cell's output, which is the RA# pad driver's input line (`ra#_drv_in`; `ra#_drv_in_u` for 2-4, as r9c names them). Its use as a gate input is not drawn |
 | `ral_tf_s#` | `ral` cell s#: drain of the pull-down gated by `cnt_gab`; not drawn further |
@@ -862,3 +862,4 @@ datapath s1...s7, s0 became b0...b6, b7.
 | ra3_drv_in_u | ra3_drv_in | |
 | ral_frc | cnt_gab | |
 | tc1_ns4 | ral_stb | |
+| ra2_drv_in_u | ra2_drv_in | |

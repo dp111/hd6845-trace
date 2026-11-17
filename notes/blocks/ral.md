@@ -112,7 +112,7 @@ needs re-reading too.
 | `rax_o1` ... `rax_o4` | poly | up x 13995 + dx from pads at (14430,4590), (14863,4635), (15425,4675), (15860,4632) to the buried contact on each strip | in | s1-s4's inputs; s2's and s4's pads at the ends of rab's metals (s4's goes on east along y 4722 to x 15862 and north) |
 | `ra0_drv_in` | poly | x 14331-14349 at y 4480-4525, joins r9c's poly from the pad (14340,4764) | out | s0's output |
 | `ra1_drv_in` | poly | s1's output poly down to a pad (14774,4592) on RA1's line y 4592 | out | |
-| `ra2_drv_in_u` | poly | s2's output poly down to a pad (15208,4805), where r9c's RA2 unit line starts | out | |
+| `ra2_drv_in` | poly | s2's output poly down to a pad (15208,4805), where r9c's RA2 unit line starts | out | |
 | `ra3_drv_in` | poly, metal, poly | s3's output poly to a pad (15771,4593), metal east along y 4590 and south along x 16297, poly to a pad (16297,5108), where r9c's RA3 unit line starts | out | |
 | `ra4_drv_in_u` | poly, metal, poly | s4's output poly to a pad (16205,4640), metal south along x 16207, poly to a pad (16205,5153), where r9c's RA4 unit line starts | out | |
 | `ral_a_s#`, `ral_tf_s#` | diffusion | inside the cell | internal | node a (between the pass and hold devices) and Tf's drain; both continue into the untraced part |

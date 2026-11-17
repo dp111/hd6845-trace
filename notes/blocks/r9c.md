@@ -24,7 +24,7 @@ selector, after the inverters `rax` and after the stage in front of the pad driv
 For RA0 and RA1 the join to the pad driver's input is drawn and extracted
 (`ra0_drv_in`, `ra1_drv_in`: the same nets as the gates of the pad cells' first
 inverters). For RA2, RA3, RA4 the units' input metals are drawn to where they were
-followed and labelled `ra2_drv_in_u`, `ra3_drv_in`, `ra4_drv_in_u` (open joins): RA2's
+followed and labelled `ra2_drv_in`, `ra3_drv_in`, `ra4_drv_in_u` (open joins): RA2's
 ends on the pad (15210,4805) of the third poly that comes down from the pad drivers'
 lines; RA3's and RA4's metals end at (16290,5109) and (16202,5153), not looked at.
 
