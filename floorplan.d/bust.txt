@@ -1,4 +1,4 @@
 # bust: the bus from the central datapath's channel to the right datapath (wiring)
 10845,4540:11700,5200  route   bus cross-under | cdp1's channel lines drop 65 px under the supply metal to a staircase of pads
 11640,4640:13560,5210  route   data bus, west | twelve metal lines; amr's six outputs land on six of them
-13190,4770:16930,5210  route   data bus, east | eight lines step down one track, then end on pads into the right datapath: ubus_b1-b4, R5's match
+13190,4770:16930,5210  route   data bus, east | eight lines step down one track, then end on pads into the right datapath: db_b1-b4, R5's match

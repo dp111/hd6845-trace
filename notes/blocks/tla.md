@@ -28,7 +28,7 @@ rcs_cond_lat <- rcs_cond while clk_tl  pass transistor latch (AMB-009)          
 rcs_u3288  = NOR(rcs_g3245, rcs_bd3330)                                                (3046,3288)
 rcs_n4200  = NOT(rcs_cond AND clk_tl OR rcs_g4240)   AND-OR-INVERT under the rail (3008,4200)
 in1        = NOR(rcs_mu, rcs_mv)         middle cluster                                (4081,4072)
-rcs_mu     = NOT rcs_bq3335              middle cluster, inverter                      (4050,3374)
+rcs_mu     = NOT ra_eq_r9              middle cluster, inverter                      (4050,3374)
 rcs_mn3852 = NOR(?, in1)                 middle cluster; second gate not read
 ```
 
@@ -77,12 +77,12 @@ the VSS rail):
 
 ```
 in1        = NOR(rcs_mu, rcs_mv)      unit at (4081,4072), with its load
-rcs_mu     = NOT rcs_bq3335           inverter at (4050,3374): one gate, under the rail and on the column
+rcs_mu     = NOT ra_eq_r9           inverter at (4050,3374): one gate, under the rail and on the column
 rcs_mn3852 = NOR(?, in1)              the unit above in1's: in1 is one of its gates; output up x 4233 to y 2852
 ```
 
 `rcs_mv` is a bus piece (x 4192, y 4112-4748) whose far end is a poly that leaves east and
-south at (4283,4745); `rcs_bq3335` is a bus piece (x 4148, y 3320-3596). `e3`'s metal goes
+south at (4283,4745); `ra_eq_r9` is a bus piece (x 4148, y 3320-3596). `e3`'s metal goes
 east along y 2728 to x 4496, south to a contact (4490,3805), and on east in poly along
 y 3805: towards the **right cluster** (x 4650-5050).
 

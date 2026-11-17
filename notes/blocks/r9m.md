@@ -12,8 +12,8 @@ x 5078-5127 (between pads 4867/4912 and 5358/5400/5405) **do not run straight**:
 poly steps down one track going east. The trace was redrawn accordingly:
 
 - R9's match (pad (5358,2641)) runs west, steps up at x 5120-5135, and arrives at pad
-  (4867,2596), i.e. the metal that ends on the contact (4148,3335). So **`rcs_bq3335` is
-  R9's match** (`@alias cdp1_b_eq rcs_bq3335`), and `rcs_mu = NOT cdp1_b_eq`: the step
+  (4867,2596), i.e. the metal that ends on the contact (4148,3335). So **the step logic's input
+  there (then under a place name) is R9's match**, now one name, `ra_eq_r9`, and `rcs_mu = NOT ra_eq_r9`: the step
   logic's first term is "scan line equals R9 (as compared at the RA pins), and not
   `rcs_mv`". Firm geometry (no `?` on the path).
 - Pad (4912,2641), with the metal down x 4194, the stub and track P's lower piece, belongs
@@ -27,7 +27,7 @@ poly steps down one track going east. The trace was redrawn accordingly:
   track (nested L's at x 8215-8345, `cache/scratch/bust/stair2.png`), so this row does
   **not** become `cdp1_l4676`: it turns south near x 8190. `cdp1_l4676` (the line from
   `amr` c3, east of `cdp1`) is fed instead by the west row y 4635.
-- So: **`amr` c3's outer output is not `rcs_bq3335`**; that statement below is withdrawn,
+- So: **`amr` c3's outer output is not `ra_eq_r9`**; that statement below is withdrawn,
   as is "the bundle's first line ... followed back 9,000 px".
 
 A second, focused review (same day) confirmed both corrected hops and the staircase at
@@ -40,7 +40,7 @@ staircase's vertical legs are at about x 8360, 8318, 8275, 8232 (drawn 8337, 829
 The sections below are kept as the record of how the earlier reading was made; where
 they disagree with this one, this one holds.
 
-## Route of `cdp1_b_eq`, from the comparator west
+## Route of `ra_eq_r9`, from the comparator west
 
 | Stretch | Layer | Ends |
 |---|---|---|
@@ -53,7 +53,7 @@ they disagree with this one, this one holds.
 
 It is the second of four parallel lines over the last 1,200 px. The other three, by
 their west ends: the first (y 2598 at x 4760) shifts to y 2555, turns south at x 4148 and
-ends on the contact (4148,3335) of `rcs_bq3335`; the third ends on a pad (4270,2640) with
+ends on the contact (4148,3335) of `ra_eq_r9`; the third ends on a pad (4270,2640) with
 a poly west; the fourth on a pad (4232,2683) with a poly west. `rcs_e3`'s pad (4270,2725)
 is the next position down; its metal goes east to x 4496 and south to y 3813 (followed,
 not drawn), so `rcs_e3` is not one of the four.
@@ -61,13 +61,13 @@ not drawn), so `rcs_e3` is not one of the four.
 ## Where it ends
 
 In the middle cluster of the row counter's step logic (`trace/tla.txt`), beside the
-contact of `rcs_bq3335`, the input of the inverter that makes `rcs_mu`:
+contact of `ra_eq_r9`, the input of the inverter that makes `rcs_mu`:
 
-    rcs_mu  = NOT rcs_bq3335
-    rcs_in1 = NOR(rcs_mu, rcs_mv)     = rcs_bq3335 AND NOT rcs_mv
+    rcs_mu  = NOT ra_eq_r9
+    rcs_in1 = NOR(rcs_mu, rcs_mv)     = ra_eq_r9 AND NOT rcs_mv
     row counter step = rcs_in1 OR (NOT rcs_e4 AND NOT (rcs_e3 AND rcs_a2))
 
-Whether the match line is on `rcs_bq3335` is AMB-013. If it is, the first term of the
+Whether the match line is on `ra_eq_r9` is AMB-013. If it is, the first term of the
 row counter's step is "scan line equals R9 (as compared at the pins), and not
 `rcs_mv`", which is what one expects of it; but that is the reason to be careful, not
 evidence.
@@ -75,7 +75,7 @@ evidence.
 ## Drawn (2026-11-17 04:33, contributor session)
 
 `trace/r9m.txt`: the whole route above, from `cdp1`'s poly end (x 8340) to the stub at
-the foot of x 4194, as one net `cdp1_b_eq`. Every metal stretch re-run through
+the foot of x 4194, as one net `ra_eq_r9`. Every metal stretch re-run through
 `tools/follow.py` (both chips' metal shots); the diagonal at x 4626-4668 placed by
 sampling the follower with `--max` (it is at (4670,2639) after 180 px, (4660,2633) after
 190, (4620,2598) after 230). Checked by overlay in `metal` and the stripped shots at
@@ -88,12 +88,12 @@ with no ring in either metal shot. So the line has no taps between the comparato
 the step logic.
 
 Extraction: no new transistors (the three poly hops cross no diffusion), no name clash;
-`cdp1_b_eq` is one net from the comparator's load to (4170,3376). The stub's last 12 px
-to the metal x 4148 (`rcs_bq3335`) are **not drawn** (AMB-013 unchanged).
+`ra_eq_r9` is one net from the comparator's load to (4170,3376). The stub's last 12 px
+to the metal x 4148 (`ra_eq_r9`) are **not drawn** (AMB-013 unchanged).
 
 ## The bundle's first line, followed back towards its driver (2026-11-17 04:41)
 
-Drawn in `trace/r9m.txt` as one net with `rcs_bq3335` (the inverter input at the contact
+Drawn in `trace/r9m.txt` as one net with `ra_eq_r9` (the inverter input at the contact
 (4148,3335) in `tla`), and with `cdp1_l4676` (alias), as far as the edge of an untraced
 logic block. Route, from the step logic outwards:
 
@@ -149,10 +149,10 @@ middle cluster's gate column, not traced. That gate is where R9's match is used,
 reading C.
 
 **Applied as a separate commit** ("tla/r9m: reading C of AMB-013"), which also edits
-`trace/tla.txt`: track P split into y 3320-3341 (the contact, label `rcs_bq3335` moved up)
+`trace/tla.txt`: track P split into y 3320-3341 (the contact, label `ra_eq_r9` moved up)
 and y 3371-3596, and R9's stub drawn onto the lower piece. Only the one contact (3335)
 was on that metal, so nothing else changes. Extraction: `rcs_mu`'s inverter is gated by
-`rcs_bq3335` (the bundle line from `amr` c3), and `cdp1_b_eq` (R9's match) now runs on
+the step logic's input (taken then for the bundle line from `amr` c3), and R9's match now runs on
 down track P. Its lower end (contact (4148,3588)) has a poly west along y 3578-3598 to
 x about 3995, where it turns south into the middle cluster's gate column (3.2x,
 `cache/scratch/r9m/r9g.png`): the gate that uses R9's match is there, not traced. Between R9's stub and the x 4148
@@ -163,7 +163,7 @@ separate metal lines elsewhere.
 So a third reading exists. **Reading C**: the stub joins the x 4148 metal (the dark line
 is the poly stem's edge printing through), but that metal is two pieces, broken at
 y 3345-3360: the upper piece (the first line) ends on the contact and drives
-`rcs_bq3335`, and the lower piece (y 3362-3596) carries R9's match on south. If so,
+`ra_eq_r9`, and the lower piece (y 3362-3596) carries R9's match on south. If so,
 `trace/tla.txt`'s `M 4148,3320 y3596` joins two nets. A brightness profile along
 x 4148 from y 3330 to 3370 in both metal shots, against a known crossing of poly under
 unbroken metal, would decide the break.

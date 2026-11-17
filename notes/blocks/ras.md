@@ -148,7 +148,7 @@ Views `cache/scratch/rax/tcs_a.png`, `tcs_m.png`, `tcs2.png`, `tcs4.png`, `tcg.p
 nine-gate island north of it (`trace/tc1.txt`, traced weeks ago with letters for names),
 430-800 px away, as polys under six bus metals. With the joins drawn the extraction makes
 each pair one net; the island's nets took the selector's names. With q = R9's bit 0
-(`cdp1_c5_q`):
+(`r9_b0_q`):
 
     ras_straight = NOT ras_shift
     ras_o0_sel1  = ras_shift AND q            passes ras_o0_alt1 to ras_o0

@@ -108,7 +108,7 @@ M 15162,6905 y8300 w=56
 M 15552,6905 y8300 w=56
 M 15942,6905 y8300 w=56
 N M 13600,7600 vcc
-# data lines (labelled in rdp2.txt: ubus_b0 .. ubus_b6)
+# data lines (labelled in rdp2.txt: db_b0 .. db_b6)
 M 13455,6905 y8300 w=24
 M 13845,6905 y8300 w=24
 M 14235,6905 y8300 w=24
@@ -116,7 +116,7 @@ M 14625,6905 y8300 w=24
 M 15016,6905 y8300 w=24
 M 15406,6905 y8300 w=24
 M 15796,6905 y8300 w=24
-# counter lines (labelled in rdp2.txt: uc_b0 .. uc_b6)
+# counter lines (labelled in rdp2.txt: rc0 .. rc6)
 M 13541,6868 y8300 w=22
 M 13931,6868 y8300 w=22
 M 14321,6868 y8300 w=22
@@ -127,7 +127,7 @@ M 15882,6868 y8300 w=22
 
 # ---- comparator of R6: eq line (row-wide diffusion strip), its exit in sm1, right end, T2 pieces
 D 13378,7656:16144,7678
-N D 15000,7667 uc_eq_r6
+N D 15000,7667 rc_eq_r6
 D 13535,7619:13557,7662
 B 13533,7617:13558,7640
 P 13533,7572:13556,7640
@@ -143,7 +143,7 @@ M 15842,7618 y8080 w=22
 
 # ---- comparator of R7: eq line (row-wide diffusion strip), its exit in sm1, right end, T2 pieces
 D 13378,6896:16144,6918
-N D 15000,6907 uc_eq_r7
+N D 15000,6907 rc_eq_r7
 D 13535,6859:13557,6902
 B 13533,6857:13558,6880
 P 13533,6812:13556,6880
@@ -187,7 +187,7 @@ M 13990,5560 y6905 w=56
 M 14381,5560 y6905 w=56
 M 14772,5560 y6905 w=56
 M 15162,5560 y6905 w=56
-# data lines of R5 = ubus_b0 .. ubus_b4, up to their top contacts (y 5620-5632), from where each
+# data lines of R5 = db_b0 .. db_b4, up to their top contacts (y 5620-5632), from where each
 # goes on north in poly under the wide supply metal (not drawn)
 M 13455,5640 y6905 w=24
 M 13845,5640 y6905 w=24
@@ -217,13 +217,13 @@ N M 16811,5800 vcc
 # data lines of R3: drawn to the foot of the latch row only. Below it each shifts sideways and ends
 # in the routing zone on a poly that goes east and south (seen in rz3m/rz4m.png, not followed)
 M 15494,5660 y6400 w=22
-N M 15494,6000 r3_b0_d
+N M 15494,6000 db_b0
 M 15884,5660 y6400 w=22
-N M 15884,6000 r3_b1_d
+N M 15884,6000 db_b1
 M 16274,5660 y6400 w=22
-N M 16274,6000 r3_b2_d
+N M 16274,6000 db_b2
 M 16665,5660 y6400 w=22
-N M 16665,6000 r3_b3_d
+N M 16665,6000 db_b3
 
 # ---- counter tracks of the R5 comparator: each runs down through the latch row into the routing
 # zone and jogs west onto a contact on one of five horizontal poly lines (the scan line counter)
@@ -252,7 +252,7 @@ P 15892,6498:15934,6532
 C 15912,6515
 M 16360,5640 y6477 x16312 w=20                # hsw2: the metal hooks west to a ring at (16314,6477), not to x 16258
 P 16296,6460:16334,6494                       # (both metal shots and acid1b at 2.4x, cache/scratch/r3d/b2top.png):
-C 16315,6477                                  # x 16258-16290 is R3 bit 2's data line r3_b2_d, which passes it
+C 16315,6477                                  # x 16258-16290 is R3 bit 2's data line db_b2, which passes it
 M 16751,5640 y6415 x16700 w=20
 P 16692,6411:16734,6445
 C 16712,6428

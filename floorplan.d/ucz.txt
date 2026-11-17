@@ -1,11 +1,11 @@
 # ucz: the row counter's seven lines into the upper right array (wiring)
-13490,9050:13560,9380  route   rc0 to uc_b0 | uc_b0's end contact, poly round to the top of bundle track L4
-13830,9050:13950,9640  route   rc1 to uc_b1 | poly drop, thin metal x 13890, hook; bar y 9620 to L5's top
+13490,9050:13560,9380  route   rc0 into the upper array | uc track 0's end contact, poly round to the top of bundle track L4
+13830,9050:13950,9640  route   rc1 into the upper array | poly drop, thin metal x 13890, hook; bar y 9620 to L5's top
 13550,9600:13870,9640  route   rc1 bar | poly bar from L5's top contact to the hook of the track x 13890
-13690,9260:14730,9370  route   rc2, rc3, rc6 rows | rows y 9276 (rc6), 9317 (rc3), 9358 (rc2); rc3 steps up a track at x 14544 to uc_b3's contact
+13690,9260:14730,9370  route   rc2, rc3, rc6 rows | rows y 9276 (rc6), 9317 (rc3), 9358 (rc2); rc3 steps up a track at x 14544 to uc track 3's contact
 13590,9370:13800,9550  route   rc2, rc3, rc6 nest | three nested L's down to the pads at the tops of the track x 13650, L8 and L6
-14450,9125:15900,9160  route   rc6 row | row y 9143 from the metal x 14474 to uc_b6's end contact
-14045,9170:15510,9250  route   rc5, rc4 rows | rows y 9187 and 9230 from the tops of the tracks x 14062, 14105 to uc_b5, uc_b4
+14450,9125:15900,9160  route   rc6 row | row y 9143 from the metal x 14474 to uc track 6's end contact
+14045,9170:15510,9250  route   rc5, rc4 rows | rows y 9187 and 9230 from the tops of the tracks x 14062, 14105 to uc tracks 5, 4
 14045,9250:14125,9985  route   rc5, rc4 tracks | thin metals x 14062, 14105 down the s0 column to their pads
 13415,9735:14125,9985  route   rc6, rc5, rc4 in | poly rows y 9750, 9881, 9966 from the counter channel
 13505,9380:13705,10700 route   rc0-rc3 bundle | tracks L4, L5, L6, L8 north of rdp3 to their top contacts

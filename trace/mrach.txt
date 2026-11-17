@@ -36,7 +36,7 @@ C 13300,7585
 M 13348,9346 y9678                        # T6, upper piece: a link in the R4 match line's route
 C 13348,9360
 C 13349,9663
-M 13306,12845 y14695                      # T5 below the staircase: continues rdp3_n0 (k5)
+M 13306,12845 y14695                      # T5 below the staircase: continues h_eq_r0half (k5)
 M 13348,13475 y14695                      # T6 below rdp3's piece: inh_rc (k6 = inh_rc)
 
 # ---------------------------------------------------------------------------

@@ -187,9 +187,9 @@ under the wide supply metal (y 5200-5550) to a pad on one metal line of a 13-lin
 
 | Column | Inner line (x 12693 - 390k) | Outer line (x 12782 - 390k) |
 |---|---|---|
-| c3 | `amr_oa_c3` -> bus y 5177 | bus y 4742 = `cdp1_l4676` (an earlier reading that this line ends on `rcs_bq3335` was wrong: `notes/blocks/r9m.md`, correction) |
-| c2 | `amr_oa_c2` -> bus y 5135 | `amr_ob_c2` -> bus y 4696 |
-| c1 | `amr_oa_c1` -> bus y 5047 | `amr_ob_c1` -> bus y 4657 |
+| c3 | `db_b7` -> bus y 5177 | bus y 4742 = `cdp1_l4676` (an earlier reading that this line ends on `ra_eq_r9` was wrong: `notes/blocks/r9m.md`, correction) |
+| c2 | `db_b6` -> bus y 5135 | `amr_ob_c2` -> bus y 4696 |
+| c1 | `db_b5` -> bus y 5047 | `amr_ob_c1` -> bus y 4657 |
 | c0 | poly from about (11497,5590) diagonally north-east, then north along x about 11645 to a pad near (11645,5005) | poly from about (11580,5590) diagonally, north along x about 11725, then diagonally north-west towards the pad (11650,4500) of `rab`'s bit 0 (`wt.png`): **not drawn**, it needs a 5x look at that pad |
 
 The bus lines run west to the staircase of pads at x 11650-11700 and on under the wide
@@ -223,7 +223,7 @@ lines: `notes/blocks/amrw.md`.)
 
 | Name | Layer | Where | Direction | What |
 |---|---|---|---|---|
-| `amr_oa_c1` ... `amr_oa_c3` (aliases of the data lines, `notes/blocks/bust.md`); c0's is `cdp1_c1_bl` | metal | x 11916, 12304, 12693 (c0: 11522), y 5585-6312 | in | data bus bits 5, 6, 7 (c0: bit 4): written into R3 bits 4-7 through T1 |
+| `db_b5` ... `db_b7` (aliases of the data lines, `notes/blocks/bust.md`); c0's is `db_b4` | metal | x 11916, 12304, 12693 (c0: 11522), y 5585-6312 | in | data bus bits 5, 6, 7 (c0: bit 4): written into R3 bits 4-7 through T1 |
 | `amr_ob_c1`, `amr_ob_c2` (= `cdp1_l4588`, `cdp1_l4632`), `cdp1_l4676`, c0's `cdp1_l4544` | metal | x 12001, 12390, 12782 (c0: 11611), y 5585-6312 | **in** | the four bits compared with R3 bits 4-7: `c4l1`, `c4l2`, `c4l3` and c0's `c4l0`, the 4-bit counter of the left array (`notes/blocks/amrw.md`) |
 | `wr_r3` | poly | y 5636, x 11445-13125 | in | R3's write strobe, from `rdp1`'s x 13327 line |
 | `r3_b4_q` ... `r3_b7_q` | poly | (12965 - 390k, 6400), going south from the pad (12957 - 390k, 6348) | out | the stored bits leave the slice south; in c3 the poly joins a band y 6405-6425 running west under the VCC rail (`b5.png`). Not followed |

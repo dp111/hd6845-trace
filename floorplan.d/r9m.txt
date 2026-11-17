@@ -1,4 +1,4 @@
-# r9m: R9's match line (cdp1_b_eq) from the comparator to the row counter's step logic (wiring)
+# r9m: R9's match line (ra_eq_r9) from the comparator to the row counter's step logic (wiring)
 6440,4440:8350,4545    route   R9 match line, east | from the R9 comparator west along y 4460 / 4528 (two poly hops)
 5950,2620:6460,4545    route   R9 match line, north | north along x 5974
 4130,2540:5980,2660    route   R9 match line, west | west along y 2641, steps up one track at x 5127, to pad (4867,2596), along y 2598 / 2555 and down x 4149 to the contact (4148,3335): the input of rcs_mu's inverter

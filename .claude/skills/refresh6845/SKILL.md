@@ -15,6 +15,10 @@ instructions do not say what to do, stop and report. Never push a failing state.
 
 ## 0. Start
 
+Never force-push (`--force`, `--force-with-lease`). A rejected push means someone else
+pushed first: pull, re-check, push again.
+
+
 ```
 git switch main && git pull --ff-only
 tools/claim.py list
