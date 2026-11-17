@@ -1162,3 +1162,43 @@ AMB-017, AMB-018; floor plan: the coarse "logic above the counters" block remove
 top-right logic rows trimmed above the `ral` band; `out/` rebuilt.
 
 Next: the `rename` package (now unblocked), then the queue as before.
+
+## 2026-11-17 13:01  Parallel work for remote collaborators; the master list covers the die
+
+The user: claims must show at once, by commit and push, so that several remote
+collaborators can work in parallel; the workflow must be where they see it first,
+including an independent review; we keep the master list. Then: "do we have the entire
+die mapped out into blocks for tracing", and a `/trace6845` command that does a package
+end to end. Collaborators will be given write access.
+
+- **Claims**: `tools/claim.py take` pulls main into the checkout (fast-forward only,
+  user: "Ensure that the remote is always pulled before claiming a task"), refuses a
+  prefix the master list does not name, a taken prefix or an overlapping region, and
+  pushes `claims/PREFIX.md` straight to main with git plumbing (the working tree is not
+  touched; a race loses at the push and sees the winner's claim). `list`, `release`,
+  and `done` (after a merge: the claim becomes "merged, awaiting coordinator" and holds
+  the tracer's proposals for the coordinator's files). Tested against a local bare copy.
+- **Work**: one branch and worktree per package (`tools/newwork.sh`); `tools/ship.sh`
+  pushes the current branch and refuses main unless `HD_COORD=1`; its lock now works in
+  worktrees.
+- **Gate**: `tools/mergecheck.py PREFIX` (branch contains main; only own files, the
+  glossary, `operation.md` and named trace fixes changed; extraction 0/0; glossary and
+  former names clean; a Review section ending "Round N: no findings."; new `?`-only joins
+  written up). Run on main for `wrj`: passes all but the review wording, as expected.
+- **`/trace6845`** (`.claude/skills/trace6845/SKILL.md`): pull, choose the first free
+  queue row, claim, worktree, trace by the guide, review rounds with a fresh agent each
+  round until one finds nothing (at most five, else stop without merging), merge through
+  the gate, push to main, hand off.
+- Documents: `notes/workflow.md` (new), the top of `CLAUDE.md`, `README.md` (new),
+  `.github/pull_request_template.md` (for those without write access), the tracing
+  guide's sections 1, 9 and 10, the master list's header.
+
+**Coverage.** `tools/coverage.py` (new) draws the die: traced, untraced inside some
+package's region, untraced in none. Before: 28 % of the die rectangle in none. The gaps:
+the pad ring (39 of 40 pad squares are not drawn: only MA3's is; the RA0-RA4 drivers are
+traced but not their pad squares or the metal to them), the D0-D7 pad cells (named in
+`dbus`'s row without a region), a bus field with a gate group at 13200-17750 x
+16900-18560, a gate group at 4780-7000 x 15000-17000, the test structures, and seams
+between regions. New queue rows `dpad`, `busC`, `bl0`, `teststr`; `padring` given
+regions; seams closed. After: 0.0 % in none. About 54 % of the die rectangle is traced
+(within 100 px), which overstates it inside partly traced arrays.

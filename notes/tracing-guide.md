@@ -19,7 +19,8 @@ Rules that override everything else:
   else's), and do not use the web at all. The datasheet (`cache/ds/p-NN.png`, block
   diagram on p-07, register table p-09) and the CPC document (`cache/accc.txt`, large:
   grep it, do not read it whole) describe behaviour; treat them as evidence, not truth.
-- Several agents share this working tree. Touch only your own files (section 10).
+- Several people and agents trace at once. Claim your package and work on its own branch
+  and working tree (`notes/workflow.md`); touch only your own files (section 10).
 
 ## 2. Coordinates, photos, tools
 
@@ -407,6 +408,8 @@ Most of the die is repeated cells. Trace a cell once.
    - **Ports**: the table from section 8.
    - **Ambiguities**: each with coordinates, the candidate readings, your working
      assumption, and what would settle it.
+   - **Review**: the independent review (`notes/workflow.md`, step 6): date, reviewer,
+     what it checked and at what zoom, what it found, what changed, what it could not check.
    - **Not done**: anything in your region you did not get to, with coordinates, so the
      next agent can pick it up without re-surveying.
 3. `floorplan.d/BLOCK.txt`: one line per functional piece you have identified, format
@@ -424,18 +427,27 @@ Most of the die is repeated cells. Trace a cell once.
   ("Address register: latch cell traced and placed five times"); add a body with a
   second `-m`-style paragraph by putting a blank line and text inside the same quoted
   message if there is something a reader of the history should know.
-- **Never run any other git command that changes anything** (no add, commit, checkout,
-  stash, reset, pull, rebase). Others have unsaved work in this tree.
+- Work on your package's branch, in a working tree of your own (`tools/newwork.sh
+  BLOCK`; `notes/workflow.md`). `ship.sh` pushes that branch; it refuses to commit on
+  main. Your work reaches main only through the gate (`tools/mergecheck.py`, workflow
+  step 7) after the review rounds, or by pull request. Merging main into your branch is
+  fine; do not
+  rewrite history that is already pushed (no rebase or reset of pushed commits).
 - Yours: `trace/BLOCK*.txt`, `notes/blocks/BLOCK.md`, `floorplan.d/BLOCK.txt`, new
-  tools named `tools/BLOCK_*.py`, your scratch folder.
-- Not yours: every other file. In particular do not edit `floorplan.txt`,
-  `notes/journal.md`, `notes/ambiguities.md`, `PLAN.md`, `CLAUDE.md`, the shared tools,
-  or another block's files; do not run `tools/build.py`, `align.py` or `prepare.py`. If
-  a shared tool is wrong or missing something, say so in your final report (and copy
-  it to `tools/BLOCK_x.py` if you need a variant now).
-- If you find that an existing trace of a neighbouring block is wrong, do not fix it:
-  record it under Ambiguities with the evidence.
-- Do not start sub-agents.
+  tools named `tools/BLOCK_*.py`, your scratch folder; rows for your names in
+  `notes/signals.md`, and `notes/operation.md` where your block changes what it says.
+- Not yours: `notes/work-packages.md`, `floorplan.txt`, `notes/journal.md`,
+  `notes/ambiguities.md`, `PLAN.md`, `CLAUDE.md`, `claims/`, `out/`, the shared tools,
+  and other blocks' notes. Do not run `tools/build.py`, `align.py` or `prepare.py`
+  except to build your own `cache/`. What you would change in those files goes into your
+  pull request (the template has a place for each). If a shared tool is wrong or missing
+  something, say so there (and copy it to `tools/BLOCK_x.py` if you need a variant now).
+- If you find that an existing trace of a neighbouring block is wrong: record it under
+  your notes' Ambiguities with the evidence. Fix it only if it blocks your work and the
+  evidence is clear, as a commit of its own whose message says what was wrong and how you
+  know, and list it in the pull request.
+- Do not start sub-agents, with one exception: the independent reviewer of your
+  finished package (`notes/workflow.md`, step 6).
 
 ## 11. What is known about the chip
 

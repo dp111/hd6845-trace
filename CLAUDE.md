@@ -5,6 +5,26 @@ first, then `notes/journal.md` (latest entry) and `notes/ambiguities.md` if they
 `notes/operation.md` is the short summary of what is established about how the chip
 works (firm / marked / open); the block notes are the deep reference.
 
+## Before you trace anything (everyone: coordinator, agents, remote collaborators)
+
+Several people and agents trace this die at once. The workflow is `notes/workflow.md`;
+read it first. **`/trace6845` does all of it for one package** (collaborators with write
+access). In short:
+
+1. `git switch main && git pull --ff-only`. Pick a package from the master list
+   `notes/work-packages.md` (the coordinator keeps it); check `tools/claim.py list`.
+2. **Claim it before doing anything else**: `tools/claim.py take PREFIX --region "..."
+   --what "..."` pulls main again, then pushes `claims/PREFIX.md` to main at once, so
+   everyone sees it.
+3. Work on branch `PREFIX` in a working tree of your own (`tools/newwork.sh PREFIX`),
+   touching only your own files; ship each finished piece with `tools/ship.sh`.
+4. Read `notes/tracing-guide.md` before tracing; follow it.
+5. **Independent review** against the photos, in rounds (one fresh reviewer agent per
+   round) until a round finds nothing; recorded in the block notes.
+6. Merge main into the branch, pass `tools/mergecheck.py PREFIX`, push to main, and hand
+   off with `tools/claim.py done` (proposals for the coordinator's files go there, not in
+   those files). Without write access: a pull request with the template instead.
+
 ## Standing rules from the user
 
 - Trace independently. Do not open Lance Ewing's HD6845 reverse-engineering work (on
@@ -79,34 +99,33 @@ works (firm / marked / open); the block notes are the deep reference.
 - Trace file format: docstring of `tools/tracelib.py`. Layer legend and what each
   feature looks like: `notes/layers.md`. Read that before tracing anything.
 
-## Parallel work (from 2026-11-14)
+## Parallel work and the coordinator
 
-The user asked for parallel agents and for the session to work unsupervised until the
-weekly usage limit is reached, committing and pushing each new traced piece and
-keeping the floor plan up to date.
+How work is shared is `notes/workflow.md` (claims on main, one branch and one working
+tree per package, independent review, pull requests). This section is for the
+coordinating session, the owner's.
 
-**Confirmed 2026-11-16 (user, before leaving a session to run unsupervised):** "while
-unsupervised, just work serially, rather than trying to do things with multiple agents in
-parallel".
-
-**Update, 2026-11-15 evening (user instruction after the usage limit was hit):** the
-eleven agents that were interrupted were resumed to finish their runs. When they
-have all reported, **go back to serial work: do not start new agents** unless the
-user asks again. Integrate their reports as below, then carry on tracing in this
-session, one block at a time, in the priority order in `notes/work-packages.md`.
-
-- Every agent works from `notes/tracing-guide.md`. Read it before tracing anything,
-  whoever you are.
-- One block = one agent = one file prefix. An agent owns `trace/PREFIX*.txt`,
-  `notes/blocks/PREFIX.md`, `floorplan.d/PREFIX.txt`, `tools/PREFIX_*.py` and
-  `cache/scratch/PREFIX/`, and nothing else.
-- Agents commit only through `tools/ship.sh "message" files...` and run tools through
-  `tools/t.sh PREFIX tool.py ...` (sets `TRACE=PREFIX` so other blocks' unfinished
-  files are not loaded).
-- The coordinating session alone edits `floorplan.txt`, `notes/work-packages.md` (the
-  queue and its status), `notes/journal.md`, `notes/ambiguities.md`, `PLAN.md`, this
-  file and the shared tools, and alone runs `tools/build.py`. When a package reports:
-  read its notes, spot-check an overlay, run the full extraction (no `TRACE`), trim the
-  coarse block in `floorplan.txt` that its `floorplan.d` fragment replaces, rebuild,
-  ship, mark it in `notes/work-packages.md`, and start the next package from the queue.
+- The coordinator alone edits `notes/work-packages.md` (the master list of tracing
+  tasks, which must cover the whole die), `notes/ambiguities.md`, `notes/journal.md`,
+  `floorplan.txt`, `PLAN.md`, this file and the shared tools, and alone runs
+  `tools/build.py` on main and commits `out/`. It commits on main with
+  `HD_COORD=1 tools/ship.sh ...`.
+- Its own tracing follows the workflow too: claim the package first (`tools/claim.py
+  take`), so that collaborators do not start on it. **While unsupervised it works
+  serially** (user, 2026-11-16: "while unsupervised, just work serially, rather than
+  trying to do things with multiple agents in parallel"): one package at a time, in the
+  priority order of the queue; the one agent it starts per package is the independent
+  reviewer, and it waits for it.
+- At the start of every session, and when told a package is in: `git pull`, then
+  `tools/claim.py list`. For each claim marked "merged, awaiting coordinator" (and each
+  pull request, merged first): read the notes and the proposals in the claim file,
+  spot-check an overlay, run the full extraction (no `TRACE`) and `tools/unsure.py`, apply
+  the proposals (master list status, Re-read items, ambiguities, other blocks' notes),
+  trim the coarse block in `floorplan.txt` that its `floorplan.d` fragment replaces,
+  rebuild `out/`, write the journal, push, then `tools/claim.py release PREFIX`.
+- Keep the master list covering the whole die: after changing it, `tools/coverage.py`
+  must show no red (untraced and in no package) except empty field and supply metal. Stacked pull requests: merge the tips (the first round's notes are in
+  the journal, 2026-11-17).
+- Every tracer, whoever: `notes/tracing-guide.md`. Tools run through `tools/t.sh PREFIX
+  tool.py ...` (sets `TRACE=PREFIX` so other blocks' unfinished files are not loaded).
 - `trace/examples/` holds worked examples that are not part of the chip's trace.
