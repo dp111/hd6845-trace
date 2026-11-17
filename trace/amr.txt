@@ -72,3 +72,16 @@ N M 12390,6000 amr_ob_c2
 N M 12304,6000 amr_oa_c2
 N M 12001,6000 amr_ob_c1
 N M 11916,6000 amr_oa_c1
+
+# --- R3's write strobe reaches amr. rdp1: "wr_r3: the line from the north at x 13327 ends on
+# a pad with a contact (13310,6385)". The same metal goes on north (tools/follow.py from
+# (13327,6300) north: corner at y 5628, west to x 13123) to a pad with a contact
+# (13125,5628) (ring in the metal shot, poly pad in the stripped shot, 2.2x:
+# cache/scratch/bust/wr3.png), from which a poly runs west along y 5615-5630 across all four
+# slices (seen continuous at 1.45x in both stripped shots, wr3c.png, wr3d.png; not at a
+# zoom that would show every crossing: ?P).
+M 13327,6390 y5628 x13118 w=14
+P 13108,5611:13142,5645
+C 13125,5628
+?P 13125,5622 x11460 w=16
+N P 12000,5622 wr_r3
