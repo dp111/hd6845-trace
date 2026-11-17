@@ -200,3 +200,27 @@ M 7842,4637 x7618 y4704 x6921 w=12
 # y 4853, west to x 7575, south to y 5140, west to x 7330), but how the poly from x 8340
 # reaches that pad is not seen: a straight guess crossed the row address selector's
 # geometry (extraction: a transistor and a short to ras_o0). Not drawn.
+
+# --- amr's partial slice c0 (column at x 11490): its two outputs. Top pads (poly, contact)
+# at (11523,5585) and (11607,5585) (3x, c0t.png); from each a metal runs down the slice to
+# y 6302-6312 as in c1-c3 (tools/follow.py); each poly runs north, 45 degrees north-east under the
+# supply metal, then north beside the staircase (clean shot 1.6x, c0l.png):
+#   inner: north along x 11740 to a pad with a contact (11738,5000) on the bus metal y 5002,
+#          i.e. cdp1_c1_bl (data bit 4): ring in both metal shots, contact on a poly pad
+#          in the clean shot (4x, c0e.png)
+#   outer: north along x 11786 to y 4690, 45 degrees north-west to (11640,4544), west as
+#          cdp1_l4544 to cdp1's edge: one poly, kept apart from rab's bit-0 pad by a dark
+#          edge (5x, c0c.png; 2.2x c0u.png)
+P 11506,5568:11540,5602
+C 11523,5585
+M 11524,5585 y6312 w=11
+P 11523,5585 x11533 y5512 11740,5305 y5000 w=18
+P 11721,4983:11755,5017
+C 11738,5000
+P 11590,5568:11624,5602
+C 11607,5585
+M 11612,5585 y6302 w=11
+P 11607,5585 x11617 y5500 11786,5331 y4690 11640,4544 x10845 w=16
+
+
+# c0's outputs, named as the bus lines they drive (amr_oa_c0 / amr_ob_c0 in amr's terms)

@@ -106,13 +106,21 @@ middle cluster on pads (4270,2640) and (4232,2683): if `cdp1_l4588` and `cdp1_l4
 those two lines, all three of `amr`'s outer outputs feed the row counter's step logic.
 Not established.
 
-## `amr`'s partial slice c0
+## `amr`'s partial slice c0: its two outputs drawn
 
-c0's two lines leave its top (about (11497,5590) and (11580,5590)) diagonally north-east
-under the supply metal and run north beside the staircase at x about 11720 and 11765
-(`cache/scratch/amr/c0b.png`, 1x). At the top, the poly that comes near `rab`'s bit-0 pad
-(11650,4500) is a single line: `cdp1_l4544`, arriving at y 4545 and turning south-east.
-At 5x in all four shots (`cache/scratch/bust/c0c.png`) a dark edge at y 4520-4530
-separates it from the pad, so **`rax_o0` has no second driver**. That `cdp1_l4544` is c0's
-outer output (as c1-c3's outer outputs are the next three lines) is likely but not drawn:
-the stretch along x 11720 was seen at 1x only.
+c0's top contacts are at (11523,5585) and (11607,5585), each with a metal down the slice
+to y 6302-6312 as in c1-c3 (follower; 3x, `cache/scratch/bust/c0t.png`). Its polys run
+north, 45 degrees north-east under the supply metal, and north beside the staircase
+(overlay at 1x on the clean shot, `c0ov.png`):
+
+- **inner output** -> along x 11740 to a contact (11738,5000) on the bus metal y 5002,
+  i.e. **`cdp1_c1_bl` = `ubus_b4`, data bit 4** (4x in four shots, `c0e.png`);
+- **outer output** -> along x 11786, 45 degrees north-west to (11640,4544), and west as
+  **`cdp1_l4544`**, the top through-line. It passes `rab`'s bit-0 pad with a dark edge
+  between them (5x, `c0c.png`): `rax_o0` has no second driver.
+
+So all four of `amr`'s slices put an outer output on a through-line into the west logic
+(c0 `cdp1_l4544`, c1 `cdp1_l4588`, c2 `cdp1_l4632`, c3 `cdp1_l4676` = `rcs_bq3335`), and an
+inner output on a data bus bit (c0 bit 4, c1 bit 5, c2 bit 6, c3 bit 7). Four slices,
+data bits 4-7, and one result each to the west: the shape of a read-back or comparison
+unit on the upper nibble. That's a guess from the wiring; the slice is not traced.
