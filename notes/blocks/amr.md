@@ -50,6 +50,19 @@ amr's slice c3**. AMB-013's test (is the first line "a second comparator's match
 it is the output of a four-way repeated slice, one per column, with two outputs each;
 the slice is not traced, so what it computes is open.
 
+## R3's write strobe runs through the slices (2026-11-17)
+
+`wr_r3` (R3's write strobe; `rdp1` drew it ending at (13310,6385)) goes on north along
+x 13327 to y 5628, west to a contact (13125,5628), and a poly runs west from there along
+y 5615-5630 across all four slices (`trace/amr.txt`, the crossing drawn `?P`: seen
+continuous at 1.45x only). With `bust`'s result that the slices' inner outputs are data
+bits 4-7 (c0..c3), **`amr` is very likely R3's high nibble**: the vertical sync width
+register, written from D4-D7 on `wr_r3`. `rdp1` has only R3's low nibble (the horizontal
+sync width, compared with `hsw`). The outer outputs (to the vertical control logic) would
+then be the register's bits, or per-bit comparisons with a 4-bit counter, on their way to
+a comparator. Believed, not traced: the slice. (The 4-bit counter in the left array,
+`c4l`, does not enter `amr` from the west at y 6157-6280: open field there.)
+
 ## Ports
 
 | Name | Layer | Where | Direction | What |
@@ -57,6 +70,7 @@ the slice is not traced, so what it computes is open.
 | `amr_oa_c1` ... `amr_oa_c3` | metal | x 11916, 12304, 12693, y 5585-6312 | out | inner outputs; to bus y 5047, 5135, 5177 |
 | `amr_ob_c1`, `amr_ob_c2` | metal | x 12001, 12390, y 5585-6312 | out | outer outputs; to bus y 4657, 4696 |
 | `rcs_bq3335` | metal | x 12782, y 5585-6312 | out | c3's outer output (r9m) |
+| `wr_r3` | poly | y 5622, x 11460-13125 | in | R3's write strobe, from `rdp1`'s x 13327 line |
 
 ## Not done
 
