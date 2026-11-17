@@ -58,13 +58,13 @@ follower jump between lines: it took m4 and m5 to MA7). Contacts read at 2.6-3.5
 | m4 | (2283,10510) | north along x 2283 | (2283,4914), MA4 (y 4912), poly hop west to the driver |
 | m5 | (2240,11112) | north along x 2242 | (2240,6995), MA5 (y 6994), poly hop |
 | m6 | (2197,11923) | larr's line x 2197 north | y 8555, MA6 (y 8555), poly hop; larr's line "not checked by a view" |
-| m7 | (2155,12615) | north to y 10120, west | (2018,10120), MA7 (y 10118) |
+| m7 | (2198,12614) | a short foot west to x 2155, north to y 10120, west | (2018,10120), MA7 (y 10118) |
 | m8 | (2283,13268) | west to x 2241, north | contact (2238,11870), poly west to MA8 (as larr found it) |
 | m9 | (2458,15388) | west, north, west, north, west | contact (2027,14352), MA9 |
 | m10 | (2455,16088) | west to x 2020, north | contact (2022,15918), MA10 |
 | m11 | (2455,17392) | west to x 2026, south | contact (2025,17485), MA11 |
 | m12 | (2455,18040) | west to x 2026, south | contact (2025,19214), MA12 |
-| m13 | (2540,18905) | output poly south to the pad, metal east along y 18908 | contact (3627,18902), MA13 |
+| m13 | (2547,18905) | output poly south (with a jog east at y 18762-18785) to the pad, metal east along y 18908 | contact (3627,18902), MA13 |
 
 The end contacts of m0-m3 and m7 were checked at 4x in both the metal and clean shots
 (`cends.png`, `cends2.png`): a ring on a poly pad in each. Extraction: every copy's hold device joins

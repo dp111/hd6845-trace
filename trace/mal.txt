@@ -135,19 +135,22 @@ P 2180,11906:2214,11940
 C 2197,11923
 M 2197,11930 y8555 w=12
 N M 2197,10000 ma6_drv_in
-P 2155,12615 x2555 w=16
-P 2138,12598:2172,12632
-C 2155,12615
-M 2155,12617 y10120 x2018 w=12
+# m7's start: the x 2155 metal turns east at y 12615 as a short foot to a ringed pad
+# (2198,12614) (independent review, 4.8x in four shots: rv_mal/m7s.png).
+P 2198,12615 x2555 w=16
+P 2181,12598:2215,12632
+C 2198,12614
+M 2205,12616 x2155 y10120 x2018 w=12
 C 2022,10120
 N M 2155,11000 ma7_drv_in
 # m13 (not mirrored, last of the column): its output poly turns south at x 2535 to a pad
 # (2540,18905); metal east along y 18908 to a contact (3627,18902) on the top of the MA13
 # driver's input poly (u13b.png, u13c.png, u13d.png).
-P 2555,18691 x2535 y18905 w=18
-P 2523,18888:2557,18922
-C 2540,18905
-M 2530,18908 x3640 w=12
+# m13's output poly jogs east at y 18762-18785 (independent review, 4.7x: rv_mal/m13z.png).
+P 2555,18691 x2528 y18773 x2551 y18905 w=18
+P 2530,18888:2564,18922
+C 2547,18905
+M 2537,18908 x3640 w=12
 P 3610,18885:3644,18919
 C 3627,18902
 N M 3000,18908 ma13_drv_in
