@@ -256,7 +256,7 @@ in chain 0) are the capacitor taps, not bus lines.
 
 ## Review
 
-The clusters were independently reviewed (2026-11-17): all 12 devices of the master in
+Round 1 (2026-11-17, an independent agent; the clusters): all 12 devices of the master in
 four shots, cluster 0's mirrored latch and shifted driver, cluster 3 at 3x, the d_d poly
 in the 28 px gap, the driver output boxes and `dlat_en` confirmed; the two collinear
 polys measured as two. It corrected the data-line load's width (now about 68/27) and

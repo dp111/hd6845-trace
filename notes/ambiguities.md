@@ -251,18 +251,18 @@ inverting it. **Adopted: VSS and a load**, by the layout rule (gates under the g
 rail, load towards the other rail). Settle by tracing a unit's east half and following
 either rail to a labelled one.
 
-## AMB-013: does R9's match line end on the step logic's input `rcs_bq3335`? (2026-11-16)  (resolved 2026-11-17)
+## AMB-013: does R9's match line end on the step logic's input `ra_eq_r9`? (2026-11-16)  (resolved 2026-11-17)
 
-`notes/blocks/r9m.md`. R9's match (`cdp1_b_eq`) was followed 9,000 px from the comparator
+`notes/blocks/r9m.md`. R9's match (`ra_eq_r9`) was followed 9,000 px from the comparator
 to the middle cluster of the row counter's step logic. Its last metal comes down x 4192
 from y 2598 and ends at y 3385 with a 25 px stub west (y 3368-3385, to x 4168). Twelve
 pixels further west is the metal x 4148 that ends on the contact (4148,3335) of
-`rcs_bq3335` (`trace/tla.txt`), and that metal is itself the end of **another** line of
+`ra_eq_r9` (`trace/tla.txt`), and that metal is itself the end of **another** line of
 the same four-line bundle (the one that is at y 2598 at x 4760).
 
 - Reading A: the stub joins the metal x 4148 (the 12 px dark line between them is the
   edge of the poly pad underneath printing through). Then two lines of the bundle are one
-  net, `rcs_bq3335`, which makes sense only if their two drivers are meant to be tied
+  net, `ra_eq_r9`, which makes sense only if their two drivers are meant to be tied
   (a wired AND of two gate outputs), and `rcs_in1` = that AND, gated by `rcs_mv`.
 - Reading B: the stub ends on a contact of its own that neither metal shot shows, and
   R9's match goes somewhere not found.
@@ -278,10 +278,10 @@ at y 3341-3371 (a 30 px run with no metal in either metal shot; measured with th
 follower's metal test against known poly crossings). The two poly hops under the metals
 x 5078-5127 each step down one track, which an independent review found at 4-5x and the
 coordinator saw in the chip-2 stripped shot. With both corrections, **R9's match
-(`cdp1_b_eq`) reaches the contact (4148,3335): `rcs_bq3335` is R9's match**, by firm
+(`ra_eq_r9`) reaches the contact (4148,3335): `ra_eq_r9` is R9's match**, by firm
 geometry, and `rcs_mu` = NOT R9's match. The stub and the lower piece of track P carry
 another line of the bundle (`r9m_l3`). The earlier statement that `amr` c3's outer output
-drives `rcs_bq3335` is withdrawn.
+drives `ra_eq_r9` is withdrawn.
 
 ## AMB-014: the gate group that makes `fld_a_in` and `fld_y_b` (2026-11-16)
 
@@ -384,3 +384,21 @@ Inverter 1 (node a to `ral_n1`) is not drawn after three passes.
 
 Device sizes: re-read item R14. Settle inverter 1 with single shots at 5-6x of
 x 14195-14300, y 4280-4460 in copies s1 and m4.
+
+## AMB-019: the data bit lines 0-4 through `cdp1`'s rows D/E, y 5542-5596 (2026-11-17)
+
+`notes/blocks/rde.md`, "The five lines through rows D and E". On each of the five bit lines
+(x 8856 + 390 k, k = 0..4) the bright metal fades out at y 5540-5547 and comes back at
+y 5593-5600; about 12 px across a thin dark bar (y 5557-5567) cannot be seen in any shot.
+
+- Reading 1 (adopted, drawn `?M`): the line narrows to about 10 px to clear the next
+  track's contact pad, and is continuous. Then R11 is written from bits 0-4 and R10 from
+  bits 0-6, as the datasheet says.
+- Reading 2: a long contact from the line to the diffusion column below it (row E's tap).
+  Same net.
+- Reading 3: two pieces, each contacting the column either side of the bar, with the bar
+  a gate: a transistor in series with each bit line. The joins would be wrong.
+
+The contributor's review leaned to continuous (about 80 %); the coordinator's look at 4x
+in two shots agrees that it cannot be seen. Settle by tracing row E's cell. The `cdp2`
+bus names are aliases, not renamed.

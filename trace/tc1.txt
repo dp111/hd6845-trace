@@ -81,7 +81,7 @@ C 7273,3375 s=24x24
 P 7262,3363:7298,3407
 P 7262,3388:7340,3407
 C 8010,3028 8009,3204 8009,3286 s=24x24
-P 7369,3020:8029,3038              # poly west from the top contact (continues; not yet followed). Ends 15 px short of the cdp1_a0_q hairpin at x 8047
+P 7369,3020:8029,3038              # poly west from the top contact (continues; not yet followed). Ends 15 px short of the r8_b5_q hairpin at x 8047
 P 8004,3290:8025,3402
 P 8004,3387:8290,3402              # runs on right under the datapath's vertical metals (seen to x 8290)
 N M 8012,3100 tc1_a
@@ -478,17 +478,17 @@ P 8256,2846:8350,2868
 C 8270,3739 8270,3833 s=24x24
 P 8257,3728:8350,3751
 P 8257,3822:8350,3844
-N M 8270,3000 cdp1_a4_q
+N M 8270,3000 r8_b1_q
 # ns6: from the east along y 2807-2821; south; contacts (8313,3527) and (8313,3870),
 #      each to a poly going east. Metal continuous across the upper contact (measured).
 M 8350,2814 x8314 y3883 w=15
 C 8313,3527 8313,3870 s=24x24
 P 8299,3516:8350,3539
 P 8299,3859:8350,3881
-N M 8314,3000 cdp1_a5_q
+N M 8314,3000 r8_b0_q
 # ---- one more line through the bus field: metal from the south at x 8067-8082 to
 #      contact (8075,4372), poly east along y 4365-4382 into the datapath
 C 8075,4372 s=24x24
 M 8075,4360 y4450 w=15
 P 8062,4365:8350,4383
-N P 8300,4374 tc1_x2
+N P 8300,4374 db_b6

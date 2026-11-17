@@ -1,4 +1,4 @@
-# ucz: where the upper right array's seven counter lines uc_b0..uc_b6 come from.
+# ucz: where the upper right array's seven counter lines rc0..rc6 come from.
 # Region: rdp2's routing zone (y 9080-9560), its s0 routing column and the left bundle
 # (x 13330-14130, y 9360-10700). notes/blocks/ucz.md. Wiring only, no transistors.
 #
@@ -18,7 +18,7 @@
 @s 24x24
 
 # =====================================================================================
-# uc_b0 = rc0   (b0.png 4x metal/acid1b/acid; b0pad.png 5x both metal shots; bundle.png)
+# uc track 0 = rc0   (b0.png 4x metal/acid1b/acid; b0pad.png 5x both metal shots; bundle.png)
 # The uc track x 13541 (drawn to y 9072 by rdp2's latch cell) ends on a contact
 # (13542,9164). The poly leaves the pad west along y 9167, turns south at x 13503, runs
 # under the wide metal band y 9225-9325 (cream on pink in the clean shot, outline in the
@@ -32,10 +32,9 @@ P 13542,9167 x13503 y9358
 P 13484,9341:13518,9375
 C 13500,9358
 M 13500,9360 x13521 y10705
-@alias rc0 uc_b0
 
 # =====================================================================================
-# uc_b1 = rc1   (b1top.png 4x, b1foot.png 5x both metal shots, t13891.png 3x,
+# uc track 1 = rc1   (b1top.png 4x, b1foot.png 5x both metal shots, t13891.png 3x,
 #                b1bar.png 3x four shots)
 # The uc track x 13931 ends on a contact (13932,9101); poly straight south under the wide
 # metal band to a pad with a contact (13932,9231). The pad's metal has a foot to the west
@@ -60,7 +59,6 @@ P 13845,9620 x13563
 P 13546,9603:13580,9637
 C 13563,9620
 M 13563,9612 y10705
-@alias rc1 uc_b1
 
 # =====================================================================================
 # The three nested L's (nest_acid1b.png, nest_acid.png, 4x; the chip-2 shot is the clear
@@ -70,7 +68,7 @@ M 13563,9612 y10705
 # together and none touches another. The rows east of the corners: rowsA.png, rowsB.png
 # (3x, clean, chip-2 and metal).
 
-# uc_b2 = rc2
+# uc track 2 = rc2
 # The uc track x 14321 runs on south to a contact (14322,9360), the east end of the row
 # y 9358 (the row stops at the pad). West along the row, south on x 13784, west along
 # y 9533 under L7, L8 and the rail to a pad with a contact (13607,9533): the top end of
@@ -82,14 +80,13 @@ P 14322,9358 x13784 y9533 x13607
 P 13590,9516:13624,9550
 C 13607,9533
 M 13607,9525 y10705
-@alias rc2 uc_b2
 
-# uc_b3 = rc3   (the hop: b3hop.png, b3hopm.png, 5x, four shots)
+# uc track 3 = rc3   (the hop: b3hop.png, b3hopm.png, 5x, four shots)
 # The uc track x 14712 ends on a contact (14713,9273). Its row runs WEST along y 9273
 # only as far as x 14544, where it steps down one track under the VSS rail x 14565 to the
 # row y 9317 (the L prints through the rail in both metal shots; east of the step the row
-# y 9317 is another net, bust's ubus_b3 row from its pad at 14625; west of the step the
-# row y 9273 is the pad at 14473 of uc_b6's net, 50 px away with a diffusion-coloured box
+# y 9317 is another net, bust's db_b3 row from its pad at 14625; west of the step the
+# row y 9273 is the pad at 14473 of rc6's net, 50 px away with a diffusion-coloured box
 # between). West along y 9317, south on x 13740, west along y 9487 to a pad with a contact
 # (13692,9487): the top end of bundle track L8, straight south to rdp3's contact
 # (13692,10745) on rc3's poly.
@@ -100,9 +97,8 @@ P 14713,9273 x14544 y9317 x13740 y9487 x13692
 P 13675,9470:13709,9504
 C 13692,9487
 M 13693,9480 y10705
-@alias rc3 uc_b3
 
-# uc_b6 = rc6
+# uc track 6 = rc6
 # The uc track x 15882 ends on a contact (15882,9143), the east end of the row y 9143
 # (east0-2.png, 2x, clean, chip-2 and metal: one straight row, no pad on the way). Its west
 # end is a pad with a contact (14475,9143); a short metal runs south on x 14474 (both metal
@@ -130,12 +126,11 @@ M 13650,9438 y9758
 P 13635,9733:13669,9767
 C 13652,9750
 P 13652,9750 x13415
-@alias rc6 uc_b6
 
 # =====================================================================================
-# uc_b5 = rc5 and uc_b4 = rc4: the two tracks of the s0 column
+# uc tracks 5 and 4 = rc5, rc4: the two tracks of the s0 column
 # (east0-2.png; t14062.png 1.6x four shots; p34.png, westrows.png)
-# uc_b5: track x 15492 ends on a contact (15492,9187), east end of the row y 9187; the
+# rc5: track x 15492 ends on a contact (15492,9187), east end of the row y 9187; the
 # row's west end is a pad with a contact (14062,9187); metal south on x 14062, straight,
 # to a pad with a contact (14062,9881); poly row west along y 9881 to mrach's rc5 (x 13425).
 M 15492,9060 y9195
@@ -148,8 +143,7 @@ M 14062,9180 y9889
 P 14045,9864:14079,9898
 C 14062,9881
 P 14062,9881 x13415
-@alias rc5 uc_b5
-# uc_b4: track x 15102 ends on a contact (15102,9230), east end of the row y 9230; west
+# rc4: track x 15102 ends on a contact (15102,9230), east end of the row y 9230; west
 # end a pad with a contact (14105,9230); metal south on x 14105 to a pad with a contact
 # (14109,9966); poly row west along y 9966 to mrach's rc4 (x 13425).
 M 15102,9060 y9238
@@ -162,7 +156,6 @@ M 14105,9222 y9974
 P 14092,9949:14126,9983
 C 14109,9966
 P 14109,9966 x13415
-@alias rc4 uc_b4
 
 # ---- h_eq_r2 (R2's match, from mrach's row y 9707) to bundle track L3
 # mrach's poly row y 9707 ends at x 13425 in its file; in the photos it runs straight on to a

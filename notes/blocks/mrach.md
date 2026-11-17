@@ -28,8 +28,8 @@ datapath (`rdp2`, `rdp3`) and the strobe channel (`bd1`) by geometry alone.
 | T3 | y 7527-12659, then T2 | `wr_r7` | contact (13217,7541), poly leaves east at (13425,7541) (into rdp1: R7's strobe); bd1's k2 |
 | T4 | y 7130-7293 | `hsw3` | leaves north; contact (13259,7278) on r0's line |
 | T4 | from x 13327 north, step at y 7368, y to 12707, then T3 | `wr_r3` | leaves north on x 13327; bd1's k3 |
-| T5 | y 7571-12745, then T4 | `uc_eq_r6` | contact (13300,7585), poly leaves east at (13425,7585) (into rdp1) |
-| T6 | y 9346-9678 | `uc_eq_r4` | "uc = R4" match: from the east at (13425,8343), poly south in the open strip x 13334, contacts (13348,9360) and (13349,9663), poly east again at y 9663 |
+| T5 | y 7571-12745, then T4 | `rc_eq_r6` | contact (13300,7585), poly leaves east at (13425,7585) (into rdp1) |
+| T6 | y 9346-9678 | `rc_eq_r4` | "uc = R4" match: from the east at (13425,8343), poly south in the open strip x 13334, contacts (13348,9360) and (13349,9663), poly east again at y 9663 |
 | T6 | y 9822-12789, then T5 | `h_eq_r0half` | rdp2's and rdp3's L0; bd1's k5 |
 | T6 | y 12816-14690 | `inh_rc` | rdp3's pad and contact (13346,12829); bd1's k6 |
 

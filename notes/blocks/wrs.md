@@ -54,7 +54,7 @@ numbers (`sel`). Nothing in this block tests that independently except the four 
 
 ## What this identifies besides
 
-- **R9's comparator** is `cdp1`'s row B: five XORs and a NOR, `cdp1_b_eq` (traced earlier).
+- **R9's comparator** is `cdp1`'s row B: five XORs and a NOR, `ra_eq_r9` (traced earlier).
   Four bits compare the register with a line each. In the fifth slice the register bit
   is replaced by the output of the nine-gate island `tc1`:
 

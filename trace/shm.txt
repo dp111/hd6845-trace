@@ -1,6 +1,6 @@
 # shm: the two small gates that make the row address selector's mode line (x 8300-8650,
 # y 3760-4110), in the slice-0 position below R8's register row. Notes: notes/blocks/shm.md.
-#   ras_shift_n = NAND(cdp1_a4_q, cdp1_a5_q)     two gates in series under the VSS rail
+#   ras_shift_n = NAND(r8_b1_q, r8_b0_q)     two gates in series under the VSS rail
 #   ras_shift   = NOT ras_shift_n
 # Views cache/scratch/rax/shiftgate.png, g1a.png, g1m.png, g0top.png.
 @block shm
@@ -49,7 +49,7 @@ P 8398,4090 x8318 w=18                # west to the contact (8313,4090) of the m
 # ns56.png, ns56e.png, ns56f.png, a5q.png. The other three lines are not drawn (y 2945 is bit a2's
 # output, y 2900 bit a3's, by their ends; y 2768 ends on a pad (10614,2768)).
 @requires cdp1
-# ns6 = the output of R8's bit in column c7 (cdp1_a5_q)
+# ns6 = the output of R8's bit in column c7 (r8_b0_q)
 M 8340,2814 x9098 w=13
 P 9078,2796:9112,2830
 C 9095,2813
@@ -65,7 +65,7 @@ C 10062,2813
 M 10062,2813 x10656 y2946 w=13
 P 10636,2923:10670,2957
 C 10653,2940
-# ns5 = the output of R8's bit in column c6 (cdp1_a4_q)
+# ns5 = the output of R8's bit in column c6 (r8_b1_q)
 P 8338,2840:8372,2874
 C 8355,2857
 M 8355,2857 x9058 w=13

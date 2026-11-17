@@ -15,7 +15,7 @@
 #         gate is tied to VSS (must be a depletion device: a feedback resistor)
 #   q leaves the cell upward in poly (pt).
 # The vertical rails (VSS left, VCC right of centre) are drawn outside the cell.
-@cell cdp1_reg tag=a1
+@cell cdp1_reg tag=r8_b4
 
 # --- metal
 M 8857,3060 y3330 w=20                 # bit line (continues downward outside the cell)
@@ -77,27 +77,27 @@ P 9028,3185:9098,3285                  # load gate block
 P 9078,3192:9110,3222                  # ... its tie
 B 9082,3190:9112,3224
 
-N P 8852,3110 cdp1_{}_x
-N D 8920,3160 cdp1_{}_q1
-N D 9064,3135 cdp1_{}_q
-N M 8857,3070 cdp1_{}_bl
-N M 8945,3070 cdp1_{}_m3
-N M 9116,3200 cdp1_{}_m6
+N P 8852,3110 {}_a                      # the tag is the whole stem: r8_b#, r9_b# (refresh 2026-11-17)
+N D 8920,3160 {}_n2
+N D 9064,3135 {}_q
+N M 8945,3070 {}_m3
+N M 9116,3200 {}_m6
+# (the bit line, metal x 8857, is the data bus line of its column: named db_b# by the bus, not here)
 @end
 
 # ---------------------------------------------------------------------------------
 # Row A: six register bits. Offsets from findcell on the metal shot, checked by overlay.
-@inst cdp1_reg -391,0 tag=a0
-@inst cdp1_reg 390,0 tag=a2
-@inst cdp1_reg 780,0 tag=a3
-@inst cdp1_reg 1170,0 tag=a4
-@inst cdp1_reg 1560,0 tag=a5
+@inst cdp1_reg -391,0 tag=r8_b5
+@inst cdp1_reg 390,0 tag=r8_b7
+@inst cdp1_reg 780,0 tag=r8_b6
+@inst cdp1_reg 1170,0 tag=r8_b1
+@inst cdp1_reg 1560,0 tag=r8_b0
 # Row C: five more of the same cell, under slices a1..a5.
-@inst cdp1_reg 0,1194 tag=c1
-@inst cdp1_reg 390,1194 tag=c2
-@inst cdp1_reg 780,1194 tag=c3
-@inst cdp1_reg 1170,1194 tag=c4
-@inst cdp1_reg 1560,1193 tag=c5
+@inst cdp1_reg 0,1194 tag=r9_b4
+@inst cdp1_reg 390,1194 tag=r9_b3
+@inst cdp1_reg 780,1194 tag=r9_b2
+@inst cdp1_reg 1170,1194 tag=r9_b1
+@inst cdp1_reg 1560,1193 tag=r9_b0
 
 # ---------------------------------------------------------------------------------
 # Supply rails. One VSS rail (left of each cell) and one VCC rail (through each cell)
@@ -145,21 +145,21 @@ C 10737,4368 s=28x36
 # ---------------------------------------------------------------------------------
 # Row A: where each q leaves (poly "pt" going up out of the cell).
 P 8722,3046 y3024 x8340 w=22           # a0: left along y 3024, under the VSS band
-N P 8345,3024 cdp1_a0_q
+N P 8345,3024 r8_b5_q
 P 9113,3046 y2985 x8340 w=22           # a1: left along y 2985
-N P 8345,2985 cdp1_a1_q
+N P 8345,2985 r8_b4_q
 P 9492,3008:9522,3046                  # a2: pad
 C 9506,3026 s=24x26
 M 9507,3044 y2950 w=20                 # ... metal up, turns left at y 2940 (outside the block)
-N M 9507,2955 cdp1_a2_q
+N M 9507,2955 r8_b7_q
 P [ 9880,3046 y3020 x9862 y2950 x9882 y3000 x9906 y3046 ]   # a3: jogs left, up to a pad at 9865,2940
-N P 9872,2955 cdp1_a3_q
+N P 9872,2955 r8_b6_q
 P 10262,3008:10296,3046                # a4: pad
 C 10275,3026 s=24x26
 M 10275,3044 y2950 w=22                # ... metal straight up
-N M 10275,2955 cdp1_a4_q
+N M 10275,2955 r8_b1_q
 P [ 10660,3046 y3020 x10655 y2950 x10675 y3000 x10686 y3046 ]   # a5: up to a pad at 10655,2940
-N P 10665,2955 cdp1_a5_q
+N P 10665,2955 r8_b0_q
 
 # Row C: each q goes up in metal to a poly pad at the foot of row B (slices 1-4).
 # The cell's m6 hangs from the same pad.
@@ -189,11 +189,11 @@ C 10672,4221 s=24x26
 M 10622,4205:10690,4240
 M 10634,3384 y4257 w=20                # ... through row B without a contact, to the lower poly line below row A
 M 10672,4235 y4257 w=22
-@alias cdp1_c1_q cdp1_c1_m6
-@alias cdp1_c2_q cdp1_c2_m6
-@alias cdp1_c3_q cdp1_c3_m6
-@alias cdp1_c4_q cdp1_c4_m6
-@alias cdp1_c5_q cdp1_c5_m6
+@alias r9_b4_q r9_b4_m6
+@alias r9_b3_q r9_b3_m6
+@alias r9_b2_q r9_b2_m6
+@alias r9_b1_q r9_b1_m6
+@alias r9_b0_q r9_b0_m6
 
 # The write line of each row: one poly line that meanders through the cells (leg up,
 # gate strip, elbow down, on to the next slice). Named where it passes under a VCC rail.
@@ -271,9 +271,9 @@ M 8727,3424 y4460 x8672 w=22           # down past row C's top, then a short ste
 C 8683,4460 s=24x24
 P 8670,4447:8704,4476                  # pad; from it a poly line runs west under slice 0's rails
 P 8340,4459 x8690 w=16                 # ... out of the block (seen unbroken to x 7900)
-N D 9100,3513 cdp1_b_eq
-N M 8727,3520 cdp1_b_eq
-N P 8345,4459 cdp1_b_eq
+N D 9100,3513 ra_eq_r9
+N M 8727,3520 ra_eq_r9
+N P 8345,4459 ra_eq_r9
 
 # ---------------------------------------------------------------------------------
 # Row B, lower half: one XOR per slice (seven transistors).  Master = slice 2
@@ -367,9 +367,9 @@ P 10660,3340:10694,3364                # pad on the upper line
 P 8285,3351 x10692 w=22                # upper line (cdp1_b5_a): west to meet tc1's poly (its output tc1_f, drawn to x 8290)
 C 10634,3396 s=24x26
 P 10612,3384:10652,3410                # pad on the lower line
-P 8285,3396 x10650 w=22                # lower line (= cdp1_c5_q): west to meet tc1's poly (its input tc1_a, drawn to x 8290)
+P 8285,3396 x10650 w=22                # lower line (= r9_b0_q): west to meet tc1's poly (its input tc1_a, drawn to x 8290)
 N P 8345,3351 cdp1_b5_a
-N P 8345,3396 cdp1_c5_q
+N P 8345,3396 r9_b0_q
 
 # ---------------------------------------------------------------------------------
 # Channel B/C (y 3990-4200): five horizontal poly lines, 14-16 wide, 43 apart. Each
@@ -415,7 +415,7 @@ P 9243,4082:9260,4140                  # hook
 P 8656,4132 x9260 w=16
 P 8656,4124:8672,4380                  # down the gap east of slice 0's VCC rail
 P 8340,4372 x8672 w=16                 # west, out of the block
-N P 8345,4372 cdp1_a3_bl
+N P 8345,4372 db_b6
 
 # ---------------------------------------------------------------------------------
 # Bit lines. Each register cell's bit-line metal (x 8857 + 390 k) is drawn inside the
@@ -428,9 +428,6 @@ N P 8345,4372 cdp1_a3_bl
 M 8857,3325 y4260 w=16                 # slice 1, row A to row C
 M 10027,3325 y4260 w=16                # slice 4
 M 10417,3325 y4260 w=16                # slice 5
-@alias cdp1_c1_bl cdp1_a1_bl
-@alias cdp1_c4_bl cdp1_a4_bl
-@alias cdp1_c5_bl cdp1_a5_bl
 M 9247,3325 y4047 x9290 y5084 w=16     # slice 2, row A: jog at y 4047, down past row C to its bus line
 M 8466,3325 8466,3350 8509,3382 y4952 w=16   # slice 0, row A: diagonal step, then straight down to its bus line
 M 8857,4520 y5150 w=16                 # row C's lines on down through the big channel (they go on: see rows D, E)
@@ -452,7 +449,7 @@ N P 10845,4544 cdp1_l4544
 N P 10845,4588 cdp1_l4588
 N P 10845,4632 cdp1_l4632
 N P 10845,4676 cdp1_l4676
-N P 10845,4719 cdp1_l4719
+N P 10845,4719 sl_eq_r5
 # The others each start at a contact under one bit line and run EAST out of the block.
 # Between x 9412 and 9580 the six lines that exist there step down one track.
 C 10417,4765 s=22x22                   # slices 5 (rows A and C): track y 4764
@@ -483,11 +480,11 @@ P 9290,5068 x9412 9455,5110 x10850 w=12
 P 8340,4981 x9462 9505,5024 x10850 w=12
 P 8340,5024 x9437 9480,5068 x10850 w=12
 N P 8345,4981 cdp1_lw1
-N P 8345,5024 cdp1_lw2
-N P 10845,4764 cdp1_c5_bl
-N P 10845,4806 cdp1_c4_bl
-N P 10845,4850 cdp1_c3_bl
-N P 10845,4893 cdp1_c2_bl
-N P 10845,4937 cdp1_c1_bl
-N P 10845,4981 cdp1_a0_bl
-N P 10845,5110 cdp1_a2_bl
+N P 8345,5024 db_b6
+N P 10845,4764 db_b0
+N P 10845,4806 db_b1
+N P 10845,4850 db_b2
+N P 10845,4893 db_b3
+N P 10845,4937 db_b4
+N P 10845,4981 db_b5
+N P 10845,5110 db_b7
