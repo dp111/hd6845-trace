@@ -123,3 +123,22 @@ P 13689,5611:13723,5645
 C 13705,5628
 M 13705,5632 x13455 y5645 w=12
 @alias cdp1_c5_bl ubus_b0
+
+# cdp1_a0_bl: its pad (15280,5068); poly south to a pad (15275,5628); metal south along
+# x 15277 (rdp1 draws a piece of it inside a latch cell) to a pad (15277,6826); poly east
+# along y 6826 under the VCC rail x 15315-15375 to a pad (15405,6826), from which ubus_b5's
+# metal runs south (rdp1 draws it from y 6905). Metal shot and clean shot at 3x
+# (cache/scratch/bust/b5.png, tp3.png, tp2.png); metal from tools/follow.py.
+P 15263,5051:15297,5085
+C 15280,5068
+P 15277,5068 y5628 w=18
+P 15258,5611:15292,5645
+C 15275,5628
+M 15277,5628 y6826 w=12
+P 15260,6809:15294,6843
+C 15277,6826
+P 15277,6826 x15405 w=20
+P 15388,6809:15422,6843
+C 15405,6826
+M 15406,6826 y6910 w=24
+@alias cdp1_a0_bl ubus_b5
