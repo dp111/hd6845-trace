@@ -3,3 +3,8 @@
 5950,2620:6460,4545    route   R9 match line, north | north along x 5974
 4150,2580:5980,2660    route   R9 match line, west | west along y 2641, a diagonal at x 4626-4668, to x 4194
 4150,2580:4215,3395    route   R9 match line, foot | south along x 4194 to the step logic; last 12 px open (AMB-013)
+4130,2540:4880,3345    route   bundle line 1, west | rcs_bq3335 (the input of the inverter making rcs_mu) north from (4148,3335), east to the pad (4867,2596)
+4860,2580:6080,4460    route   bundle line 1, middle | poly hop, east along y 2599, south along x 6022 (beside R9's line)
+6040,4420:8350,4760    route   bundle line 1, crossing field | x 6058 poly, bus metal y 4742, poly y 4740, metal y 4744/4673 to cdp1's through line y 4676
+10840,4660:12800,4760  route   bundle line 1, east | cdp1_l4676 on east, diagonal at x 11465-11530, metal y 4742 to x 12782
+12765,4720:12800,5560  route   bundle line 1, south | poly x 12782 to the untraced logic block that drives it (pad about (12786,5570))

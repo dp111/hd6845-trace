@@ -105,7 +105,11 @@ x 4162-4166 is the poly stem's edge (x 4166) printing through continuous metal.
 lower piece of track P (x 4148, y 3372-3596, bottom end not looked at); the inverter that
 makes `rcs_mu` has its input on the upper piece, which is the bundle's first line
 (drawn above, followed to x 12782). Then `rcs_mu` = NOT (first line), and R9's match goes
-on south to something not yet found.
+on south: the lower piece ends on a contact at about (4148,3588) (ring in the metal shot,
+pale centre on a poly pad in the clean shot, 4.5x, `pb.png`), whose poly runs **west**
+along y about 3583 (salmon at x 4010-4140 in the clean shot, 2.2x, `pc.png`) into the
+middle cluster's gate column, not traced. That gate is where R9's match is used, under
+reading C.
 
 **Not changed in the trace** (other blocks' files): `trace/tla.txt` draws track P as one
 metal `M 4148,3320 y3596` with the label `rcs_bq3335` at y 3500, on the lower piece. If
