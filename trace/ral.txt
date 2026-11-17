@@ -57,6 +57,34 @@ A 14205,4475:14285,4500 kind=hold
 # feeds the output back to node a (?).
 ?B 14315,4472:14347,4500
 
+# --- inverter 2 (the output stage), read from the median of all nineteen copies
+# (tools/ral_comp19.py: 5 RA + 14 MA copies, the MA ones turned back; views at 4.2x,
+# cache/scratch/ral/c19r.png, c19t.png, and in the stripped shot c19.png).
+# Load: VCC contact (14330,4252) (ring in the metal shot) onto a land; a poly block
+# 14295-14395 x 4280-4312 over it as gate, tied to the output poly x 14372-14395 (one poly).
+# Output node: diffusion below the load, y 4312-4340, and down x 14345-14370 to the
+# pull-down's drain; joined to the output poly by a buried contact (heavy-outlined box
+# 14365-14410 x 4418-4450; drawn only to x 14396, the poly's edge: in MA copy m0 the
+# full box, turned, touched tla's clk_tl inverter diffusion and shorted MA0 to VSS).
+# Pull-down: L-shaped poly (vertical x 14320-14345 from y 4350 to 4452, west along
+# y 4350-4372 to x 14250, up x 14255-14280 to y 4320) crossing the diffusion between the
+# VSS-contacted box 14255-14330 x 4385-4445 (contact (14282,4422), speckled in the clean
+# shot) and the drain strip x 14345-14370. Its gate net is ral_n1_{}: believed NOT node a
+# (inverter 1), not drawn.
+C 14330,4252 s=28x26
+D 14300,4240:14360,4340
+P 14295,4280:14395,4312
+D 14345,4312:14370,4448
+D 14370,4418:14396,4448
+B 14366,4418:14396,4450
+P 14372,4280:14395,4500
+D 14255,4385:14370,4445
+C 14282,4422 s=28x28
+P 14320,4350:14345,4452
+P 14250,4350:14345,4372
+P 14255,4320:14280,4372
+N P 14268,4330 ral_n1_{}
+
 # --- output: poly from the cell to the pad driver (S-shaped): vertical x 14372-14395,
 # west along y 4480-4500, south along x 14331-14349 to the pad (14340,4764) that r9c drew
 # for RA0. Drawn from y 4480 down; the upper part and what drives it are not drawn.

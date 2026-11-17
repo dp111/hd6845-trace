@@ -1,13 +1,14 @@
 # ral: the stage in front of the RA pad drivers (x 13990-16330, y 4250-4560)
 
-## Status (2026-11-17 05:08, contributor session)
+## Status (2026-11-17 06:23, contributor session)
 
 **Partly traced** (`trace/ral.txt`, cell `ral_cell`, five copies s0-s4 west to east; s0 is
 RA bit 0's cell, at x 13990-14460). Drawn: the two supply rails per cell, the line
 `cnt_gab` (y 4350) with its tap and the pull-down it gates, the strobe line `ral_stb`
 (y 4548) with its pad and the input pass transistor, the input strip, the hold device
-(gate on VSS) from node a to the output, the buried contact onto the output poly, s0's
-input join to `rax_o0`, and the output stub to `ra0_drv_in`; and **every copy's input and
+(gate on VSS) from node a to the output, the buried contact onto the output poly,
+**inverter 2** (the output stage: load, pull-down, output buried contact), s0's input
+join to `rax_o0`, and the output stub to `ra0_drv_in`; and **every copy's input and
 output joined**: `rax_o0`-`rax_o4` in, the RA0-RA4 pad drivers' input lines out. **Not drawn**: the two
 inverters and their loads (the forward path from node a to the output), and the upper
 part of the output poly. 15 transistors (three per cell).
@@ -18,6 +19,7 @@ part of the output poly. 15 transistors (three per cell).
 ral_a_s#  <- rax_o#    pass transistor 16/26 at (14041,4487) + 434 per cell, gate ral_stb
 ral_a_s#  <-> out_s#   hold device 16/90 at (14245,4487) + 434, gate VSS (out_s0 = ra0_drv_in)
 ral_tf_s# -> VSS       pull-down 66/20 at (14160,4413) + 434 per cell, gate cnt_gab
+out_s#  = NOT ral_n1_s#   inverter 2: load 61/32 at (14330,4296), pull-down 61/25 at (14332,4415)
 ```
 
 The hold device is the same structure as `cdp2_lat`'s (long weak device, gate on VSS,
@@ -73,6 +75,30 @@ output is the line y 4354). (b) would mean the RA band makes `cnt_gab`. That wou
 surprising, but nothing here rules it out, and it is worth checking when the cell's
 forward path is traced.
 This is the next thing to look at for the counters' `_m`/`_mb` transfer.
+
+### Inverter 2, from the median of all nineteen copies (2026-11-17 06:23)
+
+`tools/ral_comp19.py` builds the median of the five RA copies and the fourteen MA copies
+(turned back into the master's frame) as composite `ral_c19`. At 4.2x in the clean shot
+it shows what single shots and the five-copy composite did not
+(`cache/scratch/ral/c19l.png`, `c19r.png`, `c19t.png`; overlay `c19ov.png`):
+
+- load: VCC contact (14330,4252) (ring in the metal shot) onto a land, gate block
+  14295-14395 x 4280-4312 tied to the output poly x 14372-14395;
+- output node: diffusion under the load and down x 14345-14370; buried contact
+  14365-14410 x 4418-4450 onto the output poly;
+- pull-down: the L-shaped poly (x 14320-14345 down to y 4452; west along y 4350-4372;
+  up x 14255-14280 to y 4320) between the VSS-contacted box 14255-14330 x 4385-4445
+  and the drain strip.
+
+Extracted: `ra#_drv_in = NOT ral_n1_s#` for all five RA copies, and the same in the
+fourteen MA copies. **Inverter 1 is the remaining piece**: `ral_n1_s#` should be
+NOT node a. Candidates seen: the outlined box at 14225-14280 x 4290-4345 at the
+L-poly's upper end (a buried contact onto an output diffusion?), and a diffusion strip
+x 14205-14225 rising from the VSS-contacted box at 14205-14250 x 4400-4450. That box is
+cream like the diffusion boxes, not orange like poly, so it may be diffusion and not
+the poly pad drawn as the hold device's gate. If so, the hold device's gate connection
+needs re-reading too.
 
 ### Ports
 
