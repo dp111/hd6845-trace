@@ -250,7 +250,7 @@ displayed part of the line.
 
 ### Row AR (first run): 5 bits, the address register
 
-Instances `ar_s1`..`ar_s5`. Data `rbus_b0`..`s5`; strobe `ar_load` (joined to
+Instances `ar_s1`..`ar_s5`. Data `db_b0`..`s5`; strobe `ar_load` (joined to
 `ar_load` in zz_joins); outputs `arK_q` go right at y 13352-13481 with a poly
 cross-under beneath each VCC rail (joined to `ar0`..`ar4`).
 
@@ -368,8 +368,8 @@ North edge, y 10700 (all metal, all continue into rdp2):
 
 | Name | x | Direction | What |
 |---|---|---|---|
-| `rbus_b7`..`s7` | 13845, 14236, 14626, 15016, 15407, 15797, 16187, 16577 | through | data lines (rdp2: s0's own line ends at y 10567, in row RC) |
-| `rbus_b7` (second branch) | 16838 (drawn to y 10745) | through | bus s0 on the strap track of slice s7; rdp2 follows it north past y 9440 (its `rdp3_t16837`), so this is how bit s0 reaches the upper array |
+| `db_b7`..`s7` | 13845, 14236, 14626, 15016, 15407, 15797, 16187, 16577 | through | data lines (rdp2: s0's own line ends at y 10567, in row RC) |
+| `db_b7` (second branch) | 16838 (drawn to y 10745) | through | bus s0 on the strap track of slice s7; rdp2 follows it north past y 9440 (its `rdp3_t16837`), so this is how bit s0 reaches the upper array |
 | `hc7`..`s7` | 13931, 14321, 14712, 15102, 15492, 15882, 16272, 16663 | out (to rdp2's R0 comparator) | lines compared with R1 and R2; rdp2 finds no driver either and has them end at y 9705-10220, so they are driven from the lower left |
 | `h_eq_r0half` | 13348 (L0) | in | rdp2's `h_eq_r0half` (its comparator D); goes south, leaves at (13307,12850) |
 | `wr_r4` | 13391 (L1) | out (driven from the south) | `wr_r4` going north = rdp2's `wr_r4` |
@@ -427,8 +427,8 @@ Lower right, y 12900 (x > 15800):
 
 | Name | Layer | x | What |
 |---|---|---|---|
-| `rbus_b7` | poly | 16798 | going south |
-| `rbus_b4`, `s6`, `s7` | metal | 16818, 16862, 16908 | going south |
+| `db_b7` | poly | 16798 | going south |
+| `db_b4`, `s6`, `s7` | metal | 16818, 16862, 16908 | going south |
 | `vcc` | metal | 16262 (diagonal), 16520 | |
 | `vss` | metal | 16428, 16690 | |
 

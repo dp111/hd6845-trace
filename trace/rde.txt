@@ -44,26 +44,26 @@ M 10419,5592 y5710 w=16
 ?M 10023,5542 y5596 w=10
 ?M 10413,5542 y5596 w=10
 
-N M 8854,5300 cdp1_c1_bl
-N M 9244,5300 cdp1_c2_bl
-N M 9634,5300 cdp1_c3_bl
-N M 10024,5300 cdp1_c4_bl
-N M 10414,5300 cdp1_c5_bl
-@alias cdp1_c1_bl cdp2_a_s3_bus
-@alias cdp1_c2_bl cdp2_a_s4_bus
-@alias cdp1_c3_bl cdp2_a_s5_bus
-@alias cdp1_c4_bl cdp2_a_s6_bus
-@alias cdp1_c5_bl cdp2_a_s7_bus
+N M 8854,5300 db_b4
+N M 9244,5300 db_b3
+N M 9634,5300 db_b2
+N M 10024,5300 db_b1
+N M 10414,5300 db_b0
+@alias db_b4 cdp2_a_s3_bus
+@alias db_b3 cdp2_a_s4_bus
+@alias db_b2 cdp2_a_s5_bus
+@alias db_b1 cdp2_a_s6_bus
+@alias db_b0 cdp2_a_s7_bus
 # cdp2 makes cdp2_a_sK_bus canonical for cdp2_c_sK_bus; both now belong to cdp1's name.
-@alias cdp1_c1_bl cdp2_c_s3_bus
-@alias cdp1_c2_bl cdp2_c_s4_bus
-@alias cdp1_c3_bl cdp2_c_s5_bus
-@alias cdp1_c4_bl cdp2_c_s6_bus
-@alias cdp1_c5_bl cdp2_c_s7_bus
+@alias db_b4 cdp2_c_s3_bus
+@alias db_b3 cdp2_c_s4_bus
+@alias db_b2 cdp2_c_s5_bus
+@alias db_b1 cdp2_c_s6_bus
+@alias db_b0 cdp2_c_s7_bus
 
 # --- Data bit 6 to R10's slice s1 (cdp2 row C, bus line at x 8118/8075) ---------------
-# The metal that bust drew to (8075,5040) (tc1_x2's metal, bit 6, with the contact onto
-# cdp1_lw2 at (8078,5020)) runs on south along x 8075 to y 5848, steps east along
+# The metal that bust drew to (8075,5040) (db_b6's metal, bit 6, with the contact onto
+# db_b6 at (8078,5020)) runs on south along x 8075 to y 5848, steps east along
 # y 5840-5856 to x 8118 (the step lies on one of channel 1's poly lines, no contact:
 # uniform salmon under it, 4.5x in three shots, s1jog.png) and runs south along x 8118 to
 # cdp2's drawn top of cdp2_c_s1_bus (y 7395). Seen end to end: b6a.png (2.9x, y 5030-5855),
@@ -75,11 +75,11 @@ N M 10414,5300 cdp1_c5_bl
 # crossings (s1pad.png), and the follower's candidates at y 5111-5407 where the line lies
 # over three diffusion regions (pitch 130): no pad or ring seen at any of them.
 M 8075,5030 y5848 x8118 y7400 w=12
-N M 8118,6500 cdp1_a3_bl
-@alias cdp1_a3_bl cdp2_c_s1_bus
+N M 8118,6500 db_b6
+@alias db_b6 cdp2_c_s1_bus
 
 # --- Data bit 5 to R10's slice s2 (cdp2 row C, bus line at x 8535/8465) ---------------
-# The tap metal of cdp1_a0_bl at x 8727 (cdp1 drew it to y 5150) runs straight down to a
+# The tap metal of db_b5 at x 8727 (cdp1 drew it to y 5150) runs straight down to a
 # contact (8728,6088) on a poly pad (ring in both metal shots, green patch in the clean
 # shot). The poly runs west along y 6079-6095 under three metals (no pads on them) to a
 # pad with the contact (8485,6087) (ring, green patch); 4x in three shots, s2top.png.
@@ -94,6 +94,6 @@ P 8480,6087 x8730 w=16                 # west, under the metals at x 8553, 8620 
 P 8468,6073:8502,6101                  # pad
 C 8485,6087 s=22x22
 M 8494,6088 x8464 y6999 x8532 y7400 w=13
-N M 8464,6500 cdp1_a0_bl
-N P 8600,6087 cdp1_a0_bl
-@alias cdp1_a0_bl cdp2_c_s2_bus
+N M 8464,6500 db_b5
+N P 8600,6087 db_b5
+@alias db_b5 cdp2_c_s2_bus

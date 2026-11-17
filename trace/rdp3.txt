@@ -209,11 +209,11 @@ M 14625,12437 y13014 w=24
 M 15015,12437 y13014 w=24
 M 15405,12437 y13014 w=24
 M 15795,12437 y13014 w=24
-N M 14235,12600 rbus_b0
-N M 14625,12600 rbus_b1
-N M 15015,12600 rbus_b2
-N M 15405,12600 rbus_b3
-N M 15795,12600 rbus_b4
+N M 14235,12600 db_b0
+N M 14625,12600 db_b1
+N M 15015,12600 db_b2
+N M 15405,12600 db_b3
+N M 15795,12600 db_b4
 
 # =====================================================================================
 # Register rows RA (y 12167-12437) and RB (y 11321-11591): the latch cell upside down,
@@ -465,21 +465,21 @@ M 16723,10700 y12445 w=56
 N M 16723,11650 vcc
 # --- per-slice bus lines (data): contact in every latch cell, nothing else on them here
 M 13845,10700 y12445 w=24
-N M 13845,11650 rbus_b7
+N M 13845,11650 db_b7
 M 14236,10700 y12445 w=24
-N M 14236,11650 rbus_b0
+N M 14236,11650 db_b0
 M 14626,10700 y12445 w=24
-N M 14626,11650 rbus_b1
+N M 14626,11650 db_b1
 M 15016,10700 y12445 w=24
-N M 15016,11650 rbus_b2
+N M 15016,11650 db_b2
 M 15407,10700 y12445 w=24
-N M 15407,11650 rbus_b3
+N M 15407,11650 db_b3
 M 15797,10700 y12445 w=24
-N M 15797,11650 rbus_b4
+N M 15797,11650 db_b4
 M 16187,10700 y12445 w=24
-N M 16187,11650 rbus_b5
+N M 16187,11650 db_b5
 M 16577,10700 y12445 w=24
-N M 16577,11650 rbus_b6
+N M 16577,11650 db_b6
 # --- per-slice c lines (x 14712 track): two contacts in every comparator cell, none in
 # the latch cells. They run on down into the routing zone (not drawn below y 12445).
 M 13931,10700 y12445 w=22
@@ -641,7 +641,7 @@ M 16058,12493 y12843 w=18
 C 16058,12831 s=24x24
 P 16043,12821:16808,12841
 P 16788,12821:16808,12900
-N P 16798,12890 rbus_b7
+N P 16798,12890 db_b7
 C 16601,12830 s=24x24
 M 16838,12540 16838,12530 16603,12757 16603,12843 w=20
 # --- bus s5: the line goes on to row AR (drawn above); a contact at (15797,12744), poly

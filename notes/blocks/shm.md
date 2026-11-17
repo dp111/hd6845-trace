@@ -6,11 +6,11 @@ Serial work, 2026-11-16. Trace: `trace/shm.txt`. Views in `cache/scratch/rax/`:
 
 ## Result (from the extraction)
 
-    ras_shift_n = NAND(cdp1_a4_q, cdp1_a5_q)       two pull-downs in series, a load
+    ras_shift_n = NAND(r8_b1_q, r8_b0_q)       two pull-downs in series, a load
     ras_shift   = NOT ras_shift_n                  one pull-down, a load
     ras_straight = NOT ras_shift                   (in the island tc1)
 
-`cdp1_a4_q` and `cdp1_a5_q` are the outputs of the two register bits of **R8** in the
+`r8_b1_q` and `r8_b0_q` are the outputs of the two register bits of **R8** in the
 columns c6 and c7. So the row address selector shifts the scan line count up one bit,
 and the R9 compare changes (`notes/blocks/ras.md`), exactly when both of those bits of
 R8 are set. Column c7 is bit 0 in the block below (`cdp2`: its slice s7 takes row address

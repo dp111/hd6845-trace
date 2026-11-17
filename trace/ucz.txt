@@ -85,7 +85,7 @@ M 13607,9525 y10705
 # The uc track x 14712 ends on a contact (14713,9273). Its row runs WEST along y 9273
 # only as far as x 14544, where it steps down one track under the VSS rail x 14565 to the
 # row y 9317 (the L prints through the rail in both metal shots; east of the step the row
-# y 9317 is another net, bust's ubus_b3 row from its pad at 14625; west of the step the
+# y 9317 is another net, bust's db_b3 row from its pad at 14625; west of the step the
 # row y 9273 is the pad at 14473 of rc6's net, 50 px away with a diffusion-coloured box
 # between). West along y 9317, south on x 13740, west along y 9487 to a pad with a contact
 # (13692,9487): the top end of bundle track L8, straight south to rdp3's contact

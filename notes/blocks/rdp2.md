@@ -76,7 +76,7 @@ and rotation). Compared copy by copy with row RB (`rdp3_cmp`, offset 0,-757): id
 except the top edge, where q leaves. Per bit, as rdp3: `a <- bus` while the strobe is
 high, `n2 = NOT a`, `q = NOT n2`, weak hold device q -> a. q is in the sense of the bus.
 
-- Bus lines `rbus_b7..s7` (one contact per cell, y 10809). s0's bus line ends at the
+- Bus lines `db_b7..s7` (one contact per cell, y 10809). s0's bus line ends at the
   top of its RC cell (y 10567); the others run on north through both comparators with no
   contact.
 - **Strobe: `wr_r0`, so RC is R0.** The row poly runs west under the first
@@ -198,8 +198,8 @@ rc_eq_r4  = NOR(the seven x)              high when the seven uc lines equal RE
 
 | Name | Layer | Where | Direction | What |
 |---|---|---|---|---|
-| `rbus_b0`..`s7` | metal | x 14236, 14626, 15016, 15407, 15797, 16187, 16577 at y 9540, going north | through | data lines; drawn to y 9540, they go on north (track scan: to about y 9480 and beyond in places) |
-| `rbus_b7` | metal | ends at (13845,10567) | - | top end of s0's data line |
+| `db_b0`..`s7` | metal | x 14236, 14626, 15016, 15407, 15797, 16187, 16577 at y 9540, going north | through | data lines; drawn to y 9540, they go on north (track scan: to about y 9480 and beyond in places) |
+| `db_b7` | metal | ends at (13845,10567) | - | top end of s0's data line |
 | `hc7`..`s7` | metal | joined to rdp3's at y 10700 (x 13931, 14321, 14712, 15102, 15492, 15882, 16272, 16663) | in | compared with R0; not driven here; top ends y 10220 (s0), 9705 (others) |
 | `wr_r0` | poly | (13750,10815) going west to rdp3's pad | in | R0 load strobe = `wr_r0` |
 | `h_eq_r0` (= `h_eq_r0`) | metal | 13434,10700 going south (track L2) | out | high when c = R0 |
@@ -208,7 +208,7 @@ rc_eq_r4  = NOR(the seven x)              high when the seven uc lines equal RE
 | `wr_r4` | metal | 13391,10700 going south (track L1) | in | R4 load strobe = `wr_r4` |
 | `wr_r6` | poly | 13340,8295 going west | in | RF load strobe, not identified |
 | `rc_eq_r4` | poly | 13340,8339 going west | out | high when uc = R4 |
-| `ubus_b0`, `_s0`..`_s5` | metal | x 13455, 13845, 14236, 14626, 15016, 15407, 15797; north at y 8051, south at y 9075 | through | data lines of the upper array |
+| `db_b0`, `_s0`..`_s5` | metal | x 13455, 13845, 14236, 14626, 15016, 15407, 15797; north at y 8051, south at y 9075 | through | data lines of the upper array |
 | `rc0`, `_s0`..`_s5` | metal | x 13541, 13931, 14321, 14712, 15102, 15492, 15882; north at y 8051, south at y 9075 | in | compared with R4 (and by rdp1's comparator with RF) |
 | `r6_b0_q`, `_s0_q`..`_s5_q` | poly | x 13707, 14097, 14487, 14878, 15268, 15658, 16048 (22 wide) at y 8048 going north | out | RF's bits, into rdp1's comparator |
 | `rdp2_t13714` | metal | 13714,8051 north; 13714,9075 south | through | thin line on sm1's strap track |

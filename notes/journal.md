@@ -1208,7 +1208,7 @@ regions; seams closed. After: 0.0 % in none. About 54 % of the die rectangle is 
 Both from dp111, both on b8e2524, independent of each other; merged onto main without
 conflicts. Checks on the merged tree: 2,112 nets, 3,582 transistors (+57: `amr`'s slice),
 0 errors, 0 warnings; glossary and former names clean; `tools/unsure.py`: five new nets
-joined only through `?` items, `cdp1_c1_bl`..`cdp1_c5_bl` (rde's `?M` neck, disclosed,
+joined only through `?` items, `db_b4`..`db_b0` (rde's `?M` neck, disclosed,
 now AMB-019). Notes read in full; the slice equations checked by hand (x = NOT(NOR(c, q) +
 c.q) = c XOR q). Photo spot checks: `amr` c3 overlaid on the clean shot at 1.5x (every
 outline on a feature); rde's neck at (9630, 5545-5595) at 4x in two shots: no metal can be

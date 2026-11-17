@@ -199,7 +199,7 @@ y 4078 down is `ras_shift` again (ns6 ends at y 3883; a C-shaped poly lies betwe
   VSS bus to contact (7815,4372), metal west along y 4369-4383 to contact (7359,4352),
   poly west along y 4344-4362 to contact (7056,4352), metal south x 7049-7068 past
   y 4450.
-- `tc1_x2`: poly from the east at y 4365-4383 to contact (8075,4372), metal south
+- `db_b6`: poly from the east at y 4365-4383 to contact (8075,4372), metal south
   x 8067-8082 past y 4450.
 - VCC bus y 4198-4250 from the foot of the centre rail east to x 8166, then south at
   x 8116-8165. A plain rectangle: the diagonal lines on its east end are the edges of
@@ -228,21 +228,21 @@ East side (into the datapath, or the random logic at its slice-0 position x 8290
 
 | Name | Layer | Where it crosses | Dir | What |
 |---|---|---|---|---|
-| `cdp1_a4_q` | P | x 8350, y 2846-2868 | ? | north end of ns5, from contact (8271,2857) |
+| `r8_b1_q` | P | x 8350, y 2846-2868 | ? | north end of ns5, from contact (8271,2857) |
 | `tc1_ns3` | M | x 8350, y 2720-2734 | ? | ns3 arrives from the east over the top of the datapath |
 | `ral_stb` | M | x 8350, y 2764-2778 | ? | ns4, the same |
-| `cdp1_a5_q` | M | x 8350, y 2807-2821 | ? | ns6, the same |
+| `r8_b0_q` | M | x 8350, y 2807-2821 | ? | ns6, the same |
 | `tc1_f` | P | x 8250, y 3348-3362 | out | R3 output; runs on under ns1..ns6 without contact, in the channel between cdp1's rows A and B |
 | `tc1_a` | P | x 8250, y 3387-3402 | in (believed) | same channel, 40 px below `tc1_f` |
-| `cdp1_a5_q` | P | x 8350, y 3516-3539 | ? | from contact (8313,3527) |
+| `r8_b0_q` | P | x 8350, y 3516-3539 | ? | from contact (8313,3527) |
 | `tc1_ns2` | P | x 8250, y 3556-3578; reaches x 8332 and turns south there | ? | from contact (8139,3567) |
 | `tc1_w1` (= ns1) | P | x 8250, y 3691-3712 (seen to x 8350) | **in** (its only other end is L4's gate) | from contact (8139,3704) |
-| `cdp1_a4_q` | P | x 8350, y 3728-3751 | ? | from contact (8270,3739) |
-| `cdp1_a4_q` | P | x 8350, y 3822-3844 | ? | from contact (8270,3833) |
-| `cdp1_a5_q` | P | x 8350, y 3859-3881 | ? | from contact (8313,3870), the south end of ns6 |
+| `r8_b1_q` | P | x 8350, y 3728-3751 | ? | from contact (8270,3739) |
+| `r8_b1_q` | P | x 8350, y 3822-3844 | ? | from contact (8270,3833) |
+| `r8_b0_q` | P | x 8350, y 3859-3881 | ? | from contact (8313,3870), the south end of ns6 |
 | `ras_o0_sel1` | P | x 8250, y 4212-4228 (drawn to x 8350) | out | a AND b, to the datapath just above cdp1's row C |
 | `tc1_x1` | P | x 8250, y 4255-4275 (drawn to x 8350) | ? | passes through: see the west side, y 4344-4362 |
-| `tc1_x2` | P | x 8250, y 4365-4383 (drawn to x 8350) | ? | passes through: see the south side, x 8075 |
+| `db_b6` | P | x 8250, y 4365-4383 (drawn to x 8350) | ? | passes through: see the south side, x 8075 |
 
 South side (tc2), west to east:
 
@@ -254,7 +254,7 @@ South side (tc2), west to east:
 | `ras_shift` | P | x 7503-7522, y 4450 | in (believed: its only other end) | from contact (7511,4417) |
 | `tc1_ns3` | M | x 7894-7909, y 4450 | ? | from contact (7905,4370) |
 | `vss` | M | x 7943-7990, y 4450 | | the VSS bus (y 4288-4335, from the foot of the left rail) turns south |
-| `tc1_x2` | M | x 8067-8082, y 4450 | ? | to contact (8075,4372) |
+| `db_b6` | M | x 8067-8082, y 4450 | ? | to contact (8075,4372) |
 | `vcc` | M | x 8116-8165, y 4450 | | the VCC bus (y 4198-4250, from the foot of the centre rail) turns south |
 | `ral_stb` | M | x 8198-8212, y 4450 | ? | ns4 has no contact in this block |
 
@@ -280,10 +280,10 @@ North side:
 |---|---|---|---|---|
 | `vss` | M | right rail x 7771-7819, drawn y 3000-4000; it continues north through the top bus field (the bus lines cross it in poly) | | |
 
-Seen while following these, **not mine and not drawn**: `cdp1_a0_q` (poly from the
+Seen while following these, **not mine and not drawn**: `r8_b5_q` (poly from the
 datapath at y 3017-3040) turns north at x 8047-8072 and west again along y 2930-2950; it
 passes 15 px from the `tc1_a` contact pad at (8010,3028) **without touching it** (field
-gap at x 8030-8046, measured with `tc1_px.py row 3029`). `cdp1_a1_q` (poly, y 2978-2993)
+gap at x 8030-8046, measured with `tc1_px.py row 3029`). `r8_b4_q` (poly, y 2978-2993)
 turns north at x 8094-8112 up to y 2893 and west along y 2893-2907; two more polys of
 the same kind (y 2850-2864 down x 8134-8152 to y 2935-2950; y 2805-2821 down
 x 8181-8202 to y 2893-2908) nest round it: they are the row A outputs fanning out west
@@ -387,4 +387,4 @@ and touches neither (field at y 3896-3908 and 4056-4070, measured).
   x 7858 or 7902 (alternating). Only the y 2727 (ns2) and y 2771 (`w1`) lines are drawn.
   The y 2814 line's poly runs on east from contact (7707,2811) without a second contact
   in view. The row A outputs of cdp1 fan out west into it (see Ports).
-- Far ends of ns3..ns6 and of ns2's west poly; `tc1_x1`, `tc1_x2` (all in the Ports table).
+- Far ends of ns3..ns6 and of ns2's west poly; `tc1_x1`, `db_b6` (all in the Ports table).

@@ -401,19 +401,19 @@ M 15552,8300 y9540 w=56
 M 15942,8300 y9540 w=56
 # data lines of the upper array (one contact per latch cell)
 M 13455,8300 y8815 w=24
-N M 13455,8500 ubus_b0
+N M 13455,8500 db_b0
 M 13845,8300 y8815 w=24
-N M 13845,8500 ubus_b1
+N M 13845,8500 db_b1
 M 14236,8300 y8815 w=24
-N M 14236,8500 ubus_b2
+N M 14236,8500 db_b2
 M 14626,8300 y8815 w=24
-N M 14626,8500 ubus_b3
+N M 14626,8500 db_b3
 M 15016,8300 y8815 w=24
-N M 15016,8500 ubus_b4
+N M 15016,8500 db_b4
 M 15407,8300 y8815 w=24
-N M 15407,8500 ubus_b5
+N M 15407,8500 db_b5
 M 15797,8300 y8815 w=24
-N M 15797,8500 ubus_b6
+N M 15797,8500 db_b6
 # c lines of the upper array (two contacts per XOR cell)
 M 13541,8300 y8815 w=22
 N M 13541,8500 rc0

@@ -45,8 +45,8 @@ y 9072, and the metal goes on south to the end contact in the first column.
   with field between (it goes north at x 13613, east along y 9400, north again at x 13655
   and on up past y 9250); cnt_bus_a turns north at x 13590. Neither is drawn here.
 - Rows on one y are several nets. y 9273-9276: `rc6` west of the pad (14473,9273), `rc3`
-  from x 14544 to the pad (14713,9273), `bust`'s `ubus_b4` row from x 15018. y 9317:
-  `rc3` west of x 14544, `bust`'s `ubus_b3` row from its pad (14625,9315).
+  from x 14544 to the pad (14713,9273), `bust`'s `db_b4` row from x 15018. y 9317:
+  `rc3` west of x 14544, `bust`'s `db_b3` row from its pad (14625,9315).
 
 ## Ambiguities
 
