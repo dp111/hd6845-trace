@@ -1,24 +1,40 @@
 # ral: the stage in front of the RA pad drivers (x 13990-16330, y 4250-4560)
 
-## Status (2026-11-16 23:19, contributor session)
+## Status (2026-11-17 04:12, contributor session)
 
 **Partly traced** (`trace/ral.txt`, cell `ral_cell`, five copies s0-s4 west to east; s0 is
 RA bit 0's cell, at x 13990-14460). Drawn: the two supply rails per cell, the line
 `ral_frc` (y 4350) with its tap and the pull-down it gates, the strobe line `ral_stb`
-(y 4548) with its pad and the input pass transistor, the input strip as far as x 14196,
-s0's input join to `rax_o0`, and the output poly stub to `ra0_drv_in`. **Not drawn**: the
-cell's inverters and loads, the two poly bars at 14200-14290 x 4455-4500, and the upper
-part of the output poly, so the cell's function is still not extracted. 10 transistors.
+(y 4548) with its pad and the input pass transistor, the input strip, the hold device
+(gate on VSS) from node a to the output, the buried contact onto the output poly, s0's
+input join to `rax_o0`, and the output stub to `ra0_drv_in`. **Not drawn**: the two
+inverters and their loads (the forward path from node a to the output), and the upper
+part of the output poly. 15 transistors (three per cell).
 
 ### Logic (traced)
 
 ```
-ral_a_s#  <- rax_o#   pass transistor 16/26 at (14041,4487) + 434 per cell, gate ral_stb
-ral_tf_s# -> VSS      pull-down 66/20 at (14160,4413) + 434 per cell, gate ral_frc
+ral_a_s#  <- rax_o#    pass transistor 16/26 at (14041,4487) + 434 per cell, gate ral_stb
+ral_a_s#  <-> out_s#   hold device 16/90 at (14245,4487) + 434, gate VSS (out_s0 = ra0_drv_in)
+ral_tf_s# -> VSS       pull-down 66/20 at (14160,4413) + 434 per cell, gate ral_frc
 ```
 
-Believed, not traced: node a feeds a static latch (the first survey's guess, below), so
-each RA output is latched, transparent while `ral_stb` is high.
+The hold device is the same structure as `cdp2_lat`'s (long weak device, gate on VSS,
+believed depletion-mode): it feeds the output back onto node a, overpowered by the
+input while `ral_stb` is high. With a non-inverting path a -> output (two inverters,
+not yet drawn), that is the static latch of the register rows: **each RA output would be
+latched, transparent while `ral_stb` is high**. Believed, not extracted: the forward
+path is the missing piece.
+
+How the hold device was read: the poly block 14200-14290 x 4448-4500 lies over field in
+its upper half (row profile y 4462: field at x 14185-14195 and 14300-14360, poly only at
+14205-14285) and over the input strip in its lower half; the dark line at y 4470-4476
+runs the block's full width in every column profiled (x 14204, 14208, 14250, 14282,
+14286), which is the strip's edge under the poly, not a gap between two polys. So it is
+one block, and its only neighbour is the VSS-contacted poly pad above (dark line at
+y 4447 between them = the VSS rail's edge; join drawn `?P`). The strip's east end meets
+the output poly's bend under a heavy-outlined patch (14315-14347 x 4470-4500, clean
+shot): drawn `?B`.
 
 ### Ports
 
@@ -32,7 +48,7 @@ each RA output is latched, transparent while `ral_stb` is high.
 | `rax_o1_u`, `ral_in_s2`, `rax_o3_u`, `ral_in_s4` | diffusion | strip west end (14430,4487) etc. | in | input polys not drawn (rab: bit 1's and bit 3's come north right under these ends) |
 | `ra0_drv_in` | poly | x 14331-14349 at y 4480-4525, joins r9c's poly from the pad (14340,4764) | out | s0's output |
 | `ral_out_s1` ... `ral_out_s4` | poly | the same stub in each copy | out | not drawn to the drivers |
-| `ral_a_s#`, `ral_tf_s#` | diffusion | inside the cell | internal | continue into the untraced part |
+| `ral_a_s#`, `ral_tf_s#` | diffusion | inside the cell | internal | node a (between the pass and hold devices) and Tf's drain; both continue into the untraced part |
 
 ### How sure
 
@@ -50,16 +66,19 @@ each RA output is latched, transparent while `ral_stb` is high.
 
 ### Not done (next)
 
-1. The two poly bars 14200-14290 x 4455-4473 and 4480-4500 and the box round them: are
-   they joined to the VSS-contacted poly pad 14200-14246 x 4398-4446 (a `hold` device, as
-   in `cdp2_lat`)? The dark line at y 4447-4452 is the middle rail's edge, so the join
-   needs a profile at x 14210-14240, y 4440-4460 in the clean shot.
-2. Where the strip y 4479-4494 goes east of the bars (x 14290-14315) and the strip that
-   turns up at x 14390-14420.
-3. The L-shaped poly 14245-14345 x 4325-4370 / 14325-14345 x 4370-4448 (a pull-down gate
-   in the box 14252-14365 x 4378-4448) and the loads under the top rail.
-4. The output poly from y 4300 to 4480 (x 14372-14395) and what drives it.
-5. The copies' input and output polys (s1-s4), and the fifteen copies in the left array.
+1. **The forward path from node a to the output**: no buried contact from the strip
+   (x 14055-14200) to any poly was seen; Tf's poly ends at y 4462, 17 px above the
+   strip. Candidates: the L-shaped poly 14245-14345 x 4325-4370 / 14325-14345 x
+   4370-4448 (a pull-down gate in the box 14252-14365 x 4378-4448, VSS contact at about
+   (14265,4415), drain x 14348-14370, which seems to run up to a load under the top rail:
+   poly block 14285-14365 x 4277-4310); and a vertical diffusion strip x 14200-14225,
+   y 4300-4395, above the VSS pad. Two passes did not give a consistent circuit; next
+   pass needs metal1 (not cached in this clone) or 5-6x single-shot views.
+2. Whether Tf's drain `ral_tf_s#` (strip x 14172-14196) is the first inverter's output,
+   i.e. n2 = NOR(a, ral_frc), which would make `ral_frc` a force/clear of the latch.
+3. The output poly from y 4300 to 4480 (x 14375-14395): believed to be the second
+   inverter's output node (its load's gate tie at about 14365-14395 x 4280-4310).
+4. The copies' input and output polys (s1-s4), and the fifteen copies in the left array.
 
 ## First survey
 

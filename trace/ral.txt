@@ -31,13 +31,31 @@ N D 14185,4420 ral_tf_{}
 # end by a buried contact (round ring at (14000,4495) in both stripped shots: ?).
 # The strip y 4479-4494 is diffusion from x 14015 to x 14315 (colour profile along
 # y 4486, tools/ral_prof.py): it passes under the strobe poly and on under the lower
-# poly bar. Drawn here only as far as x 14196. The buried contact is drawn outside the
+# poly block. The buried contact is drawn outside the
 # cell, for s0 only: the other copies' input polys are not drawn yet.
-D 13988,4479:14196,4495
+D 13988,4479:14340,4495
 P 14028,4430:14054,4536
 P 14024,4530:14058,4564
 C 14041,4547 s=24x24
 N D 14100,4487 ral_a_{}
+
+# --- hold device: the strip passes under a poly block 14200-14290 x 4448-4500 whose
+# gate is the poly pad 14200-14246 x 4398-4446, contacted to the VSS rail (ring in the
+# metal shot at (14222,4425), pale centre on poly in the clean shot). Upper half of the
+# block lies over field (row profile y 4462: field at x 14185-14195 and 14300-14360); the
+# dark line at y 4470-4476 across the block is the strip's edge under the poly; the one
+# at y 4447 between pad and block is the VSS rail's edge (the join itself is not
+# resolved at any zoom: ?). Same structure as cdp2_lat's hold device: W/L about 15/90,
+# gate on VSS, believed depletion-mode.
+P 14200,4398:14246,4446
+C 14223,4422 s=26x26
+?P 14200,4440:14246,4452
+P 14200,4448:14290,4500
+A 14205,4475:14285,4500 kind=hold
+# East end of the strip: a heavy-outlined patch where it meets the output poly's bend
+# (clean shot, 14315-14347 x 4470-4500): taken as a buried contact, so the hold device
+# feeds the output back to node a (?).
+?B 14315,4472:14347,4500
 
 # --- output: poly from the cell to the pad driver (S-shaped): vertical x 14372-14395,
 # west along y 4480-4500, south along x 14331-14349 to the pad (14340,4764) that r9c drew

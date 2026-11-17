@@ -251,10 +251,10 @@ None of these rows has a register number yet, so all names are by place. Columns
 | `rax_o#_u` | (# = 1, 3) the input end of `ral` cell s#'s pass transistor, believed to be `rax_o`# (its poly comes north from a pad right under it, `notes/blocks/rab.md`); the buried contact is not drawn |
 | `ral_frc` | metal line y 4350 through the five `ral` cells (x 13990-16330); in each cell it gates a pull-down to VSS (`ral_tf_s#`). Source not followed. Name from "force": a guess at its role |
 | `ral_stb` | the sixth line of the row address bundle (`notes/blocks/rab.md`), metal y 4548 under the `ral` band; in each cell it gates the input pass transistor. Source not followed |
-| `ral_a_s#` | `ral` cell s# (s0-s4 west to east; s0 is RA bit 0's cell), node a: the input pass transistor's far side, diffusion strip y 4479-4494. Where it goes beyond x 14196 (+434 per cell): not drawn |
+| `ral_a_s#` | `ral` cell s# (s0-s4 west to east; s0 is RA bit 0's cell), node a: the input pass transistor's far side, diffusion strip y 4479-4494, joined to the cell's output by a hold device (gate VSS). Its use as a gate input is not drawn |
 | `ral_tf_s#` | `ral` cell s#: drain of the pull-down gated by `ral_frc`; not drawn further |
 | `ral_in_s#` | (# = 2, 4) input end of `ral` cell s#'s pass transistor; the input poly is not drawn |
-| `ral_out_s#` | (# = 1-4) the output poly stub of `ral` cell s#, south of the cell (s0's is `ra0_drv_in`); for s1 believed to reach RA1's driver line at (14774,4592), not drawn |
+| `ral_out_s#` | (# = 1-4) the output poly of `ral` cell s#, fed back to node a through the hold device (s0's is `ra0_drv_in`); for s1 believed to reach RA1's driver line at (14774,4592), not drawn |
 | `cdp1_b#_n2`, `cdp1_b#_ne` | NOR(a, b) and a XOR b |
 | `cdp1_b_eq` | NOR of the five `_ne`: high when R9 equals the 5-bit value on the `_b` lines (in slice 5 the register bit is replaced by `cdp1_b5_a`, made by `tc1`) |
 | `cdp1_l#`, `cdp1_lw#` | horizontal lines of the data bus channel, named by their y; and two write-line links |
