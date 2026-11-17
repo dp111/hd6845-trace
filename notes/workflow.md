@@ -183,6 +183,18 @@ reported to the coordinator, not traced on the side.
 
 Active claims are not in that file but in `claims/` on main: `tools/claim.py list`.
 
+## Concurrency
+
+Everything that changes main is a plain (never forced) push, which the server accepts
+only if it is a fast-forward of main as it is at that moment: a push built on an older
+main is rejected. Every tool and step that pushes to main reacts to a rejection by
+fetching again and repeating its checks: `tools/claim.py` (take, release, done) rebuilds
+its commit on the new main and re-checks the prefix and the regions; the merge step merges
+main again and re-runs `tools/mergecheck.py`. So two claims of one prefix (or two
+overlapping regions) cannot both succeed, and no merge reaches main without passing the
+gate against exactly the main it lands on. **Never force-push**: it is the one thing that
+defeats this. `tools/newwork.sh` starts work only on a claim that is yours.
+
 ## Why it is done this way
 
 - `tools/claim.py take` pulls main into your checkout first and refuses a prefix the
