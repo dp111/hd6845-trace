@@ -1,9 +1,9 @@
 # mal: the fourteen copies of the ral cell in front of the MA pad drivers
 
-## Status (2026-11-17 14:14 (UTC+1), contributor session; inverter 1 independently reviewed)
+## Status (2026-11-17 05:18, contributor session)
 
-Placed (`trace/mal.txt`, 98 transistors: seven per copy, the whole `ral_cell`), and
-**every copy's output followed to its MA pad driver: copy m# drives MA#**,
+Placed (`trace/mal.txt`, 70 transistors: five per copy, as far as `ral_cell` is
+traced, with inverter 2), and **every copy's output followed to its MA pad driver: copy m# drives MA#**,
 m0 at the top (y 8155) to m13 at the bottom (y 18576). Depends on `trace/ral.txt`
 (`@requires ral`). Inputs and the force taps' wiring are not drawn.
 
@@ -18,28 +18,20 @@ clean shot at 1.45x and 3x (`cache/scratch/ral/m0.png`, `m0b.png`): the cell's m
 (VSS) rail lands on the vertical metal x 2600-2650, the top (VCC) rail on x 2780-2830,
 the contacts on rings.
 
-## Logic (extracted; the cell is `notes/blocks/ral.md`)
+## Logic (as far as the cell is traced)
 
-    ral_a_m#   <- input                    pass transistor 68/25, gate ck_out
-    ral_n1_m#  = NOR(ral_a_m#, mal_frc_m#) pull-downs 94/22 and 94/20, load 35/50
-    ma#_drv_in = NOT ral_n1_m#             pull-down 199/22, load 60/37
-    ral_a_m#   <-> ma#_drv_in              hold device 16/90, gate VSS
-
-So `ma#_drv_in = ral_a_m# OR mal_frc_m#`: a static latch, transparent while `ck_out` is
-high, whose output the force line sets high. Both equations are FIRM in
-`tools/unsure.py --equations` for all fourteen copies. The cell's overlay was checked on
-m4 (both halves) and m12 at 3.3x in the chip-1 metal shot
-(`cache/scratch/ralinv/o_m4a_m.png`, `o_m4b_m.png`, `o_m12a_m.png`), and the median of
-the fourteen copies is the view inverter 1 was read from (`tools/ral_comp19.py --groups`,
-composite `ral_cm`).
+    ral_a_m#  <- input     pass transistor 16/26, gate ck_out    (all fourteen)
+    ral_a_m#  <-> output   hold device 16/90, gate VSS
+    ral_tf_m# -> VSS       pull-down 66/20, gate mal_frc_m#
 
 **Each copy's strobe pad lands on `ck_out`'s left-edge trunk** (`trunks`: metal x
 2500-2504, with "contact candidates about every 608 px (y 8360, 8965, 9573, 10181,
 10831, 11440 ...): its taps into the left column, not looked at"). The copies' strobe
 contacts are at y 8349, 8955, 9562, 10170, 10821, 11428, 12230, 12924, 13576, 15700,
-16395, 17081, 17731, 18382, i.e. those taps. So, the cell being the latch traced in `notes/blocks/ral.md`, **every
-MA output is latched, transparent while `ck_out` is high (CLK low)** (and forced high by
-its `mal_frc_m#` line), where the RA outputs are latched on `ral_stb`.
+16395, 17081, 17731, 18382, i.e. those taps. So, if the cell is the latch it is believed
+to be (`notes/blocks/ral.md`), **every MA output is latched, transparent while
+`ck_out` is high (CLK low)**, where the RA outputs are latched on `ral_stb`.
+Believed, not extracted: the cell's forward path is not traced.
 
 ## Ports
 
@@ -48,7 +40,7 @@ its `mal_frc_m#` line), where the RA outputs are latched on `ral_stb`.
 | `ck_out` | metal | the trunk x 2500, contacts as above | in | strobe |
 | input end of each pass transistor | diffusion | x about 2567, below each strobe contact | in | unnamed: the MA counter's (or start address's) bit, not followed |
 | `ma0_drv_in` ... `ma13_drv_in` | poly, metal | each copy's output (below) | out | the MA pad drivers' inputs |
-| `mal_frc_m0` ... `mal_frc_m13` | metal | pads at x 2728-2730 | in | gates of the pull-downs that force `ral_n1` low (output high); each drawn as a pad of its own, but see "Not done" 2 |
+| `mal_frc_m0` ... `mal_frc_m13` | metal | pads at x 2728-2730 | in | force pull-down gates; each a pad of its own here |
 
 ## Outputs: copy m# -> MA# pad driver
 
@@ -84,13 +76,9 @@ can now be checked against the counter rows (each copy's **input**, not yet foll
 ## Not done
 
 1. Each copy's input: which counter row (or start-address bit) feeds it.
-2. Where the force taps `mal_frc_m#` go. **They are probably one line**: a thin vertical
-   metal at x about 2700 runs through the column beside the pads (seen from y 10250 to
-   11350 in both metal shots at 1.1x, with a tab to the pad of m4 and of m5,
-   `cache/scratch/ralinv/frc.png`; the median of the fourteen copies shows it right across
-   the cell, where the RA band has `cnt_gab`'s line). Not drawn, ends not looked at; until
-   it is, the fourteen names stay separate ports.
-3. The twentieth copy, at (8450,5562): findcell places it at 0.81 (turned 90 degrees, not
+2. Where the force taps `mal_frc_m#` go.
+3. Everything `ral` has not traced inside the cell.
+4. The twentieth copy, at (8450,5562): findcell places it at 0.81 (turned 90 degrees, not
    mirrored, `@inst ral_cell -5785,1167 rot=90 o=14235,4395`), but an overlay at 1.5x
    (`cache/scratch/ral/t0.png`) does not put the cell's rails and pads on matching
    features, and its strobe contact (8298,5368) has no metal over it. Not placed.
