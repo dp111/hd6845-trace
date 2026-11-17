@@ -1,0 +1,37 @@
+# mal: the fourteen copies of ral_cell in front of the MA pad drivers (left array's left
+# column, x 2480-2860). notes/blocks/mal.md. Placements from tools/findcell.py with ral's
+# master (14020,4265:14450,4525, clean shot), scores 0.78-0.82; tags m0-m13 top to bottom
+# (which MA bit each serves: not established).
+@block mal
+@requires ral
+@inst ral_cell -11576,3760 mx=14235 rot=90 o=14235,4395 tag=m0    # centre y 8155
+@inst ral_cell -11576,4366 mx=14235 rot=90 o=14235,4395 tag=m1    # centre y 8761
+@inst ral_cell -11576,4973 mx=14235 rot=90 o=14235,4395 tag=m2    # centre y 9368
+@inst ral_cell -11576,5581 mx=14235 rot=90 o=14235,4395 tag=m3    # centre y 9976
+@inst ral_cell -11576,6232 mx=14235 rot=90 o=14235,4395 tag=m4    # centre y 10627
+@inst ral_cell -11576,6839 mx=14235 rot=90 o=14235,4395 tag=m5    # centre y 11234
+@inst ral_cell -11576,7641 mx=14235 rot=90 o=14235,4395 tag=m6    # centre y 12036
+@inst ral_cell -11575,8335 mx=14235 rot=90 o=14235,4395 tag=m7    # centre y 12730
+@inst ral_cell -11575,8987 mx=14235 rot=90 o=14235,4395 tag=m8    # centre y 13382
+@inst ral_cell -11575,11111 mx=14235 rot=90 o=14235,4395 tag=m9    # centre y 15506
+@inst ral_cell -11575,11806 mx=14235 rot=90 o=14235,4395 tag=m10    # centre y 16201
+@inst ral_cell -11574,12880 rot=90 o=14235,4395 tag=m11    # centre y 17275
+@inst ral_cell -11574,13530 rot=90 o=14235,4395 tag=m12    # centre y 17925
+@inst ral_cell -11574,14181 rot=90 o=14235,4395 tag=m13    # centre y 18576
+
+# --- each copy's force pull-down gate tab (the RA band's line y 4354 has no continuous
+# counterpart here: each tab is a pad of its own, wiring not followed). Ports.
+N M 2728,8232 mal_frc_m0
+N M 2728,8838 mal_frc_m1
+N M 2728,9445 mal_frc_m2
+N M 2728,10053 mal_frc_m3
+N M 2728,10704 mal_frc_m4
+N M 2728,11311 mal_frc_m5
+N M 2728,12113 mal_frc_m6
+N M 2729,12807 mal_frc_m7
+N M 2729,13459 mal_frc_m8
+N M 2729,15583 mal_frc_m9
+N M 2729,16278 mal_frc_m10
+N M 2730,17198 mal_frc_m11
+N M 2730,17848 mal_frc_m12
+N M 2730,18499 mal_frc_m13
