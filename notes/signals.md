@@ -181,6 +181,7 @@ Eleven pass transistors between the scan line counter and five output nodes.
 | `rcs_g#` | an input of the cluster that arrives on a poly line from outside, by the y of that line |
 | `rcs_ba#`, `rcs_bb#`, `rcs_bc#`, `rcs_bd#`, `rcs_be#`, `rcs_bf#`, `rcs_bg#` | a piece of bus line A-G beside the first cluster (x 3090-3380) whose driver is not yet known, by the y of its top end |
 | `rcs_bp#`, `rcs_bq#`, `rcs_br#`, `rcs_bs#`, `rcs_bt#`, `rcs_bu#`, `rcs_bv#` | the same for the second bus field (x 4140-4420; tracks P-V at x 4148, 4192, 4235, 4279, 4322, 4365, 4409) |
+| `rcs_bq3335` | (one of the above) the input of the inverter that makes `rcs_mu`: the contact (4148,3335). Its line is the first of the four-line bundle that runs with R9's match (`notes/blocks/r9m.md`), followed back 9,000 px to a pad at about (12786,5570) at the edge of the untraced logic block x 12600-12900, y 5600-6400; for 2,500 px it is cdp1's through line y 4676, so `cdp1_l4676` is an alias. Driver not traced |
 | `rcs_mu`, `rcs_mv` | the two inputs of the NOR that makes `rcs_in1` (middle cluster): bus pieces of the second bus field (x 4192). `rcs_mu` = NOT `rcs_bq3335` (an inverter at y 3413); `rcs_mv` comes from a poly that leaves the bus field east and south at (4283,4745) |
 | `rcs_mn#` | output of a unit of the middle cluster, by the y of its output (`rcs_mn3852` = NOR(?, `rcs_in1`)) |
 | `rcs_thin_e`, `rcs_thin_w` | two thin metals down the cluster, over the loads; what they join is not read |

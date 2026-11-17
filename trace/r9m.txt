@@ -45,3 +45,61 @@ M 4194,3376 x4170 w=17
 
 N M 7600,4462 cdp1_b_eq
 N M 4194,3000 cdp1_b_eq
+
+# =====================================================================================
+# The bundle's first line: from the contact (4148,3335) of rcs_bq3335 (trace/tla.txt)
+# back towards its driver, as far as the pad (12782,5570) at the edge of the untraced
+# logic block x 12600-12900, y 5600-6400. It is cdp1's through line y 4676 for 2,500 px.
+# Every metal stretch from tools/follow.py; diagonals placed by sampling with --max.
+
+# metal: north along x 4149 from the contact to y 2555, east, a 45-degree diagonal
+# (4651,2555)-(4692,2597) (follower at (4649,2556) after 1040 px, (4669,2576) after 1060,
+# (4689,2595) after 1080), east along y 2598 to the pad (4867,2596)
+M 4149,3338 y2555 x4651 4692,2598 x4867 w=12
+P 4852,2581:4882,2611
+C 4867,2596
+# poly east under the res_b / lpstb_b metals to the pad (5400,2596)
+P 4862,2596 x5405 w=16
+P 5385,2581:5415,2611
+C 5400,2596
+# metal: east along y 2599 to x 6022 (beside R9's line, x 5974), south to y 4442, east to
+# the pad (6059,4440)
+M 5400,2599 x6022 y4442 x6064 w=13
+P 6044,4425:6074,4455
+C 6059,4440
+# poly south along x 6058 (one of the eight vertical polys that R9's line crosses) to the
+# pad (6058,4742)
+P 6058,4440 y4747 w=15
+P 6043,4727:6073,4757
+C 6058,4742
+# metal: the bus line y 4742, east to the pad (6490,4740)
+M 6058,4742 x6495 w=12
+P 6475,4725:6505,4755
+C 6490,4740
+# poly east along y 4740 under the rail x 6505-6560 and the crossing field to the pad
+# (6965,4738)
+P 6485,4740 x6970 w=14
+P 6950,4723:6980,4753
+C 6965,4738
+# metal: east along y 4744, north at x 7657 to y 4673, east to the pad (7855,4676)
+M 6965,4744 x7657 y4673 x7860 w=12
+P 7840,4661:7870,4691
+C 7855,4676
+# poly east along y 4676 to cdp1's west edge (cdp1 draws it on to x 10850: cdp1_l4676)
+P 7850,4676 x8345 w=12
+# east of cdp1: on along y 4676 through the bus field, a diagonal (11465,4676)-
+# (11530,4737) under the wide supply metal, east to the pad (11650,4740)
+P 10845,4676 x11465 11530,4737 x11655 w=12
+P 11635,4725:11665,4755
+C 11650,4740
+# metal: east along y 4742 to the pad (12780,4738)
+M 11650,4742 x12784 w=12
+P 12765,4723:12795,4753
+C 12780,4738
+# poly south along x 12782 under the wide supply metal (y 5200-5550) to a pad at about
+# (12786,5570) into the untraced logic block. The pad is seen at 0.48x only: the poly is
+# drawn to y 5550 and its end left as a port.
+P 12782,4738 y5550 w=16
+N P 12782,5500 cdp1_l4676
+
+@alias rcs_bq3335 cdp1_l4676
