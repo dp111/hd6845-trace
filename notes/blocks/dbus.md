@@ -368,10 +368,10 @@ How firm:
 
 | Bit | Data line | Driver (y) | Latch cell (y) | Latch input | Tied to the pin by |
 |---|---|---|---|---|---|
-| 4 | `db_b4` (`db_b4`, metal x 16818) | 13660-13860 | 13870-14345 (upside down) | `d4_d`: chain 4's G4, metal x 17250 up to a pad (17206,13999), poly row y 13997 west | chain 4 = D4 by position (`dbus`: chains 2-5 are not followed to their pads) |
-| 5 | `db_b5` (`db_b5`, metal x 16862) | 13465-13660 | 14350-14810 | `d5_d`: chain 5's G4, metal x 17252 up and west to a pad (17161,14693), poly row y 14692 west | chain 5 = D5 by position |
-| 6 | `db_b6` (`db_b6`, metal x 16908) | 13270-13465 | 14827-15287 | `d6_d`: poly row y 15173 east to the output box (17318,15190) of G4 of buffer 6 (`dbus_in` upside down) | buffer 6's input line is traced from the contact of the D6 pad cell (`notes/blocks/dbus.md`) |
-| 7 | `db_b7` (`db_b7`, poly x 16791) | 13075-13270 | 15304-15764 | `d7_d`: poly row y 15650 east, south at x 17188, east along y 15818 to the output box of G4 of buffer 7 | buffer 7's input line is traced from the contact of the D7 pad cell |
+| 4 | `db_b4` (metal x 16818) | 13660-13860 | 13870-14345 (upside down) | `d4_d`: chain 4's G4, metal x 17250 up to a pad (17206,13999), poly row y 13997 west | chain 4 = D4 by position (`dbus`: chains 2-5 are not followed to their pads) |
+| 5 | `db_b5` (metal x 16862) | 13465-13660 | 14350-14810 | `d5_d`: chain 5's G4, metal x 17252 up and west to a pad (17161,14693), poly row y 14692 west | chain 5 = D5 by position |
+| 6 | `db_b6` (metal x 16908) | 13270-13465 | 14827-15287 | `d6_d`: poly row y 15173 east to the output box (17318,15190) of G4 of buffer 6 (`dbus_in` upside down) | buffer 6's input line is traced from the contact of the D6 pad cell (`notes/blocks/dbus.md`) |
+| 7 | `db_b7` (poly x 16791) | 13075-13270 | 15304-15764 | `d7_d`: poly row y 15650 east, south at x 17188, east along y 15818 to the output box of G4 of buffer 7 | buffer 7's input line is traced from the contact of the D7 pad cell |
 
 Firm geometry (no `?` on the path): data line k - driver k - gate row - latch cell, for all
 four; latch cell - row - metal - `dk_d` of chain k for k = 4, 5; and latch cell - row -
