@@ -11,7 +11,7 @@
 
 # Each slice has two vertical metals that end at the top on a contact to poly at y 5585
 # (x 12693 and 12782 in c3; follow.py: metal straight down to y 6312, its contacts in the
-# slice not identified). From each contact a poly runs north under the wide supply metal
+# slice: y 5640, 5928 and 6112, see below). From each contact a poly runs north under the wide supply metal
 # (y 5200-5550) to a pad on one line of the bus; that line runs west to the staircase at
 # x 11650-11700 and east towards the right datapath (not drawn here).
 #   inner line (x 12693 - 390k): pads on bus lines y 5177 (c3), 5135 (c2), 5047 (c1)
@@ -331,7 +331,7 @@ D 12996,5940:13022,6095
 # (12 px, y 6278-6289, both metal shots) is what the outline of a buried contact prints
 # through a metal (10-12 px at the tie box (11517-11543,6106-6135) under the data line). A
 # poly leaves the box south (salmon bar y 6312-6320 under the metal's margin, then orange in
-# both chip-2 shots) and turns west at y 6335-6354. So: a BURIED contact from amr_eq_r3 to
+# both chip-2 shots) and turns west at y 6338-6356. So: a BURIED contact from amr_eq_r3 to
 # that poly; c0's outer line has no third connection (its metal just ends over the box,
 # 10 px short of where it ends on field in the other columns). Views: cache/scratch/amr/
 # b5a, b5b (5x, four shots), z1 (8x), cmp1 (the box beside known contacts of each kind), f1.
