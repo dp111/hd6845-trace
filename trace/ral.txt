@@ -64,8 +64,10 @@ P 14331,4480:14395,4500
 P 14331,4480:14349,4525
 @end
 
-# s0's input: rax_o0's poly (drawn by rab to x 14000) onto the strip.
-?B 13988,4480:14016,4510
+# s0's input: rax_o0's poly (drawn by rab to x 14000) onto the strip. The input buried
+# contacts of all five copies: the same heavy-outlined square at the strip's west end in
+# both stripped shots (5-copy mosaics at 4x, cache/scratch/ral/bin.png, bin2.png).
+B 13988,4480:14016,4510
 
 @inst ral_cell 434,0 tag=s1
 @inst ral_cell 868,0 tag=s2
@@ -73,7 +75,7 @@ P 14331,4480:14349,4525
 @inst ral_cell 1865,0 tag=s4
 
 # --- the line y 4350 through all five cells (taps in each): local name cnt_gab
-M 13895,4353 x16330 w=16
+M 13895,4353 x16258 w=16
 N M 14000,4351 cnt_gab
 
 # --- the strobe line: the sixth line of the row-address bundle (notes/blocks/rab.md:
@@ -88,22 +90,22 @@ N M 14000,4548 ral_stb
 # tools/follow.py ends and 2.6x views (pm.png, pa.png).
 # s1: rab's poly from the pad (14430,4590) ends at y 4500; on up into the buried contact.
 P 14421,4485:14439,4505
-?B 14422,4480:14450,4510
+B 14422,4480:14450,4510
 # s2: rab's metal y 4636 ends on a pad (14863,4635); poly north.
 M 14852,4628:14876,4642
 P 14846,4618:14880,4652
 C 14863,4635
 P 14863,4485 y4640 w=17
-?B 14856,4480:14884,4510
+B 14856,4480:14884,4510
 # s3: rab's pad (15425,4675); poly north.
 P 15425,4485 y4680 w=18
-?B 15419,4480:15447,4510
+B 15419,4480:15447,4510
 # s4: rab's metal y 4722 goes on east to x 15862, north to a pad (15860,4632); poly north.
 M 15250,4722 x15862 y4627 w=12
 P 15843,4615:15877,4649
 C 15860,4632
 P 15860,4485 y4635 w=17
-?B 15853,4480:15881,4510
+B 15853,4480:15881,4510
 
 # --- outputs of the copies s1-s4 to the RA1-RA4 driver lines that r9c drew (four
 # output columns, cache/scratch/ral/oc.png; ob.png for the last hops):
