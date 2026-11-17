@@ -179,20 +179,25 @@ M 16926,5625 y6744 x16839 y12370 w=12
 # pads is the order of the lines (metal-shot brightness map and tools/follow.py from each
 # pad; 1.15x view cache/scratch/bust/wl1.png). Drawn to where each metal ends at the
 # crossing field x 6440-6930 (its poly rows and pads, hop3.png, are not mapped yet).
-# cdp1_l4544: pad (7810,4547); metal west to x 7532, south to y 4619 (end not looked at)
-P 7805,4544 x8345 w=12
+# CORRECTED after review (2026-11-17): at cdp1's west edge every row steps DOWN one track
+# going east, by nested L's whose vertical legs are at x 8337, 8297, 8262, 8230 (3x in both
+# stripped shots, cache/scratch/bust/stair2.png; stair.png at 2.1x for the rows west of
+# x 8200). So each west pad feeds the cdp1 line one track below its own row:
+#   row y 4500 (pad about (7860,4500), its metal not followed) -> cdp1_l4544 (amr c0)
+#   pad (7810,4547) -> cdp1_l4588 (amr c1)
+#   pad (7848,4592) -> cdp1_l4632 (amr c2)
+#   pad (7830,4635) -> cdp1_l4676 (amr c3)
+#   pad (7855,4676) -> turns south near x 8190 (r9m's r9m_l1w, not into cdp1)
+P 7870,4500 x8337 y4544 x8345 w=12
+P 7805,4547 x8297 y4588 x8345 w=12
 P 7793,4530:7827,4564
 C 7810,4547
-M 7818,4547 x7532 y4619 w=13
-# cdp1_l4588 (amr c1's outer output): pad (7848,4592); metal west to x 7570, south to
-# y 4657, west to x 6913 (end)
-P 7843,4588 x8345 w=12
+M 7818,4547 x7532 y4619 w=13         # end not looked at
+P 7843,4592 x8262 y4632 x8345 w=12
 P 7831,4575:7865,4609
 C 7848,4592
-M 7860,4593 x7570 y4657 x6913 w=12
-# cdp1_l4632 (amr c2's outer output): pad (7830,4635); metal west to x 7618, south to
-# y 4704, west to x 6921 (end)
-P 7825,4632 x8345 w=12
+M 7860,4593 x7570 y4657 x6913 w=12   # on across the crossing field (below)
+P 7825,4635 x8230 y4676 x8345 w=12
 P 7813,4618:7847,4652
 C 7830,4635
 M 7842,4637 x7618 y4704 x6921 w=12
@@ -220,7 +225,7 @@ C 11738,5000
 P 11590,5568:11624,5602
 C 11607,5585
 M 11612,5585 y6302 w=11
-P 11607,5585 x11617 y5500 11786,5331 y4690 11640,4544 x10845 w=16
+P 11607,5585 x11617 y5500 11786,5331 y4664 11666,4544 x10845 w=16   # top diagonal per review (2.25x)
 
 
 # c0's outputs, named as the bus lines they drive (amr_oa_c0 / amr_ob_c0 in amr's terms)
@@ -237,7 +242,7 @@ C 8078,5020
 P 8078,5024 x8345 w=12
 @alias cdp1_a3_bl cdp1_lw2
 
-# --- cdp1_l4588 and cdp1_l4632 across the crossing field under the three rails (x 6450-6960).
+# --- cdp1_l4632 and cdp1_l4676 (by the corrected staircase) across the crossing field under the three rails (x 6450-6960).
 # East pads: (6960,4655) and (6923,4695) (rings in the metal shot, poly pads in the stripped
 # shot, 3.4x: cache/scratch/bust/cfe.png); west pads (6460,4657) and (6470,4702) (hop3.png).
 # r9m's two lines cross this field as straight polys at constant y; these are drawn the
@@ -253,8 +258,8 @@ P 6453,4685:6487,4719
 C 6470,4702
 ?P 6460,4657 x6960 w=16
 ?P 6470,4700 x6923 w=16
-# west of the field (tools/follow.py): cdp1_l4588 west along y 4660 to x 5972, south to
-# y 5895, west to x 5883; cdp1_l4632 west along y 4702 to x 6016, south to y 5944, west to
+# west of the field (tools/follow.py): cdp1_l4632 west along y 4660 to x 5972, south to
+# y 5895, west to x 5883; cdp1_l4676 west along y 4702 to x 6016, south to y 5944, west to
 # x 5898. Ends not looked at.
 M 6460,4658 x5972 y5895 x5883 w=12
 M 6470,4701 x6016 y5944 x5898 w=12

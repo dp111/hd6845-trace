@@ -34,7 +34,7 @@ under the wide supply metal (y 5200-5550) to a pad on one metal line of a 13-lin
 
 | Column | Inner line (x 12693 - 390k) | Outer line (x 12782 - 390k) |
 |---|---|---|
-| c3 | `amr_oa_c3` -> bus y 5177 | **bus y 4742: the line that ends on `rcs_bq3335`** (`notes/blocks/r9m.md`) |
+| c3 | `amr_oa_c3` -> bus y 5177 | bus y 4742 = `cdp1_l4676` (an earlier reading that this line ends on `rcs_bq3335` was wrong: `notes/blocks/r9m.md`, correction) |
 | c2 | `amr_oa_c2` -> bus y 5135 | `amr_ob_c2` -> bus y 4696 |
 | c1 | `amr_oa_c1` -> bus y 5047 | `amr_ob_c1` -> bus y 4657 |
 | c0 | poly from about (11497,5590) diagonally north-east, then north along x about 11645 to a pad near (11645,5005) | poly from about (11580,5590) diagonally, north along x about 11725, then diagonally north-west towards the pad (11650,4500) of `rab`'s bit 0 (`wt.png`): **not drawn**, it needs a 5x look at that pad |
@@ -45,20 +45,24 @@ east for 1,400-4,750 px to a staircase of ends at x 13544, 13546, 13848, 14238, 
 15020, 15280, 15584, 16146, 16926 (y 4787-5196), i.e. into the right datapath at its
 390 pitch. None of these lines is drawn yet (east of x 12100 nothing in the trace).
 
-So R9's bundle line 1 (the input of `rcs_mu`'s inverter) is the **outer output of
-amr's slice c3**. AMB-013's test (is the first line "a second comparator's match"?):
-it is the output of a four-way repeated slice, one per column, with two outputs each;
-the slice is not traced, so what it computes is open.
+(Withdrawn: an earlier version said here that the input of `rcs_mu`'s inverter is c3's
+outer output. An independent review showed two poly hops on that route step one track,
+and that input is R9's match: `notes/blocks/r9m.md`, correction. c3's outer line is
+`cdp1_l4676`; where it goes west of `cdp1` is in `notes/blocks/bust.md`.)
 
 ## R3's write strobe runs through the slices (2026-11-17)
 
 `wr_r3` (R3's write strobe; `rdp1` drew it ending at (13310,6385)) goes on north along
-x 13327 to y 5628, west to a contact (13125,5628), and a poly runs west from there along
-y 5615-5630 across all four slices (`trace/amr.txt`, the crossing drawn `?P`: seen
-continuous at 1.45x only). With `bust`'s result that the slices' inner outputs are data
-bits 4-7 (c0..c3), **`amr` is very likely R3's high nibble**: the vertical sync width
+x 13327 to y 5628, west to a contact (13125,5628), and a poly runs west from there across
+all four slices (`trace/amr.txt`, drawn `?P`). An independent review (4.7-7x, four shots)
+found that it is not straight: in each slice it detours south around a metal-to-diffusion
+contact box on the inner vertical metal (c3: box x 12675-12720, y 5622-5665, ring at
+(12690,5640)), passing under the box along y 5668-5690, where it looks like a transistor
+gated by the strobe on that metal's diffusion. The two corner joins per slice are not
+profiled. With the result on branch `bust` (`notes/blocks/bust.md` there) that the slices' inner lines
+are data bits 4-7 (c0..c3), **`amr` is very likely R3's high nibble**: the vertical sync width
 register, written from D4-D7 on `wr_r3`. `rdp1` has only R3's low nibble (the horizontal
-sync width, compared with `hsw`). The outer outputs (to the vertical control logic) would
+sync width, compared with `hsw`). The outer outputs (which leave west towards the top-left logic) would
 then be the register's bits, or per-bit comparisons with a 4-bit counter, on their way to
 a comparator. Believed, not traced: the slice. (The 4-bit counter in the left array,
 `c4l`, does not enter `amr` from the west at y 6157-6280: open field there.)
@@ -67,9 +71,9 @@ a comparator. Believed, not traced: the slice. (The 4-bit counter in the left ar
 
 | Name | Layer | Where | Direction | What |
 |---|---|---|---|---|
-| `amr_oa_c1` ... `amr_oa_c3` | metal | x 11916, 12304, 12693, y 5585-6312 | out | inner outputs; to bus y 5047, 5135, 5177 |
+| `amr_oa_c1` ... `amr_oa_c3` | metal | x 11916, 12304, 12693, y 5585-6312 | open | inner lines; to bus y 5047, 5135, 5177 (data bits, so possibly written in, not out); each has a metal-to-diffusion contact at (12693 - 390k, 5640) |
 | `amr_ob_c1`, `amr_ob_c2` | metal | x 12001, 12390, y 5585-6312 | out | outer outputs; to bus y 4657, 4696 |
-| `rcs_bq3335` | metal | x 12782, y 5585-6312 | out | c3's outer output (r9m) |
+| `cdp1_l4676` | metal | x 12782, y 5585-6312 | out | c3's outer line |
 | `wr_r3` | poly | y 5622, x 11460-13125 | in | R3's write strobe, from `rdp1`'s x 13327 line |
 
 ## Not done

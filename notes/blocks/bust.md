@@ -1,13 +1,12 @@
 # bust: the bus between the central datapath and the right datapath (queue: busT)
 
-## Status (2026-11-17 05:32, contributor session)
+## Status (2026-11-17 07:15, contributor session; corrected after independent review)
 
 Wiring drawn (`trace/bust.txt`): twelve of the fourteen lines of `cdp1`'s big channel
 from its east edge (x 10845) through the cross-under at x 11230-11700 and east as metal
 to their ends at x 12000-16926, and five of the east ends joined to what they feed. No
-transistors. (The thirteenth, `cdp1_l4676` = `rcs_bq3335`, is drawn by `r9m` the same
-way; the fourteenth, `cdp1_l4544`, does not drop: it goes on at y 4555 to the
-top-right corner of the staircase, not followed.)
+transistors. (The thirteenth, `cdp1_l4676`, is drawn by `r9m` the same way; the
+fourteenth, `cdp1_l4544`, does not drop: it is `amr` c0's outer output, below.)
 
 ## Route and order
 
@@ -24,7 +23,7 @@ default gap bridges). East of the staircase: metal, `tools/follow.py` from each 
 |---|---|---|---|
 | `cdp1_l4588` | 4655 | 12000 | `amr` c1's outer output (alias of `amr_ob_c1`); drop seen end to end at 3x (`c0a.png`) |
 | `cdp1_l4632` | 4697 | 12390 | `amr` c2's outer output (`amr_ob_c2`) |
-| `cdp1_l4676` (`rcs_bq3335`) | 4740 | 12782 | `amr` c3's outer output (drawn by `r9m`) |
+| `cdp1_l4676` | 4740 | 12782 | `amr` c3's outer output (drawn by `r9m`) |
 | `cdp1_l4719` | 4787 | pad (13540,4787) | **R5's match**: poly south to `rdp1`'s poly x 13533-13556 from y 5450 (alias of `sl_eq_r5`) |
 | `cdp1_c5_bl` | 4830 / 4850 | pad (13715,4850) | **`ubus_b0`**: poly south at x 13706 to a pad (13705,5628) (it ends there, above `rdp1`'s eq-line load), metal west along y 5632 and down as `ubus_b0` (2.7x in four shots, `c5.png`; follower) |
 | `cdp1_c4_bl` | 4873 / 4894 | 13848 | **`ubus_b1`** (poly x 13845 to the data line's top, 5635) |
@@ -49,14 +48,13 @@ default gap bridges). East of the staircase: metal, `tools/follow.py` from each 
   (`cdp1` found no contact on it), towards the west logic. Where it is used: not
   followed west of x 8340.
 - **`amr`'s outputs drive the bus**: its three outer outputs drive the three through-lines
-  `cdp1_l4588`, `cdp1_l4632`, `cdp1_l4676` (the last is `rcs_bq3335`, the input of the
-  row counter step logic's `rcs_mu` inverter); its three inner outputs drive
+  `cdp1_l4588`, `cdp1_l4632`, `cdp1_l4676` (c0's drives `cdp1_l4544`); its inner outputs drive
   `cdp1_a0_bl`, `cdp1_lw2` and `cdp1_a2_bl`. What `amr` computes is not traced.
 
 ## Not done
 
-1. The east ends left as ports (table), and `cdp1_l4544`.
-2. `cdp1_lw1` (east end 15584, a poly south at x 15580) and `cdp1_l4544`: not followed.
+1. The east ends left as ports (table).
+2. `cdp1_lw1` (east end 15584, a poly south at x 15580): not followed.
    Bit 7 of the upper array, and R3's own data lines, not identified.
 3. Renaming the bus as data bus bits once the coordinator agrees on names (aliases are
    used for now).
@@ -74,7 +72,7 @@ chip, as expected.
 
 With `ubus_b6` and `rbus_b7` joined: `cdp1_lw2` writes bit 6 of R7, R6, R4 and `cdp1_a2_bl`
 writes bit 7 of R0, R1, R2 and R8's row-A slice 2 (which is therefore R8 bit 7, a cursor
-skew bit). The six data lines now joined across the chip:
+skew bit). The eight data lines now joined across the chip:
 
 | Data bit | central datapath line | right datapath |
 |---|---|---|
@@ -89,22 +87,39 @@ skew bit). The six data lines now joined across the chip:
 
 `amr`'s inner outputs drive bits 5, 6 and 7 (c1, c2, c3).
 
-## West of the central datapath
+## West of the central datapath (corrected 2026-11-17 07:15)
 
-The through-lines leave `cdp1`'s west edge (x 8340) as poly and end on a staircase of
-pads at x 7795-7860, from which metals run west as the bus metals above the row address
-selector (the same route as `r9m`'s line 1). Drawn: `cdp1_l4544` to (7535,4619),
-`cdp1_l4588` (amr c1 outer) to (6913,4658), `cdp1_l4632` (amr c2 outer) to (6921,4699).
-Not drawn: `cdp1_l4719` (R5's match), whose metal leaves a pad near (7782,4766) but whose
-poly's drop from y 4719 is not seen (a straight guess crossed `ras` geometry).
+The through-lines leave `cdp1`'s west edge (x 8340) as poly. **Between x 8215 and 8345
+every row steps down one track** by nested L's (vertical legs at x 8337, 8297, 8262,
+8230; 3x in both stripped shots, `stair2.png`, and `stair.png` at 2.1x). The first
+drawing ran them straight, which put every west pad on the line one track too high; an
+independent review of `r9m-route` found the step, and this was redrawn and checked by
+overlay (`rv_bust/fixstair.png` in the reviewer worktree). The rows west of the step end
+on a staircase of pads at x 7810-7860, from which metals run west:
 
-Beyond x 6913-6921 the lines enter the crossing field under three rails (x 6440-6930,
-`hop3.png`): six pads on its west side (y 4525, 4570, 4614, 4657, 4702, 4738) and poly
-rows across, but the pads on its east side are not one per row, so the mapping across is
-open. `r9m`'s notes say the bundle that runs with R9's match ends in the step logic's
-middle cluster on pads (4270,2640) and (4232,2683): if `cdp1_l4588` and `cdp1_l4632` are
-those two lines, all three of `amr`'s outer outputs feed the row counter's step logic.
-Not established.
+| cdp1 line (east of the step) | west row, pad | metal west | `amr` |
+|---|---|---|---|
+| `cdp1_l4544` | y 4500, pad about (7860,4500) | not followed | c0 outer |
+| `cdp1_l4588` | y 4547, pad (7810,4547) | west to x 7532, south to (7535,4619), end not looked at | c1 outer |
+| `cdp1_l4632` | y 4592, pad (7848,4592) | west, south, west along y 4657 to (6913,4658), across the crossing field | c2 outer |
+| `cdp1_l4676` | y 4635, pad (7830,4635) | west, south, west along y 4704 to (6921,4699), across the crossing field | c3 outer |
+| (none) | y 4676, pad (7855,4676) | `r9m`'s `r9m_l1w`; the row turns south near x 8190 | - |
+
+`cdp1_l4719` (R5's match): not drawn west of `cdp1` (a straight guess crossed `ras`
+geometry; with the step, it probably comes from the row that turns south at x 8190 or
+the pad near (8245,4718): to be read).
+
+### Across the crossing field to the top-left logic
+
+The two metals that reach the crossing field under the three rails (x 6450-6960) end on
+pads at matching y on both sides: (6960,4655)/(6460,4657) and (6923,4695)/(6470,4702)
+(3.4x, `cfe.png`; `hop3.png`). The polys across are drawn `?P` (not seen end to end).
+West of it they run along y 4660 / 4702, south along x 5972 / 6016, and end on contacts
+onto poly pads (5885,5893) and (5922,5935) into the untraced top-left logic (2.7x,
+`we.png`). So **`amr` c2's and c3's outer outputs** (by the corrected mapping) go to the
+top-left logic near (5900,5900); c1's ends at (7535,4619) (not looked at) and c0's west
+end is not followed. None of them is `rcs_bq3335` (that is R9's match:
+`notes/blocks/r9m.md`, correction).
 
 ## `amr`'s partial slice c0: its two outputs drawn
 
@@ -120,7 +135,7 @@ north, 45 degrees north-east under the supply metal, and north beside the stairc
   between them (5x, `c0c.png`): `rax_o0` has no second driver.
 
 So all four of `amr`'s slices put an outer output on a through-line into the west logic
-(c0 `cdp1_l4544`, c1 `cdp1_l4588`, c2 `cdp1_l4632`, c3 `cdp1_l4676` = `rcs_bq3335`), and an
+(c0 `cdp1_l4544`, c1 `cdp1_l4588`, c2 `cdp1_l4632`, c3 `cdp1_l4676`), and an
 inner output on a data bus bit (c0 bit 4, c1 bit 5, c2 bit 6, c3 bit 7). Four slices,
 data bits 4-7, and one result each to the west: the shape of a read-back or comparison
 unit on the upper nibble. That's a guess from the wiring; the slice is not traced.
@@ -196,3 +211,13 @@ Method used for bits 1-6, for bit 0: the clean shot reads well here (poly cream/
 pink field, contacts with green centres) except under the wide rails; read each line at
 1.4-2.4x from both ends, check its metal stretches with the metal test in both metal
 shots, and confirm with `tools/bust_fanout.py` (bit 0 should then write R0-R2, R4-R9).
+
+### Review notes on the routing zone and the fan-out check
+
+- The poly rows of bits 1, 2 and 3 do not end at the `rbus` top contacts: rows y 9400,
+  9358 and 9315 run on east past (14625,9400), (15014,9358) and (15410,9316), cross
+  x 16839, and appear to reach further pads near x 16400-17030 (independent review, 0.7x
+  only). Not drawn; the fan-out for bits 1-3 is therefore a lower bound.
+- The register-width check cannot detect a swap of bits 1 and 4, 2 and 3, or 5 and 6
+  (identical strobe sets); the order within those pairs rests on the geometry, which the
+  review checked. "Exactly the datasheet" leaves out R3 (`wr_r3` reaches no data line yet).
