@@ -434,6 +434,6 @@ N M 13478,14700 hc2
 # k11: east at y 15005 to k12's position, south to a contact at 13609,15608 (scan and the first run's 1.5x view);
 # the poly from there (west, then diagonally down-left) is not traced
 M 13565,14690 y15005 x13608 y15621 w=20
-?P 13594,15594:13626,15622
-?C 13609,15608
+P 13594,15594:13626,15622
+C 13609,15608
 N M 13565,14700 bd1_k11
