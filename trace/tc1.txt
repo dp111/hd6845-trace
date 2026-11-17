@@ -469,7 +469,7 @@ N M 8184,3000 tc1_ns3
 # ns4: from the east along y 2764-2778; south; jogs east at y 4112-4135; west along
 #      y 4369-4383; south at x 8198-8212. No contact in this block.
 M 8350,2771 x8227 y4124 x8248 y4376 x8205 y4450 w=15
-N M 8227,3000 tc1_ns4
+N M 8227,3000 ral_stb
 # ns5: starts on contact (8271,2857) (poly east along y 2846-2868); two more contacts
 #      near its south end, each to a poly going east
 C 8271,2857 s=24x24

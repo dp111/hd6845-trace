@@ -1,0 +1,237 @@
+# ral: the stage in front of the RA pad drivers, x 13990-16330, y 4250-4560.
+# Five copies of one cell (pitch 434, one gap of 563): notes/blocks/ral.md.
+# This file draws only what is read with confidence. Inverter 1 (node a -> ral_n1_{}) is NOT
+# drawn yet (see the notes, "Not done").
+@block ral
+@w M=16 P=20
+@s 26x26
+
+@cell ral_cell tag=s0
+# --- supply rails, one piece per cell (they run on through the band).
+# Top rail VCC, middle rail VSS: by device orientation (pull-down sources on the middle
+# rail, load-shaped blocks under the top one), not followed to a labelled rail.
+M 13996,4220:14452,4268
+N M 14000,4244 vcc
+M 13996,4397:14452,4446
+N M 14000,4421 vss
+
+# --- pull-down Tf: gate = the line y 4350 (cnt_gab), source on the middle rail.
+# Poly pad under the line's tab, contact (14157,4318); poly strip down across the
+# diffusion box; drain the strip x 14172-14196 (where it goes: not drawn).
+P 14142,4303:14176,4346
+C 14158,4320 s=24x24
+M 14140,4300:14176,4352
+P 14150,4340:14170,4462
+D 14102,4380:14196,4446
+C 14118,4423 s=28x28
+N D 14185,4420 ral_tf_{}
+
+# --- input pass transistor: rax_o# -> node a, gate = the strobe line y 4548 (ral_stb).
+# The input poly (drawn by rab for bit 0, ending at x 14000) lands on the strip's west
+# end by a buried contact (round ring at (14000,4495) in both stripped shots: ?).
+# The strip y 4479-4494 is diffusion from x 14015 to x 14315 (colour profile along
+# y 4486, tools/ral_prof.py): it passes under the strobe poly and on under the lower
+# poly block. The buried contact is drawn outside the
+# cell, for s0 only; the other copies' inputs are drawn after the instances.
+D 13988,4479:14340,4495
+P 14028,4430:14054,4536
+P 14024,4530:14058,4564
+C 14041,4547 s=24x24
+N D 14100,4487 ral_a_{}
+
+# --- hold device: the strip passes under a poly block 14200-14290 x 4448-4500 whose
+# gate is the poly pad 14200-14246 x 4398-4446, contacted to the VSS rail (ring in the
+# metal shot at (14222,4425), pale centre on poly in the clean shot). Upper half of the
+# block lies over field (row profile y 4462: field at x 14185-14195 and 14300-14360); the
+# dark line at y 4470-4476 across the block is the strip's edge under the poly; the one
+# at y 4447 between pad and block is the VSS rail's edge (the join itself is not
+# resolved at any zoom: ?). Same structure as cdp2_lat's hold device: W/L about 15/90,
+# gate on VSS, believed depletion-mode.
+P 14200,4398:14246,4446
+C 14223,4422 s=26x26
+?P 14200,4440:14246,4452
+P 14200,4448:14290,4500
+A 14205,4475:14285,4500 kind=hold
+# East end of the strip: a heavy-outlined patch where it meets the output poly's bend
+# (clean shot, 14315-14347 x 4470-4500): taken as a buried contact, so the hold device
+# feeds the output back to node a (?).
+?B 14315,4472:14347,4500
+
+# --- inverter 2 (the output stage), read from the median of all nineteen copies
+# (tools/ral_comp19.py: 5 RA + 14 MA copies, the MA ones turned back; views at 4.2x,
+# cache/scratch/ral/c19r.png, c19t.png, and in the stripped shot c19.png).
+# Load: VCC contact (14330,4252) (ring in the metal shot) onto a land; a poly block
+# 14295-14395 x 4280-4312 over it as gate, tied to the output poly x 14372-14395 (one poly).
+# Output node: diffusion below the load, y 4312-4340, and down x 14345-14370 to the
+# pull-down's drain; joined to the output poly by a buried contact (heavy-outlined box
+# 14365-14410 x 4418-4450; drawn only to x 14396, the poly's edge: in MA copy m0 the
+# full box, turned, touched tla's clk_tl inverter diffusion and shorted MA0 to VSS).
+# Pull-down: L-shaped poly (vertical x 14320-14345 from y 4350 to 4452, west along
+# y 4350-4372 to x 14250, up x 14255-14280 to y 4320) crossing the diffusion between the
+# VSS-contacted box 14255-14330 x 4385-4445 (contact (14282,4422), speckled in the clean
+# shot) and the drain strip x 14345-14370. Its gate net is ral_n1_{}: believed NOT node a
+# (inverter 1), not drawn.
+C 14330,4252 s=28x26
+D 14300,4240:14360,4340
+P 14295,4280:14395,4312
+D 14345,4312:14370,4448
+D 14370,4418:14396,4448
+B 14366,4418:14396,4450
+P 14372,4280:14395,4500
+D 14255,4385:14370,4445
+C 14282,4422 s=28x28
+P 14320,4350:14345,4452
+P 14250,4350:14345,4372
+P 14255,4320:14280,4372
+N P 14268,4330 ral_n1_{}
+
+# --- output: poly from the cell to the pad driver (S-shaped): vertical x 14372-14395,
+# west along y 4480-4500, south along x 14331-14349 to the pad (14340,4764) that r9c drew
+# for RA0. Drawn from y 4480 down; the part above is inverter 2's output (drawn below).
+P 14331,4480:14395,4500
+P 14331,4480:14349,4525
+@end
+
+# s0's input: rax_o0's poly (drawn by rab to x 14000) onto the strip. The input buried
+# contacts of all five copies: the same heavy-outlined square at the strip's west end in
+# both stripped shots (5-copy mosaics at 4x, cache/scratch/ral/bin.png, bin2.png).
+B 13988,4480:14016,4510
+
+@inst ral_cell 434,0 tag=s1
+@inst ral_cell 868,0 tag=s2
+@inst ral_cell 1431,0 tag=s3
+@inst ral_cell 1865,0 tag=s4
+
+# --- the line y 4350 through all five cells (taps in each): local name cnt_gab
+M 13895,4353 x16258 w=16
+N M 14000,4351 cnt_gab
+
+# --- the strobe line: the sixth line of the row-address bundle (notes/blocks/rab.md:
+# from (11650,4245) east, south along x 13862, east along y 4548 to x 15906). Only its
+# stretch under the band is drawn here.
+M 13990,4548 x15910 w=16
+N M 14000,4548 ral_stb
+
+# --- inputs of the copies s1-s4: in every copy the input poly comes up from the south at
+# x 13995 + dx to the same round buried-contact structure as s0's (mosaic of the five
+# corners, cache/scratch/ral/inq.png); s0's comes from the west instead. Pads from
+# tools/follow.py ends and 2.6x views (pm.png, pa.png).
+# s1: rab's poly from the pad (14430,4590) ends at y 4500; on up into the buried contact.
+P 14421,4485:14439,4505
+B 14422,4480:14450,4510
+# s2: rab's metal y 4636 ends on a pad (14863,4635); poly north.
+M 14852,4628:14876,4642
+P 14846,4618:14880,4652
+C 14863,4635
+P 14863,4485 y4640 w=17
+B 14856,4480:14884,4510
+# s3: rab's pad (15425,4675); poly north.
+P 15425,4485 y4680 w=18
+B 15419,4480:15447,4510
+# s4: rab's metal y 4722 goes on east to x 15862, north to a pad (15860,4632); poly north.
+M 15250,4722 x15862 y4627 w=12
+P 15843,4615:15877,4649
+C 15860,4632
+P 15860,4485 y4635 w=17
+B 15853,4480:15881,4510
+
+# --- outputs of the copies s1-s4 to the RA1-RA4 driver lines that r9c drew (four
+# output columns, cache/scratch/ral/oc.png; ob.png for the last hops):
+# s1: poly down to a pad (14774,4592) on RA1's line y 4592 (r9c: "end not looked at").
+P 14774,4515 y4597 w=18
+P 14757,4575:14791,4609
+C 14774,4592
+M 14762,4585:14790,4599
+# s2: poly down to a pad (15208,4805), where RA2's unit line starts (r9c: (15210,4807)).
+P 15208,4515 y4810 w=18
+P 15191,4788:15225,4822
+C 15208,4805
+M 15196,4799:15222,4814
+# s3: poly down to a pad (15771,4593); metal east along y 4590 to x 16297, south to a pad
+# (16297,4930); poly south to a pad (16297,5108), where RA3's unit line starts (r9c:
+# "west end (16290,5109) not looked at"). Contact candidate (16121,4592): none (4x,
+# four shots, cc4.png).
+P 15771,4515 y4598 w=18
+P 15754,4576:15788,4610
+C 15771,4593
+M 15771,4590 x16297 y4935 w=12
+P 16280,4913:16314,4947
+C 16297,4930
+P 16297,4930 y5113 w=18
+P 16280,5091:16314,5125
+C 16297,5108
+M 16284,5104:16310,5118
+# s4: poly down to a pad (16205,4640); metal south to a pad (16207,4930); poly south to a
+# pad (16205,5153), where RA4's unit line starts (r9c: (16202,5153)).
+P 16205,4515 y4645 w=18
+P 16188,4623:16222,4657
+C 16205,4640
+M 16207,4635 y4935 w=12
+P 16190,4913:16224,4947
+C 16207,4930
+P 16205,4930 y5158 w=18
+P 16188,5136:16222,5170
+C 16205,5153
+M 16195,5148:16215,5162
+
+# =====================================================================================
+# The strobe ral_stb back to where tc1 drew it (ral_stb: "from the east along y
+# 2764-2778; south ..."; trace/tc1.txt, drawn from x 8350 west). Route from tc1's end
+# eastwards: metal y 2771 to a pad (9055,2768); poly under two vertical metals to a pad
+# (9235,2768); metal to a pad (9826,2768); poly to a pad (10022,2768); metal to a pad
+# (10606,2768); poly to a pad (10802,2768); metal east to x 11068, south along x 11068
+# to y 4242, east to a pad (11150,4245); poly east along y 4245 under the wide supply
+# metal x 11280-11600 (the same cross-under as rab's five lines) to a pad (11650,4245);
+# metal east along y 4245 to x 13862, south to y 4548, on east under the band (drawn
+# above). Every metal stretch from tools/follow.py (the long one sampled with --max);
+# the four poly hops at 2.3-4x in metal and the clean shot (cache/scratch/ral/st2.png,
+# st3.png, st5.png, st6.png, st7.png, st9m.png, st9a.png).
+@w M=12 P=18
+M 8345,2771 x9055 w=15
+P 9038,2751:9072,2785
+C 9055,2768
+P 9055,2768 x9235
+P 9218,2751:9252,2785
+C 9235,2768
+M 9235,2770 x9826
+P 9809,2751:9843,2785
+C 9826,2768
+P 9826,2768 x10022
+P 10005,2751:10039,2785
+C 10022,2768
+M 10022,2770 x10606
+P 10589,2751:10623,2785
+C 10606,2768
+P 10606,2768 x10802
+P 10785,2751:10819,2785
+C 10802,2768
+M 10802,2768 x11068 y4242 x11150
+P 11133,4228:11167,4262
+C 11150,4245
+P 11150,4245 x11650
+P 11633,4228:11667,4262
+C 11650,4245
+M 11650,4245 x13862 y4548 x13995
+
+# =====================================================================================
+# The line cnt_gab (y 4354 under the band) back to its source side: its metal ends on a
+# pad (13900,4350); poly north along x 13905 and west along y 4285 under the strobe's
+# metal x 13862 to a pad (13822,4285) (four shots at 4x, cache/scratch/ral/fr6.png);
+# metal west along y 4287 to a pad (11694,4287); poly west under the wide supply metal
+# (the third line of the cross-under at x 11240-11700, with the strobe and rab's five) to
+# a pad (11243,4284) (fr2.png, fr3.png); metal south along x 11242 to y 5612, east to
+# x 11396, south to y 7218, onto wl's contact (11392,7210) on band H4 (wl.txt: "a pad
+# with a contact (11392,7210) under a metal that leaves north"). Band H4 goes on east as
+# the feed of the counters' line x 12902 (cnt_gab). Metal from tools/follow.py.
+P 13900,4350 x13905 y4285 x13822 w=18
+P 13883,4333:13917,4367
+C 13900,4350
+P 13805,4268:13839,4302
+C 13822,4285
+M 13822,4287 x11694 w=12
+P 11677,4270:11711,4304
+C 11694,4287
+P 11243,4287 x11694 w=18
+P 11226,4267:11260,4301
+C 11243,4284
+M 11242,4284 y5612 x11396 y7210 w=12

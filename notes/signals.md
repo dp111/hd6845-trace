@@ -142,7 +142,7 @@ in brackets).
 | `lc_ck_m_n`, `lc_ck_m_dly`, `lc_ck_s_n`, `lc_ck_s_dly` | inverse and two-inverter delay of each of the two clocks, inside that generator |
 | `c4l_l3`, `sl_l3` | the L3 lines of those two counters: the 4-bit one's comes from the north; the 5-bit one's from a poly along y 6410 (from the west, and from a metal from the north at x 3968) |
 | `c4l_gab`, `sl_gab` | their pass-gate lines: the 4-bit one's comes from the north; the 5-bit one's from a poly from the east along y 6520, ending on a contact at (4087,11005) |
-| `cnt_gab` | gate line of the `_m` to `_mb` pass transistors of all 19 bits (x 12902), fed from the top by band H4. Source not traced |
+| `cnt_gab` | gate line of the `_m` to `_mb` pass transistors of all 19 bits (x 12902), fed from the top by band H4. **Also** the line y 4354 through the five `ral` cells, where it gates a pull-down to VSS in each (`ral_tf_s#`): from `wl`'s contact (11392,7210) on H4 north along x 11396 / 11242, through the cross-under at x 11243-11694, east along y 4287 and a poly L into the band (`trace/ral.txt`, firm). Source not traced |
 | `cnt_l2_a`, `cnt_l2_b`, `cnt_l2_c` | three pieces of the metal line L2 that passes through the rows without a contact |
 | `cnt_la_a`, `cnt_la_b`, `cnt_la_c` | three pieces of the metal x 12285 through the rows; no contact found in the rows (re-read item R8). `cnt_la_a` feeds an inverter west of the counters |
 | `cnt_la_a_n` | NOT `cnt_la_a`; leaves north |
@@ -252,6 +252,12 @@ None of these rows has a register number yet, so all names are by place. Columns
 | `cdp1_b5_a` | the register-side input of R9's comparator in slice 5 (bit 0): not the register bit but the output of the island `tc1` |
 | `ra#_cmp` | the row-address-side input of R9's comparator for bit # (# = 0-4): output of a unit near the right edge whose pull-down is gated by `ra#_drv_in`; with the unit's load, NOT `ra#_drv_in`, the level of pin RA# (AMB-012; `notes/blocks/r9c.md`). The comparator cell's own name for the same net, `cdp1_b#_b` with # = 5 minus the bit, is kept as an alias |
 | `ra#_drv_in_u` | (# = 2, 3, 4) the input of that unit, believed to be `ra#_drv_in`; the line is not drawn back to the pad cell |
+| `ral_stb` | the strobe of the `ral` cells' input pass transistors (metal y 4548 under the band). Followed back and drawn (`trace/ral.txt`): north along x 13862, west along y 4245 (the sixth line of rab's bundle), a cross-under at x 11150-11650, north along x 11068, west along y 2768 with three poly hops, to x 8350, where it is `tc1`'s nested bus metal ns4 (old name under former names). That metal goes south past y 4450 to a pad at about (8205,5672), whose poly runs east towards the twentieth `ral` copy at (8449,5562) (seen, not drawn). Source: not found yet |
+| `ral_a_s#` | `ral` cell s# (s0-s4 west to east; s0 is RA bit 0's cell), node a: the input pass transistor's far side, diffusion strip y 4479-4494, joined by a hold device (gate VSS) to the cell's output, which is the RA# pad driver's input line (`ra#_drv_in`; `ra#_drv_in_u` for 2-4, as r9c names them). Its use as a gate input is not drawn |
+| `ral_tf_s#` | `ral` cell s#: drain of the pull-down gated by `cnt_gab`; not drawn further |
+| `ral_a_m#`, `ral_tf_m#` | the same nodes in the fourteen copies of the `ral` cell in front of the MA pad drivers (`trace/mal.txt`, tags m0-m13 top to bottom; **copy m# drives MA#**: each output followed to its pad driver) |
+| `mal_frc_m#` | the gate tab of the force pull-down in MA copy m#: a pad of its own (no common line, unlike the RA band's `cnt_gab`); where it goes not followed |
+| `ral_n1_s#`, `ral_n1_m#` | the input of inverter 2 (the output stage) of `ral` cell s# / MA copy m#: the L-shaped poly; the cell's output = NOT this. Believed NOT node a (inverter 1, not drawn) |
 | `cdp1_b#_n2`, `cdp1_b#_ne` | NOR(a, b) and a XOR b |
 | `cdp1_b_eq` | NOR of the five `_ne`: high when R9 equals the 5-bit value on the `_b` lines (in slice 5 the register bit is replaced by `cdp1_b5_a`, made by `tc1`) |
 | `cdp1_l#`, `cdp1_lw#` | horizontal lines of the data bus channel, named by their y; and two write-line links. East of the block they cross under the supply metal and go on east as the bus to the right datapath (`notes/blocks/bust.md`): `cdp1_l4588`, `cdp1_l4632` are `amr`'s c1, c2 outer outputs; `cdp1_l4719` is R5's match (`sl_eq_r5`, alias); `cdp1_lw2` is `amr` c2's inner output |
@@ -871,3 +877,5 @@ datapath s1...s7, s0 became b0...b6, b7.
 | hc4_u | hc4 | |
 | hc5_u | hc5 | |
 | bd1_k11 | hc1 | |
+| ral_frc | cnt_gab | |
+| tc1_ns4 | ral_stb | |
