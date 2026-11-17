@@ -716,7 +716,7 @@ transistors, 0 errors, 0 warnings. User: "let's continue".
 - **The upper right datapath's top rows** (`rdp1`) are built from the cells of the rows
   below: R6's comparator, R7 and its comparator, and a top row holding **R5** (5 bits) and
   **one nibble of R3** (4 bits), each with a comparator. 284 transistors by instancing.
-  Strobes `wr_r7`, `wr_r5`, `wr_r3` followed in; `uc_eq_r6` joined to the strobe
+  Strobes `wr_r7`, `wr_r5`, `wr_r3` followed in; `rc_eq_r6` joined to the strobe
   channel's track k4.
 - **The mid-right 4-bit counter is the horizontal sync width counter** (`hsw0`-`hsw3`):
   its four outputs end under the counter tracks of R3's comparator.
@@ -754,9 +754,9 @@ registers (central datapath), R3's other nibble, R8.
    pass channel 2 unused, so R9's comparator takes them elsewhere, or they are tapped
    further west (the pads at x 4925-6196, and the vertical poly bus they cross).
 2. `rdp2`'s routing zone (y 9080-9560): joins the row counter to the `uc` lines, closing
-   `uc_eq_r4/r6/r7` against `rc`.
-3. Where the match lines go: `sl_eq_r5` (north), `hsw_eq_r3`, `uc_eq_r7` (west),
-   `uc_eq_r6` and `h_eq_r0` (strobe channel gate column), `h_eq_r1` (bottom-centre).
+   `rc_eq_r4/r6/r7` against `rc`.
+3. Where the match lines go: `sl_eq_r5` (north), `hsw_eq_r3`, `rc_eq_r7` (west),
+   `rc_eq_r6` and `h_eq_r0` (strobe channel gate column), `h_eq_r1` (bottom-centre).
 4. The rest of the step-logic clusters; the 4-bit left counter's outputs; `e4`.
 
 ## 2026-11-16 10:48  the row address selector; `inh_src` is a bus line
@@ -944,7 +944,7 @@ the choice of bit 0's source by R9's bit 0, and the switch of the R9 comparator'
 1. `ras_o0_alt1`, `ras_o0_alt2`, `tc1_g`: the two signals that can become row address
    bit 0 (the field), followed only to pads at (7078,5303)'s metal, (6922,4787) and
    (6985,4958).
-2. Where `cdp1_b_eq` (R9's match) goes: leaves west along y 4459.
+2. Where `ra_eq_r9` (R9's match) goes: leaves west along y 4459.
 3. The `ral` cell and its strobe; the loads of `rax` and of the R9 units.
 4. `bd2`: `wr_data_e_n`'s destination.
 
@@ -964,14 +964,14 @@ west of the selector (`notes/blocks/fld.md`).
 **Open, in the order I would take them**
 
 1. `fld`: the upper group's west part and the lower gate group (field logic).
-2. Where `cdp1_b_eq` (R9's match) goes.
+2. Where `ra_eq_r9` (R9's match) goes.
 3. The `ral` cell and its strobe; the loads of `rax` and of the R9 units.
 4. `bd2`: `wr_data_e_n`'s destination. R12.
 
-**Same day: R9's match followed to the step logic.** `cdp1_b_eq` runs 9,000 px west and
+**Same day: R9's match followed to the step logic.** `ra_eq_r9` runs 9,000 px west and
 north-west (three poly cross-unders, the top line of the bus above the selector, up
 x 5974, along y 2640) and comes down x 4192 into the middle cluster of the row counter's
-step logic, ending 12 px from the metal of `rcs_bq3335`, the input of the term
+step logic, ending 12 px from the metal of `ra_eq_r9`, the input of the term
 `rcs_in1` of the step. Whether it is on that net is not decided (AMB-013): another line of
 the same bundle ends on that contact. Not drawn (`notes/blocks/r9m.md`).
 
@@ -1208,7 +1208,7 @@ regions; seams closed. After: 0.0 % in none. About 54 % of the die rectangle is 
 Both from dp111, both on b8e2524, independent of each other; merged onto main without
 conflicts. Checks on the merged tree: 2,112 nets, 3,582 transistors (+57: `amr`'s slice),
 0 errors, 0 warnings; glossary and former names clean; `tools/unsure.py`: five new nets
-joined only through `?` items, `cdp1_c1_bl`..`cdp1_c5_bl` (rde's `?M` neck, disclosed,
+joined only through `?` items, `db_b4`..`db_b0` (rde's `?M` neck, disclosed,
 now AMB-019). Notes read in full; the slice equations checked by hand (x = NOT(NOR(c, q) +
 c.q) = c XOR q). Photo spot checks: `amr` c3 overlaid on the clean shot at 1.5x (every
 outline on a feature); rde's neck at (9630, 5545-5595) at 4x in two shots: no metal can be
@@ -1235,6 +1235,35 @@ and the glossary checks, committed per batch; `operation.md` against
 `tools/unsure.py --equations`; `tools/build.py`; journal. `tools/names.py` (new):
 `candidates` lists placeholders and old `@alias` names beside a functional name, split
 into firm (rename) and through `?` items (do not, trap 17), plus glossary hints;
-`snapshot` / `compare`. On today's tree it lists, among others, `uc_b0`..`uc_b6` ->
-`rc0`..`rc6`, `cdp1_l4719` -> `sl_eq_r5`, `rdp3_n2s1` -> `h_eq_r0`, and keeps rde's
+`snapshot` / `compare`. On today's tree it lists, among others, `rc0`..`rc6` ->
+`rc0`..`rc6`, `sl_eq_r5` -> `sl_eq_r5`, `h_eq_r0` -> `h_eq_r0`, and keeps rde's
 data bits 0-4 apart (AMB-019). Not run yet.
+
+## 2026-11-17 14:43  Refresh
+
+The first run of `/refresh6845`. Every rename batch was proved by `tools/names.py
+compare` against the snapshot taken first: 2,112 nets and 3,582 transistors before and
+after, every transistor and connection identical, only names changed (86 nets).
+
+- **Batch 1**: the upper array's counter lines `uc_b0`..`uc_b6` -> `rc0`..`rc6` (they were
+  aliases); `uc_eq_r4/6/7` -> `rc_eq_r4/6/7`; `cdp1_l4719` -> `sl_eq_r5`; `rdp3_n2s1` ->
+  `h_eq_r0`, `rdp3_n0` -> `h_eq_r0half`; R9's match `cdp1_b_eq` and its far end
+  `rcs_bq3335` -> `ra_eq_r9`.
+- **Batch 2**: the data bus is one name per bit, `db_b0`..`db_b7` (it had been `ubus_b#`,
+  `rbus_b#`, `cdp1_*_bl`, `r3_b#_d`, `amr_oa_c#`, `cdp1_lw2`, `tc1_x2`); R8 and R9's bits
+  (`cdp1` rows A and C) are `r8_b#_a/_n2/_q/_m#` and `r9_b#_*`. The cell `cdp1_reg` now
+  takes the whole stem as its tag, and no longer labels its bit line (the bus names it).
+- Wording repaired where the renames made notes circular (ucz's route table, r9m's
+  correction, bust's tables: a note at its top explains the old two-sided tables).
+- **Not renamed, on purpose**: R10 and R11 (`cdp2` rows C, A), whose bits 0-4 rest on
+  AMB-019 (their `cdp2_*_bus` names stay aliases of `db_b#`); R9's comparator cells
+  (`cdp1_b#_*`); aliases that are a cell's own name for a pin (`ar#_q`, `*_tab`,
+  `cdp1_b#_b`); `ra4_drv_in_u` (joined only through `?`).
+- `operation.md`: `ras_shift` = R8 bit 0 AND bit 1 (the bits' identity is now firm, the
+  gate still marked); R9's bit 0 is what selects RA output 0's source in shift mode
+  (firm); names current. 708 of 1,049 equations firm, as before.
+- `out/` rebuilt: 0 errors, 0 warnings, 0 names outside the glossary. Coverage: about
+  54 % traced, 99.3 % of the die rectangle in some package, 0.0 % in neither.
+
+Branches in flight that use an old name fail `tools/mergecheck.py` until they run
+`tools/rename.py OLD NEW` after merging main (the former-names table has every pair).

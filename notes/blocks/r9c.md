@@ -11,7 +11,7 @@ Serial work, 2026-11-16. Trace: `trace/r9c.txt`. Views in `cache/scratch/rax/`:
                           the input line of the pad driver of RA0 ... RA4
     cdp1_b#_ne  = R9 bit XOR ra#_cmp              bits 4, 3, 2, 1
     cdp1_b5_ne  = cdp1_b5_a XOR ra0_cmp           bit 0, cdp1_b5_a from the island tc1
-    cdp1_b_eq   = NOR of the five
+    ra_eq_r9   = NOR of the five
 
 **R9 is compared with the row address as it goes to the pins**: the five lines that enter
 the RA pad drivers (`ra#_drv_in`; the pad is the inverse of that line) are each taken to

@@ -94,7 +94,7 @@
 -	route	data bit 5 to R10	8455,5150:8740,7395	R8 bit 5's tap down x 8727, poly west along y 6087, metal down x 8464 and 8532 to R10's second slice
 29	?array	rows D and E (5 cells)	8750,5150:10790,5700	not traced
 -	route	data bus bits 4-0 through rows D/E	8840,5150:10430,5700	cdp1's five slice bit lines down to R11 and R10; a 54 px necked stretch at y 5542-5596 is assumed continuous
--	route	data bus, east	13190,4770:16930,5210	eight lines step down one track, then end on pads into the right datapath: ubus_b1-b4, R5's match
+-	route	data bus, east	13190,4770:16930,5210	eight lines step down one track, then end on pads into the right datapath: db_b1-b4, R5's match
 -	route	R9 compare inputs	17060,4950:17420,5330	five metals from the west (the RA pad drivers' input lines) to pads, poly on to the units
 -	logic	R9 compare inverters	17290,5170:17660,5880	five units, one per RA bit: gate = the RA pad driver input line, output = the compare line of R9's comparator. Pull-downs traced, loads not
 30	route	RA4 driver input	17320,4960:17790,5960	from the RA4 pad cell south along x 17771, west along y 5938, to the RA4 comparator unit's input (17335,5800)
@@ -137,14 +137,14 @@
 -	array	R10 comparator (equal, greater)	8700,6930:10830,7480	per bit: XOR of the register bit with the bit on the slice's through track, a chain from left (most significant) to right, and a pull-down on a row-long line. Believed outputs: "equal" at the right end of the chain, "greater" on the line; one connection per bit not seen
 -	route	bands above the counters	11040,7020:11700,7230	four horizontal poly lines that go on east over the top of the mid-right array: H3 is inh_rc, H4 feeds the counters' line x 12902
 -	route	wiring channel right of the counters	13040,7130:13425,14700	seven metal tracks with poly hidden under them: write strobes of R3, R5, R6, R7 going north, the counter outputs going east to the comparators (rows r4-r14) or north (r0-r3), match lines coming back, and the clock-related line inh_rc on its way to the top of the array
--	array	R7 comparator (7 bit)	13360,6902:16160,7282	counter lines of the upper array against R7 (vertical sync position); result uc_eq_r7 leaves west
+-	array	R7 comparator (7 bit)	13360,6902:16160,7282	counter lines of the upper array against R7 (vertical sync position); result rc_eq_r7 leaves west
 -	array	R10 register (7 bit)	7990,7500:10790,7825	seven copies of the same static latch cell with their own strobe line. Five bits feed the comparator above, the two leftmost bits leave to the left. Which register: not yet established (the 5 + 2 split would fit R10)
 -	logic	row counter step gate	11215,7650:11665,7860	p = NOR(a, b): a is the core signal that also stops ck_b (inh_rc), b comes from the bus field in the west
 -	logic	two inverters	11260,7265:11665,7555	upper: inverse of the line that runs down through all counter rows (x 12285), sent north; lower: inverter for a bus-field signal
 -	array	horizontal sync width counter (4 bit)	11730,7260:13040,9180	rows r0-r3; on the character clock like the horizontal counter; compared with R3's nibble in the upper right datapath
 36	route	ck_a rail	13005,7270:13045,16950	clock phase A up the right edge of the mid-right array, one tap per row
 -	array	R7 register (7 bit)	13360,7289:16160,7559	vertical sync position
--	array	R6 comparator (7 bit)	13360,7662:16160,8042	counter lines of the upper array against R6 (vertical displayed); result uc_eq_r6 goes down the wiring channel to the strobe channel
+-	array	R6 comparator (7 bit)	13360,7662:16160,8042	counter lines of the upper array against R6 (vertical displayed); result rc_eq_r6 goes down the wiring channel to the strobe channel
 37	route	pad driver lines	17590,7380:17660,18840	P_x, one metal line common to all eight data pad cells (enable), and the per-bit lines and pad input lines beside it
 -	pad	32 D1	18420,7570:19180,8330	pin 32, D1
 -	pad	10 MA6	670,7870:1430,8630	pin 10, MA6
@@ -168,11 +168,11 @@
 -	route	bus lines A, B, F in the channel	13040,9160:13425,9760	A and B come from the routing channel between counter rows r3 and r4 and leave east; F is the R2 match line going west across the array
 -	array	R4 register (7 bit)	13360,8807:16160,9077	vertical total; latches loaded by wr_r4 (strobe comes up bundle track L1); feeds the comparator above
 -	route	routing zone	13360,9080:16950,9560	horizontal poly lines; carries R0 bit 7 (y 9487) and comparator D's output (y 9532); otherwise not traced
-41	route	rc0 to uc_b0	13490,9050:13560,9380	uc_b0's end contact, poly round to the top of bundle track L4
-42	route	rc1 to uc_b1	13830,9050:13950,9640	poly drop, thin metal x 13890, hook; bar y 9620 to L5's top
-43	route	rc5, rc4 rows	14045,9170:15510,9250	rows y 9187 and 9230 from the tops of the tracks x 14062, 14105 to uc_b5, uc_b4
+41	route	rc0 into the upper array	13490,9050:13560,9380	uc track 0's end contact, poly round to the top of bundle track L4
+42	route	rc1 into the upper array	13830,9050:13950,9640	poly drop, thin metal x 13890, hook; bar y 9620 to L5's top
+43	route	rc5, rc4 rows	14045,9170:15510,9250	rows y 9187 and 9230 from the tops of the tracks x 14062, 14105 to uc tracks 5, 4
 49	route	rc5, rc4 tracks	14045,9250:14125,9985	thin metals x 14062, 14105 down the s0 column to their pads
-44	route	rc6 row	14450,9125:15900,9160	row y 9143 from the metal x 14474 to uc_b6's end contact
+44	route	rc6 row	14450,9125:15900,9160	row y 9143 from the metal x 14474 to uc track 6's end contact
 -	route	data bits 0-3, east	16260,9195:17010,9415	rows on east of the R3 taps to four contacts
 -	route	data bits 0-3, field	16950,9195:17230,13580	four metals down dbus's wiring field to units 0-3
 -	?logic	D0 bus gating and read driver	17150,8885:17590,9520	NAND and AND-OR-invert pull-downs seen under the ground rail; takes d0_d, drives the per-bit line to the D0 pad cell; not traced
@@ -185,7 +185,7 @@
 46	route	rc0-rc3 bundle	13505,9380:13705,10700	tracks L4, L5, L6, L8 north of rdp3 to their top contacts
 50	route	rc1 bar	13550,9600:13870,9640	poly bar from L5's top contact to the hook of the track x 13890
 47	route	rc2, rc3, rc6 nest	13590,9370:13800,9550	three nested L's down to the pads at the tops of the track x 13650, L8 and L6
--	route	rc2, rc3, rc6 rows	13690,9260:14730,9370	rows y 9276 (rc6), 9317 (rc3), 9358 (rc2); rc3 steps up a track at x 14544 to uc_b3's contact
+-	route	rc2, rc3, rc6 rows	13690,9260:14730,9370	rows y 9276 (rc6), 9317 (rc3), 9358 (rc2); rc3 steps up a track at x 14544 to uc track 3's contact
 48	route	routing column	13800,9440:14170,10084	exit lines of both comparators, R0 bit 7 going north and round the array, poly bars from the bundle to tracks going north
 -	array	R0/2 comparator (7 bit)	14170,9563:16940,9954	c of each slice against the R0 bit of the next slice, bit 7 of c not compared (believed c = R0/2, the interlace half line); output south on bundle track L0
 -	route	data bits 0-3, east	14230,9295:16680,9460	the routing-zone rows on east to four contacts

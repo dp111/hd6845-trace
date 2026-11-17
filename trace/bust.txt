@@ -5,7 +5,7 @@
 # by a 45-degree diagonal (lower lines further west: the lines cannot cross), and comes up on
 # a pad of the staircase at x 11655 / 11697 (alternating). Read from the clean shot at 1.35x
 # and 2.5x (cache/scratch/bust/xu.png, dg1.png, dg2.png) and the pads in both metal shots at
-# 3x (pe.png). cdp1_l4676 (= rcs_bq3335) is drawn by r9m and follows the same pattern.
+# 3x (pe.png). cdp1_l4676 is drawn by r9m and follows the same pattern.
 # East of the staircase each is a metal line (tools/follow.py, 2,000-5,250 px); the lower
 # eight step down one track (21 px) at x 13200-13510 (jog.png) and end on pads whose polys
 # go south into the upper right datapath.
@@ -67,14 +67,14 @@ M 11697,5131 x13245 y5153 x16146
 M 11655,5175 x13200 y5196 x16926
 
 # --- east ends: pads, and the polys south that are drawn here
-# cdp1_l4719 ends on a pad (13540,4787); its poly goes south under the bus lines and the wide
+# sl_eq_r5 ends on a pad (13540,4787); its poly goes south under the bus lines and the wide
 # supply metal (the poly column at x 13538 in the stripped shot at y 5300) to rdp1's poly
 # x 13533-13556 from y 5450 (R5's match leaving its comparator north): so the R5 match is
-# cdp1_l4719.
+# sl_eq_r5.
 P 13523,4770:13557,4804
 C 13540,4787
 P 13544,4787 y5455 w=20
-# c4, c3, c2, c1: pads at the ends; polys south to the tops of the data lines ubus_b1..b4
+# c4, c3, c2, c1: pads at the ends; polys south to the tops of the data lines db_b1..b4
 # (rdp1 draws them from y 5640; their top pads at y 5630-5640 seen at 1x, tp1.png, tp2.png,
 # and the poly x 13843 end to end at 1.2x in three shots, d1.png)
 P 13831,4878:13865,4912
@@ -97,36 +97,27 @@ C 15020,5024
 P 15016,5024 y5630 w=18
 P 14999,5613:15033,5647
 C 15016,5630
-@alias cdp1_c4_bl ubus_b1
-@alias cdp1_c3_bl ubus_b2
-@alias cdp1_c2_bl ubus_b3
-@alias cdp1_c1_bl ubus_b4
-@alias sl_eq_r5 cdp1_l4719
 # the other east ends are left as ports: c5 (13715,4850), a0 (15280,5068), lw1 (15584,5110),
 # lw2 (16146,5153), a2 (16926,5196); notes/blocks/bust.md
 # amr's outputs land on these lines (trace/amr.txt): aliases
 @alias cdp1_l4588 amr_ob_c1
 @alias cdp1_l4632 amr_ob_c2
-@alias cdp1_a0_bl amr_oa_c1
-@alias cdp1_a3_bl amr_oa_c2
-@alias cdp1_a2_bl amr_oa_c3
 
 
-# cdp1_c5_bl: its pad (13715,4850); poly south at x 13706 to a pad with a contact (13705,5628)
+# db_b0: its pad (13715,4850); poly south at x 13706 to a pad with a contact (13705,5628)
 # (ring in both metal shots, clean-shot pale centre, 2.7x: cache/scratch/bust/c5.png; the poly
 # ends there, well above the eq line's load in rdp1); metal west along y 5632 to x 13450,
-# where it turns down as ubus_b0 (tools/follow.py: one piece to y 8589).
+# where it turns down as db_b0 (tools/follow.py: one piece to y 8589).
 P 13698,4833:13732,4867
 C 13715,4850
 P 13710,4850 x13706 y5628 w=18
 P 13689,5611:13723,5645
 C 13705,5628
 M 13705,5632 x13455 y5645 w=12
-@alias cdp1_c5_bl ubus_b0
 
-# cdp1_a0_bl: its pad (15280,5068); poly south to a pad (15275,5628); metal south along
+# db_b5: its pad (15280,5068); poly south to a pad (15275,5628); metal south along
 # x 15277 (rdp1 draws a piece of it inside a latch cell) to a pad (15277,6826); poly east
-# along y 6826 under the VCC rail x 15315-15375 to a pad (15405,6826), from which ubus_b5's
+# along y 6826 under the VCC rail x 15315-15375 to a pad (15405,6826), from which db_b5's
 # metal runs south (rdp1 draws it from y 6905). Metal shot and clean shot at 3x
 # (cache/scratch/bust/b5.png, tp3.png, tp2.png); metal from tools/follow.py.
 P 15263,5051:15297,5085
@@ -141,11 +132,10 @@ P 15277,6826 x15405 w=20
 P 15388,6809:15422,6843
 C 15405,6826
 M 15406,6826 y6910 w=24
-@alias cdp1_a0_bl ubus_b5
 
-# cdp1_lw2: its pad (16146,5153); poly south to a pad (16146,5625); metal south along
+# db_b6: its pad (16146,5153); poly south to a pad (16146,5625); metal south along
 # x 16144 to y 6830, west to a pad (16005,6825); poly west under the VCC rail x 15910-15960
-# to a pad (15870,6825); metal west to x 15790 and south as ubus_b6 (rdp1 draws it from
+# to a pad (15870,6825); metal west to x 15790 and south as db_b6 (rdp1 draws it from
 # y 6905). 2.5x in metal and the clean shot (cache/scratch/bust/b6.png, r3d.png).
 P 16129,5136:16163,5170
 C 16146,5153
@@ -159,8 +149,7 @@ P 15870,6825 x16005 w=20
 P 15853,6808:15887,6842
 C 15870,6825
 M 15870,6825 x15790 y6910 w=20
-@alias cdp1_a3_bl ubus_b6
-# cdp1_a2_bl: its pad (16926,5196); poly south to a pad (16922,5625); metal south along
+# db_b7: its pad (16926,5196); poly south to a pad (16922,5625); metal south along
 # x 16926 to y 6744, west to x 16839, south (follower sampled with --max: x 16838-16840 at
 # y 6777 ... 12377). Its end, near y 12663, not looked at (the follower ends on a VCC rail
 # there, so it may have jumped): drawn to y 12370.
@@ -170,7 +159,6 @@ P 16924,5196 y5625 w=18
 P 16905,5608:16939,5642
 C 16922,5625
 M 16926,5625 y6744 x16839 y12370 w=12
-@alias cdp1_a2_bl rbus_b7
 
 # =====================================================================================
 # West of cdp1 (x 8340): the through-lines come out as poly and end on a staircase of pads
@@ -201,7 +189,7 @@ P 7825,4635 x8230 y4676 x8345 w=12
 P 7813,4618:7847,4652
 C 7830,4635
 M 7842,4637 x7618 y4704 x6921 w=12
-# cdp1_l4719 (R5's match): a metal leaves a pad at about (7782,4766) west (to x 7700, south to
+# sl_eq_r5 (R5's match): a metal leaves a pad at about (7782,4766) west (to x 7700, south to
 # y 4853, west to x 7575, south to y 5140, west to x 7330), but how the poly from x 8340
 # reaches that pad is not seen: a straight guess crossed the row address selector's
 # geometry (extraction: a transistor and a short to ras_o0). Not drawn.
@@ -211,7 +199,7 @@ M 7842,4637 x7618 y4704 x6921 w=12
 # y 6302-6312 as in c1-c3 (tools/follow.py); each poly runs north, 45 degrees north-east under the
 # supply metal, then north beside the staircase (clean shot 1.6x, c0l.png):
 #   inner: north along x 11740 to a pad with a contact (11738,5000) on the bus metal y 5002,
-#          i.e. cdp1_c1_bl (data bit 4): ring in both metal shots, contact on a poly pad
+#          i.e. db_b4 (data bit 4): ring in both metal shots, contact on a poly pad
 #          in the clean shot (4x, c0e.png)
 #   outer: north along x 11786 to y 4690, 45 degrees north-west to (11640,4544), west as
 #          cdp1_l4544 to cdp1's edge: one poly, kept apart from rab's bit-0 pad by a dark
@@ -230,17 +218,16 @@ P 11607,5585 x11617 y5500 11786,5331 y4664 11666,4544 x10845 w=16   # top diagon
 
 # c0's outputs, named as the bus lines they drive (amr_oa_c0 / amr_ob_c0 in amr's terms)
 
-# --- the prediction checked: cdp1_a3_bl (R8's row-A slice 3, which writes only R8; tc1 draws
-# its metal as tc1_x2, from the contact (8075,4372) south) runs on south along x 8075
+# --- the prediction checked: db_b6 (R8's row-A slice 3, which writes only R8; tc1 draws
+# its metal as db_b6, from the contact (8075,4372) south) runs on south along x 8075
 # (tools/follow.py, to y 5848) and has a contact (8078,5020) onto a poly that runs east
-# along y 5024 to cdp1's west edge as cdp1_lw2 = data bit 6 (ring in the metal shot, poly
+# along y 5024 to cdp1's west edge as db_b6 = data bit 6 (ring in the metal shot, poly
 # band in the chip-2 stripped shot from x 8090 to 8340 at y 5017-5035, 3x:
 # cache/scratch/bust/lw2w.png; column profiles at x 8110, 8240, 8310).
 M 8075,4440 y5040 w=12
 P 8060,5003:8096,5037
 C 8078,5020
 P 8078,5024 x8345 w=12
-@alias cdp1_a3_bl cdp1_lw2
 
 # --- cdp1_l4632 and cdp1_l4676 (by the corrected staircase) across the crossing field under the three rails (x 6450-6960).
 # East pads: (6960,4655) and (6923,4695) (rings in the metal shot, poly pads in the stripped
@@ -274,33 +261,31 @@ C 5922,5935
 # =====================================================================================
 # The routing zone of the right datapath (rdp2's y 9080-9560), where the upper array's data
 # lines (ubus) meet the lower array's (rbus), two slices further east.
-# Bit 6: ubus_b6's metal (x 15796) ends on a contact (15795,9100); a poly runs east along
+# Bit 6: db_b6's metal (x 15796) ends on a contact (15795,9100); a poly runs east along
 # y 9095-9110 (continuous salmon band in the clean shot at 1.45x, cache/scratch/bust/b6r.png)
-# to a contact (16577,9096) at the top of rbus_b6's metal (x 16577).
-M 15796,9000 y9112 w=20                # ubus_b6's metal on to its end (tools/follow.py: 9104)
+# to a contact (16577,9096) at the top of db_b6's metal (x 16577).
+M 15796,9000 y9112 w=20                # db_b6's metal on to its end (tools/follow.py: 9104)
 P 15778,9083:15812,9117
 C 15795,9100
 P 15795,9101 x16577 w=14
 P 16560,9079:16594,9113
 C 16577,9096
-M 16577,9088 y9800 w=20                # rbus_b6's metal north to its top (tools/follow.py: 9096)
-@alias cdp1_a3_bl rbus_b6
-# Bit 5: ubus_b5's metal (x 15406) ends on a contact (15407,9232); poly east along y 9232 to
-# x 15838, down to y 9266, east to a contact (16187,9268) at the top of rbus_b5's metal
+M 16577,9088 y9800 w=20                # db_b6's metal north to its top (tools/follow.py: 9096)
+# Bit 5: db_b5's metal (x 15406) ends on a contact (15407,9232); poly east along y 9232 to
+# x 15838, down to y 9266, east to a contact (16187,9268) at the top of db_b5's metal
 # (x 16187). 1.45x in the clean and metal shots (b5r.png), the step at 3.5x (b5s.png).
-M 15406,9060 y9240 w=24                # ubus_b5's metal on to its end (tools/follow.py: 9234)
+M 15406,9060 y9240 w=24                # db_b5's metal on to its end (tools/follow.py: 9234)
 P 15390,9215:15424,9249
 C 15407,9232
 P 15407,9232 x15838 y9266 x16187 w=14
 P 16170,9251:16204,9285
 C 16187,9268
-M 16187,9260 y9800 w=20                # rbus_b5's metal north to its top (tools/follow.py: 9268)
-@alias cdp1_a0_bl rbus_b5
-# Bit 2: ubus_b2's metal (x 14235) on to its end contact (14240,9100); a poly row east along
+M 16187,9260 y9800 w=20                # db_b5's metal north to its top (tools/follow.py: 9268)
+# Bit 2: db_b2's metal (x 14235) on to its end contact (14240,9100); a poly row east along
 # y 9100 to a contact (14862,9097); a thin metal down x 14863 (continuous in both metal
 # shots: the gaps found by the metal test are 5-17 px, poly crossings and the two rings;
 # cache/scratch/bust/b2m.png) to a contact (14862,9355); a poly row east along y 9355 to the
-# contact (15018,9352) at the top of rbus_b2's metal (x 15016). Clean shot at 1.45x
+# contact (15018,9352) at the top of db_b2's metal (x 15016). Clean shot at 1.45x
 # (b2r.png).
 M 14235,9050 y9110 w=24
 P 14223,9083:14257,9117
@@ -315,11 +300,10 @@ P 14862,9355 x15018 w=14
 P 15001,9335:15035,9369
 C 15018,9352
 M 15016,9345 y9800 w=24
-@alias cdp1_c3_bl rbus_b2
-# Bit 1: ubus_b1's metal (x 13845) on to its end contact (13842,9102); a poly down x 13842 to
+# Bit 1: db_b1's metal (x 13845) on to its end contact (13842,9102); a poly down x 13842 to
 # a contact (13842,9222); a thin metal down x 13842 through the poly rows (no other contact)
 # to a contact (13842,9398); a poly row east along y 9400 to the contact (14625,9400) at the
-# top of rbus_b1's metal (x 14625). Four shots at 2.2x (cache/scratch/bust/b1m.png); the row
+# top of db_b1's metal (x 14625). Four shots at 2.2x (cache/scratch/bust/b1m.png); the row
 # east in the clean shot at 1.45x (b1r.png).
 M 13845,9050 y9110 w=24
 P 13825,9085:13859,9119
@@ -334,15 +318,14 @@ P 13842,9400 x14625 w=14
 P 14608,9383:14642,9417
 C 14625,9400
 M 14625,9395 y9605 w=24
-@alias cdp1_c4_bl rbus_b1
-# Bit 0: ubus_b0's metal (x 13455) on to its end contact (13455,9163); a poly drops straight
+# Bit 0: db_b0's metal (x 13455) on to its end contact (13455,9163); a poly drops straight
 # along x 13455 under the wide metal band y 9225-9275 (no track step: clean and chip-2 shots
 # at 4.5x, cache/scratch/bust/b0_w2.png) to a contact (13455,9313); a metal south along
 # x 13452 (one piece in both metal shots; gaps only at the poly rows y 9390-9460) to a
 # contact (13455,9578); a poly row east along y 9578 (straight at 3x, b0_z4.png) to x 13865,
 # north along x 13865 (the outermost of the nested L's, chip-2 shot at 2.2x, b0_z2.png) to
 # y 9445, and east along y 9445 (straight under the narrow columns at 3.6x, b0_z3.png) to the
-# contact (14238,9445) at the top of rbus_b0's metal (tools/follow.py: 9444). The row runs
+# contact (14238,9445) at the top of db_b0's metal (tools/follow.py: 9444). The row runs
 # on east past the pad (not drawn; review, e6.png).
 M 13455,9050 y9175 w=24
 P 13438,9146:13472,9180
@@ -357,11 +340,10 @@ P 13455,9578 x13866 y9445 x14238 w=14
 P 14221,9428:14255,9462
 C 14238,9445
 M 14237,9437 y9550 w=24
-@alias cdp1_c5_bl rbus_b0
-# Bit 3: ubus_b3's metal (x 14625) on to its end contact (14625,9315) (tools/follow.py: one
+# Bit 3: db_b3's metal (x 14625) on to its end contact (14625,9315) (tools/follow.py: one
 # piece to y 9320); a poly row east along y 9310 to a contact (15402,9310) at the top of the
 # metal x 15406, which runs down unbroken (both metal shots: only poly-crossing gaps of
-# 7-15 px) to rbus_b3. 1.38x in the clean and metal shots (b3r.png); the end at 2.2x
+# 7-15 px) to db_b3. 1.38x in the clean and metal shots (b3r.png); the end at 2.2x
 # (b3a.png).
 M 14625,9060 y9322 w=24
 P 14608,9298:14642,9332
@@ -370,11 +352,10 @@ P 14625,9312 x15402 w=14
 P 15385,9293:15419,9327
 C 15402,9310
 M 15406,9303 y9605 w=24
-@alias cdp1_c2_bl rbus_b3
-# Bit 4: ubus_b4's metal (x 15016) on to its end contact (15018,9272); a poly row east along
+# Bit 4: db_b4's metal (x 15016) on to its end contact (15018,9272); a poly row east along
 # y 9270 to a contact (15790,9272) (ring in both metal shots, contact centre in the clean
 # shot, 4x: cache/scratch/bust/b4c.png), from which the metal x 15796 runs down unbroken to
-# rbus_b4 (both metal shots: the only longer gap is the ring's own edge). 1.38x (b4r.png).
+# db_b4 (both metal shots: the only longer gap is the ring's own edge). 1.38x (b4r.png).
 M 15016,9060 y9280 w=24
 P 15001,9255:15035,9289
 C 15018,9272
@@ -382,4 +363,3 @@ P 15018,9271 x15790 w=14
 P 15773,9255:15807,9289
 C 15790,9272
 M 15793,9265 y9605 w=24
-@alias cdp1_c1_bl rbus_b4

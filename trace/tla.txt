@@ -556,7 +556,7 @@ P 4045,3883:4260,3902
 P 4252,3876:4290,3910
 C 4270,3893
 
-# ---- rcs_mu = NOT rcs_bq3335: an inverter. One gate (y 3363-3385) that is a pull-down both
+# ---- rcs_mu = NOT ra_eq_r9: an inverter. One gate (y 3363-3385) that is a pull-down both
 # under the VSS rail (between the rail's box, contact (4030,3350), and the node's strip
 # y 3393-3415, which runs on west under the rail to its load: not drawn) and on the column
 # east of the rail. Below the node east of the rail is field (classmap --open), so there is no
@@ -576,7 +576,7 @@ P 4132,3318:4166,3388                 # stem up to the pad, contact (4148,3335)
 C 4148,3335
 M 4148,3320 y3341 w=20                # bus piece x 4138-4160: upper part, ends at y 3341 (split by r9m, 2026-11-17:
 M 4148,3371 y3596 w=20                #   no metal at y 3341-3371 in either metal shot; notes/blocks/r9m.md, AMB-013)
-N M 4148,3330 rcs_bq3335
+N M 4148,3330 ra_eq_r9
 
 # ====================================================================
 # AOI unit of the first cluster, y 4045-4320: rcs_n4200 = NOT( rcs_cond . clk_tl + rcs_g4240 ).

@@ -3,9 +3,9 @@
 ## Status (2026-11-17 11:15 (UTC+1), contributor session; independently reviewed)
 
 Wiring only (`trace/rde.txt`), no transistors. Drawn: the five slice bit lines of `cdp1`
-(`cdp1_c1_bl`..`cdp1_c5_bl`, data bits 4..0) from `cdp1`'s drawn ends (y 5150) through
+(`db_b4`..`db_b0`, data bits 4..0) from `cdp1`'s drawn ends (y 5150) through
 rows D and E to `cdp2`'s bus lines (`cdp2_a_s3_bus`..`cdp2_a_s7_bus`, y 5700); data bit 6
-from (8075,5040) to `cdp2_c_s1_bus`; data bit 5 from `cdp1_a0_bl`'s tap (8727,5150) to
+from (8075,5040) to `cdp2_c_s1_bus`; data bit 5 from `db_b5`'s tap (8727,5150) to
 `cdp2_c_s2_bus`. **One 54 px stretch of each of the five lines (y 5542-5596) is drawn
 `?M`: an assumption, see below.** Rows D and E themselves are still not traced.
 
@@ -104,8 +104,8 @@ side of the bar) is not excluded. Settling it needs row E's cell traced.
 
 ## Bit 6 to R10's s1
 
-`bust` drew the metal (data bit 6: `tc1_x2`'s metal, with the contact (8078,5020) onto
-`cdp1_lw2`) to (8075,5040). It runs on south along x 8075 to y 5848, steps east to x 8118
+`bust` drew the metal (data bit 6: `db_b6`'s metal, with the contact (8078,5020) onto
+`db_b6`) to (8075,5040). It runs on south along x 8075 to y 5848, steps east to x 8118
 along y 5840-5856 and runs south along x 8118 to `cdp2_c_s1_bus`'s drawn top (y 7395).
 The step lies on one of channel 1's poly lines with no contact (uniform salmon under it;
 `cdp2` found the same at the line's lower jog). Views: `b6a.png`, `s1a.png`, `s1b.png`,
@@ -123,7 +123,7 @@ Possible taps, not established and not drawn:
 
 ## Bit 5 to R10's s2
 
-`cdp1_a0_bl`'s tap metal at x 8727 runs from y 5150 straight down to a contact
+`db_b5`'s tap metal at x 8727 runs from y 5150 straight down to a contact
 (8728,6088) on a poly pad; the poly runs west along y 6079-6095, under the metals at
 x 8687, 8620 (a VSS rail) and 8553 with no pad on any, to a pad with the contact
 (8485,6087); that pad's metal has its line on the west side and goes south along x 8464
@@ -140,9 +140,9 @@ poly under the line, no pad (`tap.png`).
 
 | Net | Layer | Where | Note |
 |---|---|---|---|
-| `cdp1_c1_bl`..`cdp1_c5_bl` | M | x 8856 + 390 k: joins `cdp1` at y 5140-5150 and `cdp2` at y 5700-5710 | data bits 4..0; `cdp2_a_sK_bus` / `cdp2_c_sK_bus` (K = 3..7) are aliases |
-| `cdp1_a3_bl` | M | joins `bust` at (8075,5030-5040), `cdp2` at (8118,7395-7400) | data bit 6; `cdp2_c_s1_bus` is an alias |
-| `cdp1_a0_bl` | M, P | joins `cdp1` at (8727,5140-5150), `cdp2` at (8532,7395-7400) | data bit 5; `cdp2_c_s2_bus` is an alias |
+| `db_b4`..`db_b0` | M | x 8856 + 390 k: joins `cdp1` at y 5140-5150 and `cdp2` at y 5700-5710 | data bits 4..0; `cdp2_a_sK_bus` / `cdp2_c_sK_bus` (K = 3..7) are aliases |
+| `db_b6` | M | joins `bust` at (8075,5030-5040), `cdp2` at (8118,7395-7400) | data bit 6; `cdp2_c_s1_bus` is an alias |
+| `db_b5` | M, P | joins `cdp1` at (8727,5140-5150), `cdp2` at (8532,7395-7400) | data bit 5; `cdp2_c_s2_bus` is an alias |
 
 ## Ambiguities
 
@@ -158,7 +158,7 @@ poly under the line, no pad (`tap.png`).
   poly block (xc-20)..(xc+16) x 5408-5455 under the line; the diffusion column and bar
   described above; a poly strip (xc+6)..(xc+16) x 5512-5540 between the column and a box
   under the next track; a poly block (xc-6)..(xc+16) x 5632-5680 under the line.
-- `cdp1_a2_bl`'s metal (data bit 7) below y 5084 (jog to x 9335): not followed
+- `db_b7`'s metal (data bit 7) below y 5084 (jog to x 9335): not followed
   (`tools/follow.py` from (9335,5110) south stops at (9331,5516), unchecked).
 - Where the s1 and s2 lines go below row C (x 8075, 8465 at y 7821), and the five bus
   lines below `cdp2` (they are `cdp3`'s bit lines by position: not joined here).

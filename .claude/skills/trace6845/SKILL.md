@@ -163,7 +163,10 @@ Fix and re-run until it prints PASS. Then:
 git push origin HEAD:main
 ```
 
-If the push is rejected, main has moved: go back to the top of this step.
+If the push is rejected, main has moved: go back to the top of this step. **Never** use
+`--force` or `--force-with-lease` on any push, and never push to main other than this way
+or through `tools/claim.py`: a rejected push is how the repository keeps two merges from
+overwriting each other.
 
 ## 8. Hand off to the coordinator
 
