@@ -234,6 +234,14 @@ Round 1 (2026-11-17, an independent agent, single copies s0-s3, m4, m9, m12 and 
 medians at 5x+): see below; its findings (notes nits, a diffusion item overhanging Tf's
 gate by 2 px) were fixed.
 
+Round 2 (2026-11-17, an independent agent, single copies s3, m7 and m0 at 5-7x): one
+finding: the Round 1 fix (diffusion item trimmed to x 14150) had removed the diffusion under
+Tf's gate at y 4352-4370, so Tf extracted as 77/20; the photo shows diffusion on both sides
+there (gate poly continuous from y 4338 to 4455). Restored to x 14172: Tf 94/20 again in all
+19 copies. Everything else re-checked right (load, bar pull-down and its gate wire, pass
+gate 68/25, the `ral_n1` band by colour against known diffusion, inverter 2, the hold
+device in four layers).
+
 Re-read of the force line and the strobe (2026-11-17, an independent agent, every hop at
 4.4-6x in both stripped shots and both metal shots), because a force line that is the
 counters' transfer line does not fit: the cross-under at x 11150-11720 (three polys, none
