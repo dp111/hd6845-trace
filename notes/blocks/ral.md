@@ -1,6 +1,6 @@
 # ral: the stage in front of the RA pad drivers (x 13990-16330, y 4250-4560)
 
-## Status (2026-11-17 05:00, contributor session)
+## Status (2026-11-17 05:08, contributor session)
 
 **Partly traced** (`trace/ral.txt`, cell `ral_cell`, five copies s0-s4 west to east; s0 is
 RA bit 0's cell, at x 13990-14460). Drawn: the two supply rails per cell, the line
@@ -37,13 +37,36 @@ y 4447 between them = the VSS rail's edge; join drawn `?P`). The strip's east en
 the output poly's bend under a heavy-outlined patch (14315-14347 x 4470-4500, clean
 shot): drawn `?B`.
 
+### Where `cnt_gab` is driven: every end looked at, none found (2026-11-17 05:08)
+
+The net as now drawn: band H4 (poly y 7200-7225, x 11043-12910), the counters' line
+x 12902 (y 7200-16943), the metal from `wl`'s contact (11392,7210) north to the
+cross-under, the metal y 4287 and the line through the five cells. Ends and taps
+looked at:
+
+| Place | Result |
+|---|---|
+| H4's west end | ends at x 11043 with no contact (four shots at 3.5x, `cache/scratch/gab/h4c.png`); the metal x 11025 beside it is `rc0_n`, no ring. **`wl`'s notes say H4 "runs on west into the bus field": it does not** |
+| H4's east end | the contact (12889,7210) onto x 12902; no poly beyond (`h4e.png`) |
+| x 12902's bottom | ends free 55 px above `ck_b`'s contact (`mra`'s notes) |
+| the north metal's contact candidate (11393,6965) | not a contact: polys crossing under (four shots at 4x, `g2.png`) |
+| its corners (11249,5612), (11396,5615) | plain corners (3.4x, `co.png`) |
+| the pad (11243,4284) | poly east only (`pd.png`) |
+| the line's east end | stops at x 16255 over cell s4's output poly, with no contact, as in the other cells (4.5x, `be2.png`). The first draft ran it to x 16330, onto the wide metal there: corrected |
+
+So no gate output drives `cnt_gab` anywhere along the drawn net, and nothing in the
+trace connects it to a supply. Either a contact or buried contact was missed on
+H4 (x 11043-12910, which crosses the top of the counter array and four metal lines),
+or along x 12902 inside the array, or the line is driven through one of `mra`'s cells.
+This is the next thing to look at for the counters' `_m`/`_mb` transfer.
+
 ### Ports
 
 | Name | Layer | Where (s0; +434, +868, +1431, +1865 for s1-s4) | Direction | What |
 |---|---|---|---|---|
 | `vcc` | metal | top rail y 4220-4268 | supply | by device orientation, not followed to a labelled rail |
 | `vss` | metal | middle rail y 4397-4446 | supply | same |
-| `cnt_gab` | metal | y 4346-4362, x 13895-16330 | in | the counters' `_m`/`_mb` gate line: drawn back to `wl`'s band H4 (glossary); first called `ral_frc` here |
+| `cnt_gab` | metal | y 4346-4362, x 13895-16258 | in | the counters' `_m`/`_mb` gate line: drawn back to `wl`'s band H4 (glossary); first called `ral_frc` here |
 | `ral_stb` | metal | y 4540-4556, x 13990-15910 (ends on s4's pad) | in | the sixth line of rab's bundle; drawn back 9,000 px to x 8350, where it is `tc1`'s ns4 (formerly `tc1_ns4`, renamed) |
 | `rax_o0` | poly | (14000,4500), from rab | in | s0's input, onto the strip by a buried contact (`?B`: round ring in both stripped shots) |
 | `rax_o1` ... `rax_o4` | poly | up x 13995 + dx from pads at (14430,4590), (14863,4635), (15425,4675), (15860,4632) to the buried contact on each strip | in | s1-s4's inputs; s2's and s4's pads at the ends of rab's metals (s4's goes on east along y 4722 to x 15862 and north) |

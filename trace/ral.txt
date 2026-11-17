@@ -73,7 +73,7 @@ P 14331,4480:14349,4525
 @inst ral_cell 1865,0 tag=s4
 
 # --- the line y 4350 through all five cells (taps in each): local name cnt_gab
-M 13895,4353 x16330 w=16
+M 13895,4353 x16258 w=16
 N M 14000,4351 cnt_gab
 
 # --- the strobe line: the sixth line of the row-address bundle (notes/blocks/rab.md:
