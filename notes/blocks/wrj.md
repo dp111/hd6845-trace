@@ -7,8 +7,8 @@ Traced 2026-11-17 09:30 (one agent, one pass with a numeric cross-check). File
 2046 nets, 3430 transistors, 0 errors, 0 warnings. `tools/unsure.py` lists none of the
 four nets.
 
-**All four joins come out as expected**: rdp3's `wr_r0_u`, `wr_r1_u`, `wr_r2_u` and
-rdp2's `wr_r4_u` (= `rdp3_n1s4`) are bd1's `wr_r0`, `wr_r1`, `wr_r2`, `wr_r4`. So, by
+**All four joins come out as expected**: rdp3's `wr_r0`, `wr_r1`, `wr_r2` and
+rdp2's `wr_r4` are bd1's `wr_r0`, `wr_r1`, `wr_r2`, `wr_r4`. So, by
 geometry from the select gates to the register rows: rdp3's row RA is R1, row RB is R2,
 rdp2's row RC is R0 and row RE is R4. (That statement also rests on rdp3's own drawing of
 the bundle north of y 13480, on bd1's tracks south of y 14690 and on rdp2's poly link for
@@ -40,7 +40,7 @@ were read. Everything was looked at in both metal shots and in `acid1b`.
 
 | Strobe | From (rdp3) | Route | To (bd1) | Evidence |
 |---|---|---|---|---|
-| `wr_r4` | L4, (13521,13480), net `rdp3_n1s4` | straight on x 13521 | k10, (13521,14690) | surveys; poly crossings `xA.png` (y 13880-13908), `xC.png` (diagonal, y 14088-14136) |
+| `wr_r4` | L4, (13521,13480), net `wr_r4` | straight on x 13521 | k10, (13521,14690) | surveys; poly crossings `xA.png` (y 13880-13908), `xC.png` (diagonal, y 14088-14136) |
 | `wr_r2` | L6, (13608,13480) | straight on x 13608 | k12, (13608,14690) | surveys; `xA.png`, `xB.png` (the band's corner, y 14010-14050) |
 | `wr_r0` | L7, (13651,13480) | straight on x 13651 | k13, (13652,14690) | surveys; `xA.png`, `xB.png`; dirt at y 13585 (chip 1) and 14385 (chip 2) on `blem1.png` |
 | `wr_r1` | L11, (13825,13480) | x 13825 to y 14001, west along y 13993-14010 to x 13782, south | k16, (13782,14690) | `jog11_m.png` (4x, both chips), `jog11_a.png` (stripped shots), overlay `jog11_ov.png` |
@@ -72,11 +72,9 @@ points with rdp3's and bd1's geometry confirmed.
 
 None on the four joins.
 
-`wr_r4`: rdp2's file has `@alias wr_r4_u rdp3_n1s4`. The extraction needs every alias to
-name the canonical net directly, so `trace/wrj.txt` carries `@alias wr_r4 wr_r4_u` and
-`@alias wr_r4 rdp3_n1s4`; the second works only because this file loads after rdp2's.
-Fix for the coordinator: `tools/rename.py wr_r4_u wr_r4` and `rdp3_n1s4 wr_r4`, delete
-rdp2's alias line and both of these.
+Names: the pieces in rdp2, rdp3 and bd1 carry the same names `wr_r0`, `wr_r1`, `wr_r2`,
+`wr_r4` (renamed with `tools/rename.py` in the commit after the drawing; the former
+`_u` names are in the glossary's former-names table).
 
 ## Not done
 

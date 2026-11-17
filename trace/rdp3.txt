@@ -238,8 +238,8 @@ N M 15795,12600 rbus_b4
 @inst rdp3_lat 1170,-1699 mx=14790 rot=180 o=14790,13150 tag=r2_b4
 @inst rdp3_lat 1560,-1700 mx=14790 rot=180 o=14790,13150 tag=r2_b5
 @inst rdp3_lat 1951,-1699 mx=14790 rot=180 o=14790,13150 tag=r2_b6
-N P 14850,12418 wr_r1_u
-N P 14850,11572 wr_r2_u
+N P 14850,12418 wr_r1
+N P 14850,11572 wr_r2
 
 # --- right end of each row: VSS land and contact for s7's second pull-down, under the
 # ninth VSS rail (x 16906)
@@ -258,7 +258,7 @@ P 13770,12404:13794,12714
 P 13770,12688:13845,12714
 C 13823,12700 s=26x26
 M 13825,12688 y13480 w=22
-N M 13825,13400 wr_r1_u
+N M 13825,13400 wr_r1
 
 # --- RB load strobe: the row poly runs on west under the VSS rail to a pad with a contact
 # at (13648,11570); thin metal goes down from there on track L7 (x 13651), jogs LEFT at
@@ -268,7 +268,7 @@ N M 13825,13400 wr_r1_u
 P 13620,11558:13815,11586
 C 13648,11571 s=26x26
 M 13651,11558 y12357 x13608 y13480 w=18
-N M 13608,13400 wr_r2_u
+N M 13608,13400 wr_r2
 
 
 # =====================================================================================
@@ -561,7 +561,7 @@ C 13390,12438 s=26x26
 P 13375,12426:13540,12454
 C 13522,12440 s=26x26
 M 13521,12428 y13480 w=18
-N M 13521,13400 rdp3_n1s4
+N M 13521,13400 wr_r4
 # --- L2 from the north, jog left at y 12486, on down L1
 M 13434,10700 y12486 x13391 y13480 w=18
 N M 13391,13400 rdp3_n2s1
@@ -602,7 +602,7 @@ N P 13335,10965 rc3
 P 13677,10798:13760,10830            # west end of RC's strobe poly (the row is in rdp2)
 C 13690,10815 s=26x26
 M 13694,10803 y12400 x13651 y13480 w=18
-N M 13651,13400 wr_r0_u
+N M 13651,13400 wr_r0
 
 # =====================================================================================
 # Routing zone between row RA and row AR (y 12437-13010) and the lines that leave it

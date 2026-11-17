@@ -133,26 +133,26 @@ doubts about the cell's upper edge were the hold device's stripes and poly seen 
 metal lines. Differences are outside the cell: the bus line and the c track run through;
 q goes up in poly.
 
-- Strobe `wr_r1_u`: row poly; right end free (ends at x 16925); at the left end it
+- Strobe `wr_r1`: row poly; right end free (ends at x 16925); at the left end it
   turns down at x 13782 under the first VSS rail to a pad with a contact at
   (13823,12700); thin metal on bundle track L11 (x 13825) goes down from there and
   leaves the region at y 13480.
-- Strobe `wr_r2_u`: row poly; right end free; runs on west to a pad with a contact
+- Strobe `wr_r2`: row poly; right end free; runs on west to a pad with a contact
   at (13648,11571); metal goes down on track L7 (x 13651), **jogs left at y 12357 onto
   track L6 (x 13608)** and leaves the region on L6.
 - Which registers (run 3; the lower ends are bd1's table of tracks at y 14700, the
   stretch y 13480-14700 between the two regions was checked with `tools/rdp3_jogs.py`
   in both metal shots: no jog, and no break longer than a poly line passing under):
-  - `wr_r2_u` arrives on L6 = bd1's k12 = `wr_r2` (contact 13609,14956).
+  - `wr_r2` arrives on L6 = bd1's k12 = `wr_r2` (contact 13609,14956).
     **RB = R2** (horizontal sync position).
-  - `wr_r1_u` goes down L11 to y 14000, **jogs left onto L10** (x 13782; seen,
+  - `wr_r1` goes down L11 to y 14000, **jogs left onto L10** (x 13782; seen,
     `cache/scratch/rdp3/l11_jog.png`) = bd1's k16 = `wr_r1` (contact 13785,14913).
     **RA = R1** (horizontal displayed). The metal on L11 below y 14050 is another net
     (bd1's k17, which comes from a track at x 13868 by a jog at y 14050); the piece of
     L10 above y 13893 is a third net (ends there on a contact to a poly line going west).
   - `wr_r0` (bd1's k13, x 13652) comes up L7, **jogs right onto L8 at y 12400** and
     ends on the contact (13690,10815) on the west end of the strobe poly of row RC, the
-    register row above RB, which is rdp2's. **RC = R0.** Drawn here as `wr_r0_u`.
+    register row above RB, which is rdp2's. **RC = R0.** Drawn here as `wr_r0`.
   - The three rows from the top are therefore R0, R2, R1: the order of those three
     select columns in the decode array.
   - Run 2 had RB = R0 from a track scan of L7 "continuous from y 11566 to 15000". It is
@@ -287,7 +287,7 @@ a net. Each net, from north to south (all drawn; overlay `ov_bun1.png`):
 |---|---|---|---|
 | `rdp3_n0` | L0 at y 10700 | straight down L0 to y 12789, steps left to x 13307 | leaves the region west/south at (13307,12850); the track at x 13307 above y 12745 is another line, which turns west there |
 | `inh_rc` | poly pad from the west, contact (13346,12829) | L0 | L0 at y 13480 (bd1's k6 = `inh_rc`) |
-| `rdp3_n1s4` | L1 at y 10700 | L1 to contact (13390,12438); poly link east y 12426-12454 under L2, L3; contact (13522,12440); L4 | L4 at y 13480 = bd1's k10 = **`wr_r4`** (so R4's write strobe goes north on L1) |
+| `wr_r4` | L1 at y 10700 | L1 to contact (13390,12438); poly link east y 12426-12454 under L2, L3; contact (13522,12440); L4 | L4 at y 13480 = bd1's k10 = **`wr_r4`** (so R4's write strobe goes north on L1) |
 | `rdp3_n2s1` | L2 at y 10700 | L2, jog left at y 12486, L1 | L1 at y 13480 (bd1's k7, untraced there) |
 | `h_eq_r2` | L3 at y 10700 | L3 down to contact (13477,10857) | (poly east to comparator B) |
 | `h_eq_r1` | (poly from comparator A) contact (13479,11703) | L3, jog left at y 12530, L2 | L2 at y 13480 (bd1's k8, untraced there) |
@@ -296,9 +296,9 @@ a net. Each net, from north to south (all drawn; overlay `ov_bun1.png`):
 | `rc2` | L6 at y 10700 | L6 to contact (13608,11438); poly west y 11429-11452 | leaves west at (13330,11440) |
 | `rdp3_n7s9` | L7 at y 10700 | L7, jog left at y 11507, L6, jog left at y 12313, L5 to contact (13565,12826); poly link east y 12815-12837 under L6, L7, L8; contact (13736,12826); L9 | L9 at y 13480 (bd1's k15, untraced there) |
 | `rc3` | L8 at y 10700 | L8 to contact (13692,10745); poly west y 10737-10758, down between L1 and L2 (x 13413), west y 10954-10976 | leaves west at (13330,10965) |
-| `wr_r0_u` | contact (13690,10815) on RC's strobe poly | L8, jog left at y 12400, L7 | L7 at y 13480 = bd1's k13 = **`wr_r0`** |
-| `wr_r2_u` | contact (13648,11571) on RB's strobe poly | L7, jog left at y 12357, L6 | L6 at y 13480 = bd1's k12 = **`wr_r2`** |
-| `wr_r1_u` | contact (13823,12700) on RA's strobe poly | L11 | L11 at y 13480; at y 14000 it jogs onto L10 = bd1's k16 = **`wr_r1`** |
+| `wr_r0` | contact (13690,10815) on RC's strobe poly | L8, jog left at y 12400, L7 | L7 at y 13480 = bd1's k13 = **`wr_r0`** |
+| `wr_r2` | contact (13648,11571) on RB's strobe poly | L7, jog left at y 12357, L6 | L6 at y 13480 = bd1's k12 = **`wr_r2`** |
+| `wr_r1` | contact (13823,12700) on RA's strobe poly | L11 | L11 at y 13480; at y 14000 it jogs onto L10 = bd1's k16 = **`wr_r1`** |
 
 Lines that start in the routing zone and go south are c lines (next section): L3 from
 contact (13478,12916) is `hc2_u`, L5 from (13565,12959) `hc1_u`, L8 from
@@ -372,7 +372,7 @@ North edge, y 10700 (all metal, all continue into rdp2):
 | `rbus_b7` (second branch) | 16838 (drawn to y 10745) | through | bus s0 on the strap track of slice s7; rdp2 follows it north past y 9440 (its `rdp3_t16837`), so this is how bit s0 reaches the upper array |
 | `hc7`..`s7` | 13931, 14321, 14712, 15102, 15492, 15882, 16272, 16663 | out (to rdp2's R0 comparator) | lines compared with R1 and R2; rdp2 finds no driver either and has them end at y 9705-10220, so they are driven from the lower left |
 | `rdp3_n0` | 13348 (L0) | in | rdp2's `h_eq_r0half` (its comparator D); goes south, leaves at (13307,12850) |
-| `rdp3_n1s4` | 13391 (L1) | out (driven from the south) | `wr_r4` going north = rdp2's `wr_r4_u` |
+| `wr_r4` | 13391 (L1) | out (driven from the south) | `wr_r4` going north = rdp2's `wr_r4` |
 | `rdp3_n2s1` | 13434 (L2) | in | **rdp2's `h_eq_r0`: R0 = c**, the end-of-line match; passes through here, leaves south on L1 |
 | `h_eq_r2` | 13478 (L3) | **out** | **R2 = c**; rdp2 has it end on a contact at (13475,9705), poly west along y 9705 |
 | `rc0` | 13521 (L4) | ? | turns west at y 12397 |
@@ -383,8 +383,8 @@ North edge, y 10700 (all metal, all continue into rdp2):
 | `vss` | 13783 + 390 k (9 rails) | - | |
 | `vcc` | 13990 + 390 k (8 rails) | - | |
 
-Inside the region at its top: `wr_r0_u`, contact (13690,10815) on the west end of
-RC's strobe poly (y 10798-10830; the row is rdp2's, the same net as `wr_r0_u`).
+Inside the region at its top: `wr_r0`, contact (13690,10815) on the west end of
+RC's strobe poly (y 10798-10830; the row is rdp2's, the same net as `wr_r0`).
 
 West edge, x 13330 (all poly, going west):
 
@@ -407,14 +407,14 @@ South edge, y 13480 (metal unless noted):
 | `rdp3_n2s1` | 13391 (L1) | k7 (untraced) | **R0 = c** (`h_eq_r0`), out |
 | `h_eq_r1` | 13434 (L2) | k8 (untraced) | **R1 = c**, out |
 | `hc2_u` | 13478 (L3) | k9 (untraced) | |
-| `rdp3_n1s4` | 13521 (L4) | k10 `wr_r4` | in |
+| `wr_r4` | 13521 (L4) | k10 `wr_r4` | in |
 | `hc1_u` | 13565 (L5) | k11 (partly traced) | |
-| `wr_r2_u` | 13608 (L6) | k12 `wr_r2` | in: RB's load strobe |
-| `wr_r0_u` | 13651 (L7) | k13 `wr_r0` | in: RC's load strobe |
+| `wr_r2` | 13608 (L6) | k12 `wr_r2` | in: RB's load strobe |
+| `wr_r0` | 13651 (L7) | k13 `wr_r0` | in: RC's load strobe |
 | `hc3_u` | 13694 (L8) | k14 `hc3` | |
 | `rdp3_n7s9` | 13738 (L9) | k15 (untraced) | |
 | `hc5_u` | 13782 (L10) | (ends at 13782,13893 on poly going west) | |
-| `wr_r1_u` | 13825 (L11) | jogs to L10 at y 14000: k16 `wr_r1` | in: RA's load strobe |
+| `wr_r1` | 13825 (L11) | jogs to L10 at y 14000: k16 `wr_r1` | in: RA's load strobe |
 | `hc0_u` | 13871 (poly) | by scan: metal x 13868 from y 13630, k17 `hc0` | |
 | `hc4_u` | 14108 | (by scan to y 14032) | |
 | `vss` | 13912; 16125 (bending left) | | |

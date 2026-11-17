@@ -21,7 +21,7 @@ in backticks in the first column.
    number (bit 0 = least significant), `_s#` slice number where the bit order is not
    established, `_dly` a delayed copy, `_buf` a buffered copy.
 4. **`_u` marks an open join**: a piece of wire believed to be the same net as the name
-   without the suffix, whose connection has not been drawn (`hc1_u`, `wr_r0_u`). Every
+   without the suffix, whose connection has not been drawn (`hc1_u`, `ck_a_u`). Every
    `_u` name is a task; the build lists them.
 5. Rows and slices are places and keep their numbers in the notes ("row r18", "slice
    s3"); the tables below say which bit each one is.
@@ -854,3 +854,8 @@ datapath s1...s7, s0 became b0...b6, b7.
 | fld_y_a | rc0_n | via wl_i2_out |
 | wl_i2_in | rc0 | |
 | wl_i2_out | rc0_n | |
+| wr_r0_u | wr_r0 | |
+| wr_r1_u | wr_r1 | |
+| wr_r2_u | wr_r2 | |
+| wr_r4_u | wr_r4 | |
+| rdp3_n1s4 | wr_r4 | |

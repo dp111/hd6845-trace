@@ -29,7 +29,7 @@ C 16898,10687 s=30x40
 
 # --- RC load strobe: the row poly runs on west under the first VSS rail to a pad with a
 # contact at (13690,10815) on bundle track L8. Pad, contact and the metal south from it
-# are drawn and named in rdp3.txt (wr_r0_u, followed there to wr_r0); here only the
+# are drawn and named in rdp3.txt (wr_r0, followed there to wr_r0); here only the
 # piece of poly between that pad and slice s0's loop.
 P 13750,10801:13800,10829
 
@@ -310,7 +310,7 @@ M 16838,9440 y10575 w=20
 #
 # Register row RE (y 8807-9077): rdp3_lat upside down, seven copies; compared copy by
 # copy with rdp3's row RB (tools/rdp3_cmp.py): identical. Its strobe is traced to L1 =
-# rdp3_n1s4, which rdp3 follows to wr_r4: RE is R4.
+# wr_r4, which rdp3 follows to wr_r4: RE is R4.
 # =====================================================================================
 @inst rdp3_lat -1172,-4213 mx=14790 rot=180 o=14790,13150 tag=r4_b0
 @inst rdp3_lat -782,-4213 mx=14790 rot=180 o=14790,13150 tag=r4_b1
@@ -319,8 +319,7 @@ M 16838,9440 y10575 w=20
 @inst rdp3_lat 390,-4213 mx=14790 rot=180 o=14790,13150 tag=r4_b4
 @inst rdp3_lat 780,-4213 mx=14790 rot=180 o=14790,13150 tag=r4_b5
 @inst rdp3_lat 1170,-4213 mx=14790 rot=180 o=14790,13150 tag=r4_b6
-N P 14850,9058 wr_r4_u
-@alias wr_r4_u rdp3_n1s4
+N P 14850,9058 wr_r4
 # right end: VSS land and contact for s5's second pull-down, under the rail x 16125
 D 16097,8902:16145,8962
 D 16097,8958:16124,8987

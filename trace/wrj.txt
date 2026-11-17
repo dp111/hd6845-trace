@@ -54,14 +54,5 @@ N M 13651,14100 wr_r0
 M 13825,13470 y14001 x13782 y14700
 N M 13782,14100 wr_r1
 
-# The joins: rdp3's labels on these tracks at y 13400, bd1's at y 14700.
-@alias wr_r0 wr_r0_u
-@alias wr_r1 wr_r1_u
-@alias wr_r2 wr_r2_u
-# wr_r4: rdp2 already makes wr_r4_u the name of rdp3_n1s4 (its row RE strobe, north on L1
-# to the poly link at y 12440, south on L4), so one alias covers both.
-@alias wr_r4 wr_r4_u
-# The extraction wants every alias to point at the canonical name directly, and rdp2's
-# line reads "@alias wr_r4_u rdp3_n1s4". This line replaces it (this file loads after
-# rdp2.txt); when the coordinator renames, rdp2's alias line goes and so does this one.
-@alias wr_r4 rdp3_n1s4
+# The joins: rdp3's labels on these tracks at y 13400 and bd1's at y 14700 now carry the
+# same names (renamed after this stretch was drawn; rdp2's row RE strobe is wr_r4 too).
