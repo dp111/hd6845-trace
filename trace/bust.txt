@@ -111,3 +111,15 @@ C 15016,5630
 @alias cdp1_lw2 amr_oa_c2
 @alias cdp1_a2_bl amr_oa_c3
 
+
+# cdp1_c5_bl: its pad (13715,4850); poly south at x 13706 to a pad with a contact (13705,5628)
+# (ring in both metal shots, clean-shot pale centre, 2.7x: cache/scratch/bust/c5.png; the poly
+# ends there, well above the eq line's load in rdp1); metal west along y 5632 to x 13450,
+# where it turns down as ubus_b0 (tools/follow.py: one piece to y 8589).
+P 13698,4833:13732,4867
+C 13715,4850
+P 13710,4850 x13706 y5628 w=18
+P 13689,5611:13723,5645
+C 13705,5628
+M 13705,5632 x13455 y5645 w=12
+@alias cdp1_c5_bl ubus_b0

@@ -26,7 +26,7 @@ default gap bridges). East of the staircase: metal, `tools/follow.py` from each 
 | `cdp1_l4632` | 4697 | 12390 | `amr` c2's outer output (`amr_ob_c2`) |
 | `cdp1_l4676` (`rcs_bq3335`) | 4740 | 12782 | `amr` c3's outer output (drawn by `r9m`) |
 | `cdp1_l4719` | 4787 | pad (13540,4787) | **R5's match**: poly south to `rdp1`'s poly x 13533-13556 from y 5450 (alias of `sl_eq_r5`) |
-| `cdp1_c5_bl` | 4830 / 4850 | pad (13715,4850) | a poly goes south at x 13712 (seen, not drawn: in `rdp1`'s trace the poly it meets at (13705,5720) is on `sl_eq_r5`'s net, which would join two bus lines: check `rdp1` there first) |
+| `cdp1_c5_bl` | 4830 / 4850 | pad (13715,4850) | **`ubus_b0`**: poly south at x 13706 to a pad (13705,5628) (it ends there, above `rdp1`'s eq-line load), metal west along y 5632 and down as `ubus_b0` (2.7x in four shots, `c5.png`; follower) |
 | `cdp1_c4_bl` | 4873 / 4894 | 13848 | **`ubus_b1`** (poly x 13845 to the data line's top, 5635) |
 | `cdp1_c3_bl` | 4916 / 4937 | 14238 | **`ubus_b2`** |
 | `cdp1_c2_bl` | 4959 / 4981 | 14630 | **`ubus_b3`** |
@@ -41,7 +41,8 @@ default gap bridges). East of the staircase: metal, `tools/follow.py` from each 
 - **The data bus bit order of the central datapath**: `cdp1`'s slice bit lines are the
   right datapath's data lines, slice 4 = `ubus_b1`, slice 3 = `ubus_b2`, slice 2 =
   `ubus_b3`, slice 1 = `ubus_b4` (firm geometry, `tools/unsure.py` does not list them).
-  That is slice = 5 - bit, the order the glossary already gives for R9's comparator
+  and slice 5 = `ubus_b0`. That is slice = 5 - bit, the order the glossary already gives
+  for R9's comparator
   (`cdp1_b#_b`, "# = 5 minus the bit"). So R8's and R9's bits can be named.
 - **R5's match** (vertical total adjust: scan line = R5) leaves the right datapath north
   and runs west on `cdp1_l4719`, through the central datapath's channel unbroken
@@ -55,7 +56,14 @@ default gap bridges). East of the staircase: metal, `tools/follow.py` from each 
 ## Not done
 
 1. The east ends left as ports (table), and `cdp1_l4544`.
-2. `ubus_b0` and `ubus_b5`/`ubus_b6`: which bus lines feed them (believed `cdp1_c5_bl`
-   and `cdp1_a0_bl` by the order above).
+2. `ubus_b5`/`ubus_b6`: which bus lines feed them (`cdp1_a0_bl` is believed `ubus_b5`: its
+   metal x 15277 ends at y 6826, `ubus_b5` is at x 15406; the link is not found).
 3. Renaming the bus as data bus bits once the coordinator agrees on names (aliases are
    used for now).
+
+## A problem found in `rdp1`'s trace (fix proposed as its own commit)
+
+`rdp1` drew the VCC rail x 13600 from y 5560; the metal shots show no metal there above
+y 5650 (`rail.png`, `c5b.png`): it starts at about y 5655. The overhang shorted VCC to the
+metal from `cdp1_c5_bl`'s pad to `ubus_b0` (y 5632), and the extraction reported it. The
+one-line fix to `trace/rdp1.txt` is a separate commit so it can be reviewed on its own.
