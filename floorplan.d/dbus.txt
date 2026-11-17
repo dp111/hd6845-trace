@@ -9,5 +9,12 @@
 17150,10250:17590,10885  logic  D1 input latch and data line driver | transparent latch on d1_d (enable dlat_en), drives data line 1
 17150,11617:17590,12252  logic  D2 input latch and data line driver | transparent latch on d2_d (enable dlat_en), drives data line 2
 17150,12983:17590,13618  logic  D3 input latch and data line driver | transparent latch on d3_d (enable dlat_en), drives data line 3
-17150,15103:17590,16600  ?logic  data bus control logic | single gates on a 152 px pitch, not surveyed
+17255,15157:17590,15757  io  D6 input buffer | the same four-inverter cell upside down (G1 at the bottom); input traced from the D6 pad cell's contact
+17255,15786:17590,16386  io  D7 input buffer | the same cell upside down; input traced from the D7 pad cell's contact
+17250,16400:17590,16600  ?logic  pad driver line inverter (dbus_n9) | one inverter; its output is on the thin metal that runs up the column between the rails
+17240,15680:17310,16685  route  d6_in | metal from the pad of chain 6's input down past chain 7
+17280,16505:17855,16685  route  d6_in | poly from the D6 pad cell's contact (17838,16515) under the rails
+17240,16310:17270,16725  route  d7_in | metal from the pad of chain 7's input
+17245,16700:17580,17140  route  d7_in | poly under the VCC rail
+17545,17112:17850,17500  route  d7_in | metal and poly from the D7 pad cell's contact (17830,17490)
 17590,7380:17660,18840  route  pad driver lines | P_x, one metal line common to all eight data pad cells (enable), and the per-bit lines and pad input lines beside it

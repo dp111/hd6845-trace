@@ -5,14 +5,17 @@ Trace: `trace/dbus.txt`. Scratch tools: `tools/dbus_mosaic.py` (the same rectang
 several offsets side by side, for comparing repeats), `tools/dbus_autocorr.py`
 (vertical pitch of a strip).
 
-## Status (2026-11-17 14:00 (UTC+1), contributor session; clusters independently reviewed, the chain 4/5 outputs not yet)
+## Status (2026-11-17 14:40 (UTC+1), contributor session; clusters independently reviewed; the chain 4/5 outputs, buffers 6 and 7 and the inverter below them not yet)
 
 Traced, extracting, overlay-checked: the input buffer chain (four inverters) as cell
-`dbus_in`, placed six times (D0-D5); the input line of D0 from where it enters the
-column, and the whole input line of D1 from the pad cell's contact; **the gate group
-("cluster") under each of chains 0-3: a transparent data input latch and the driver of
-the internal data line**, cells `dbus_lat` and `dbus_drv`, 12 transistors per bit, placed
-four times (48 transistors). Data lines 0-3 (`cdp1_c5_bl` ... `cdp1_c2_bl`, drawn into the
+`dbus_in`, placed **eight times** (D0-D5 upright; **D6 and D7 upside down in the lower
+part of the column**, y 15157-15757 and 15786-16386); the input line of D0 from where it
+enters the column, and the whole input lines of D1, **D6 and D7** from the pad cells'
+contacts; **the gate group ("cluster") under each of chains 0-3: a transparent data input
+latch and the driver of the internal data line**, cells `dbus_lat` and `dbus_drv`, 12
+transistors per bit, placed four times (48 transistors); and **the inverter below chain 7**
+(`dbus_n9`, 2 transistors), whose output is on the thin metal between the rails.
+Data lines 0-3 (`cdp1_c5_bl` ... `cdp1_c2_bl`, drawn into the
 units by `dbl`) are thereby joined to the pins D0-D3 (D0 and D1 by traced input lines from their pads;
 D2 and D3 by the chains' position, see Ambiguities): line k = `dk_lat` = the level of
 pin Dk while `dlat_en` is high, held while it is low. One buried contact per bit (the tie
@@ -25,12 +28,13 @@ Chains 4 and 5 have no cluster below them: their outputs `d4_d` and `d5_d` leave
 wiring field to the west on a metal each (x 17250 from (17249,14304) up to a pad
 (17206,13999); x 17252 from (17250,15060) up and west to a pad (17161,14693)), drawn here,
 and go on as poly rows to the latch cells of D4 and D5 in the column x 16480-16800, where
-the latches and bus drivers of bits 4-7 are (`notes/blocks/dbh.md`). The latches of D6 and
-D7 there take their inputs from two gates in the lower part of this column (output boxes
-near (17318,15190) and (17315,15815)), which are not traced.
+the latches and bus drivers of bits 4-7 are (`notes/blocks/dbh.md`). Chains 6 and 7 have
+none either: `d6_d` and `d7_d` leave their top gates (G4) in poly to the west, as the
+input rows of the latch cells of D6 and D7 there.
 
-Surveyed, with coordinates below, but NOT traced: all other logic in the column, the
-channel wiring to the pads, where `dlat_en` is driven. The pad cell (AMB-003) was not
+Surveyed, with coordinates below, but NOT traced: the logic above D0, the capacitor taps
+of chains 1-7, the channel wiring of the pad driver lines. `dlat_en`'s driver is in
+`notes/blocks/dbh.md`. The pad cell (AMB-003) was not
 attempted; what the column tells us about its two lines is under "P_x and P_y" below.
 
 ## Inventory
@@ -57,13 +61,16 @@ down from the D0 pad cell. Gates sit on a 152 px vertical pitch between two rail
 | Cluster 0 (D0) | 17150-17590 x 8885-9520 | traced: `dbus_lat` upside down (mirror line y 9826.5) and `dbus_drv` at (0,-1368) |
 | Clusters 1-3 (D1-D3) | 17150-17590 x 10250-10890, and the same at (1,1365), (1,2733) | traced: `dbus_lat` + `dbus_drv`, master = D1's. Clusters 1-3 are copies of each other (findcell 0.88, 0.85; cellcheck median ncc 0.96-0.97); cluster 0 is **not** a copy of them (findcell finds nothing above 0.4): its inverter-and-latch part is the same cell turned upside down (cellcheck ncc 0.94 on the clean shot, 0.91 on metal), its driver the same cell the right way up, and the wiring between the two differs |
 | Cross-unders between units 0 and 1 | poly "line 1" y 9545-9566, "line 2" y 9590-9610, both under both rails | line 1 drawn (D1 input); line 2 is D1's P_y, not drawn |
-| Logic below chain 5 | 17150-17590 x 15100-16600 | about nine single gates on the 152 pitch, not copies of `dbus_in` and not traced. The top one (y 15150-15260) drives the D6 latch's input row from its output box (17300-17335 x 15175-15205), and its own gate band is fed by a poly down x 17255-17275 from a box near (17318,15648); the gate at about y 15790 drives the D7 latch's input row (`notes/blocks/dbh.md`). No cluster follows chains 4 and 5 (chain 5 starts 758 px below chain 4): their latches are in `dbh`'s column |
+| Input chain, D6 | 17255-17590 x 15157-15757 | cell `dbus_in` mirrored about a horizontal line (`my=8580`, offset (3,6877)): G4 at the top, G1 at the bottom. findcell on the clean shot 0.87; overlay `cache/scratch/dbl67/c6.png` at 2x in two shots, every item within about 5 px |
+| Input chain, D7 | 17255-17590 x 15786-16386 | the same, offset (3,7506); findcell 0.81; overlay `c7.png` |
+| Inverter `dbus_n9` | 17250-17590 x 16400-16600 | traced, 2 transistors; its load's tie `?` |
+| Below y 16600 | - | no more gates: the VSS rail ends at y 16550, the VCC rail at y 17020; the two input lines of D6 and D7 cross here (y 16669 and 16711) |
 | Logic above D0 | 17200-17700 x 5250-5900 | several gates, not looked at |
 
-findcell (metal and clean shot, threshold 0.4) finds no seventh or eighth copy of
-the chain. The input buffers of D6 and D7 are in the lower part of the column
-(y 15100-16600), laid out differently: the inputs of the D6 and D7 latches come from
-two gate outputs there (table above). Not traced.
+The lower part of the column (y 15100-16600) is therefore nine gates: the four
+inverters of chain 6, the four of chain 7, and `dbus_n9`. (findcell in the upright
+orientation finds no seventh or eighth copy; with the orientations `m0,180,m180` it finds
+both.)
 
 ## Logic
 
@@ -79,7 +86,8 @@ in the bottom row (`rw_a`..`rw_d`). For chain n:
 
 - `d0_in` is the line from the D0 pad cell (Ports). Traced into G1.
 - `d1_in` is traced from the D1 pad cell's contact into chain 1's G1, so chain 1 is
-  D1's. Chains 2-5 are tagged by position and *assumed* to follow the pad order.
+  D1's; `d6_in` and `d7_in` likewise (below). Chains 2-5 are tagged by position and
+  *assumed* to follow the pad order.
 - `d0_b` and `d0_c` each run left in poly to a metal contact next to a plain
   diffusion rectangle (the "added capacitance" rectangles of the bottom row). The
   strap from `d0_c`'s contact (17078,8795) to its rectangle (contact 16990,8787) is
@@ -94,6 +102,40 @@ in the bottom row (`rw_a`..`rw_d`). For chain n:
 In chains 1-5 the b and c lines also run left (for chain 1: `d1_b` up at x 17225-17245
 to y 9750 and left along y 9740-9760; `d1_c` left to x 17165 and down), presumably
 to their capacitors; not followed.
+
+### Input lines of D6 and D7 (traced; images in `cache/scratch/dbl67/`)
+
+Both chains stand upside down, so their inputs are at the bottom and the lines come up
+from below the column.
+
+| Line | Route | Seen |
+|---|---|---|
+| `d6_in` | contact (17838,16515) at the foot of the metal that comes down from the contact column of the D6 pad cell's protection structure (the same arrangement as D1's contact at (17835,8405), `p16.png`); poly west along y 16505-16525 under a wide metal, south x 17655-17675, west along y 16658-16680 under the `P_x` metal and the VCC rail (no contact) to a pad (17290,16668); metal north x 17290-17306 beside chain 7, crossing chain 7's poly lines (uniform width, no pad), west at y 15890, north x 17246-17262 to the pad (17253,15693) of G1's gate band | `e6.png` 2.1x, `x67.png` 2x three shots, `e67.png` 2.4x, `m7b.png` 2.9x and `m7.png` 5x three shots, `i67.png` 3.8x; `tools/follow.py` from (17299,16390) north: one piece to (17254,15692); overlays `o2.png`, `o4.png` |
+| `d7_in` | contact (17830,17490) at the head of the metal that goes down into the contact column of the D7 pad cell's protection structure (`d7c.png`); poly west along y 17480-17500 to a contact (17555,17487); metal north x 17548-17565 to a pad (17560,17122); poly north x 17528-17550 under a thin horizontal metal (y 17068-17090, no contact) and under the VCC rail to y 16711; west along y 16700-16722 to a pad (17255,16715); metal north x 17246-17262 to the pad (17253,16322) of G1's gate band | `d7b.png` 1.9x, `d7a.png` 2.7x three shots, `x67.png`, `e67.png`, `i67.png`; follow.py from (17255,16370) south: one piece to (17254,16716); overlay `o4.png` |
+
+So D6's protection column is entered from its lower end and D7's from its upper end. As
+for D1, "the pad cell's contact" is where tracing stops: the pad cell itself is AMB-003.
+
+### Inverter `dbus_n9` (traced; `g9.png`, `g9w.png`, `g9e.png`, overlay `o2.png`)
+
+    dbus_n9 = NOT dbus_n9_in
+
+- Pull-down under the VSS rail: diffusion x 17352-17400, VSS contact (17375,16417), gate
+  = a poly row y 16441-16463 that arrives from the west (at 0.8x it starts at a pad near
+  (16990,16450); not followed) and ends rounded at x 17419.
+- Node: under the rail y 16466-16497, east along y 16474-16497 to a vertical strip
+  x 17445-17468 (y 16425-16590) whose south end is a pad with **the end contact of the
+  thin metal** (17447,16565). Depletion load: gate block 17475-17525 x 16452-16518 over
+  the strip y 16474-16499 to the VCC land (contact (17555,16475)); its tie is a
+  heavy-outlined box 17470-17500 x 16420-16447 at the head of the vertical strip (`?`).
+- The node also has a stub west (y 16480-16500) to a heavy-outlined box
+  17300-17322 x 16478-16500 beside `d6_in`'s metal: see Ambiguities.
+- Believed: this inverter drives a pad driver line. The thin metal looks continuous in a
+  1x strip of the whole column (`thin.png`) up to its corner at y 8097, where `dbus` found
+  it to be D0's `P_y`; it was not followed at a zoom that would show a break or a tap, so
+  "`dbus_n9` = D0's `P_y`" is not claimed. The five inverters in the lower part of the
+  `dbh` column have their pads on the metals of the wiring field that carry the other
+  pad driver lines; together these may be the output stage of the read path.
 
 ### Data input latch and bus driver (`dbus_lat`, `dbus_drv`; traced)
 
@@ -118,8 +160,8 @@ Twelve transistors per bit. For bit n (extracted equations):
   cluster (the two series gates). There it turns west to a contact (17166,13611), goes
   on in poly to a contact (16986,13608) and in metal west and down x 16860; this file
   draws it to y 13650 and `trace/dbh.txt` from there: down past the latch cells of D4-D7
-  (two contacts in each) to its end at (16772,15792), beside untraced logic. Believed: the
-  write strobe from the bus control (E, CS, R/W); not traced.
+  (two contacts in each) and on to its driver, a NOR gate with `cs_d` as one input
+  (`notes/blocks/dbh.md`): `dlat_en = NOR(cs_d, dbh_dlat_in_b)`.
 
 Layout, in the master's coordinates (cluster 1; clean shot unless said):
 
@@ -196,13 +238,16 @@ Two readings that the first look got wrong and the profiles corrected:
 | `d0_in` | metal x 17548-17566 | comes down from the D0 pad cell: poly from a contact near 17818,6578 left along y 6578, down to a contact near 17546,6755, then metal down; turns left at y 8188 (cross-under 17300-17500) | in | D0 pad after its protection structure. Drawn from y 8050 down |
 | `d1_in` | poly | from the D1 pad cell's contact at 17822,8400 (drawn up to x 17835) | in | D1 pad after its protection structure |
 | `d2_in`..`d5_in` | poly | G1 gate band of each chain, at 17291,8340 + offset | in | not followed to the pads |
+| `d6_in`, `d7_in` | poly, metal | contacts (17838,16515) and (17830,17490); metal stubs drawn towards the pad cells' contact columns | in | D6 and D7 pads after their protection structures |
+| `dbus_n9_in` | poly | row y 16452, drawn from x 17250 | in | input of the inverter below chain 7; from the west |
+| `dbus_n9` | metal | thin metal x 17440-17456, drawn y 16400-16577 | out | up the column between the rails |
 | `dN_d` | poly, then metal | G4 output, 17290-17345 x 8825-8847 + offset | out of the chain | pad level, buffered and delayed; into the cluster |
 | P_y of D0 | metal x 17590-17610 from the pad cell (contact near 17580,7495), contact 17597,8097, poly cross-under y 8090-8105, contact 17510,8097, metal left to x 17448 and down as the thin metal | - | to the pad | not drawn |
 | P_y of D1 | poly y 9225-9240 from the pad cell to x 17650, down x 17640-17655 (under the P_x metal) to line 2 (y 9590-9610), left to a contact at 17120,9620, metal x 17110-17130 downward | - | to the pad | not drawn |
 | P_x | metal x 17633-17650, y 7380-18835 | contacts listed above | to the pads | common enable-type line, not drawn |
-| `dlat_en` (the first pass's "M_b") | metal x 17243-17262, then poly and metal | top end (17252,8990); bottom: west at y 13613, contact (17166,13611), poly west, contact (16986,13608), metal west and down x 16860; drawn here to (16862,13650), from there by `dbh` | in | enable of the eight input latches: `dbh` follows it down past the latch cells of D4-D7 (two contacts in each) to its end (16772,15792). Driver not traced |
+| `dlat_en` (the first pass's "M_b") | metal x 17243-17262, then poly and metal | top end (17252,8990); bottom: west at y 13613, contact (17166,13611), poly west, contact (16986,13608), metal west and down x 16860; drawn here to (16862,13650), from there by `dbh` | in | enable of the eight input latches: `dbh` follows it down past the latch cells of D4-D7 (two contacts in each) and on to its driver (`dlat_en = NOR(cs_d, dbh_dlat_in_b)`, `notes/blocks/dbh.md`) |
 | data lines 0-3 (`cdp1_c5_bl` ... `cdp1_c2_bl`) | poly | `dbl`'s contacts (17207,9467), (17077,10832), (17165,12200), (17208,13563) | out | driven by the units: line k = NOT `dk_lat_n` |
-| thin metal | metal x 17438-17458 | through every cluster between the rails | - | D0's `P_y` in unit 0; it is also there in units 1-3 (`segs.py` finds it at most heights from y 9300 to 11100). No contact in any cluster. Not drawn, not followed |
+| thin metal | metal x 17438-17458 | through every cluster between the rails | - | D0's `P_y` in unit 0; it is also there in units 1-3 (`segs.py` finds it at most heights from y 9300 to 11100) and through chains 4-7. No contact in any cluster. Its south end is the contact (17447,16565) on `dbus_n9`. Drawn only there |
 | lines from the core | metal | the metals that arrive from the left at y 9460-9480, 9520-9545 and 9565-9585 and turn down at x 17195-17215 and 17155-17175 | - | these are `dbl`'s data lines 0, 3 and 2 |
 
 **Internal data bus:** lines 0-3 leave the units from the bus drivers, through the
@@ -252,15 +297,38 @@ the notes; the `?` tie of `dn_lat`'s load stays open.
   overpower or disable these drivers; nothing in the units does. Not a conflict in the
   trace, but a question for whoever traces the read path.
 
+- **The box 17300-17322 x 16478-16500 at the west end of `dbus_n9`'s stub**, under the
+  east edge of `d6_in`'s metal (x 17290-17306). Two readings: (a) a metal contact, which
+  would put the inverter's output on D6's input line; (b) a closed box that the metal
+  passes, like the closed poly pads on the latch nodes. Seen: both metal shots have no
+  bright metal for 36 px there (y 16476-16512), with dark lines across the metal at the
+  box's top and bottom edges and a dim centre (90-120 against 200 on the line); the clean
+  shot shows the box's inside cream (185,169,126) at x 17306-17322, east of the metal's
+  axis, and the metal's own pink margin running on unbroken along x 17286-17292. Calibration:
+  the known mid-line contact (16815,14437) is dark olive in the clean shot (121,102,64)
+  with a bright centre in the metal; the poly-on-diffusion boxes that `dlat_en`'s metal
+  crosses at x 16770 are cream (178,167,125) with a dim centre (150), and those cannot be
+  contacts. The box here matches the second kind. **Working assumption: (b), no contact**,
+  and nothing is drawn at the box (the metal is drawn as one piece over it; the stub is
+  drawn up to it). Reading (a) also makes no electrical sense (an inverter output and the
+  thin metal on a pad's input). Two passes (6x in four shots, 8x sharpened, pixel grids).
+  Settled by a sharper shot, or by finding in the D6 pad cell that nothing else drives
+  the input line.
+- The tie of `dbus_n9`'s load gate (`?P`, `?D`, `?B`, 17462-17500 x 16418-16455): a box
+  with a heavy outline in all four shots, inside not resolved.
+- Chains 6 and 7 are placed as copies. Checked on the overlays: every item of both.
+  Not looked at above 2x: the cells' insides (they are the master's by correlation and
+  overlay, not by an independent reading).
+
 ## Not done
 
-- Where `dlat_en` is driven: the logic at its south end (16772,15792) (`dbh` draws the
-  metal to there).
-- The thin metal x 17438-17458 through units 1-3: where it comes from and goes.
-- Left-hand wiring of chains 1-5: capacitor taps (what was seen of chains 4 and 5's
-  is listed in `notes/blocks/dbh.md`).
-- Logic at y 15100-16600: the gates that feed the D6 and D7 latches, i.e. the D6 and D7
-  input buffers, and their lines from the pads. Logic at y 5250-5900.
-- Channel wiring x 17590-17830: P_x line, P_y lines, input lines of D2-D7.
+- The thin metal x 17438-17458: followed at 1x only between its two ends ((17510,8097)
+  and (17447,16565)); whether it is one piece.
+- `dbus_n9_in`: the row y 16452 west of x 17250 (a pad near (16990,16450)).
+- Left-hand wiring of chains 1-7: capacitor taps (what was seen of chains 4 and 5's
+  is listed in `notes/blocks/dbh.md`; chains 6 and 7: the `b` and `c` lines leave west
+  from x 17258 like the others, not looked at).
+- Logic at y 5250-5900.
+- Channel wiring x 17590-17830: P_x line, P_y lines, input lines of D2-D5.
 - The driver of P_x.
 - Pad cell (AMB-003): not attempted.

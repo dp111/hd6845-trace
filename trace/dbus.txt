@@ -5,9 +5,9 @@
 @block dbus
 
 # ---- rails (extent checked by overlay over the part traced so far)
-M 17355,8030:17400,15120           # VSS rail (continues both ways)
+M 17355,8030:17400,16550           # VSS rail (continues up; bottom end y 16550)
 N M 17378,8200 vss
-M 17527,8287:17585,15120           # VCC rail (top end at 8287; continues down)
+M 17527,8287:17585,17020           # VCC rail (top end at 8287, bottom end y 17020 on a wide horizontal metal)
 N M 17556,8300 vcc
 
 # ---- input buffer chain: four inverters in series, the same arrangement as the R/W,
@@ -105,6 +105,10 @@ N P 17300,8836 d{}_d
 @inst dbus_in 2,4098 tag=3
 @inst dbus_in 2,5465 tag=4
 @inst dbus_in 2,6223 tag=5
+# D6 and D7: the same chain upside down (mirrored about y 8580), G1 at the bottom and G4
+# at the top (findcell on the clean shot 0.87 and 0.81; every item checked by overlay).
+@inst dbus_in 3,6877 my=8580 tag=6
+@inst dbus_in 3,7506 my=8580 tag=7
 
 # ---- chain 0 (D0): wiring left of the cell
 C 17253,8338 s=26x26               # pad input: metal to G1's gate
@@ -333,3 +337,70 @@ C 17250,15060 s=24x24
 M 17252,15072 y14700 x17150 w=18   # up and west
 C 17161,14693 s=24x24
 P 17145,14678:17178,14708
+
+# ---- chain 6 (D6): pad input line. From the contact of the D6 pad cell's protection
+# column (17838,16515; the same structure as D1's contact at 17835,8405: p16.png) in poly
+# west under a wide metal, south at x 17655-17675, west along y 16658-16680 under the
+# P_x metal and the VCC rail (no contact) to a pad (17290,16668); metal north x 17290-17306
+# past chain 7 (it crosses chain 7's poly lines; uniform width, no pad), west at y 15890
+# and north x 17254 to the pad of G1's gate band (17253,15693).
+# cache/scratch/dbl67: i67.png 3.8x, m7.png 5x, m7b.png 2.9x, e67.png, x67.png, e6.png.
+# At y 16476-16512 the metal passes the west edge of a box that ends a diffusion stub of
+# the inverter dbus_n9 below (see there): read as NO contact (notes, Ambiguities).
+P 17235,15678:17300,15709          # pad and west end of G1's gate band
+C 17253,15693 s=24x24
+M 17254,15683 y15890 x17298 y16676 w=16
+C 17290,16668 s=24x24
+P 17272,16652:17310,16685
+P 17290,16669 x17665 w=22
+P 17665,16680 y16505 w=20
+P 17655,16515 x17855 w=20
+C 17838,16515 s=24x24
+M 17840,16527 y16410 w=18          # up to the pad cell's contact column (not drawn further)
+
+# ---- chain 7 (D7): pad input line. From the contact (17830,17490) at the top of the D7
+# pad cell's protection column in poly west along y 17480-17500 to a contact (17555,17487),
+# metal north x 17548-17565 to a pad (17558,17122), poly north x 17528-17550 under a thin
+# horizontal metal and under the VCC rail (no contact) to y 16711, west to a pad
+# (17255,16715), metal north x 17254 to the pad of G1's gate band (17253,16322).
+# s7.png 0.86x, d7a.png 2.7x, d7b.png 1.9x, d7c.png 1.5x, i67.png 3.8x, e67.png 2.4x.
+P 17235,16305:17300,16338          # pad and west end of G1's gate band
+C 17253,16322 s=24x24
+M 17254,16312 y16725 w=16
+C 17255,16715 s=24x24
+P 17238,16700:17272,16730
+P 17255,16711 x17539 w=22
+P 17539,16700 y17125 w=20
+P 17540,17105:17580,17140
+C 17560,17122 s=24x24
+M 17557,17112 y17497 w=16
+C 17555,17487 s=24x24
+P 17540,17490 x17847 w=20
+C 17830,17490 s=24x24
+M 17832,17480 y17585 w=16          # down to the pad cell's contact column (not drawn further)
+
+# ---- inverter below chain 7 ("ninth gate", y 16400-16600): dbus_n9 = NOT dbus_n9_in.
+# Pull-down under the VSS rail (gate = the poly row y 16441-16463 arriving from the west),
+# depletion load to the VCC rail; the output node is a diffusion: under the rail, east
+# along y 16474-16497, a vertical strip x 17445-17468 whose south end carries the contact
+# of the thin metal x 17438-17458 (that metal runs up the column between the rails), and a
+# stub west to a heavy-outlined box 17300-17322 x 16478-16500 beside d6_in's metal.
+# g9.png 3.6x two shots, g9w.png / g9e.png 4.2x four shots, box9.png, box9s.png.
+P 17250,16452 x17419 w=22          # gate row (from a pad near (16990,16450): 0.8x only, not drawn)
+N P 17260,16452 dbus_n9_in
+D 17352,16400:17400,16497          # VSS land, channel, node
+C 17375,16417 s=26x26              # VSS
+D 17305,16480:17352,16500          # stub west to the box (no contact drawn: Ambiguities)
+D 17400,16474:17470,16497          # node east
+D 17445,16425:17468,16590          # vertical strip under the thin metal
+D 17428,16540:17472,16590
+C 17447,16565 s=24x24
+M 17448,16577 y16400 w=16          # thin metal, up (not drawn further)
+N M 17448,16480 dbus_n9
+P 17475,16452:17525,16518          # load gate
+D 17460,16474:17530,16499          # load strip
+D 17525,16440:17585,16500          # VCC land
+C 17555,16475 s=30x30
+?P 17475,16418:17500,16455         # load gate stem up to the tie box (box seen, inside not resolved)
+?D 17462,16425:17500,16447
+?B 17470,16420:17500,16447

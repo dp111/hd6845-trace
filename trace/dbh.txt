@@ -209,11 +209,56 @@ M 16860,13645 y13802 x16816 y15803 x16772 w=14
 # D6: row y 15173, a step down at x 17226-17244, east to the buried-contact box of the gate
 # at y 15150-15260 (box 17300-17335 x 15175-15205) (2.1x in two shots, e6.png; w6.png)
 P 16840,15173 17226,15173 17244,15192 17302,15192 w=14
-N P 17290,15192 dbh_d6_in
+N P 17290,15192 d6_d
 # D7: row y 15650 to x 17188 (2.5x in three shots, r7.png), south under a metal of the
 # wiring field to y 15818 and east to the box of the gate at y 15790 (1.4x only, r7b.png:
 # the stretch y 15700-15800 under the metal is not seen as a colour of its own)
 P 16840,15650 x17195 w=14
 P 17188,15645 y15818 w=14
 P 17181,15818 x17300 w=14
-N P 17290,15818 dbh_d7_in
+N P 17290,15818 d7_d
+
+# ---- dlat_en south of (16772,15803). The metal goes on south at x 16762-16780 over the
+# output boxes of the five inverters of this column's lower part (y 15810-16360; the boxes
+# are poly-on-diffusion boxes, cream in the clean shot, and the metal looks the same over
+# all five: read as no contact, since five outputs cannot share a metal; the first
+# crossing is drawn ? because the dbh review read (16772,15803) as an end), turns west at
+# y 16498 to a contact (16577,16495), poly west under the VCC rail to a contact
+# (16443,16495), metal west and south x 16427 to a contact (16424,16860), poly row west
+# along y 16853-16877 under cs_d, rs_d, rw_d, bd2_rs_n, the metal x 16205 and e_b (no pad
+# and salmon, not olive, under each: no tap) to the output box of a NOR gate under the
+# VSS rail x 16003-16053.
+# cache/scratch/dbl67: de1.png 4x four shots, L1m.png / L1a.png 1.65x, de2.png 2.6x,
+# de3.png, de4.png, n3.png 3.3x; tools/follow.py in stages.
+?M 16772,15796 y15880 w=14
+M 16772,15872 y16498 x16565 w=14
+C 16577,16495 s=24x24
+P 16560,16480:16600,16512
+P 16435,16500 x16590 w=26
+C 16443,16495 s=24x24
+M 16455,16493 x16427 y16872 w=14
+C 16424,16860 s=24x24
+P 16405,16845:16442,16878
+P 16110,16865 x16430 w=22
+# the driver: dlat_en = NOR( cs_d, dbh_dlat_in_b ). Diffusion column x 16025-16095 under
+# and east of the VSS rail, VSS contacts at both ends, two gate bands, the node between
+# them; depletion load to the west (VCC land under the wide VCC metal). n1.png, n2.png
+# 3.2x four shots, de6.png, n7.png.
+D 16025,16770:16095,16960
+C 16042,16790 s=24x24              # VSS
+C 16042,16940 s=24x24              # VSS
+P 16012,16820 x16395 w=24          # band 1, from cs_d's contact
+P 16362,16803:16398,16835
+C 16380,16818 s=24x24              # on the cs_d metal
+P 16005,16906 x16240 w=22          # band 2
+P 16231,16896 y17135 w=14          # ... south in the gap between the metals x 16205 and x 16250 (n5.png, three shots)
+N P 16231,17000 dbh_dlat_in_b
+D 15890,16847:16030,16885          # load strip
+P 15925,16830:15968,16925          # load gate
+D 15845,16838:15895,16903          # VCC land
+C 15862,16868 s=24x30
+?D 15970,16880:15990,16922         # load gate tie (loop seen at the block's SE corner, inside not resolved)
+?P 15965,16890:15990,16920
+?B 15968,16888:15992,16924
+?D 16090,16850:16125,16885         # output box: the row ends on it (heavy outline, green centre in the clean shot)
+?B 16097,16850:16127,16885
