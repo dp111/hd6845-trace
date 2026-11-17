@@ -65,9 +65,11 @@ names are joined here by `@alias ra4_drv_in ra4_drv_in_u`, **through uncertain g
 
 ## Not done
 
-1. The last stretch from the pad (15252,4183) into `ral` s2. With it, RA2 is joined end
-   to end, and `r9c`'s `ra2_drv_in_u` can be renamed (its unit line starts at s2's
-   lower output pad, (15208,4805)).
+1. RA2: the poly from the pad (15252,4183) is drawn south to y 4295, the top of `ral`
+   cell s2's output column (only s2 has it: `oup.png`). The column itself, y 4300-4480,
+   is `ral`'s item 4. When it is drawn, RA2 is joined end to end and `r9c`'s
+   `ra2_drv_in_u` (its unit line starts at s2's lower output pad, (15208,4805)) can be
+   renamed.
 2. `r9c`'s `?P` from its bit-4 metal (17135,5150) south to y 5805: when it is seen end to
    end, rename `ra4_drv_in_u` to `ra4_drv_in` and drop the alias.
 3. With the `ral` branch merged: `ra3_drv_in_u` (r9c) joins `ra3_drv_in` through
