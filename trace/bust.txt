@@ -1,0 +1,113 @@
+# bust: the bus between the central datapath and the right datapath (queue: busT), y 4550-5200,
+# x 10845-16930. notes/blocks/bust.md. Wiring only.
+# West of x 10845 the lines are cdp1's big channel (trace/cdp1.txt), named there. Each runs
+# east as poly under the bus field and the wide supply metal x 11280-11600, drops about 65 px
+# by a 45-degree diagonal (lower lines further west: the lines cannot cross), and comes up on
+# a pad of the staircase at x 11655 / 11697 (alternating). Read from the clean shot at 1.35x
+# and 2.5x (cache/scratch/bust/xu.png, dg1.png, dg2.png) and the pads in both metal shots at
+# 3x (pe.png). cdp1_l4676 (= rcs_bq3335) is drawn by r9m and follows the same pattern.
+# East of the staircase each is a metal line (tools/follow.py, 2,000-5,250 px); the lower
+# eight step down one track (21 px) at x 13200-13510 (jog.png) and end on pads whose polys
+# go south into the upper right datapath.
+@block bust
+@w M=12 P=12
+@s 24x24
+
+?P 10845,4588 x11590 11657,4655 x11660
+P 11638,4638:11672,4672
+C 11655,4655
+P 10845,4632 x11525 11590,4697 x11702
+P 11680,4680:11714,4714
+C 11697,4697
+P 10845,4719 x11440 11506,4785 x11702
+P 11680,4768:11714,4802
+C 11697,4785
+P 10845,4764 x11410 11475,4829 x11660
+P 11638,4812:11672,4846
+C 11655,4829
+P 10845,4806 x11388 11454,4872 x11702
+P 11680,4855:11714,4889
+C 11697,4872
+P 10845,4850 x11375 11442,4917 x11660
+P 11638,4900:11672,4934
+C 11655,4917
+P 10845,4893 x11352 11419,4960 x11702
+P 11680,4943:11714,4977
+C 11697,4960
+P 10845,4937 x11328 11395,5004 x11660
+P 11638,4987:11672,5021
+C 11655,5004
+P 10845,4981 x11304 11370,5047 x11702
+P 11680,5030:11714,5064
+C 11697,5047
+P 10845,5024 x11282 11347,5089 x11660
+P 11638,5072:11672,5106
+C 11655,5089
+P 10845,5068 x11268 11334,5134 x11702
+P 11680,5117:11714,5151
+C 11697,5134
+P 10845,5110 x11230 11297,5177 x11660
+P 11638,5160:11672,5194
+C 11655,5177
+# line y 4588: its drop is seen only to (11616,4608); the rest to the pad (11655,4655) assumed
+# (the pad and the metal from it are plain): drawn ?P.
+
+# --- metal east from the staircase
+M 11655,4655 x12000
+M 11697,4697 x12390
+M 11697,4787 x13540
+M 11655,4830 x13525 y4850 x13715
+M 11697,4873 x13502 y4894 x13848
+M 11655,4916 x13465 y4937 x14238
+M 11697,4959 x13419 y4981 x14630
+M 11655,5002 x13374 y5024 x15020
+M 11697,5045 x13330 y5068 x15280
+M 11655,5088 x13289 y5110 x15584
+M 11697,5131 x13245 y5153 x16146
+M 11655,5175 x13200 y5196 x16926
+
+# --- east ends: pads, and the polys south that are drawn here
+# cdp1_l4719 ends on a pad (13540,4787); its poly goes south under the bus lines and the wide
+# supply metal (the poly column at x 13538 in the stripped shot at y 5300) to rdp1's poly
+# x 13533-13556 from y 5450 (R5's match leaving its comparator north): so the R5 match is
+# cdp1_l4719.
+P 13523,4770:13557,4804
+C 13540,4787
+P 13544,4787 y5455 w=20
+# c4, c3, c2, c1: pads at the ends; polys south to the tops of the data lines ubus_b1..b4
+# (rdp1 draws them from y 5640; their top pads at y 5630-5640 seen at 1x, tp1.png, tp2.png,
+# and the poly x 13843 end to end at 1.2x in three shots, d1.png)
+P 13831,4878:13865,4912
+C 13848,4895
+P 13845,4895 y5635 w=18
+P 13828,5618:13862,5652
+C 13845,5635
+P 14221,4921:14255,4955
+C 14238,4938
+P 14236,4938 y5635 w=18
+P 14219,5618:14253,5652
+C 14236,5635
+P 14613,4964:14647,4998
+C 14630,4981
+P 14626,4981 y5635 w=18
+P 14609,5618:14643,5652
+C 14626,5635
+P 15003,5007:15037,5041
+C 15020,5024
+P 15016,5024 y5630 w=18
+P 14999,5613:15033,5647
+C 15016,5630
+@alias cdp1_c4_bl ubus_b1
+@alias cdp1_c3_bl ubus_b2
+@alias cdp1_c2_bl ubus_b3
+@alias cdp1_c1_bl ubus_b4
+@alias sl_eq_r5 cdp1_l4719
+# the other east ends are left as ports: c5 (13715,4850), a0 (15280,5068), lw1 (15584,5110),
+# lw2 (16146,5153), a2 (16926,5196); notes/blocks/bust.md
+# amr's outputs land on these lines (trace/amr.txt): aliases
+@alias cdp1_l4588 amr_ob_c1
+@alias cdp1_l4632 amr_ob_c2
+@alias cdp1_a0_bl amr_oa_c1
+@alias cdp1_lw2 amr_oa_c2
+@alias cdp1_a2_bl amr_oa_c3
+

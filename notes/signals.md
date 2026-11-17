@@ -212,7 +212,7 @@ Eleven pass transistors between the scan line counter and five output nodes.
 | `uc_eq_r#` | high when those lines equal R4 (vertical total), R6 (vertical displayed) or R7 (vertical sync position). `uc_eq_r6` goes down the wiring channel to the strobe channel (its track k4); `uc_eq_r7` leaves west along y 6820 |
 | `hc#_u` | the horizontal counter line at the comparators, where its join to `hc#` is not drawn |
 | `rbus_b#` | data line of bit # through the lower right datapath (believed D#; its connection to the data pads is not traced) |
-| `ubus_b#` | data line of bit # through the upper right array (R4, R6, R7: bits 0-6; R5: bits 0-4). Believed D#; they go north in poly under the supply metal at y 5450-5545, not followed to the pads |
+| `ubus_b#` | data line of bit # through the upper right array (R4, R6, R7: bits 0-6; R5: bits 0-4). Believed D#. `ubus_b1`-`ubus_b4` are joined (`trace/bust.txt`) to the central datapath's slice bit lines `cdp1_c4_bl` ... `cdp1_c1_bl` (aliases): slice = 5 - bit. b0, b5, b6 not yet joined |
 | `ar#`, `ar#_n` | address register bit # and its inverse (rows of the decode array) |
 | `ar#_a`, `ar#_n2`, `ar#_q`, `ar#_trk` | nodes of address register bit #: storage node, its inverse, output, and the track that takes it to the decode |
 | `ar_load`, `ar_load_n` | load strobe of the address register and its inverse |
@@ -252,7 +252,7 @@ None of these rows has a register number yet, so all names are by place. Columns
 | `ra#_drv_in_u` | (# = 2, 3, 4) the input of that unit, believed to be `ra#_drv_in`; the line is not drawn back to the pad cell |
 | `cdp1_b#_n2`, `cdp1_b#_ne` | NOR(a, b) and a XOR b |
 | `cdp1_b_eq` | NOR of the five `_ne`: high when R9 equals the 5-bit value on the `_b` lines (in slice 5 the register bit is replaced by `cdp1_b5_a`, made by `tc1`) |
-| `cdp1_l#`, `cdp1_lw#` | horizontal lines of the data bus channel, named by their y; and two write-line links |
+| `cdp1_l#`, `cdp1_lw#` | horizontal lines of the data bus channel, named by their y; and two write-line links. East of the block they cross under the supply metal and go on east as the bus to the right datapath (`notes/blocks/bust.md`): `cdp1_l4588`, `cdp1_l4632` are `amr`'s c1, c2 outer outputs; `cdp1_l4719` is R5's match (`sl_eq_r5`, alias); `cdp1_lw2` is `amr` c2's inner output |
 | `cdp2_a_s#_*` | cdp2 row A (5-bit latch), slice #: `_a` storage node, `_n2` inverse, `_q` output, `_bus` bit line |
 | `cdp2_a_c_s#_*` | cdp2 row C (7-bit latch), the same nodes |
 | `wr_r11`, `wr_r10` | the write strobes of R11 and R10, which are the load strobes of rows A and C: **row A is R11, row C is R10** (`notes/blocks/wrs.md`) |
