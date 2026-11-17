@@ -1,0 +1,11 @@
+# amrw: wiring of R3's upper comparator (traced 2026-11-17)
+11040,6335:11620,6360  route  amr_eq_r3, first stretch | from the buried contact under amr c0's outer metal: poly west to the pad (11350,6347), metal west and south to channel 2
+7430,6396:11040,6420   route  amr_eq_r3 in channel 2 | the second line of the central datapath's channel 2 (poly, no pad on it): the vertical sync width comparison going west
+4615,6396:7430,6420    route  amr_eq_r3, west of the datapath | metal over the crossing fields, poly, metal over the poly bus, poly, to the pad (4631,6411)
+3990,5970:4640,6400    route  amr_eq_r3, north | metal x 4628 north and west along y 5982
+2230,5620:3750,5990    route  amr_eq_r3, second crossing field | poly y 5978, metal x 3738, poly west along y 5630 to the pad (2242,5632)
+2228,3450:2600,5640    route  amr_eq_r3 to the step logic | metal x 2240 north, poly east along y 3461 into tla's first cluster (gate under rail R1 at (2625,3461))
+4715,6140:5600,6295    route  c4l0-c4l3 east | the 4-bit counter's four lines: poly rows, metals over the poly bus, nested corners north
+5440,5790:5940,5950    route  c4l0-c4l3 rows | four poly rows between the nested metals
+5880,4560:6500,5800    route  c4l0, c4l1 north | two nested metals to the crossing field (beside bust's two for c4l2, c4l3)
+6440,4555:7870,4625    route  c4l0, c4l1 to cdp1 | rows across the crossing field, metals east and north to the pads of the rows that enter cdp1 as cdp1_l4544 / cdp1_l4588

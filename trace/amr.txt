@@ -318,3 +318,28 @@ C 13016,5758 s=24x34
 D 12993,5888:13048,5946
 C 13018,5907 s=24x34
 D 12996,5940:13022,6095
+
+# --- where amr_eq_r3 leaves (2026-11-17, amrw). In the column at x 11490 the outer line's metal
+# (x 11601-11621) ends over a box with a heavy outline (11601-11628, 6286-6307). The box
+# stands on the line's diffusion, not on field: under that metal the clean shot is flat tan
+# (protected diffusion) from y 6243 to 6305, crossed only by two dark lines (y 6276, the
+# line's south edge of the other columns, and y 6287, the box's north side, which runs on
+# east as the south edge of the stepped-down line). Inside the box: tan, no specks (a metal
+# contact to diffusion has them, e.g. (11521,5640)), no green patch (a metal contact to
+# poly has one, e.g. (11611,5928)); the metal is not widened and the dark stretch across it
+# (12 px, y 6278-6289, both metal shots) is what the outline of a buried contact prints
+# through a metal (10-12 px at the tie box (11517-11543,6106-6135) under the data line). A
+# poly leaves the box south (salmon bar y 6312-6320 under the metal's margin, then orange in
+# both chip-2 shots) and turns west at y 6335-6354. So: a BURIED contact from amr_eq_r3 to
+# that poly; c0's outer line has no third connection (its metal just ends over the box,
+# 10 px short of where it ends on field in the other columns). Views: cache/scratch/amrw/
+# b5a, b5b (5x, four shots), z1 (8x), cmp1 (the box beside known contacts of each kind), f1.
+# The diffusion between the line and the box is ?D because the two dark lines across it are
+# not explained in full; the box touches the line's diffusion under either reading of them.
+?D 11604,6266:11626,6305
+B 11601,6286:11628,6307
+P 11613,6292 y6347 x11345 w=18         # south, then west under the VSS rail and under cnt_gab's metal
+                                        # x 11396 (no pad, no patch, metal unbroken: z2.png at 6x)
+P 11333,6330:11367,6364                 # pad (11350,6347): ring in both metal shots, green patch
+C 11350,6347
+# it goes on west in trace/amrw.txt

@@ -1,6 +1,6 @@
 # amr: R3's high nibble and its 4-bit comparator (x 11400-13060, y 5540-6450)
 
-## Status (2026-11-17 12:02 (UTC+1), contributor session; independently reviewed)
+## Status (2026-11-17 13:20 (UTC+1), contributor session; the slice, its exit and its inputs independently reviewed)
 
 **The slice is traced** (`trace/amr.txt`, cell `amr_slice`, placed four times; 57 transistors;
 the full extraction has 0 errors, 0 warnings). Each slice is
@@ -12,13 +12,19 @@ the full extraction has 0 errors, 0 warnings). Each slice is
   output drives a big pull-down on one diffusion line through all four slices,
   `amr_eq_r3` = NOR of the four XORs. The line's load stands in the column at x 11490.
 
-`tools/bust_fanout.py` now lists `wr_r3` on data bits 4, 5, 6 and 7: the datasheet's R3
+`tools/bust_fanout.py` lists `wr_r3` on data bits 4, 5, 6 and 7: the datasheet's R3
 high nibble (vertical sync width).
 
-Not found: **where `amr_eq_r3` leaves** (both ends of the diffusion line are closed, no
-contact seen on it), and what drives the four outer lines (`cdp1_l4544`, `cdp1_l4588`,
-`cdp1_l4632`, `cdp1_l4676`: a 4-bit counter is expected). Several joins are marked `?`
-(Ambiguities).
+**Both ends of the comparator are now joined** (`notes/blocks/amrw.md`, `trace/amrw.txt`):
+
+- the four outer lines are the outputs of the 4-bit counter in the left array's upper rows,
+  bit for bit: `c4l0` with R3 bit 4, `c4l1` with bit 5, `c4l2` with bit 6, `c4l3` with bit 7
+  (the extraction prints `r3c_b4_x = NOT((c4l0 & r3_b4_q) | r3c_b4_nor)` and so on);
+- `amr_eq_r3` leaves the line through a buried contact under the foot of c0's outer metal
+  ("Where `amr_eq_r3` leaves", below) and runs 12,000 px west and north to a gate in the
+  top-left logic (`tla`'s first cluster, west side, at (2625,3461)).
+
+Several joins are marked `?` (Ambiguities).
 
 ## Inventory
 
@@ -27,7 +33,7 @@ master, column c3). **The column at x 11490 (c0) is a full copy**, not a partial
 `cellcheck.py amr_slice` gives 3-5 % bad blocks for c1, c2 and 15 % for c0, all of c0's at
 the slice's edges and at the east end of the big pull-down (below). What made it look
 partial is only that its two lines arrive in poly at the top (`notes/blocks/bust.md`). It also
-differs at its outer line's foot, which has a third connection ("c0's outer line", below).
+differs under its outer line's foot, where the line `amr_eq_r3` has its exit ("Where `amr_eq_r3` leaves", below).
 
 | y | What |
 |---|---|
@@ -35,7 +41,7 @@ differs at its outer line's foot, which has a third connection ("c0's outer line
 | 5620-5880 | the register bit |
 | 5885-6130 | the comparator bit (two gates) |
 | 6140-6275 | big pull-down and the line `amr_eq_r3` (diffusion, y 6246-6272) |
-| 6312 | the three thin metals (data line x 12693, a metal on `n2` x 12735, outer line x 12782) end, rounded, on field: no contact (4x median, `z5.png`), in c1..c3. **c0's outer line does not**: see "c0's outer line" below |
+| 6312 | the three thin metals (data line x 12693, a metal on `n2` x 12735, outer line x 12782) end, rounded, on field: no contact (4x median, `z5.png`), in c1..c3. In c0 the outer line's metal ends 10 px shorter, over the buried contact of `amr_eq_r3` (below) |
 | 6330-6400 | the q line's arm to a pad (12957,6348) and a poly south: q leaves the slice |
 
 A fifth rail (VSS, x 12998-13044) stands east of the last slice with the two lands that the
@@ -78,24 +84,45 @@ r3c_b7_x   = NOT(r3c_b7_nor + c7 . r3_b7_q)  =  c7 XOR r3_b7_q
 amr_eq_r3  = NOR(r3c_b4_x, r3c_b5_x, r3c_b6_x, r3c_b7_x)     high when c = R3 bits 4-7
 ```
 
-c4..c7 are the outer lines `cdp1_l4544`, `cdp1_l4588`, `cdp1_l4632`, `cdp1_l4676`. In c1..c3
-each has exactly two contacts in the slice, both to poly (green patch in the clean shot, no specks),
-and none to diffusion: **inputs here**, not outputs as the first survey assumed. c0's line
-(`cdp1_l4544`) has the same two and a third connection at its foot (below).
+c4..c7 are the outer lines (`cdp1`'s through lines y 4544, 4588, 4632, 4676), which are the
+counter bits `c4l0` ... `c4l3` (`notes/blocks/amrw.md`). In every column each has exactly two
+contacts in the slice, both to poly (green patch in the clean shot, no specks), and none to
+diffusion: **inputs here**, not outputs as the first survey assumed.
 
-**c0's outer line (found by the independent review, not drawn).** Its metal (x 11601-11621)
-does not end on field: it ends on an outlined box at about (11612, 6288-6318); a poly stub
-leaves the box south (y 6320-6330) into a poly band y 6330-6350 running west to a pad with a
-metal ring at about (11350,6340); a metal runs from there west along y 6340 and turns south
-near x 11060 (all four shots at 6x). Whether the box is a metal or a buried contact is not
-settled (tan inside, no green patch). A lead to the outer lines' driver or another reader.
+**Where `amr_eq_r3` leaves (2026-11-17 13:20; drawn).** The review found that c0's outer metal
+(x 11601-11621) ends on an outlined box and that a poly leaves the box. The box
+(11601-11628, 6286-6307) is a **buried contact on the line `amr_eq_r3`**, and the outer
+line has no connection there:
+
+- under that metal the clean shot is flat tan (protected diffusion) from y 6243, the top of
+  the line, to y 6305, the bottom of the box, crossed by two dark lines only (y 6276, where
+  the line's south edge is in the other columns, and y 6287, the box's north side, which
+  runs on east as the south edge of the line where it is stepped down, x 11640-11800): the
+  box stands on the line's diffusion (`b5a.png`, `b5b.png` at 5x in four shots; `z1.png` at 8x);
+- inside the box: tan, no specks and no green patch. Beside known contacts at the same zoom
+  (`cmp1.png`): a metal contact to diffusion has specks ((11521,5640)), a metal contact to
+  poly a green patch ((11611,5928), (11613,6112), (11786,6348)); the box has neither;
+- the metal is not widened over the box, and the dark stretch across it (12 px, y 6278-6289,
+  the same in both metal shots) is what a buried contact's outline prints through a metal:
+  10-12 px at the tie boxes (y 6106-6135) under the four data lines. So the metal goes on
+  over the box and ends at y ~6305, 10 px short of where it ends on field in c1..c3;
+- a poly leaves the box south (salmon bar y 6312-6320 in the metal's margin, then orange in
+  both chip-2 shots), turns west at y 6338-6356, passes under c0's VSS rail and under the thin
+  metal of `cnt_gab` (x 11396: no pad, no patch, metal unbroken, `z2.png` at 6x) and ends on
+  a pad with a contact (11350,6347). From there: `notes/blocks/amrw.md`.
+
+The other reading, a metal contact from the outer line to the line's diffusion, would make
+c0's compared bit the comparator's own output; nothing in the four shots supports a contact.
+The piece of diffusion between the line and the box is `?D` (the two dark lines across it
+are not explained in full); the buried contact is drawn firm.
 
 `tools/unsure.py --equations`: the latch equations (`n2`, `q`) are FIRM for c1..c3 (c0's
 `r3_b4_n2` DEPENDS on its `?P` gate run, which the review saw plainly at 3.4x); `nor`, `x` and
 `amr_eq_r3` DEPEND on `?` items (Ambiguities 1-5).
 
-Believed, not traced: that the outer lines are a 4-bit counter (the datasheet's vertical sync
-width counter), which would make `amr_eq_r3` "sync width reached". Two metals look like
+Traced: the outer lines are the 4-bit counter `c4l` (`notes/blocks/amrw.md`). Believed: that
+this counter is the datasheet's vertical sync width counter, which makes `amr_eq_r3` "sync
+width reached". Two metals look like
 leftovers of a through-track layout: the metal x 12735 has one contact (to `n2`,
 (12742,5759)) and the metal x 12957 one (Ambiguity 3); neither takes its net anywhere.
 
@@ -189,19 +216,18 @@ shots in all four columns (`wl.png`). Drawn firm for c1..c3 and c0's leg; c0's b
 west corner `?P` (Ambiguity 6). `tools/unsure.py` no longer lists `wr_r3`.
 
 (The 4-bit counter in the left array, `c4l`, does not enter `amr` from the west at
-y 6157-6280: open field there. Only that band was checked; c0's outer line has a
-connection going west at y 6340. If it is the comparator's counter it arrives on the outer
-lines, through `cdp1`'s through lines.)
+y 6157-6280: open field there. It arrives on the four outer lines, through `cdp1`'s through
+lines: `notes/blocks/amrw.md`.)
 
 ## Ports
 
 | Name | Layer | Where | Direction | What |
 |---|---|---|---|---|
 | `amr_oa_c1` ... `amr_oa_c3` (aliases of the data lines, `notes/blocks/bust.md`); c0's is `cdp1_c1_bl` | metal | x 11916, 12304, 12693 (c0: 11522), y 5585-6312 | in | data bus bits 5, 6, 7 (c0: bit 4): written into R3 bits 4-7 through T1 |
-| `amr_ob_c1`, `amr_ob_c2` (= `cdp1_l4588`, `cdp1_l4632`), `cdp1_l4676`, c0's `cdp1_l4544` | metal | x 12001, 12390, 12782 (c0: 11611), y 5585-6312 | **in** | the four bits compared with R3 bits 4-7; driver not found (they come from the west on `cdp1`'s through lines) |
+| `amr_ob_c1`, `amr_ob_c2` (= `cdp1_l4588`, `cdp1_l4632`), `cdp1_l4676`, c0's `cdp1_l4544` | metal | x 12001, 12390, 12782 (c0: 11611), y 5585-6312 | **in** | the four bits compared with R3 bits 4-7: `c4l1`, `c4l2`, `c4l3` and c0's `c4l0`, the 4-bit counter of the left array (`notes/blocks/amrw.md`) |
 | `wr_r3` | poly | y 5636, x 11445-13125 | in | R3's write strobe, from `rdp1`'s x 13327 line |
 | `r3_b4_q` ... `r3_b7_q` | poly | (12965 - 390k, 6400), going south from the pad (12957 - 390k, 6348) | out | the stored bits leave the slice south; in c3 the poly joins a band y 6405-6425 running west under the VCC rail (`b5.png`). Not followed |
-| `amr_eq_r3` | diffusion | y 6246-6272, x 11445-13047 | out | exit not found (Not done 1) |
+| `amr_eq_r3` | diffusion; poly from the buried contact (11601-11628, 6286-6307) | y 6246-6272, x 11445-13047; pad (11350,6347) | out | to the top-left logic (`notes/blocks/amrw.md`) |
 | `vss` | metal | x 12628 - 390k and x 13021, y 5545 (to the wide metal above) and y 6440 (goes on south; contact to a land at (12625,6435)) | | rails |
 | `vcc` | metal | x 12843 - 390k, y 6335 | | goes on south with a jog west |
 
@@ -210,21 +236,17 @@ lines, through `cdp1`'s through lines.)
 Independently reviewed (2026-11-17): all 14 transistors per slice confirmed on c3 at
 3.4-6.5x (no missed or invented channel), the loads, the data inputs (bits 4..7) and
 `wr_r3` as T1's gate; the three `?D` joins read as joined; PE = q in function. It found
-c0's outer line's third connection (above, not drawn) and corrected the overclaims.
+the box and the poly under the foot of c0's outer line (read since as the exit of `amr_eq_r3`,
+above) and corrected the overclaims.
 Unsure: L3's gate tie (both candidates give gate = nor), the pull-down's east corner (W
 only), c0's load (one copy).
 
 ## Not done
 
-1. **Where `amr_eq_r3` is used.** The diffusion line ends rounded under c0's VSS rail
-   (x 11445, `wend.png`) and under the rail east of c3 (x 13047, `eend.png`); no ring in the
-   metal shots and no specks in the clean shot along it, in the views made (the crossings
-   under the q lines and under each rail were looked at only at 2.5-4x). Its only poly is the
-   load's block. Places not yet excluded: a contact under one of the four VCC rails or VSS
-   rails at 5x+, and the 50 px of line under each rail.
-2. The driver of the four outer lines (`notes/blocks/bust.md`: `cdp1_l4544` towards
-   (11650,4500); the other three west through `cdp1`), and c0's outer line's third
-   connection at its foot, west along y 6340 (above): to be drawn.
+1. (Done: `amr_eq_r3` leaves by the buried contact under c0's outer metal; `notes/blocks/amrw.md`.
+   The line's two closed ends, under c0's VSS rail and under the rail east of c3, stay as
+   they were read: no contact seen on either.)
+2. (Done: the four outer lines are `c4l0` ... `c4l3`; `notes/blocks/amrw.md`.)
 3. Where the four q polys go south of y 6400.
 4. The rails south of y 6440 and the VCC rail's jog.
 5. The `?` items (Ambiguities): the three joins in metal gaps need a shot that shows them.
