@@ -59,11 +59,19 @@ looked at:
 | its bottom end | free, 30 px above the metal at y 16975 (four shots at 4x, `gbot.png`), as `mra` found |
 
 So no gate output drives `cnt_gab` anywhere along the drawn net, and nothing in the
-trace connects it to a supply. H4 and x 12902 are now both ruled out (above). What remains: the north
-branch (metal x 11242 / 11396, y 4284-7210) and the metal y 4287 (x 11694-13822), which
-pass through or beside the untraced logic above the counters, and the RA band itself. A
-contact on one of those that the follower did not report, or a driver reached by poly
-from one of their ends, is the next place to look.
+trace connects it to a supply. H4 and x 12902 are now both ruled out (above), and so is the north branch:
+the same colour scan along x 11242 (y 4300-5612), y 5614, x 11396 (y 5614-7200) and
+y 4287 (x 11700-13820) finds only the known pads at the ends, plus six spots (x 11242 at
+y 4508, 4638, 4726, 5100; x 11396 at y 6352, 6940) which at 3.4x in both shots are polys
+crossing under continuous metal, with no ring (`nb1.png`, `nb2.png`).
+
+**So the whole drawn net of `cnt_gab` has no driver.** Two possibilities are left. (a) A
+contact where the colour test fails, under a wide metal, for instance where the north branch
+passes under the supply metal x 11280-11600. (b) The net is driven inside the RA band
+cells (`ral_tf_s#` is only a drain; the cell's untraced part could hold a gate whose
+output is the line y 4354). (b) would mean the RA band makes `cnt_gab`. That would be
+surprising, but nothing here rules it out, and it is worth checking when the cell's
+forward path is traced.
 This is the next thing to look at for the counters' `_m`/`_mb` transfer.
 
 ### Ports
