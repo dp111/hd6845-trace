@@ -111,13 +111,14 @@ along y about 3583 (salmon at x 4010-4140 in the clean shot, 2.2x, `pc.png`) int
 middle cluster's gate column, not traced. That gate is where R9's match is used, under
 reading C.
 
-**Not changed in the trace** (other blocks' files): `trace/tla.txt` draws track P as one
-metal `M 4148,3320 y3596` with the label `rcs_bq3335` at y 3500, on the lower piece. If
-reading C is accepted: split it into y 3320-3341 (keeps the contact and the label
-`rcs_bq3335`, moved up) and y 3371-3596 (R9's match, `cdp1_b_eq`), then draw the stub's
-last 12 px in `trace/r9m.txt`. Until then the stub stays undrawn and the first line drawn
-here joins `rcs_bq3335` through `tla`'s metal, which is right under both readings A and
-C at the contact. Between R9's stub and the x 4148
+**Applied as a separate commit** ("tla/r9m: reading C of AMB-013"), which also edits
+`trace/tla.txt`: track P split into y 3320-3341 (the contact, label `rcs_bq3335` moved up)
+and y 3371-3596, and R9's stub drawn onto the lower piece. Only the one contact (3335)
+was on that metal, so nothing else changes. Extraction: `rcs_mu`'s inverter is gated by
+`rcs_bq3335` (the bundle line from `amr` c3), and `cdp1_b_eq` (R9's match) now runs on
+down track P. Its lower end (contact (4148,3588)) has a poly west along y 3578-3598 to
+x about 3995, where it turns south into the middle cluster's gate column (3.2x,
+`cache/scratch/r9m/r9g.png`): the gate that uses R9's match is there, not traced. Between R9's stub and the x 4148
 metal at y 3365-3390 there is a dark line only 4-12 px wide (at x about 4163, where
 `tla`'s poly stem has its right edge, x 4166), narrower than the spacing between
 separate metal lines elsewhere.

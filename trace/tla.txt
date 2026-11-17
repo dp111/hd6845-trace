@@ -574,8 +574,9 @@ D 3960,3393:4012,3415                 # the node's strip going west under the ra
 P 3995,3363:4142,3385
 P 4132,3318:4166,3388                 # stem up to the pad, contact (4148,3335)
 C 4148,3335
-M 4148,3320 y3596 w=20                # bus piece x 4138-4160, y 3320-3596 (follow.py; bottom end not looked at)
-N M 4148,3500 rcs_bq3335
+M 4148,3320 y3341 w=20                # bus piece x 4138-4160: upper part, ends at y 3341 (split by r9m, 2026-11-17:
+M 4148,3371 y3596 w=20                #   no metal at y 3341-3371 in either metal shot; notes/blocks/r9m.md, AMB-013)
+N M 4148,3330 rcs_bq3335
 
 # ====================================================================
 # AOI unit of the first cluster, y 4045-4320: rcs_n4200 = NOT( rcs_cond . clk_tl + rcs_g4240 ).
