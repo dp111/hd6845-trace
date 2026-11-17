@@ -102,9 +102,9 @@ left and why), commit it, and push:
 git push origin main
 ```
 
-If the push is rejected, `git pull --rebase origin main`, re-run `compare` (against a new
-snapshot of the pulled main with your batches reverted is not needed: the pulled commits
-are other packages' merges, so check extraction, `signals.py` and `signals.py --docs`), push.
+If the push is rejected, someone merged a package meanwhile: `git pull --rebase origin
+main`, then rename anything their package added under an old name (`tools/rename.py`
+again), check the extraction, `signals.py` and `signals.py --docs`, and push.
 
 **Tell collaborators.** Branches in flight that use an old name will fail
 `tools/mergecheck.py` (former names) until they run `tools/rename.py OLD NEW` after merging
