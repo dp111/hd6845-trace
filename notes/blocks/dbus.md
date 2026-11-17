@@ -6,7 +6,7 @@ Trace: `trace/dbus.txt` (the column beside the pads) and `trace/dbus_h.txt` (bit
 several offsets side by side, for comparing repeats), `tools/dbus_autocorr.py`
 (vertical pitch of a strip).
 
-## Status (2026-11-17 14:13 +0000, contributor session; independently reviewed: the clusters in Round 1, buffers 6 and 7 with their input lines and the inverter below them in Round 2, the rest (cluster 2, latch copies D5/D6, the eight data-line joins) in Round 3; see Review)
+## Status (2026-11-17 14:13 +0000, contributor session; independently reviewed: the clusters in Round 1, buffers 6 and 7 with their input lines and the inverter below them in Round 2, the rest (cluster 2, latch copies D5/D6, the eight data-line joins) in Round 3; Rounds 4-6 on the documents, the last clean; see Review)
 
 Traced, extracting, overlay-checked: the input buffer chain (four inverters) as cell
 `dbus_in`, placed **eight times** (D0-D5 upright; **D6 and D7 upside down in the lower
@@ -297,6 +297,12 @@ chains D1-D5 and three latch-cell y ranges in `trace/dbus_h.txt`'s comments; and
 Round 5 (2026-11-17, an independent agent: the Round 4 fixes, the extraction, `unsure.py
 --equations` against the notes and `operation.md`, the gate): no trace finding; one number
 fixed: D4's latch-cell y range (13890-14350, the master mirrored about y 14350).
+
+Round 6 (2026-11-17, an independent agent: D4's range against the mirrored master, every
+other quoted range and coordinate of the latch cells, drivers, gate rows, `d_d` rows and
+`dlat_en` contacts against the geometry, the extraction, the gate).
+
+Round 6: no findings.
 
 ## Ambiguities
 
