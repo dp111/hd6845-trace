@@ -55,10 +55,15 @@ looked at:
 | the pad (11243,4284) | poly east only (`pd.png`) |
 | the line's east end | stops at x 16255 over cell s4's output poly, with no contact, as in the other cells (4.5x, `be2.png`). The first draft ran it to x 16330, onto the wide metal there: corrected |
 
+| the counters' line x 12902, y 7240-16930 | the same colour scan finds only `mra`'s per-row gate contacts of the pass transistors (y 10515, 13161, 15134, 15610, 16088 ..., checked at 4x, `g12m.png`, `g12a.png`) and a spot at y 7299 with no ring in either metal shot (`g7299.png`) |
+| its bottom end | free, 30 px above the metal at y 16975 (four shots at 4x, `gbot.png`), as `mra` found |
+
 So no gate output drives `cnt_gab` anywhere along the drawn net, and nothing in the
-trace connects it to a supply. Either a contact or buried contact was missed on
-H4 (x 11043-12910, which crosses the top of the counter array and four metal lines),
-or along x 12902 inside the array, or the line is driven through one of `mra`'s cells.
+trace connects it to a supply. H4 and x 12902 are now both ruled out (above). What remains: the north
+branch (metal x 11242 / 11396, y 4284-7210) and the metal y 4287 (x 11694-13822), which
+pass through or beside the untraced logic above the counters, and the RA band itself. A
+contact on one of those that the follower did not report, or a driver reached by poly
+from one of their ends, is the next place to look.
 This is the next thing to look at for the counters' `_m`/`_mb` transfer.
 
 ### Ports
