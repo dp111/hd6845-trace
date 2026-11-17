@@ -1,0 +1,7 @@
+# rad: the RA pad drivers' input lines (wiring)
+17700,2080:18320,2500  route   RA2 driver input, north | from the RA2 pad cell west and under the wide rail
+15240,2480:17745,3895  route   RA2 driver input | south along x 17727 and west along y 3878
+15235,3855:15440,4200  route   RA2 driver input, end | poly under RA0/RA1's metals, south along x 15255 towards the ral band
+16270,3200:17790,3980  route   RA3 driver input | from the RA3 pad cell south along x 17771 and west along y 3962
+16270,3940:16320,4610  route   RA3 driver input, end | poly and metal south along x 16290-16297 through the ral band
+17320,4960:17790,5960  route   RA4 driver input | from the RA4 pad cell south along x 17771, west along y 5938, to the RA4 comparator unit's input (17335,5800)

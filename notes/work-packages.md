@@ -106,7 +106,7 @@ tracing the stretch between the two pieces and renaming the label.
 | Names | Where the gap is |
 |---|---|
 | `ck_a_u` | the horizontal counter's L3 line: poly from (12631,16954) to the `ck_a` bus line at (12740,18471), followed but not drawn |
-| `ra2_drv_in_u`, `ra3_drv_in_u`, `ra4_drv_in_u` | the inputs of the R9 compare units of bits 2-4: from the metals' west ends ((15210,4805) pad; (16290,5109); (16202,5153)) back to the pad cells' input polys |
+| `ra2_drv_in`, `ra3_drv_in`, `ra4_drv_in_u` | the inputs of the R9 compare units of bits 2-4: from the metals' west ends ((15210,4805) pad; (16290,5109); (16202,5153)) back to the pad cells' input polys |
 
 ## Queue
 

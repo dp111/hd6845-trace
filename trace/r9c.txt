@@ -177,8 +177,8 @@ C 17135,5150
 M 16202,5155 x17140 w=12              # west end (16202,5153) not looked at
 N M 16500,4981 ra0_drv_in
 N M 16500,5025 ra1_drv_in
-N M 16500,5068 ra2_drv_in_u
-N M 16500,5111 ra3_drv_in_u
+N M 16500,5068 ra2_drv_in
+N M 16500,5111 ra3_drv_in
 N M 16500,5155 ra4_drv_in_u
 
 # ===== the RA0 and RA1 pad drivers' input lines, from the pad cells to the units' input metals =====
