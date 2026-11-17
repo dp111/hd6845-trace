@@ -1,6 +1,6 @@
 # ral: the stage in front of the RA pad drivers (x 13960-16330, y 4220-4560)
 
-## Status (2026-11-17 14:14 (UTC+1), contributor session; inverter 1 independently reviewed)
+## Status (2026-11-17 14:14 (UTC+1), contributor session; inverter 1 independently reviewed in three rounds, the last clean)
 
 **The cell is traced in full** (`trace/ral.txt`, cell `ral_cell`, five copies s0-s4 west
 to east; s0 is RA bit 0's cell, at x 13960-14460): 7 transistors per cell, 35 in the band
@@ -242,6 +242,11 @@ there (gate poly continuous from y 4338 to 4455). Restored to x 14172: Tf 94/20 
 gate 68/25, the `ral_n1` band by colour against known diffusion, inverter 2, the hold
 device in four layers).
 
+Round 3 (2026-11-17, an independent agent; the Tf fix against an extraction of the previous
+commit: only the 19 Tf lines changed, 77/20 to 94/20, same nets; fresh copies s4 and m11 at
+5x in four layers, judged without the trace first; the notes' sizes, counts and equations
+against the extraction).
+
 Re-read of the force line and the strobe (2026-11-17, an independent agent, every hop at
 4.4-6x in both stripped shots and both metal shots), because a force line that is the
 counters' transfer line does not fit: the cross-under at x 11150-11720 (three polys, none
@@ -261,6 +266,8 @@ within edge width (inverter 2's load measured about 64/40 against the drawn 60/3
 hold device's poly join and buried contact read firm in all 19 copies (the latch's
 feedback rests on these two); overlays on s0, s1, m4, m12; extraction against the
 previous cell: only the cell's own devices changed, nets fell by exactly 19.
+
+Round 3: no findings.
 
 ## Not done (next)
 
