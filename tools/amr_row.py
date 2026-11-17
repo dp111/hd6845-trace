@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Continuity of a horizontal poly row in the clean shot:  amrw_row.py Y X0 X1 [OFF]
+"""Continuity of a horizontal poly row in the clean shot:  amr_row.py Y X0 X1 [OFF]
 
 For every x from X0 to X1 the colour at the row's centre (y = Y, searched +-5) is compared
 with the mean of the two flanks OFF px above and below (default 21: half the 43 px pitch of

@@ -1,11 +1,11 @@
 # amrw: the route of amr_eq_r3 (R3 bits 4-7 = the four compared lines) from amr's column at
-# x 11490 to the top-left logic. notes/blocks/amrw.md. Wiring only, no transistors.
+# x 11490 to the top-left logic. notes/blocks/amr.md. Wiring only, no transistors.
 # It starts at the pad (11350,6347) that trace/amr.txt draws (buried contact on the wired-NOR
 # line, poly west). Every pad: ring in both metal shots and a green patch on a poly pad in
 # the clean shot (cache/scratch/amrw/w1, p1, w3, pads1.png at 2.7-3.8x). Metals: tools/follow.py
 # (end to end between the pads, no other contact candidate). Poly rows: strips at 1.55-1.65x
 # in the clean shot (st2, st3, st4, st5.png) and a colour profile along each row against its
-# flanks (tools/amrw_row.py: no weak stretch on any of them).
+# flanks (tools/amr_row.py: no weak stretch on any of them).
 @block amrw
 @w M=12 P=18
 @s 24x24
@@ -88,7 +88,7 @@ N M 2240,4500 amr_eq_r3
 # corners, 1.7x, both shots), c4c (the four rows x 5530-5930 and their eight pads, 2.7x),
 # vv (the four nested metals x 5890-6016, y 4570-5935), cf1, cf2 (crossing field x 6440-6990:
 # four straight rows in both stripped shots, 2.1-2.25x), cn1, z3 (the corners at x 7490 / 7538,
-# 2.7x and 4x), pads2 (pads at 3.8x). Metals: tools/follow.py; rows: amrw_row.py profile.
+# 2.7x and 4x), pads2 (pads at 3.8x). Metals: tools/follow.py; rows: tools/amr_row.py profile.
 # Nothing crosses: the four lines stay nested in the same order all the way.
 # =====================================================================================
 # --- rows east from urch's ends to pads at the vertical poly bus (x 5050-5450)
