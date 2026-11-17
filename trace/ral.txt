@@ -15,7 +15,7 @@ N M 14000,4244 vcc
 M 13996,4397:14452,4446
 N M 14000,4421 vss
 
-# --- pull-down Tf: gate = the line y 4350 (ral_frc), source on the middle rail.
+# --- pull-down Tf: gate = the line y 4350 (cnt_gab), source on the middle rail.
 # Poly pad under the line's tab, contact (14157,4318); poly strip down across the
 # diffusion box; drain the strip x 14172-14196 (where it goes: not drawn).
 P 14142,4303:14176,4346
@@ -72,9 +72,9 @@ P 14331,4480:14349,4525
 @inst ral_cell 1431,0 tag=s3
 @inst ral_cell 1865,0 tag=s4
 
-# --- the line y 4350 through all five cells (taps in each): local name ral_frc
-M 13990,4351 x16330 w=16
-N M 14000,4351 ral_frc
+# --- the line y 4350 through all five cells (taps in each): local name cnt_gab
+M 13895,4353 x16330 w=16
+N M 14000,4351 cnt_gab
 
 # --- the strobe line: the sixth line of the row-address bundle (notes/blocks/rab.md:
 # from (11650,4245) east, south along x 13862, east along y 4548 to x 15906). Only its
@@ -145,7 +145,7 @@ C 16205,5153
 M 16195,5148:16215,5162
 
 # =====================================================================================
-# The strobe ral_stb back to where tc1 drew it (tc1_ns4: "from the east along y
+# The strobe ral_stb back to where tc1 drew it (ral_stb: "from the east along y
 # 2764-2778; south ..."; trace/tc1.txt, drawn from x 8350 west). Route from tc1's end
 # eastwards: metal y 2771 to a pad (9055,2768); poly under two vertical metals to a pad
 # (9235,2768); metal to a pad (9826,2768); poly to a pad (10022,2768); metal to a pad
@@ -182,4 +182,26 @@ P 11150,4245 x11650
 P 11633,4228:11667,4262
 C 11650,4245
 M 11650,4245 x13862 y4548 x13995
-@alias ral_stb tc1_ns4
+
+# =====================================================================================
+# The line cnt_gab (y 4354 under the band) back to its source side: its metal ends on a
+# pad (13900,4350); poly north along x 13905 and west along y 4285 under the strobe's
+# metal x 13862 to a pad (13822,4285) (four shots at 4x, cache/scratch/ral/fr6.png);
+# metal west along y 4287 to a pad (11694,4287); poly west under the wide supply metal
+# (the third line of the cross-under at x 11240-11700, with the strobe and rab's five) to
+# a pad (11243,4284) (fr2.png, fr3.png); metal south along x 11242 to y 5612, east to
+# x 11396, south to y 7218, onto wl's contact (11392,7210) on band H4 (wl.txt: "a pad
+# with a contact (11392,7210) under a metal that leaves north"). Band H4 goes on east as
+# the feed of the counters' line x 12902 (cnt_gab). Metal from tools/follow.py.
+P 13900,4350 x13905 y4285 x13822 w=18
+P 13883,4333:13917,4367
+C 13900,4350
+P 13805,4268:13839,4302
+C 13822,4285
+M 13822,4287 x11694 w=12
+P 11677,4270:11711,4304
+C 11694,4287
+P 11243,4287 x11694 w=18
+P 11226,4267:11260,4301
+C 11243,4284
+M 11242,4284 y5612 x11396 y7210 w=12

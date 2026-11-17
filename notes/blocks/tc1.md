@@ -230,7 +230,7 @@ East side (into the datapath, or the random logic at its slice-0 position x 8290
 |---|---|---|---|---|
 | `cdp1_a4_q` | P | x 8350, y 2846-2868 | ? | north end of ns5, from contact (8271,2857) |
 | `tc1_ns3` | M | x 8350, y 2720-2734 | ? | ns3 arrives from the east over the top of the datapath |
-| `tc1_ns4` | M | x 8350, y 2764-2778 | ? | ns4, the same |
+| `ral_stb` | M | x 8350, y 2764-2778 | ? | ns4, the same |
 | `cdp1_a5_q` | M | x 8350, y 2807-2821 | ? | ns6, the same |
 | `tc1_f` | P | x 8250, y 3348-3362 | out | R3 output; runs on under ns1..ns6 without contact, in the channel between cdp1's rows A and B |
 | `tc1_a` | P | x 8250, y 3387-3402 | in (believed) | same channel, 40 px below `tc1_f` |
@@ -256,7 +256,7 @@ South side (tc2), west to east:
 | `vss` | M | x 7943-7990, y 4450 | | the VSS bus (y 4288-4335, from the foot of the left rail) turns south |
 | `tc1_x2` | M | x 8067-8082, y 4450 | ? | to contact (8075,4372) |
 | `vcc` | M | x 8116-8165, y 4450 | | the VCC bus (y 4198-4250, from the foot of the centre rail) turns south |
-| `tc1_ns4` | M | x 8198-8212, y 4450 | ? | ns4 has no contact in this block |
+| `ral_stb` | M | x 8198-8212, y 4450 | ? | ns4 has no contact in this block |
 
 West side (drawn to x 6960, the east edge of the gate columns, which are not traced):
 
