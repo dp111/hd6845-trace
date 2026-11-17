@@ -99,8 +99,8 @@ on a staircase of pads at x 7810-7860, from which metals run west:
 
 | cdp1 line (east of the step) | west row, pad | metal west | `amr` |
 |---|---|---|---|
-| `cdp1_l4544` | y 4500, pad about (7860,4500) | not followed | c0 outer |
-| `cdp1_l4588` | y 4547, pad (7810,4547) | west to x 7532, south to (7535,4619), end not looked at | c1 outer |
+| `cdp1_l4544` | y 4500, pad (7860,4502) | west along y 4506, south at x 7492, west along y 4572 to the crossing field: drawn in `trace/amrw.txt` | c0 outer |
+| `cdp1_l4588` | y 4547, pad (7810,4547) | west to x 7532, south to y 4613 (a corner), west to the crossing field: `trace/amrw.txt` | c1 outer |
 | `cdp1_l4632` | y 4592, pad (7848,4592) | west, south, west along y 4657 to (6913,4658), across the crossing field | c2 outer |
 | `cdp1_l4676` | y 4635, pad (7830,4635) | west, south, west along y 4704 to (6921,4699), across the crossing field | c3 outer |
 | (none) | y 4676, pad (7855,4676) | `r9m`'s `r9m_l1w`; the row turns south near x 8190 | - |
@@ -117,8 +117,9 @@ pads at matching y on both sides: (6960,4655)/(6460,4657) and (6923,4695)/(6470,
 West of it they run along y 4660 / 4702, south along x 5972 / 6016, and end on contacts
 onto poly pads (5885,5893) and (5922,5935) into the untraced top-left logic (2.7x,
 `we.png`). So **`amr` c2's and c3's outer outputs** (by the corrected mapping) go to the
-top-left logic near (5900,5900); c1's ends at (7535,4619) (not looked at) and c0's west
-end is not followed. None of them is `rcs_bq3335` (that is R9's match:
+top-left logic near (5900,5900); c1's and c0's go the same way, one and two tracks north.
+**All four come from the 4-bit counter `c4l` of the left array** (`notes/blocks/amrw.md`: the
+pads at (5885,5893) and (5922,5935) are the east ends of two of four poly rows from it). None of them is `rcs_bq3335` (that is R9's match:
 `notes/blocks/r9m.md`, correction).
 
 ## `amr`'s partial slice c0: its two outputs drawn
