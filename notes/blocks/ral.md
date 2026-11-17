@@ -68,7 +68,7 @@ This is the next thing to look at for the counters' `_m`/`_mb` transfer.
 | `vss` | metal | middle rail y 4397-4446 | supply | same |
 | `cnt_gab` | metal | y 4346-4362, x 13895-16258 | in | the counters' `_m`/`_mb` gate line: drawn back to `wl`'s band H4 (glossary); first called `ral_frc` here |
 | `ral_stb` | metal | y 4540-4556, x 13990-15910 (ends on s4's pad) | in | the sixth line of rab's bundle; drawn back 9,000 px to x 8350, where it is `tc1`'s ns4 (formerly `tc1_ns4`, renamed) |
-| `rax_o0` | poly | (14000,4500), from rab | in | s0's input, onto the strip by a buried contact (`?B`: round ring in both stripped shots) |
+| `rax_o0` | poly | (14000,4500), from rab | in | s0's input, onto the strip by a buried contact (the same heavy-outlined square in all five copies and both stripped shots, 4x mosaics `bin.png`, `bin2.png`) |
 | `rax_o1` ... `rax_o4` | poly | up x 13995 + dx from pads at (14430,4590), (14863,4635), (15425,4675), (15860,4632) to the buried contact on each strip | in | s1-s4's inputs; s2's and s4's pads at the ends of rab's metals (s4's goes on east along y 4722 to x 15862 and north) |
 | `ra0_drv_in` | poly | x 14331-14349 at y 4480-4525, joins r9c's poly from the pad (14340,4764) | out | s0's output |
 | `ra1_drv_in` | poly | s1's output poly down to a pad (14774,4592) on RA1's line y 4592 | out | |
