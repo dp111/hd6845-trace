@@ -1,6 +1,7 @@
-# dbh: data bus bits 4-7 south of the right datapath: the four bus drivers at the top of
+# dbus, bits 4-7: data bus bits 4-7 south of the right datapath: the four bus drivers at the top of
 # the column x 16480-16800 (y 13100-13860) and the wiring between them, the latch cells
-# below them (y 13870-15790, cell dbh_lat) and the input buffer chains of dbus.
+# below them (y 13870-15790, cell dbh_lat) and the input buffer chains in the data pin
+# column (trace/dbus.txt); dlat_en from there to its driver, a NOR gate, and that gate.
 # See notes/blocks/dbus.md.
 @block dbh
 
@@ -90,7 +91,7 @@ P 16342,14866 16342,15262 16466,15386 16560,15386 w=14
 @alias d7_lat_n areg_w6
 @alias d6_lat_n areg_w7
 
-# ---- d4_d and d5_d: poly rows west from the pads at the top of dbus's metals, under the
+# ---- d4_d and d5_d: poly rows west from the pads at the top of the metals in trace/dbus.txt, under the
 # five metals of the wiring field x 16925-17115 and the dlat_en metal x 16815 (no pad on
 # the way; 1.2x w1.png, w2.png), into the latch cells
 P 17206,13997 x16840 w=14
@@ -197,22 +198,23 @@ M 16751,14378 y14802 w=20          # M_c: d_d_n from the inverter up to its gate
 M 16488,13880:16535,15800
 M 16657,13880:16702,15800
 
-# ---- dlat_en on south from dbus's end (16862,13650): down x 16858 to y 13802, west
-# to x 16816, down past the four latch cells (two contacts in each: the series
-# gates) to y 15792 and west to its end (16772,15792) (tools/follow.py, one piece, 2208 px;
-# overlays). What drives it at that end is not traced.
+# ---- dlat_en on south from where trace/dbus.txt ends it (16862,13650): down x 16858 to
+# y 13802, west to x 16816, down past the four latch cells (two contacts in each: the
+# series gates) to y 15803 and west to x 16772 (tools/follow.py, one piece, 2208 px;
+# overlays). From there on south to its driver: see "dlat_en south of (16772,15803)" below.
 M 16860,13645 y13802 x16816 y15803 x16772 w=14
 
-# ---- data inputs of the latch cells of D6 and D7: poly rows east to the outputs of two
-# gates in the lower part of the dbus column (not traced: the gates are single inverters
-# on the 152 px pitch at y 15150-16550, wired differently from dbus_in).
-# D6: row y 15173, a step down at x 17226-17244, east to the buried-contact box of the gate
-# at y 15150-15260 (box 17300-17335 x 15175-15205) (2.1x in two shots, e6.png; w6.png)
+# ---- data inputs of the latch cells of D6 and D7: poly rows east to the output
+# boxes of G4 of input buffers 6 and 7, the two upside-down copies of dbus_in in the lower
+# part of the data pin column (y 15157-15757 and 15786-16386; traced, in trace/dbus.txt).
+# D6: row y 15173, a step down at x 17226-17244, east to the buried-contact box of buffer
+# 6's G4 (box 17300-17335 x 15175-15205) (2.1x in two shots, e6.png; w6.png)
 P 16840,15173 17226,15173 17244,15192 17302,15192 w=14
 N P 17290,15192 d6_d
 # D7: row y 15650 to x 17188 (2.5x in three shots, r7.png), south under a metal of the
-# wiring field to y 15818 and east to the box of the gate at y 15790 (1.4x only, r7b.png:
-# the stretch y 15700-15800 under the metal is not seen as a colour of its own)
+# wiring field to y 15818 and east to the box of buffer 7's G4 at y 15790 (1.4x, r7b.png:
+# the stretch y 15700-15800 under the metal is not seen as a colour of its own there; the
+# first review saw it plainly in the chip-2 metal shot, so it is drawn firm)
 P 16840,15650 x17195 w=14
 P 17188,15645 y15818 w=14
 P 17181,15818 x17300 w=14

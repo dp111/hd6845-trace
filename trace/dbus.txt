@@ -312,8 +312,8 @@ P 17181,13513:17231,13533
 # dlat_en ("M_b"): one metal down the wiring field, a contact in every cluster
 # Top end on the contact of D0's cluster (y 8990). Bottom: west at y 13613 to a contact
 # (17166,13611), poly west to a contact (16986,13608), metal west and down x 16860
-# (2.1x and 1.45x, cache/scratch/dbc/mb_end.png, mb_w.png). follow.py takes that metal on
-# down x 16820 to an end at (16772,15800) beside untraced logic: not drawn beyond y 13650.
+# (2.1x and 1.45x, cache/scratch/dbc/mb_end.png, mb_w.png). Drawn here to y 13650; from there to
+# its driver (a NOR gate at 15890-16130 x 16770-16960) in trace/dbus_h.txt.
 M 17252,8982 y13614 x17156 w=18
 N M 17252,10900 dlat_en
 C 17166,13611 s=24x24
