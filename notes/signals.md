@@ -56,7 +56,7 @@ Central datapath (registers identified by their write strobes, `notes/blocks/wrs
 | Rows | Register | Slices |
 |---|---|---|
 | `cdp1` row A | R8 (6 bits) | columns c2-c7 (cells a0-a5). Bit order from the data bus (`notes/blocks/bust.md`): slices 5, 4, 1, 0, 3, 2 are bits 0, 1, 4, 5, 6, 7 (`r8_b#_*`); bits 0 and 1 are the two whose AND is `ras_shift` |
-| `cdp1` row C, comparator row B | R9 (5 bits) | slices 1-5 = columns c3-c7; slice 5 believed bit 0 |
+| `cdp1` row C, comparator row B | R9 (5 bits) | slices 1-5 = columns c3-c7; slice k = bit 5 - k, from the data bus (`r9_b#_*`) |
 | `cdp2` row A | R11 (5 bits) | s3-s7 |
 | `cdp2` row C, comparator rows B | R10 (7 bits) | s1-s7; s3-s7 compared, s7 = bit 0 ... s3 = bit 4 (from the `rax_o#` lines); s1, s2 the two mode bits |
 

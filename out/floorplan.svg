@@ -83,7 +83,7 @@
 <text x="3456" y="3076" font-family="sans-serif" font-size="28" fill="#ffffff" stroke="#000000" stroke-width="3" paint-order="stroke">middle cluster of the vertical control ?</text>
 <rect x="11400" y="10600" width="250" height="6670" fill="#969696" fill-opacity="0.10" stroke="#969696" stroke-width="10"><title>write strobes R8-R11, south: four metals down to the bottom bus</title></rect>
 <text x="11416" y="10622" font-family="sans-serif" font-size="14" fill="#ffffff" stroke="#000000" stroke-width="2" paint-order="stroke">write strobes R8-R11, south</text>
-<rect x="13190" y="4770" width="3740" height="440" fill="#969696" fill-opacity="0.10" stroke="#969696" stroke-width="10"><title>data bus, east: eight lines step down one track, then end on pads into the right datapath: ubus_b1-b4, R5's match</title></rect>
+<rect x="13190" y="4770" width="3740" height="440" fill="#969696" fill-opacity="0.10" stroke="#969696" stroke-width="10"><title>data bus, east: eight lines step down one track, then end on pads into the right datapath: db_b1-b4, R5's match</title></rect>
 <text x="13206" y="4923" font-family="sans-serif" font-size="145" fill="#ffffff" stroke="#000000" stroke-width="15" paint-order="stroke">data bus, east</text>
 <rect x="13690" y="18130" width="3790" height="430" fill="#ffc800" fill-opacity="0.10" stroke="#ffc800" stroke-width="10"><title>input buffers (CLK, R/W, E, RS, CS): CLK and E: three-finger inverter then two-finger inverter. R/W, RS, CS: chain of four inverters each, both polarities available. One more inverter at the left end</title></rect>
 <text x="13706" y="18280" font-family="sans-serif" font-size="142" fill="#ffffff" stroke="#000000" stroke-width="14" paint-order="stroke">input buffers (CLK, R/W, E, RS, CS)</text>
@@ -141,9 +141,9 @@
 <text x="6416" y="2728" font-family="sans-serif" font-size="70" fill="#ffffff" stroke="#000000" stroke-width="7" paint-order="stroke">gate columns ?</text>
 <rect x="13820" y="18940" width="3770" height="285" fill="#ffc800" fill-opacity="0.10" stroke="#ffc800" stroke-width="10"><title>input protection (CLK, R/W, E, RS, CS): five clamp cells in order CLK, R/W, E, RS, CS; each pad reaches its cell through a resistive strip</title></rect>
 <text x="13836" y="19042" font-family="sans-serif" font-size="94" fill="#ffffff" stroke="#000000" stroke-width="9" paint-order="stroke">input protection (CLK, R/W, E, RS, CS)</text>
-<rect x="13360" y="6902" width="2800" height="380" fill="#00dcff" fill-opacity="0.10" stroke="#00dcff" stroke-width="10"><title>R7 comparator (7 bit): counter lines of the upper array against R7 (vertical sync position); result uc_eq_r7 leaves west</title></rect>
+<rect x="13360" y="6902" width="2800" height="380" fill="#00dcff" fill-opacity="0.10" stroke="#00dcff" stroke-width="10"><title>R7 comparator (7 bit): counter lines of the upper array against R7 (vertical sync position); result rc_eq_r7 leaves west</title></rect>
 <text x="13376" y="7035" font-family="sans-serif" font-size="125" fill="#ffffff" stroke="#000000" stroke-width="13" paint-order="stroke">R7 comparator (7 bit)</text>
-<rect x="13360" y="7662" width="2800" height="380" fill="#00dcff" fill-opacity="0.10" stroke="#00dcff" stroke-width="10"><title>R6 comparator (7 bit): counter lines of the upper array against R6 (vertical displayed); result uc_eq_r6 goes down the wiring channel to the strobe channel</title></rect>
+<rect x="13360" y="7662" width="2800" height="380" fill="#00dcff" fill-opacity="0.10" stroke="#00dcff" stroke-width="10"><title>R6 comparator (7 bit): counter lines of the upper array against R6 (vertical displayed); result rc_eq_r6 goes down the wiring channel to the strobe channel</title></rect>
 <text x="13376" y="7795" font-family="sans-serif" font-size="125" fill="#ffffff" stroke="#000000" stroke-width="13" paint-order="stroke">R6 comparator (7 bit)</text>
 <rect x="4640" y="2950" width="420" height="2500" fill="#ff5050" fill-opacity="0.10" stroke="#ff5050" stroke-width="10" stroke-dasharray="60 40"><title>right cluster of the vertical control: not traced; one input of the step logic comes from here on a poly at y 3805</title></rect>
 <text x="4656" y="2975" font-family="sans-serif" font-size="17" fill="#ffffff" stroke="#000000" stroke-width="2" paint-order="stroke">right cluster of the vertical control ?</text>
@@ -547,13 +547,13 @@
 <text x="15761" y="13036" font-family="sans-serif" font-size="28" fill="#ffffff" stroke="#000000" stroke-width="3" paint-order="stroke">address register, bit 5</text>
 <rect x="11260" y="7265" width="405" height="290" fill="#ff5050" fill-opacity="0.10" stroke="#ff5050" stroke-width="10"><title>two inverters: upper: inverse of the line that runs down through all counter rows (x 12285), sent north; lower: inverter for a bus-field signal</title></rect>
 <text x="11276" y="7323" font-family="sans-serif" font-size="50" fill="#ffffff" stroke="#000000" stroke-width="5" paint-order="stroke">two inverters</text>
-<rect x="14045" y="9170" width="1465" height="80" fill="#969696" fill-opacity="0.10" stroke="#969696" stroke-width="10"><title>rc5, rc4 rows: rows y 9187 and 9230 from the tops of the tracks x 14062, 14105 to uc_b5, uc_b4</title></rect>
+<rect x="14045" y="9170" width="1465" height="80" fill="#969696" fill-opacity="0.10" stroke="#969696" stroke-width="10"><title>rc5, rc4 rows: rows y 9187 and 9230 from the tops of the tracks x 14062, 14105 to uc tracks 5, 4</title></rect>
 <text x="14061" y="9204" font-family="sans-serif" font-size="26" fill="#ffffff" stroke="#000000" stroke-width="3" paint-order="stroke">rc5, rc4 rows</text>
 <rect x="15890" y="15985" width="510" height="225" fill="#ff5050" fill-opacity="0.10" stroke="#ff5050" stroke-width="10"><title>data register write decode: 3-input NOR of R/W, NOT RS and CS: write AND chip selected AND RS high; data input of the write strobe latch</title></rect>
 <text x="15906" y="16025" font-family="sans-serif" font-size="32" fill="#ffffff" stroke="#000000" stroke-width="3" paint-order="stroke">data register write decode</text>
 <rect x="15890" y="16245" width="510" height="225" fill="#ff5050" fill-opacity="0.10" stroke="#ff5050" stroke-width="10"><title>address register write decode: 3-input NOR of R/W, RS and CS: write AND chip selected AND RS low; gates the address register strobe</title></rect>
 <text x="15906" y="16282" font-family="sans-serif" font-size="29" fill="#ffffff" stroke="#000000" stroke-width="3" paint-order="stroke">address register write decode</text>
-<rect x="13690" y="9260" width="1040" height="110" fill="#969696" fill-opacity="0.10" stroke="#969696" stroke-width="10"><title>rc2, rc3, rc6 rows: rows y 9276 (rc6), 9317 (rc3), 9358 (rc2); rc3 steps up a track at x 14544 to uc_b3's contact</title></rect>
+<rect x="13690" y="9260" width="1040" height="110" fill="#969696" fill-opacity="0.10" stroke="#969696" stroke-width="10"><title>rc2, rc3, rc6 rows: rows y 9276 (rc6), 9317 (rc3), 9358 (rc2); rc3 steps up a track at x 14544 to uc track 3's contact</title></rect>
 <text x="13706" y="9304" font-family="sans-serif" font-size="36" fill="#ffffff" stroke="#000000" stroke-width="4" paint-order="stroke">rc2, rc3, rc6 rows</text>
 <rect x="15470" y="6670" width="950" height="120" fill="#969696" fill-opacity="0.10" stroke="#969696" stroke-width="10"><title>R3 data, top: poly rows y 6688-6775 from R3's data lines east to the bundle</title></rect>
 <text x="15486" y="6718" font-family="sans-serif" font-size="40" fill="#ffffff" stroke="#000000" stroke-width="4" paint-order="stroke">R3 data, top</text>
@@ -603,8 +603,8 @@
 <text x="13416" y="11724" font-family="sans-serif" font-size="26" fill="#ffffff" stroke="#000000" stroke-width="3" paint-order="stroke">R1 match line exit</text>
 <rect x="11680" y="10880" width="42" height="1700" fill="#969696" fill-opacity="0.10" stroke="#969696" stroke-width="10"><title>look-ahead line A: wired NOR of g1 = AND of q of rows r7-r10, feeds the chain input of row r6</title></rect>
 <text x="11696" y="10902" font-family="sans-serif" font-size="14" fill="#ffffff" stroke="#000000" stroke-width="2" paint-order="stroke">look-ahead line A</text>
-<rect x="13830" y="9050" width="120" height="590" fill="#969696" fill-opacity="0.10" stroke="#969696" stroke-width="10"><title>rc1 to uc_b1: poly drop, thin metal x 13890, hook; bar y 9620 to L5's top</title></rect>
-<text x="13846" y="9072" font-family="sans-serif" font-size="14" fill="#ffffff" stroke="#000000" stroke-width="2" paint-order="stroke">rc1 to uc_b1</text>
+<rect x="13830" y="9050" width="120" height="590" fill="#969696" fill-opacity="0.10" stroke="#969696" stroke-width="10"><title>rc1 into the upper array: poly drop, thin metal x 13890, hook; bar y 9620 to L5's top</title></rect>
+<text x="13846" y="9072" font-family="sans-serif" font-size="14" fill="#ffffff" stroke="#000000" stroke-width="2" paint-order="stroke">rc1 into the upper array</text>
 <rect x="15235" y="3855" width="205" height="345" fill="#969696" fill-opacity="0.10" stroke="#969696" stroke-width="10"><title>RA2 driver input, end: poly under RA0/RA1's metals, south along x 15255 towards the ral band</title></rect>
 <text x="15251" y="3877" font-family="sans-serif" font-size="14" fill="#ffffff" stroke="#000000" stroke-width="2" paint-order="stroke">RA2 driver input, end</text>
 <rect x="13760" y="15120" width="295" height="230" fill="#ff5050" fill-opacity="0.10" stroke="#ff5050" stroke-width="10"><title>two inverters on line X: both driven by X (the input of input-row gate 0); outputs NOT X leave north on track k6 and south on x 13716</title></rect>
@@ -619,7 +619,7 @@
 <text x="15911" y="15260" font-family="sans-serif" font-size="32" fill="#ffffff" stroke="#000000" stroke-width="3" paint-order="stroke">address load driver</text>
 <rect x="8170" y="15850" width="395" height="140" fill="#ff5050" fill-opacity="0.10" stroke="#ff5050" stroke-width="10"><title>inverter (weak load): input from below the block, output to the gates under it</title></rect>
 <text x="8186" y="15889" font-family="sans-serif" font-size="31" fill="#ffffff" stroke="#000000" stroke-width="3" paint-order="stroke">inverter (weak load)</text>
-<rect x="14450" y="9125" width="1450" height="35" fill="#969696" fill-opacity="0.10" stroke="#969696" stroke-width="10"><title>rc6 row: row y 9143 from the metal x 14474 to uc_b6's end contact</title></rect>
+<rect x="14450" y="9125" width="1450" height="35" fill="#969696" fill-opacity="0.10" stroke="#969696" stroke-width="10"><title>rc6 row: row y 9143 from the metal x 14474 to uc track 6's end contact</title></rect>
 <text x="14466" y="9147" font-family="sans-serif" font-size="14" fill="#ffffff" stroke="#000000" stroke-width="2" paint-order="stroke">rc6 row</text>
 <rect x="13760" y="16125" width="295" height="155" fill="#ff5050" fill-opacity="0.10" stroke="#ff5050" stroke-width="10"><title>driver of line X: one inverter, X = NOT g; g arrives in poly along y 16231 from a line at x 13630</title></rect>
 <text x="13776" y="16162" font-family="sans-serif" font-size="29" fill="#ffffff" stroke="#000000" stroke-width="3" paint-order="stroke">driver of line X</text>
@@ -653,8 +653,8 @@
 <text x="7436" y="3004" font-family="sans-serif" font-size="21" fill="#ffffff" stroke="#000000" stroke-width="2" paint-order="stroke">VSS strap</text>
 <rect x="13860" y="15385" width="190" height="130" fill="#ff5050" fill-opacity="0.10" stroke="#ff5050" stroke-width="10"><title>inverter: bd1_an = NOT bd1_a; output goes south on a metal line (x 13783) to the latch's lower half</title></rect>
 <text x="13876" y="15427" font-family="sans-serif" font-size="34" fill="#ffffff" stroke="#000000" stroke-width="3" paint-order="stroke">inverter</text>
-<rect x="13490" y="9050" width="70" height="330" fill="#969696" fill-opacity="0.10" stroke="#969696" stroke-width="10"><title>rc0 to uc_b0: uc_b0's end contact, poly round to the top of bundle track L4</title></rect>
-<text x="13506" y="9072" font-family="sans-serif" font-size="14" fill="#ffffff" stroke="#000000" stroke-width="2" paint-order="stroke">rc0 to uc_b0</text>
+<rect x="13490" y="9050" width="70" height="330" fill="#969696" fill-opacity="0.10" stroke="#969696" stroke-width="10"><title>rc0 into the upper array: uc track 0's end contact, poly round to the top of bundle track L4</title></rect>
+<text x="13506" y="9072" font-family="sans-serif" font-size="14" fill="#ffffff" stroke="#000000" stroke-width="2" paint-order="stroke">rc0 into the upper array</text>
 <rect x="13771" y="14010" width="22" height="690" fill="#969696" fill-opacity="0.10" stroke="#969696" stroke-width="10"><title>wr_r1 track (L10 position): R1 write strobe on to bd1's track k16</title></rect>
 <text x="13787" y="14032" font-family="sans-serif" font-size="14" fill="#ffffff" stroke="#000000" stroke-width="2" paint-order="stroke">wr_r1 track (L10 position)</text>
 <rect x="13814" y="14060" width="22" height="640" fill="#969696" fill-opacity="0.10" stroke="#969696" stroke-width="10"><title>hc0 track (L11 position): hc0 on to bd1's track k17</title></rect>

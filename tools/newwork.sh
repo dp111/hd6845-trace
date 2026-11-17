@@ -7,8 +7,16 @@
 cd "$(dirname "$0")/.." || exit 1
 p="$1"; [ -n "$p" ] || { echo "usage: tools/newwork.sh PREFIX [DIR]"; exit 2; }
 git fetch -q origin || exit 1
-git show "origin/main:claims/$p.md" >/dev/null 2>&1 \
+claim=$(git show "origin/main:claims/$p.md" 2>/dev/null) \
   || { echo "newwork: $p is not claimed on origin/main; run tools/claim.py take first"; exit 2; }
+owner=$(printf '%s\n' "$claim" | sed -n 's/^| Who | \(.*\) |$/\1/p')
+me=$(gh api user -q .login 2>/dev/null || git config user.name)
+[ "$owner" = "$me" ] || { echo "newwork: $p is claimed by $owner, not by you ($me)"; exit 2; }
+# A branch of this name from an earlier, merged run is fine (main fast-forwards over it);
+# one that is not merged is someone's unfinished work: stop rather than build beside it.
+if git rev-parse -q --verify "origin/$p" >/dev/null && ! git merge-base --is-ancestor "origin/$p" origin/main; then
+  echo "newwork: origin/$p exists and is not merged into main: resume it (git worktree add DIR $p) or ask its owner"; exit 2
+fi
 dir="${2:-$(cd .. && pwd)/hd6845-trace-$p}"
 git worktree add -q -b "$p" "$dir" origin/main || exit 1
 ln -s "$PWD/cache" "$dir/cache"
