@@ -1238,3 +1238,32 @@ into firm (rename) and through `?` items (do not, trap 17), plus glossary hints;
 `snapshot` / `compare`. On today's tree it lists, among others, `rc0`..`rc6` ->
 `rc0`..`rc6`, `sl_eq_r5` -> `sl_eq_r5`, `h_eq_r0` -> `h_eq_r0`, and keeps rde's
 data bits 0-4 apart (AMB-019). Not run yet.
+
+## 2026-11-17 14:43  Refresh
+
+The first run of `/refresh6845`. Every rename batch was proved by `tools/names.py
+compare` against the snapshot taken first: 2,112 nets and 3,582 transistors before and
+after, every transistor and connection identical, only names changed (86 nets).
+
+- **Batch 1**: the upper array's counter lines `uc_b0`..`uc_b6` -> `rc0`..`rc6` (they were
+  aliases); `uc_eq_r4/6/7` -> `rc_eq_r4/6/7`; `cdp1_l4719` -> `sl_eq_r5`; `rdp3_n2s1` ->
+  `h_eq_r0`, `rdp3_n0` -> `h_eq_r0half`; R9's match `cdp1_b_eq` and its far end
+  `rcs_bq3335` -> `ra_eq_r9`.
+- **Batch 2**: the data bus is one name per bit, `db_b0`..`db_b7` (it had been `ubus_b#`,
+  `rbus_b#`, `cdp1_*_bl`, `r3_b#_d`, `amr_oa_c#`, `cdp1_lw2`, `tc1_x2`); R8 and R9's bits
+  (`cdp1` rows A and C) are `r8_b#_a/_n2/_q/_m#` and `r9_b#_*`. The cell `cdp1_reg` now
+  takes the whole stem as its tag, and no longer labels its bit line (the bus names it).
+- Wording repaired where the renames made notes circular (ucz's route table, r9m's
+  correction, bust's tables: a note at its top explains the old two-sided tables).
+- **Not renamed, on purpose**: R10 and R11 (`cdp2` rows C, A), whose bits 0-4 rest on
+  AMB-019 (their `cdp2_*_bus` names stay aliases of `db_b#`); R9's comparator cells
+  (`cdp1_b#_*`); aliases that are a cell's own name for a pin (`ar#_q`, `*_tab`,
+  `cdp1_b#_b`); `ra4_drv_in_u` (joined only through `?`).
+- `operation.md`: `ras_shift` = R8 bit 0 AND bit 1 (the bits' identity is now firm, the
+  gate still marked); R9's bit 0 is what selects RA output 0's source in shift mode
+  (firm); names current. 708 of 1,049 equations firm, as before.
+- `out/` rebuilt: 0 errors, 0 warnings, 0 names outside the glossary. Coverage: about
+  54 % traced, 99.3 % of the die rectangle in some package, 0.0 % in neither.
+
+Branches in flight that use an old name fail `tools/mergecheck.py` until they run
+`tools/rename.py OLD NEW` after merging main (the former-names table has every pair).
