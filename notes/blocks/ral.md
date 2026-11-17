@@ -1,6 +1,6 @@
 # ral: the stage in front of the RA pad drivers (x 13990-16330, y 4250-4560)
 
-## Status (2026-11-17 04:46, contributor session)
+## Status (2026-11-17 04:57, contributor session)
 
 **Partly traced** (`trace/ral.txt`, cell `ral_cell`, five copies s0-s4 west to east; s0 is
 RA bit 0's cell, at x 13990-14460). Drawn: the two supply rails per cell, the line
@@ -44,7 +44,7 @@ shot): drawn `?B`.
 | `vcc` | metal | top rail y 4220-4268 | supply | by device orientation, not followed to a labelled rail |
 | `vss` | metal | middle rail y 4397-4446 | supply | same |
 | `ral_frc` | metal | y 4343-4359, x 13990-16330 | in | source not followed |
-| `ral_stb` | metal | y 4540-4556, x 13990-15910 (ends on s4's pad) | in | the sixth line of rab's bundle; source not followed |
+| `ral_stb` | metal | y 4540-4556, x 13990-15910 (ends on s4's pad) | in | the sixth line of rab's bundle; drawn back 9,000 px to x 8350, where it is `tc1_ns4` (glossary) |
 | `rax_o0` | poly | (14000,4500), from rab | in | s0's input, onto the strip by a buried contact (`?B`: round ring in both stripped shots) |
 | `rax_o1` ... `rax_o4` | poly | up x 13995 + dx from pads at (14430,4590), (14863,4635), (15425,4675), (15860,4632) to the buried contact on each strip | in | s1-s4's inputs; s2's and s4's pads at the ends of rab's metals (s4's goes on east along y 4722 to x 15862 and north) |
 | `ra0_drv_in` | poly | x 14331-14349 at y 4480-4525, joins r9c's poly from the pad (14340,4764) | out | s0's output |
