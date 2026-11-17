@@ -294,6 +294,10 @@ cluster (glossary, trace comment), the Status line's Round 3 credit, the invento
 chains D1-D5 and three latch-cell y ranges in `trace/dbus_h.txt`'s comments; and
 `notes/operation.md`'s data-bus row now has the input latches and `dlat_en` (marked).
 
+Round 5 (2026-11-17, an independent agent: the Round 4 fixes, the extraction, `unsure.py
+--equations` against the notes and `operation.md`, the gate): no trace finding; one number
+fixed: D4's latch-cell y range (13890-14350, the master mirrored about y 14350).
+
 ## Ambiguities
 
 - **The tie of `dn_lat`'s load gate** (`?P`, `?D`, `?B` in `dbus_lat`, master 17410-17443 x
@@ -401,7 +405,7 @@ How firm:
 
 | Bit | Data line | Driver (y) | Latch cell (y) | Latch input | Tied to the pin by |
 |---|---|---|---|---|---|
-| 4 | `db_b4` (metal x 16818) | 13660-13860 | 13870-14345 (upside down) | `d4_d`: chain 4's G4, metal x 17250 up to a pad (17206,13999), poly row y 13997 west | chain 4 = D4 by position (chains 2-5 are not followed to their pads: Ambiguities above) |
+| 4 | `db_b4` (metal x 16818) | 13660-13860 | 13890-14350 (upside down) | `d4_d`: chain 4's G4, metal x 17250 up to a pad (17206,13999), poly row y 13997 west | chain 4 = D4 by position (chains 2-5 are not followed to their pads: Ambiguities above) |
 | 5 | `db_b5` (metal x 16862) | 13465-13660 | 14350-14810 | `d5_d`: chain 5's G4, metal x 17252 up and west to a pad (17161,14693), poly row y 14692 west | chain 5 = D5 by position |
 | 6 | `db_b6` (metal x 16908) | 13270-13465 | 14827-15287 | `d6_d`: poly row y 15173 east to the output box (17318,15190) of G4 of buffer 6 (`dbus_in` upside down) | buffer 6's input line is traced from the contact of the D6 pad cell (the `d6_in` row of the input-line table above) |
 | 7 | `db_b7` (poly x 16791) | 13075-13270 | 15304-15764 | `d7_d`: poly row y 15650 east, south at x 17188, east along y 15818 to the output box of G4 of buffer 7 | buffer 7's input line is traced from the contact of the D7 pad cell |

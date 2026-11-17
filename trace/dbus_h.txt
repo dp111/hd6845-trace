@@ -77,7 +77,7 @@ P 16475,13458 x16790 w=20
 # into the latch cell at y 14350-14810
 P 16790,13655 x16410 y14432 x16560 w=16
 # bit 4: row y 13850 west to x 16465, south in the open to y 14258, east into the latch
-# cell at y 13870-14340
+# cell at y 13890-14350
 P 16790,13852 x16465 y14258 x16560 w=18
 # bit 6, areg_w7 on south: diagonal from (16366,14800) to (16458,14905), east into the
 # latch cell at y 14827-15287
