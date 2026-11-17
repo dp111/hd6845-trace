@@ -1,6 +1,6 @@
 # amr: R3's high nibble and its 4-bit comparator (x 11400-13060, y 5540-6450)
 
-## Status (2026-11-17 13:20 (UTC+1), contributor session; the slice, its exit and its inputs independently reviewed)
+## Status (2026-11-17 14:07 +0000, contributor session; the slice, its exit and its inputs independently reviewed, Rounds 1-3)
 
 **The slice is traced** (`trace/amr.txt`, cell `amr_slice`, placed four times; 57 transistors;
 the full extraction has 0 errors, 0 warnings). Each slice is
@@ -26,6 +26,12 @@ high nibble (vertical sync width).
 
 Several joins are marked `?` (Ambiguities).
 
+**Images.** Views of the slice are in `cache/scratch/amrc/`, views of the exit and of the
+routes in `cache/scratch/amr/` (`z1.png`, `z2.png`, `z3.png` and `k1.png` exist in both and
+are different images). A bare file name below is in `cache/scratch/amrc/` in the slice's
+sections and in `cache/scratch/amr/` in the section "The inputs and the match line's route";
+where a slice section cites a route image the directory is named. `cache/` is not in git.
+
 ## Inventory
 
 Four copies of one slice at the datapath pitch (offsets 0, -390, -781, -1171 from the
@@ -41,7 +47,7 @@ differs under its outer line's foot, where the line `amr_eq_r3` has its exit ("W
 | 5620-5880 | the register bit |
 | 5885-6130 | the comparator bit (two gates) |
 | 6140-6275 | big pull-down and the line `amr_eq_r3` (diffusion, y 6246-6272) |
-| 6312 | the three thin metals (data line x 12693, a metal on `n2` x 12735, outer line x 12782) end, rounded, on field: no contact (4x median, `z5.png`), in c1..c3. In c0 the outer line's metal ends 10 px shorter, over the buried contact of `amr_eq_r3` (below) |
+| 6312 | the three thin metals (data line x 12693, a metal on `n2` x 12735, outer line x 12782) end, rounded, on field: no contact (4x median, `cache/scratch/amrc/z5.png`), in c1..c3. In c0 the outer line's metal ends 10 px shorter, over the buried contact of `amr_eq_r3` (below) |
 | 6330-6400 | the q line's arm to a pad (12957,6348) and a poly south: q leaves the slice |
 
 A fifth rail (VSS, x 12998-13044) stands east of the last slice with the two lands that the
@@ -98,9 +104,10 @@ line has no connection there:
   the line, to y 6305, the bottom of the box, crossed by two dark lines only (y 6276, where
   the line's south edge is in the other columns, and y 6287, the box's north side, which
   runs on east as the south edge of the line where it is stepped down, x 11640-11800): the
-  box stands on the line's diffusion (`b5a.png`, `b5b.png` at 5x in four shots; `z1.png` at 8x);
+  box stands on the line's diffusion (`cache/scratch/amr/b5a.png`, `b5b.png` there at 5x in four
+  shots; `cache/scratch/amr/z1.png` at 8x);
 - inside the box: tan, no specks and no green patch. Beside known contacts at the same zoom
-  (`cmp1.png`): a metal contact to diffusion has specks ((11521,5640)), a metal contact to
+  (`cache/scratch/amr/cmp1.png`): a metal contact to diffusion has specks ((11521,5640)), a metal contact to
   poly a green patch ((11611,5928), (11613,6112), (11786,6348)); the box has neither;
 - the metal is not widened over the box, and the dark stretch across it (12 px, y 6278-6289,
   the same in both metal shots) is what a buried contact's outline prints through a metal:
@@ -108,7 +115,7 @@ line has no connection there:
   over the box and ends at y ~6305, 10 px short of where it ends on field in c1..c3;
 - a poly leaves the box south (salmon bar y 6312-6320 in the metal's margin, then orange in
   both chip-2 shots), turns west at y 6338-6356, passes under c0's VSS rail and under the thin
-  metal of `cnt_gab` (x 11396: no pad, no patch, metal unbroken, `z2.png` at 6x) and ends on
+  metal of `cnt_gab` (x 11396: no pad, no patch, metal unbroken, `cache/scratch/amr/z2.png` at 6x) and ends on
   a pad with a contact (11350,6347). From there: the section "The inputs and the match line's route" below.
 
 The other reading, a metal contact from the outer line to the line's diffusion, would make
@@ -162,7 +169,7 @@ the open gaps the chip-2 shots decide: poly is orange in both. Views: `cache/scr
    contact nor the specks of a diffusion contact there (`k34.png`): read as no contact. If it
    were one, the load's gate would be q, which gives no sensible gate.
 3. **How q reaches PE.** PE's head lies on the east arm of the q land in an outlined box
-   (4x median, `z8.png`): `?B`; the short metal x 12957 has a bright block over the same box
+   (4x median, `cache/scratch/amrc/z8.png`): `?B`; the short metal x 12957 has a bright block over the same box
    (`mo1.png`, `mo34.png`): `?C` (butting). Either alone makes PE = q. A second bright block
    on that metal at y 5857-5877 has no contact patch in the clean shot: not drawn.
 4. **East of the big pull-down's east side** (x 12881-12906, y 6176-6250, open gap): an
@@ -190,13 +197,15 @@ under the wide supply metal (y 5200-5550) to a pad on one metal line of a 13-lin
 | c3 | `db_b7` -> bus y 5177 | bus y 4742 = `cdp1_l4676` (an earlier reading that this line ends on `ra_eq_r9` was wrong: `notes/blocks/r9m.md`, correction) |
 | c2 | `db_b6` -> bus y 5135 | `amr_ob_c2` -> bus y 4696 |
 | c1 | `db_b5` -> bus y 5047 | `amr_ob_c1` -> bus y 4657 |
-| c0 | poly from about (11497,5590) diagonally north-east, then north along x about 11645 to a pad near (11645,5005) | poly from about (11580,5590) diagonally, north along x about 11725, then diagonally north-west towards the pad (11650,4500) of `rab`'s bit 0 (`wt.png`): drawn: it is `cdp1_l4544` = `c4l0` (section "The inputs and the match line's route") |
+| c0 | poly from about (11497,5590) diagonally north-east, then north along x about 11645 to a pad near (11645,5005) | poly from about (11580,5590) diagonally, north along x about 11725, then diagonally north-west towards the pad (11650,4500) of `rab`'s bit 0 (`wt.png`, image not kept): drawn: it is `cdp1_l4544` = `c4l0` (section "The inputs and the match line's route") |
 
 The bus lines run west to the staircase of pads at x 11650-11700 and on under the wide
 supply metal x 11280-11600 (the same cross-under as `rab`'s and the strobe's), and
 east for 1,400-4,750 px to a staircase of ends at x 13544, 13546, 13848, 14238, 14630,
 15020, 15280, 15584, 16146, 16926 (y 4787-5196), i.e. into the right datapath at its
-390 pitch. None of these lines is drawn yet (east of x 12100 nothing in the trace).
+390 pitch. (Superseded: this survey ended "None of these lines is drawn yet". They are drawn
+now: the slices' polys north in `trace/amr.txt`, the bus lines in `trace/bust.txt`, "Not
+done" item 6.)
 
 (Withdrawn: an earlier version said here that the input of `rcs_mu`'s inverter is c3's
 outer output. An independent review showed two poly hops on that route step one track,
@@ -211,7 +220,7 @@ from there across all four slices. In each slice it detours south around the dat
 contact land: down the 28 px gap between the outer line and the metal x 12735 (x 12752-12772),
 west along y 5667-5690 across the land's lower part (**the gate of T1**), and up again at
 x 12642-12665 under the VSS rail's edge. The west corner is seen end to end on the 5x median
-(`t_12575_5600.png`); the east leg is an orange band from y 5622 to 5695 in both chip-2
+(`cache/scratch/amrc/t_12575_5600.png`); the east leg is an orange band from y 5622 to 5695 in both chip-2
 shots in all four columns (`wl.png`). Drawn firm for c1..c3 and c0's leg; c0's bottom run and
 west corner `?P` (Ambiguity 6). `tools/unsure.py` no longer lists `wr_r3`.
 
@@ -250,6 +259,17 @@ glossary rows still called `c4l` unidentified and `amr_eq_r3`'s use not found; a
 "Not done" item; the first survey's c0 row; a broken table cell; image paths; the floor
 plan box for `c4l0`'s leg.
 
+Round 3 (2026-11-17, an independent agent): checked the rows of `notes/operation.md` and
+`notes/signals.md` about `amr`, `c4l` and `amr_eq_r3` against `tools/unsure.py`; the layers
+under nine points of the trace with `tools/amr_at.py`; the note on the follower's two false
+jumps; the weak runs that `tools/amr_row.py` reports; and the documents. Its findings were
+in the documents and the floor plan only, fixed: two glossary rows (`c4l#` still "not
+identified"; `db_b6` called an output of c2); the first survey's "none of these lines is
+drawn yet"; image citations that did not resolve (two scratch directories, images not kept);
+drawn geometry that no floor plan box covered (the slices' rails and foot, `wr_r3`'s metal,
+four short stretches of the routes); the status lines; the length of the route's stretch in
+`trace/amr.txt`; this file cited as if it were another.
+
 ## Not done
 
 1. (Done: `amr_eq_r3` leaves by the buried contact under c0's outer metal; the section "The inputs and the match line's route" below.
@@ -263,9 +283,10 @@ plan box for `c4l0`'s leg.
 
 ## The inputs and the match line's route (`trace/amrw.txt`)
 
-### Status (2026-11-17 13:20 (UTC+1), contributor session; independently reviewed)
+### Status (2026-11-17 14:07 +0000, contributor session; independently reviewed, Rounds 1-3)
 
-Wiring drawn (`trace/amrw.txt`; the first 60 px of the result's route are in `trace/amr.txt`),
+Wiring drawn (`trace/amrw.txt`; about the first 320 px of the result's route, from the box to the pad
+(11350,6347), are in `trace/amr.txt`),
 no transistors; the full extraction has 0 errors, 0 warnings and the same transistor count.
 
 - **The four compared lines of `amr` are the 4-bit counter of the left array**, bit for bit:
@@ -282,7 +303,7 @@ no transistors; the full extraction has 0 errors, 0 warnings and the same transi
 
 | Stretch | Layer | Ends | Seen |
 |---|---|---|---|
-| buried contact on the line under c0's outer metal (11601-11628, 6286-6307); south, then west along y 6347 under c0's VSS rail and under `cnt_gab`'s metal | poly | pad (11350,6347) | `notes/blocks/amr.md`; `f1.png` 4x, `z2.png` 6x, overlay `ov1.png` |
+| buried contact on the line under c0's outer metal (11601-11628, 6286-6307); south, then west along y 6347 under c0's VSS rail and under `cnt_gab`'s metal | poly | pad (11350,6347) | the section "Where `amr_eq_r3` leaves" above; `f1.png` 4x, `z2.png` 6x, overlay `ov1.png` |
 | west along y 6349, south at x 11068 | metal | pad (11027,6407) | follower; `w1.png` 3.5x |
 | west along y 6408: the **second line of the central datapath's channel 2**, 3,580 px, no pad | poly | pad (7445,6410) | `st2.png`, `st3.png` 1.6x; `k1.png` 3x at x 7800-8220; `p1.png` 3.5x four shots |
 | west along y 6413 over the crossing fields x 6330-7400 | metal | pad (6145,6410) | follower (1,284 px, no candidate); `w3.png` |
@@ -349,7 +370,7 @@ since the order is kept under any uniform shift.
 `tools/unsure.py`: `c4l0` and `c4l1` are joined through firm geometry. `c4l2` and `c4l3`
 pass over `bust`'s two `?P` rows across the crossing field (y 4657, 4700); here both rows
 were seen end to end in both stripped shots (`cf2.png`), so those two can be made firm.
-`amr_eq_r3` depends on one `?D` (`notes/blocks/amr.md`).
+`amr_eq_r3` depends on one `?D` (the section "Where `amr_eq_r3` leaves" above).
 
 ### Names
 
@@ -367,8 +388,8 @@ vertical sync width counter) and `amr_eq_r3` after it is left to the coordinator
 
 ### Ambiguities
 
-1. The buried contact that starts the route (`notes/blocks/amr.md`, "Where `amr_eq_r3`
-   leaves"): read as a buried contact, not a metal contact, from four shots; the diffusion
+1. The buried contact that starts the route (the section "Where `amr_eq_r3` leaves"
+   above): read as a buried contact, not a metal contact, from four shots; the diffusion
    under it is `?D`.
 2. `bust`'s west pads of the crossing field for `c4l2` and `c4l3` are drawn about 30 px from
    where the pads are ((6492,4655) and (6452,4700) in `cf2.png`, drawn at (6460,4657) and

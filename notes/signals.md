@@ -111,7 +111,8 @@ All five names below are copies of it.
 ## Counters
 
 For `<bit>` read `hc#` (horizontal), `rc#` (character row), `hsw#` (horizontal sync
-width), `sl#` (scan line) or `c4l#` (the left array's 4-bit counter, not identified). Each
+width), `sl#` (scan line) or `c4l#` (the left array's 4-bit counter, compared with R3 bits 4-7 in `amr`: believed the
+vertical sync width counter). Each
 bit is a master-slave pair (`notes/blocks/mra.md`; the node letters used there are given
 in brackets).
 
@@ -258,7 +259,7 @@ None of these rows has a register number yet, so all names are by place. Columns
 | `ral_n1_s#`, `ral_n1_m#` | the input of inverter 2 (the output stage) of `ral` cell s# / MA copy m#: the L-shaped poly; the cell's output = NOT this. Believed NOT node a (inverter 1, not drawn) |
 | `cdp1_b#_n2`, `cdp1_b#_ne` | NOR(a, b) and a XOR b |
 | `ra_eq_r9` | R9's match: NOR of the five `_ne` of the comparator in `cdp1` row B, high when R9 equals the 5-bit value on the `_b` lines, which are the row address as it goes to the RA pins (`ra#_cmp`; marked, AMB-012). In slice 5 the register bit is replaced by `cdp1_b5_a`, made by `tc1`. It runs to the row counter's step logic, where it is the input of the inverter that makes `rcs_mu` (contact (4148,3335); AMB-013, resolved; `notes/blocks/r9m.md`) |
-| `cdp1_l#`, `cdp1_lw#` | horizontal lines of the data bus channel, named by their y; and two write-line links. East of the block they cross under the supply metal and go on east as the bus to the right datapath (`notes/blocks/bust.md`): `cdp1_l4544`..`cdp1_l4676` are the four inputs of `amr`'s comparator (bits 4-7 of the value compared with R3's high nibble); `sl_eq_r5` is R5's match (`sl_eq_r5`, alias); `db_b6` is `amr` c2's inner output |
+| `cdp1_l#`, `cdp1_lw#` | horizontal lines of the data bus channel, named by their y; and two write-line links. East of the block they cross under the supply metal and go on east as the bus to the right datapath (`notes/blocks/bust.md`): `cdp1_l4544`..`cdp1_l4676` are the four inputs of `amr`'s comparator (the 4-bit counter `c4l0`..`c4l3`, compared with R3's high nibble); `sl_eq_r5` is R5's match (`sl_eq_r5`, alias); `db_b6` is `amr` c2's inner line, an input there (the data written into the slice's latch) |
 | `cdp2_a_s#_*` | cdp2 row A (5-bit latch), slice #: `_a` storage node, `_n2` inverse, `_q` output, `_bus` bit line |
 | `cdp2_a_c_s#_*` | cdp2 row C (7-bit latch), the same nodes |
 | `wr_r11`, `wr_r10` | the write strobes of R11 and R10, which are the load strobes of rows A and C: **row A is R11, row C is R10** (`notes/blocks/wrs.md`) |
