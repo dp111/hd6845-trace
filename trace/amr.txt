@@ -1,0 +1,74 @@
+# amr: the logic above the mid-right array (x 11400-13050, y 5250-6450).
+# notes/blocks/amr.md. Four copies of one slice at a pitch of 390 (findcell on the clean
+# shot: dx 0, -390, -781 at 0.91-1.00; -1170 at 0.69-0.75, a partial copy). Columns by
+# their left edge: c0 x 11490 (partial), c1 11880, c2 12270, c3 12660.
+# Drawn so far: only each full slice's two output lines from the top of the slice north
+# to the horizontal bus at y 4650-5180 (wiring, no transistors). The slice is not traced.
+@block amr
+@w M=12 P=18
+@s 24x24
+
+# Each slice has two vertical metals that end at the top on a contact to poly at y 5585
+# (x 12693 and 12782 in c3; follow.py: metal straight down to y 6312, its contacts in the
+# slice not identified). From each contact a poly runs north under the wide supply metal
+# (y 5200-5550) to a pad on one line of the bus; that line runs west to the staircase at
+# x 11650-11700 and east towards the right datapath (not drawn here).
+#   inner line (x 12693 - 390k): pads on bus lines y 5177 (c3), 5135 (c2), 5047 (c1)
+#   outer line (x 12782 - 390k): pads on bus lines y 4742 (c3), 4696 (c2), 4657 (c1)
+# Pads from the 0.85x survey and a 2.6x mosaic of the inner pads
+# (cache/scratch/amr/nl.png, pads.png); the bus lines' y from the metal shots' profile at
+# x 12200.
+
+# c3 outer: drawn by r9m (poly x 12782 from the pad (12780,4738) to y 5550): extended to
+# the slice's contact.
+P 12782,5540 y5590 w=16
+P 12765,5568:12799,5602
+C 12782,5585
+M 12782,5585 y6312
+
+# c3 inner
+P 12672,5568:12706,5602
+C 12690,5585
+M 12693,5585 y6312
+P 12690,5180 y5590
+P 12668,5163:12702,5197
+C 12685,5180
+M 12650,5177 x12720
+
+# c2 outer, inner
+P 12373,5568:12407,5602
+C 12390,5585
+M 12390,5585 y6312
+P 12390,4692 y5590
+P 12373,4675:12407,4709
+C 12390,4692
+M 12350,4696 x12430
+P 12287,5568:12321,5602
+C 12304,5585
+M 12304,5585 y6312
+P 12300,5130 y5590
+P 12278,5113:12312,5147
+C 12295,5130
+M 12260,5135 x12330
+
+# c1 outer, inner
+P 11985,5568:12019,5602
+C 12002,5585
+M 12001,5585 y6312
+P 12000,4652 y5590
+P 11983,4635:12017,4669
+C 12000,4652
+M 11960,4657 x12040
+P 11897,5568:11931,5602
+C 11914,5585
+M 11916,5585 y6312
+P 11910,5043 y5590
+P 11888,5026:11922,5060
+C 11905,5043
+M 11870,5047 x11940
+
+N M 12693,6000 amr_oa_c3
+N M 12390,6000 amr_ob_c2
+N M 12304,6000 amr_oa_c2
+N M 12001,6000 amr_ob_c1
+N M 11916,6000 amr_oa_c1

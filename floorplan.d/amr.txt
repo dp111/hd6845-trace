@@ -1,0 +1,3 @@
+# amr: logic above the mid-right array (surveyed)
+11880,5560:13050,6460  ?logic  amr: four slices at the 390 pitch | one slice repeated (c1-c3 full, c0 at x 11490 partial); two outputs per slice north to the bus y 4657-5177; c3's outer output is rcs_bq3335. Not traced
+11880,4630:12800,5600  route   amr outputs north | six polys under the supply metal from the slices' top contacts (y 5585) to pads on the bus
