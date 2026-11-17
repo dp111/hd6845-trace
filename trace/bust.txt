@@ -311,3 +311,22 @@ P 15001,9335:15035,9369
 C 15018,9352
 M 15016,9345 y9800 w=24
 @alias cdp1_c3_bl rbus_b2
+# Bit 1: ubus_b1's metal (x 13845) on to its end contact (13842,9102); a poly down x 13842 to
+# a contact (13842,9222); a thin metal down x 13842 through the poly rows (no other contact)
+# to a contact (13842,9398); a poly row east along y 9400 to the contact (14625,9400) at the
+# top of rbus_b1's metal (x 14625). Four shots at 2.2x (cache/scratch/bust/b1m.png); the row
+# east in the clean shot at 1.45x (b1r.png).
+M 13845,9050 y9110 w=24
+P 13825,9085:13859,9119
+C 13842,9102
+P 13842,9102 y9222 w=18
+P 13825,9205:13859,9239
+C 13842,9222
+M 13842,9215 y9405 w=12
+P 13825,9381:13859,9415
+C 13842,9398
+P 13842,9400 x14625 w=14
+P 14608,9383:14642,9417
+C 14625,9400
+M 14625,9395 y9605 w=24
+@alias cdp1_c4_bl rbus_b1
