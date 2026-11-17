@@ -1,6 +1,6 @@
 # amr: R3's high nibble and its 4-bit comparator (x 11400-13060, y 5540-6450)
 
-## Status (2026-11-17 14:07 +0000, contributor session; the slice, its exit and its inputs independently reviewed, Rounds 1-3)
+## Status (2026-11-17 14:14 +0000, contributor session; the slice, its exit and its inputs independently reviewed, Rounds 1-5)
 
 **The slice is traced** (`trace/amr.txt`, cell `amr_slice`, placed four times; 57 transistors;
 the full extraction has 0 errors, 0 warnings). Each slice is
@@ -270,6 +270,18 @@ drawn geometry that no floor plan box covered (the slices' rails and foot, `wr_r
 four short stretches of the routes); the status lines; the length of the route's stretch in
 `trace/amr.txt`; this file cited as if it were another.
 
+Round 4 (2026-11-17, an independent agent: the Round 3 fixes, a shapely check of the floor
+plan against every drawn item, the extraction, `unsure.py --equations`): no finding in the
+trace or the floor plan; three small document items, fixed: `notes/operation.md`'s net
+count for this branch, two comments in `trace/amr.txt`, and the comment above the two
+aliases in `trace/bust.txt` ("outputs" -> inputs; a commit of its own, comment only).
+
+Round 5 (2026-11-17, an independent agent: the three fixes against the trace, the
+extraction, the gate, this section and the Status): no findings beyond recording Rounds 4
+and 5 here.
+
+Round 5: no findings.
+
 ## Not done
 
 1. (Done: `amr_eq_r3` leaves by the buried contact under c0's outer metal; the section "The inputs and the match line's route" below.
@@ -283,7 +295,7 @@ four short stretches of the routes); the status lines; the length of the route's
 
 ## The inputs and the match line's route (`trace/amrw.txt`)
 
-### Status (2026-11-17 14:07 +0000, contributor session; independently reviewed, Rounds 1-3)
+### Status (2026-11-17 14:14 +0000, contributor session; independently reviewed, Rounds 1-5)
 
 Wiring drawn (`trace/amrw.txt`; about the first 320 px of the result's route, from the box to the pad
 (11350,6347), are in `trace/amr.txt`),
