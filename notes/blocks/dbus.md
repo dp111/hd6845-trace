@@ -110,7 +110,7 @@ from below the column.
 
 | Line | Route | Seen |
 |---|---|---|
-| `d6_in` | contact (17838,16515) at the foot of the metal that comes down from the contact column of the D6 pad cell's protection structure (the same arrangement as D1's contact at (17835,8405), `p16.png`); poly west along y 16505-16525 under a wide metal, south x 17655-17675, west along y 16658-16680 under the `P_x` metal and the VCC rail (no contact) to a pad (17290,16668); metal north x 17290-17306 beside chain 7, crossing chain 7's poly lines (uniform width, no pad), west at y 15890, north x 17246-17262 to the pad (17253,15693) of G1's gate band | `e6.png` 2.1x, `x67.png` 2x three shots, `e67.png` 2.4x, `m7b.png` 2.9x and `m7.png` 5x three shots, `i67.png` 3.8x; `tools/follow.py` from (17299,16390) north: one piece to (17254,15692); overlays `o2.png`, `o4.png` |
+| `d6_in` | contact (17838,16515) at the foot of the metal that comes down from the contact column of the D6 pad cell's protection structure (the same arrangement as D1's contact at (17835,8405), `p16.png`); poly west along y 16505-16525 under a wide metal, south x 17655-17675, west along y 16658-16680 under the `P_x` metal and the VCC rail (no contact) to a pad (17290,16668); metal north x 17290-17306 beside chain 7, crossing chain 7's poly lines (uniform width, no pad), west at y 15890, north x 17246-17262 to the pad (17253,15693) of G1's gate band | `e6.png` 2.1x, `x67.png` 2x three shots, `e67.png` 2.4x, `m7b.png` 2.9x and `m7.png` 5x three shots, `i67.png` 3.8x; `tools/follow.py` stops at the box (17300-17322 x 16478-16500) from both sides (S from 16390 ends at 16476, N from 16600 at 16516): that stretch is `?M` |
 | `d7_in` | contact (17830,17490) at the head of the metal that goes down into the contact column of the D7 pad cell's protection structure (`d7c.png`); poly west along y 17480-17500 to a contact (17555,17487); metal north x 17548-17565 to a pad (17560,17122); poly north x 17528-17550 under a thin horizontal metal (y 17068-17090, no contact) and under the VCC rail to y 16711; west along y 16700-16722 to a pad (17255,16715); metal north x 17246-17262 to the pad (17253,16322) of G1's gate band | `d7b.png` 1.9x, `d7a.png` 2.7x three shots, `x67.png`, `e67.png`, `i67.png`; follow.py from (17255,16370) south: one piece to (17254,16716); overlay `o4.png` |
 
 So D6's protection column is entered from its lower end and D7's from its upper end. As
@@ -262,6 +262,20 @@ in the 28 px gap, the driver output boxes and `dlat_en` confirmed; the two colli
 polys measured as two. It corrected the data-line load's width (now about 68/27) and
 the notes; the `?` tie of `dn_lat`'s load stays open.
 
+Round 1 (2026-11-17, an independent agent; bits 4-7: `dbh_drv`, `dbh_lat`, the four copies,
+the data-line routes and gate rows, the latch inputs, `dlat_en`'s middle part), with
+template-guided reading as the main suspicion: no wrong device or join; it corrected the
+VSS extension's place, `dlat_en`'s end, D7's poly (made firm), the `?` zone's position in
+the notes, and the notes (details in the section "Bits 4-7").
+
+Round 2 (2026-11-17, an independent agent; the D6/D7 input buffers at 3.6-4x on each copy,
+`d6_in` and `d7_in` from their pad cells, `dlat_en`'s route south and its NOR driver,
+`dbus_n9`): no wrong transistor or connection. Fixed: the stretch of `d6_in`'s metal over
+the box (17300-17322 x 16478-16500) is now `?M` (no metal pixel in either shot, the
+follower stops on both sides; read as passing over, not a contact); `dlat_en`'s metal over
+all five inverter output boxes is `?M` (the same evidence at all five); the notes'
+firm-path claim for D6.
+
 ## Ambiguities
 
 - **The tie of `dn_lat`'s load gate** (`?P`, `?D`, `?B` in `dbus_lat`, master 17410-17443 x
@@ -375,7 +389,9 @@ How firm:
 
 Firm geometry (no `?` on the path): data line k - driver k - gate row - latch cell, for all
 four; latch cell - row - metal - `dk_d` of chain k for k = 4, 5; and latch cell - row -
-`dk_d` of chain k - `dk_in` - the pad cell's contact for k = 6, 7. What rests on
+`dk_d` of chain k - `dk_in` - the pad cell's contact for k = 7, and for k = 6 except one
+40 px stretch of `d6_in`'s metal (y 16470-16520, over a box) drawn `?M`: neither metal shot
+shows metal there and the follower stops at it from both sides (review). What rests on
 position: that chains 4 and 5 are D4's and D5's (as in `dbus`). The numbering is self-consistent: the bus bit order
 (`bust`: register widths) and the pad order agree for all eight bits if the four latch
 cells are D4-D7 from top to bottom.

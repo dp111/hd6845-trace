@@ -349,7 +349,9 @@ P 17145,14678:17178,14708
 # the inverter dbus_n9 below (see there): read as NO contact (notes, Ambiguities).
 P 17235,15678:17300,15709          # pad and west end of G1's gate band
 C 17253,15693 s=24x24
-M 17254,15683 y15890 x17298 y16676 w=16
+M 17254,15683 y15890 x17298 y16478 w=16
+?M 17298,16470 y16520 w=16          # over the box 17300-17322 x 16478-16500: no metal pixel in either metal shot for y 16476-16515 and the follower stops on both sides (review); read as passing over it
+M 17298,16512 y16676 w=16
 C 17290,16668 s=24x24
 P 17272,16652:17310,16685
 P 17290,16669 x17665 w=22

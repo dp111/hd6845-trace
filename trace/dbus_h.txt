@@ -221,8 +221,9 @@ N P 17290,15818 d7_d
 # ---- dlat_en south of (16772,15803). The metal goes on south at x 16762-16780 over the
 # output boxes of the five inverters of this column's lower part (y 15810-16360; the boxes
 # are poly-on-diffusion boxes, cream in the clean shot, and the metal looks the same over
-# all five: read as no contact, since five outputs cannot share a metal; the first
-# crossing is drawn ? because the dbh review read (16772,15803) as an end), turns west at
+# all five: read as no contact, since five outputs cannot share a metal; all five
+# crossings are drawn ? (the first review read (16772,15803) as an end; the second: the
+# metal looks alike over all five, dark runs 26-29 px, longer than known pass-overs)), turns west at
 # y 16498 to a contact (16577,16495), poly west under the VCC rail to a contact
 # (16443,16495), metal west and south x 16427 to a contact (16424,16860), poly row west
 # along y 16853-16877 under cs_d, rs_d, rw_d, bd2_rs_n, the metal x 16205 and e_b (no pad
@@ -230,8 +231,8 @@ N P 17290,15818 d7_d
 # VSS rail x 16003-16053.
 # cache/scratch/dbl67: de1.png 4x four shots, L1m.png / L1a.png 1.65x, de2.png 2.6x,
 # de3.png, de4.png, n3.png 3.3x; tools/follow.py in stages.
-?M 16772,15796 y15880 w=14
-M 16772,15872 y16498 x16565 w=14
+?M 16772,15796 y16370 w=14            # over all five inverter output boxes (review: mark all five or none)
+M 16772,16362 y16498 x16565 w=14
 C 16577,16495 s=24x24
 P 16560,16480:16600,16512
 P 16435,16500 x16590 w=26
