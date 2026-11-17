@@ -13,17 +13,17 @@ errors. From the top:
 | 5710-6090 | comparator of **R5** (5 bits) and, 477 px to its right, comparator of **R3** (4 bits) | 5 + 4 | scan line counter `sl0`-`sl4`; horizontal sync width counter `hsw0`-`hsw3` |
 | 6095-6365 | register **R5** (5 latches) and register **R3**, one nibble (4 latches) | 5 + 4 | |
 | 6365-6900 | routing zone | | |
-| 6902-7282 | comparator of **R7** | 7 | the seven counter lines `uc_b0`-`uc_b6` of the array below |
+| 6902-7282 | comparator of **R7** | 7 | the seven counter lines `rc0`-`rc6` of the array below |
 | 7289-7559 | register **R7** (7 latches) | 7 | |
-| 7662-8042 | comparator of **R6** (its register row is rdp2's, below) | 7 | `uc_b0`-`uc_b6` |
+| 7662-8042 | comparator of **R6** (its register row is rdp2's, below) | 7 | `rc0`-`rc6` |
 
-Results: `sl_eq_r5`, `hsw_eq_r3`, `uc_eq_r7`, `uc_eq_r6` (each high when all its bits
+Results: `sl_eq_r5`, `hsw_eq_r3`, `rc_eq_r7`, `rc_eq_r6` (each high when all its bits
 match: a row-wide NOR of the per-bit XORs, as in the rows below).
 
-Not done: where `sl_eq_r5` (leaves north), `hsw_eq_r3` and `uc_eq_r7` (leaves west along
+Not done: where `sl_eq_r5` (leaves north), `hsw_eq_r3` and `rc_eq_r7` (leaves west along
 y 6820) go; the data lines of R3 below their latch row; the tops of the data lines
-(they go north in poly under the wide supply metal y 5450-5545); the tops of `ubus_b5`
-and `ubus_b6`; the strap tracks that tap single register bits (below).
+(they go north in poly under the wide supply metal y 5450-5545); the tops of `db_b5`
+and `db_b6`; the strap tracks that tap single register bits (below).
 
 ## How the rows were found and checked
 
@@ -40,7 +40,7 @@ pitch of the array below and four more, 477 px (not 390) further right.
   where `trace/mrach.txt` brings `wr_r7` up track T3.
 - **R6's comparator**: its match line leaves west along y 7572-7588 to (13425,7585), the
   line the wiring channel takes down track T5 to the strobe channel's track k4. That
-  track is therefore `uc_eq_r6`.
+  track is therefore `rc_eq_r6`.
 - **R5** (the five latches): the wiring channel's track T2 (`wr_r5`) ends on a contact
   (13170,6345); its poly runs east along y 6335-6355 into the first latch's strobe loop.
   The strobe line ends, rounded, at x 15355, after the fifth latch (3x view `stb1.png`).
@@ -48,7 +48,7 @@ pitch of the array below and four more, 477 px (not 390) further right.
   (13310,6387); its poly runs east along y 6377-6395 *below* the row to x 15437 and turns
   up into the strobe loop of the first of the four latches (`stb1.png`, `stb2.png`).
 
-R5 shares the data lines `ubus_b0`-`ubus_b4` with R7, R6 and R4 (one metal each from
+R5 shares the data lines `db_b0`-`db_b4` with R7, R6 and R4 (one metal each from
 y 5632 to y 8815). R3 has four data lines of its own.
 
 ## What identifies the counters, and the bit order
@@ -88,12 +88,12 @@ Seen, not drawn:
 - The right group's rails shift 88 px west by diagonals at y 6560-6680 to become the
   rails of the array below.
 - R3's four data lines below the latch row: drawn by `r3d` to the data bus (bits 0-3).
-  `r3_b0_d` and `r3_b1_d` end on contacts (15490,6775) and (15880,6735) on poly lines east;
-  `r3_b2_d` turns east as metal to a contact (16362,6688); `r3_b3_d` runs straight on. The
+  `db_b0` and `db_b1` end on contacts (15490,6775) and (15880,6735) on poly lines east;
+  `db_b2` turns east as metal to a contact (16362,6688); `db_b3` runs straight on. The
   metals south are x 16274, 16404, 16620, 16664 (`notes/blocks/r3d.md`).
 - A thin metal on the strap track of the last R5 slice (x 15250-15277) comes down to a
   contact (15255,6815); poly east to a contact (15385,6815) at the top of a metal at
-  x 15390 (`ubus_b5`'s position). So that track may be how `ubus_b5` reaches the north.
+  x 15390 (`db_b5`'s position). So that track may be how `db_b5` reaches the north.
 - The seven `uc` lines end at y 6864-6872, just above R7's comparator: nothing in this
   block drives them. They are fed in the routing zone of `rdp2` (y 9080-9560).
 

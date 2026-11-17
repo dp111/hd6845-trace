@@ -42,7 +42,7 @@ slice) at x 13783 + 390 K, i.e. s(K) = right-datapath column c(K-1); s0 lies lef
   13478,10700), `h_eq_r1` **south** (out at 13434,13480, bd1's track k8). Neither is
   gated or latched inside the region.
 - The R0 match itself (rdp2's `h_eq_r0`) crosses this region in the bundle as
-  `rdp3_n2s1`: in on L2 at (13434,10700), jog left at y 12486, out on L1 at
+  `h_eq_r0`: in on L2 at (13434,10700), jog left at y 12486, out on L1 at
   (13391,13480) = bd1's track k7. No contact, gate or latch on the way.
 - Not done: only details (see the end).
 
@@ -250,7 +250,7 @@ displayed part of the line.
 
 ### Row AR (first run): 5 bits, the address register
 
-Instances `ar_s1`..`ar_s5`. Data `rbus_b0`..`s5`; strobe `ar_load` (joined to
+Instances `ar_s1`..`ar_s5`. Data `db_b0`..`s5`; strobe `ar_load` (joined to
 `ar_load` in zz_joins); outputs `arK_q` go right at y 13352-13481 with a poly
 cross-under beneath each VCC rail (joined to `ar0`..`ar4`).
 
@@ -285,10 +285,10 @@ a net. Each net, from north to south (all drawn; overlay `ov_bun1.png`):
 
 | Net | North end | Path | South end |
 |---|---|---|---|
-| `rdp3_n0` | L0 at y 10700 | straight down L0 to y 12789, steps left to x 13307 | leaves the region west/south at (13307,12850); the track at x 13307 above y 12745 is another line, which turns west there |
+| `h_eq_r0half` | L0 at y 10700 | straight down L0 to y 12789, steps left to x 13307 | leaves the region west/south at (13307,12850); the track at x 13307 above y 12745 is another line, which turns west there |
 | `inh_rc` | poly pad from the west, contact (13346,12829) | L0 | L0 at y 13480 (bd1's k6 = `inh_rc`) |
 | `wr_r4` | L1 at y 10700 | L1 to contact (13390,12438); poly link east y 12426-12454 under L2, L3; contact (13522,12440); L4 | L4 at y 13480 = bd1's k10 = **`wr_r4`** (so R4's write strobe goes north on L1) |
-| `rdp3_n2s1` | L2 at y 10700 | L2, jog left at y 12486, L1 | L1 at y 13480 (bd1's k7, untraced there) |
+| `h_eq_r0` | L2 at y 10700 | L2, jog left at y 12486, L1 | L1 at y 13480 (bd1's k7, untraced there) |
 | `h_eq_r2` | L3 at y 10700 | L3 down to contact (13477,10857) | (poly east to comparator B) |
 | `h_eq_r1` | (poly from comparator A) contact (13479,11703) | L3, jog left at y 12530, L2 | L2 at y 13480 (bd1's k8, untraced there) |
 | `rc0` | L4 at y 10700 | L4 to contact (13522,12375); poly west y 12387-12407 under L3..L0 | leaves west at (13330,12397) |
@@ -368,12 +368,12 @@ North edge, y 10700 (all metal, all continue into rdp2):
 
 | Name | x | Direction | What |
 |---|---|---|---|
-| `rbus_b7`..`s7` | 13845, 14236, 14626, 15016, 15407, 15797, 16187, 16577 | through | data lines (rdp2: s0's own line ends at y 10567, in row RC) |
-| `rbus_b7` (second branch) | 16838 (drawn to y 10745) | through | bus s0 on the strap track of slice s7; rdp2 follows it north past y 9440 (its `rdp3_t16837`), so this is how bit s0 reaches the upper array |
+| `db_b7`..`s7` | 13845, 14236, 14626, 15016, 15407, 15797, 16187, 16577 | through | data lines (rdp2: s0's own line ends at y 10567, in row RC) |
+| `db_b7` (second branch) | 16838 (drawn to y 10745) | through | bus s0 on the strap track of slice s7; rdp2 follows it north past y 9440 (its `rdp3_t16837`), so this is how bit s0 reaches the upper array |
 | `hc7`..`s7` | 13931, 14321, 14712, 15102, 15492, 15882, 16272, 16663 | out (to rdp2's R0 comparator) | lines compared with R1 and R2; rdp2 finds no driver either and has them end at y 9705-10220, so they are driven from the lower left |
-| `rdp3_n0` | 13348 (L0) | in | rdp2's `h_eq_r0half` (its comparator D); goes south, leaves at (13307,12850) |
+| `h_eq_r0half` | 13348 (L0) | in | rdp2's `h_eq_r0half` (its comparator D); goes south, leaves at (13307,12850) |
 | `wr_r4` | 13391 (L1) | out (driven from the south) | `wr_r4` going north = rdp2's `wr_r4` |
-| `rdp3_n2s1` | 13434 (L2) | in | **rdp2's `h_eq_r0`: R0 = c**, the end-of-line match; passes through here, leaves south on L1 |
+| `h_eq_r0` | 13434 (L2) | in | **rdp2's `h_eq_r0`: R0 = c**, the end-of-line match; passes through here, leaves south on L1 |
 | `h_eq_r2` | 13478 (L3) | **out** | **R2 = c**; rdp2 has it end on a contact at (13475,9705), poly west along y 9705 |
 | `rc0` | 13521 (L4) | ? | turns west at y 12397 |
 | `rc1` | 13565 (L5) | ? | turns west at y 11920 |
@@ -394,7 +394,7 @@ West edge, x 13330 (all poly, going west):
 | `rc2` | 11440 | from L6 north |
 | `rc1` | 11920 | from L5 north |
 | `rc0` | 12397 | from L4 north |
-| `rdp3_n0` | 12789 (metal, stepping to x 13307) | from L0 north |
+| `h_eq_r0half` | 12789 (metal, stepping to x 13307) | from L0 north |
 | `inh_rc` | 12829 (pad at 13328-13364) | to L0 south (`inh_rc`); the pad's poly comes from the west, not followed |
 | `hc7` | 13004 | c line of slice s0 |
 | `hc6` | 13418 | c line of slice s7 |
@@ -404,7 +404,7 @@ South edge, y 13480 (metal unless noted):
 | Name | x | bd1's track at y 14700 | What |
 |---|---|---|---|
 | `inh_rc` | 13347 (L0) | k6 `inh_rc` | |
-| `rdp3_n2s1` | 13391 (L1) | k7 (untraced) | **R0 = c** (`h_eq_r0`), out |
+| `h_eq_r0` | 13391 (L1) | k7 (untraced) | **R0 = c** (`h_eq_r0`), out |
 | `h_eq_r1` | 13434 (L2) | k8 (untraced) | **R1 = c**, out |
 | `hc2` | 13478 (L3) | k9 (untraced) | |
 | `wr_r4` | 13521 (L4) | k10 `wr_r4` | in |
@@ -427,8 +427,8 @@ Lower right, y 12900 (x > 15800):
 
 | Name | Layer | x | What |
 |---|---|---|---|
-| `rbus_b7` | poly | 16798 | going south |
-| `rbus_b4`, `s6`, `s7` | metal | 16818, 16862, 16908 | going south |
+| `db_b7` | poly | 16798 | going south |
+| `db_b4`, `s6`, `s7` | metal | 16818, 16862, 16908 | going south |
 | `vcc` | metal | 16262 (diagonal), 16520 | |
 | `vss` | metal | 16428, 16690 | |
 

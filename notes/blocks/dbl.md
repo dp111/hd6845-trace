@@ -3,7 +3,7 @@
 ## Status (2026-11-17 08:51, contributor session)
 
 Wiring only (`trace/dbl.txt`), no transistors, no new net names. Stacked on `r3d`.
-Data bus bits 0-3 (`cdp1_c5_bl`..`cdp1_c2_bl`) are followed from the right datapath's
+Data bus bits 0-3 (`db_b0`..`db_b3`) are followed from the right datapath's
 routing zone to the wiring field left of the `dbus` column, and down it to a contact in
 each of the units 0-3: **bit k ends in unit k**, on a poly that runs east into that unit's
 cluster (not traced, so the extraction does not yet join a data line to a pin).

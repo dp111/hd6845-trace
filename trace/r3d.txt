@@ -6,16 +6,16 @@
 # pads), each to a contact under one of four thin metals x 16274, 16404, 16620, 16664 (metal
 # test in both metal shots at y 7000, 8000, 8800, 9050; the rails between them are
 # x 16340, 16512 and 16730). The four metals go north through the bundle right of the
-# upper array to R3's data lines below their latch row (rdp1's r3_b0_d..r3_b3_d, which
+# upper array to R3's data lines below their latch row (rdp1's db_b0..db_b3, which
 # rdp1 drew down to y 6400 and described as "shifting sideways ... towards the data bus").
 # Ends and corners at 2.4-5x in metal, metal1 and acid1b (r3d/j1.png, b1top.png,
 # b3top.png, b1vcc.png, e_b01.png, e_b23.png under cache/scratch/bust and r3d).
 
-# ---- bit 0 -> r3_b0_d
-# Row y 9445 on east from rbus_b0's top contact to a contact (16273,9443) (the row ends
+# ---- bit 0 -> db_b0
+# Row y 9445 on east from db_b0's top contact to a contact (16273,9443) (the row ends
 # there: field east of the pad, 4.5x); metal x 16274 north (one piece, tools/follow.py to
 # 6776) to a contact (16273,6772); poly west along y 6775 (straight at 3x, rows3_*.png) to
-# a contact (15490,6775) at the foot of r3_b0_d's metal x 15492.
+# a contact (15490,6775) at the foot of db_b0's metal x 15492.
 P 14238,9445 x16273 w=14
 P 16256,9426:16290,9460
 C 16273,9443
@@ -27,12 +27,12 @@ P 15473,6758:15507,6792
 C 15490,6775
 M 15494,6400 y6782 x15490 w=12
 
-# ---- bit 1 -> r3_b1_d
-# Row y 9400 on east from rbus_b1's top contact to a contact (16400,9400) (the row also
+# ---- bit 1 -> db_b1
+# Row y 9400 on east from db_b1's top contact to a contact (16400,9400) (the row also
 # runs on east past it: not drawn); metal x 16404 north to a contact (16400,6820), which is
 # separate from the VCC metal box above it (15 px gap in both metal shots at 5x,
 # b1vcc.png); poly north under the box to y 6735 and west along y 6735 (straight at 3x) to
-# a contact (15880,6735) at the foot of r3_b1_d's metal x 15884 (continuous from y 6400 at
+# a contact (15880,6735) at the foot of db_b1's metal x 15884 (continuous from y 6400 at
 # 2.6x in both metal shots, b1top.png).
 P 14625,9400 x16400 w=14
 P 16383,9383:16417,9417
@@ -45,10 +45,10 @@ P 15863,6718:15897,6752
 C 15880,6735
 M 15884,6400 y6742 x15880 w=12
 
-# ---- bit 2 -> r3_b2_d
-# Row y 9355 on east from rbus_b2's top contact to a contact (16615,9355); metal x 16620
+# ---- bit 2 -> db_b2
+# Row y 9355 on east from db_b2's top contact to a contact (16615,9355); metal x 16620
 # north to a contact (16615,6760); poly north to y 6688 and west along it to a contact
-# (16362,6688); from it r3_b2_d's own metal goes west along y 6688 and turns north as
+# (16362,6688); from it db_b2's own metal goes west along y 6688 and turns north as
 # x 16274 (j1.png, 2.4x). Bit 0's metal x 16274 below ends on its own contact (16273,6772):
 # no metal between y 6700 and 6760 in both metal shots.
 P 15018,9352 x16615 y9355 w=14
@@ -62,9 +62,9 @@ P 16345,6671:16379,6705
 C 16362,6688
 M 16274,6400 y6688 x16370 w=16
 
-# ---- bit 3 -> r3_b3_d
-# Row y 9310 on east from rbus_b3's top contact to a contact (16660,9312); metal x 16664
-# north, one piece (tools/follow.py from 9280 to 5670, through r3_b3_d's metal; poly
+# ---- bit 3 -> db_b3
+# Row y 9310 on east from db_b3's top contact to a contact (16660,9312); metal x 16664
+# north, one piece (tools/follow.py from 9280 to 5670, through db_b3's metal; poly
 # crossings at y 6430-6450 at 3x in both metal shots, b3top.png).
 P 15402,9310 x16660 w=14
 P 16643,9295:16677,9329
@@ -72,7 +72,3 @@ C 16660,9312
 M 16664,6400 y9320 w=12
 
 # The joins: R3's low-nibble data lines are data bus bits 0-3.
-@alias cdp1_c5_bl r3_b0_d
-@alias cdp1_c4_bl r3_b1_d
-@alias cdp1_c3_bl r3_b2_d
-@alias cdp1_c2_bl r3_b3_d

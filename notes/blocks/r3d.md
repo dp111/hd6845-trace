@@ -3,9 +3,9 @@
 ## Status (2026-11-17 08:41, contributor session)
 
 Wiring only (`trace/r3d.txt`), no transistors. The four data lines of R3's 4-bit register
-row in the right datapath's top array (`rdp1`'s `r3_b0_d`..`r3_b3_d`, which `rdp1` drew
+row in the right datapath's top array (`rdp1`'s `db_b0`..`db_b3`, which `rdp1` drew
 down to y 6400) are followed to the data bus: **`r3_bK_d` is data bit K for K = 0-3**
-(joins by `@alias` to `cdp1_c5_bl`, `cdp1_c4_bl`, `cdp1_c3_bl`, `cdp1_c2_bl`). Stacked
+(joins by `@alias` to `db_b0`, `db_b1`, `db_b2`, `db_b3`). Stacked
 on `bust`, which drew the data bus lines and their routing-zone rows.
 
 ## Route
@@ -20,17 +20,17 @@ below their latch row:
 
 | Bit | Row (y), contact | Thin metal | Top | R3 line |
 |---|---|---|---|---|
-| 0 | 9445, (16273,9443) | x 16274 | contact (16273,6772); poly west along y 6775 (3x) to a contact (15490,6775) | `r3_b0_d` (metal x 15492 from y 6400) |
-| 1 | 9400, (16400,9400) | x 16404 | contact (16400,6820), clear of the VCC metal box above it (15 px gap, 5x); poly north to y 6735, west (3x) to a contact (15880,6735) | `r3_b1_d` (metal x 15884 from y 6400, 2.6x) |
-| 2 | 9355, (16615,9355) | x 16620 | contact (16615,6760); poly north to y 6688 and west to a contact (16362,6688) | `r3_b2_d`: its metal x 16274 from y 6400 turns east along y 6688 to that contact (2.4x) |
-| 3 | 9310, (16660,9312) | x 16664 | straight on north as `r3_b3_d` (follower 9280 to 5670) | `r3_b3_d` |
+| 0 | 9445, (16273,9443) | x 16274 | contact (16273,6772); poly west along y 6775 (3x) to a contact (15490,6775) | `db_b0` (metal x 15492 from y 6400) |
+| 1 | 9400, (16400,9400) | x 16404 | contact (16400,6820), clear of the VCC metal box above it (15 px gap, 5x); poly north to y 6735, west (3x) to a contact (15880,6735) | `db_b1` (metal x 15884 from y 6400, 2.6x) |
+| 2 | 9355, (16615,9355) | x 16620 | contact (16615,6760); poly north to y 6688 and west to a contact (16362,6688) | `db_b2`: its metal x 16274 from y 6400 turns east along y 6688 to that contact (2.4x) |
+| 3 | 9310, (16660,9312) | x 16664 | straight on north as `db_b3` (follower 9280 to 5670) | `db_b3` |
 
 Bit 0's thin metal x 16274 has one tap on the way, a contact at (16272,9205) with a poly
 leaving east along y 9205 (both metal shots and acid1b at 4.5-6x): the data line's branch
 to the D-pin units, followed in `dbl`. The other three metals have no contact between their
 ends (follower started on each line; independent review surveyed the bundle).
 
-The x 16274 line is two pieces: `r3_b2_d` above (to y 6700, then east) and bit 0 below
+The x 16274 line is two pieces: `db_b2` above (to y 6700, then east) and bit 0 below
 (from its contact at y 6772); both metal shots show no metal between (`j1.png`).
 
 Images: `cache/scratch/r3d/` (`ov_top.png`, `ov_bot.png` are the overlays) and
@@ -51,8 +51,8 @@ Images: `cache/scratch/r3d/` (`ov_top.png`, `ov_bot.png` are the overlays) and
 `rdp1` drew `hsw2`'s counter track ending on a contact at (16270,6470), with its metal
 hooked west to x 16258 and its poly line y 6472 ending at x 16260. Both metal shots and the
 clean shot (2.4x, `b2top.png`) put the ring and the pad at about (16315,6477): the metal
-hooks west only from x 16358 to the ring, and `r3_b2_d`'s thin metal x 16274 passes west
-of it with a clear gap. As drawn, extending `r3_b2_d` down shorted it to `hsw2`. The fix
+hooks west only from x 16358 to the ring, and `db_b2`'s thin metal x 16274 passes west
+of it with a clear gap. As drawn, extending `db_b2` down shorted it to `hsw2`. The fix
 moves the contact, the metal's end and the poly's end; the extraction is otherwise
 unchanged (same transistor count; `hsw2` still reaches its comparator slice).
 

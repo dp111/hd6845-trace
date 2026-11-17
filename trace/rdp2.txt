@@ -122,8 +122,7 @@ P 13923,10000:13947,10074
 P 13420,10001:13947,10020            # line west
 P 13420,9998:13452,10027             # pad
 C 13434,10012 s=26x26                # to track L2
-M 13434,9996 y10700 w=18             # L2 south: rdp3 draws it on from y 10700 as rdp3_n2s1
-@alias h_eq_r0 rdp3_n2s1
+M 13434,9996 y10700 w=18             # L2 south: rdp3 draws it on from y 10700 as h_eq_r0
 # --- right end: lower VSS land that slice s7's T7 and series pair end on (ninth rail)
 D 16886,10398:16940,10475
 C 16903,10435 s=24x40
@@ -252,8 +251,7 @@ P 13950,9523:13963,9845
 P 13330,9828:13963,9845
 P 13330,9820:13368,9851              # pad
 C 13346,9837 s=26x26                 # to track L0
-M 13348,9822 y10700 w=18             # L0 south: rdp3 draws it on from y 10700 as rdp3_n0
-@alias h_eq_r0half rdp3_n0
+M 13348,9822 y10700 w=18             # L0 south: rdp3 draws it on from y 10700 as h_eq_r0half
 # --- right end: lower VSS land that slice s7's T7 and series pair end on (ninth rail)
 D 16886,9877:16940,9954
 C 16903,9914 s=24x40
@@ -338,7 +336,7 @@ M 13391,9297 y10700 w=18
 # Comparator E (y 8415-8806) above RE: the same cells again, seven slices; the load of
 # its eq line is in sm1. Compared with band A by tools/rdp3_cmp.py: identical, T2
 # pieces included (plain metal pieces with no contact, as in rdp3's bands).
-#   rdp2_ce_K_x = uc_K XOR q(RE, K);  uc_eq_r4 = NOR of the seven x
+#   rdp2_ce_K_x = uc_K XOR q(RE, K);  rc_eq_r4 = NOR of the seven x
 # =====================================================================================
 @inst rdp2_xor -1171,-1670 tag=r4c_b0
 @inst rdp3_mpd1 -781,-3361 tag=r4c_b0
@@ -356,7 +354,7 @@ M 13391,9297 y10700 w=18
 @inst rdp3_mpd 1170,-3361 tag=r4c_b6
 # --- eq line: row-wide diffusion strip, ends under the rails x 13393 and x 16125
 D 13378,8415:16144,8437
-N D 15000,8426 uc_eq_r4
+N D 15000,8426 rc_eq_r4
 # --- its exit, in sm1 (same structure as comparator C's): tab up at x 13535-13557,
 # buried contact, poly up and then WEST along y 8331-8347 under the rail x 13393 and
 # out of the region
@@ -403,34 +401,34 @@ M 15552,8300 y9540 w=56
 M 15942,8300 y9540 w=56
 # data lines of the upper array (one contact per latch cell)
 M 13455,8300 y8815 w=24
-N M 13455,8500 ubus_b0
+N M 13455,8500 db_b0
 M 13845,8300 y8815 w=24
-N M 13845,8500 ubus_b1
+N M 13845,8500 db_b1
 M 14236,8300 y8815 w=24
-N M 14236,8500 ubus_b2
+N M 14236,8500 db_b2
 M 14626,8300 y8815 w=24
-N M 14626,8500 ubus_b3
+N M 14626,8500 db_b3
 M 15016,8300 y8815 w=24
-N M 15016,8500 ubus_b4
+N M 15016,8500 db_b4
 M 15407,8300 y8815 w=24
-N M 15407,8500 ubus_b5
+N M 15407,8500 db_b5
 M 15797,8300 y8815 w=24
-N M 15797,8500 ubus_b6
+N M 15797,8500 db_b6
 # c lines of the upper array (two contacts per XOR cell)
 M 13541,8300 y8815 w=22
-N M 13541,8500 uc_b0
+N M 13541,8500 rc0
 M 13931,8300 y8815 w=22
-N M 13931,8500 uc_b1
+N M 13931,8500 rc1
 M 14321,8300 y8815 w=22
-N M 14321,8500 uc_b2
+N M 14321,8500 rc2
 M 14712,8300 y8815 w=22
-N M 14712,8500 uc_b3
+N M 14712,8500 rc3
 M 15102,8300 y8815 w=22
-N M 15102,8500 uc_b4
+N M 15102,8500 rc4
 M 15492,8300 y8815 w=22
-N M 15492,8500 uc_b5
+N M 15492,8500 rc5
 M 15882,8300 y8815 w=22
-N M 15882,8500 uc_b6
+N M 15882,8500 rc6
 # sm1 only: a thin through line on the strap track
 M 13714,8300 y8815 w=20
 N M 13714,8500 rdp2_t13714
