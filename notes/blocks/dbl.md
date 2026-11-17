@@ -3,11 +3,10 @@
 ## Status (2026-11-17 08:51, contributor session)
 
 Wiring only (`trace/dbl.txt`), no transistors, no new net names. Stacked on `r3d`.
-Data bus bits 0-3 (`cdp1_c5_bl`..`cdp1_c2_bl`) are followed from the right datapath's
+Data bus bits 0-3 (`db_b0`..`db_b3`) are followed from the right datapath's
 routing zone to the wiring field left of the `dbus` column, and down it to a contact in
 each of the units 0-3: **bit k ends in unit k**, on a poly that runs east into that unit's
-cluster. The clusters are traced since (`notes/blocks/dbus.md`): the poly ends on the
-data line node of the unit's bus driver, so line k is driven by pin Dk's input latch.
+cluster (not traced, so the extraction does not yet join a data line to a pin).
 
 ## Route
 
@@ -20,7 +19,7 @@ data line node of the unit's bus driver, so line k is driven by pin Dk's input l
 
 The four metals are four of the five vertical lines of `dbus`'s wiring field (x 17078,
 17166, 17210 and the short x 17125; the fifth, x 17122 below unit 0, is D1's `P_y`, and
-x 17253 is `dlat_en`). They turn into the field as four nested L's at y 9210-9660
+x 17253 is `M_b`). They turn into the field as four nested L's at y 9210-9660
 (2.1x, `cache/scratch/r3d/stair.png`; overlay `cache/scratch/dbl/ov1.png`).
 
 Evidence:
@@ -34,7 +33,7 @@ Evidence:
   9700-12206, x 17210 9700-13572, one piece each. Its other contact candidates on x 17166
   and x 17210 are plain line, a poly corner and dirt (4x mosaic, `r3d/taps.png`). A poly
   U of another net lies under the x 17210 metal at y 10480-10795 (both arms leave east
-  under `dlat_en`): no ring or pad in either metal shot, so no tap (review, 5x).
+  under `M_b`): no ring or pad in either metal shot, so no tap (review, 5x).
 - Ends: each metal ends on a ring with a poly leaving east (3-3.5x, `r3d/b1end.png`,
   `b2end.png`, `b3end.png`, `u0.png`). Below bit 1's end a separate metal starts at
   x 17078 on its own contact (17077,10925).
@@ -45,13 +44,13 @@ Evidence:
   for bit 1, 17165-17208 for the others). `dbus` traced chain 1 from the D1 pad (and
   chain 0 from D0); chains 2-5 are tagged by position. So the data line numbered bit 1 (by
   `bust`'s register-width match) goes to D1's unit and bit 0 to D0's: an independent check
-  of the bit numbering for those two, and consistent for bits 2 and 3. The clusters are now
-  traced (`notes/blocks/dbus.md`), so for D0 and D1 this is a drawn join to the pins.
+  of the bit numbering for those two, and consistent for bits 2 and 3. It becomes a join
+  to the pins when the clusters are traced.
 - Each end's poly runs east to a heavy-outlined box of about 25 x 25 px at x 17300-17325
   with no poly beyond it (independent review, 5x in three shots): the look of a buried
-  contact. It is: each box ties the data line to the node of the unit's bus driver
-  (`dbus_drv` in `notes/blocks/dbus.md`), so the unit drives the line from the pin's latch
-  (pin to line); nothing in the unit reads the line.
+  contact. In unit 0 it sits at the corner of `dbus`'s node N2. Whether the data line
+  drives a gate or ties to a diffusion node, and so which way the unit uses it, is open
+  until the cluster is traced.
 
 ## Review
 
@@ -61,4 +60,4 @@ line; wording for bits 2-3; the poly under bit 3's metal; row y 9355 firm) are i
 
 ## Not done
 
-- Bits 4-7's routes to units 4-7.
+- The clusters (`dbus`'s "Not done"). Bits 4-7's routes to units 4-7.
