@@ -4,8 +4,8 @@
 
 RA2's, RA3's and RA4's input lines drawn from their pad cells towards the band of `ral`
 cells (`trace/rad.txt`, wiring only, no transistors). RA0's and RA1's lines are in
-`trace/r9c.txt`. Each of RA2-RA4 still has one stretch undrawn (below); with the `ral`
-branch's output joins they close the path `ral` cell s# -> RA# pad driver for all five
+`trace/r9c.txt`. Each of RA2-RA4 still has one stretch undrawn (below); with `ral`'s
+output joins they close the path `ral` cell s# -> RA# pad driver for all five
 bits.
 
 ## RA2 (`ra2_drv_in`)
@@ -36,7 +36,7 @@ of the poly hop.
 | south along x 16297 | metal | drawn to y 4600 | 1.9x |
 
 The metal x 16297 is the one `ral` cell s3's output metal (y 4590) joins from the west
-(drawn on the `ral` branch, which takes it on south to RA3's unit line at (16297,5108)).
+(drawn in `trace/ral.txt`, which takes it on south to RA3's unit line at (16297,5108)).
 So RA3's driver input is s3's output.
 
 ## RA4 (`ra4_drv_in`)
@@ -59,7 +59,7 @@ names are joined here by `@alias ra4_drv_in ra4_drv_in_u`, **through uncertain g
 | Name | Layer | Where | Direction | What |
 |---|---|---|---|---|
 | `ra2_drv_in` | metal | contact (18308,2094) | out (to the pad cell) | joins `pads_out`'s `ra2_drv_in` |
-| `ra3_drv_in` | metal | x 16297 at y 4600 | in | `ral` s3's output joins this metal at y 4590 (on the `ral` branch) |
+| `ra3_drv_in` | metal | x 16297 at y 4600 | in | `ral` s3's output joins this metal at y 4590 (`trace/ral.txt`) |
 | `ra4_drv_in` | poly | contact (17335,5800) | in | `r9c`'s unit input line, alias of `ra4_drv_in_u` |
 | `ra2_drv_in` | poly | below the pad (15252,4183) | in | believed: on down into `ral` cell s2's output poly (the vertical at x 15240-15263, y 4300-4500, which is s0's at x 14372-14395 moved by 868). Not drawn |
 
@@ -72,5 +72,5 @@ names are joined here by `@alias ra4_drv_in ra4_drv_in_u`, **through uncertain g
    renamed.
 2. `r9c`'s `?P` from its bit-4 metal (17135,5150) south to y 5805: when it is seen end to
    end, rename `ra4_drv_in_u` to `ra4_drv_in` and drop the alias.
-3. With the `ral` branch merged: `ra3_drv_in` (r9c) joins `ra3_drv_in` through
-   x 16297; then rename it.
+3. Done (merged 2026-11-17): `ra3_drv_in` (r9c) joins `ra3_drv_in` through x 16297 and
+   was renamed; RA2 likewise through `ral` s2's output column (item 1).

@@ -67,7 +67,7 @@ metal from `cdp1_c5_bl`'s pad to `ubus_b0` (y 5632), and the extraction reported
 one-line fix to `trace/rdp1.txt` is a separate commit so it can be reviewed on its own.
 
 With `ubus_b5` joined, the extraction shows one net writing R8's slice-0 bit (`wr_r8`)
-and bit 5 of R7, R6 and R4 (`wr_r7`, `wr_r6`, `wr_r4_u`): one data bus line across the
+and bit 5 of R7, R6 and R4 (`wr_r7`, `wr_r6`, `wr_r4`): one data bus line across the
 chip, as expected.
 
 With `ubus_b6` and `rbus_b7` joined: `cdp1_lw2` writes bit 6 of R7, R6, R4 and `cdp1_a2_bl`

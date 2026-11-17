@@ -14,7 +14,7 @@ rdp2's row RC is R0 and row RE is R4. (That statement also rests on rdp3's own d
 the bundle north of y 13480, on bd1's tracks south of y 14690 and on rdp2's poly link for
 row RE, none of which was re-read here.)
 
-The aliases are in `trace/wrj.txt`; `tools/rename.py` has not been run (coordinator).
+The open-join names were renamed with `tools/rename.py` in 82ba48e.
 
 ## What is in the stretch
 

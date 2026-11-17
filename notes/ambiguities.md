@@ -251,7 +251,7 @@ inverting it. **Adopted: VSS and a load**, by the layout rule (gates under the g
 rail, load towards the other rail). Settle by tracing a unit's east half and following
 either rail to a labelled one.
 
-## AMB-013: does R9's match line end on the step logic's input `rcs_bq3335`? (2026-11-16)
+## AMB-013: does R9's match line end on the step logic's input `rcs_bq3335`? (2026-11-16)  (resolved 2026-11-17)
 
 `notes/blocks/r9m.md`. R9's match (`cdp1_b_eq`) was followed 9,000 px from the comparator
 to the middle cluster of the row counter's step logic. Its last metal comes down x 4192
@@ -271,6 +271,17 @@ Both metal shots at 5x (`cache/scratch/rax/eq9.png`) and a profile (`--half 1`: 
 x 4149-4157 and 4169-4196 on y 3376) do not decide it. **Not adopted either way; nothing
 drawn.** Settle by tracing the other line (poly y 2595 at x 5400) to its driver: if that
 is a second comparator's match, reading A is the design.
+
+Resolved 2026-11-17 (contributor packages `r9m`, `bust`, merged; `notes/blocks/r9m.md`,
+"CORRECTION"): neither A nor B. Track P (`trace/tla.txt`, x 4148) is two pieces, broken
+at y 3341-3371 (a 30 px run with no metal in either metal shot; measured with the
+follower's metal test against known poly crossings). The two poly hops under the metals
+x 5078-5127 each step down one track, which an independent review found at 4-5x and the
+coordinator saw in the chip-2 stripped shot. With both corrections, **R9's match
+(`cdp1_b_eq`) reaches the contact (4148,3335): `rcs_bq3335` is R9's match**, by firm
+geometry, and `rcs_mu` = NOT R9's match. The stub and the lower piece of track P carry
+another line of the bundle (`r9m_l3`). The earlier statement that `amr` c3's outer output
+drives `rcs_bq3335` is withdrawn.
 
 ## AMB-014: the gate group that makes `fld_a_in` and `fld_y_b` (2026-11-16)
 
@@ -343,3 +354,33 @@ an arm of open diffusion reaching west from the node to where a poly ends; the c
 itself is not resolved (`?B`). **Adopted.** `tools/unsure.py` lists the first (two
 labels); the second has one label and is not seen by it.
 
+## AMB-017: what drives `cnt_gab`, the counters' `_m`/`_mb` transfer gate line (2026-11-17)
+
+`notes/blocks/ral.md`, "Where `cnt_gab` is driven". The net as drawn: `wl`'s band H4 (poly
+y 7200-7225, x 11043-12910), the counters' line x 12902 (y 7200-16943), the metal from
+`wl`'s contact (11392,7210) north to the cross-under, the metal y 4287, and the line
+y 4354 through the five `ral` cells, where it gates one pull-down per cell. Every end was
+looked at and every stretch scanned for contacts (G minus R in the clean shot, then 3.4-4x
+views): no gate output drives it, and nothing ties it to a supply.
+
+- Reading A: a contact the colour test misses, under wide metal (for instance where the
+  north branch passes under the supply metal x 11280-11600).
+- Reading B: it is driven inside the `ral` cells' untraced part (inverter 1's region).
+
+No assumption adopted. Settle by tracing `ral`'s inverter 1 (B), then by single shots at
+5x under the supply metal (A).
+
+## AMB-018: the `ral` cell: latch, and its device sizes (2026-11-17)
+
+`notes/blocks/ral.md`; copies in `trace/ral.txt` (RA0-RA4) and `trace/mal.txt` (MA0-MA13).
+Traced: a pass transistor from the input to node a on the strobe (`ral_stb` for RA,
+`ck_out` for MA), a long hold device (gate VSS) from node a to the output, a pull-down
+on `cnt_gab` (RA) or `mal_frc_m#` (MA), and inverter 2 (output = NOT `ral_n1`).
+Inverter 1 (node a to `ral_n1`) is not drawn after three passes.
+
+- Working belief (not extracted): `ral_n1` = NOT node a, so the cell is a static latch,
+  transparent while the strobe is high; every MA output latched while CLK is low.
+- Possibly `ral_n1` = NOR(node a, `cnt_gab`), making `cnt_gab` a force on the latch.
+
+Device sizes: re-read item R14. Settle inverter 1 with single shots at 5-6x of
+x 14195-14300, y 4280-4460 in copies s1 and m4.

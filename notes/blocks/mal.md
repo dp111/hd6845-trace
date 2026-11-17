@@ -2,8 +2,8 @@
 
 ## Status (2026-11-17 05:18, contributor session)
 
-Placed (`trace/mal.txt`, 42 transistors: three per copy, as far as `ral_cell` is
-traced), and **every copy's output followed to its MA pad driver: copy m# drives MA#**,
+Placed (`trace/mal.txt`, 70 transistors: five per copy, as far as `ral_cell` is
+traced, with inverter 2), and **every copy's output followed to its MA pad driver: copy m# drives MA#**,
 m0 at the top (y 8155) to m13 at the bottom (y 18576). Depends on `trace/ral.txt`
 (`@requires ral`). Inputs and the force taps' wiring are not drawn.
 

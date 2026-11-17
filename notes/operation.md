@@ -2,7 +2,7 @@
 
 This is the short version. The block notes (`notes/blocks/`) are the reference; the
 glossary of names is `notes/signals.md`. Last checked against the extraction on
-2026-11-16 (2,050 nets, 3,430 transistors).
+2026-11-17 (2,090 nets, 3,525 transistors).
 
 ## How to read this page
 
@@ -10,7 +10,7 @@ Every statement carries one of three marks.
 
 | Mark | Meaning |
 |---|---|
-| **Firm** | The extracted netlist says it, and still says it when every item marked uncertain (`?`) is deleted from the trace. `tools/unsure.py --equations NAME` prints this for any equation: 683 of the 1,013 extracted equations are firm. |
+| **Firm** | The extracted netlist says it, and still says it when every item marked uncertain (`?`) is deleted from the trace. `tools/unsure.py --equations NAME` prints this for any equation: 701 of the 1,032 extracted equations are firm. |
 | **Marked** | Extracted, but it depends on at least one uncertain item or on a join that is believed and not drawn. The assumption is named. |
 | **Open** | Not traced. Nothing is claimed. |
 
@@ -58,6 +58,7 @@ How the two private clock pairs are made (the same cell twice):
 | The two equations above, for both copies. | Firm |
 | `rc_step` = NOR(`inh_rc`, `rc_stepreq_n`): the row counter steps when the step logic asks and the inhibit signal is low. | Firm |
 | `rc_stepreq_n` = NOR of three terms; the step happens when term 1 is high, or when NOT `rcs_e4` AND NOT (`rcs_e3` AND `rcs_a2`). | Marked (one term's gate has an uncertain item); and the inputs `rcs_e3`, `rcs_e4`, `rcs_a2` are **not identified** |
+| Term 1 is `rcs_in1` = NOR(`rcs_mu`, `rcs_mv`), and `rcs_mu` is made by an inverter whose input is **R9's match** (`cdp1_b_eq`): so term 1 = R9's match AND NOT `rcs_mv`. The row counter steps when the scan line (as compared at the RA pins) equals R9, unless `rcs_mv`. | Firm for the join from R9's comparator to the inverter (AMB-013, resolved 2026-11-17); marked for the equations (the comparator's NOR and `rcs_in1` depend on uncertain items). `rcs_mv` is open |
 | What makes `lc_step`. | Open |
 | The memory address counter (14 bits, left array) and what clocks it. | Open (cells traced, control lines not) |
 
@@ -89,6 +90,8 @@ is not settled.
 | Whether anything ends the strobe when E falls, or re-times it to CLK. | **Open**. As drawn nothing does; that reading rests on the marked nets above |
 | The register rows of R3 (one nibble), R5, R6, R7, R8, R9, R10, R11 are identified by their strobe lines, drawn end to end. | Firm for the joins; the register *numbers* rest on the address decoder's numbering of its lines |
 | The rows of R0, R1, R2, R4 are identified by their strobe lines, drawn end to end (`notes/blocks/wrj.md`). | Firm for the joins; the register *numbers* rest on the address decoder's numbering of its lines |
+| The data bus: all eight bits are joined from the right datapath across the chip to the central datapath (`notes/blocks/bust.md`); bits 0-3 reach the D0-D3 units of the data bus column (`dbl`). The registers each bit writes match the datasheet's widths exactly (R5, R9 bits 0-4; R4, R6, R7 bits 0-6; R8 bits 0, 1, 4-7; R0-R2 bits 0-7), which nothing in the trace assumed. | Firm for the joins; the bit numbers rest on that match and, for bits 0 and 1, on the D0/D1 units |
+| R8 is the central datapath's row A and R9 its row C; slice = 5 - bit (R8's bit 6 is in slice 3, bit 7 in slice 2). | Firm for the joins (from the data bus) |
 | R12-R15 (start address, cursor), R16/R17 (light pen), the status register. | Open beyond their strobe gates |
 | Which nibble of R3 the 4-bit row is: the low one (bits 0-3, horizontal sync width). Its four data lines are the data bus lines of bits 0-3 (`notes/blocks/r3d.md`). | Firm for the joins; the bit numbers of the data lines rest on the register-width match (`notes/blocks/bust.md`) |
 
@@ -101,14 +104,14 @@ throughout.
 
 | Output | Compares | Counter inputs | Where the output goes |
 |---|---|---|---|
-| `h_eq_r0` | `hc` with R0 (8 bits) | bits 6-7 drawn, bits 0-5 believed | to a gate column beside the strobe channel; ends on a buried contact there. **Use: open** |
+| `h_eq_r0` | `hc` with R0 (8 bits) | all drawn (bits 0-5 joined by `hcj`; bit 2 rests on one uncertain poly in `bd1`) | to a gate column beside the strobe channel; ends on a buried contact there. **Use: open** |
 | `h_eq_r0half` | `hc` bits 0-6 with R0 bits 1-7 (R0 / 2) | as above | towards the same gate column. **Use: open** |
 | `h_eq_r1` | `hc` with R1 | as above | into the bottom-centre logic. **Use: open** |
-| `h_eq_r2` | `hc` with R2 | as above | believed to run west of the counters on a bus line (join not drawn). **Use: open** |
+| `h_eq_r2` | `hc` with R2 | as above | runs west of the counters on bus line G (joined, `notes/blocks/ucz.md`). **Use: open** |
 | `hsw_eq_r3` | `hsw` with the R3 nibble (4 bits) | drawn | not followed. **Use: open** |
 | `uc_eq_r4`, `uc_eq_r6`, `uc_eq_r7` | seven lines `uc` with R4, R6, R7 | `uc` is the row counter `rc`, bit for bit: all seven joins drawn (`notes/blocks/ucz.md`), firm geometry | R6's goes to the strobe channel, R7's leaves west; not followed. **Use: open** |
-| `sl_eq_r5` | scan line counter with R5 (5 bits) | drawn | leaves north; not followed. **Use: open** |
-| R9's (`cdp1_b_eq`) | **the row address as it goes to the RA pins** with R9 (5 bits) | marked (the five lines pass units whose loads are not traced) | followed to the row counter's step logic; the last 12 px are undecided (AMB-013). **Use: open** |
+| `sl_eq_r5` | scan line counter with R5 (5 bits) | drawn | leaves north and runs west on `cdp1_l4719` through the central datapath's channel (`notes/blocks/bust.md`); not followed west of it. **Use: open** |
+| R9's (`cdp1_b_eq`) | **the row address as it goes to the RA pins** with R9 (5 bits) | marked (the five lines pass units whose loads are not traced) | drawn to the row counter's step logic: it is the input of the inverter that makes `rcs_mu` (AMB-013, resolved). **Use: the row counter's step request (above)** |
 | R10's (central datapath) | the row address one stage earlier with R10 bits 0-4; gives "equal" and "greater" | marked | not followed. **Use: open** |
 
 Not found at all: comparators for R11 (cursor end), R12-R15 against the address
@@ -118,7 +121,9 @@ counter, and whatever the 4-bit counter `c4l` is compared with.
 
 | Fact | Mark |
 |---|---|
-| The RA pins are not the scan line counter directly. Between them: a selector, a row of five units, then a five-cell stage in front of the pad drivers. | Firm that the selector and the units are there; the stage is not traced |
+| The RA pins are not the scan line counter directly. Between them: a selector, a row of five units, then a five-cell stage (`ral`) in front of the pad drivers. | Firm that they are there |
+| The `ral` stage: each cell passes its input onto a node on a strobe (`ral_stb`), holds it there through a weak device, and drives the pad driver's input as NOT `ral_n1`. That it is a latch transparent while the strobe is high needs the cell's inverter 1, not traced (AMB-018). | Firm for the output inverter (RA0-RA3; RA4 marked); the latch is believed. Where `ral_stb` comes from: open |
+| The fourteen MA outputs pass through the same cell, strobed by `ck_out` (high while CLK is low): copy m# drives MA# (`notes/blocks/mal.md`). | Firm for the output inverters and the bit order; the latch is believed, as above; what feeds each copy is open |
 | The selector passes scan line bit k to output k, or to output k+1 (a shift up by one bit). The two control lines are opposites: `ras_straight` = NOT `ras_shift`. | Firm for the control; six strip joins inside the selector are uncertain |
 | `ras_shift` = AND of two bits of R8. | Marked (four buried contacts). That they are R8's interlace bits 0 and 1 is believed |
 | In shift mode output 0 has no counter bit; one bit of R9 chooses which of two signals drives it (`ras_o0_sel1` = shift AND that bit, `ras_o0_sel2` = shift AND NOT that bit). | Firm. That the bit is R9's bit 0 is believed (from the column it stands in) |
@@ -140,5 +145,5 @@ So that silence is not read as knowledge:
 - The memory address counter's control, and the cursor compare.
 
 The list of what is assumed, with the evidence for and against each, is
-`notes/ambiguities.md` (AMB-001 to AMB-016). Work still to re-check before anything is
-simulated is the "Re-read list" in `notes/work-packages.md` (R1-R12).
+`notes/ambiguities.md` (AMB-001 to AMB-018). Work still to re-check before anything is
+simulated is the "Re-read list" in `notes/work-packages.md` (R1-R15).

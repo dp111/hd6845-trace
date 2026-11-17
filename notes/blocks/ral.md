@@ -10,7 +10,8 @@ RA bit 0's cell, at x 13990-14460). Drawn: the two supply rails per cell, the li
 pull-down, output buried contact), and every copy's input (`rax_o0`-`rax_o4`). Outputs:
 s0 and s1 join the RA0 and RA1 pad drivers' input lines (`ra0_drv_in`, `ra1_drv_in`);
 s2-s4 join r9c's RA2-RA4 comparator-unit lines (`ra2/3/4_drv_in_u`), and reach the pad
-drivers only with branch `rad-lines` (the renames are on `ra-joins`). **Not drawn**:
+drivers through `rad`'s lines: RA2 and RA3 renamed `ra2_drv_in`, `ra3_drv_in`; RA4 joined
+only through r9c's `?P` (`ra4_drv_in_u`, aliased). **Not drawn**:
 inverter 1 (node a -> `ral_n1_s#`). 25 transistors (five per cell).
 
 ### Logic (traced)
@@ -91,8 +92,8 @@ it shows what single shots and the five-copy composite did not
   up x 14255-14280 to y 4320) between the VSS-contacted box 14255-14330 x 4385-4445
   and the drain strip.
 
-Extracted: `ra#_drv_in = NOT ral_n1_s#` (`_u` for 2-4 on this branch) for all five RA
-copies (and for the fourteen MA copies on branch `mal`). **Inverter 1 is the remaining piece**: `ral_n1_s#` should be
+Extracted: `ra#_drv_in = NOT ral_n1_s#` (`_u` for RA4) for all five RA
+copies (and for the fourteen MA copies in `trace/mal.txt`). **Inverter 1 is the remaining piece**: `ral_n1_s#` should be
 NOT node a. Candidates seen: the outlined box at 14225-14280 x 4290-4345 at the
 L-poly's upper end (a buried contact onto an output diffusion?), and a diffusion strip
 x 14205-14225 rising from the VSS-contacted box at 14205-14250 x 4400-4450. That box is
@@ -160,7 +161,8 @@ tab pad, to decide poly against diffusion.
 4. Whether Tf's drain `ral_tf_s#` is inverter 1's output (n1 = NOR(a, `cnt_gab`)?), which
    would make `cnt_gab` a force/clear of the latch.
 5. `cnt_gab`'s driver (above), the `?P` (hold gate to its pad) and the output `?B`.
-6. The fifteen copies in the left array are on branch `mal`.
+6. The fourteen copies in the left array are in `trace/mal.txt` (`notes/blocks/mal.md`); the
+   twentieth, at (8449,5562), is not placed.
 
 ## First survey
 

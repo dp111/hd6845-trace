@@ -68,8 +68,7 @@
 2100,2500:6400,6350     ?logic  top-left logic | random logic
 6400,2500:8250,6400     ?logic  top-centre logic | random logic left of the central datapath
 4400,6900:6450,10400    ?logic  left-centre logic | random logic between the left array and the central datapath
-11900,3400:16400,4500   ?logic  top-right logic rows | two rows of gates under the test structures, near the RA/HSYNC/VSYNC pads
-11400,5250:13050,6450   ?logic  logic above the counters | small array, 4 or so columns
+11900,3400:16400,4210   ?logic  top-right logic rows | gates under the test structures, near the RA/HSYNC/VSYNC pads (the RA output stage below is ral)
 7000,14600:11000,18550  ?logic  bottom-centre logic | random logic below the central datapath
 4800,15800:6500,18650   ?logic  bottom-left logic | random logic near DISPTMG/CUDISP pads
 11600,2150:12080,2800   ?logic  small cell by die marking | isolated cell left of the HD46505S text

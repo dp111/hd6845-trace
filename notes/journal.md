@@ -1125,3 +1125,40 @@ summary of what is certain.
   item; 683 of 1,013 equations are unchanged. The page says plainly that no counter's
   reset and no comparator's effect is established yet.
 
+
+## 2026-11-17 11:48  Collaborator PRs #1-#12 merged
+
+A collaborator (dp111) opened twelve PRs, all on 6101f6e: three stacks, merged as their
+five tips (#4, #11, #5, #6, #9), which bring in the other seven. Before merging: each tip
+and the trial merge extracted (0 errors, 0 warnings, 0 names outside the glossary);
+`tools/unsure.py` on main and on the merge differ only in three nets, each disclosed in
+its block's notes (`ra4_drv_in`, `wr_r3`, and `hc2`, whose uncertain stretch is old);
+all eleven block notes read; three claims checked in the photos by me (r9m's two hops,
+which step one track in the chip-2 stripped shot; ucz's hop at x 14544; mal's copy m7).
+The packages had independent reviews on the contributor's side, which caught two errors
+before the PRs were opened (r9m's hops, bust's staircase at cdp1's west edge).
+
+Result: 2,090 nets, 3,525 transistors (+95: the `ral` cell, 5 RA and 14 MA copies);
+open joins 15 -> 1 (`ck_a_u`, plus `ra4_drv_in_u` aliased across a `?`).
+
+What it establishes (details in `notes/operation.md`):
+- **R9's match drives the row counter's step request**: `rcs_mu` = NOT R9's match, so
+  term 1 of the step request = R9 match AND NOT `rcs_mv` (AMB-013 resolved).
+- The data bus joined across the chip; the register fan-out per bit is the datasheet's
+  layout without having assumed it. R8 = cdp1 row A, R9 = row C, bit order settled, so
+  the `rename` package is unblocked.
+- R3's 4-bit row is the low nibble; `amr` is believed to be the high nibble.
+- `uc` = the row counter (R4, R6, R7's comparators); `hc0`-`hc5` and the R0/R1/R2/R4
+  strobes joined.
+- RA and MA outputs pass through one cell (`ral`), believed a latch (MA on `ck_out`);
+  its inverter 1 is not traced (AMB-018). `cnt_gab` has no driver on its drawn net
+  (AMB-017).
+
+Coordinator follow-up in the same push: conflicts in `signals.md` and
+`work-packages.md` resolved by hand (row additions on both sides); stale former names and
+"on branch X" wording fixed; Re-read items R13 (straight-drawn hops), R14 (`ral` device
+sizes, x19), R15 (other blocks' notes the new packages contradict); trap 10 extended;
+AMB-017, AMB-018; floor plan: the coarse "logic above the counters" block removed, the
+top-right logic rows trimmed above the `ral` band; `out/` rebuilt.
+
+Next: the `rename` package (now unblocked), then the queue as before.

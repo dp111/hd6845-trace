@@ -190,6 +190,13 @@ Traps, all of them real:
    (`strips.py --layer acid1b`, and `classmap.py` where the colours are close), and
    account for every track end: a track that stops has gone somewhere. First seen in
    `mrach` (x 13040-13425), where half the nets change track under the metal.
+   **The same holds for every poly hop under a wide metal and every bundle at a block's
+   edge: a hop that looks straight at 2x may step one track.** Found 2026-11-17: `r9m`'s two
+   hops under the `res_b`/`lpstb_b` metals (x 5078-5127) were drawn straight from a 1.8x view
+   and each steps down one track, which had put R9's match on the wrong input of the step
+   logic; `bust`'s rows all step one track at `cdp1`'s west edge (x 8215-8345). Read each
+   hop at 4x or more in both stripped shots, and check that the number of rows entering
+   equals the number leaving at the same order.
 11. **"Drawn once, at full length" is a claim about every crossing.** A rail or clock line
    that looks continuous through an array at 1x may be cut at each routing channel and
    re-fed from somewhere else. In the mid-right array the `ck_a` rail, the master clock

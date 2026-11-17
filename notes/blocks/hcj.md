@@ -19,7 +19,7 @@ the piece joined here (rdp3's c track to bd1's k9 metal) is one firm piece.
 Before drawing: each of rdp3's two label sets (c track at y 11650, bundle track at
 y 13400-13478) was already one net per bit in rdp3's own geometry (same net id).
 
-The aliases are in `trace/hcj.txt`; `tools/rename.py` has not been run (coordinator).
+The open-join names were renamed with `tools/rename.py` in 6e14273.
 
 ## Routes
 
@@ -78,8 +78,8 @@ None left open on the six joins. Two things that were looked at twice:
 
 ## Other blocks
 
-- `trace/bd1.txt`: the pad and contact at the foot of k11 lose their `?` (own commit on
-  this branch); the pad is taller than bd1 drew it (to y 15642), drawn here.
+- `trace/bd1.txt`: the pad and contact at the foot of k11 lose their `?` (own commit,
+  ee37967); the pad is taller than bd1 drew it (to y 15642), drawn here.
 - The open-join names are renamed with `tools/rename.py` in the commit after the drawing
   (rdp3, bd1, wrj, the glossary, work-packages).
 - `notes/blocks/mrach.md` (rows r13, r14, r17 "not drawn between" / "not found yet") and

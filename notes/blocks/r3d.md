@@ -27,7 +27,7 @@ below their latch row:
 
 Bit 0's thin metal x 16274 has one tap on the way, a contact at (16272,9205) with a poly
 leaving east along y 9205 (both metal shots and acid1b at 4.5-6x): the data line's branch
-to the D-pin units, followed in the next branch, `dbl`. The other three metals have no contact between their
+to the D-pin units, followed in `dbl`. The other three metals have no contact between their
 ends (follower started on each line; independent review surveyed the bundle).
 
 The x 16274 line is two pieces: `r3_b2_d` above (to y 6700, then east) and bit 0 below
@@ -65,4 +65,4 @@ confirmed; it found the tap at (16272,9205), now described above.
 
 - Rows y 9400, 9355 and 9310 (bits 1-3) also run on east past their contacts, to contacts
   near x 16950-17030; row y 9355 may be interrupted at x 16635-16695 (an oval of field
-  on the row in the clean shot; continuous in the chip-2 shot). Followed in the next branch, `dbl`.
+  on the row in the clean shot; continuous in the chip-2 shot). Followed in `dbl`.

@@ -59,7 +59,7 @@ found that it is not straight: in each slice it detours south around a metal-to-
 contact box on the inner vertical metal (c3: box x 12675-12720, y 5622-5665, ring at
 (12690,5640)), passing under the box along y 5668-5690, where it looks like a transistor
 gated by the strobe on that metal's diffusion. The two corner joins per slice are not
-profiled. With the result on branch `bust` (`notes/blocks/bust.md` there) that the slices' inner lines
+profiled. With the result in `notes/blocks/bust.md` that the slices' inner lines
 are data bits 4-7 (c0..c3), **`amr` is very likely R3's high nibble**: the vertical sync width
 register, written from D4-D7 on `wr_r3`. `rdp1` has only R3's low nibble (the horizontal
 sync width, compared with `hsw`). The outer outputs (which leave west towards the top-left logic) would

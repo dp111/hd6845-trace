@@ -1,6 +1,6 @@
 # ucz: where the upper right array's counter lines `uc_b0`..`uc_b6` come from
 
-## Status (2026-11-17 09:15, contributor session; not yet independently reviewed)
+## Status (2026-11-17 09:15, contributor session; independently reviewed, see Review)
 
 Wiring drawn (`trace/ucz.txt`): all seven lines, each from the end contact of its `uc`
 track in `rdp2`'s routing zone back to a net that was already named. No transistors.
