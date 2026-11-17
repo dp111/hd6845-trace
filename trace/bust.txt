@@ -291,3 +291,23 @@ P 16170,9251:16204,9285
 C 16187,9268
 M 16187,9260 y9800 w=20                # rbus_b5's metal north to its top (tools/follow.py: 9268)
 @alias cdp1_a0_bl rbus_b5
+# Bit 2: ubus_b2's metal (x 14235) on to its end contact (14240,9100); a poly row east along
+# y 9100 to a contact (14862,9097); a thin metal down x 14863 (continuous in both metal
+# shots: the gaps found by the metal test are 5-17 px, poly crossings and the two rings;
+# cache/scratch/bust/b2m.png) to a contact (14862,9355); a poly row east along y 9355 to the
+# contact (15018,9352) at the top of rbus_b2's metal (x 15016). Clean shot at 1.45x
+# (b2r.png).
+M 14235,9050 y9110 w=24
+P 14223,9083:14257,9117
+C 14240,9100
+P 14240,9100 x14862 w=14
+P 14845,9080:14879,9114
+C 14862,9097
+M 14863,9090 y9362 w=12
+P 14845,9338:14879,9372
+C 14862,9355
+P 14862,9355 x15018 w=14
+P 15001,9335:15035,9369
+C 15018,9352
+M 15016,9345 y9800 w=24
+@alias cdp1_c3_bl rbus_b2
