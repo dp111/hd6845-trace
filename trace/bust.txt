@@ -265,3 +265,29 @@ P 5868,5876:5902,5910
 C 5885,5893
 P 5905,5918:5939,5952
 C 5922,5935
+
+# =====================================================================================
+# The routing zone of the right datapath (rdp2's y 9080-9560), where the upper array's data
+# lines (ubus) meet the lower array's (rbus), two slices further east.
+# Bit 6: ubus_b6's metal (x 15796) ends on a contact (15795,9100); a poly runs east along
+# y 9095-9110 (continuous salmon band in the clean shot at 1.45x, cache/scratch/bust/b6r.png)
+# to a contact (16577,9096) at the top of rbus_b6's metal (x 16577).
+M 15796,9000 y9112 w=20                # ubus_b6's metal on to its end (tools/follow.py: 9104)
+P 15778,9083:15812,9117
+C 15795,9100
+P 15795,9101 x16577 w=14
+P 16560,9079:16594,9113
+C 16577,9096
+M 16577,9088 y9800 w=20                # rbus_b6's metal north to its top (tools/follow.py: 9096)
+@alias cdp1_a3_bl rbus_b6
+# Bit 5: ubus_b5's metal (x 15406) ends on a contact (15407,9232); poly east along y 9232 to
+# x 15838, down to y 9266, east to a contact (16187,9268) at the top of rbus_b5's metal
+# (x 16187). 1.45x in the clean and metal shots (b5r.png), the step at 3.5x (b5s.png).
+M 15406,9060 y9240 w=24                # ubus_b5's metal on to its end (tools/follow.py: 9234)
+P 15390,9215:15424,9249
+C 15407,9232
+P 15407,9232 x15838 y9266 x16187 w=14
+P 16170,9251:16204,9285
+C 16187,9268
+M 16187,9260 y9800 w=20                # rbus_b5's metal north to its top (tools/follow.py: 9268)
+@alias cdp1_a0_bl rbus_b5
