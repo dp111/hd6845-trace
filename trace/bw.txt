@@ -60,7 +60,7 @@ P 7010,7544:7052,7577
 C 7031,7560
 M 7036,7530 y7590 w=23
 
-# R2 match (h_eq_r2_u). Channel line y 8006-8024 west to a pad with a contact (8340,8010)
+# R2 match (h_eq_r2). Channel line y 8006-8024 west to a pad with a contact (8340,8010)
 # under a vertical metal x 8330-8352 (not followed).
 P 11045,8015 x8330 w=18
 P 8320,7995:8362,8030

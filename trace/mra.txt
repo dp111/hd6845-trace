@@ -600,7 +600,7 @@ P 11640,9351:12541,9369                   # E: master clock of rows r4-r10
 P 11640,9397:12670,9413                   # G: ... steps up at x 12650-12670 ...
 P 12650,9373:12670,9413
 P 12650,9373:13050,9391                   # F: ... and runs on east into the wiring channel (it is the R2 match line)
-N P 12300,9405 h_eq_r2_u
+N P 12300,9405 h_eq_r2
 
 @cell mra_col4 tag=rc5
 @s 30x32
