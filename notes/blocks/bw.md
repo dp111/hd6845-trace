@@ -24,7 +24,7 @@ There each ends on a pad with a contact to one vertical metal.
 | `ck_a` | 7873-7891 | 7880, then 7787 | pad, contact (7419,7387) | metal x 7410-7432 **north** (seen to y 7150) |
 | `rc_stepreq_n` (row counter step, active low) | 7917-7935 | 7839, then under the wide metal at x 7753 | after y 7436 west, x 7407 south, y 7519 west through the whole crossing field, x 6300 north, y 7471 west: pad, contact (5838,7470) | metal x 5830-5852 north to a contact (5838,5585); poly west along y 5585 through a second crossing field to a contact (3518,5587); metal west and north to a contact (3283,5238); poly east, north and west along y 5018 to the output node of the step gate at (2975,5035): block `tla` |
 | `wl_h1` (band H1's line) | 7962-7980 | 7792, then x 7709 | after y 7477 west, x 7450 south, y 7562 west: pad, contact (7031,7560) | metal x 7025-7048, direction not followed |
-| R2 match (`h_eq_r2_u`) | 8006-8024 | does not turn | pad, contact (8340,8010) | metal x 8330-8352, not followed |
+| R2 match (`h_eq_r2`) | 8006-8024 | does not turn | pad, contact (8340,8010) | metal x 8330-8352, not followed |
 
 So the row counter's step signal is made in the **top-left logic**, by a three-input NOR
 at (2975,5035) (`notes/blocks/tla.md`). `ck_a` and bus line B's signal go north on two metals at x 7421

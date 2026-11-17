@@ -209,7 +209,7 @@ Eleven pass transistors between the scan line counter and five output nodes.
 | `hsw_eq_r#` | high when the horizontal sync width counter equals R3's nibble (the end of HSYNC). Not followed |
 | `h_eq_r#` | high when the horizontal counter equals R# (R0: end of line; R1: displayed width; R2: sync position) |
 | `h_eq_r#half` | high when the horizontal counter equals R0/2 |
-| `h_eq_r#_u` | a piece believed to be `h_eq_r#` whose join is not drawn (tracks k7, k8 of the strobe channel; bus line G west of the counters) |
+| `h_eq_r#_u` | a piece believed to be `h_eq_r#` whose join is not drawn (tracks k7, k8 of the strobe channel) |
 | `uc_b#` | the seven counter lines of the upper right array (bit 0 at the left). They are the character row counter `rc#`, bit for bit: all seven joins are drawn (`trace/ucz.txt`, 2026-11-17) and the names are aliases of `rc#` |
 | `uc_eq_r#` | high when those lines equal R4 (vertical total), R6 (vertical displayed) or R7 (vertical sync position). `uc_eq_r6` goes down the wiring channel to the strobe channel (its track k4); `uc_eq_r7` leaves west along y 6820 |
 | `hc#_u` | the horizontal counter line at the comparators, where its join to `hc#` is not drawn |
@@ -364,7 +364,7 @@ datapath s1...s7, s0 became b0...b6, b7.
 | mra_b_r# | rc#_mb | mra_b_r10 -> rc0_mb |
 | mra_busa | cnt_bus_a | |
 | mra_busb | cnt_bus_b | |
-| mra_busg | h_eq_r2_u | |
+| mra_busg | h_eq_r2 | |
 | mra_cin_r3 | c4b_ci | |
 | mra_cin_r18 | hc_ci | |
 | mra_cin_r10 | rc_ci | |
@@ -858,3 +858,4 @@ datapath s1...s7, s0 became b0...b6, b7.
 | fld_y_a | rc0_n | via wl_i2_out |
 | wl_i2_in | rc0 | |
 | wl_i2_out | rc0_n | |
+| h_eq_r2_u | h_eq_r2 | |

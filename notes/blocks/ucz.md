@@ -65,11 +65,11 @@ None on the seven routes. Weakest evidence, for a reviewer:
 
 ## R2's match to L3 (added 2026-11-17)
 
-mrach's row y 9707 (`h_eq_r2_u`) runs straight on from x 13425 to a pad with a contact
+mrach's row y 9707 (`h_eq_r2`) runs straight on from x 13425 to a pad with a contact
 (13475,9705), the top of bundle track L3 (metal x 13478, one piece by `tools/follow.py`
 to y 10860, no contact candidates), which `rdp3` names `h_eq_r2` from y 10700 (4.5x in
 three shots, `cache/scratch/ucz/r2.png`). Firm geometry (`tools/unsure.py` does not
-list it); joined by an alias here and renamed in the next commit.
+list it), so the open join that ended at x 13425 is closed and carries the one name.
 
 ## Review
 

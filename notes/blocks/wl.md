@@ -115,7 +115,7 @@ diagonal at y 8500-8600:
 |---|---|---|---|
 | 11189-11209 / 11235-11255 | contact (11197,7842), poly line y 7830-7850 from the west | bus line B, contact (11655,9228): on east through the channel into rdp2 at (13425,9447) | `cnt_bus_b` |
 | 11147-11167 / 11190-11210 | contact (11155,7882), poly line y 7872-7893 | bus line C, contact (11608,9272): **`ck_a`** from the counters' own `ck_a` line | `ck_a` |
-| 11101-11121 / 11145-11165 | contact (11106,8060), poly up to the line y 8005-8025 | bus line G, contact (11655,9402): the **R2 match** line from the right datapath | `h_eq_r2_u` |
+| 11101-11121 / 11145-11165 | contact (11106,8060), poly up to the line y 8005-8025 | bus line G, contact (11655,9402): the **R2 match** line from the right datapath | `h_eq_r2` |
 
 So `ck_a` and the R2 match (horizontal sync position) are taken west into the bus field
 here, and a signal on bus line B passes between the bus field and the upper right datapath.
@@ -151,7 +151,7 @@ here, and a signal on bus line B passes between the bus field and the upper righ
 | `wl_h1` | P | (11040,7971); (11979,6930) | ? | band H1 and the poly line y 7960-7982 |
 | `cnt_bus_b` | P | (11040,7840) | ? | bus line B's line into the bus field |
 | `ck_a` | P | (11040,7882) | out | `ck_a` into the bus field |
-| `h_eq_r2_u` | P | (11040,8015) | out | R2 match into the bus field |
+| `h_eq_r2` | P | (11040,8015) | out | R2 match into the bus field |
 | vss | M | y 9100-9150 at x 11832; x 11434-11478 at y 6930 | - | joins mra's rail; continues north |
 | vcc | M | x 11605-11655 at y 6930, continues north | - | |
 
