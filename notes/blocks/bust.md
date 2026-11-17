@@ -158,42 +158,35 @@ bit 4, slice 0 bit 5, slice 3 bit 6 (by the above), slice 2 bit 7; **R9 = row C*
 slice 5 bit 0 ... slice 1 bit 4. That settles the bit order the "rename" package was
 waiting for.
 
-## Next: the right datapath's routing zone (y 9080-9560), where `ubus` meets `rbus`
+## The right datapath's routing zone (y 9080-9600), where `ubus` meets `rbus`
 
-The fan-out check shows the other half of the gap: R0-R2's bits 0-6 are on `rbus_b0`..`b6`
-(lower right array, `rdp2`/`rdp3`), and none of those is joined to `ubus_b0`..`b6`
-(upper array). `rbus_bk` sits at the x of `ubus_b(k+2)`: the lines shift two slices
-(781 px) east across `rdp2`'s untraced routing zone. Measured ends (tools/follow.py):
+R0-R2's bits 0-6 are on `rbus_b0`..`b6` (lower right array, `rdp2`/`rdp3`); the upper
+array's are `ubus_b0`..`b6`. `rbus_bk` sits at the x of `ubus_b(k+2)`: each line shifts
+two slices (781 px) east across `rdp2`'s untraced routing zone. Ends (tools/follow.py):
 
-| Bit | `ubus` x, end going south | `rbus` x, end going north |
-|---|---|---|
-| 0 | 13455, 9168 | 14235, 9444 |
-| 1 | 13845, 9104 | 14625, 9400 |
-| 2 | 14235, 9104 | 15016, 9356 |
-| 3 | 14625, 9320 | 15406, 9764 (follower stopped early) |
-| 4 | 15016, 9276 | 15796, 9764 (stopped early) |
-| 5 | 15406, 9234 | 16187, 9268 |
-| 6 | 15796, 9104 | 16577, 9096 |
+| Bit | `ubus` x, end going south | `rbus` x, top going north | State |
+|---|---|---|---|
+| 0 | 13455, 9168 | 14235, 9444 | partly read (below) |
+| 1 | 13845, 9104 | 14625, 9400 | open |
+| 2 | 14235, 9104 | 15016, 9356 | open |
+| 3 | 14625, 9320 | 15406, 9764 (follower stopped early) | open |
+| 4 | 15016, 9276 | 15796, 9764 (stopped early) | open |
+| 5 | 15406, 9234 | 16187, 9268 | **drawn**: contact (15407,9232), poly east, step down at x 15838 (3.5x), east along y 9266 to the contact (16187,9268) |
+| 6 | 15796, 9104 | 16577, 9096 | **drawn**: contact (15795,9100), poly along y 9100 (continuous in the clean shot) to the contact (16577,9096) |
 
-The zone is a channel of about 14 horizontal poly rows (25 px pitch, y 9080-9450) under
-thin vertical metals that change rows at contacts (trap 10), and it also carries the
-row counter's `uc` lines (`rdp1`: "fed in the routing zone of rdp2"). One pair seen at
-1.4x (`b6z.png`): `ubus_b6` ends on a ring at (15790,9085), a poly row at y about 9085
-runs east, and a ring at about (16580,9088) sits on `rbus_b6`'s top. Consistent with
-"each data line crosses on one poly row", but the stripped shot's colour contrast here is
-too weak to measure a row's continuity (column profile at x 16000), so **nothing is
-drawn**. Method for whoever takes it: list every ring (contact) in the zone from both
-metal shots, assign each to its poly row by y, check each row's continuity in the clean
-shot at 3x between consecutive rings, then build the joins; `tools/bust_fanout.py` must
-then show bit k writing R0, R1 and R2 as well.
+Check: `tools/bust_fanout.py` now shows bits 5 and 6 writing R0, R1, R2, R4, R6, R7 and
+R8. The `rbus` lines are already named by bit (`rdp3`), so a wrong crossing would show as
+a name clash in the extraction; none did.
 
-## `amr` c1's and c2's outer outputs, further west
+Bit 0, read so far (clean shot at 2.4x, `b0z.png`): `ubus_b0` ends on a contact
+(13452,9165); a poly drops along x 13452 to a contact (13452,9318); the metal from there
+runs south (follower) to a contact (13455,9580); a poly row leaves it east along
+y 9568-9588. A colour scan of that row (salmon poly against pink field) finds it to
+x 13815 and then not again until x 14180-14220, under the wide rails at x 13950-14200
+where the test does not work. The `rbus_b0` side: its top contact (14215,9440) has a
+poly west along y 9440 that turns south near x 13890 (1.45x, `b0r.png`). Not joined.
 
-`cdp1_l4588` and `cdp1_l4632` (amr c1, c2 outer outputs) cross the field under the three
-rails (x 6450-6960) on pads at matching y on both sides, like `r9m`'s two lines there; the
-polys across are drawn `?P` (not seen end to end). West of it they run along y 4660 /
-4702, south along x 5972 / 6016, and end on contacts onto poly pads (5885,5893) and
-(5922,5935), into the untraced top-left logic (2.7x, `we.png`). So all four outer outputs
-go to the vertical control logic: c3's to the row counter's step logic (`rcs_bq3335`),
-c1's and c2's to the logic around (5900,5900), and c0's (`cdp1_l4544`) west along the
-bus metals (end at (7535,4619) not looked at).
+Method for bits 0-4: the clean shot reads well here (poly cream/salmon on pink field,
+contacts with green centres) except under the wide rails. Work each line at 2.4x from
+both ends, and settle the stretch under the rails in the metal1 shot, or by the stripped
+shot's fringe-free composite of the five slices.
