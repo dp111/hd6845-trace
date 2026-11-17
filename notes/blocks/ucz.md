@@ -63,6 +63,14 @@ None on the seven routes. Weakest evidence, for a reviewer:
   rail in the chip-2 metal shot (14557,9318) are at different places on the two chips:
   read as dirt, not contacts.
 
+## R2's match to L3 (added 2026-11-17)
+
+mrach's row y 9707 (`h_eq_r2_u`) runs straight on from x 13425 to a pad with a contact
+(13475,9705), the top of bundle track L3 (metal x 13478, one piece by `tools/follow.py`
+to y 10860, no contact candidates), which `rdp3` names `h_eq_r2` from y 10700 (4.5x in
+three shots, `cache/scratch/ucz/r2.png`). Firm geometry (`tools/unsure.py` does not
+list it); joined by an alias here and renamed in the next commit.
+
 ## Review
 
 Independently reviewed (2026-11-17), read from the photos alone with a swap in the
@@ -74,7 +82,7 @@ confirmed, and no two lines are swapped. The identity `rcK` rests on `mrach`'s a
 ## Not done
 
 - cnt_bus_a, cnt_bus_b east of x 13425 (both go north through the nest; seen, above).
-- h_eq_r2_u's row y 9707 to L3's top contact (13478,9705); the bars of L0/L2 at
+- The bars of L0/L2 at
   y 9663 and of L2/L7 at y 9920; L7's lower piece (`rdp3_n7s9`) north of y 10700.
 - Renaming `uc_b#` to `rc#` (`tools/rename.py`): the joins are firm, aliases are used for
   now; `rdp2`'s notes still say "believed" (corrections listed below).

@@ -163,3 +163,15 @@ P 14092,9949:14126,9983
 C 14109,9966
 P 14109,9966 x13415
 @alias rc4 uc_b4
+
+# ---- h_eq_r2 (R2's match, from mrach's row y 9707) to bundle track L3
+# mrach's poly row y 9707 ends at x 13425 in its file; in the photos it runs straight on to a
+# pad with a contact (13475,9705) (green centre in the clean shot, ring in the metal shot,
+# 4.5x in three shots, cache/scratch/ucz/r2.png), the top of L3's metal x 13478, which runs
+# south in one piece (tools/follow.py 9704-10860, no contact candidates) to rdp3's L3
+# (h_eq_r2, drawn from y 10700).
+P 13420,9707 x13475 w=16
+P 13458,9688:13492,9722
+C 13475,9705
+M 13478,9698 y10705 w=18
+@alias h_eq_r2 h_eq_r2_u
