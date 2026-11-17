@@ -1,0 +1,112 @@
+# hcj: the horizontal counter lines hc0..hc5 between rdp3's lower-left ports (y 13480) and
+# the named counter outputs (bd1's tracks at y 14690, mrach's polys at x 13425, and for hc1
+# the counter's poly at x 13053 below bd1's track k11).
+# x 13040-14130, y 13470-15990. No transistors.
+#
+# Evidence (images under cache/scratch/hcj/; coordinates are metal-shot pixels):
+#  - surveys at 1.6x, metal and acid1b: sv_metal_a.png, sv_acid1b_a.png (x 13400-14180,
+#    y 13440-14120), sv_metal_b.png, sv_acid1b_b.png (x 13380-14160, y 14060-14740).
+#  - numeric (tools/hcj_prof.py: follow.py's metal test, 7 px column, both chips):
+#    along every track drawn here the longest non-metal run in at least one chip is 20 px,
+#    except where a line really ends (below); every run over 9 px is one of the poly
+#    crossings y 13873-13912 (hc5's poly), y 14007-14040 (hc4's band) or hc4's diagonal
+#    (x 13478: y 14131-14200; x 13565: y 14044-14093), or single-chip dirt.
+#    Down the gaps between tracks (x 13456, 13500, 13543, 13586, 13672, 13716, 13760,
+#    13804, 13847, 14085, 14131; y 13440-14710) chip 1 shows no metal at all except the
+#    two arms at y 13999-14007 (wr_r1's, x 13804) and y 14041-14053 (hc0's, x 13847);
+#    chip 2 the same plus speckle (runs of 4-16 px), so no track changes place elsewhere.
+#  - acid1b: plain field under the tracks between the crossings; the dark rings on the
+#    polys sit in the gaps between tracks (guide trap 2), none under a track, and no
+#    track has a pad at a crossing in either metal shot.
+@block hcj
+@w M=18 P=18
+@s 24x24
+
+# --- hc0: rdp3's poly (x 13861-13881, from the contact (14324,13458)) runs on south to a
+# pad with a contact at (13868,13632); metal from the pad south on x 13868, west along
+# y 14041-14059 onto x 13825, south to bd1's track k17 (13826,14690).
+# hc0_top.png (4x, three shots: poly orange in both metal shots from y 13450 to the pad,
+# ring in both, pale pad in acid1b), hc0_arm.png (4x: the corner at (13868,14050) and the
+# corner at (13825,14050); wr_r1's arm above it ends at y 14010, the poly band of hc4
+# lies between, and x 13825 has no metal from y 14008 to 14041 in either chip).
+# The metal block east of the poly (x 13887-13930, to y 13597) is rdp3's vss; the poly has
+# no contact before the pad.
+P 13861,13470:13881,13625
+P 13856,13612:13886,13648
+C 13868,13632
+M 13868,13618 y14050 x13825 y14700
+N M 13825,14400 hc0
+
+# --- hc1: track L5 (x 13565), straight from rdp3's end (13565,13480) to bd1's track k11
+# (13565,14690). Crosses hc5's poly (y 13873-13912) and hc4's diagonal (y 14044-14093)
+# without a pad (hc5_poly.png, hc4_diag.png).
+M 13565,13470 y14700
+N M 13565,14300 hc1
+# bd1 draws k11 on: x 13565 to y 15005, arm east onto x 13608 (k12 has ended on its
+# contact (13609,14956)), south to a pad at (13609,15608), which bd1 has as `?`.
+# Re-read here: k11_jog.png (4x, three shots: the arm at y 14990-15012 passes 18 px below
+# the ring of k12's pad, dark all along the pad's width in chip 1; no metal on x 13608
+# from y 14961 to 14995 nor on x 13565 from y 15008 to 15191, both chips). On x 13565 at
+# y 14897-14928 k11 crosses hc3's poly; chip 2 is dim there (dirt, 32 px under the metal
+# test), chip 1 shows metal and acid1b shows the poly in its metal-protected colour under
+# the track with the gap rings either side: continuous.
+# k11_pad.png (4x): x 13608 ends on a pad (13592-13628, y 15590-15642) with a ring at
+# (13606,15608) in both chips; the poly leaves the pad's foot west along y 15620-15640
+# under the inh_n track (x 13565, which carries on south: no pad), under x 13521 and
+# x 13478, turns south-west at x 13454 and runs diagonally under nine tracks to
+# (13111,15973), then west along y 15964-15986 into the mid-right array's piece of hc1
+# (which ended at x 13053). hc1_sv_acid1b.png, hc1_sv_metal.png (2x, whole run),
+# hc1_p1.png, hc1_p2.png, hc1_p3.png (3x, metal and acid1b), hc1_west.png (4x, metal,
+# acid, acid1b: the band is continuous from the drawn end at x 13053 to the corner).
+# No pad on any crossed track; the poly is visible in the metal shots between tracks all
+# the way.
+P 13592,15592:13628,15640
+C 13608,15608
+P 13612,15630 x13454 13111,15973 x13040
+
+# --- hc2: track L3 (x 13478), straight from rdp3's end (13478,13480) to bd1's track k9
+# (13478,14690). Crosses hc5's poly (y 13878-13910, hc5_poly.png) and hc4's diagonal
+# (y 14131-14200, hc4_diag.png) without a pad.
+M 13478,13470 y14700
+N M 13478,14400 hc2
+
+# --- hc3: track L8 (x 13694), straight from rdp3's end (13694,13480) to bd1's track k14
+# (13694,14690). Crosses hc5's poly and hc4's band (y 14008-14040) without a pad
+# (hc5_poly.png, hc4_band.png).
+M 13694,13470 y14700
+N M 13694,14400 hc3
+
+# --- hc4: the thin metal at x 14108 from rdp3's end (14108,13480) ends on a pad with a
+# contact at (14105,14022); poly west along y 14014-14035 under the vcc and vss rails,
+# under hc0's metal (x 13868), wr_r1 (x 13782) and L9..L6, turns south-west at x 13612
+# and runs diagonally under L5, L4, L3, L2 to the mid-right channel's poly, whose drawn
+# end is at (13425,14212) (mrach: "n1 of row r14").
+# hc4_ct.png (4x: ring in both chips, pad in acid1b), hc4_band.png (2.7x, three shots,
+# x 13585-14055: band continuous under both rails, no pad and no ring on any metal over
+# it; the blobs on the rails differ between the chips: dirt), hc4_diag.png (2.45x, metal
+# and acid1b: the corner and the diagonal down to mrach's end).
+M 14108,13470 y14034
+P 14090,14006:14124,14040
+C 14105,14022
+P 14100,14025 x13612 13418,14219
+
+# --- hc5: track L10 (x 13782) from rdp3's end (13782,13480) ends on a pad with a contact
+# at (13782,13893); poly west along y 13884-13902 under L9..L2 to the mid-right channel's
+# poly, drawn to x 13425 (mrach: "n1 of row r13"). No metal on x 13782 from y 13897 to
+# 13986 (both chips): the piece below is wr_r1.
+# hc5_ct.png (4x), hc5_poly.png (3x, three shots, x 13385-13815).
+M 13782,13470 y13904
+P 13766,13876:13798,13910
+C 13782,13893
+P 13415,13884:13790,13902
+N P 13600,13893 hc5
+
+# The joins (each label set of rdp3 is one net in rdp3 itself: comparator c track and
+# bundle track, checked by net id before drawing).
+@alias hc0 hc0_u
+@alias hc1 hc1_u
+@alias hc1 bd1_k11
+@alias hc2 hc2_u
+@alias hc3 hc3_u
+@alias hc4 hc4_u
+@alias hc5 hc5_u
