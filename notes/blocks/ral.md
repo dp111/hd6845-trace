@@ -72,8 +72,17 @@ shot): drawn `?B`.
    4370-4448 (a pull-down gate in the box 14252-14365 x 4378-4448, VSS contact at about
    (14265,4415), drain x 14348-14370, which seems to run up to a load under the top rail:
    poly block 14285-14365 x 4277-4310); and a vertical diffusion strip x 14200-14225,
-   y 4300-4395, above the VSS pad. Two passes did not give a consistent circuit; next
-   pass needs metal1 (not cached in this clone) or 5-6x single-shot views.
+   y 4300-4395, above the VSS pad. Two passes did not give a consistent circuit.
+   Third look, with `metal1` (2026-11-17, `cache/scratch/ral/a2.png`, four shots of
+   14000-14150 x 4370-4530 at 4x): east of the strobe gate the strip seems to have an
+   arm going **north**, x 14055-14085, from the strip up to y about 4380 under the VSS
+   rail (outlines in `metal1` and `acid`: a vertical edge at x 14083-14090 from y 4380 to
+   4495; row profiles at y 4468, 4473, 4500 show colour at x 14058-14078 that the strip
+   east of it does not have). Both metal shots show a ring at about (14045,4425), over
+   the strobe poly's rounded top end (14010-14060 x 4405-4432). Neither is resolved: if
+   the ring is a contact onto the arm, node a would sit on VSS, which makes no sense, so
+   one of these readings is wrong. This corner is the next thing to settle (contact test
+   `tools/cdp2_pt.py` on the ring; colour profile across x 14050-14095 at y 4420).
 2. Whether Tf's drain `ral_tf_s#` (strip x 14172-14196) is the first inverter's output,
    i.e. n2 = NOR(a, ral_frc), which would make `ral_frc` a force/clear of the latch.
 3. The output poly from y 4300 to 4480 (x 14375-14395): believed to be the second
