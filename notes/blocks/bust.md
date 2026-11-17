@@ -1,6 +1,6 @@
 # bust: the bus between the central datapath and the right datapath (queue: busT)
 
-## Status (2026-11-17 07:15, contributor session; corrected after independent review)
+## Status (2026-11-17 08:31, contributor session; corrected after independent review; bit 0 joined)
 
 Wiring drawn (`trace/bust.txt`): twelve of the fourteen lines of `cdp1`'s big channel
 from its east edge (x 10845) through the cross-under at x 11230-11700 and east as metal
@@ -181,7 +181,7 @@ two slices (781 px) east across `rdp2`'s untraced routing zone. Ends (tools/foll
 
 | Bit | `ubus` x, end going south | `rbus` x, top going north | Route (drawn) |
 |---|---|---|---|
-| 0 | 13455, 9168 | 14235, 9444 | **open** (below) |
+| 0 | 13455, 9168 | 14235, 9444 | contact (13455,9163), poly down x 13455 under the wide band y 9225-9275 to (13455,9313), metal down x 13452 to (13455,9578), poly east along y 9578, north on x 13866 (outermost nested L), east along y 9445 to the top contact (14238,9445) (`b0_w2.png`, `b0_z2.png`-`b0_z4.png`, `b0_ov.png`) |
 | 1 | 13845, 9104 | 14625, 9400 | contact (13842,9102), poly down to (13842,9222), thin metal down through the rows to (13842,9398), poly east along y 9400 to the top contact (four shots at 2.2x, `b1m.png`; `b1r.png`) |
 | 2 | 14235, 9104 | 15016, 9356 | contact (14240,9100), poly east along y 9100 to (14862,9097), thin metal down x 14863 to (14862,9355), poly east to the top contact (`b2r.png`, `b2m.png`) |
 | 3 | 14625, 9320 | 15406 | contact (14625,9315), poly east along y 9310 to (15402,9310), the top of the metal x 15406 down to `rbus_b3` (`b3r.png`, `b3a.png`) |
@@ -192,32 +192,27 @@ two slices (781 px) east across `rdp2`'s untraced routing zone. Ends (tools/foll
 Each crossing's metal stretches were checked with the follower's metal test in both metal
 shots (the only gaps are 5-17 px poly crossings and contact rings). The `rbus` lines are
 already named by bit (`rdp3`), so a wrong crossing would show as a name clash in the
-extraction; none did. **`tools/bust_fanout.py` now gives, for bits 1-7, exactly the
-datasheet's registers**: bit 1 and 4 R0-R2, R4-R9; bit 2 and 3 R0-R2, R4-R7, R9 (no R8);
+extraction; none did. **`tools/bust_fanout.py` now gives, for bits 0-7, the
+datasheet's registers** (for bits 0-3 a lower bound, see the review notes below): bit 0, 1 and 4 R0-R2, R4-R9; bit 2 and 3 R0-R2, R4-R7, R9 (no R8);
 bit 5 and 6 R0-R2, R4, R6-R8; bit 7 R0-R2, R8.
 
-**Bit 0** (open): `ubus_b0` ends on a contact (13452,9165); a poly drops along x 13452 to a
-contact (13452,9318); the metal from there runs south to a contact (13455,9580); a poly
-row leaves it east along y 9568-9588 (clean shot at 2.4x, `b0z.png`). `rbus_b0`'s top
-contact (14215,9440) has a poly west along y 9440 that turns south near x 13890
-(`b0r.png`, `b0e.png`). Between them, at x 13800-13900 y 9540-9620, a pad near
-(13820,9608) with a metal west (`b0g.png`, 2.3x) was seen but its connections are not
-settled. Later look (2.7x, `b0h.png`, follower): that is a second poly row, y 9610-9630,
-between contacts (13560,9620) and (13842,9618); the first carries a metal 2,330 px south
-(to y 11924), the second a metal east and north to (13897,9228). So that row is another
-net, not bit 0. Bit 0's row y 9578 is the one to follow east of x 13815. The colour test fails under the wide rails at x 13950-14200.
-
-Method used for bits 1-6, for bit 0: the clean shot reads well here (poly cream/salmon on
-pink field, contacts with green centres) except under the wide rails; read each line at
-1.4-2.4x from both ends, check its metal stretches with the metal test in both metal
-shots, and confirm with `tools/bust_fanout.py` (bit 0 should then write R0-R2, R4-R9).
+**Bit 0** (drawn 2026-11-17, after the first review round): the route is in the table. The
+earlier reading that `rbus_b0`'s row turns south "near x 13890" took the second nested L;
+the chip-2 shot at 2.2x (`b0_z2.png`) shows three nested L's whose verticals are at
+x 13860, 13895 and 13935, and the outermost (top row y 9445, vertical x 13860-13873) is the
+one whose foot turns west as bit 0's row y 9578. Every poly stretch was read at 3x or more
+(the drop under the wide band at 4.5x in two shots: straight, no track step), the metal
+x 13452 with the metal test in both metal shots, and the join changes no transistor count.
+The second row y 9615 (contacts (13560,9620) and (13842,9618)) is another net, as before.
+With it, bit 0 writes R0-R2 and R4-R9, as the datasheet says (a lower bound: its row runs
+on east, below). Independent review (2026-11-17) confirmed every stretch and the corner.
 
 ### Review notes on the routing zone and the fan-out check
 
-- The poly rows of bits 1, 2 and 3 do not end at the `rbus` top contacts: rows y 9400,
-  9358 and 9315 run on east past (14625,9400), (15014,9358) and (15410,9316), cross
+- The poly rows of bits 0, 1, 2 and 3 do not end at the `rbus` top contacts: rows y 9445
+  (past x 16100, review of bit 0 at 1-5x), 9400, 9358 and 9315 run on east past (14625,9400), (15014,9358) and (15410,9316), cross
   x 16839, and appear to reach further pads near x 16400-17030 (independent review, 0.7x
-  only). Not drawn; the fan-out for bits 1-3 is therefore a lower bound.
+  only). Not drawn; the fan-out for bits 0-3 is therefore a lower bound.
 - The register-width check cannot detect a swap of bits 1 and 4, 2 and 3, or 5 and 6
   (identical strobe sets); the order within those pairs rests on the geometry, which the
   review checked. "Exactly the datasheet" leaves out R3 (`wr_r3` reaches no data line yet).

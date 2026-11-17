@@ -335,6 +335,29 @@ P 14608,9383:14642,9417
 C 14625,9400
 M 14625,9395 y9605 w=24
 @alias cdp1_c4_bl rbus_b1
+# Bit 0: ubus_b0's metal (x 13455) on to its end contact (13455,9163); a poly drops straight
+# along x 13455 under the wide metal band y 9225-9275 (no track step: clean and chip-2 shots
+# at 4.5x, cache/scratch/bust/b0_w2.png) to a contact (13455,9313); a metal south along
+# x 13452 (one piece in both metal shots; gaps only at the poly rows y 9390-9460) to a
+# contact (13455,9578); a poly row east along y 9578 (straight at 3x, b0_z4.png) to x 13865,
+# north along x 13865 (the outermost of the nested L's, chip-2 shot at 2.2x, b0_z2.png) to
+# y 9445, and east along y 9445 (straight under the narrow columns at 3.6x, b0_z3.png) to the
+# contact (14238,9445) at the top of rbus_b0's metal (tools/follow.py: 9444). The row runs
+# on east past the pad (not drawn; review, e6.png).
+M 13455,9050 y9175 w=24
+P 13438,9146:13472,9180
+C 13455,9163
+P 13455,9163 y9313 w=16
+P 13438,9296:13472,9330
+C 13455,9313
+M 13452,9305 y9586 w=14
+P 13438,9561:13472,9595
+C 13455,9578
+P 13455,9578 x13866 y9445 x14238 w=14
+P 14221,9428:14255,9462
+C 14238,9445
+M 14237,9437 y9550 w=24
+@alias cdp1_c5_bl rbus_b0
 # Bit 3: ubus_b3's metal (x 14625) on to its end contact (14625,9315) (tools/follow.py: one
 # piece to y 9320); a poly row east along y 9310 to a contact (15402,9310) at the top of the
 # metal x 15406, which runs down unbroken (both metal shots: only poly-crossing gaps of
