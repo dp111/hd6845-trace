@@ -38,7 +38,7 @@ N M 17000,3878 ra2_drv_in
 # pad (16290,3960); poly south along x 16290 under the five r9c metals y 4000-4180 and
 # the band's top rail to a pad (16295,4478); metal south along x 16297 to the band's
 # output level (y 4600). That metal is the one ral cell s3's output metal (y 4590) joins
-# from the west, and which goes on south to RA3's unit line (r9c's ra3_drv_in_u at
+# from the west, and which goes on south to RA3's unit line (r9c's ra3_drv_in at
 # (16290,5109)): drawn here only to y 4600. Metal from tools/follow.py (2,200 px);
 # pads at 1.6-2.2x in metal and the clean shot (cache/scratch/rad/ra3a.png, ra3b.png,
 # ra3c.png).

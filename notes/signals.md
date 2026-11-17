@@ -248,10 +248,10 @@ None of these rows has a register number yet, so all names are by place. Columns
 | `wr_r8`, `wr_r9` | the write strobes of R8 and R9, which are the write lines of rows A and C: **row A is R8, row C is R9** (`notes/blocks/wrs.md`) |
 | `cdp1_b5_a` | the register-side input of R9's comparator in slice 5 (bit 0): not the register bit but the output of the island `tc1` |
 | `ra#_cmp` | the row-address-side input of R9's comparator for bit # (# = 0-4): output of a unit near the right edge whose pull-down is gated by `ra#_drv_in`; with the unit's load, NOT `ra#_drv_in`, the level of pin RA# (AMB-012; `notes/blocks/r9c.md`). The comparator cell's own name for the same net, `cdp1_b#_b` with # = 5 minus the bit, is kept as an alias |
-| `ra#_drv_in_u` | (# = 2, 3, 4) the input of that unit, believed to be `ra#_drv_in`; the line is not drawn back to the pad cell |
+| `ra#_drv_in_u` | (# = 2, 4) the input of that unit, believed to be `ra#_drv_in`. RA4's is aliased to `ra4_drv_in` (`trace/rad.txt`) through r9c's `?P`; RA2's joins `ral` cell s2's output but its last stretch to the pad cell's line (below (15252,4183)) is not drawn. RA3's was renamed: the join through x 16297 is firm |
 | `ral_frc` | metal line y 4350 through the five `ral` cells (x 13990-16330); in each cell it gates a pull-down to VSS (`ral_tf_s#`). Source not followed. Name from "force": a guess at its role |
 | `ral_stb` | the sixth line of the row address bundle (`notes/blocks/rab.md`), metal y 4548 under the `ral` band; in each cell it gates the input pass transistor. Source not followed |
-| `ral_a_s#` | `ral` cell s# (s0-s4 west to east; s0 is RA bit 0's cell), node a: the input pass transistor's far side, diffusion strip y 4479-4494, joined by a hold device (gate VSS) to the cell's output, which is the RA# pad driver's input line (`ra#_drv_in`; `ra#_drv_in_u` for 2-4, as r9c names them). Its use as a gate input is not drawn |
+| `ral_a_s#` | `ral` cell s# (s0-s4 west to east; s0 is RA bit 0's cell), node a: the input pass transistor's far side, diffusion strip y 4479-4494, joined by a hold device (gate VSS) to the cell's output, which is the RA# pad driver's input line (`ra#_drv_in`; still `ra#_drv_in_u` for 2 and 4). Its use as a gate input is not drawn |
 | `ral_tf_s#` | `ral` cell s#: drain of the pull-down gated by `ral_frc`; not drawn further |
 | `cdp1_b#_n2`, `cdp1_b#_ne` | NOR(a, b) and a XOR b |
 | `cdp1_b_eq` | NOR of the five `_ne`: high when R9 equals the 5-bit value on the `_b` lines (in slice 5 the register bit is replaced by `cdp1_b5_a`, made by `tc1`) |
@@ -859,3 +859,4 @@ datapath s1...s7, s0 became b0...b6, b7.
 | fld_y_a | rc0_n | via wl_i2_out |
 | wl_i2_in | rc0 | |
 | wl_i2_out | rc0_n | |
+| ra3_drv_in_u | ra3_drv_in | |

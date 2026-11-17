@@ -70,5 +70,5 @@ names are joined here by `@alias ra4_drv_in ra4_drv_in_u`, **through uncertain g
    lower output pad, (15208,4805)).
 2. `r9c`'s `?P` from its bit-4 metal (17135,5150) south to y 5805: when it is seen end to
    end, rename `ra4_drv_in_u` to `ra4_drv_in` and drop the alias.
-3. With the `ral` branch merged: `ra3_drv_in_u` (r9c) joins `ra3_drv_in` through
+3. With the `ral` branch merged: `ra3_drv_in` (r9c) joins `ra3_drv_in` through
    x 16297; then rename it.
