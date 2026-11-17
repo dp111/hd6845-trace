@@ -1,8 +1,9 @@
 # r9m: R9's match line (cdp1_b_eq) from the comparator to the row counter's step logic.
 # Route as followed in notes/blocks/r9m.md; every metal stretch from tools/follow.py
 # (both chips' metal shots), diagonals placed by sampling the follower with --max.
-# The last 12 px (stub at x 4168 to the metal x 4148 of rcs_bq3335) are AMB-013 and are
-# NOT drawn: the line ends free.
+# CORRECTED 2026-11-17 after independent review: two poly hops under the metals x 5078-5127
+# step down one track, so R9's match ends on the contact (4148,3335) (rcs_bq3335), and the
+# metal x 4194 with the stub is another net (r9m_l3). See notes/blocks/r9m.md, correction.
 @block r9m
 @w M=12 P=16
 @s 24x24
@@ -31,7 +32,17 @@ C 5358,2641
 
 # --- poly west under the metals of res_b (x 5275) and lpstb_b (x 5335) to the pad
 # (4912,2640)
-P 4907,2641 x5363
+# CORRECTED after independent review (4-5x, both stripped shots; review images
+# rv_r9m/hop4.png, hop5.png, hop6.png): the polys under the metals x 5078-5127 do not run
+# straight; each steps down one track going east. The poly from pad (4912,2641) runs east to
+# x 5083, south to y 2681 and east to a pad (5405,2681); the one from pad (5358,2641) runs
+# west to x 5127 and north to y 2596, west to pad (4867,2596) (drawn with that line below).
+P 4912,2641 x5083 y2681 x5405 w=16
+P 5388,2664:5422,2698
+C 5405,2681
+# east of that pad: metal along y 2685 to x 5848 and south to a pad (5845,5045)
+# (tools/follow.py; r9m notes "line 3"); its far end is not looked at.
+M 5405,2683 x5848 y5045 w=12
 P 4897,2626:4927,2656
 C 4912,2641
 
@@ -47,7 +58,7 @@ M 4194,3376 x4142 w=17
 # both metal shots, notes AMB-013). Drawn with tla's split of track P (separate commit).
 
 N M 7600,4462 cdp1_b_eq
-N M 4194,3000 cdp1_b_eq
+N M 4194,3000 r9m_l3
 
 # =====================================================================================
 # The bundle's first line: from the contact (4148,3335) of rcs_bq3335 (trace/tla.txt)
@@ -62,12 +73,16 @@ M 4149,3338 y2555 x4651 4692,2598 x4867 w=12
 P 4852,2581:4882,2611
 C 4867,2596
 # poly east under the res_b / lpstb_b metals to the pad (5400,2596)
-P 4862,2596 x5405 w=16
+P 4867,2596 x5127 y2641 x5358 w=16     # the leg x 5120-5135 joins this line to R9's (corrected)
+# pad (5400,2596): its poly runs west to x 5175 and turns north, ending near y 2545 (seen
+# in the review images; where it goes is not followed)
+P 5400,2596 x5175 y2550 w=16
 P 5385,2581:5415,2611
 C 5400,2596
 # metal: east along y 2599 to x 6022 (beside R9's line, x 5974), south to y 4442, east to
 # the pad (6059,4440)
 M 5400,2599 x6022 y4442 x6064 w=13
+N M 5700,2599 r9m_l1w
 P 6044,4425:6074,4455
 C 6059,4440
 # poly south along x 6058 (one of the eight vertical polys that R9's line crosses) to the
@@ -89,7 +104,10 @@ M 6965,4744 x7657 y4673 x7860 w=12
 P 7840,4661:7870,4691
 C 7855,4676
 # poly east along y 4676 to cdp1's west edge (cdp1 draws it on to x 10850: cdp1_l4676)
-P 7850,4676 x8345 w=12
+P 7850,4676 x8192 w=12                 # CORRECTED: this row does not reach cdp1's line y 4676;
+# at cdp1's west edge every row steps down one track by an L (x 8215-8345; 3x in both
+# stripped shots, cache/scratch/bust/stair2.png). This one turns south near x 8190 (towards
+# a pad near (8245,4718), not drawn).
 # east of cdp1: on along y 4676 through the bus field, a diagonal (11465,4676)-
 # (11530,4737) under the wide supply metal, east to the pad (11650,4740)
 P 10845,4676 x11465 11530,4737 x11655 w=12
@@ -105,4 +123,5 @@ C 12780,4738
 P 12782,4738 y5550 w=16
 N P 12782,5500 cdp1_l4676
 
-@alias rcs_bq3335 cdp1_l4676
+# R9's match is the input of rcs_mu's inverter (the corrected hop joins them; firm geometry)
+@alias cdp1_b_eq rcs_bq3335
