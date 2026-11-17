@@ -1,0 +1,99 @@
+# rde: the data bus lines through the central datapath's rows D and E (y 5150-5700).
+# Wiring only. Notes: notes/blocks/rde.md. Images: cache/scratch/rde/.
+@block rde
+
+# --- Slices c1..c5 (cdp1) = s3..s7 (cdp2): data bits 4..0 ---------------------------
+# Each column's bit line runs from cdp1's drawn end (y 5150) to cdp2's drawn top (y 5700).
+#
+# Upper piece, y 5150-5542: bright metal x (xc-7)..(xc+5), xc = 8856 + 390 k. Dark
+#   crossings of 4-14 px only (tools/rde_dim.py; the 13-14 px one at y 5183-5196 is a thin
+#   poly, the metal's two edges run through it: sr_5190.png, 5x median of five slices).
+# Lower piece, y 5596-5700: bright metal x (xc-5)..(xc+11), crossings of 5-11 px.
+# No pad, ring or widening on either piece (srm_5375.png, srm_5540.png, sv4.png).
+M 8854,5140 y5546 w=14
+M 9244,5140 y5546 w=14
+M 9634,5140 y5546 w=14
+M 10024,5140 y5546 w=14
+M 10414,5140 y5546 w=14
+M 8859,5592 y5710 w=16
+M 9249,5592 y5710 w=16
+M 9639,5592 y5710 w=16
+M 10029,5592 y5710 w=16
+M 10419,5592 y5710 w=16
+
+# The stretch y 5542-5596: the metal is never bright here in either metal shot. Read as
+# a NECK about 10 px wide, x (xc-8)..(xc+2), squeezed past the pad of the contact at
+# (xc+42,5562) on the next track, over a diffusion column (xc-18..xc, y 5512-5590) that a
+# thin dark bar crosses at y 5557-5567. Marked '?' because the evidence is indirect:
+#  - metal1 is dark over x (xc-8)..(xc+2) (44-59 against 82-99 on the open column beside
+#    it) where the clean shot is flat tan: something on the metal layer lies there, in
+#    all five slices (tools/rde_edge.py, and the table in the notes);
+#  - the line's left edge (dip at xc-10) is there above, in and below the stretch;
+#  - no contact marks on the column in the clean shot (the VSS contacts at (xc-63,5430)
+#    and (xc-63,5655) show theirs plainly), and no room for a contact pad: a line cannot
+#    end here, and the lower piece's top (y 5593-5600) is over bare field;
+#  - the bright strip x (xc+6)..(xc+10) beside it is the poly pad seen in the gap between
+#    the neck and the pad's metal (one edge line, not a metal gap, separates it from the
+#    pad's metal).
+# Views: sr1.png, sr8.png (5x, 8x medians of five slices, four shots), mo_all.png (five
+# slices singly, 5x, three shots). At y 5557-5567 the bar is black in every shot and the
+# neck cannot be seen across it.
+?M 8853,5542 y5596 w=10
+?M 9243,5542 y5596 w=10
+?M 9633,5542 y5596 w=10
+?M 10023,5542 y5596 w=10
+?M 10413,5542 y5596 w=10
+
+N M 8854,5300 cdp1_c1_bl
+N M 9244,5300 cdp1_c2_bl
+N M 9634,5300 cdp1_c3_bl
+N M 10024,5300 cdp1_c4_bl
+N M 10414,5300 cdp1_c5_bl
+@alias cdp1_c1_bl cdp2_a_s3_bus
+@alias cdp1_c2_bl cdp2_a_s4_bus
+@alias cdp1_c3_bl cdp2_a_s5_bus
+@alias cdp1_c4_bl cdp2_a_s6_bus
+@alias cdp1_c5_bl cdp2_a_s7_bus
+# cdp2 makes cdp2_a_sK_bus canonical for cdp2_c_sK_bus; both now belong to cdp1's name.
+@alias cdp1_c1_bl cdp2_c_s3_bus
+@alias cdp1_c2_bl cdp2_c_s4_bus
+@alias cdp1_c3_bl cdp2_c_s5_bus
+@alias cdp1_c4_bl cdp2_c_s6_bus
+@alias cdp1_c5_bl cdp2_c_s7_bus
+
+# --- Data bit 6 to R10's slice s1 (cdp2 row C, bus line at x 8118/8075) ---------------
+# The metal that bust drew to (8075,5040) (tc1_x2's metal, bit 6, with the contact onto
+# cdp1_lw2 at (8078,5020)) runs on south along x 8075 to y 5848, steps east along
+# y 5840-5856 to x 8118 (the step lies on one of channel 1's poly lines, no contact:
+# uniform salmon under it, 4.5x in three shots, s1jog.png) and runs south along x 8118 to
+# cdp2's drawn top of cdp2_c_s1_bus (y 7395). Seen end to end: b6a.png (2.9x, y 5030-5855),
+# s1a.png (2.3x, y 5790-6340), s1b.png (2.3x, y 6320-7400), both metal shots. Dark
+# stretches of at most 16 px, none in both shots at one place except poly crossings
+# (tools/rde_dim.py). tools/follow.py takes it from (8075,4990) to the step, and from
+# (8118,7450) north to y 6256; between, the channel's crossings are too close for it.
+# Not established: taps. A wider bright blob on the line at (8118,7088) between two poly
+# crossings (s1pad.png), and the follower's candidates at y 5111-5407 where the line lies
+# over three diffusion regions (pitch 130): no pad or ring seen at any of them.
+M 8075,5030 y5848 x8118 y7400 w=12
+N M 8118,6500 cdp1_a3_bl
+@alias cdp1_a3_bl cdp2_c_s1_bus
+
+# --- Data bit 5 to R10's slice s2 (cdp2 row C, bus line at x 8535/8465) ---------------
+# The tap metal of cdp1_a0_bl at x 8727 (cdp1 drew it to y 5150) runs straight down to a
+# contact (8728,6088) on a poly pad (ring in both metal shots, green patch in the clean
+# shot). The poly runs west along y 6079-6095 under three metals (no pads on them) to a
+# pad with the contact (8485,6087) (ring, green patch); 4x in three shots, s2top.png.
+# The pad's metal has its line on the west side (one outline round line and pad, 6x,
+# s2c.png): south along x 8464 to y 6999, east to x 8532, south to cdp2's drawn top of
+# cdp2_c_s2_bus (y 7395). tools/follow.py takes both metals whole; dark stretches of at
+# most 14 px (tools/rde_dim.py).
+M 8727,5140 y6094 w=12
+C 8728,6088 s=22x22
+P 8712,6074:8746,6101                  # pad
+P 8480,6087 x8730 w=16                 # west, under the metals at x 8553, 8620 (VSS), 8687
+P 8468,6073:8502,6101                  # pad
+C 8485,6087 s=22x22
+M 8494,6088 x8464 y6999 x8532 y7400 w=13
+N M 8464,6500 cdp1_a0_bl
+N P 8600,6087 cdp1_a0_bl
+@alias cdp1_a0_bl cdp2_c_s2_bus
