@@ -30,6 +30,13 @@ poly steps down one track going east. The trace was redrawn accordingly:
 - So: **`amr` c3's outer output is not `rcs_bq3335`**; that statement below is withdrawn,
   as is "the bundle's first line ... followed back 9,000 px".
 
+A second, focused review (same day) confirmed both corrected hops and the staircase at
+5.5x / 4.5x in both stripped shots, and found nothing else between the two legs. Not
+drawn yet: the poly from pad (5400,2596) does not end at y 2550; it turns west along
+y 2550 under the same metals to a pad with a contact at about (4905,2550). The
+staircase's vertical legs are at about x 8360, 8318, 8275, 8232 (drawn 8337, 8297, 8262,
+8230; no connection changes).
+
 The sections below are kept as the record of how the earlier reading was made; where
 they disagree with this one, this one holds.
 
