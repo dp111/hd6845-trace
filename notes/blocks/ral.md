@@ -100,6 +100,14 @@ cream like the diffusion boxes, not orange like poly, so it may be diffusion and
 the poly pad drawn as the hold device's gate. If so, the hold device's gate connection
 needs re-reading too.
 
+Third pass on inverter 1 (19-copy composite, metal and stripped shots at 3x, `i1.png`):
+the strip x 14205-14225 is plain from y 4290 to y 4395, and the outlined region at the
+L-poly's top (x 14230-14290, y 4290-4340) has a rounded corner at (14295,4285). No
+junction resolves. Stopped here (trap 9): settle it with single shots at 5-6x of
+x 14195-14300, y 4280-4460 in the two cleanest copies (s1 and m4 score best in
+cellcheck), and a colour profile across the box 14205-14250 x 4400-4450 against the Tf
+tab pad, to decide poly against diffusion.
+
 ### Ports
 
 | Name | Layer | Where (s0; +434, +868, +1431, +1865 for s1-s4) | Direction | What |
