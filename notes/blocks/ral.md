@@ -46,7 +46,8 @@ looked at:
 
 | Place | Result |
 |---|---|
-| H4's west end | ends at x 11043 with no contact (four shots at 3.5x, `cache/scratch/gab/h4c.png`); the metal x 11025 beside it is `rc0_n`, no ring. **`wl`'s notes say H4 "runs on west into the bus field": it does not** |
+| H4's west end | ends at x 11043-11055 in a closed outline, with nothing leaving it north or west (four shots at 3.5x and 5x, `cache/scratch/gab/h4c.png`, `cache/scratch/ral/h4w.png`, `h4n.png`); the metal x 11025 beside it is `rc0_n`, no ring. **`wl`'s notes say H4 "runs on west into the bus field": it does not** |
+| H4 itself, x 11060-12900 | a colour scan of the clean shot along the band (G minus R, which picks out a contact's green centre) finds only the two known contacts (11392,7210) and (12889,7214), plus three spots at x 12121, 12299, 12467, which are not contacts (4x mosaics in both shots, `h4c1.png`, `h4c2.png`: no ring, only the band crossing under a metal) |
 | H4's east end | the contact (12889,7210) onto x 12902; no poly beyond (`h4e.png`) |
 | x 12902's bottom | ends free 55 px above `ck_b`'s contact (`mra`'s notes) |
 | the north metal's contact candidate (11393,6965) | not a contact: polys crossing under (four shots at 4x, `g2.png`) |
