@@ -1,0 +1,47 @@
+# r9m: R9's match line (cdp1_b_eq) from the comparator to the row counter's step logic.
+# Route as followed in notes/blocks/r9m.md; every metal stretch from tools/follow.py
+# (both chips' metal shots), diagonals placed by sampling the follower with --max.
+# The last 12 px (stub at x 4168 to the metal x 4148 of rcs_bq3335) are AMB-013 and are
+# NOT drawn: the line ends free.
+@block r9m
+@w M=12 P=16
+@s 24x24
+
+# --- poly from cdp1's edge (drawn there to x 8340) west to the pad (7815,4460)
+P 7803,4459 x8345
+P 7800,4446:7830,4476
+C 7815,4461
+
+# --- metal: west along y 4462, south at x 7450, west along y 4528 (the top one of six
+# bus metals above the row address selector) to the pad (6920,4525)
+M 7815,4462 x7450 y4528 x6920
+P 6905,4512:6935,4542
+C 6920,4527
+
+# --- poly west under three rails to the pad (6445,4528)
+P 6440,4527 x6925
+P 6430,4513:6460,4543
+C 6445,4528
+
+# --- metal: west to x 5974 (over a field of eight vertical polys, no pads), north along
+# x 5974 to y 2641, west along y 2641 to the pad (5358,2640)
+M 6451,4528 x5974 y2641 x5358
+P 5343,2626:5373,2656
+C 5358,2641
+
+# --- poly west under the metals of res_b (x 5275) and lpstb_b (x 5335) to the pad
+# (4912,2640)
+P 4907,2641 x5363
+P 4897,2626:4927,2656
+C 4912,2641
+
+# --- metal: west along y 2641 to x 4668, up a 45-degree diagonal to (4626,2599) (the
+# follower is at (4670,2639) after 180 px, (4660,2633) after 190, (4620,2598) after 230),
+# west along y 2599 to x 4194, south along x 4194 to y 3384; at the foot a 25 px stub
+# west (y 3368-3385) to x 4170. Whether the stub ends on the metal x 4148 twelve px
+# further west is AMB-013.
+M 4912,2641 x4668 4626,2599 x4194 y3384 w=13
+M 4194,3376 x4170 w=17
+
+N M 7600,4462 cdp1_b_eq
+N M 4194,3000 cdp1_b_eq
