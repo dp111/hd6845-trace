@@ -29,6 +29,12 @@ P 15258,3872 x15422 w=18
 P 15241,3855:15275,3889
 C 15258,3872
 M 15255,3866 y4183 w=12
+# poly south from the pad, under the band's top rail, to the top of ral cell s2's output
+# column (x 15240-15263, which is s0's x 14372-14395 moved by 868) at y about 4295. Only
+# s2 has this poly: the other four copies show bare field above y 4280 at that x
+# (mosaic of the five copies, cache/scratch/rad/oup.png). The column below (y 4300-4480)
+# is ral's, not drawn yet (notes/blocks/ral.md, "Not done" 4).
+P 15253,4183 y4295 w=20
 P 15235,4166:15269,4200
 C 15252,4183
 N M 17000,3878 ra2_drv_in
