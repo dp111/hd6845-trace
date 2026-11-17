@@ -157,3 +157,32 @@ Hence the central datapath rows: **R8 = row A**, slice 5 bit 0, slice 4 bit 1, s
 bit 4, slice 0 bit 5, slice 3 bit 6 (by the above), slice 2 bit 7; **R9 = row C**,
 slice 5 bit 0 ... slice 1 bit 4. That settles the bit order the "rename" package was
 waiting for.
+
+## Next: the right datapath's routing zone (y 9080-9560), where `ubus` meets `rbus`
+
+The fan-out check shows the other half of the gap: R0-R2's bits 0-6 are on `rbus_b0`..`b6`
+(lower right array, `rdp2`/`rdp3`), and none of those is joined to `ubus_b0`..`b6`
+(upper array). `rbus_bk` sits at the x of `ubus_b(k+2)`: the lines shift two slices
+(781 px) east across `rdp2`'s untraced routing zone. Measured ends (tools/follow.py):
+
+| Bit | `ubus` x, end going south | `rbus` x, end going north |
+|---|---|---|
+| 0 | 13455, 9168 | 14235, 9444 |
+| 1 | 13845, 9104 | 14625, 9400 |
+| 2 | 14235, 9104 | 15016, 9356 |
+| 3 | 14625, 9320 | 15406, 9764 (follower stopped early) |
+| 4 | 15016, 9276 | 15796, 9764 (stopped early) |
+| 5 | 15406, 9234 | 16187, 9268 |
+| 6 | 15796, 9104 | 16577, 9096 |
+
+The zone is a channel of about 14 horizontal poly rows (25 px pitch, y 9080-9450) under
+thin vertical metals that change rows at contacts (trap 10), and it also carries the
+row counter's `uc` lines (`rdp1`: "fed in the routing zone of rdp2"). One pair seen at
+1.4x (`b6z.png`): `ubus_b6` ends on a ring at (15790,9085), a poly row at y about 9085
+runs east, and a ring at about (16580,9088) sits on `rbus_b6`'s top. Consistent with
+"each data line crosses on one poly row", but the stripped shot's colour contrast here is
+too weak to measure a row's continuity (column profile at x 16000), so **nothing is
+drawn**. Method for whoever takes it: list every ring (contact) in the zone from both
+metal shots, assign each to its poly row by y, check each row's continuity in the clean
+shot at 3x between consecutive rings, then build the joins; `tools/bust_fanout.py` must
+then show bit k writing R0, R1 and R2 as well.
