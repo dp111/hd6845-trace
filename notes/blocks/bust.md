@@ -22,7 +22,7 @@ default gap bridges). East of the staircase: metal, `tools/follow.py` from each 
 
 | cdp1 line (x 10845) | metal y | east end | joined to |
 |---|---|---|---|
-| `cdp1_l4588` | 4655 | 12000 | `amr` c1's outer output (alias of `amr_ob_c1`); its drop seen only to (11616,4608): `?P` |
+| `cdp1_l4588` | 4655 | 12000 | `amr` c1's outer output (alias of `amr_ob_c1`); drop seen end to end at 3x (`c0a.png`) |
 | `cdp1_l4632` | 4697 | 12390 | `amr` c2's outer output (`amr_ob_c2`) |
 | `cdp1_l4676` (`rcs_bq3335`) | 4740 | 12782 | `amr` c3's outer output (drawn by `r9m`) |
 | `cdp1_l4719` | 4787 | pad (13540,4787) | **R5's match**: poly south to `rdp1`'s poly x 13533-13556 from y 5450 (alias of `sl_eq_r5`) |
@@ -105,3 +105,15 @@ open. `r9m`'s notes say the bundle that runs with R9's match ends in the step lo
 middle cluster on pads (4270,2640) and (4232,2683): if `cdp1_l4588` and `cdp1_l4632` are
 those two lines, all three of `amr`'s outer outputs feed the row counter's step logic.
 Not established.
+
+## `amr`'s partial slice c0 (open, and worth checking)
+
+c0's two lines leave its top (about (11497,5590) and (11580,5590)) diagonally north-east
+under the supply metal, run north beside the staircase at x about 11720 and 11765, and at
+the top turn diagonally north-west. There, two parallel diagonals meet near
+`rab`'s bit-0 pad (11650,4500): one is `cdp1_l4544` (the top channel line, which does not
+drop like the others), and the other runs towards that pad
+(`cache/scratch/amr/c0a.png`, `c0b.png`, 3x and 1x). **If one of c0's lines does land on
+`rab`'s pad, `rax_o0` has a second driver**, which would be wrong or would mean that
+`rax_o0` is not what `rax` alone makes. Not resolved: needs 5x single shots at
+x 11630-11720, y 4490-4580.

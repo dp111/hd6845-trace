@@ -13,7 +13,7 @@
 @w M=12 P=12
 @s 24x24
 
-?P 10845,4588 x11590 11657,4655 x11660
+P 10845,4588 x11590 11657,4655 x11660
 P 11638,4638:11672,4672
 C 11655,4655
 P 10845,4632 x11525 11590,4697 x11702
@@ -49,8 +49,8 @@ C 11697,5134
 P 10845,5110 x11230 11297,5177 x11660
 P 11638,5160:11672,5194
 C 11655,5177
-# line y 4588: its drop is seen only to (11616,4608); the rest to the pad (11655,4655) assumed
-# (the pad and the metal from it are plain): drawn ?P.
+# line y 4588: its drop seen end to end to the pad (11655,4655) at 3x in both chip-2 shots
+# (cache/scratch/amr/c0a.png).
 
 # --- metal east from the staircase
 M 11655,4655 x12000
