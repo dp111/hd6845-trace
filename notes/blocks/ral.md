@@ -228,7 +228,22 @@ kept apart, did ("Inverter 1: how it was read" above).
 4. The input buried contact at the strip's west end (`?` in the trace's comment, drawn
    `B`) was not re-read.
 
-### Review of inverter 1 (2026-11-17)
+## Review
+
+Round 1 (2026-11-17, an independent agent, single copies s0-s3, m4, m9, m12 and both group
+medians at 5x+): see below; its findings (notes nits, a diffusion item overhanging Tf's
+gate by 2 px) were fixed.
+
+Re-read of the force line and the strobe (2026-11-17, an independent agent, every hop at
+4.4-6x in both stripped shots and both metal shots), because a force line that is the
+counters' transfer line does not fit: the cross-under at x 11150-11720 (three polys, none
+steps), the metal y 4287, the hop at (13822-13905, 4285-4350), the metal x 11242 and
+x 11396 down to band H4 at (11392,7212), and the strobe's route back to `tc1`'s ns4 with
+its three poly hops on y 2768: no swap and no wrong join. The contradiction is therefore
+not in these routes: it is in what band H4 / the line x 12902 does (`wl`'s and `mra`'s
+reading) or in an undiscovered driver (AMB-017).
+
+### Round 1 details: inverter 1
 
 Independently reviewed on single copies s0-s3, m4, m9, m12 and both group medians at 5x+:
 inverter 1 = NOR(node a, `cnt_gab`) confirmed device by device (the bar's gate wire to
