@@ -343,3 +343,15 @@ P 15385,9293:15419,9327
 C 15402,9310
 M 15406,9303 y9605 w=24
 @alias cdp1_c2_bl rbus_b3
+# Bit 4: ubus_b4's metal (x 15016) on to its end contact (15018,9272); a poly row east along
+# y 9270 to a contact (15790,9272) (ring in both metal shots, contact centre in the clean
+# shot, 4x: cache/scratch/bust/b4c.png), from which the metal x 15796 runs down unbroken to
+# rbus_b4 (both metal shots: the only longer gap is the ring's own edge). 1.38x (b4r.png).
+M 15016,9060 y9280 w=24
+P 15001,9255:15035,9289
+C 15018,9272
+P 15018,9271 x15790 w=14
+P 15773,9255:15807,9289
+C 15790,9272
+M 15793,9265 y9605 w=24
+@alias cdp1_c1_bl rbus_b4
