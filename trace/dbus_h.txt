@@ -74,16 +74,16 @@ P 16475,13265 x16790 w=20
 # bit 6: row y 13458 = areg_w7's poly
 P 16475,13458 x16790 w=20
 # bit 5: row y 13653 west to x 16410, south under the rail areg_rail_r to y 14432, east
-# into the latch cell at y 14360-14840
+# into the latch cell at y 14350-14810
 P 16790,13655 x16410 y14432 x16560 w=16
 # bit 4: row y 13850 west to x 16465, south in the open to y 14258, east into the latch
 # cell at y 13870-14340
 P 16790,13852 x16465 y14258 x16560 w=18
 # bit 6, areg_w7 on south: diagonal from (16366,14800) to (16458,14905), east into the
-# latch cell at y 14840-15315
+# latch cell at y 14827-15287
 P 16364,14695 16364,14798 16460,14907 16560,14907 w=16
 # bit 7, areg_w6 on south: the metal ends on a contact (16337,14865); poly down x 16342 to
-# y 15262, diagonal to (16468,15384), east into the latch cell at y 15315-15790
+# y 15262, diagonal to (16468,15384), east into the latch cell at y 15304-15764
 M 16341,14695 y14875 w=15
 C 16338,14865
 P 16324,14852:16354,14880

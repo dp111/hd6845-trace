@@ -6,7 +6,7 @@ Trace: `trace/dbus.txt` (the column beside the pads) and `trace/dbus_h.txt` (bit
 several offsets side by side, for comparing repeats), `tools/dbus_autocorr.py`
 (vertical pitch of a strip).
 
-## Status (2026-11-17 14:13 +0000, contributor session; independently reviewed: the clusters in Round 1, buffers 6 and 7 with their input lines and the inverter below them in Round 2, the chain 4/5 outputs and the rest in Round 3; see Review)
+## Status (2026-11-17 14:13 +0000, contributor session; independently reviewed: the clusters in Round 1, buffers 6 and 7 with their input lines and the inverter below them in Round 2, the rest (cluster 2, latch copies D5/D6, the eight data-line joins) in Round 3; see Review)
 
 Traced, extracting, overlay-checked: the input buffer chain (four inverters) as cell
 `dbus_in`, placed **eight times** (D0-D5 upright; **D6 and D7 upside down in the lower
@@ -57,7 +57,7 @@ down from the D0 pad cell. Gates sit on a 152 px vertical pitch between two rail
 | What | Where | State |
 |---|---|---|
 | Input chain, D0 | 17255-17590 x 8280-8880 | cell `dbus_in`, traced |
-| Input chain, D1-D5 | same cell at (1,1365) (1,2732) (2,4098) (2,5465) (2,6223) | placed; findcell on the clean shot scores 0.81-0.83, each overlay checked at 1.25x. The four-gate core is the same in all six; the wiring left of x 17290 differs per copy and is drawn only for D0 (and D1's input) |
+| Input chain, D1-D5 | same cell at (1,1365) (1,2732) (2,4098) (2,5465) (2,6223) | placed; findcell on the clean shot scores 0.81-0.83, each overlay checked at 1.25x. The four-gate core is the same in all six; the wiring left of x 17290 differs per copy: drawn for D0-D3 (their `d_d`/`lat_n` polys into the clusters) and for D4, D5 (the `d4_d`/`d5_d` metals to the latches of bits 4-7) |
 | Capacitor rectangles of chain 0 | 16960-17040 x 8445-8580 and x 8745-8880 | drawn |
 | Cluster 0 (D0) | 17150-17590 x 8885-9520 | traced: `dbus_lat` upside down (mirror line y 9826.5) and `dbus_drv` at (0,-1368) |
 | Clusters 1-3 (D1-D3) | 17150-17590 x 10250-10890, and the same at (1,1365), (1,2733) | traced: `dbus_lat` + `dbus_drv`, master = D1's. Clusters 1-3 are copies of each other (findcell 0.88, 0.85; cellcheck median ncc 0.96-0.97); cluster 0 is **not** a copy of them (findcell finds nothing above 0.4): its inverter-and-latch part is the same cell turned upside down (cellcheck ncc 0.94 on the clean shot, 0.91 on metal), its driver the same cell the right way up, and the wiring between the two differs |
@@ -287,6 +287,13 @@ described with one `?M` crossing instead of five, wording left from when bits 4-
 D6/D7 buffers were separate pieces, and three stale comments in `trace/dbus_h.txt`. All
 fixed (2026-11-17 14:13 +0000); the extraction is unchanged.
 
+Round 4 (2026-11-17, an independent agent: the Round 3 fixes, this file end to end against
+both trace files and `tools/unsure.py --equations`, the gate): no error in the trace; five
+document items, fixed: the `?M` stretch's length (50 px), `dlat_en`'s two contacts per
+cluster (glossary, trace comment), the Status line's Round 3 credit, the inventory row of
+chains D1-D5 and three latch-cell y ranges in `trace/dbus_h.txt`'s comments; and
+`notes/operation.md`'s data-bus row now has the input latches and `dlat_en` (marked).
+
 ## Ambiguities
 
 - **The tie of `dn_lat`'s load gate** (`?P`, `?D`, `?B` in `dbus_lat`, master 17410-17443 x
@@ -402,7 +409,7 @@ How firm:
 Firm geometry (no `?` on the path): data line k - driver k - gate row - latch cell, for all
 four; latch cell - row - metal - `dk_d` of chain k for k = 4, 5; and latch cell - row -
 `dk_d` of chain k - `dk_in` - the pad cell's contact for k = 7, and for k = 6 except one
-40 px stretch of `d6_in`'s metal (y 16470-16520, over a box) drawn `?M`: neither metal shot
+50 px stretch of `d6_in`'s metal (y 16470-16520, over a box) drawn `?M`: neither metal shot
 shows metal there and the follower stops at it from both sides (review). What rests on
 position: that chains 4 and 5 are D4's and D5's (as for chains 2 and 3: Ambiguities above). The numbering is self-consistent: the bus bit order
 (`bust`: register widths) and the pad order agree for all eight bits if the four latch

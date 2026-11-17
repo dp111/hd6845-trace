@@ -309,7 +309,7 @@ P 17181,13209:17195,13533
 P 17181,13513:17231,13533
 # (data bit 3's contact pad overlaps the driver's poly)
 
-# dlat_en ("M_b"): one metal down the wiring field, a contact in every cluster
+# dlat_en ("M_b"): one metal down the wiring field, two contacts in each cluster
 # Top end on the contact of D0's cluster (y 8990). Bottom: west at y 13613 to a contact
 # (17166,13611), poly west to a contact (16986,13608), metal west and down x 16860
 # (2.1x and 1.45x, cache/scratch/dbc/mb_end.png, mb_w.png). Drawn here to y 13650; from there to
