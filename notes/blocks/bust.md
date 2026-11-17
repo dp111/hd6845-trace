@@ -47,9 +47,11 @@ default gap bridges). East of the staircase: metal, `tools/follow.py` from each 
   and runs west on `cdp1_l4719`, through the central datapath's channel unbroken
   (`cdp1` found no contact on it), towards the west logic. Where it is used: not
   followed west of x 8340.
-- **`amr`'s outputs drive the bus**: its three outer outputs drive the three through-lines
-  `cdp1_l4588`, `cdp1_l4632`, `cdp1_l4676` (c0's drives `cdp1_l4544`); its inner outputs drive
-  `cdp1_a0_bl`, `cdp1_lw2` and `cdp1_a2_bl`. What `amr` computes is not traced.
+- **`amr`'s lines on the bus** (corrected 2026-11-17 by the trace of `amr`'s slice,
+  `notes/blocks/amr.md`): the four outer lines `cdp1_l4544`, `cdp1_l4588`, `cdp1_l4632`,
+  `cdp1_l4676` are **inputs** to `amr` (each ends on two gate contacts there), the 4-bit value
+  compared with R3 bits 4-7; they are driven from the west, source not found. The inner
+  lines are data bits 4-7, written into R3. The earlier text here called both outputs.
 
 ## Not done
 

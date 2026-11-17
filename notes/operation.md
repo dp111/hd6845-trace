@@ -2,7 +2,7 @@
 
 This is the short version. The block notes (`notes/blocks/`) are the reference; the
 glossary of names is `notes/signals.md`. Last checked against the extraction on
-2026-11-17 (2,090 nets, 3,525 transistors).
+2026-11-17 (2,112 nets, 3,582 transistors).
 
 ## How to read this page
 
@@ -10,7 +10,7 @@ Every statement carries one of three marks.
 
 | Mark | Meaning |
 |---|---|
-| **Firm** | The extracted netlist says it, and still says it when every item marked uncertain (`?`) is deleted from the trace. `tools/unsure.py --equations NAME` prints this for any equation: 701 of the 1,032 extracted equations are firm. |
+| **Firm** | The extracted netlist says it, and still says it when every item marked uncertain (`?`) is deleted from the trace. `tools/unsure.py --equations NAME` prints this for any equation: 708 of the 1,049 extracted equations are firm. |
 | **Marked** | Extracted, but it depends on at least one uncertain item or on a join that is believed and not drawn. The assumption is named. |
 | **Open** | Not traced. Nothing is claimed. |
 
@@ -92,6 +92,8 @@ is not settled.
 | The rows of R0, R1, R2, R4 are identified by their strobe lines, drawn end to end (`notes/blocks/wrj.md`). | Firm for the joins; the register *numbers* rest on the address decoder's numbering of its lines |
 | The data bus: all eight bits are joined from the right datapath across the chip to the central datapath (`notes/blocks/bust.md`); bits 0-3 reach the D0-D3 units of the data bus column (`dbl`). The registers each bit writes match the datasheet's widths exactly (R5, R9 bits 0-4; R4, R6, R7 bits 0-6; R8 bits 0, 1, 4-7; R0-R2 bits 0-7), which nothing in the trace assumed. | Firm for the joins; the bit numbers rest on that match and, for bits 0 and 1, on the D0/D1 units |
 | R8 is the central datapath's row A and R9 its row C; slice = 5 - bit (R8's bit 6 is in slice 3, bit 7 in slice 2). | Firm for the joins (from the data bus) |
+| R3's high nibble is the four-slice block `amr` (bits 4-7 from data bits 4-7 on `wr_r3`), so every data bit writes R3, as the datasheet's R3. | Firm for the latch equations and the data joins (`notes/blocks/amr.md`) |
+| R10 (central datapath `cdp2` row C, bits 0-6) and R11 (row A, bits 0-4) take their data from the data bus (`notes/blocks/rde.md`). | Firm for bits 5 and 6; marked for bits 0-4 (AMB-019) |
 | R12-R15 (start address, cursor), R16/R17 (light pen), the status register. | Open beyond their strobe gates |
 | Which nibble of R3 the 4-bit row is: the low one (bits 0-3, horizontal sync width). Its four data lines are the data bus lines of bits 0-3 (`notes/blocks/r3d.md`). | Firm for the joins; the bit numbers of the data lines rest on the register-width match (`notes/blocks/bust.md`) |
 
@@ -109,6 +111,7 @@ throughout.
 | `h_eq_r1` | `hc` with R1 | as above | into the bottom-centre logic. **Use: open** |
 | `h_eq_r2` | `hc` with R2 | as above | runs west of the counters on bus line G (joined, `notes/blocks/ucz.md`). **Use: open** |
 | `hsw_eq_r3` | `hsw` with the R3 nibble (4 bits) | drawn | not followed. **Use: open** |
+| `amr_eq_r3` | R3 bits 4-7 (the vertical sync width, `amr`) with four lines `cdp1_l4544`..`cdp1_l4676` from the west | source of the four lines not found (believed a 4-bit counter: `c4l`?) | not found: the diffusion line's ends are closed. Per bit XOR and the NOR marked (seven `?` items). **Use: open** |
 | `uc_eq_r4`, `uc_eq_r6`, `uc_eq_r7` | seven lines `uc` with R4, R6, R7 | `uc` is the row counter `rc`, bit for bit: all seven joins drawn (`notes/blocks/ucz.md`), firm geometry | R6's goes to the strobe channel, R7's leaves west; not followed. **Use: open** |
 | `sl_eq_r5` | scan line counter with R5 (5 bits) | drawn | leaves north and runs west on `cdp1_l4719` through the central datapath's channel (`notes/blocks/bust.md`); not followed west of it. **Use: open** |
 | R9's (`cdp1_b_eq`) | **the row address as it goes to the RA pins** with R9 (5 bits) | marked (the five lines pass units whose loads are not traced) | drawn to the row counter's step logic: it is the input of the inverter that makes `rcs_mu` (AMB-013, resolved). **Use: the row counter's step request (above)** |
@@ -145,5 +148,5 @@ So that silence is not read as knowledge:
 - The memory address counter's control, and the cursor compare.
 
 The list of what is assumed, with the evidence for and against each, is
-`notes/ambiguities.md` (AMB-001 to AMB-018). Work still to re-check before anything is
-simulated is the "Re-read list" in `notes/work-packages.md` (R1-R15).
+`notes/ambiguities.md` (AMB-001 to AMB-019). Work still to re-check before anything is
+simulated is the "Re-read list" in `notes/work-packages.md` (R1-R18).

@@ -1202,3 +1202,25 @@ traced but not their pad squares or the metal to them), the D0-D7 pad cells (nam
 between regions. New queue rows `dpad`, `busC`, `bl0`, `teststr`; `padring` given
 regions; seams closed. After: 0.0 % in none. About 54 % of the die rectangle is traced
 (within 100 px), which overstates it inside partly traced arrays.
+
+## 2026-11-17 14:24  PRs #13 (rde) and #14 (amr) merged
+
+Both from dp111, both on b8e2524, independent of each other; merged onto main without
+conflicts. Checks on the merged tree: 2,112 nets, 3,582 transistors (+57: `amr`'s slice),
+0 errors, 0 warnings; glossary and former names clean; `tools/unsure.py`: five new nets
+joined only through `?` items, `cdp1_c1_bl`..`cdp1_c5_bl` (rde's `?M` neck, disclosed,
+now AMB-019). Notes read in full; the slice equations checked by hand (x = NOT(NOR(c, q) +
+c.q) = c XOR q). Photo spot checks: `amr` c3 overlaid on the clean shot at 1.5x (every
+outline on a feature); rde's neck at (9630, 5545-5595) at 4x in two shots: no metal can be
+seen across it, as the notes say.
+
+- **R3's high nibble is traced** (`amr`): four latches on `wr_r3` from data bits 4-7,
+  and a 4-bit equality comparator, `amr_eq_r3`, against four lines from the west. Those
+  lines are **inputs**; `bust` and the first survey had called them outputs (corrected
+  in `bust.md` and the glossary; trap 20, re-read R18). Where `amr_eq_r3` goes and what
+  drives the four lines: not found.
+- **R10 and R11** take their data from the bus (`rde`): `cdp2` row A = R11 (bits 0-4),
+  row C = R10 (bits 0-6), as the datasheet. Bits 0-4 marked (AMB-019).
+- Method notes from both became traps 18-19 and re-read items R16-R17.
+
+The PRs predate the claim workflow, so there were no claims to release.

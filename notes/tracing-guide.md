@@ -242,6 +242,19 @@ Traps, all of them real:
    `tools/unsure.py` lists every net whose labelled pieces are joined only through `?`
    items; run it before writing up a join.
 
+18. **The text tools are right under metal and wrong in the open.** `tools/classmap.py` and
+   `tools/railprof.py` call open poly "dark" and open field "diffusion", and do not tell a
+   channel from poly over field there. In an open gap, decide in the chip-2 shots, where
+   poly is orange. Found 2026-11-17 in `amr` (re-read item R16).
+19. **The metal test misses thin metal.** The follower's test (R > 177, G > 128) does not
+   see thin, dim lines (under about 16 px): it reports breaks or no line at all. For those,
+   profile along and across the line and compare with a known stretch of the same line.
+   Found 2026-11-17 in `rde` (R17).
+20. **A contact at low zoom does not say which way a signal goes.** Whether a line drives or
+   receives depends on whether its contact lands on a gate poly or on a source or drain.
+   Two packages called `amr`'s four outer lines outputs; they are gate inputs. Found
+   2026-11-17 (R18).
+
 **When a trap turns out to affect work already done**, add the affected blocks to the
 "Re-read list" in `notes/work-packages.md` in the same commit that records the finding.
 A remark in a journal entry or a report is not enough: nobody re-reads those when
