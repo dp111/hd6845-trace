@@ -136,7 +136,14 @@ D 16960,8745:17040,8880            # capacitor rectangle
 # d0_d: poly left to a contact, then down in metal (line M_a) into the gate group below
 P 17195,8825:17295,8847
 C 17205,8837 s=26x26
-M 17208,8825 y9100 w=20            # continues down (not yet traced)
+M 17208,8825 y9265 w=20            # M_a, down to a contact on the latch's d_d band
+C 17206,9254 s=24x24
+P 17190,9240:17227,9267
+# lat_n of D0: west, down the wiring field at x 17158-17178 (in the open; brown C in the
+# metal shot) and back east to the driver's gate. 3x, cache/scratch/dbc/c0L.png
+P 17158,9154:17230,9176
+P 17158,9154:17178,9434
+P 17158,9412:17230,9433
 
 # ---- chain 1 (D1): pad input line. Poly all the way from the pad cell: left along
 # y 8405, down the channel beside the VCC rail, left again under both rails
@@ -150,3 +157,164 @@ C 17293,9643 s=26x26
 P 17272,9630:17312,9660
 P 17272,9655:17300,9717            # down to G1's gate band
 N P 17700,8405 d1_in
+
+# ---- data input latch and bus driver (the "cluster" under each of chains 0-3).
+# Twelve transistors per bit:
+#   d_d_n  = NOT d_d                         (inverter)
+#   lat_n  = NOT(d_d . dlat_en + lat)        (AND-OR-invert, load between the rails)
+#   lat    = NOT(d_d_n . dlat_en + lat_n)    (the other half of the latch)
+#   data line = NOT lat_n                    (wide pull-down, strong load)
+# Two cells: dbus_lat (inverter and latch) and dbus_drv (bus driver). Master = the cluster
+# under chain 1 (y 10280-10880), read from a sub-pixel median of the three copies under
+# chains 1-3 at 4-6x in four shots (cache/scratch/dbc/sr*.png) and single-copy views.
+# Under chain 0 the inverter-and-latch part is the same cell upside down (the driver is
+# not), so the wiring between the two parts differs there.
+# The thin metal x 17438-17458 (a pad driver line passing through) is not drawn.
+@cell dbus_lat tag=1
+# diffusion column under the VSS rail: VSS / d_d / dlat_en / lat_n / lat / VSS
+D 17347,10338:17395,10595
+D 17325,10372:17350,10500          # the column is wider here (west edge x 17325)
+C 17368,10362 s=24x30              # VSS
+C 17368,10565 s=24x30              # VSS
+# inverter d_d_n: the d_d band turns up as a vertical gate between the VSS land and the output
+D 17347,10338:17460,10383          # VSS land, channel, output
+P 17402,10330:17420,10412          # vertical gate
+D 17442,10292:17460,10345          # output neck, up under the thin metal
+B 17440,10290:17462,10318          # output and load gate tied to the top band
+P 17295,10296:17470,10315          # top band: d_d_n west to the metal M_c
+P 17292,10291:17326,10321
+C 17307,10306 s=24x24
+N P 17350,10305 d{}_d_n
+P 17466,10296:17492,10347          # load gate, L down from the tie
+P 17468,10345:17520,10393          # load gate
+D 17455,10350:17535,10385          # load strip
+D 17528,10350:17590,10420          # VCC land
+C 17555,10385 s=30x40              # VCC
+P 17222,10390:17420,10410          # d_d band: series gate, and the inverter's gate
+# dlat_en band, upper
+P 17235,10433:17400,10455
+P 17235,10425:17270,10459
+C 17251,10441 s=24x24
+# lat_n: node, tie to its load gate, load, and the line to the bus pull-down
+D 17300,10475:17350,10500          # west extension
+B 17298,10474:17327,10501
+P 17225,10476:17327,10497          # lat_n west, to the wiring field (per copy, below)
+N P 17260,10487 d{}_lat_n
+D 17390,10467:17535,10497          # lat_n east: load strip
+D 17437,10440:17462,10470          # bump up to the tie
+P 17432,10425:17480,10462          # load gate pad, west part over the bump
+B 17435,10438:17464,10464
+P 17477,10425:17523,10508          # load gate (pad with the M_d contact, then over the strip)
+C 17490,10440 s=24x24
+M 17476,10426:17512,10456
+M 17495,10430 y10652 w=20          # M_d: lat_n down to the gate of lat's pull-down
+M 17476,10624:17512,10656
+C 17490,10640 s=24x24
+P 17475,10625:17520,10667
+P 17497,10655:17520,10712
+P 17440,10688:17520,10712          # lat_n gate band, from the east, ends under the thin metal
+D 17528,10465:17590,10592          # VCC land shared by the two latch loads
+C 17541,10484:17563,10574          # long VCC contact
+# lat band (gate of lat_n's second pull-down and gate of lat's load)
+P 17325,10522:17480,10545
+P 17477,10528:17523,10605          # load gate of lat
+D 17437,10562:17535,10592          # lat: load strip
+# the tie of this load gate to lat: a heavy-outlined box at 17425-17447 x 10555-10600 beside
+# the band, in the gap between the VSS rail and the thin metal. Not resolved in any shot.
+# In the gap's slit (x 17420-17430) the metal shots read poly on the band (y 10524-10552),
+# one dark line, then a patch between poly and diffusion colour at y 10566-10580 (a small
+# heavy-outlined box in the 4-copy median, tie4.png), then field: read as a west tab of
+# lat's diffusion under a tab of the band, with a buried contact.
+?P 17414,10540:17440,10582
+?D 17412,10558:17442,10586
+?B 17410,10555:17443,10588
+# lat: node in the column: lat / dlat_en / d_d_n / VSS
+D 17347,10608:17395,10765
+D 17300,10607:17350,10633          # west extension to a poly pad that goes nowhere
+B 17298,10605:17329,10635
+P 17283,10607:17327,10632
+N P 17290,10620 d{}_lat
+D 17390,10612:17470,10638          # lat east ...
+D 17437,10562:17470,10640          # ... up to the load strip
+D 17447,10636:17470,10742          # ... and down under the thin metal, through the lat_n gate, to VSS
+D 17390,10717:17497,10742          # VSS land, east extension
+C 17368,10745 s=24x30              # VSS
+# dlat_en band, lower
+P 17235,10648:17412,10670
+P 17235,10642:17270,10674
+C 17251,10657 s=24x24
+# d_d_n band
+P 17290,10693:17372,10715
+P 17360,10686:17412,10708
+P 17288,10690:17320,10722
+C 17303,10705 s=24x24
+M 17290,10290:17325,10322
+M 17311,10300 y10712 w=20          # M_c: d_d_n down to its gate band
+M 17288,10690:17322,10722
+@end
+
+@cell dbus_drv tag=1
+D 17347,10728:17395,10840          # VSS land / lat_n gate / data line node
+C 17368,10747 s=24x26              # VSS
+D 17390,10738:17432,10840          # the column is wider here (bus pull-down)
+P 17225,10780:17443,10800          # lat_n: gate of the bus pull-down (from the wiring field)
+# data line node: buried contact to the line's poly, strong load
+D 17300,10810:17350,10845
+B 17298,10808:17342,10847
+P 17200,10823:17340,10845          # the data line's poly, from its contact in the wiring field
+D 17390,10820:17535,10838
+D 17472,10770:17535,10838          # the node widens under the load to y 10770-10838 (independent review, both metal shots and acid): load about 68/27
+P 17495,10757:17523,10856          # load gate
+D 17528,10770:17590,10840          # VCC land
+C 17555,10800 s=30x34              # VCC
+D 17440,10830:17462,10860          # bump down to the tie
+P 17440,10850:17523,10872
+B 17438,10848:17464,10862
+@end
+
+@inst dbus_lat 1,1365 tag=2
+@inst dbus_lat 1,2733 tag=3
+@inst dbus_drv 1,1365 tag=2
+@inst dbus_drv 1,2733 tag=3
+# under chain 0: the latch part upside down (mirror line y 9826.5), the driver 1368 px up
+@inst dbus_lat 0,0 my=9826.5 tag=0
+@inst dbus_drv 0,-1368 tag=0
+
+# ---- per copy: d_d into the latch, the lat_n line through the wiring field to the
+# driver's gate, and the data line's poly from its contact (dbl) to the driver.
+# D1-D3: d_d runs west from the chain's G4, down the 28 px gap between the metals
+# x 17215 and x 17243 (seen as a redder slit in four shots: measured) and east as the band.
+# lat_n: a vertical at x 17203-17217 under the metal of data bit 3 for D1, at x 17181-17195
+# for D2 and D3 (2.6x mosaic, cache/scratch/dbc/mw2.png). No contact to the metals above.
+P 17222,10190:17295,10212
+P 17222,10190:17240,10410
+P 17203,10476:17230,10497
+P 17203,10476:17217,10800
+P 17203,10780:17230,10800
+P 17077,10834 x17205 w=20          # data bit 1
+P 17223,11555:17296,11577
+P 17223,11555:17241,11775
+P 17181,11841:17231,11862
+P 17181,11841:17195,12165
+P 17181,12145:17231,12165
+P 17165,12199 x17205 w=20          # data bit 2
+P 17223,12923:17296,12945
+P 17223,12923:17241,13143
+P 17181,13209:17231,13230
+P 17181,13209:17195,13533
+P 17181,13513:17231,13533
+# (data bit 3's contact pad overlaps the driver's poly)
+
+# dlat_en ("M_b"): one metal down the wiring field, a contact in every cluster
+# Top end on the contact of D0's cluster (y 8990). Bottom: west at y 13613 to a contact
+# (17166,13611), poly west to a contact (16986,13608), metal west and down x 16860
+# (2.1x and 1.45x, cache/scratch/dbc/mb_end.png, mb_w.png). follow.py takes that metal on
+# down x 16820 to an end at (16772,15800) beside untraced logic: not drawn beyond y 13650.
+M 17252,8982 y13614 x17156 w=18
+N M 17252,10900 dlat_en
+C 17166,13611 s=24x24
+P 17150,13596:17183,13626
+P 16986,13608 x17166 w=18
+P 16970,13592:17002,13624
+C 16986,13608 s=24x24
+M 16998,13615 x16862 y13650 w=14

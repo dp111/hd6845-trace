@@ -5,9 +5,9 @@
 17255,13745:17590,14345  ?io  D4 input buffer | same cell, assigned by position
 17255,14503:17590,15103  ?io  D5 input buffer | same cell, assigned by position
 16960,8445:17040,8880  io  D0 buffer capacitors | plain diffusion rectangles for d0_b (contact cut, not strapped) and d0_c
-17150,8885:17590,9520  ?logic  D0 bus gating and read driver | NAND and AND-OR-invert pull-downs seen under the ground rail; takes d0_d, drives the per-bit line to the D0 pad cell; not traced
-17150,10250:17590,10885  ?logic  D1 bus gating and read driver | looks like a copy of the D0 group; not traced
-17150,11617:17590,12252  ?logic  D2 bus gating and read driver | looks like a copy of the D0 group; not traced
-17150,12983:17590,13618  ?logic  D3 bus gating and read driver | looks like a copy of the D0 group; not traced
+17150,8885:17590,9520  logic  D0 input latch and data line driver | transparent latch on d0_d (enable dlat_en), drives data line 0; the latch cell upside down
+17150,10250:17590,10885  logic  D1 input latch and data line driver | transparent latch on d1_d (enable dlat_en), drives data line 1
+17150,11617:17590,12252  logic  D2 input latch and data line driver | transparent latch on d2_d (enable dlat_en), drives data line 2
+17150,12983:17590,13618  logic  D3 input latch and data line driver | transparent latch on d3_d (enable dlat_en), drives data line 3
 17150,15103:17590,16600  ?logic  data bus control logic | single gates on a 152 px pitch, not surveyed
 17590,7380:17660,18840  route  pad driver lines | P_x, one metal line common to all eight data pad cells (enable), and the per-bit lines and pad input lines beside it

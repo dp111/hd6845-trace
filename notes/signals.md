@@ -77,6 +77,9 @@ Central datapath (registers identified by their write strobes, `notes/blocks/wrs
 | `*_pu`, `*_pd` | inside an output pad cell: gate of the pull-up fingers (first inverter) and of the pull-down fingers (second inverter) |
 | `d#_in` | data pin D# behind its protection, at its input buffer |
 | `d#_a`, `d#_b`, `d#_c`, `d#_d` | the four inverters of data input buffer #: `_a`, `_c` inverted, `_b`, `_d` true |
+| `d#_d_n` | NOT `d#_d` (inverter in the pin unit's latch cell, `notes/blocks/dbus.md`) |
+| `d#_lat`, `d#_lat_n` | the data input latch of pin D#: `d#_lat` follows `d#_d` while `dlat_en` is high and holds while it is low; `d#_lat_n` is its inverse and drives the pull-down of data line # (the line is NOT `d#_lat_n`). D0-D3 traced; the tie of `d#_lat`'s load gate is marked `?` |
+| `dlat_en` | enable of the data input latches (high = transparent): one metal down the wiring field beside the data pin units (x 17252), a contact in each of the units D0-D3. Comes from the south-west (drawn to (16862,13650); `follow.py` takes it to (16772,15800) beside untraced logic). What drives it is not traced |
 | `dbus_cap#b` | plate of a capacitor beside the D0 input buffer (purpose not established) |
 
 ## Clocks
