@@ -171,3 +171,32 @@ P 16905,5608:16939,5642
 C 16922,5625
 M 16926,5625 y6744 x16839 y12370 w=12
 @alias cdp1_a2_bl rbus_b7
+
+# =====================================================================================
+# West of cdp1 (x 8340): the through-lines come out as poly and end on a staircase of pads
+# at x 7795-7860, from which metals run west (the bus metals above the row address
+# selector, like r9m's line 1, cdp1_l4676). Poly lines cannot cross, so the order of the
+# pads is the order of the lines (metal-shot brightness map and tools/follow.py from each
+# pad; 1.15x view cache/scratch/bust/wl1.png). Drawn to where each metal ends at the
+# crossing field x 6440-6930 (its poly rows and pads, hop3.png, are not mapped yet).
+# cdp1_l4544: pad (7810,4547); metal west to x 7532, south to y 4619 (end not looked at)
+P 7805,4544 x8345 w=12
+P 7793,4530:7827,4564
+C 7810,4547
+M 7818,4547 x7532 y4619 w=13
+# cdp1_l4588 (amr c1's outer output): pad (7848,4592); metal west to x 7570, south to
+# y 4657, west to x 6913 (end)
+P 7843,4588 x8345 w=12
+P 7831,4575:7865,4609
+C 7848,4592
+M 7860,4593 x7570 y4657 x6913 w=12
+# cdp1_l4632 (amr c2's outer output): pad (7830,4635); metal west to x 7618, south to
+# y 4704, west to x 6921 (end)
+P 7825,4632 x8345 w=12
+P 7813,4618:7847,4652
+C 7830,4635
+M 7842,4637 x7618 y4704 x6921 w=12
+# cdp1_l4719 (R5's match): a metal leaves a pad at about (7782,4766) west (to x 7700, south to
+# y 4853, west to x 7575, south to y 5140, west to x 7330), but how the poly from x 8340
+# reaches that pad is not seen: a straight guess crossed the row address selector's
+# geometry (extraction: a transistor and a short to ras_o0). Not drawn.

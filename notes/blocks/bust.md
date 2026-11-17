@@ -88,3 +88,20 @@ skew bit). The six data lines now joined across the chip:
 | 7 | `cdp1_a2_bl` (slice 2, row A) | `rbus_b7` |
 
 `amr`'s inner outputs drive bits 5, 6 and 7 (c1, c2, c3).
+
+## West of the central datapath
+
+The through-lines leave `cdp1`'s west edge (x 8340) as poly and end on a staircase of
+pads at x 7795-7860, from which metals run west as the bus metals above the row address
+selector (the same route as `r9m`'s line 1). Drawn: `cdp1_l4544` to (7535,4619),
+`cdp1_l4588` (amr c1 outer) to (6913,4658), `cdp1_l4632` (amr c2 outer) to (6921,4699).
+Not drawn: `cdp1_l4719` (R5's match), whose metal leaves a pad near (7782,4766) but whose
+poly's drop from y 4719 is not seen (a straight guess crossed `ras` geometry).
+
+Beyond x 6913-6921 the lines enter the crossing field under three rails (x 6440-6930,
+`hop3.png`): six pads on its west side (y 4525, 4570, 4614, 4657, 4702, 4738) and poly
+rows across, but the pads on its east side are not one per row, so the mapping across is
+open. `r9m`'s notes say the bundle that runs with R9's match ends in the step logic's
+middle cluster on pads (4270,2640) and (4232,2683): if `cdp1_l4588` and `cdp1_l4632` are
+those two lines, all three of `amr`'s outer outputs feed the row counter's step logic.
+Not established.
