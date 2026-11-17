@@ -46,7 +46,7 @@ Five counters are identified. All use the same master-slave bit cell.
 | Horizontal sync width counter `hsw` | 4 | `ck_b` and `ck_a` directly | as above | Firm |
 | Character row counter `rc` | 7 | its own pair `rc_ck_m`, `rc_ck_s` | once per pulse of `rc_step` | Firm |
 | Scan line counter `sl` | 5 | a second pair `lc_ck_m`, `lc_ck_s` | once per pulse of `lc_step` | Firm |
-| A 4-bit counter `c4l` (not identified; possibly vertical sync width) | 4 | the same pair as `sl` | once per pulse of `lc_step` | Firm |
+| A 4-bit counter `c4l`, compared with R3 bits 4-7 (`amr`): believed the vertical sync width counter | 4 | the same pair as `sl` | once per pulse of `lc_step` | Firm |
 
 How the two private clock pairs are made (the same cell twice):
 
@@ -111,14 +111,14 @@ throughout.
 | `h_eq_r1` | `hc` with R1 | as above | into the bottom-centre logic. **Use: open** |
 | `h_eq_r2` | `hc` with R2 | as above | runs west of the counters on bus line G (joined, `notes/blocks/ucz.md`). **Use: open** |
 | `hsw_eq_r3` | `hsw` with the R3 nibble (4 bits) | drawn | not followed. **Use: open** |
-| `amr_eq_r3` | R3 bits 4-7 (the vertical sync width, `amr`) with four lines `cdp1_l4544`..`cdp1_l4676` from the west | source of the four lines not found (believed a 4-bit counter: `c4l`?) | not found: the diffusion line's ends are closed. Per bit XOR and the NOR marked (seven `?` items). **Use: open** |
+| `amr_eq_r3` | R3 bits 4-7 (the vertical sync width, `amr`) with the 4-bit counter `c4l0`..`c4l3` (drawn through `cdp1_l4544`..`cdp1_l4676`; `c4l2`, `c4l3` over two `?P` rows of `bust`) | drawn | leaves through a buried contact at c0 (marked) and runs about 12,000 px west to a gate at (2625,3461) in `tla`'s first cluster (seen, not drawn). Per bit XOR and the NOR marked (`?` items in the cell). **Use: the gate in `tla`, open** |
 | `rc_eq_r4`, `rc_eq_r6`, `rc_eq_r7` | the row counter `rc` with R4, R6, R7 | drawn: the seven lines of the upper array are `rc0`..`rc6`, joined on firm geometry (`notes/blocks/ucz.md`) | R6's goes to the strobe channel, R7's leaves west; not followed. **Use: open** |
 | `sl_eq_r5` | scan line counter with R5 (5 bits) | drawn | leaves north and runs west on `sl_eq_r5` through the central datapath's channel (`notes/blocks/bust.md`); not followed west of it. **Use: open** |
 | R9's (`ra_eq_r9`) | **the row address as it goes to the RA pins** with R9 (5 bits) | marked (the five lines pass units whose loads are not traced) | drawn to the row counter's step logic: it is the input of the inverter that makes `rcs_mu` (AMB-013, resolved). **Use: the row counter's step request (above)** |
 | R10's (central datapath) | the row address one stage earlier with R10 bits 0-4; gives "equal" and "greater" | marked | not followed. **Use: open** |
 
 Not found at all: comparators for R11 (cursor end), R12-R15 against the address
-counter, and whatever the 4-bit counter `c4l` is compared with.
+counter.
 
 ## The row address (RA0-RA4)
 

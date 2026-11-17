@@ -190,7 +190,7 @@ under the wide supply metal (y 5200-5550) to a pad on one metal line of a 13-lin
 | c3 | `db_b7` -> bus y 5177 | bus y 4742 = `cdp1_l4676` (an earlier reading that this line ends on `ra_eq_r9` was wrong: `notes/blocks/r9m.md`, correction) |
 | c2 | `db_b6` -> bus y 5135 | `amr_ob_c2` -> bus y 4696 |
 | c1 | `db_b5` -> bus y 5047 | `amr_ob_c1` -> bus y 4657 |
-| c0 | poly from about (11497,5590) diagonally north-east, then north along x about 11645 to a pad near (11645,5005) | poly from about (11580,5590) diagonally, north along x about 11725, then diagonally north-west towards the pad (11650,4500) of `rab`'s bit 0 (`wt.png`): **not drawn**, it needs a 5x look at that pad |
+| c0 | poly from about (11497,5590) diagonally north-east, then north along x about 11645 to a pad near (11645,5005) | poly from about (11580,5590) diagonally, north along x about 11725, then diagonally north-west towards the pad (11650,4500) of `rab`'s bit 0 (`wt.png`): drawn: it is `cdp1_l4544` = `c4l0` (section "The inputs and the match line's route") |
 
 The bus lines run west to the staircase of pads at x 11650-11700 and on under the wide
 supply metal x 11280-11600 (the same cross-under as `rab`'s and the strobe's), and
@@ -241,6 +241,15 @@ above) and corrected the overclaims.
 Unsure: L3's gate tie (both candidates give gate = nor), the pull-down's east corner (W
 only), c0's load (one copy).
 
+
+Round 2 (2026-11-17, an independent agent, on the reorganised package after the merge with
+main; poly rows x 5520-5945 and row y 5630 at 4x in both stripped shots, metal interiors
+x 4628, y 5982, x 2240, y 6413 end to end, the c4l2/c4l3 rows, the bust alias commit): no
+finding in the trace. Findings in the documents, fixed: `notes/operation.md` and two
+glossary rows still called `c4l` unidentified and `amr_eq_r3`'s use not found; a stale
+"Not done" item; the first survey's c0 row; a broken table cell; image paths; the floor
+plan box for `c4l0`'s leg.
+
 ## Not done
 
 1. (Done: `amr_eq_r3` leaves by the buried contact under c0's outer metal; the section "The inputs and the match line's route" below.
@@ -276,10 +285,7 @@ no transistors; the full extraction has 0 errors, 0 warnings and the same transi
 | buried contact on the line under c0's outer metal (11601-11628, 6286-6307); south, then west along y 6347 under c0's VSS rail and under `cnt_gab`'s metal | poly | pad (11350,6347) | `notes/blocks/amr.md`; `f1.png` 4x, `z2.png` 6x, overlay `ov1.png` |
 | west along y 6349, south at x 11068 | metal | pad (11027,6407) | follower; `w1.png` 3.5x |
 | west along y 6408: the **second line of the central datapath's channel 2**, 3,580 px, no pad | poly | pad (7445,6410) | `st2.png`, `st3.png` 1.6x; `k1.png` 3x at x 7800-8220; `p1.png` 3.5x four shots |
-| west along y 6413 over the crossing fields x 6330-7400 | metal | pad (6145,6410) | follower (1,284 px, no candidate); `w3.png`. The follower makes two false jumps on this
-route (trap 16): from x 5888 past the pad (6495,4568) onto the wide metal x 6530-6580, and
-from the pad (7445,6410) east to the thin metal x 7532; both are bare poly in both chips
-(independent review) |
+| west along y 6413 over the crossing fields x 6330-7400 | metal | pad (6145,6410) | follower (1,284 px, no candidate); `w3.png` |
 | west | poly | pad (5629,6412) | `st4.png`; `pads1.png` 3.8x |
 | west over the vertical poly bus x 5000-5450 | metal | pad (4931,6412) | follower; `pads1.png` |
 | west | poly | pad (4631,6411) | `w4.png` 2.7x: the pad is separate from the row y 6452's bend beside it |
@@ -289,6 +295,14 @@ from the pad (7445,6410) east to the thin metal x 7532; both are bare poly in bo
 | west along y 5630 through `tla`'s second crossing field and under the foot of the step logic cluster, 1,500 px | poly | pad (2242,5632) | `st5.png` 1.65x, `w7.png` |
 | north along x 2240, 2,170 px straight (the poly rows y 4540, 4980, 5500 pass under it with no pad) | metal | pad (2244,3463) | follower sampled every 400 px; `v1m.png`, `v1b.png` |
 | east along y 3461 across the first bus field (six vertical metals, no pad) | poly | the diffusion column under rail R1, x 2596 | `t1.png` 3x, `d1.png` 4.5x |
+
+The follower made two false jumps on these routes (trap 16; independent review): on this
+route from the pad (7445,6410) east to the thin metal x 7532, and on `c4l0`'s route from
+x 5888 past the pad (6495,4568) onto the wide metal x 6530-6580; both stretches are bare
+poly in both chips. The metal x 2240 also crosses a poly row at y 4915 (no pad). The
+profile tool (`tools/amr_row.py 4657 6512 6950`) shows three short weak runs on `c4l2`'s
+row (x 6515-6524, 6659-6666, 6749-6759); at 4x the row is continuous in both stripped
+shots (Round 2).
 
 Every pad has a ring in both metal shots and a green patch on a poly pad in the clean shot.
 Every poly row was also profiled in the clean shot against its two flanks
@@ -373,4 +387,3 @@ wording fixes are in.
 1. The gate at (2625,3461) and the rest of `tla`'s west column y 3260-3570 (above): the
    column, its four gates, the node's load and exit; and the source of the gate in series
    with `amr_eq_r3` (metal x 2283 north from (2283,3505), to y 3198).
-2. An independent review of this route.

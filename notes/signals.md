@@ -42,7 +42,7 @@ same bit cell as the mid-right array's):
 | Rows | Counter | Bit of row |
 |---|---|---|
 | u8 ... u4 | scan line counter, `sl0` ... `sl4` (5 bits; stepped by `lc_step`; compared bit for bit with R5) | u8 = bit 0 (the carry enters there from the left column), u4 = bit 4 |
-| u3 ... u0 | 4-bit counter, `c4l0` ... `c4l3` (not identified; same clocks as the scan line counter) | u3 = bit 0, u0 = bit 3 |
+| u3 ... u0 | 4-bit counter, `c4l0` ... `c4l3` (compared with R3 bits 4-7 in `amr`: believed the vertical sync width counter; same clocks as the scan line counter) | u3 = bit 0, u0 = bit 3 |
 
 Right datapath, lower array (R0, R1, R2 and their comparators): slice s1 = bit 0, s2 =
 bit 1, ... s7 = bit 6, **s0 = bit 7** (from the counter lines: `hc0` arrives at s1, `hc7`
@@ -205,7 +205,7 @@ Eleven pass transistors between the scan line counter and five output nodes.
 | `r#c_b#_nor`, `r#c_b#_x` | comparator of R#, bit #: NOR(counter bit, register bit), and x = counter bit XOR register bit |
 | `r#hc_s#_nor`, `r#hc_s#_x` | comparator of the horizontal counter against R0 shifted one place (R0/2), by slice |
 | `sl_eq_r#` | high when the scan line counter equals R5 (vertical total adjust). Leaves the comparator northwards; not followed |
-| `amr_eq_r#` | high when the four lines `cdp1_l4544`, `cdp1_l4588`, `cdp1_l4632`, `cdp1_l4676` (bits 4-7 of a value whose source is not found; believed a 4-bit counter, the vertical sync width) equal R3 bits 4-7: the wired NOR of `r3c_b4_x` ... `r3c_b7_x` on a diffusion line y 6246-6272 through `amr`'s four slices, load in the first column. Named for the block because the counter is not identified. Where it is used: not found (`notes/blocks/amr.md`) |
+| `amr_eq_r#` | high when the 4-bit counter `c4l0`..`c4l3` (on the lines `cdp1_l4544`..`cdp1_l4676`) equals R3 bits 4-7: the wired NOR of `r3c_b4_x` ... `r3c_b7_x` on a diffusion line y 6246-6272 through `amr`'s four slices, load in the first column. It leaves through a buried contact at c0 and runs west to a gate in `tla`'s first cluster (`notes/blocks/amr.md`). Named for the block until its use is traced |
 | `hsw_eq_r#` | high when the horizontal sync width counter equals R3's nibble (the end of HSYNC). Not followed |
 | `h_eq_r#` | high when the horizontal counter equals R# (R0: end of line; R1: displayed width; R2: sync position) |
 | `h_eq_r#half` | high when the horizontal counter equals R0/2 |

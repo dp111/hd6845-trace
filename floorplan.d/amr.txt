@@ -13,4 +13,4 @@
 4715,6140:5600,6295    route  c4l0-c4l3 east | the 4-bit counter's four lines: poly rows, metals over the poly bus, nested corners north
 5440,5790:5940,5950    route  c4l0-c4l3 rows | four poly rows between the nested metals
 5880,4560:6500,5800    route  c4l0, c4l1 north | two nested metals to the crossing field (beside bust's two for c4l2, c4l3)
-6440,4555:7870,4625    route  c4l0, c4l1 to cdp1 | rows across the crossing field, metals east and north to the pads of the rows that enter cdp1 as cdp1_l4544 / cdp1_l4588
+6440,4495:7880,4625    route  c4l0, c4l1 to cdp1 | rows across the crossing field, metals east and north to the pads of the rows that enter cdp1 as cdp1_l4544 / cdp1_l4588
