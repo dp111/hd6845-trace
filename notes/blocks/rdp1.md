@@ -13,14 +13,14 @@ errors. From the top:
 | 5710-6090 | comparator of **R5** (5 bits) and, 477 px to its right, comparator of **R3** (4 bits) | 5 + 4 | scan line counter `sl0`-`sl4`; horizontal sync width counter `hsw0`-`hsw3` |
 | 6095-6365 | register **R5** (5 latches) and register **R3**, one nibble (4 latches) | 5 + 4 | |
 | 6365-6900 | routing zone | | |
-| 6902-7282 | comparator of **R7** | 7 | the seven counter lines `uc_b0`-`uc_b6` of the array below |
+| 6902-7282 | comparator of **R7** | 7 | the seven counter lines `rc0`-`rc6` of the array below |
 | 7289-7559 | register **R7** (7 latches) | 7 | |
-| 7662-8042 | comparator of **R6** (its register row is rdp2's, below) | 7 | `uc_b0`-`uc_b6` |
+| 7662-8042 | comparator of **R6** (its register row is rdp2's, below) | 7 | `rc0`-`rc6` |
 
-Results: `sl_eq_r5`, `hsw_eq_r3`, `uc_eq_r7`, `uc_eq_r6` (each high when all its bits
+Results: `sl_eq_r5`, `hsw_eq_r3`, `rc_eq_r7`, `rc_eq_r6` (each high when all its bits
 match: a row-wide NOR of the per-bit XORs, as in the rows below).
 
-Not done: where `sl_eq_r5` (leaves north), `hsw_eq_r3` and `uc_eq_r7` (leaves west along
+Not done: where `sl_eq_r5` (leaves north), `hsw_eq_r3` and `rc_eq_r7` (leaves west along
 y 6820) go; the data lines of R3 below their latch row; the tops of the data lines
 (they go north in poly under the wide supply metal y 5450-5545); the tops of `ubus_b5`
 and `ubus_b6`; the strap tracks that tap single register bits (below).
@@ -40,7 +40,7 @@ pitch of the array below and four more, 477 px (not 390) further right.
   where `trace/mrach.txt` brings `wr_r7` up track T3.
 - **R6's comparator**: its match line leaves west along y 7572-7588 to (13425,7585), the
   line the wiring channel takes down track T5 to the strobe channel's track k4. That
-  track is therefore `uc_eq_r6`.
+  track is therefore `rc_eq_r6`.
 - **R5** (the five latches): the wiring channel's track T2 (`wr_r5`) ends on a contact
   (13170,6345); its poly runs east along y 6335-6355 into the first latch's strobe loop.
   The strobe line ends, rounded, at x 15355, after the fifth latch (3x view `stb1.png`).

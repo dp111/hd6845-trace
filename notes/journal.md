@@ -716,7 +716,7 @@ transistors, 0 errors, 0 warnings. User: "let's continue".
 - **The upper right datapath's top rows** (`rdp1`) are built from the cells of the rows
   below: R6's comparator, R7 and its comparator, and a top row holding **R5** (5 bits) and
   **one nibble of R3** (4 bits), each with a comparator. 284 transistors by instancing.
-  Strobes `wr_r7`, `wr_r5`, `wr_r3` followed in; `uc_eq_r6` joined to the strobe
+  Strobes `wr_r7`, `wr_r5`, `wr_r3` followed in; `rc_eq_r6` joined to the strobe
   channel's track k4.
 - **The mid-right 4-bit counter is the horizontal sync width counter** (`hsw0`-`hsw3`):
   its four outputs end under the counter tracks of R3's comparator.
@@ -754,9 +754,9 @@ registers (central datapath), R3's other nibble, R8.
    pass channel 2 unused, so R9's comparator takes them elsewhere, or they are tapped
    further west (the pads at x 4925-6196, and the vertical poly bus they cross).
 2. `rdp2`'s routing zone (y 9080-9560): joins the row counter to the `uc` lines, closing
-   `uc_eq_r4/r6/r7` against `rc`.
-3. Where the match lines go: `sl_eq_r5` (north), `hsw_eq_r3`, `uc_eq_r7` (west),
-   `uc_eq_r6` and `h_eq_r0` (strobe channel gate column), `h_eq_r1` (bottom-centre).
+   `rc_eq_r4/r6/r7` against `rc`.
+3. Where the match lines go: `sl_eq_r5` (north), `hsw_eq_r3`, `rc_eq_r7` (west),
+   `rc_eq_r6` and `h_eq_r0` (strobe channel gate column), `h_eq_r1` (bottom-centre).
 4. The rest of the step-logic clusters; the 4-bit left counter's outputs; `e4`.
 
 ## 2026-11-16 10:48  the row address selector; `inh_src` is a bus line
@@ -944,7 +944,7 @@ the choice of bit 0's source by R9's bit 0, and the switch of the R9 comparator'
 1. `ras_o0_alt1`, `ras_o0_alt2`, `tc1_g`: the two signals that can become row address
    bit 0 (the field), followed only to pads at (7078,5303)'s metal, (6922,4787) and
    (6985,4958).
-2. Where `cdp1_b_eq` (R9's match) goes: leaves west along y 4459.
+2. Where `ra_eq_r9` (R9's match) goes: leaves west along y 4459.
 3. The `ral` cell and its strobe; the loads of `rax` and of the R9 units.
 4. `bd2`: `wr_data_e_n`'s destination.
 
@@ -964,14 +964,14 @@ west of the selector (`notes/blocks/fld.md`).
 **Open, in the order I would take them**
 
 1. `fld`: the upper group's west part and the lower gate group (field logic).
-2. Where `cdp1_b_eq` (R9's match) goes.
+2. Where `ra_eq_r9` (R9's match) goes.
 3. The `ral` cell and its strobe; the loads of `rax` and of the R9 units.
 4. `bd2`: `wr_data_e_n`'s destination. R12.
 
-**Same day: R9's match followed to the step logic.** `cdp1_b_eq` runs 9,000 px west and
+**Same day: R9's match followed to the step logic.** `ra_eq_r9` runs 9,000 px west and
 north-west (three poly cross-unders, the top line of the bus above the selector, up
 x 5974, along y 2640) and comes down x 4192 into the middle cluster of the row counter's
-step logic, ending 12 px from the metal of `rcs_bq3335`, the input of the term
+step logic, ending 12 px from the metal of `ra_eq_r9`, the input of the term
 `rcs_in1` of the step. Whether it is on that net is not decided (AMB-013): another line of
 the same bundle ends on that contact. Not drawn (`notes/blocks/r9m.md`).
 
@@ -1235,6 +1235,6 @@ and the glossary checks, committed per batch; `operation.md` against
 `tools/unsure.py --equations`; `tools/build.py`; journal. `tools/names.py` (new):
 `candidates` lists placeholders and old `@alias` names beside a functional name, split
 into firm (rename) and through `?` items (do not, trap 17), plus glossary hints;
-`snapshot` / `compare`. On today's tree it lists, among others, `uc_b0`..`uc_b6` ->
-`rc0`..`rc6`, `cdp1_l4719` -> `sl_eq_r5`, `rdp3_n2s1` -> `h_eq_r0`, and keeps rde's
+`snapshot` / `compare`. On today's tree it lists, among others, `rc0`..`rc6` ->
+`rc0`..`rc6`, `sl_eq_r5` -> `sl_eq_r5`, `h_eq_r0` -> `h_eq_r0`, and keeps rde's
 data bits 0-4 apart (AMB-019). Not run yet.

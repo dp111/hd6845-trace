@@ -58,7 +58,7 @@ How the two private clock pairs are made (the same cell twice):
 | The two equations above, for both copies. | Firm |
 | `rc_step` = NOR(`inh_rc`, `rc_stepreq_n`): the row counter steps when the step logic asks and the inhibit signal is low. | Firm |
 | `rc_stepreq_n` = NOR of three terms; the step happens when term 1 is high, or when NOT `rcs_e4` AND NOT (`rcs_e3` AND `rcs_a2`). | Marked (one term's gate has an uncertain item); and the inputs `rcs_e3`, `rcs_e4`, `rcs_a2` are **not identified** |
-| Term 1 is `rcs_in1` = NOR(`rcs_mu`, `rcs_mv`), and `rcs_mu` is made by an inverter whose input is **R9's match** (`cdp1_b_eq`): so term 1 = R9's match AND NOT `rcs_mv`. The row counter steps when the scan line (as compared at the RA pins) equals R9, unless `rcs_mv`. | Firm for the join from R9's comparator to the inverter (AMB-013, resolved 2026-11-17); marked for the equations (the comparator's NOR and `rcs_in1` depend on uncertain items). `rcs_mv` is open |
+| Term 1 is `rcs_in1` = NOR(`rcs_mu`, `rcs_mv`), and `rcs_mu` is made by an inverter whose input is **R9's match** (`ra_eq_r9`): so term 1 = R9's match AND NOT `rcs_mv`. The row counter steps when the scan line (as compared at the RA pins) equals R9, unless `rcs_mv`. | Firm for the join from R9's comparator to the inverter (AMB-013, resolved 2026-11-17); marked for the equations (the comparator's NOR and `rcs_in1` depend on uncertain items). `rcs_mv` is open |
 | What makes `lc_step`. | Open |
 | The memory address counter (14 bits, left array) and what clocks it. | Open (cells traced, control lines not) |
 
@@ -112,9 +112,9 @@ throughout.
 | `h_eq_r2` | `hc` with R2 | as above | runs west of the counters on bus line G (joined, `notes/blocks/ucz.md`). **Use: open** |
 | `hsw_eq_r3` | `hsw` with the R3 nibble (4 bits) | drawn | not followed. **Use: open** |
 | `amr_eq_r3` | R3 bits 4-7 (the vertical sync width, `amr`) with four lines `cdp1_l4544`..`cdp1_l4676` from the west | source of the four lines not found (believed a 4-bit counter: `c4l`?) | not found: the diffusion line's ends are closed. Per bit XOR and the NOR marked (seven `?` items). **Use: open** |
-| `uc_eq_r4`, `uc_eq_r6`, `uc_eq_r7` | seven lines `uc` with R4, R6, R7 | `uc` is the row counter `rc`, bit for bit: all seven joins drawn (`notes/blocks/ucz.md`), firm geometry | R6's goes to the strobe channel, R7's leaves west; not followed. **Use: open** |
-| `sl_eq_r5` | scan line counter with R5 (5 bits) | drawn | leaves north and runs west on `cdp1_l4719` through the central datapath's channel (`notes/blocks/bust.md`); not followed west of it. **Use: open** |
-| R9's (`cdp1_b_eq`) | **the row address as it goes to the RA pins** with R9 (5 bits) | marked (the five lines pass units whose loads are not traced) | drawn to the row counter's step logic: it is the input of the inverter that makes `rcs_mu` (AMB-013, resolved). **Use: the row counter's step request (above)** |
+| `rc_eq_r4`, `rc_eq_r6`, `rc_eq_r7` | seven lines `uc` with R4, R6, R7 | `uc` is the row counter `rc`, bit for bit: all seven joins drawn (`notes/blocks/ucz.md`), firm geometry | R6's goes to the strobe channel, R7's leaves west; not followed. **Use: open** |
+| `sl_eq_r5` | scan line counter with R5 (5 bits) | drawn | leaves north and runs west on `sl_eq_r5` through the central datapath's channel (`notes/blocks/bust.md`); not followed west of it. **Use: open** |
+| R9's (`ra_eq_r9`) | **the row address as it goes to the RA pins** with R9 (5 bits) | marked (the five lines pass units whose loads are not traced) | drawn to the row counter's step logic: it is the input of the inverter that makes `rcs_mu` (AMB-013, resolved). **Use: the row counter's step request (above)** |
 | R10's (central datapath) | the row address one stage earlier with R10 bits 0-4; gives "equal" and "greater" | marked | not followed. **Use: open** |
 
 Not found at all: comparators for R11 (cursor end), R12-R15 against the address

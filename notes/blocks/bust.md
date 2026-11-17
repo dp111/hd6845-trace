@@ -24,7 +24,7 @@ default gap bridges). East of the staircase: metal, `tools/follow.py` from each 
 | `cdp1_l4588` | 4655 | 12000 | `amr` c1's outer output (alias of `amr_ob_c1`); drop seen end to end at 3x (`c0a.png`) |
 | `cdp1_l4632` | 4697 | 12390 | `amr` c2's outer output (`amr_ob_c2`) |
 | `cdp1_l4676` | 4740 | 12782 | `amr` c3's outer output (drawn by `r9m`) |
-| `cdp1_l4719` | 4787 | pad (13540,4787) | **R5's match**: poly south to `rdp1`'s poly x 13533-13556 from y 5450 (alias of `sl_eq_r5`) |
+| `sl_eq_r5` | 4787 | pad (13540,4787) | **R5's match**: poly south to `rdp1`'s poly x 13533-13556 from y 5450 (alias of `sl_eq_r5`) |
 | `cdp1_c5_bl` | 4830 / 4850 | pad (13715,4850) | **`ubus_b0`**: poly south at x 13706 to a pad (13705,5628) (it ends there, above `rdp1`'s eq-line load), metal west along y 5632 and down as `ubus_b0` (2.7x in four shots, `c5.png`; follower) |
 | `cdp1_c4_bl` | 4873 / 4894 | 13848 | **`ubus_b1`** (poly x 13845 to the data line's top, 5635) |
 | `cdp1_c3_bl` | 4916 / 4937 | 14238 | **`ubus_b2`** |
@@ -44,7 +44,7 @@ default gap bridges). East of the staircase: metal, `tools/follow.py` from each 
   for R9's comparator
   (`cdp1_b#_b`, "# = 5 minus the bit"). So R8's and R9's bits can be named.
 - **R5's match** (vertical total adjust: scan line = R5) leaves the right datapath north
-  and runs west on `cdp1_l4719`, through the central datapath's channel unbroken
+  and runs west on `sl_eq_r5`, through the central datapath's channel unbroken
   (`cdp1` found no contact on it), towards the west logic. Where it is used: not
   followed west of x 8340.
 - **`amr`'s lines on the bus** (corrected 2026-11-17 by the trace of `amr`'s slice,
@@ -107,7 +107,7 @@ on a staircase of pads at x 7810-7860, from which metals run west:
 | `cdp1_l4676` | y 4635, pad (7830,4635) | west, south, west along y 4704 to (6921,4699), across the crossing field | c3 outer |
 | (none) | y 4676, pad (7855,4676) | `r9m`'s `r9m_l1w`; the row turns south near x 8190 | - |
 
-`cdp1_l4719` (R5's match): not drawn west of `cdp1` (a straight guess crossed `ras`
+`sl_eq_r5` (R5's match): not drawn west of `cdp1` (a straight guess crossed `ras`
 geometry; with the step, it probably comes from the row that turns south at x 8190 or
 the pad near (8245,4718): to be read).
 
@@ -120,7 +120,7 @@ West of it they run along y 4660 / 4702, south along x 5972 / 6016, and end on c
 onto poly pads (5885,5893) and (5922,5935) into the untraced top-left logic (2.7x,
 `we.png`). So **`amr` c2's and c3's outer outputs** (by the corrected mapping) go to the
 top-left logic near (5900,5900); c1's ends at (7535,4619) (not looked at) and c0's west
-end is not followed. None of them is `rcs_bq3335` (that is R9's match:
+end is not followed. None of them is `ra_eq_r9` (that is R9's match:
 `notes/blocks/r9m.md`, correction).
 
 ## `amr`'s partial slice c0: its two outputs drawn

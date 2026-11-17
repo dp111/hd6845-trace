@@ -116,7 +116,7 @@ M 14625,6905 y8300 w=24
 M 15016,6905 y8300 w=24
 M 15406,6905 y8300 w=24
 M 15796,6905 y8300 w=24
-# counter lines (labelled in rdp2.txt: uc_b0 .. uc_b6)
+# counter lines (labelled in rdp2.txt: rc0 .. rc6)
 M 13541,6868 y8300 w=22
 M 13931,6868 y8300 w=22
 M 14321,6868 y8300 w=22
@@ -127,7 +127,7 @@ M 15882,6868 y8300 w=22
 
 # ---- comparator of R6: eq line (row-wide diffusion strip), its exit in sm1, right end, T2 pieces
 D 13378,7656:16144,7678
-N D 15000,7667 uc_eq_r6
+N D 15000,7667 rc_eq_r6
 D 13535,7619:13557,7662
 B 13533,7617:13558,7640
 P 13533,7572:13556,7640
@@ -143,7 +143,7 @@ M 15842,7618 y8080 w=22
 
 # ---- comparator of R7: eq line (row-wide diffusion strip), its exit in sm1, right end, T2 pieces
 D 13378,6896:16144,6918
-N D 15000,6907 uc_eq_r7
+N D 15000,6907 rc_eq_r7
 D 13535,6859:13557,6902
 B 13533,6857:13558,6880
 P 13533,6812:13556,6880

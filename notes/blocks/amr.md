@@ -160,7 +160,7 @@ under the wide supply metal (y 5200-5550) to a pad on one metal line of a 13-lin
 
 | Column | Inner line (x 12693 - 390k) | Outer line (x 12782 - 390k) |
 |---|---|---|
-| c3 | `amr_oa_c3` -> bus y 5177 | bus y 4742 = `cdp1_l4676` (an earlier reading that this line ends on `rcs_bq3335` was wrong: `notes/blocks/r9m.md`, correction) |
+| c3 | `amr_oa_c3` -> bus y 5177 | bus y 4742 = `cdp1_l4676` (an earlier reading that this line ends on `ra_eq_r9` was wrong: `notes/blocks/r9m.md`, correction) |
 | c2 | `amr_oa_c2` -> bus y 5135 | `amr_ob_c2` -> bus y 4696 |
 | c1 | `amr_oa_c1` -> bus y 5047 | `amr_ob_c1` -> bus y 4657 |
 | c0 | poly from about (11497,5590) diagonally north-east, then north along x about 11645 to a pad near (11645,5005) | poly from about (11580,5590) diagonally, north along x about 11725, then diagonally north-west towards the pad (11650,4500) of `rab`'s bit 0 (`wt.png`): **not drawn**, it needs a 5x look at that pad |

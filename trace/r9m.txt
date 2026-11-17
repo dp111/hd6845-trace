@@ -1,8 +1,8 @@
-# r9m: R9's match line (cdp1_b_eq) from the comparator to the row counter's step logic.
+# r9m: R9's match line (ra_eq_r9) from the comparator to the row counter's step logic.
 # Route as followed in notes/blocks/r9m.md; every metal stretch from tools/follow.py
 # (both chips' metal shots), diagonals placed by sampling the follower with --max.
 # CORRECTED 2026-11-17 after independent review: two poly hops under the metals x 5078-5127
-# step down one track, so R9's match ends on the contact (4148,3335) (rcs_bq3335), and the
+# step down one track, so R9's match ends on the contact (4148,3335) (ra_eq_r9), and the
 # metal x 4194 with the stub is another net (r9m_l3). See notes/blocks/r9m.md, correction.
 @block r9m
 @w M=12 P=16
@@ -57,11 +57,11 @@ M 4194,3376 x4142 w=17
 # x 4162-4166 is the edge of tla's poly stem printing through continuous metal (measured in
 # both metal shots, notes AMB-013). Drawn with tla's split of track P (separate commit).
 
-N M 7600,4462 cdp1_b_eq
+N M 7600,4462 ra_eq_r9
 N M 4194,3000 r9m_l3
 
 # =====================================================================================
-# The bundle's first line: from the contact (4148,3335) of rcs_bq3335 (trace/tla.txt)
+# The bundle's first line: from the contact (4148,3335) of ra_eq_r9 (trace/tla.txt)
 # back towards its driver, as far as the pad (12782,5570) at the edge of the untraced
 # logic block x 12600-12900, y 5600-6400. It is cdp1's through line y 4676 for 2,500 px.
 # Every metal stretch from tools/follow.py; diagonals placed by sampling with --max.
@@ -124,4 +124,3 @@ P 12782,4738 y5550 w=16
 N P 12782,5500 cdp1_l4676
 
 # R9's match is the input of rcs_mu's inverter (the corrected hop joins them; firm geometry)
-@alias cdp1_b_eq rcs_bq3335

@@ -548,7 +548,7 @@ N M 13434,13400 h_eq_r1
 # --- L0: from the north; at y 12789 it steps left to x 13307 (outside the region) and
 # goes on south there
 M 13348,10700 y12789 x13307 y12850 w=18
-N M 13348,11000 rdp3_n0
+N M 13348,11000 h_eq_r0half
 # --- L0 below: starts on a contact on a poly pad that comes from the west
 P 13328,12815:13364,12843
 C 13346,12829 s=26x26
@@ -564,7 +564,7 @@ M 13521,12428 y13480 w=18
 N M 13521,13400 wr_r4
 # --- L2 from the north, jog left at y 12486, on down L1
 M 13434,10700 y12486 x13391 y13480 w=18
-N M 13391,13400 rdp3_n2s1
+N M 13391,13400 h_eq_r0
 # --- L4 from the north ends on a contact; poly west along y 12397, out of the region
 M 13521,10700 y12386 w=18
 C 13522,12375 s=26x26

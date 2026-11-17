@@ -13,7 +13,7 @@ Traced, placed in every slice, extracting (107 transistors, no errors, no open n
 rows A and C (static register cell, 6 and 5 bits), row B (five XORs and the NOR that
 makes the equality line), the wiring of channel B/C, the two poly lines under row A,
 all bit lines down to y 5150, the fourteen bus lines of the big channel, and
-`cdp1_b_eq` to the block's edge. Second run (2026-11-15) added everything from row B's
+`ra_eq_r9` to the block's edge. Second run (2026-11-15) added everything from row B's
 XOR on. Not traced: rows D and E (surveyed, one median pair of views), the logic in
 the slice-0 position below row A (x 8340-8750 and a little of slice 1 at y 4740-4870),
 and where the two write lines go after they leave the block (both leave east and turn
@@ -30,7 +30,7 @@ uses s0.
 | top wiring | 2950-3040 | - | VSS band and feeds, the q outputs of row A leaving upward | traced (to y 2950) |
 | A | 3040-3330 | s0-s5 (6) | register cell `cdp1_reg` | traced |
 | below A | 3330-3420 | all | two horizontal poly lines y 3340-3362 and 3385-3408, full width, one contact each at the right end | traced |
-| B upper | 3440-3650 | s1-s5 | 5-input NOR `cdp1_b_eq` | traced |
+| B upper | 3440-3650 | s1-s5 | 5-input NOR `ra_eq_r9` | traced |
 | B lower | 3650-3990 | s1-s5 | XOR cell `cdp1_xor` | traced |
 | channel B/C | 3990-4230 | all | five poly lines from the east (the compare value), plus the poly that feeds a3's bit line from the west | traced |
 | C | 4232-4524 | s1-s5 (5) | `cdp1_reg` again (dy = 1194) | traced |
@@ -114,7 +114,7 @@ the diffusion under m6 at 9104-9130.
   at (10893,4505) to a metal line going south at x 10894 (below where row A's line has
   left that track).
 
-### Row B upper half (traced): `cdp1_b_eq = NOR(cdp1_b1_ne .. cdp1_b5_ne)`
+### Row B upper half (traced): `ra_eq_r9 = NOR(cdp1_b1_ne .. cdp1_b5_ne)`
 
 - The output is a diffusion line along the row, closed at both ends (x 8778 and
   x 10765). One pull-down per slice (W/L 164/23; slice 1: 124/23), one depletion load
@@ -122,7 +122,7 @@ the diffusion under m6 at 9104-9130.
   at 9070-9112 x 3505-3546).
 - It leaves through a buried contact in slice 1 (8928-8962 x 3476-3510) into a poly
   line y 3424-3450 going left under slice 1's VSS rail to a pad at 8725,3437, and from
-  there in metal downward (x 8727): see "`cdp1_b_eq` (traced to the edge)".
+  there in metal downward (x 8727): see "`ra_eq_r9` (traced to the edge)".
 - `cdp1_bN_ne` (N = 1..5) are the gates of the pull-downs; each comes up from the XOR
   of its slice through a buried contact at 9234-9266 x 3652-3682 (+390 per slice;
   slice 1: 8844-8876).
@@ -148,7 +148,7 @@ Master slice 2 (x 9150-9560, y 3650-3990), placed five times. Seven transistors:
   `q` in slices 1-4, in the same sense as the bit written into the register. **B** is the
   thin metal line x 9325-9345 that comes up from channel B/C, with two poly taps
   (9336,3672 and 9336,3858). Neither input is inverted and the gate is symmetric, so
-  `cdp1_b_eq` = 1 exactly when the five A bits equal the five B bits.
+  `ra_eq_r9` = 1 exactly when the five A bits equal the five B bits.
 - **Slice 5 is wired differently** (traced): its pad at the foot (10677,3958) is not fed
   from row C below but by a metal line x 10669-10689 going *up* through the cell to a
   contact (10680,3354) on the upper of the two poly lines under row A's foot
@@ -219,7 +219,7 @@ along y 4372 out of the block at x 8340. It is in line with two of the five line
 separate from them: field under metal between x 9265 and 9315 on y 4132 (colour map),
 open field between x 9656 and 9705 on y 4090.
 
-### `cdp1_b_eq` (traced to the edge)
+### `ra_eq_r9` (traced to the edge)
 
 From the pad at 8725,3437 the metal runs down x 8716-8738 past row B and channel B/C
 with no contact (colour scan y 3440-4470), steps west at y 4460 to a contact at
@@ -295,7 +295,7 @@ have to be followed east.
 | `cdp1_c5_q` | P | 8285,3396 (likewise) | out | = `tc1_a`. Row C's fifth bit |
 | `cdp1_bK_b` (K = 1..5) | P | 10850, y 4176, 4132, 4089, 4046, 4003 | in | the compare value, one bit per line; K = 5 is the top line |
 | `cdp1_a3_bl` | P | 8340,4372 going west | in/out | bit line of a3 |
-| `cdp1_b_eq` | P | 8340,4459 going west (unbroken to x 7900 by colour scan) | out | 1 when row C equals the compare value |
+| `ra_eq_r9` | P | 8340,4459 going west (unbroken to x 7900 by colour scan) | out | 1 when row C equals the compare value |
 | `cdp1_l4544`, `_l4588`, `_l4632`, `_l4676`, `_l4719` | P | 8340 and 10850 at those y | - | pass through |
 | `cdp1_c5_bl`, `_c4_bl`, `_c3_bl`, `_c2_bl`, `_c1_bl`, `_a0_bl` | P | 10850, y 4764, 4806, 4850, 4893, 4937, 4981 | in/out | bus lines of the bit lines (c1, c4, c5 also serve a1, a4, a5) |
 | `cdp1_lw1`, `cdp1_lw2` | P | 8340, y 4981 and 5024; 10850, y 5024 and 5068 | - | pass through, one track lower on the east |
@@ -388,7 +388,7 @@ have to be followed east.
   - **A band along the whole row at y 5165-5185** between two heavy lines (seen from
     x 8790 to 10750 at 0.5x). It is diffusion-coloured under the VSS rail, the bit line
     and the VCC rail, with no contact specks there. Believed a shared node along the
-    row, like `cdp1_b_eq`'s line; its ends and its load were not looked for.
+    row, like `ra_eq_r9`'s line; its ends and its load were not looked for.
   - A diffusion column x 9290-9315 hangs from that band down to y 5297 and is crossed
     by two poly bars, y 5195-5217 and y 5237-5262: believed two transistors in series.
     The upper bar's poly runs from x 9430 west to x 9257, down under the bit line to
@@ -416,7 +416,7 @@ have to be followed east.
   that bundle down the east edge of cdp2-cdp4. Until then neither row is tied to a
   register number by its strobe.
 - East ends of the bus lines, of the five compare lines and of the five pass-through
-  lines (x 10850); west ends of `cdp1_b_eq`, `cdp1_a3_bl`, `cdp1_lw1`, `cdp1_lw2` and the five
+  lines (x 10850); west ends of `ra_eq_r9`, `cdp1_a3_bl`, `cdp1_lw1`, `cdp1_lw2` and the five
   pass-through lines (x 8340).
 - The metal of a2's bus line below its contact (jog to x 9335, on down through rows D
   and E), and the tap of a0's bus line at x 8727 below y 5150.

@@ -271,9 +271,9 @@ M 8727,3424 y4460 x8672 w=22           # down past row C's top, then a short ste
 C 8683,4460 s=24x24
 P 8670,4447:8704,4476                  # pad; from it a poly line runs west under slice 0's rails
 P 8340,4459 x8690 w=16                 # ... out of the block (seen unbroken to x 7900)
-N D 9100,3513 cdp1_b_eq
-N M 8727,3520 cdp1_b_eq
-N P 8345,4459 cdp1_b_eq
+N D 9100,3513 ra_eq_r9
+N M 8727,3520 ra_eq_r9
+N P 8345,4459 ra_eq_r9
 
 # ---------------------------------------------------------------------------------
 # Row B, lower half: one XOR per slice (seven transistors).  Master = slice 2
@@ -452,7 +452,7 @@ N P 10845,4544 cdp1_l4544
 N P 10845,4588 cdp1_l4588
 N P 10845,4632 cdp1_l4632
 N P 10845,4676 cdp1_l4676
-N P 10845,4719 cdp1_l4719
+N P 10845,4719 sl_eq_r5
 # The others each start at a contact under one bit line and run EAST out of the block.
 # Between x 9412 and 9580 the six lines that exist there step down one track.
 C 10417,4765 s=22x22                   # slices 5 (rows A and C): track y 4764

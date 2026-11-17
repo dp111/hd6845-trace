@@ -4,6 +4,6 @@
 13360,6095:15370,6365   array   R5 register (5 bit) | vertical total adjust; five latches on the data lines of the array below
 15410,6095:17020,6365   array   R3 register (4 bit) | one nibble of R3 (horizontal sync width, by the datasheet's layout); four latches with data lines of their own
 13060,6365:17020,6900   route   routing zone above R7 | the four lines of the horizontal sync width counter and the five of the scan line counter arrive here from the west and end under the comparators' counter tracks; R3's data lines leave east
-13360,6902:16160,7282   array   R7 comparator (7 bit) | counter lines of the upper array against R7 (vertical sync position); result uc_eq_r7 leaves west
+13360,6902:16160,7282   array   R7 comparator (7 bit) | counter lines of the upper array against R7 (vertical sync position); result rc_eq_r7 leaves west
 13360,7289:16160,7559   array   R7 register (7 bit) | vertical sync position
-13360,7662:16160,8042   array   R6 comparator (7 bit) | counter lines of the upper array against R6 (vertical displayed); result uc_eq_r6 goes down the wiring channel to the strobe channel
+13360,7662:16160,8042   array   R6 comparator (7 bit) | counter lines of the upper array against R6 (vertical displayed); result rc_eq_r6 goes down the wiring channel to the strobe channel

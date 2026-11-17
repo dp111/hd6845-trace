@@ -181,11 +181,10 @@ Eleven pass transistors between the scan line counter and five output nodes.
 | `rcs_g#` | an input of the cluster that arrives on a poly line from outside, by the y of that line |
 | `rcs_ba#`, `rcs_bb#`, `rcs_bc#`, `rcs_bd#`, `rcs_be#`, `rcs_bf#`, `rcs_bg#` | a piece of bus line A-G beside the first cluster (x 3090-3380) whose driver is not yet known, by the y of its top end |
 | `rcs_bp#`, `rcs_bq#`, `rcs_br#`, `rcs_bs#`, `rcs_bt#`, `rcs_bu#`, `rcs_bv#` | the same for the second bus field (x 4140-4420; tracks P-V at x 4148, 4192, 4235, 4279, 4322, 4365, 4409) |
-| `amr_oa_c#`, `amr_ob_c#` | the two vertical metals of `amr`'s slice in column # (c1 x 11880, c2 12270, c3 12660; c0's two are drawn in `trace/bust.txt` and carry the bus names `ubus_b4` / `cdp1_l4544`), named before the slice was traced. Inner (`oa`, x 11916 + 390(#-1)): **a data bus bit** (bits 5, 6, 7), written into R3 bits 5-7 on `wr_r3`. Outer (`ob`, x 12001 + ...): **an input**, the bit that R3's bit is compared with (aliases of `cdp1_l4588`, `cdp1_l4632`; c3's is `cdp1_l4676`, which west of `cdp1` is fed from the row y 4635, not `rcs_bq3335`: `notes/blocks/r9m.md`, correction). To bus lines y 5047/5135/5177 and 4657/4696/4742 (`notes/blocks/amr.md`) |
-| `rcs_bq3335` | (one of the above) the input of the inverter that makes `rcs_mu`: the contact (4148,3335). **It is R9's match** (`cdp1_b_eq`, alias): the line runs north along x 4149, east to the pad (4867,2596) and by a poly that steps down one track at x 5127 to R9's line (`notes/blocks/r9m.md`, correction) |
+| `amr_oa_c#`, `amr_ob_c#` | the two vertical metals of `amr`'s slice in column # (c1 x 11880, c2 12270, c3 12660; c0's two are drawn in `trace/bust.txt` and carry the bus names `ubus_b4` / `cdp1_l4544`), named before the slice was traced. Inner (`oa`, x 11916 + 390(#-1)): **a data bus bit** (bits 5, 6, 7), written into R3 bits 5-7 on `wr_r3`. Outer (`ob`, x 12001 + ...): **an input**, the bit that R3's bit is compared with (aliases of `cdp1_l4588`, `cdp1_l4632`; c3's is `cdp1_l4676`, which west of `cdp1` is fed from the row y 4635, not `ra_eq_r9`: `notes/blocks/r9m.md`, correction). To bus lines y 5047/5135/5177 and 4657/4696/4742 (`notes/blocks/amr.md`) |
 | `r9m_l3` | the bundle's line 3: track P's lower piece (x 4148, y 3371-3596, contact (4148,3588) with a poly west into the middle cluster), the stub at y 3376, metal up x 4194, west along y 2641 / 2599, the pad (4912,2641), a poly stepping down to the pad (5405,2681), metal along y 2685 and down x 5848 to (5845,5045). Driver not found |
 | `r9m_l1w` | the metal from the pad (5400,2596) (whose poly goes north at x 5175, not followed) east along y 2599, down x 6022, across the crossing field to the pad (7855,4676) and the row y 4676, which turns south near x 8190 at `cdp1`'s west edge |
-| `rcs_mu`, `rcs_mv` | the two inputs of the NOR that makes `rcs_in1` (middle cluster): bus pieces of the second bus field (x 4192). `rcs_mu` = NOT `rcs_bq3335` (an inverter at y 3413); `rcs_mv` comes from a poly that leaves the bus field east and south at (4283,4745) |
+| `rcs_mu`, `rcs_mv` | the two inputs of the NOR that makes `rcs_in1` (middle cluster): bus pieces of the second bus field (x 4192). `rcs_mu` = NOT `ra_eq_r9` (an inverter at y 3413); `rcs_mv` comes from a poly that leaves the bus field east and south at (4283,4745) |
 | `rcs_mn#` | output of a unit of the middle cluster, by the y of its output (`rcs_mn3852` = NOR(?, `rcs_in1`)) |
 | `rcs_thin_e`, `rcs_thin_w` | two thin metals down the cluster, over the loads; what they join is not read |
 | `rc0_n` | NOT `rc0`: output of the inverter I2 west of the counters, whose input was traced to the row counter's bit 0 on 2026-11-16 (its two nets had place names until then: see Former names). One input of the XOR that makes `ras_o0_alt1` |
@@ -211,8 +210,7 @@ Eleven pass transistors between the scan line counter and five output nodes.
 | `h_eq_r#` | high when the horizontal counter equals R# (R0: end of line; R1: displayed width; R2: sync position) |
 | `h_eq_r#half` | high when the horizontal counter equals R0/2 |
 | `h_eq_r#_u` | a piece believed to be `h_eq_r#` whose join is not drawn (tracks k7, k8 of the strobe channel) |
-| `uc_b#` | the seven counter lines of the upper right array (bit 0 at the left). They are the character row counter `rc#`, bit for bit: all seven joins are drawn (`trace/ucz.txt`, 2026-11-17) and the names are aliases of `rc#` |
-| `uc_eq_r#` | high when those lines equal R4 (vertical total), R6 (vertical displayed) or R7 (vertical sync position). `uc_eq_r6` goes down the wiring channel to the strobe channel (its track k4); `uc_eq_r7` leaves west along y 6820 |
+| `rc_eq_r#` | high when the row counter `rc` (its seven lines through the upper right array, joined by `ucz`) equals R4 (vertical total), R6 (vertical displayed) or R7 (vertical sync position). `rc_eq_r6` goes down the wiring channel to the strobe channel (its track k4); `rc_eq_r7` leaves west along y 6820 |
 | `hc#_u` | the horizontal counter line at the comparators, where its join to `hc#` is not drawn |
 | `rbus_b#` | data line of bit # through the lower right datapath (believed D#; its connection to the data pads is not traced) |
 | `ubus_b#` | data line of bit # through the upper right array (R4, R6, R7: bits 0-6; R5: bits 0-4). Believed D#. `ubus_b0`-`ubus_b6` are joined (`trace/bust.txt`) to the central datapath's lines `cdp1_c5_bl` ... `cdp1_c1_bl`, `cdp1_a0_bl`, `cdp1_a3_bl` (= `cdp1_lw2`) (aliases), and `rbus_b7` to `cdp1_a2_bl`: the data bus, table in `notes/blocks/bust.md`. R8 = cdp1 row A (bits 0,1,4,5,6,7 in slices 5,4,1,0,3,2), R9 = row C (bits 0-4 in slices 5-1) |
@@ -237,7 +235,7 @@ Eleven pass transistors between the scan line counter and five output nodes.
 
 | Name | What it is |
 |---|---|
-| `bd1_k#` | tracks of the channel not yet identified (`uc_eq_r6`, `hc1`) |
+| `bd1_k#` | tracks of the channel not yet identified (`rc_eq_r6`, `hc1`) |
 | `bd1_a`, `bd1_an` | input and output of inverter A |
 | `bd1_n#`, `bd1_q`, `bd1_k` | nodes of the latch gated by `inh_lat` (upper half node, lower half node, output, and the node pulled low by `inh_src`'s line) |
 
@@ -260,8 +258,8 @@ None of these rows has a register number yet, so all names are by place. Columns
 | `mal_frc_m#` | the gate tab of the force pull-down in MA copy m#: a pad of its own (no common line, unlike the RA band's `cnt_gab`); where it goes not followed |
 | `ral_n1_s#`, `ral_n1_m#` | the input of inverter 2 (the output stage) of `ral` cell s# / MA copy m#: the L-shaped poly; the cell's output = NOT this. Believed NOT node a (inverter 1, not drawn) |
 | `cdp1_b#_n2`, `cdp1_b#_ne` | NOR(a, b) and a XOR b |
-| `cdp1_b_eq` | NOR of the five `_ne`: high when R9 equals the 5-bit value on the `_b` lines (in slice 5 the register bit is replaced by `cdp1_b5_a`, made by `tc1`) |
-| `cdp1_l#`, `cdp1_lw#` | horizontal lines of the data bus channel, named by their y; and two write-line links. East of the block they cross under the supply metal and go on east as the bus to the right datapath (`notes/blocks/bust.md`): `cdp1_l4544`..`cdp1_l4676` are the four inputs of `amr`'s comparator (bits 4-7 of the value compared with R3's high nibble); `cdp1_l4719` is R5's match (`sl_eq_r5`, alias); `cdp1_lw2` is `amr` c2's inner output |
+| `ra_eq_r9` | R9's match: NOR of the five `_ne` of the comparator in `cdp1` row B, high when R9 equals the 5-bit value on the `_b` lines, which are the row address as it goes to the RA pins (`ra#_cmp`; marked, AMB-012). In slice 5 the register bit is replaced by `cdp1_b5_a`, made by `tc1`. It runs to the row counter's step logic, where it is the input of the inverter that makes `rcs_mu` (contact (4148,3335); AMB-013, resolved; `notes/blocks/r9m.md`) |
+| `cdp1_l#`, `cdp1_lw#` | horizontal lines of the data bus channel, named by their y; and two write-line links. East of the block they cross under the supply metal and go on east as the bus to the right datapath (`notes/blocks/bust.md`): `cdp1_l4544`..`cdp1_l4676` are the four inputs of `amr`'s comparator (bits 4-7 of the value compared with R3's high nibble); `sl_eq_r5` is R5's match (`sl_eq_r5`, alias); `cdp1_lw2` is `amr` c2's inner output |
 | `cdp2_a_s#_*` | cdp2 row A (5-bit latch), slice #: `_a` storage node, `_n2` inverse, `_q` output, `_bus` bit line |
 | `cdp2_a_c_s#_*` | cdp2 row C (7-bit latch), the same nodes |
 | `wr_r11`, `wr_r10` | the write strobes of R11 and R10, which are the load strobes of rows A and C: **row A is R11, row C is R10** (`notes/blocks/wrs.md`) |
@@ -882,3 +880,18 @@ datapath s1...s7, s0 became b0...b6, b7.
 | ral_frc | cnt_gab | |
 | tc1_ns4 | ral_stb | |
 | ra2_drv_in_u | ra2_drv_in | |
+| uc_b0 | rc0 | |
+| uc_b1 | rc1 | |
+| uc_b2 | rc2 | |
+| uc_b3 | rc3 | |
+| uc_b4 | rc4 | |
+| uc_b5 | rc5 | |
+| uc_b6 | rc6 | |
+| uc_eq_r4 | rc_eq_r4 | |
+| uc_eq_r6 | rc_eq_r6 | |
+| uc_eq_r7 | rc_eq_r7 | |
+| cdp1_l4719 | sl_eq_r5 | |
+| rdp3_n2s1 | h_eq_r0 | |
+| rdp3_n0 | h_eq_r0half | |
+| cdp1_b_eq | ra_eq_r9 | |
+| rcs_bq3335 | ra_eq_r9 | |

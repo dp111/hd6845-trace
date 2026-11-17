@@ -5,7 +5,7 @@
 # by a 45-degree diagonal (lower lines further west: the lines cannot cross), and comes up on
 # a pad of the staircase at x 11655 / 11697 (alternating). Read from the clean shot at 1.35x
 # and 2.5x (cache/scratch/bust/xu.png, dg1.png, dg2.png) and the pads in both metal shots at
-# 3x (pe.png). cdp1_l4676 (= rcs_bq3335) is drawn by r9m and follows the same pattern.
+# 3x (pe.png). cdp1_l4676 is drawn by r9m and follows the same pattern.
 # East of the staircase each is a metal line (tools/follow.py, 2,000-5,250 px); the lower
 # eight step down one track (21 px) at x 13200-13510 (jog.png) and end on pads whose polys
 # go south into the upper right datapath.
@@ -67,10 +67,10 @@ M 11697,5131 x13245 y5153 x16146
 M 11655,5175 x13200 y5196 x16926
 
 # --- east ends: pads, and the polys south that are drawn here
-# cdp1_l4719 ends on a pad (13540,4787); its poly goes south under the bus lines and the wide
+# sl_eq_r5 ends on a pad (13540,4787); its poly goes south under the bus lines and the wide
 # supply metal (the poly column at x 13538 in the stripped shot at y 5300) to rdp1's poly
 # x 13533-13556 from y 5450 (R5's match leaving its comparator north): so the R5 match is
-# cdp1_l4719.
+# sl_eq_r5.
 P 13523,4770:13557,4804
 C 13540,4787
 P 13544,4787 y5455 w=20
@@ -101,7 +101,6 @@ C 15016,5630
 @alias cdp1_c3_bl ubus_b2
 @alias cdp1_c2_bl ubus_b3
 @alias cdp1_c1_bl ubus_b4
-@alias sl_eq_r5 cdp1_l4719
 # the other east ends are left as ports: c5 (13715,4850), a0 (15280,5068), lw1 (15584,5110),
 # lw2 (16146,5153), a2 (16926,5196); notes/blocks/bust.md
 # amr's outputs land on these lines (trace/amr.txt): aliases
@@ -201,7 +200,7 @@ P 7825,4635 x8230 y4676 x8345 w=12
 P 7813,4618:7847,4652
 C 7830,4635
 M 7842,4637 x7618 y4704 x6921 w=12
-# cdp1_l4719 (R5's match): a metal leaves a pad at about (7782,4766) west (to x 7700, south to
+# sl_eq_r5 (R5's match): a metal leaves a pad at about (7782,4766) west (to x 7700, south to
 # y 4853, west to x 7575, south to y 5140, west to x 7330), but how the poly from x 8340
 # reaches that pad is not seen: a straight guess crossed the row address selector's
 # geometry (extraction: a transistor and a short to ras_o0). Not drawn.
