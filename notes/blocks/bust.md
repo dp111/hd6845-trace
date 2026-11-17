@@ -186,3 +186,14 @@ drawn**. Method for whoever takes it: list every ring (contact) in the zone from
 metal shots, assign each to its poly row by y, check each row's continuity in the clean
 shot at 3x between consecutive rings, then build the joins; `tools/bust_fanout.py` must
 then show bit k writing R0, R1 and R2 as well.
+
+## `amr` c1's and c2's outer outputs, further west
+
+`cdp1_l4588` and `cdp1_l4632` (amr c1, c2 outer outputs) cross the field under the three
+rails (x 6450-6960) on pads at matching y on both sides, like `r9m`'s two lines there; the
+polys across are drawn `?P` (not seen end to end). West of it they run along y 4660 /
+4702, south along x 5972 / 6016, and end on contacts onto poly pads (5885,5893) and
+(5922,5935), into the untraced top-left logic (2.7x, `we.png`). So all four outer outputs
+go to the vertical control logic: c3's to the row counter's step logic (`rcs_bq3335`),
+c1's and c2's to the logic around (5900,5900), and c0's (`cdp1_l4544`) west along the
+bus metals (end at (7535,4619) not looked at).

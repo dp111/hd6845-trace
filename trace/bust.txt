@@ -236,3 +236,32 @@ P 8060,5003:8096,5037
 C 8078,5020
 P 8078,5024 x8345 w=12
 @alias cdp1_a3_bl cdp1_lw2
+
+# --- cdp1_l4588 and cdp1_l4632 across the crossing field under the three rails (x 6450-6960).
+# East pads: (6960,4655) and (6923,4695) (rings in the metal shot, poly pads in the stripped
+# shot, 3.4x: cache/scratch/bust/cfe.png); west pads (6460,4657) and (6470,4702) (hop3.png).
+# r9m's two lines cross this field as straight polys at constant y; these are drawn the
+# same way but not seen end to end: ?P.
+P 6943,4638:6977,4672
+C 6960,4655
+M 6913,4657 x6960 w=12
+P 6906,4678:6940,4712
+C 6923,4695
+P 6443,4640:6477,4674
+C 6460,4657
+P 6453,4685:6487,4719
+C 6470,4702
+?P 6460,4657 x6960 w=16
+?P 6470,4700 x6923 w=16
+# west of the field (tools/follow.py): cdp1_l4588 west along y 4660 to x 5972, south to
+# y 5895, west to x 5883; cdp1_l4632 west along y 4702 to x 6016, south to y 5944, west to
+# x 5898. Ends not looked at.
+M 6460,4658 x5972 y5895 x5883 w=12
+M 6470,4701 x6016 y5944 x5898 w=12
+# ends: contacts onto poly pads (5885,5893) and (5922,5935) (rings in the metal shot, poly
+# pads in the stripped shot, 2.7x: cache/scratch/bust/we.png); the polys go on into the
+# untraced top-left logic (queue: tl1-tl6).
+P 5868,5876:5902,5910
+C 5885,5893
+P 5905,5918:5939,5952
+C 5922,5935
