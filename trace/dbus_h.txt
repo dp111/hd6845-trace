@@ -1,7 +1,7 @@
 # dbh: data bus bits 4-7 south of the right datapath: the four bus drivers at the top of
 # the column x 16480-16800 (y 13100-13860) and the wiring between them, the latch cells
 # below them (y 13870-15790, cell dbh_lat) and the input buffer chains of dbus.
-# See notes/blocks/dbh.md.
+# See notes/blocks/dbus.md.
 @block dbh
 
 # ---- rails of the driver column (y 13080 down through the latch cells to y 15800). Which is which comes from the loads: every load's far end contacts
@@ -60,10 +60,10 @@ M 16818,12895 y13728 w=18
 C 16813,13716
 P 16797,13700:16829,13732
 P 16790,13718 x16813 w=16
-@alias cdp1_a2_bl dbh_dl7
-@alias cdp1_a3_bl dbh_dl6
-@alias cdp1_a0_bl dbh_dl5
-@alias cdp1_c1_bl dbh_dl4
+@alias db_b7 dbh_dl7
+@alias db_b6 dbh_dl6
+@alias db_b5 dbh_dl5
+@alias db_b4 dbh_dl4
 
 # ---- gate rows of the drivers: each is a poly row under both rails that leaves the
 # column to the west and goes south to one of the four latch cells (1.45-1.6x in three

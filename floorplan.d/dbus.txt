@@ -18,3 +18,19 @@
 17245,16700:17580,17140  route  d7_in | poly under the VCC rail
 17545,17112:17850,17500  route  d7_in | metal and poly from the D7 pad cell's contact (17830,17490)
 17590,7380:17660,18840  route  pad driver lines | P_x, one metal line common to all eight data pad cells (enable), and the per-bit lines and pad input lines beside it
+# bits 4-7 (trace/dbus_h.txt)
+16470,13075:16810,13865  logic   bus drivers, data bits 7-4 | four cells, top to bottom bits 7, 6, 5, 4: depletion load and one wide pull-down on each data line, gate = the bit's latch output
+16470,13870:16850,15790  logic   data input latches D4-D7 | four transparent latches (D4's upside down), enabled by dlat_en; each drives the bus driver of its bit
+16780,12880:16920,13735  route   data bits 4-7 into the drivers | the four bus ends from the lower right datapath
+16330,13250:16480,15400  route   latch outputs to the drivers | four poly lines west of the column (two are areg's lines 6 and 7)
+16840,13985:17260,14010  route   d4_d | chain 4's output to the D4 latch
+16840,14680:17260,14705  route   d5_d | chain 5's output to the D5 latch
+16840,15160:17310,15200  route   d6_d | chain 6's output to the D6 latch
+16840,15640:17310,15830  route   d7_d | chain 7's output to the D7 latch
+16765,13640:16870,15800  route   dlat_en | latch enable, down past the four latch cells
+16480,15800:16800,16450  ?logic  five inverters | single inverters on a 135 px pitch with pads on the wiring field's metals; surveyed, not traced
+16760,15800:16785,16505  route   dlat_en | on south over the five inverters
+16415,16480:16785,16512  route   dlat_en | west, under the VCC rail in poly
+16415,16485:16440,16875  route   dlat_en | south to the row
+16110,16850:16440,16880  route   dlat_en | poly row under the R/W, RS, CS bundle from the driver
+15840,16770:16130,16960  logic   dlat_en driver | NOR of cs_d and a second input (not followed): the enable of the eight data input latches
