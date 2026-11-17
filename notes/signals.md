@@ -210,7 +210,7 @@ Eleven pass transistors between the scan line counter and five output nodes.
 | `h_eq_r#` | high when the horizontal counter equals R# (R0: end of line; R1: displayed width; R2: sync position) |
 | `h_eq_r#half` | high when the horizontal counter equals R0/2 |
 | `h_eq_r#_u` | a piece believed to be `h_eq_r#` whose join is not drawn (tracks k7, k8 of the strobe channel; bus line G west of the counters) |
-| `uc_b#` | the seven counter lines of the upper right array (bit 0 at the left). Believed to be the character row counter `rc#` (four of its seven lines are joined to this array's bundle by geometry; the join to these tracks, in the routing zone y 9080-9560, is not drawn) |
+| `uc_b#` | the seven counter lines of the upper right array (bit 0 at the left). They are the character row counter `rc#`, bit for bit: all seven joins are drawn (`trace/ucz.txt`, 2026-11-17) and the names are aliases of `rc#` |
 | `uc_eq_r#` | high when those lines equal R4 (vertical total), R6 (vertical displayed) or R7 (vertical sync position). `uc_eq_r6` goes down the wiring channel to the strobe channel (its track k4); `uc_eq_r7` leaves west along y 6820 |
 | `hc#_u` | the horizontal counter line at the comparators, where its join to `hc#` is not drawn |
 | `rbus_b#` | data line of bit # through the lower right datapath (believed D#; its connection to the data pads is not traced) |

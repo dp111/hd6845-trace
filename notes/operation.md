@@ -106,7 +106,7 @@ throughout.
 | `h_eq_r1` | `hc` with R1 | as above | into the bottom-centre logic. **Use: open** |
 | `h_eq_r2` | `hc` with R2 | as above | believed to run west of the counters on a bus line (join not drawn). **Use: open** |
 | `hsw_eq_r3` | `hsw` with the R3 nibble (4 bits) | drawn | not followed. **Use: open** |
-| `uc_eq_r4`, `uc_eq_r6`, `uc_eq_r7` | seven lines `uc` with R4, R6, R7 | `uc` is **believed** to be the row counter; the join is not drawn | R6's goes to the strobe channel, R7's leaves west; not followed. **Use: open** |
+| `uc_eq_r4`, `uc_eq_r6`, `uc_eq_r7` | seven lines `uc` with R4, R6, R7 | `uc` is the row counter `rc`, bit for bit: all seven joins drawn (`notes/blocks/ucz.md`), firm geometry | R6's goes to the strobe channel, R7's leaves west; not followed. **Use: open** |
 | `sl_eq_r5` | scan line counter with R5 (5 bits) | drawn | leaves north; not followed. **Use: open** |
 | R9's (`cdp1_b_eq`) | **the row address as it goes to the RA pins** with R9 (5 bits) | marked (the five lines pass units whose loads are not traced) | followed to the row counter's step logic; the last 12 px are undecided (AMB-013). **Use: open** |
 | R10's (central datapath) | the row address one stage earlier with R10 bits 0-4; gives "equal" and "greater" | marked | not followed. **Use: open** |
