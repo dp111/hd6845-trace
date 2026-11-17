@@ -1,3 +1,5 @@
-# amr: logic above the mid-right array (surveyed)
-11450,5560:13050,6460  ?array  R3 high nibble (vertical sync width)? 4 slices | believed: one slice per data bit D4-D7, on R3's write strobe (wr_r3 runs through the slices); each slice is connected to its data bit and sends one line west (cdp1's through lines y 4544-4676). Slice not traced
-11880,4630:12800,5600  route   amr outputs north | six polys under the supply metal from the slices' top contacts (y 5585) to pads on the bus
+# amr: R3's high nibble and its comparator (traced 2026-11-17)
+11430,5620:13050,5880  array  R3 bits 4-7 (register) | four latches (columns x 11490, 11880, 12270, 12660 = data bits 4-7) written from the data bus on wr_r3; q leaves each slice south at y 6400
+11430,5885:13050,6135  array  comparator of R3 bits 4-7 | per bit: nor = NOR(c, q), x = c XOR q, against the four lines cdp1_l4544 / l4588 / l4632 / l4676 (inputs; believed a 4-bit counter: vertical sync width)
+11430,6140:13050,6290  logic  amr_eq_r3: wired NOR of the four XORs | a 241/25 pull-down per bit (c0's 132/26) on one diffusion line y 6246-6272; its load east of the first column's VCC rail (x 11677-11815). Where the line is used: not found
+11880,4630:12800,5600  route  amr lines north | six polys under the supply metal from the slices' top contacts (y 5585) to pads on the bus: data bits in, compared bits in

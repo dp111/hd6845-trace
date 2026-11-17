@@ -1,14 +1,21 @@
 # Work packages
 
-The queue for parallel tracing. Maintained by the coordinating session only. Each
-package is one agent's job: a region, a file prefix, and what is expected. Regions are
+The master list of tracing work. Maintained by the coordinating session only. Each
+package is one tracer's job: a region, a file prefix, and what is expected. Regions are
 metal-shot pixels, x0-x1 x y0-y1. A row or cell belongs to the package that contains
-its centre.
+its centre. The packages must together cover the whole die: every transistor is to be
+traced (`PLAN.md`, M7). `tools/coverage.py` draws the die with what is traced, what lies
+in some package's region, and what lies in neither; the last must show only empty
+field and supply metal. Run it after every change to this list.
+
+**To take a package: `notes/workflow.md`.** Claim it first with `tools/claim.py take`;
+active claims are in `claims/` on main (`tools/claim.py list`), not in this file. Propose
+changes to this file in your pull request; the coordinator applies them at merge.
 
 Status: `queued`, `running`, `done` (traced and reported), `checked` (an independent
 agent has verified it), `partial` (reported, with work left: see its notes).
 
-**2026-11-15 18:00.** The usage limit stopped all eleven running agents at once; they
+History. **2026-11-15 18:00.** The usage limit stopped all eleven running agents at once; they
 were resumed when it reset. By the user's instruction no further agents are started
 after this round: once these eleven have reported, the remaining packages below are
 worked serially by the coordinating session, in priority order.
@@ -48,7 +55,7 @@ All eleven reported by 2026-11-15 night; statuses below are final for the round.
 | rename | - | the nets of the four identified register rows (`cdp1_a#_*`, `cdp1_c#_*`, `cdp2_a_s#_*`, `cdp2_a_c_s#_*`, `cdp1_b*`) to register names | not done; **unblocked 2026-11-17**: `bust` settled the bit order (R8 = row A, R9 = row C; slice = 5 - bit, R8 bit 6 in slice 3, bit 7 in slice 2; `notes/blocks/bust.md`). Also `uc_b0`..`uc_b6` to `rc0`..`rc6` (aliased in `trace/ucz.txt`; firm) |
 | `ral` | 13990-16330 x 4250-4560 | the stage in front of the RA pad drivers: five copies of one cell, pitch 434 (one gap of 563). **The same cell occurs fourteen times in the left array's left column (in front of the MA drivers) and once at (8449,5562)** | partial (contributor, merged 2026-11-17; 25 transistors, five per copy): pass transistor on `ral_stb`, hold device, the `cnt_gab` pull-down, inverter 2 (the output stage); outputs joined to RA0-RA4. **Inverter 1 not drawn** (three passes), so "a latch transparent while the strobe is high" is believed, not extracted. Device sizes doubtful (re-read R14). `cnt_gab` has no driver anywhere on its drawn net (AMB-017); `ral_stb`'s source not found. Copies: `mal` |
 | `bd2` (rest) | 16370-16800 x 15400-16450 | the loads of the gate group right of the bundle, where `wr_data_e_n` goes, the gate band `bd2_x`, the right-hand column | not traced; observations of 2026-11-16 at the end of `notes/blocks/bd2.md`. **Decides what closes the write strobe when E falls** (jsbeeb issue 1866) |
-| `dbus` | 17050-17700 x 5300-17000, and the D0-D7 pad cells | data bus interface column; then finish the data pad cell (AMB-003) | partial: input buffers D0-D5 traced; gate groups, bus lines, pad cell left (continue as the same block) |
+| `dbus` | 16950-17700 x 5300-17000, and the D0-D7 pad cells | data bus interface column; then finish the data pad cell (AMB-003) | partial: input buffers D0-D5 traced; gate groups, bus lines, pad cell left (continue as the same block) |
 
 | `cdp2` | 7600-10850 x 5700-8450 | central datapath | partial (runs 1, 2; 142 transistors): row A five latch bits, row C seven latch bits; rows B1/B2 a 5-bit comparator with a ripple chain between slices (per bit: NOR, XOR, a NAND with the chain input) and a row-long line pulled low per bit, i.e. it yields more than equality; it compares row C's bits with a 5-bit value on per-slice through tracks. What drives the chain input and what the chain output drives meet at one hidden corner (9300,7168) and are not drawn. Left: row D (six large cells continuing into cdp3's row A), channels 2 and 3, the strobes beyond x 10895 |
 | `cdp3` | 7600-10850 x 8450-11200 | central datapath | partial (runs 1, 2; 159 transistors): row C (6 bits, columns c2-c7) and row H (8 bits) are static register bits, same circuit as cdp1's, each readable onto bus N through rows E/F and driving a line west; write lines traced to the region's east edge. Left: row A (a different, larger cell), row I, the logic beside row A, and one unexplained NAND onto a bit line |
@@ -82,6 +89,7 @@ checks (r9m's hops, ucz's hop at x 14544, mal's copy m7).
 | `wrj` | 13500-13850 x 13480-14700 | the write strobes of R0, R1, R2, R4 from `rdp3` to `bd1` | done (wiring): all four joined, firm |
 | `hcj` | 13040-14130 x 13470-15990 | the horizontal counter lines `hc0`-`hc5` to the comparators | done (wiring): all six joined; `hc2` still rests on bd1's `?` poly |
 | `rad` | 15235-18320 x 2080-5960 | the RA2-RA4 pad drivers' input lines | done (wiring): RA2 and RA3 joined end to end through `ral`; RA4 to r9c's unit through a `?P` (open join) |
+| `rde` | 7600-10850 x 5150-7400 | the data bus through `cdp1`'s rows D and E to R10 and R11 (`cdp2` rows C and A) | done (wiring, PR #13): `cdp2` row A = R11 (bits 0-4), row C = R10 (bits 0-6) by the register fan-out; bits 5 and 6 firm; the five lines of bits 0-4 cross one 54 px stretch drawn `?M` (AMB-019). Left: rows D and E themselves (cells not traced); bit 7 below y 5084 |
 | `mal` | 2540-2840 x 7960-18780 | the fourteen copies of the `ral` cell in front of the MA drivers | placed (70 transistors, as far as `ral` is traced): copy m# drives MA#; strobe = `ck_out`. Left: each copy's input, the `mal_frc_m#` taps, the twentieth copy at (8449,5562) |
 
 ## Re-read list
@@ -117,6 +125,9 @@ the poly as salmon under where the metal was; `tools/strips.py --layer acid1b` a
 | R13 | `rab`, `wrs`, `slbus`, `r9m` (line 3), `bust` (west of x 8345), and every bundle drawn straight across a cross-under or block edge | each poly hop or cross-under under wide metal, at 4x or more in both stripped shots | r9m's two hops under x 5078-5127 were read straight at 1.8x and each steps one track (found by review, 2026-11-17); bust's rows step one track at x 8215-8345. A straight-drawn hop that steps swaps nets silently | open |
 | R14 | `ral` cell (`trace/ral.txt`), placed 19 times with `mal` | inverter 2's pull-down (drawn W/L 61/25 against a 61/32 load; probably the whole L-poly as gate, W about 170-190) and the pass transistor (drawn 16/26; probably W about 45, gate 5 px further east) | the contributor's own review, medium confidence; the connections do not change but the sizes are copied into 95 transistors and matter for simulation (M5, M7) | open |
 | R15 | `wl`, `rdp2`, `mrach`, `rdp3` notes | correct them from the new blocks: `wl`'s band H4 does not run on west (`ral.md`); `rdp2`'s routing-zone track ends, the x 13890 metal and L7's piece (`ucz.md`, "Other blocks' notes"); `mrach` rows r13, r14, r17 and `rdp3`'s south-edge table (`hcj.md`, "Other blocks") | their notes still state what the 2026-11-17 packages found to be otherwise | open |
+| R16 | every gate or channel decided from `tools/classmap.py` or `tools/railprof.py` output in an **open** area (no metal above): `tcw`'s gate column (read "as text"), and any block whose notes cite those tools for a gate outside metal | look at each such gate in the chip-2 shots, where poly is orange | `amr` (2026-11-17): both tools call open poly "dark" and open field "diffusion", and confuse a channel with poly over field; right under metal, wrong in the gaps | open |
+| R17 | every metal declared absent, broken or ended by the follower's metal test (R > 177, G > 128) where the metal is thin (under about 16 px) | relative profiles along and across the line against a known stretch of the same line | `rde` (2026-11-17): the test misses the thin, dim bit lines through `cdp1`'s rows D/E entirely | open |
+| R18 | the direction (driver or receiver) of every line that a survey called an input or output from its contacts at low zoom: `bust`'s and `amr`'s first survey are corrected; check `rab`, `wrs`, `slbus`, `urch` | at each end, whether the contact lands on a gate poly or on a source/drain | `amr` (2026-11-17): the four outer lines were taken as outputs and are gate inputs | open |
 
 ## Open joins
 
@@ -134,7 +145,8 @@ tracing the stretch between the two pieces and renaming the label.
 | Prefix | Region | What |
 |---|---|---|
 | `tc1` | 6400-8250 x 2500-4450 | top-centre random logic, upper half | partial (runs 1, 2; 26 transistors): the nine-gate island and all its wiring; its five inputs followed to the region's edges: a from the datapath (cdp1's register bit), w1 leaves east at (8350,3700), b, g, i arrive from tc2 at (7512,4450), (7143,4450), (7187,4450). Left: the gate columns at x 6400-7000 (large devices under wide rails, need 3-4x views and profiles), an undrawn structure at x 6750-6940, y 3930-4200, the channel at x 7000-7170 |
-| `dbus` (continue) | as above | gate groups under the buffer chains, internal bus lines, P_x driver, D6/D7 buffers, then the pad cell |
+| `dbus` (continue) | as above | gate groups under the buffer chains, internal bus lines, P_x driver, D6/D7 buffers (the pad cells are `dpad`) |
+| `dpad` | 17700-19838 x 5900-18900 | the D0-D7 pad cells: tri-state driver and pre-driver under the VCC band, one cell traced and placed eight times (AMB-003), each cell's joins to `dbus` |
 | `areg` (continue) | as above | finish the fifth register cell (with `rdp3`'s four), the right-hand column x 16480-16800 |
 | `tl1`-`tl6` | 2100-6400 x 2500-6350, in six parts | top-left random logic |
 | `tc2` | 6400-8250 x 4450-6400 | top-centre random logic, lower half |
@@ -145,7 +157,10 @@ tracing the stretch between the two pieces and renaming the label.
 | `bl1`, `bl2` | 4800-6500 x 15800-18650 | bottom-left random logic |
 | `bd1`-`bd3` | 13000-14100 x 14700-17100; 15850-17000 x 14700-17100; 14100-15850 x 16550-17100 | rest of the logic below the decode array; **start with re-read items R1, R2** |
 | `tr1`, `tr2` | 11900-16400 x 3400-4500 | top-right logic rows |
-| `amr` | 11400-13050 x 5250-6450 | logic above the mid-right array: four slices on data bits 4-7 with `wr_r3` through them, believed R3's high nibble | surveyed and outputs drawn (contributor, merged 2026-11-17; `notes/blocks/amr.md`). Next: the slice device by device (c3, x 12570-12960); `wr_r3`'s poly is `?P` |
-| `busL`, `busB`, `busT` | 4850-7550 x 10400-15000; 6500-13300 x 17000-18600; 11000-17000 x 3000-5300 | bus fields: follow the wiring between blocks and join their ports; `busT`'s data bus part is done as `bust` (contributor packages, below) |
-| `padring` | periphery | pad squares, supply rings, strips from pads to protection cells, the two comb cells by LPSTB/RES |
+| `amr` | 11400-13050 x 5250-6450 | R3's high nibble and its comparator | done (contributor, merged 2026-11-17, PR #14; 57 transistors): R3 bits 4-7 latched from data bits 4-7 on `wr_r3`; per bit c XOR q; `amr_eq_r3` = NOR of the four. Left: where `amr_eq_r3` goes; the driver of the four compared lines (c0's outer line has an undrawn third connection west along y 6340); where the q polys go south of y 6400; seven `?` items (`notes/blocks/amr.md`) |
+| `busL`, `busB`, `busT` | 4780-7550 x 10400-15000; 6500-13300 x 17000-18600; 11000-17000 x 3000-5300 | bus fields: follow the wiring between blocks and join their ports; `busT`'s data bus part is done as `bust` (contributor packages, below) |
+| `padring` | 0-19838 x 0-2650; 0-19838 x 18550-21025; 0-2350 x 2150-18900; 17700-19838 x 2150-5900 | the 40 pad squares (only MA3's is drawn) and the metal from each to its driver or protection cell; the supply rings; the two comb cells by LPSTB/RES (6380-6918 x 833-1280); whatever else in the bands is untraced. The output drivers in these bands are traced (`pads_out`); the bands overlap them |
+| `busC` | 13200-17750 x 16900-18560 | the bus field between the strobe logic (`bd1`-`bd3`) and the input buffer row, with a gate group at its east end (about x 16100-17000, y 16900-17500) and a block at x 17100-17700, y 17000-18400 below the data bus column; found by `tools/coverage.py` 2026-11-17, in no package before |
+| `bl0` | 4780-7000 x 15000-15800; 6500-7000 x 15800-17000 | a gate group (about x 5900-6300, y 15200-16000) among the bus wiring between the left bus field and the bottom-left logic; found by `tools/coverage.py` 2026-11-17, in no package before |
+| `teststr` | 15000-17500 x 2400-3600; 11600-12080 x 2150-2800 | the process-monitor structures and the small cell by the die marking: probably not connected to the circuit; trace them last, as unconnected devices, so that the transistor count is complete |
 | verification | each finished package | an independent agent re-checks sampled gates and every port against the photos |
