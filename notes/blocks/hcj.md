@@ -7,10 +7,10 @@ Traced 2026-11-17 09:48 (one agent, one pass with a numeric cross-check and over
 uncertain items. Full extraction: 2039 nets (7 fewer: seven names merged), 3430
 transistors, 0 errors, 0 warnings.
 
-**All six joins come out as expected**: rdp3's `hc0_u` .. `hc5_u` are
+**All six joins come out as expected**: rdp3's six c-track nets are the counter's
 `hc0` .. `hc5` (bd1's tracks k17, k9, k14 for bits 0, 2, 3; the wiring channel's
 polys for bits 4 and 5; the counter row r17's poly, through bd1's track k11, for bit 1).
-bd1's `bd1_k11` is `hc1`, as mrach expected. So the comparator c tracks of the
+bd1's track k11 is `hc1`, as mrach expected. So the comparator c tracks of the
 right datapath slices s1..s6 are the master outputs of counter rows r18, r17, r16, r15, r14,
 r13 by drawn geometry. `tools/unsure.py` lists none of hc0, hc1, hc3, hc4, hc5; `hc2` is
 listed as before for bd1's `?` poly from k9 into the mid-right array (not touched here):
@@ -76,19 +76,15 @@ None left open on the six joins. Two things that were looked at twice:
   15486-15495, 15508-15544) and x 13630 (y 15418-15436); chip 1 has nothing there and the
   views show bare ground with speckle (`k11_pad.png`; review `k11_low.png`).
 
-## Other blocks (not edited)
+## Other blocks
 
-- `trace/bd1.txt` lines 437-438: the pad and contact at the foot of k11 are `?P` / `?C`
-  (13594,15594:13626,15622 and 13609,15608). They are confirmed here (`k11_pad.png`)
-  and by the review; bd1's lose their `?` in a separate commit on this branch (hcj.txt also
-  draws the pad, taller). The pad is taller than
-  bd1 drew it: it reaches y 15642, where the poly leaves it west.
-- `notes/blocks/bd1.md` (k11 row, ports table, "Not done") and `notes/blocks/mrach.md`
-  (rows r13, r14, r17 "not drawn between" / "not found yet") can now say hc1, hc4, hc5.
-- `notes/blocks/rdp3.md` south-edge table: `hc4_u` "(by scan to y 14032)" ends on the
-  contact (14105,14022); `hc0_u`'s contact is at (13868,13632).
-- `notes/work-packages.md` "Open joins": the row hc0_u..hc5_u can go; `notes/signals.md`
-  needs the former names (hc0_u..hc5_u, bd1_k11) moved once rename.py is run.
+- `trace/bd1.txt`: the pad and contact at the foot of k11 lose their `?` (own commit on
+  this branch); the pad is taller than bd1 drew it (to y 15642), drawn here.
+- The open-join names are renamed with `tools/rename.py` in the commit after the drawing
+  (rdp3, bd1, wrj, the glossary, work-packages).
+- `notes/blocks/mrach.md` (rows r13, r14, r17 "not drawn between" / "not found yet") and
+  `notes/blocks/rdp3.md`'s south-edge table (`hc4` "by scan to y 14032": it ends on the
+  contact (14105,14022); `hc0`'s contact is at (13868,13632)) are not updated here.
 
 ## Review
 

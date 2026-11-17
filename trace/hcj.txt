@@ -103,10 +103,3 @@ N P 13600,13893 hc5
 
 # The joins (each label set of rdp3 is one net in rdp3 itself: comparator c track and
 # bundle track, checked by net id before drawing).
-@alias hc0 hc0_u
-@alias hc1 hc1_u
-@alias hc1 bd1_k11
-@alias hc2 hc2_u
-@alias hc3 hc3_u
-@alias hc4 hc4_u
-@alias hc5 hc5_u

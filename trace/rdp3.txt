@@ -94,7 +94,7 @@ C 14562,13256 s=24x22                # band to the VSS rail
 @inst rdp3_lat 1170,0 tag=ar4
 N P 14850,13029 ar_load
 # AR only: the two spare tracks end at the cell edges
-# (the s1 track is hc0_u: it runs through the cell, see "Routing zone")
+# (the s1 track is hc0: it runs through the cell, see "Routing zone")
 N M 14712,13020 ar1_trk
 N M 15102,13020 ar2_trk
 N M 15492,13020 ar3_trk
@@ -485,17 +485,17 @@ N M 16577,11650 rbus_b6
 M 13931,10700 y12445 w=22
 N M 13931,11650 hc7
 M 14321,10700 y12445 w=22
-N M 14321,11650 hc0_u
+N M 14321,11650 hc0
 M 14712,10700 y12445 w=22
-N M 14712,11650 hc1_u
+N M 14712,11650 hc1
 M 15102,10700 y12445 w=22
-N M 15102,11650 hc2_u
+N M 15102,11650 hc2
 M 15492,10700 y12445 w=22
-N M 15492,11650 hc3_u
+N M 15492,11650 hc3
 M 15882,10700 y12445 w=22
-N M 15882,11650 hc4_u
+N M 15882,11650 hc4
 M 16272,10700 y12445 w=22
-N M 16272,11650 hc5_u
+N M 16272,11650 hc5
 M 16663,10700 y12445 w=22
 N M 16663,11650 hc6
 # --- slice s7 only: the strap track of the latch cells is one through line here
@@ -683,42 +683,42 @@ M 14322,13270 y13473 w=22
 C 14324,13458 s=24x24
 P 13861,13451:14340,13471
 P 13861,13451:13881,13480
-N P 13871,13478 hc0_u
+N P 13871,13478 hc0
 # s2: contact; poly west along y 12961 to a contact on bundle track L5; metal south
 M 14712,12437 y12973 w=22
 C 14712,12961 s=24x24
 P 13550,12951:14727,12971
 C 13565,12959 s=24x24
 M 13565,12947 y13480 w=18
-N M 13565,13400 hc1_u
+N M 13565,13400 hc1
 # s3: contact; poly west along y 12917 to a contact on bundle track L3; metal south
 M 15102,12437 y12929 w=22
 C 15105,12917 s=24x24
 P 13463,12907:15120,12927
 C 13478,12916 s=24x24
 M 13478,12904 y13480 w=18
-N M 13478,13400 hc2_u
+N M 13478,13400 hc2
 # s4: contact; poly west along y 12874 to a contact on bundle track L8; metal south
 M 15492,12437 y12886 w=22
 C 15496,12873 s=24x24
 P 13677,12864:15511,12884
 C 13692,12872 s=24x24
 M 13694,12860 y13480 w=18
-N M 13694,13400 hc3_u
+N M 13694,13400 hc3
 # s5: contact; poly west along y 12831 to a contact at x 14107; metal south at x 14108
 M 15882,12437 y12843 w=22
 C 15885,12830 s=24x24
 P 14092,12821:15900,12841
 C 14107,12830 s=24x24
 M 14108,12818 y13480 w=18
-N M 14108,13400 hc4_u
+N M 14108,13400 hc4
 # s6: contact; poly west along y 12787 to a contact on bundle track L10; metal south
 M 16272,12437 y12799 w=22
 C 16276,12786 s=24x24
 P 13765,12777:16291,12797
 C 13780,12786 s=24x24
 M 13782,12774 y13480 w=18
-N M 13782,13400 hc5_u
+N M 13782,13400 hc5
 # s7: contact; poly west along y 12461; contact; metal link down x 15668; contact; poly
 # west along y 12744 to a contact at x 14065; metal south to a contact at y 13408; poly
 # west along y 13418 under the whole bundle, out of the region

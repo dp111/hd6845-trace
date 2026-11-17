@@ -22,12 +22,12 @@ Twelve bundle tracks come down from rdp3 (L0..L11, 43.4 px pitch); the eight fro
 were read. Everything was looked at in both metal shots and in `acid1b`.
 
 - The tracks L4..L9 are straight and unbroken from y 13480 to 14700.
-- L10 (x 13782, rdp3's `hc5_u`) ends on a contact at (13782,13893); a poly leaves it west
+- L10 (x 13782, rdp3's `hc5`) ends on a contact at (13782,13893); a poly leaves it west
   along y 13880-13908 under L9..L4 and on. No metal on x 13782 from y 13915 to 13992
   (open field in `acid1b`).
 - L11 (x 13825) turns west at y 14001 and takes over L10's position.
 - The line at x 13868 (starts on a contact at (13868,13630) under a poly from the north:
-  rdp3's `hc0_u`, by its position) turns west at y 14041-14058 and takes over L11's
+  rdp3's `hc0`, by its position) turns west at y 14041-14058 and takes over L11's
   position (bd1's `hc0` at (13826,14700)). Seen, not drawn: its contact was not read.
 - A poly band at y 14010-14038 comes from the east under all the tracks, turns south-west
   at x 13600 and runs diagonally under L5 and L4 (it passes L4 at y 14088-14136). It lies
@@ -78,9 +78,9 @@ Names: the pieces in rdp2, rdp3 and bd1 carry the same names `wr_r0`, `wr_r1`, `
 
 ## Not done
 
-- The x 13868 line (`hc0_u` to `hc0`): metal seen from the contact (13868,13630) to
+- The x 13868 line (`hc0`): metal seen from the contact (13868,13630) to
   (13825,14700), contact and poly not read at high zoom, not drawn.
-- L5, L8, L9 (rdp3's `hc1_u`, `hc3_u`, `rdp3_n7s9`; bd1's `bd1_k11`, `hc3`, `bd1_a`):
+- L5, L8, L9 (rdp3's `hc1`, `hc3`, `rdp3_n7s9`; bd1's `hc1`, `hc3`, `bd1_a`):
   straight and unbroken in the same views and profiles, not drawn (not this package).
 - L0..L3 (x 13348-13478): not read here.
 - The poly from L10's contact going west (y 13893) and the poly band at y 14010-14038 with

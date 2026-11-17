@@ -16,7 +16,7 @@
 #  - numeric, along each track: every non-metal run is under 25 px in at least one chip
 #    except at the poly crossings, each looked at 4.6-5x in metal, metal1, acid1b:
 #      y 13878-13910  poly going west from the contact (13782,13893) where L10 ends
-#                     (rdp3's hc5_u): xA.png. Metal of L4..L9 passes over it, no pad,
+#                     (rdp3's hc5): xA.png. Metal of L4..L9 passes over it, no pad,
 #                     no ring, poly plain in acid1b.
 #      y 14010-14038  a poly band from the east, which turns south-west at x 13600 and
 #                     runs diagonally under L5 and L4 (y 14080-14140 at L4): xB.png, xC.png,

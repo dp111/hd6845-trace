@@ -301,8 +301,8 @@ a net. Each net, from north to south (all drawn; overlay `ov_bun1.png`):
 | `wr_r1` | contact (13823,12700) on RA's strobe poly | L11 | L11 at y 13480; at y 14000 it jogs onto L10 = bd1's k16 = **`wr_r1`** |
 
 Lines that start in the routing zone and go south are c lines (next section): L3 from
-contact (13478,12916) is `hc2_u`, L5 from (13565,12959) `hc1_u`, L8 from
-(13692,12872) `hc3_u`, L10 from (13780,12786) `hc5_u`. Three poly lines pass
+contact (13478,12916) is `hc2`, L5 from (13565,12959) `hc1`, L8 from
+(13692,12872) `hc3`, L10 from (13780,12786) `hc5`. Three poly lines pass
 under the bundle on their way west: `hc7` (y 12744, then down x 13413 and west
 along y 13004), `hc6` (y 13418) and, higher up, `rc3`.
 
@@ -406,17 +406,17 @@ South edge, y 13480 (metal unless noted):
 | `inh_rc` | 13347 (L0) | k6 `inh_rc` | |
 | `rdp3_n2s1` | 13391 (L1) | k7 (untraced) | **R0 = c** (`h_eq_r0`), out |
 | `h_eq_r1` | 13434 (L2) | k8 (untraced) | **R1 = c**, out |
-| `hc2_u` | 13478 (L3) | k9 (untraced) | |
+| `hc2` | 13478 (L3) | k9 (untraced) | |
 | `wr_r4` | 13521 (L4) | k10 `wr_r4` | in |
-| `hc1_u` | 13565 (L5) | k11 (partly traced) | |
+| `hc1` | 13565 (L5) | k11 (partly traced) | |
 | `wr_r2` | 13608 (L6) | k12 `wr_r2` | in: RB's load strobe |
 | `wr_r0` | 13651 (L7) | k13 `wr_r0` | in: RC's load strobe |
-| `hc3_u` | 13694 (L8) | k14 `hc3` | |
+| `hc3` | 13694 (L8) | k14 `hc3` | |
 | `rdp3_n7s9` | 13738 (L9) | k15 (untraced) | |
-| `hc5_u` | 13782 (L10) | (ends at 13782,13893 on poly going west) | |
+| `hc5` | 13782 (L10) | (ends at 13782,13893 on poly going west) | |
 | `wr_r1` | 13825 (L11) | jogs to L10 at y 14000: k16 `wr_r1` | in: RA's load strobe |
-| `hc0_u` | 13871 (poly) | by scan: metal x 13868 from y 13630, k17 `hc0` | |
-| `hc4_u` | 14108 | (by scan to y 14032) | |
+| `hc0` | 13871 (poly) | by scan: metal x 13868 from y 13630, k17 `hc0` | |
+| `hc4` | 14108 | (by scan to y 14032) | |
 | `vss` | 13912; 16125 (bending left) | | |
 | `vcc` | 13990; 14382..15942 at y 13520 | | into the decode array's VCC bus |
 | `ar0_q`..`s4_q` | contacts 15884,13482; 15839,13437; 15884,13392; 15839,13352 (then poly east) | | `ar0`..`ar3` |

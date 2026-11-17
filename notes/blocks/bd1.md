@@ -229,7 +229,7 @@ gate is `inh_lat`, the inverse of line X.
 | k8 13435 | h_eq_r1 | jogs to x 13478 at y 15130, runs south; by scan metal to y 16594, a 23 px break, then to y 16797. Lower end not traced |
 | k9 13478 | hc2 | jogs to x 13521 at y 15087, **ends at contact (13520,15390)**; poly west along y 15388 (under wr_r7's jog, no contact), corner at x 13108, south, west into the mid-right array at (13035,15497) (the poly's route is from the first run, `?`) |
 | k10 13521 | wr_r4 | ends at contact (13521,15042) |
-| k11 13565 | bd1_k11 | jogs to x 13608 at y 15005, down to a contact at (13609,15608) (scan, 1.5x); poly west then diagonally down-left towards (13250,15750), not traced |
+| k11 13565 | hc1 | jogs to x 13608 at y 15005, down to a contact at (13609,15608) (scan, 1.5x); poly west then diagonally down-left to counter row r17's n1 (drawn by `hcj`) |
 | k12 13608 | wr_r2 | ends at contact (13609,14956) |
 | k13 13652 | wr_r0 | ends at contact (13652,15000) |
 | k14 13694 | hc3 | ends at contact (13692,14913); poly west into the mid-right array at y 15020 |
@@ -278,7 +278,7 @@ X's lines, contact (13522,15999), metal south on x 13521 to about y 16273.
 | inh_lat | metal | 13435,16769 (drawn to there) | out | NOT X going south on k8's position; lower end not traced |
 | bd1_k | metal | 13521,16273 (drawn to there) | ? | going south on k10's position; lower end not traced |
 | wr_r4 | metal | 13521,14700 (north) | out | track k10 |
-| bd1_k11 | metal | 13565,14700 (north) | ? | track k11; jogs to x 13608 at y 15005, ends at a contact at (13609,15608) (`?`), poly west then diagonally down-left towards (13250,15750), not traced |
+| hc1 | metal | 13565,14700 (north) | ? | track k11; jogs to x 13608 at y 15005, ends at a contact at (13609,15608), poly west then diagonally down-left to counter row r17's n1 (drawn by `hcj`) |
 | wr_r2 | metal | 13608,14700 (north) | out | track k12 |
 | wr_r0 | metal | 13652,14700 (north) | out | track k13 |
 | hc3 | metal | 13694,14700 (north) | ? | track k14 |
