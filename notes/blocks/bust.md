@@ -55,7 +55,7 @@ default gap bridges). East of the staircase: metal, `tools/follow.py` from each 
 
 1. The east ends left as ports (table).
 2. `cdp1_lw1` (east end 15584, a poly south at x 15580): not followed.
-   Bit 7 of the upper array, and R3's own data lines, not identified.
+   Bit 7 of the upper array not identified. (R3's low-nibble data lines: drawn by `r3d`, data bits 0-3.)
 3. Renaming the bus as data bus bits once the coordinator agrees on names (aliases are
    used for now).
 
