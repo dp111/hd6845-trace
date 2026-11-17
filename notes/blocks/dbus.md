@@ -12,7 +12,7 @@ Traced, extracting, overlay-checked: the input buffer chain (four inverters) as 
 column, and the whole input line of D1 from the pad cell's contact; **the gate group
 ("cluster") under each of chains 0-3: a transparent data input latch and the driver of
 the internal data line**, cells `dbus_lat` and `dbus_drv`, 12 transistors per bit, placed
-four times (48 transistors). Data lines 0-3 (`cdp1_c5_bl` ... `cdp1_c2_bl`, drawn into the
+four times (48 transistors). Data lines 0-3 (`db_b0` ... `db_b3`, drawn into the
 units by `dbl`) are thereby joined to the pins D0-D3 (D0 and D1 by traced input lines from their pads;
 D2 and D3 by the chains' position, see Ambiguities): line k = `dk_lat` = the level of
 pin Dk while `dlat_en` is high, held while it is low. One buried contact per bit (the tie
@@ -193,7 +193,7 @@ Two readings that the first look got wrong and the profiles corrected:
 | P_y of D1 | poly y 9225-9240 from the pad cell to x 17650, down x 17640-17655 (under the P_x metal) to line 2 (y 9590-9610), left to a contact at 17120,9620, metal x 17110-17130 downward | - | to the pad | not drawn |
 | P_x | metal x 17633-17650, y 7380-18835 | contacts listed above | to the pads | common enable-type line, not drawn |
 | `dlat_en` (formerly "M_b") | metal x 17243-17262, then poly and metal | top end (17252,8990); bottom: west at y 13613, contact (17166,13611), poly west, contact (16986,13608), metal west and down x 16860; drawn to (16862,13650) | in | enable of the four input latches. Driver not traced (`follow.py`: on down x 16820 to (16772,15800)) |
-| data lines 0-3 (`cdp1_c5_bl` ... `cdp1_c2_bl`) | poly | `dbl`'s contacts (17207,9467), (17077,10832), (17165,12200), (17208,13563) | out | driven by the units: line k = NOT `dk_lat_n` |
+| data lines 0-3 (`db_b0` ... `db_b3`) | poly | `dbl`'s contacts (17207,9467), (17077,10832), (17165,12200), (17208,13563) | out | driven by the units: line k = NOT `dk_lat_n` |
 | thin metal | metal x 17438-17458 | through every cluster between the rails | - | D0's `P_y` in unit 0; it is also there in units 1-3 (`segs.py` finds it at most heights from y 9300 to 11100). No contact in any cluster. Not drawn, not followed |
 | lines from the core | metal | the metals that arrive from the left at y 9460-9480, 9520-9545 and 9565-9585 and turn down at x 17195-17215 and 17155-17175 | - | these are `dbl`'s data lines 0, 3 and 2 |
 
@@ -203,7 +203,7 @@ in chain 0) are the capacitor taps, not bus lines.
 
 ## Review
 
-The clusters were independently reviewed (2026-11-17): all 12 devices of the master in
+Round 1 (2026-11-17, an independent agent; the clusters): all 12 devices of the master in
 four shots, cluster 0's mirrored latch and shifted driver, cluster 3 at 3x, the d_d poly
 in the 28 px gap, the driver output boxes and `dlat_en` confirmed; the two collinear
 polys measured as two. It corrected the data-line load's width (now about 68/27) and
