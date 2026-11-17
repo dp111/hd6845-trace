@@ -78,3 +78,7 @@ can now be checked against the counter rows (each copy's **input**, not yet foll
 1. Each copy's input: which counter row (or start-address bit) feeds it.
 2. Where the force taps `mal_frc_m#` go.
 3. Everything `ral` has not traced inside the cell.
+4. The twentieth copy, at (8450,5562): findcell places it at 0.81 (turned 90 degrees, not
+   mirrored, `@inst ral_cell -5785,1167 rot=90 o=14235,4395`), but an overlay at 1.5x
+   (`cache/scratch/ral/t0.png`) does not put the cell's rails and pads on matching
+   features, and its strobe contact (8298,5368) has no metal over it. Not placed.
