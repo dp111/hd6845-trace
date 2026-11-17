@@ -330,3 +330,16 @@ P 14608,9383:14642,9417
 C 14625,9400
 M 14625,9395 y9605 w=24
 @alias cdp1_c4_bl rbus_b1
+# Bit 3: ubus_b3's metal (x 14625) on to its end contact (14625,9315) (tools/follow.py: one
+# piece to y 9320); a poly row east along y 9310 to a contact (15402,9310) at the top of the
+# metal x 15406, which runs down unbroken (both metal shots: only poly-crossing gaps of
+# 7-15 px) to rbus_b3. 1.38x in the clean and metal shots (b3r.png); the end at 2.2x
+# (b3a.png).
+M 14625,9060 y9322 w=24
+P 14608,9298:14642,9332
+C 14625,9315
+P 14625,9312 x15402 w=14
+P 15385,9293:15419,9327
+C 15402,9310
+M 15406,9303 y9605 w=24
+@alias cdp1_c2_bl rbus_b3
