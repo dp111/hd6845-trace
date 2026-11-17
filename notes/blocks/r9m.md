@@ -1,7 +1,37 @@
-# r9m: where R9's match goes (drawn, except the last 12 px: AMB-013)
+# r9m: where R9's match goes (drawn; it is the input of `rcs_mu`'s inverter)
 
 Serial work, 2026-11-16. No trace file. Views in `cache/scratch/rax/`: `eq1.png` ...
 `eq9.png`. Every metal stretch from `tools/follow.py`.
+
+## CORRECTION (2026-11-17 07:11): R9's match drives `rcs_mu`'s inverter; read this first
+
+An independent review (Fable, 4-5x in both stripped shots; its images are in the reviewer
+worktree under `cache/scratch/rv_r9m/`, `hop4.png`, `hop5.png`, `hop6.png`, re-checked
+here by overlay, `fixhop.png`) found that the two poly hops under the metals
+x 5078-5127 (between pads 4867/4912 and 5358/5400/5405) **do not run straight**: each
+poly steps down one track going east. The trace was redrawn accordingly:
+
+- R9's match (pad (5358,2641)) runs west, steps up at x 5120-5135, and arrives at pad
+  (4867,2596), i.e. the metal that ends on the contact (4148,3335). So **`rcs_bq3335` is
+  R9's match** (`@alias cdp1_b_eq rcs_bq3335`), and `rcs_mu = NOT cdp1_b_eq`: the step
+  logic's first term is "scan line equals R9 (as compared at the RA pins), and not
+  `rcs_mv`". Firm geometry (no `?` on the path).
+- Pad (4912,2641), with the metal down x 4194, the stub and track P's lower piece, belongs
+  to the poly that steps down to a pad (5405,2681) and the metal along y 2685 to x 5848
+  and south to (5845,5045): "bundle line 3", named `r9m_l3`. Track P's split (AMB-013)
+  stands, confirmed by the review's measurements, but the two pieces carry the opposite
+  nets to what the earlier text below says.
+- Pad (5400,2596) does not join line 1's west part: its poly turns north at x 5175 and
+  ends near y 2545 (not followed). The metal from it (y 2599, x 6022, the crossing field,
+  pad (7855,4676)) is named `r9m_l1w`. At `cdp1`'s west edge every row steps down one
+  track (nested L's at x 8215-8345, `cache/scratch/bust/stair2.png`), so this row does
+  **not** become `cdp1_l4676`: it turns south near x 8190. `cdp1_l4676` (the line from
+  `amr` c3, east of `cdp1`) is fed instead by the west row y 4635.
+- So: **`amr` c3's outer output is not `rcs_bq3335`**; that statement below is withdrawn,
+  as is "the bundle's first line ... followed back 9,000 px".
+
+The sections below are kept as the record of how the earlier reading was made; where
+they disagree with this one, this one holds.
 
 ## Route of `cdp1_b_eq`, from the comparator west
 
