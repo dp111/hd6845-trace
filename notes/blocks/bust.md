@@ -187,7 +187,10 @@ row leaves it east along y 9568-9588 (clean shot at 2.4x, `b0z.png`). `rbus_b0`'
 contact (14215,9440) has a poly west along y 9440 that turns south near x 13890
 (`b0r.png`, `b0e.png`). Between them, at x 13800-13900 y 9540-9620, a pad near
 (13820,9608) with a metal west (`b0g.png`, 2.3x) was seen but its connections are not
-settled. The colour test fails under the wide rails at x 13950-14200.
+settled. Later look (2.7x, `b0h.png`, follower): that is a second poly row, y 9610-9630,
+between contacts (13560,9620) and (13842,9618); the first carries a metal 2,330 px south
+(to y 11924), the second a metal east and north to (13897,9228). So that row is another
+net, not bit 0. Bit 0's row y 9578 is the one to follow east of x 13815. The colour test fails under the wide rails at x 13950-14200.
 
 Method used for bits 1-6, for bit 0: the clean shot reads well here (poly cream/salmon on
 pink field, contacts with green centres) except under the wide rails; read each line at
