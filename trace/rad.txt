@@ -1,0 +1,34 @@
+# rad: the RA pad drivers' input lines, from the pad cells back towards the band of
+# ral cells (notes/blocks/rad.md). RA0's and RA1's are drawn in trace/r9c.txt; this file
+# draws RA2's, as far as followed.
+@block rad
+@w M=12 P=18
+@s 24x24
+
+# --- RA2: contact on the pad driver's input poly (ra2_drv_in, trace/pads_out.txt) at
+# (18308,2094), metal west along y 2097 to a pad (17727,2097), poly south under the wide
+# rail x 17600-17880 (y 2140-2440) to a pad (17727,2485), metal south along x 17727 to
+# y 3880, west along y 3878 to a pad (15422,3872); poly west under RA0's and RA1's metals
+# (x 15300, 15342) to a pad (15258,3872); metal south along x 15255 to a pad (15252,4183).
+# Metal from tools/follow.py (the y 3878 run ends at x 15423; the x 15255 run is 3935-4183
+# by the follower, up to the pad at 3x); the pads and hops seen at 1.6-4x in metal and
+# the clean shot (cache/scratch/ral/ra2a.png, ra2b.png, ra2c.png, ra2d.png, ra2g.png).
+# The x 15258 metal is the one r9c's notes list among "the three RA metals x 15258 /
+# 15300 / 15342" that its five polys pass under.
+C 18308,2094
+M 18308,2097 x17727 w=13
+P 17710,2080:17744,2114
+C 17727,2097
+P 17727,2097 y2485 w=20
+P 17710,2468:17744,2502
+C 17727,2485
+M 17727,2485 y3878 x15422 w=12
+P 15405,3855:15439,3889
+C 15422,3872
+P 15258,3872 x15422 w=18
+P 15241,3855:15275,3889
+C 15258,3872
+M 15255,3866 y4183 w=12
+P 15235,4166:15269,4200
+C 15252,4183
+N M 17000,3878 ra2_drv_in
