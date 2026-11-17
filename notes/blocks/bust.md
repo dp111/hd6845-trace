@@ -124,3 +124,29 @@ So all four of `amr`'s slices put an outer output on a through-line into the wes
 inner output on a data bus bit (c0 bit 4, c1 bit 5, c2 bit 6, c3 bit 7). Four slices,
 data bits 4-7, and one result each to the west: the shape of a read-back or comparison
 unit on the upper nibble. That's a guess from the wiring; the slice is not traced.
+
+## Check: the register widths the data bus now gives
+
+`tools/bust_fanout.py` lists, from the extraction, the write strobes of the register bits
+on each data line (merged tree, 2026-11-17):
+
+| Data line | Written into |
+|---|---|
+| bit 0, bit 1, bit 4 | R4, R5, R6, R7, R8, R9 |
+| bit 2, bit 3 | R4, R5, R6, R7, R9 |
+| bit 5 | R4, R6, R7, R8 |
+| bit 6 | R4, R6, R7 |
+| bit 7 | R0, R1, R2, R8 |
+| `cdp1_a3_bl` (not yet joined to a data line) | R8 |
+
+(R0-R2 bits 0-6 are on `rbus`, which `rdp2`/`rdp3` traced; R10-R15 are not yet on these
+lines.) This is exactly the datasheet's layout, and nothing in the trace assumed it:
+R5 and R9 are 5 bits (0-4), R4, R6 and R7 are 7 bits (0-6), and R8 has bits 0, 1, 4, 5, 7
+plus `cdp1_a3_bl`, so **`cdp1_a3_bl` is R8 bit 6** (the datasheet's R8 is bits 0-1, 4-5,
+6-7). **Prediction**: `cdp1_a3_bl` joins `cdp1_lw2` (bit 6) somewhere west of the central
+datapath (it leaves `cdp1` towards `tc1`, as `tc1_x2`).
+
+Hence the central datapath rows: **R8 = row A**, slice 5 bit 0, slice 4 bit 1, slice 1
+bit 4, slice 0 bit 5, slice 3 bit 6 (by the above), slice 2 bit 7; **R9 = row C**,
+slice 5 bit 0 ... slice 1 bit 4. That settles the bit order the "rename" package was
+waiting for.
