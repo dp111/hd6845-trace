@@ -81,7 +81,7 @@ skew bit). The six data lines now joined across the chip:
 | 0 | `cdp1_c5_bl` (slice 5) | `ubus_b0` |
 | 1 | `cdp1_c4_bl` (slice 4) | `ubus_b1` |
 | 2 | `cdp1_c3_bl` (slice 3) | `ubus_b2` |
-| 3 | `cdp1_c2_bl` (slice 3's neighbour, slice 2, row C) | `ubus_b3` |
+| 3 | `cdp1_c2_bl` (slice 2, row C) | `ubus_b3` |
 | 4 | `cdp1_c1_bl` (slice 1) | `ubus_b4` |
 | 5 | `cdp1_a0_bl` (slice 0, row A) | `ubus_b5` |
 | 6 | `cdp1_lw2` (from cdp1's west edge) | `ubus_b6` |
