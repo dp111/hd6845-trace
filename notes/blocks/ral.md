@@ -1,10 +1,10 @@
 # ral: the stage in front of the RA pad drivers (x 13990-16330, y 4250-4560)
 
-## Status (2026-11-17 04:46, contributor session)
+## Status (2026-11-17 05:00, contributor session)
 
 **Partly traced** (`trace/ral.txt`, cell `ral_cell`, five copies s0-s4 west to east; s0 is
 RA bit 0's cell, at x 13990-14460). Drawn: the two supply rails per cell, the line
-`ral_frc` (y 4350) with its tap and the pull-down it gates, the strobe line `ral_stb`
+`cnt_gab` (y 4350) with its tap and the pull-down it gates, the strobe line `ral_stb`
 (y 4548) with its pad and the input pass transistor, the input strip, the hold device
 (gate on VSS) from node a to the output, the buried contact onto the output poly, s0's
 input join to `rax_o0`, and the output stub to `ra0_drv_in`; and **every copy's input and
@@ -17,7 +17,7 @@ part of the output poly. 15 transistors (three per cell).
 ```
 ral_a_s#  <- rax_o#    pass transistor 16/26 at (14041,4487) + 434 per cell, gate ral_stb
 ral_a_s#  <-> out_s#   hold device 16/90 at (14245,4487) + 434, gate VSS (out_s0 = ra0_drv_in)
-ral_tf_s# -> VSS       pull-down 66/20 at (14160,4413) + 434 per cell, gate ral_frc
+ral_tf_s# -> VSS       pull-down 66/20 at (14160,4413) + 434 per cell, gate cnt_gab
 ```
 
 The hold device is the same structure as `cdp2_lat`'s (long weak device, gate on VSS,
@@ -43,8 +43,8 @@ shot): drawn `?B`.
 |---|---|---|---|---|
 | `vcc` | metal | top rail y 4220-4268 | supply | by device orientation, not followed to a labelled rail |
 | `vss` | metal | middle rail y 4397-4446 | supply | same |
-| `ral_frc` | metal | y 4343-4359, x 13990-16330 | in | source not followed |
-| `ral_stb` | metal | y 4540-4556, x 13990-15910 (ends on s4's pad) | in | the sixth line of rab's bundle; source not followed |
+| `cnt_gab` | metal | y 4346-4362, x 13895-16330 | in | the counters' `_m`/`_mb` gate line: drawn back to `wl`'s band H4 (glossary); first called `ral_frc` here |
+| `ral_stb` | metal | y 4540-4556, x 13990-15910 (ends on s4's pad) | in | the sixth line of rab's bundle; drawn back 9,000 px to x 8350, where it is `tc1`'s ns4 (formerly `tc1_ns4`, renamed) |
 | `rax_o0` | poly | (14000,4500), from rab | in | s0's input, onto the strip by a buried contact (`?B`: round ring in both stripped shots) |
 | `rax_o1` ... `rax_o4` | poly | up x 13995 + dx from pads at (14430,4590), (14863,4635), (15425,4675), (15860,4632) to the buried contact on each strip | in | s1-s4's inputs; s2's and s4's pads at the ends of rab's metals (s4's goes on east along y 4722 to x 15862 and north) |
 | `ra0_drv_in` | poly | x 14331-14349 at y 4480-4525, joins r9c's poly from the pad (14340,4764) | out | s0's output |
@@ -88,7 +88,7 @@ shot): drawn `?B`.
    one of these readings is wrong. This corner is the next thing to settle (contact test
    `tools/cdp2_pt.py` on the ring; colour profile across x 14050-14095 at y 4420).
 2. Whether Tf's drain `ral_tf_s#` (strip x 14172-14196) is the first inverter's output,
-   i.e. n2 = NOR(a, ral_frc), which would make `ral_frc` a force/clear of the latch.
+   i.e. n2 = NOR(a, cnt_gab), which would make `cnt_gab` a force/clear of the latch.
 3. The output poly from y 4300 to 4480 (x 14375-14395): believed to be the second
    inverter's output node (its load's gate tie at about 14365-14395 x 4280-4310).
 4. The copies' input and output polys (s1-s4), and the fifteen copies in the left array.
