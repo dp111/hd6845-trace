@@ -82,16 +82,64 @@ N M 14000,4351 ral_frc
 M 13990,4548 x15910 w=16
 N M 14000,4548 ral_stb
 
-# --- ports of the copies s1-s4 (inputs and outputs not drawn beyond the cell).
-# Inputs: the strip's west end, where each copy's input poly should land as s0's does.
-# rab: bit 1's poly goes north from the pad (14430,4590) and bit 3's from (15425,4675),
-# right under s1's and s3's input ends; bits 2 and 4 were not followed that far.
-N D 14430,4487 rax_o1_u
-N D 14864,4487 ral_in_s2
-N D 15427,4487 rax_o3_u
-N D 15861,4487 ral_in_s4
-# Outputs: the stub of the S-shaped poly south of the cell (s0's is ra0_drv_in).
-N P 14774,4515 ral_out_s1
-N P 15208,4515 ral_out_s2
-N P 15771,4515 ral_out_s3
-N P 16205,4515 ral_out_s4
+# --- inputs of the copies s1-s4: in every copy the input poly comes up from the south at
+# x 13995 + dx to the same round buried-contact structure as s0's (mosaic of the five
+# corners, cache/scratch/ral/inq.png); s0's comes from the west instead. Pads from
+# tools/follow.py ends and 2.6x views (pm.png, pa.png).
+# s1: rab's poly from the pad (14430,4590) ends at y 4500; on up into the buried contact.
+P 14421,4485:14439,4505
+?B 14422,4480:14450,4510
+# s2: rab's metal y 4636 ends on a pad (14863,4635); poly north.
+M 14852,4628:14876,4642
+P 14846,4618:14880,4652
+C 14863,4635
+P 14863,4485 y4640 w=17
+?B 14856,4480:14884,4510
+# s3: rab's pad (15425,4675); poly north.
+P 15425,4485 y4680 w=18
+?B 15419,4480:15447,4510
+# s4: rab's metal y 4722 goes on east to x 15862, north to a pad (15860,4632); poly north.
+M 15250,4722 x15862 y4627 w=12
+P 15843,4615:15877,4649
+C 15860,4632
+P 15860,4485 y4635 w=17
+?B 15853,4480:15881,4510
+
+# --- outputs of the copies s1-s4 to the RA1-RA4 driver lines that r9c drew (four
+# output columns, cache/scratch/ral/oc.png; ob.png for the last hops):
+# s1: poly down to a pad (14774,4592) on RA1's line y 4592 (r9c: "end not looked at").
+P 14774,4515 y4597 w=18
+P 14757,4575:14791,4609
+C 14774,4592
+M 14762,4585:14790,4599
+# s2: poly down to a pad (15208,4805), where RA2's unit line starts (r9c: (15210,4807)).
+P 15208,4515 y4810 w=18
+P 15191,4788:15225,4822
+C 15208,4805
+M 15196,4799:15222,4814
+# s3: poly down to a pad (15771,4593); metal east along y 4590 to x 16297, south to a pad
+# (16297,4930); poly south to a pad (16297,5108), where RA3's unit line starts (r9c:
+# "west end (16290,5109) not looked at"). Contact candidate (16121,4592): none (4x,
+# four shots, cc4.png).
+P 15771,4515 y4598 w=18
+P 15754,4576:15788,4610
+C 15771,4593
+M 15771,4590 x16297 y4935 w=12
+P 16280,4913:16314,4947
+C 16297,4930
+P 16297,4930 y5113 w=18
+P 16280,5091:16314,5125
+C 16297,5108
+M 16284,5104:16310,5118
+# s4: poly down to a pad (16205,4640); metal south to a pad (16207,4930); poly south to a
+# pad (16205,5153), where RA4's unit line starts (r9c: (16202,5153)).
+P 16205,4515 y4645 w=18
+P 16188,4623:16222,4657
+C 16205,4640
+M 16207,4635 y4935 w=12
+P 16190,4913:16224,4947
+C 16207,4930
+P 16205,4930 y5158 w=18
+P 16188,5136:16222,5170
+C 16205,5153
+M 16195,5148:16215,5162

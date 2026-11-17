@@ -248,13 +248,10 @@ None of these rows has a register number yet, so all names are by place. Columns
 | `cdp1_b5_a` | the register-side input of R9's comparator in slice 5 (bit 0): not the register bit but the output of the island `tc1` |
 | `ra#_cmp` | the row-address-side input of R9's comparator for bit # (# = 0-4): output of a unit near the right edge whose pull-down is gated by `ra#_drv_in`; with the unit's load, NOT `ra#_drv_in`, the level of pin RA# (AMB-012; `notes/blocks/r9c.md`). The comparator cell's own name for the same net, `cdp1_b#_b` with # = 5 minus the bit, is kept as an alias |
 | `ra#_drv_in_u` | (# = 2, 3, 4) the input of that unit, believed to be `ra#_drv_in`; the line is not drawn back to the pad cell |
-| `rax_o#_u` | (# = 1, 3) the input end of `ral` cell s#'s pass transistor, believed to be `rax_o`# (its poly comes north from a pad right under it, `notes/blocks/rab.md`); the buried contact is not drawn |
 | `ral_frc` | metal line y 4350 through the five `ral` cells (x 13990-16330); in each cell it gates a pull-down to VSS (`ral_tf_s#`). Source not followed. Name from "force": a guess at its role |
 | `ral_stb` | the sixth line of the row address bundle (`notes/blocks/rab.md`), metal y 4548 under the `ral` band; in each cell it gates the input pass transistor. Source not followed |
-| `ral_a_s#` | `ral` cell s# (s0-s4 west to east; s0 is RA bit 0's cell), node a: the input pass transistor's far side, diffusion strip y 4479-4494, joined to the cell's output by a hold device (gate VSS). Its use as a gate input is not drawn |
+| `ral_a_s#` | `ral` cell s# (s0-s4 west to east; s0 is RA bit 0's cell), node a: the input pass transistor's far side, diffusion strip y 4479-4494, joined by a hold device (gate VSS) to the cell's output, which is the RA# pad driver's input line (`ra#_drv_in`; `ra#_drv_in_u` for 2-4, as r9c names them). Its use as a gate input is not drawn |
 | `ral_tf_s#` | `ral` cell s#: drain of the pull-down gated by `ral_frc`; not drawn further |
-| `ral_in_s#` | (# = 2, 4) input end of `ral` cell s#'s pass transistor; the input poly is not drawn |
-| `ral_out_s#` | (# = 1-4) the output poly of `ral` cell s#, fed back to node a through the hold device (s0's is `ra0_drv_in`); for s1 believed to reach RA1's driver line at (14774,4592), not drawn |
 | `cdp1_b#_n2`, `cdp1_b#_ne` | NOR(a, b) and a XOR b |
 | `cdp1_b_eq` | NOR of the five `_ne`: high when R9 equals the 5-bit value on the `_b` lines (in slice 5 the register bit is replaced by `cdp1_b5_a`, made by `tc1`) |
 | `cdp1_l#`, `cdp1_lw#` | horizontal lines of the data bus channel, named by their y; and two write-line links |

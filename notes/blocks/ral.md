@@ -1,13 +1,14 @@
 # ral: the stage in front of the RA pad drivers (x 13990-16330, y 4250-4560)
 
-## Status (2026-11-17 04:12, contributor session)
+## Status (2026-11-17 04:46, contributor session)
 
 **Partly traced** (`trace/ral.txt`, cell `ral_cell`, five copies s0-s4 west to east; s0 is
 RA bit 0's cell, at x 13990-14460). Drawn: the two supply rails per cell, the line
 `ral_frc` (y 4350) with its tap and the pull-down it gates, the strobe line `ral_stb`
 (y 4548) with its pad and the input pass transistor, the input strip, the hold device
 (gate on VSS) from node a to the output, the buried contact onto the output poly, s0's
-input join to `rax_o0`, and the output stub to `ra0_drv_in`. **Not drawn**: the two
+input join to `rax_o0`, and the output stub to `ra0_drv_in`; and **every copy's input and
+output joined**: `rax_o0`-`rax_o4` in, the RA0-RA4 pad drivers' input lines out. **Not drawn**: the two
 inverters and their loads (the forward path from node a to the output), and the upper
 part of the output poly. 15 transistors (three per cell).
 
@@ -45,9 +46,12 @@ shot): drawn `?B`.
 | `ral_frc` | metal | y 4343-4359, x 13990-16330 | in | source not followed |
 | `ral_stb` | metal | y 4540-4556, x 13990-15910 (ends on s4's pad) | in | the sixth line of rab's bundle; source not followed |
 | `rax_o0` | poly | (14000,4500), from rab | in | s0's input, onto the strip by a buried contact (`?B`: round ring in both stripped shots) |
-| `rax_o1_u`, `ral_in_s2`, `rax_o3_u`, `ral_in_s4` | diffusion | strip west end (14430,4487) etc. | in | input polys not drawn (rab: bit 1's and bit 3's come north right under these ends) |
+| `rax_o1` ... `rax_o4` | poly | up x 13995 + dx from pads at (14430,4590), (14863,4635), (15425,4675), (15860,4632) to the buried contact on each strip | in | s1-s4's inputs; s2's and s4's pads at the ends of rab's metals (s4's goes on east along y 4722 to x 15862 and north) |
 | `ra0_drv_in` | poly | x 14331-14349 at y 4480-4525, joins r9c's poly from the pad (14340,4764) | out | s0's output |
-| `ral_out_s1` ... `ral_out_s4` | poly | the same stub in each copy | out | not drawn to the drivers |
+| `ra1_drv_in` | poly | s1's output poly down to a pad (14774,4592) on RA1's line y 4592 | out | |
+| `ra2_drv_in_u` | poly | s2's output poly down to a pad (15208,4805), where r9c's RA2 unit line starts | out | |
+| `ra3_drv_in_u` | poly, metal, poly | s3's output poly to a pad (15771,4593), metal east along y 4590 and south along x 16297, poly to a pad (16297,5108), where r9c's RA3 unit line starts | out | |
+| `ra4_drv_in_u` | poly, metal, poly | s4's output poly to a pad (16205,4640), metal south along x 16207, poly to a pad (16205,5153), where r9c's RA4 unit line starts | out | |
 | `ral_a_s#`, `ral_tf_s#` | diffusion | inside the cell | internal | node a (between the pass and hold devices) and Tf's drain; both continue into the untraced part |
 
 ### How sure
