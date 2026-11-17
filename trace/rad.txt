@@ -32,3 +32,48 @@ M 15255,3866 y4183 w=12
 P 15235,4166:15269,4200
 C 15252,4183
 N M 17000,3878 ra2_drv_in
+
+# --- RA3: the pad driver's input poly (ra3_drv_in, pads_out instance ra3, along y 3220)
+# ends on a pad (17768,3222); metal south along x 17771 to y 3968, west along y 3962 to a
+# pad (16290,3960); poly south along x 16290 under the five r9c metals y 4000-4180 and
+# the band's top rail to a pad (16295,4478); metal south along x 16297 to the band's
+# output level (y 4600). That metal is the one ral cell s3's output metal (y 4590) joins
+# from the west, and which goes on south to RA3's unit line (r9c's ra3_drv_in_u at
+# (16290,5109)): drawn here only to y 4600. Metal from tools/follow.py (2,200 px);
+# pads at 1.6-2.2x in metal and the clean shot (cache/scratch/rad/ra3a.png, ra3b.png,
+# ra3c.png).
+P 17751,3205:17785,3239
+C 17768,3222
+M 17771,3222 y3962 x16290 w=12
+P 16273,3943:16307,3977
+C 16290,3960
+P 16290,3960 y4478 w=20
+P 16278,4461:16312,4495
+C 16295,4478
+M 16297,4478 y4600 w=12
+N M 17000,3962 ra3_drv_in
+
+# --- RA4: the pad driver's input poly (ra4_drv_in, pads_out instance ra4, along y 4975)
+# ends on a pad (17768,4978); metal south along x 17771 to y 5942, west along y 5938 to a
+# pad (17530,5937); poly west under the wide rail x 17440-17490 to a pad (17398,5937);
+# metal west to x 17338, north to the contact (17335,5800) on r9c's bit-4 unit input
+# poly (the pad r9c's notes list as "pad (17330,5800) on bit 4's input poly, with a metal
+# going south"): ring in both metal shots, pale centre on a poly pad in both stripped
+# shots (4x, cache/scratch/rad/ra4c.png). Metal from tools/follow.py; the hop at 2.4x
+# (ra4b.png); the driver end at 1.6x (ra4a.png).
+P 17751,4961:17785,4995
+C 17768,4978
+M 17771,4978 y5938 x17530 w=12
+P 17513,5920:17547,5954
+C 17530,5937
+P 17398,5937 x17530 w=18
+P 17381,5920:17415,5954
+C 17398,5937
+M 17398,5937 x17338 y5800 w=12
+P 17318,5783:17352,5817
+C 17335,5800
+N M 17771,5500 ra4_drv_in
+# r9c labels the unit input's line ra4_drv_in_u; the path from that label to this contact
+# runs through r9c's uncertain poly (?P 17135,5150 x17142 y5805 x17500, "its run south not
+# seen end to end"). So the two names are aliased here, not merged with rename.py.
+@alias ra4_drv_in ra4_drv_in_u
