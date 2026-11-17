@@ -164,29 +164,32 @@ R0-R2's bits 0-6 are on `rbus_b0`..`b6` (lower right array, `rdp2`/`rdp3`); the 
 array's are `ubus_b0`..`b6`. `rbus_bk` sits at the x of `ubus_b(k+2)`: each line shifts
 two slices (781 px) east across `rdp2`'s untraced routing zone. Ends (tools/follow.py):
 
-| Bit | `ubus` x, end going south | `rbus` x, top going north | State |
+| Bit | `ubus` x, end going south | `rbus` x, top going north | Route (drawn) |
 |---|---|---|---|
-| 0 | 13455, 9168 | 14235, 9444 | partly read (below) |
-| 1 | 13845, 9104 | 14625, 9400 | open |
-| 2 | 14235, 9104 | 15016, 9356 | open |
-| 3 | 14625, 9320 | 15406, 9764 (follower stopped early) | open |
-| 4 | 15016, 9276 | 15796, 9764 (stopped early) | open |
-| 5 | 15406, 9234 | 16187, 9268 | **drawn**: contact (15407,9232), poly east, step down at x 15838 (3.5x), east along y 9266 to the contact (16187,9268) |
-| 6 | 15796, 9104 | 16577, 9096 | **drawn**: contact (15795,9100), poly along y 9100 (continuous in the clean shot) to the contact (16577,9096) |
+| 0 | 13455, 9168 | 14235, 9444 | **open** (below) |
+| 1 | 13845, 9104 | 14625, 9400 | contact (13842,9102), poly down to (13842,9222), thin metal down through the rows to (13842,9398), poly east along y 9400 to the top contact (four shots at 2.2x, `b1m.png`; `b1r.png`) |
+| 2 | 14235, 9104 | 15016, 9356 | contact (14240,9100), poly east along y 9100 to (14862,9097), thin metal down x 14863 to (14862,9355), poly east to the top contact (`b2r.png`, `b2m.png`) |
+| 3 | 14625, 9320 | 15406 | contact (14625,9315), poly east along y 9310 to (15402,9310), the top of the metal x 15406 down to `rbus_b3` (`b3r.png`, `b3a.png`) |
+| 4 | 15016, 9276 | 15796 | contact (15018,9272), poly east along y 9270 to (15790,9272) (4x, `b4c.png`), metal x 15796 down to `rbus_b4` |
+| 5 | 15406, 9234 | 16187, 9268 | contact (15407,9232), poly east, step down at x 15838 (3.5x, `b5s.png`), east along y 9266 to the top contact |
+| 6 | 15796, 9104 | 16577, 9096 | contact (15795,9100), poly along y 9100 to the top contact (`b6r.png`) |
 
-Check: `tools/bust_fanout.py` now shows bits 5 and 6 writing R0, R1, R2, R4, R6, R7 and
-R8. The `rbus` lines are already named by bit (`rdp3`), so a wrong crossing would show as
-a name clash in the extraction; none did.
+Each crossing's metal stretches were checked with the follower's metal test in both metal
+shots (the only gaps are 5-17 px poly crossings and contact rings). The `rbus` lines are
+already named by bit (`rdp3`), so a wrong crossing would show as a name clash in the
+extraction; none did. **`tools/bust_fanout.py` now gives, for bits 1-7, exactly the
+datasheet's registers**: bit 1 and 4 R0-R2, R4-R9; bit 2 and 3 R0-R2, R4-R7, R9 (no R8);
+bit 5 and 6 R0-R2, R4, R6-R8; bit 7 R0-R2, R8.
 
-Bit 0, read so far (clean shot at 2.4x, `b0z.png`): `ubus_b0` ends on a contact
-(13452,9165); a poly drops along x 13452 to a contact (13452,9318); the metal from there
-runs south (follower) to a contact (13455,9580); a poly row leaves it east along
-y 9568-9588. A colour scan of that row (salmon poly against pink field) finds it to
-x 13815 and then not again until x 14180-14220, under the wide rails at x 13950-14200
-where the test does not work. The `rbus_b0` side: its top contact (14215,9440) has a
-poly west along y 9440 that turns south near x 13890 (1.45x, `b0r.png`). Not joined.
+**Bit 0** (open): `ubus_b0` ends on a contact (13452,9165); a poly drops along x 13452 to a
+contact (13452,9318); the metal from there runs south to a contact (13455,9580); a poly
+row leaves it east along y 9568-9588 (clean shot at 2.4x, `b0z.png`). `rbus_b0`'s top
+contact (14215,9440) has a poly west along y 9440 that turns south near x 13890
+(`b0r.png`, `b0e.png`). Between them, at x 13800-13900 y 9540-9620, a pad near
+(13820,9608) with a metal west (`b0g.png`, 2.3x) was seen but its connections are not
+settled. The colour test fails under the wide rails at x 13950-14200.
 
-Method for bits 0-4: the clean shot reads well here (poly cream/salmon on pink field,
-contacts with green centres) except under the wide rails. Work each line at 2.4x from
-both ends, and settle the stretch under the rails in the metal1 shot, or by the stripped
-shot's fringe-free composite of the five slices.
+Method used for bits 1-6, for bit 0: the clean shot reads well here (poly cream/salmon on
+pink field, contacts with green centres) except under the wide rails; read each line at
+1.4-2.4x from both ends, check its metal stretches with the metal test in both metal
+shots, and confirm with `tools/bust_fanout.py` (bit 0 should then write R0-R2, R4-R9).
