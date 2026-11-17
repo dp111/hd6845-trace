@@ -1,0 +1,58 @@
+# wrj: the four write-strobe tracks of the left-edge bundle between rdp3 (which draws the
+# bundle down to y 13480) and bd1 (which draws its tracks up to y 14690).
+# x 13500-13850, y 13470-14700. Metal only: nothing else belongs to these nets here.
+#
+# Evidence (images under cache/scratch/wrj/, all coordinates metal-shot pixels):
+#  - survey at 2x of x 13490-13910, y 13460-14720 in both metal shots:
+#    sv_metal_13460.png, sv_metal_14080.png, sv_metal1_13460.png, sv_metal1_14080.png.
+#    Tracks L4..L9 run straight through; the only metal that leaves its track is at
+#    y 13990-14060 (below).
+#  - numeric: metal test (R>170, G>125, 7 px wide column) down the centre line of every
+#    gap between tracks (x 13500, 13543, 13586, 13630, 13673, 13716, 13760, 13804, 13847),
+#    y 13400-14700. Chip 1 (metal1): no metal at all in any gap except x 13804 at
+#    y 13998-14008 (L11's arm) and x 13847 at y 14041-14054 (the arm of the x 13868 line).
+#    Chip 2: the same two, plus isolated speckle (5 %, runs of 2-20 px), looked at on
+#    blem1.png: bare field. So no track of L3..L11 changes track anywhere else.
+#  - numeric, along each track: every non-metal run is under 25 px in at least one chip
+#    except at the poly crossings, each looked at 4.6-5x in metal, metal1, acid1b:
+#      y 13878-13910  poly going west from the contact (13782,13893) where L10 ends
+#                     (rdp3's hc5): xA.png. Metal of L4..L9 passes over it, no pad,
+#                     no ring, poly plain in acid1b.
+#      y 14010-14038  a poly band from the east, which turns south-west at x 13600 and
+#                     runs diagonally under L5 and L4 (y 14080-14140 at L4): xB.png, xC.png,
+#                     jog11_m.png, jog11_a.png. Metal passes over it on L4, L6..L9 and
+#                     L10's new piece; no pad, no ring. (The dark rings on this band in
+#                     acid1b sit in the gaps between tracks: guide trap 2.)
+#    Single-chip dark spots on the tracks (L7 at y 13585 on chip 1 and y 14385 on chip 2,
+#    L10 at y 14327, L11 at y 13484 on chip 1) are dirt: the other chip's metal is whole
+#    (blem1.png).
+@block wrj
+@w M=18
+
+# --- wr_r4: L4 (x 13521), straight. rdp3's end (13521,13480) to bd1's top (13521,14690).
+# Crosses the hc5 poly at y 13880-13908 and the diagonal poly at y 14088-14136 (xA, xC).
+M 13521,13470 y14700
+N M 13521,14100 wr_r4
+
+# --- wr_r2: L6 (x 13608), straight. Crosses the hc5 poly and the corner of the poly band
+# at y 14010-14050 (xB.png: metal present between the poly's edges in both chips).
+M 13608,13470 y14700
+N M 13608,14100 wr_r2
+
+# --- wr_r0: L7 (x 13651), straight. Same two crossings (xA, xB).
+M 13651,13470 y14700
+N M 13651,14100 wr_r0
+
+# --- wr_r1: L11 (x 13825) down to y 14001, arm west along y 13993-14010 to x 13782, then
+# south on L10's position to bd1's top (13782,14690). jog11_m.png (4x, both chips),
+# jog11_a.png (acid1b and acid: the metal's ghost outline shows the same corner).
+#  - L10 above the arm is another net: it ends on the contact (13782,13893); no metal on
+#    x 13782 from y 13915 to 13992 in either chip.
+#  - x 13825 below the arm is another net: no metal from y 14008 to 14041 in either chip
+#    (33 px, the poly band shows orange there); the line from the contact (13868,13630)
+#    turns west along y 14041-14058 and takes over x 13825 going south (bd1's hc0).
+M 13825,13470 y14001 x13782 y14700
+N M 13782,14100 wr_r1
+
+# The joins: rdp3's labels on these tracks at y 13400 and bd1's at y 14700 now carry the
+# same names (renamed after this stretch was drawn; rdp2's row RE strobe is wr_r4 too).

@@ -10,7 +10,7 @@
 @alias ar4 ar4_q
 # its load strobe: areg's metal at x 16299 to rdp3's row-wide poly at (16285,13022)
 
-# (An alias "wr_r0 = wr_r2_u" stood here on the strength of rdp3's second run. It was
+# (An alias joining wr_r0 to the R2 strobe's rdp3 piece stood here on the strength of rdp3's second run. It was
 # wrong: a track-scanning tool had bridged a jog in the bundle. Two later runs, working
 # independently, followed the strobes again: R0 is rdp2's row RC, and rdp3's row RB is R2.)
 

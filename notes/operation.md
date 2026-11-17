@@ -88,7 +88,7 @@ is not settled.
 | The common strobe is a latch of "write, chip selected, RS high" that is open while E is high. | Marked (four of its nets are joined only through uncertain items) |
 | Whether anything ends the strobe when E falls, or re-times it to CLK. | **Open**. As drawn nothing does; that reading rests on the marked nets above |
 | The register rows of R3 (one nibble), R5, R6, R7, R8, R9, R10, R11 are identified by their strobe lines, drawn end to end. | Firm for the joins; the register *numbers* rest on the address decoder's numbering of its lines |
-| The rows of R0, R1, R2, R4. | Marked: their strobe joins are believed, not drawn |
+| The rows of R0, R1, R2, R4 are identified by their strobe lines, drawn end to end (`notes/blocks/wrj.md`). | Firm for the joins; the register *numbers* rest on the address decoder's numbering of its lines |
 | R12-R15 (start address, cursor), R16/R17 (light pen), the status register. | Open beyond their strobe gates |
 | Which nibble of R3 the 4-bit row is: the low one (bits 0-3, horizontal sync width). Its four data lines are the data bus lines of bits 0-3 (`notes/blocks/r3d.md`). | Firm for the joins; the bit numbers of the data lines rest on the register-width match (`notes/blocks/bust.md`) |
 

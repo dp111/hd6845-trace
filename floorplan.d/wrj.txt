@@ -1,0 +1,6 @@
+13510,13480:13532,14700  route  wr_r4 track (L4) | R4 write strobe, straight between rdp3's bundle and bd1's track k10
+13597,13480:13619,14700  route  wr_r2 track (L6) | R2 write strobe, straight between rdp3's bundle and bd1's track k12
+13640,13480:13662,14700  route  wr_r0 track (L7) | R0 write strobe, straight between rdp3's bundle and bd1's track k13
+13814,13480:13836,14010  route  wr_r1 track (L11) | R1 write strobe from rdp3, down to its jog west at y 14001
+13771,13992:13836,14010  route  wr_r1 jog | arm from L11 west to L10's position, just above a poly band
+13771,14010:13793,14700  route  wr_r1 track (L10 position) | R1 write strobe on to bd1's track k16

@@ -1,0 +1,12 @@
+13857,13470:13879,14060  route  hc0 line (poly, pad, x 13868) | hc0 from rdp3's poly to the contact (13868,13632), metal south to its jog
+13814,14040:13879,14060  route  hc0 jog | arm west onto L11's position, just below hc4's poly band
+13814,14060:13836,14700  route  hc0 track (L11 position) | hc0 on to bd1's track k17
+13554,13480:13576,14700  route  hc1 track (L5) | hc1, straight between rdp3's bundle and bd1's track k11
+13040,15590:13630,15990  route  hc1 poly | from k11's pad (13608,15608) west, diagonally south-west under nine tracks, west into the counter row r17
+13467,13480:13489,14700  route  hc2 track (L3) | hc2, straight between rdp3's bundle and bd1's track k9
+13683,13480:13705,14700  route  hc3 track (L8) | hc3, straight between rdp3's bundle and bd1's track k14
+14097,13480:14119,14040  route  hc4 line (x 14108) | hc4 from rdp3 down to its contact (14105,14022)
+13612,14012:14124,14038  route  hc4 poly band | west under the vcc and vss rails and the bundle
+13418,14012:13612,14222  route  hc4 diagonal | poly south-west under L5..L2 to the wiring channel's end (13425,14212)
+13771,13480:13793,13910  route  hc5 track (L10) | hc5 from rdp3 down to its contact (13782,13893)
+13415,13882:13771,13904  route  hc5 poly | west under L9..L2 to the wiring channel's end at x 13425

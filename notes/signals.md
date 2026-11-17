@@ -21,7 +21,7 @@ in backticks in the first column.
    number (bit 0 = least significant), `_s#` slice number where the bit order is not
    established, `_dly` a delayed copy, `_buf` a buffered copy.
 4. **`_u` marks an open join**: a piece of wire believed to be the same net as the name
-   without the suffix, whose connection has not been drawn (`hc1_u`, `wr_r0_u`). Every
+   without the suffix, whose connection has not been drawn (`ck_a_u`). Every
    `_u` name is a task; the build lists them.
 5. Rows and slices are places and keep their numbers in the notes ("row r18", "slice
    s3"); the tables below say which bit each one is.
@@ -236,7 +236,7 @@ Eleven pass transistors between the scan line counter and five output nodes.
 
 | Name | What it is |
 |---|---|
-| `bd1_k#` | tracks of the channel not yet identified (`uc_eq_r6`, `bd1_k11`) |
+| `bd1_k#` | tracks of the channel not yet identified (`uc_eq_r6`, `hc1`) |
 | `bd1_a`, `bd1_an` | input and output of inverter A |
 | `bd1_n#`, `bd1_q`, `bd1_k` | nodes of the latch gated by `inh_lat` (upper half node, lower half node, output, and the node pulled low by `inh_src`'s line) |
 
@@ -859,3 +859,15 @@ datapath s1...s7, s0 became b0...b6, b7.
 | wl_i2_in | rc0 | |
 | wl_i2_out | rc0_n | |
 | h_eq_r2_u | h_eq_r2 | |
+| wr_r0_u | wr_r0 | |
+| wr_r1_u | wr_r1 | |
+| wr_r2_u | wr_r2 | |
+| wr_r4_u | wr_r4 | |
+| rdp3_n1s4 | wr_r4 | |
+| hc0_u | hc0 | |
+| hc1_u | hc1 | |
+| hc2_u | hc2 | |
+| hc3_u | hc3 | |
+| hc4_u | hc4 | |
+| hc5_u | hc5 | |
+| bd1_k11 | hc1 | |
