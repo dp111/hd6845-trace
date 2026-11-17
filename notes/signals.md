@@ -77,9 +77,10 @@ Central datapath (registers identified by their write strobes, `notes/blocks/wrs
 | `*_pu`, `*_pd` | inside an output pad cell: gate of the pull-up fingers (first inverter) and of the pull-down fingers (second inverter) |
 | `d#_in` | data pin D# behind its protection, at its input buffer |
 | `d#_a`, `d#_b`, `d#_c`, `d#_d` | the four inverters of data input buffer #: `_a`, `_c` inverted, `_b`, `_d` true |
-| `d#_d_n` | NOT `d#_d` (inverter in the pin unit's latch cell, `notes/blocks/dbus.md`) |
-| `d#_lat`, `d#_lat_n` | the data input latch of pin D#: `d#_lat` follows `d#_d` while `dlat_en` is high and holds while it is low; `d#_lat_n` is its inverse and drives the pull-down of data line # (the line is NOT `d#_lat_n`). D0-D3 traced; the tie of `d#_lat`'s load gate is marked `?` |
-| `dlat_en` | enable of the data input latches (high = transparent): one metal down the wiring field beside the data pin units (x 17252), a contact in each of the units D0-D3. Comes from the south-west (drawn to (16862,13650); `follow.py` takes it to (16772,15800) beside untraced logic). What drives it is not traced |
+| `d#_d_n` | NOT `d#_d` (inverter in the pin unit's latch cell, `notes/blocks/dbus.md`; for D4-D7 in the latch cells of `notes/blocks/dbh.md`, where D6's and D7's are NOT `dbh_d6_in`, NOT `dbh_d7_in`) |
+| `d#_lat`, `d#_lat_n` | the data input latch of pin D#: `d#_lat` follows `d#_d` while `dlat_en` is high and holds while it is low; `d#_lat_n` is its inverse and drives the pull-down of data line # (the line is NOT `d#_lat_n`). D0-D3 in the pin units (`dbus`), D4-D7 in the column x 16480-16800 (`dbh`); in all eight the tie of `d#_lat`'s load gate is marked `?`. `d7_lat_n` and `d6_lat_n` are `areg`'s `areg_w6` and `areg_w7` (aliases) |
+| `dlat_en` | enable of the eight data input latches (high = transparent): one metal down the wiring field beside the data pin units (x 17252), a contact in each of the units D0-D3, then west and south (x 16858, 16816) past the latch cells of D4-D7 with two contacts in each, to its end at (16772,15792). What drives it is not traced |
+| `dbh_d6_in`, `dbh_d7_in` | data inputs of the latch cells of D6 and D7 (in the place of `d4_d`, `d5_d`): poly rows from the outputs of two untraced gates in the lower part of the data pin column (y 15150-15260 and about y 15790). Believed the buffered pins D6 and D7; the buffers are not traced |
 | `dbus_cap#b` | plate of a capacitor beside the D0 input buffer (purpose not established) |
 
 ## Clocks
@@ -221,7 +222,7 @@ Eleven pass transistors between the scan line counter and five output nodes.
 | `ar#`, `ar#_n` | address register bit # and its inverse (rows of the decode array) |
 | `ar#_a`, `ar#_n2`, `ar#_q`, `ar#_trk` | nodes of address register bit #: storage node, its inverse, output, and the track that takes it to the decode |
 | `ar_load`, `ar_load_n` | load strobe of the address register and its inverse |
-| `areg_w#` | lines 6 and 7 of the bundle beside the address row inverters; not identified |
+| `areg_w#` | lines 6 and 7 of the bundle beside the address row inverters. Identified (`notes/blocks/dbh.md`): `areg_w6` = `d7_lat_n`, `areg_w7` = `d6_lat_n`, the outputs of the D7 and D6 input latches on their way north to the bus drivers of data lines 7 and 6 (aliases; not yet renamed) |
 
 ## Bus control
 

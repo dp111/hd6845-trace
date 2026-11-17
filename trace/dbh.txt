@@ -1,0 +1,219 @@
+# dbh: data bus bits 4-7 south of the right datapath: the four bus drivers at the top of
+# the column x 16480-16800 (y 13100-13860) and the wiring between them, the latch cells
+# below them (y 13870-15790, cell dbh_lat) and the input buffer chains of dbus.
+# See notes/blocks/dbh.md.
+@block dbh
+
+# ---- rails of the driver column (y 13080 down through the latch cells to y 15800). Which is which comes from the loads: every load's far end contacts
+# the left rail. Neither was followed to a pad.
+M 16488,13080:16535,13880          # VCC rail
+N M 16510,13100 vcc
+M 16657,13080:16702,13880          # VSS rail
+N M 16680,13100 vss
+
+# ---- bus driver: the data line's node with a depletion load (gate tied to the node by a
+# buried contact) and one wide pull-down under the VSS rail. Same circuit as dbus_drv.
+# Master = the cell of data bit 6 (y 13270-13465); four copies at a 195 px pitch
+# (findcell on the clean shot 0.86-0.91). Read on the 4-copy median at 4x in three shots
+# (cache/scratch/dbh/sr_acid1b.png, sr_acid.png, sr_metal.png).
+@cell dbh_drv tag=6
+D 16480,13325:16537,13397          # VCC land
+C 16507,13361 s=30x44              # VCC
+D 16530,13325:16603,13398          # load channel and the strip beyond the load gate
+P 16543,13300:16585,13405          # load gate
+P 16543,13300:16645,13322          # its arm east, above the strip
+P 16618,13300:16645,13342          # arm end down onto the node
+B 16616,13322:16647,13344          # load gate tied to the node
+D 16583,13325:16660,13350          # node, east under the VSS rail
+D 16648,13328:16774,13408          # node band / channel / VSS side
+D 16745,13313:16774,13350          # node's east end
+B 16747,13313:16776,13346          # data line poly onto the node
+P 16750,13316:16795,13340          # data line, east (wiring per copy below)
+N P 16790,13328 dbh_dl{}
+D 16650,13388:16742,13437          # VSS land
+C 16693,13410 s=30x30              # VSS
+P 16628,13358:16797,13388          # pull-down gate band (W about 125, L 30)
+P 16780,13358:16797,13468          # ... down to the gate row
+N P 16788,13420 d{}_lat_n
+@end
+@inst dbh_drv 0,-195 tag=7
+@inst dbh_drv 0,195 tag=5
+@inst dbh_drv 0,390 tag=4
+
+# ---- data lines 7, 6, 5, 4 into the drivers (rdp3 draws them to y 12900)
+# bit 7: poly down x 16783-16800 from rdp3's end to y 13128, west onto the node box
+# (2.4x in two stripped shots, b7.png)
+P 16791,12885 y13133 x16755 w=16
+# bit 6: metal x 16908 ends on a contact (16903,13326); poly west along y 13328 under the
+# metals of bits 5 and 4 (no contact) (2.4x, z1.png)
+M 16908,12895 y13338 w=18
+C 16904,13326
+P 16888,13310:16920,13342
+P 16790,13328 x16904 w=16
+# bit 5: metal x 16862 ends on a contact (16856,13521); poly west under bit 4's metal
+M 16862,12895 y13533 w=18
+C 16857,13521
+P 16841,13505:16873,13537
+P 16790,13523 x16857 w=16
+# bit 4: metal x 16818 ends on a contact (16812,13716)
+M 16818,12895 y13728 w=18
+C 16813,13716
+P 16797,13700:16829,13732
+P 16790,13718 x16813 w=16
+@alias cdp1_a2_bl dbh_dl7
+@alias cdp1_a3_bl dbh_dl6
+@alias cdp1_a0_bl dbh_dl5
+@alias cdp1_c1_bl dbh_dl4
+
+# ---- gate rows of the drivers: each is a poly row under both rails that leaves the
+# column to the west and goes south to one of the four latch cells (1.45-1.6x in three
+# shots: d1m.png, g1.png, g2.png; 3.3x g3.png)
+# bit 7: row y 13265 = areg_w6's poly
+P 16475,13265 x16790 w=20
+# bit 6: row y 13458 = areg_w7's poly
+P 16475,13458 x16790 w=20
+# bit 5: row y 13653 west to x 16410, south under the rail areg_rail_r to y 14432, east
+# into the latch cell at y 14360-14840
+P 16790,13655 x16410 y14432 x16560 w=16
+# bit 4: row y 13850 west to x 16465, south in the open to y 14258, east into the latch
+# cell at y 13870-14340
+P 16790,13852 x16465 y14258 x16560 w=18
+# bit 6, areg_w7 on south: diagonal from (16366,14800) to (16458,14905), east into the
+# latch cell at y 14840-15315
+P 16364,14695 16364,14798 16460,14907 16560,14907 w=16
+# bit 7, areg_w6 on south: the metal ends on a contact (16337,14865); poly down x 16342 to
+# y 15262, diagonal to (16468,15384), east into the latch cell at y 15315-15790
+M 16341,14695 y14875 w=15
+C 16338,14865
+P 16324,14852:16354,14880
+P 16342,14866 16342,15262 16466,15386 16560,15386 w=14
+@alias d7_lat_n areg_w6
+@alias d6_lat_n areg_w7
+
+# ---- d4_d and d5_d: poly rows west from the pads at the top of dbus's metals, under the
+# five metals of the wiring field x 16925-17115 and the dlat_en metal x 16815 (no pad on
+# the way; 1.2x w1.png, w2.png), into the latch cells
+P 17206,13997 x16840 w=14
+P 17161,14692 x16840 w=14
+
+# ---- data input latch of D4-D7: four cells below the drivers. The circuit and the
+# arrangement are those of dbus_lat turned by 180 degrees (findcell 0.63-0.67 against it),
+# but the layout is not a copy: the positions differ by up to 30 px from part to part, so
+# it is a cell of its own. Master = the cell at y 14350-14810 (D5's), read on the 3-copy
+# median at 4-5x (cache/scratch/dbh/La_*.png, Lb_*.png, T1-T7.png, U1.png) with dbus_lat
+# as the guide to what to look for; every item was then checked by overlay.
+#   d_d_n = NOT d_d
+#   lat_n = NOT(d_d . dlat_en + lat)        (lower node)
+#   lat   = NOT(d_d_n . dlat_en + lat_n)    (upper node)
+# and lat_n goes up the thin metal x 16571 to the pad of the row that is the gate of the
+# bit's bus driver.
+@cell dbh_lat tag=5
+# upper column under the VSS rail: VSS / d_d_n / dlat_en / lat
+D 16672,14352:16730,14492
+D 16588,14362:16735,14385          # top VSS land, west to the strip of lat's third pull-down (placed by the independent review: 16588-16672 x 14362-14385)
+C 16702,14363 s=24x24              # VSS: half of one long contact (y 14320-14380) shared with the mirrored cell above
+D 16656,14455:16730,14492          # lat, a little wider than the column
+D 16725,14460:16790,14490          # lat east, under the thin metal, to a closed poly pad
+P 16768,14458:16795,14497
+B 16766,14458:16792,14492
+N D 16700,14475 d{}_lat
+# d_d_n band and its pad under M_c
+P 16658,14386:16775,14410
+P 16742,14376:16778,14410
+C 16761,14389 s=24x24
+N P 16700,14398 d{}_d_n
+# dlat_en band, lower in dbus_lat, upper here
+P 16658,14428:16830,14450
+P 16798,14422:16832,14454
+C 16815,14437 s=24x24
+# lat's third pull-down: a diffusion strip beside the rail from the top VSS land down to
+# lat, under the end of the lat_n poly (the stub of the gate row's pad)
+D 16628,14352:16646,14465
+D 16628,14455:16660,14465
+P 16553,14388:16651,14412          # lat_n stub: gate over the strip, rounded end at x 16648
+P 16553,14388:16578,14445
+P 16553,14435:16603,14472          # pad of the gate row, contact of M_d
+C 16572,14452 s=24x24
+N P 16565,14420 d{}_lat_n
+M 16571,14440 y14668 w=20          # M_d: lat_n from its load gate pad up to the row's pad
+C 16575,14655 s=24x24
+# lat's load: gate block continuous with the lat band; strip from the VCC land
+P 16543,14487:16608,14574
+P 16600,14550:16748,14574          # lat band: gate of lat_n's pull-down from the middle VSS land
+D 16530,14508:16612,14537          # load strip
+D 16480,14505:16538,14634          # VCC land of the two latch loads
+C 16501,14525:16523,14615          # long VCC contact
+# How lat reaches its load strip and where the load gate is tied to it: in the zone
+# x 16605-16658, y 14460-14545 between the thin metal and the rail, which no shot resolves
+# (heavy outlines 16612-16650 x 14490-14545; the same spot is unresolved in dbus_lat).
+# Drawn as dbus_lat has it: lat west along y 14465-14492 and down to the strip, the gate
+# tied by a buried contact beside the band.
+?D 16612,14467:16660,14492
+?D 16612,14467:16640,14537
+?P 16622,14517:16650,14555
+?D 16620,14513:16652,14541
+?B 16619,14511:16654,14544
+# middle VSS land / lat band / lat_n
+D 16690,14505:16730,14580
+D 16688,14505:16735,14553
+C 16702,14527 s=24x24              # VSS
+# lower column: lat_n / dlat_en / d_d / VSS
+D 16680,14576:16730,14752
+D 16655,14578:16685,14634          # lat_n, wider to the west: start of its load strip
+D 16725,14597:16790,14625          # lat_n east, under the thin metal, to a closed poly pad
+P 16768,14592:16797,14630
+B 16766,14595:16792,14627
+D 16530,14602:16672,14632          # lat_n's load strip
+P 16543,14587:16603,14672          # load gate, with the pad of M_d below the strip
+P 16598,14648:16648,14672          # pad, east part over the tie
+D 16612,14628:16645,14657          # bump of the strip down to the tie
+B 16610,14635:16647,14659
+# dlat_en band, upper in dbus_lat, lower here
+P 16660,14640:16830,14662
+P 16798,14636:16832,14668
+C 16813,14652 s=24x24
+# d_d band (from the east, per copy) and the inverter's vertical gate
+P 16655,14686:16845,14707
+P 16655,14686:16676,14760
+# inverter d_d_n: VSS land / vertical gate / output west / load to the VCC land
+D 16608,14716:16735,14752
+C 16705,14729 s=24x24              # VSS
+D 16608,14745:16632,14797          # output neck down to the tie
+B 16606,14772:16634,14799
+P 16582,14778:16772,14800          # d_d_n band under the rail to the contact of M_c
+P 16738,14776:16775,14803
+C 16756,14790 s=24x24
+P 16580,14750:16600,14800          # load gate: L up from the tie
+P 16545,14704:16602,14752          # load gate
+D 16530,14718:16612,14747          # load strip
+D 16480,14688:16538,14745          # VCC land
+C 16509,14715 s=28x40
+M 16751,14378 y14802 w=20          # M_c: d_d_n from the inverter up to its gate band
+@end
+@inst dbh_lat 0,0 my=14350 tag=4
+@inst dbh_lat 0,477 tag=6
+@inst dbh_lat 0,954 tag=7
+# rails through the latch cells
+M 16488,13880:16535,15800
+M 16657,13880:16702,15800
+
+# ---- dlat_en on south from dbus's end (16862,13650): down x 16858 to y 13802, west
+# to x 16816, down past the four latch cells (two contacts in each: the series
+# gates) to y 15792 and west to its end (16772,15792) (tools/follow.py, one piece, 2208 px;
+# overlays). What drives it at that end is not traced.
+M 16860,13645 y13802 x16816 y15803 x16772 w=14
+
+# ---- data inputs of the latch cells of D6 and D7: poly rows east to the outputs of two
+# gates in the lower part of the dbus column (not traced: the gates are single inverters
+# on the 152 px pitch at y 15150-16550, wired differently from dbus_in).
+# D6: row y 15173, a step down at x 17226-17244, east to the buried-contact box of the gate
+# at y 15150-15260 (box 17300-17335 x 15175-15205) (2.1x in two shots, e6.png; w6.png)
+P 16840,15173 17226,15173 17244,15192 17302,15192 w=14
+N P 17290,15192 dbh_d6_in
+# D7: row y 15650 to x 17188 (2.5x in three shots, r7.png), south under a metal of the
+# wiring field to y 15818 and east to the box of the gate at y 15790 (1.4x only, r7b.png:
+# the stretch y 15700-15800 under the metal is not seen as a colour of its own)
+P 16840,15650 x17195 w=14
+P 17188,15645 y15818 w=14
+P 17181,15818 x17300 w=14
+N P 17290,15818 dbh_d7_in

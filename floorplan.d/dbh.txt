@@ -1,0 +1,10 @@
+# dbh: data bus bits 4-7: drivers, D4-D7 input latches, wiring
+16470,13075:16810,13865  logic   bus drivers, data bits 7-4 | four cells, top to bottom bits 7, 6, 5, 4: depletion load and one wide pull-down on each data line, gate = the bit's latch output
+16470,13870:16850,15790  logic   data input latches D4-D7 | four transparent latches (D4's upside down), enabled by dlat_en; each drives the bus driver of its bit
+16780,12880:16920,13735  route   data bits 4-7 into the drivers | the four bus ends from the lower right datapath
+16330,13250:16480,15400  route   latch outputs to the drivers | four poly lines west of the column (two are areg's lines 6 and 7)
+16840,13985:17260,14010  route   d4_d | chain 4's output to the D4 latch
+16840,14680:17260,14705  route   d5_d | chain 5's output to the D5 latch
+16840,15160:17310,15200  route   D6 latch input | from a gate of the lower dbus column
+16840,15640:17310,15830  route   D7 latch input | from a gate of the lower dbus column
+16765,13640:16870,15800  route   dlat_en | latch enable, down past the four latch cells

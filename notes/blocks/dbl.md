@@ -61,4 +61,4 @@ line; wording for bits 2-3; the poly under bit 3's metal; row y 9355 firm) are i
 
 ## Not done
 
-- Bits 4-7's routes to units 4-7.
+- (Bits 4-7 do not come this way: they leave the lower right datapath to the south and are driven from the column x 16480-16800, `notes/blocks/dbh.md`.)

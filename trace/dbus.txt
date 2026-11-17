@@ -318,3 +318,18 @@ P 16986,13608 x17166 w=18
 P 16970,13592:17002,13624
 C 16986,13608 s=24x24
 M 16998,13615 x16862 y13650 w=14
+
+# ---- chains 4 and 5: d_d leaves the wiring field to the west, towards the latch cells
+# in the column x 16480-16800 (trace/dbh.txt). 2.6-2.8x in two shots, cache/scratch/dbh/
+# w3.png, w5.png; the join of the metal to the pad (17206,13999): metal test along y 14002
+# in both metal shots (only 3-6 px dips at the pad's edge), w4.png at 5x.
+P 17240,14290:17296,14312          # d4_d west to a contact
+C 17249,14304 s=24x24
+M 17250,14316 17250,14016 17233,14000 17200,14000 w=18   # up, bending onto the pad
+C 17206,13999 s=24x24
+P 17190,13983:17223,14015
+P 17240,15048:17296,15070          # d5_d west to a contact
+C 17250,15060 s=24x24
+M 17252,15072 y14700 x17150 w=18   # up and west
+C 17161,14693 s=24x24
+P 17145,14678:17178,14708
