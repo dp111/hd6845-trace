@@ -1,10 +1,11 @@
 # mal: the fourteen copies of the ral cell in front of the MA pad drivers
 
-## Status (2026-11-17 05:11, contributor session)
+## Status (2026-11-17 05:18, contributor session)
 
 Placed (`trace/mal.txt`, 42 transistors: three per copy, as far as `ral_cell` is
-traced). Depends on `trace/ral.txt` (`@requires ral`). Inputs, outputs and the force
-taps' wiring are not drawn.
+traced), and **every copy's output followed to its MA pad driver: copy m# drives MA#**,
+m0 at the top (y 8155) to m13 at the bottom (y 18576). Depends on `trace/ral.txt`
+(`@requires ral`). Inputs and the force taps' wiring are not drawn.
 
 ## Placement
 
@@ -38,12 +39,43 @@ Believed, not extracted: the cell's forward path is not traced.
 |---|---|---|---|---|
 | `ck_out` | metal | the trunk x 2500, contacts as above | in | strobe |
 | input end of each pass transistor | diffusion | x about 2567, below each strobe contact | in | unnamed: the MA counter's (or start address's) bit, not followed |
-| output of each hold device | poly | x about 2567, above | out | unnamed: believed the `maN_drv_in` line, not followed |
+| `ma0_drv_in` ... `ma13_drv_in` | poly, metal | each copy's output (below) | out | the MA pad drivers' inputs; `_u` for 4, 5, 6 |
 | `mal_frc_m0` ... `mal_frc_m13` | metal | pads at x 2728-2730 | in | force pull-down gates; each a pad of its own here |
+
+## Outputs: copy m# -> MA# pad driver
+
+Each copy's output poly leaves its bend west under the `ck_out` trunk to a contact; a
+metal from there runs to the pad driver's input. Followed with `tools/follow.py`
+started on each copy's own metal (starting on the shared column x 2195 makes the
+follower jump between lines: it took m4 and m5 to MA7). Contacts read at 2.6-3.5x.
+
+| Copy | Contact | Route | Driver end |
+|---|---|---|---|
+| m0 | (2195,8038) | west to x 2153, north to y 2142, east | (4606,2142), MA0 (x 4602) |
+| m1 | (2148,8640) | west to x 2110, north to y 2100, east | (3069,2096), MA1 (x 3062) |
+| m2 | (2108,9250) | north, jog west to x 2023 at y 8757, north | (2022,1659), MA2 (y 1658) |
+| m3 | (2150,9858) | north, jog to x 2061 at y 8709, north | (2065,3265), MA3 (y 3264) |
+| m4 | (2283,10510) | north along x 2283 | (2283,4914), MA4 (y 4912): poly hop not drawn (`_u`) |
+| m5 | (2240,11112) | north along x 2242 | (2240,6995), MA5 (y 6994): `_u` |
+| m6 | (2197,11923) | larr's line x 2197 north | y 8555, MA6 (y 8555): `_u`, "not checked by a view" (larr) |
+| m7 | (2155,12615) | north to y 10120, west | (2018,10120), MA7 (y 10118) |
+| m8 | (2283,13268) | west to x 2241, north | contact (2238,11870), poly west to MA8 (as larr found it) |
+| m9 | (2458,15388) | west, north, west, north, west | contact (2027,14352), MA9 |
+| m10 | (2455,16088) | west to x 2020, north | contact (2022,15918), MA10 |
+| m11 | (2455,17392) | west to x 2026, south | contact (2025,17485), MA11 |
+| m12 | (2455,18040) | west to x 2026, south | contact (2025,19214), MA12 |
+| m13 | (2540,18905) | output poly south to the pad, metal east along y 18908 | contact (3627,18902), MA13 |
+
+The end contacts of m0-m3 and m7 are drawn where the follower ended, on the drivers'
+polys, without a view each (`?C`). Extraction: every copy's hold device joins
+`ral_a_m#` to `ma#_drv_in` (`_u` for 4-6); 0 errors, 0 warnings.
+
+This settles the bit order for the left column, and with `larr`'s carry direction it
+can now be checked against the counter rows (each copy's **input**, not yet followed).
 
 ## Not done
 
-1. Each copy's input and output: which counter row feeds it and which MA pad driver it
-   feeds (that also fixes the bit order m# -> MA#).
+1. Each copy's input: which counter row (or start-address bit) feeds it.
+1a. The poly hops for MA4, MA5, MA6 (like MA8's).
 2. Where the force taps `mal_frc_m#` go.
 3. Everything `ral` has not traced inside the cell.
