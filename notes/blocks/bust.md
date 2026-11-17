@@ -106,14 +106,13 @@ middle cluster on pads (4270,2640) and (4232,2683): if `cdp1_l4588` and `cdp1_l4
 those two lines, all three of `amr`'s outer outputs feed the row counter's step logic.
 Not established.
 
-## `amr`'s partial slice c0 (open, and worth checking)
+## `amr`'s partial slice c0
 
 c0's two lines leave its top (about (11497,5590) and (11580,5590)) diagonally north-east
-under the supply metal, run north beside the staircase at x about 11720 and 11765, and at
-the top turn diagonally north-west. There, two parallel diagonals meet near
-`rab`'s bit-0 pad (11650,4500): one is `cdp1_l4544` (the top channel line, which does not
-drop like the others), and the other runs towards that pad
-(`cache/scratch/amr/c0a.png`, `c0b.png`, 3x and 1x). **If one of c0's lines does land on
-`rab`'s pad, `rax_o0` has a second driver**, which would be wrong or would mean that
-`rax_o0` is not what `rax` alone makes. Not resolved: needs 5x single shots at
-x 11630-11720, y 4490-4580.
+under the supply metal and run north beside the staircase at x about 11720 and 11765
+(`cache/scratch/amr/c0b.png`, 1x). At the top, the poly that comes near `rab`'s bit-0 pad
+(11650,4500) is a single line: `cdp1_l4544`, arriving at y 4545 and turning south-east.
+At 5x in all four shots (`cache/scratch/bust/c0c.png`) a dark edge at y 4520-4530
+separates it from the pad, so **`rax_o0` has no second driver**. That `cdp1_l4544` is c0's
+outer output (as c1-c3's outer outputs are the next three lines) is likely but not drawn:
+the stretch along x 11720 was seen at 1x only.
