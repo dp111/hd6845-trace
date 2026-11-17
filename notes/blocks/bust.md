@@ -33,8 +33,8 @@ default gap bridges). East of the staircase: metal, `tools/follow.py` from each 
 | `cdp1_c1_bl` | 5002 / 5024 | 15020 | **`ubus_b4`** |
 | `cdp1_a0_bl` | 5045 / 5068 | 15280 | `amr` c1's inner output; **`ubus_b5`**: poly to a pad (15275,5628), metal down x 15277 to a pad (15277,6826), poly east under the VCC rail to a pad (15405,6826), `ubus_b5`'s metal south (3x, `b5.png`) |
 | `cdp1_lw1` | 5088 / 5110 | 15584 | a poly south at x 15580 (not drawn) |
-| `cdp1_lw2` | 5131 / 5153 | 16146 | `amr` c2's inner output; east end not drawn further |
-| `cdp1_a2_bl` | 5175 / 5196 | 16926 | `amr` c3's inner output; east end not drawn further |
+| `cdp1_lw2` | 5131 / 5153 | 16146 | `amr` c2's inner output; **`ubus_b6`**: poly to a pad (16146,5625), metal down x 16144 and west to a pad (16005,6825), poly west under the VCC rail to a pad (15870,6825), metal to `ubus_b6` (2.5x, `b6.png`) |
+| `cdp1_a2_bl` | 5175 / 5196 | 16926 | `amr` c3's inner output; **`rbus_b7`**: poly to a pad (16922,5625), metal down x 16926, west to x 16839 and south: the through line on slice s7's strap track that `rdp2`/`rdp3` already identified as `rbus_b7`'s branch "to the upper array" (drawn from y 9440) |
 
 ## What this establishes
 
@@ -56,8 +56,8 @@ default gap bridges). East of the staircase: metal, `tools/follow.py` from each 
 ## Not done
 
 1. The east ends left as ports (table), and `cdp1_l4544`.
-2. `ubus_b6`: which bus line feeds it (by the order, `cdp1_lw1` or one of the lines whose
-   east ends are not drawn).
+2. `cdp1_lw1` (east end 15584, a poly south at x 15580) and `cdp1_l4544`: not followed.
+   Bit 7 of the upper array, and R3's own data lines, not identified.
 3. Renaming the bus as data bus bits once the coordinator agrees on names (aliases are
    used for now).
 
@@ -71,3 +71,20 @@ one-line fix to `trace/rdp1.txt` is a separate commit so it can be reviewed on i
 With `ubus_b5` joined, the extraction shows one net writing R8's slice-0 bit (`wr_r8`)
 and bit 5 of R7, R6 and R4 (`wr_r7`, `wr_r6`, `wr_r4_u`): one data bus line across the
 chip, as expected.
+
+With `ubus_b6` and `rbus_b7` joined: `cdp1_lw2` writes bit 6 of R7, R6, R4 and `cdp1_a2_bl`
+writes bit 7 of R0, R1, R2 and R8's row-A slice 2 (which is therefore R8 bit 7, a cursor
+skew bit). The six data lines now joined across the chip:
+
+| Data bit | central datapath line | right datapath |
+|---|---|---|
+| 0 | `cdp1_c5_bl` (slice 5) | `ubus_b0` |
+| 1 | `cdp1_c4_bl` (slice 4) | `ubus_b1` |
+| 2 | `cdp1_c3_bl` (slice 3) | `ubus_b2` |
+| 3 | `cdp1_c2_bl` (slice 3's neighbour, slice 2, row C) | `ubus_b3` |
+| 4 | `cdp1_c1_bl` (slice 1) | `ubus_b4` |
+| 5 | `cdp1_a0_bl` (slice 0, row A) | `ubus_b5` |
+| 6 | `cdp1_lw2` (from cdp1's west edge) | `ubus_b6` |
+| 7 | `cdp1_a2_bl` (slice 2, row A) | `rbus_b7` |
+
+`amr`'s inner outputs drive bits 5, 6 and 7 (c1, c2, c3).

@@ -142,3 +142,32 @@ P 15388,6809:15422,6843
 C 15405,6826
 M 15406,6826 y6910 w=24
 @alias cdp1_a0_bl ubus_b5
+
+# cdp1_lw2: its pad (16146,5153); poly south to a pad (16146,5625); metal south along
+# x 16144 to y 6830, west to a pad (16005,6825); poly west under the VCC rail x 15910-15960
+# to a pad (15870,6825); metal west to x 15790 and south as ubus_b6 (rdp1 draws it from
+# y 6905). 2.5x in metal and the clean shot (cache/scratch/bust/b6.png, r3d.png).
+P 16129,5136:16163,5170
+C 16146,5153
+P 16146,5153 y5625 w=18
+P 16129,5608:16163,5642
+C 16146,5625
+M 16144,5625 y6830 x16005 w=12
+P 15988,6808:16022,6842
+C 16005,6825
+P 15870,6825 x16005 w=20
+P 15853,6808:15887,6842
+C 15870,6825
+M 15870,6825 x15790 y6910 w=20
+@alias cdp1_lw2 ubus_b6
+# cdp1_a2_bl: its pad (16926,5196); poly south to a pad (16922,5625); metal south along
+# x 16926 to y 6744, west to x 16839, south (follower sampled with --max: x 16838-16840 at
+# y 6777 ... 12377). Its end, near y 12663, not looked at (the follower ends on a VCC rail
+# there, so it may have jumped): drawn to y 12370.
+P 16909,5179:16943,5213
+C 16926,5196
+P 16924,5196 y5625 w=18
+P 16905,5608:16939,5642
+C 16922,5625
+M 16926,5625 y6744 x16839 y12370 w=12
+@alias cdp1_a2_bl rbus_b7
