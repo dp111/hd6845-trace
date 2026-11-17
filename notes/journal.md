@@ -1224,3 +1224,17 @@ seen across it, as the notes say.
 - Method notes from both became traps 18-19 and re-read items R16-R17.
 
 The PRs predate the claim workflow, so there were no claims to release.
+
+## 2026-11-17 14:30  /refresh6845
+
+User: a skill to regenerate `out/`, update `notes/operation.md` and rename the default
+named signals whose purpose is now clear. `.claude/skills/refresh6845/SKILL.md`
+(coordinator only, on main): baseline; renames in batches, each proved by
+`tools/names.py compare` (transistors and connections identical, only names changed)
+and the glossary checks, committed per batch; `operation.md` against
+`tools/unsure.py --equations`; `tools/build.py`; journal. `tools/names.py` (new):
+`candidates` lists placeholders and old `@alias` names beside a functional name, split
+into firm (rename) and through `?` items (do not, trap 17), plus glossary hints;
+`snapshot` / `compare`. On today's tree it lists, among others, `uc_b0`..`uc_b6` ->
+`rc0`..`rc6`, `cdp1_l4719` -> `sl_eq_r5`, `rdp3_n2s1` -> `h_eq_r0`, and keeps rde's
+data bits 0-4 apart (AMB-019). Not run yet.

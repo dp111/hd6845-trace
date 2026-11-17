@@ -123,6 +123,9 @@ coordinating session, the owner's.
   the proposals (master list status, Re-read items, ambiguities, other blocks' notes),
   trim the coarse block in `floorplan.txt` that its `floorplan.d` fragment replaces,
   rebuild `out/`, write the journal, push, then `tools/claim.py release PREFIX`.
+- **`/refresh6845`** (`.claude/skills/refresh6845/`): rename placeholders the trace has
+  identified (checked with `tools/names.py compare`: only names may change), bring
+  `notes/operation.md` up to date, rebuild `out/`, journal. Run it after a batch of merges.
 - Keep the master list covering the whole die: after changing it, `tools/coverage.py`
   must show no red (untraced and in no package) except empty field and supply metal. Stacked pull requests: merge the tips (the first round's notes are in
   the journal, 2026-11-17).
